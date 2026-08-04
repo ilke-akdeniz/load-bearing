@@ -59,6 +59,20 @@ Read these before writing anything.
 
 If a change contradicts `docs/DECISIONS.md`, stop and say so rather than proceeding.
 
+## Sources
+
+Material outside this repo that the book draws on.
+Most of it has already been worked through and corrected by the author, so **read it rather than re-deriving the argument** — re-derivation produces subtly different claims, and the book cannot afford to contradict itself between chapters.
+
+- **`~/c/TechIter/01/coding-style-architecture.md`** — roughly 3,700 lines analysing FlowCore's structure, written and reviewed in dialogue with the author.
+  Directly feeds several chapters: layering and the direction rule, DAG-versus-line shapes, when layering fails (→ 05, 18); placement-by-scope with worked rules (→ 19); Adapter at class scale versus system scale (→ 11); layered packages forcing exports (→ 18); dependency injection across Go, C#, Python, and Node (→ Part V); error taxonomies, params structs, and testing against a real database.
+  It also contains the author's positions on pattern culture and methodology, which Part IV should stay consistent with.
+- **`~/s/flowcore/docs/decisions.md`** — 38 design decisions in Context / Options / Decision / Why / Consequence form. The source of most FlowCore examples, and the model for this book's own decision log.
+- **`~/s/flowcore/docs/code-map.md`** — how the library fits together; useful for picking an example that is genuinely representative.
+- **`~/s/flowcore`** — the code itself. Prefer quoting real lines over inventing illustrative ones.
+
+Public repo: <https://github.com/ilke-akdeniz/flowcore>.
+
 ## The anti-repetition protocol
 
 The single most important operational rule in this repo.
