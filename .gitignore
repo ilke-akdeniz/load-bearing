@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+._*
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*~
+
+# Local scratch — drafts not meant for the repo
+scratch/
+*.draft.md
+
+# Claude Code local settings (keep .claude/settings.json if it is shared)
+.claude/settings.local.json
