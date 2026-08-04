@@ -255,3 +255,70 @@ The bookkeeping is real, and it will be wrong occasionally.
 The ledger only prevents repetition of *registered* concepts.
 It cannot catch an argument that arises independently in two chapters and was never entered, nor near-duplicate phrasing of the same idea under two names.
 Author review remains the backstop, and a repetition found in the drafts should be treated as a ledger defect — a missing or mis-assigned row — rather than as a wording problem to edit locally.
+
+---
+
+## 8. "Layered architecture" is split into three claims, not treated as one
+
+**Date.** 2026-08-03
+
+**Context.**
+Chapter 05 had to say something about layering, which is the most widely endorsed structural advice in software and also the source of some of the worst structure in it.
+Treating it as a single claim makes that contradiction unexplainable: either the advice is good and the pass-through classes are somebody's execution failure, or the advice is bad and a great deal of well-functioning software is an accident.
+
+**Options.**
+Treat "layered architecture" as one Principle and note that it is often over-applied; treat it as a Law with common misapplications; split it into its component claims and classify each separately.
+
+**Decision.**
+Split into three, and give each its own kind:
+
+| Claim | Kind |
+|---|---|
+| Dependencies flow one way — no cycles | **Law** |
+| The acyclic graph is a straight line | **Principle** |
+| The line is `presentation → business → data`, expressed as directories | **Idiom** |
+
+**Why.**
+The split explains the contradiction instead of restating it.
+Almost all real damage is a violation of claim 1; almost all damage done by layering *advocacy* is claim 3 applied where the graph is not a line.
+That is a diagnosis, and it tells a reviewer which of the three they are looking at.
+
+It is also the book's own model applied to its most important structural material — three levels bundled under one name is precisely the failure chapter 02 describes.
+If the model could not take layering apart, that would be evidence against the model.
+
+**Provenance.**
+The two-claim version — *dependencies flow one way* versus *and the layers are presentation/business/data* — comes from the FlowCore architecture dialogue at `~/c/TechIter/01/coding-style-architecture.md`, written in exchange with the author and corrected there.
+That document also supplies the formulation the chapter quotes: *managed, acyclic dependency direction is a foundation of maintainable software; layering is its most common shape, not its definition.*
+The draft's contribution is separating the taxonomy from its *expression as directories*, and attaching the five-level kinds to each claim.
+
+**Consequence.**
+Chapter 05 leads with the three-way table rather than with a definition of layering.
+`LEDGER.md` records "layered is three claims" as owned by 05, so chapters 16, 18, 19, and 20 cite it rather than re-deriving it — 18 in particular, which owns what expressing claim 3 as packages actually costs.
+
+---
+
+## 9. Chapter 05 uses FlowCore for type-enforced direction, not for its package layout
+
+**Date.** 2026-08-03
+
+**Context.**
+FlowCore is the running example, and each appearance must show a different facet.
+Two chapters want its structure: 05 (dependency and hiding) and 18 (Clean Architecture as directories).
+The obvious material — one flat package, 133 exported identifiers, no `internal/` — is the same material for both.
+
+**Options.**
+Let 05 introduce the flat-package argument and have 18 refer back; give 18 the flat package and find 05 a different facet; split the flat-package argument across both.
+
+**Decision.**
+18 keeps the package layout and what walls cost.
+05 uses `querier` and `txQuerier` — the dependency direction enforced by *what a function can reach*, with `Begin` deliberately absent from both interfaces so no store helper can start a transaction.
+
+**Why.**
+It is a genuinely different facet rather than a division of one, and it is the stronger example for 05's actual claim: it shows a real, compiler-checked layering with no directory involvement at all, which is exactly the *layer ≠ directory* point.
+The compiler error is quotable from FlowCore's decision 37, so the enforcement can be shown rather than asserted.
+
+The third option was rejected on the ledger's own logic — an argument split across two chapters is re-established in both.
+
+**Consequence.**
+Chapter 05 quotes decision 10's reasoning for keeping `querier` unexported ("a public commitment to a shape pgx defines") as its worked instance of export-surface-as-liability, and leaves the flat package unmentioned except as a cross-reference.
+The chapter's other examples are deliberately non-FlowCore — a compiler's DAG, ECS parallel arrays, `net/http` — so no section rests on it alone.
