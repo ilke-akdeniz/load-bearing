@@ -322,3 +322,83 @@ The third option was rejected on the ledger's own logic — an argument split ac
 **Consequence.**
 Chapter 05 quotes decision 10's reasoning for keeping `querier` unexported ("a public commitment to a shape pgx defines") as its worked instance of export-surface-as-liability, and leaves the flat package unmentioned except as a cross-reference.
 The chapter's other examples are deliberately non-FlowCore — a compiler's DAG, ECS parallel arrays, `net/http` — so no section rests on it alone.
+
+---
+
+## 10. Book chapters and working documents get different markdown conventions
+
+**Date.** 2026-08-03
+
+**Context.**
+`CLAUDE.md` carried one set of markdown rules, written for a code repository, applied to everything.
+The central rule was **one sentence per line**, chosen so a one-word change produces a one-line diff.
+
+The author raised that this does not suit book content, and asked for conventions that keep the source readable while staying easy for a future script to build into a PDF.
+
+**Options.**
+Keep one rule set for the whole repo; adopt a full print-oriented convention set for chapters (semantic markup, fenced divs, explicit cross-reference links, ASCII-only diagrams, per-file YAML frontmatter); adopt a minimal set covering only what a script cannot fix later.
+
+**Decision.**
+Two rule sets, split by location.
+`docs/` keeps one sentence per line.
+Chapters at the repo root get four rules and nothing more:
+
+1. One paragraph per line.
+2. Code left exactly as the language's formatter produces it, never hand-broken to fit a page; ASCII diagrams under 72 columns.
+3. One H1 per file, the title with no chapter number.
+4. Every code fence carries a language tag.
+
+The middle option was drafted first and rejected in the same pass.
+
+**Why.**
+The diagnosis of the sentence-per-line problem is specific: it is not that the sentences are short, it is that **paragraphs stop looking like paragraphs**.
+Every line begins at column zero with a capital letter, so the blank line is the only surviving signal of where a thought ends, and it is a weak one against fifteen identical-looking lines.
+Prose reads as a list of assertions.
+
+What sentence-per-line buys — one-word-change-is-one-line-diff — is recoverable at any time with `git diff --word-diff`, at finer granularity than it offered.
+Source readability is paid on every read; diff granularity is a flag away.
+
+The larger convention set was rejected on a test the book itself supplies.
+Its extra rules — `::: claim` fenced divs, `[Ch. 05](05_structure.md)` cross-reference links, ASCII-only diagrams, dropped `---` dividers — each traded source readability for build convenience, **and every one of them is a transformation a script can perform in a single pass years from now.**
+Box-drawing glyphs need a font, not a rewrite; `(Ch. 05)` is a regex; `---` is one line of filter code.
+Paying in readability today for work a machine can do later is the wrong direction.
+
+The surviving rules are those a script *cannot* do:
+
+- Joining prose into paragraphs is mechanical, but the resulting line lengths are what the author reads for the life of the project.
+- Heading structure and fence tags are cheap now and ambiguous to infer later — nothing downstream can reliably tell a shell transcript from a diagram from Go.
+
+**Correction: the 72-column code rule failed its own test.**
+The first version of this decision required code fences to stay under 72 columns, on the reasoning that breaking a long signature well needs judgment and therefore could not be automated.
+Chapters 02 and 05 were converted on that basis, with 16 lines rewrapped by hand.
+
+The author rejected the result on sight: the breaks made the code harder to read and harder to follow.
+That objection is correct, and the rule was wrong for the reason the rest of this entry gives — **it was paying in source readability for something the build can do.**
+LaTeX's `fvextra` wraps long lines inside the environments pandoc already emits, at whitespace, with a continuation marker, and keeps pandoc's syntax highlighting; the settings are recorded in `CLAUDE.md`.
+Nothing needed to be broken by hand at all.
+
+Two things had gone wrong.
+The premise was unchecked — "a script cannot break a line well" was assumed rather than verified against what the toolchain actually offers.
+And the rule was worse than a neutral mistake: hand-broken signatures are not the code, so the book would have been quoting FlowCore inaccurately in a chapter whose argument rests on the exact shape of a function signature.
+
+All code was restored verbatim.
+The one width rule that survives applies to **ASCII diagrams only**, because a wrapped diagram is destroyed rather than marked — and that is a genuine asymmetry between code and art, not a page-fitting preference.
+
+**Format.**
+Markdown was reconsidered and kept.
+AsciiDoc is genuinely better at books — native cross-references, indexes, code callouts, a real PDF toolchain — and Typst and LaTeX produce better print output.
+All three optimize for the printed artifact, and for this book the printed artifact is not the point: the repository is.
+The book is published in public while in progress and read in a browser, it is CC BY so readers must be able to fork and translate it without installing a toolchain, and it is LLM-drafted, where markdown is generated reliably and AsciiDoc accumulates low-grade syntax errors.
+Markdown is the only candidate satisfying all three.
+The decision is also reversible: pandoc converts markdown to AsciiDoc or LaTeX mechanically, and consistent source is most of that work.
+
+**Consequence.**
+`CLAUDE.md`'s markdown section was split into shared rules, book rules, and `docs/` rules.
+Chapters 02 and 05 were converted: prose joined to one paragraph per line, chapter numbers removed from both H1s, 4 untagged code blocks given languages, and the DAG diagram in 05 narrowed from 86 to 52 columns.
+All code is byte-identical to what it was before the conversion, verified by diff.
+The prose was verified unchanged word-for-word; the only differences are the two chapter numbers and one redundant `>` prefix on a joined blockquote.
+
+`CLAUDE.md` carries the `fvextra` settings, so the constraint is recorded where the build will need it rather than imposed on every chapter written between now and then.
+
+The visible cost is that a chapter's prose is now unreadable in a terminal without soft wrap, and that `git diff` on a revised paragraph reports the whole paragraph.
+`git diff --word-diff=color` is the intended review command and should be used on chapter files.

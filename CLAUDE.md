@@ -140,15 +140,54 @@ Each appearance must show a *different* facet. No chapter rests on FlowCore alon
 
 ## Markdown conventions
 
-For clean diffs and portable rendering.
+Two sets.
+Book chapters at the repo root are prose for a reader and a future print build; working documents in `docs/` are engineering artifacts reviewed as diffs.
+They get different rules.
 
-- **One sentence per line.** Break at `.` `?` `!`. A one-word change is then a one-line diff.
-- **Don't split mid-sentence.** A clause after `;` `:` or `—` stays on its sentence's line.
+### Shared by both
+
 - **Blank line between block elements**, and after every heading before its content.
 - **Never two blank lines in a row.** File ends with a single newline.
 - **Lists:** one item per line, no blank lines between items in a tight list.
-- **Code fences and tables are literal** — never reflow or sentence-split their contents.
+- **Code fences and tables are literal** — never reflow their contents.
 - **Bold lead-ins** (`**Term.**`) stay on the same line as the sentence they introduce.
+
+### Book chapters — `NN_slug.md` at the repo root
+
+Four rules, and they exist because the source is read as prose and will one day be built into a PDF.
+
+- **One paragraph per line.** No breaking within a paragraph; the editor soft-wraps. Paragraph boundaries are the blank lines, and a paragraph is one line however long it runs.
+- **Code is left exactly as the language's formatter produces it.** Never hand-break a signature to fit a page — code is read in the source far more often than in print, and the print build wraps long lines itself (see below). `gofmt` output goes in verbatim.
+- **ASCII diagrams stay under 72 columns.** This is the one width rule, and it applies only to diagrams, because a wrapped diagram is destroyed rather than merely marked.
+- **One H1 per file, the chapter title with no number** (`# Structure: Dependency and Hiding`). The number lives in the filename and the TOC. A print build numbers chapters itself, and a number in the title produces "Chapter 5 — 05. Structure."
+- **Every code fence carries a language tag** — `go`, `csharp`, `python`, `sql`, `rust`, and `text` for terminal output, compiler errors, and ASCII diagrams. No bare fences.
+
+Everything else stays as it reads best.
+Long code lines, box-drawing characters in diagrams, `>` blockquotes, `---` section dividers, and plain `(Ch. 05)` cross-references are all fine — each is a build-time transformation, and none is worth making the source uglier for.
+
+**For whoever writes the PDF build.**
+Long code lines are handled by `fvextra`, which extends the `fancyvrb` environments pandoc already emits, so pandoc's syntax highlighting is kept:
+
+```latex
+\usepackage{fvextra}
+\fvset{
+  breaklines=true,          % wrap instead of overflowing the margin
+  breakanywhere=false,      % break at whitespace, not mid-token
+  breakindent=2em,
+  breaksymbolleft={\small\ensuremath{\hookrightarrow}},
+  fontsize=\small
+}
+```
+
+At `\small` a normal measure fits roughly 72–80 monospace columns, so the handful of lines above that wrap once and carry a visible `↪`.
+Diagrams must not be wrapped by this — either keep them inside the measure, which is the rule above, or emit `text` blocks with `breaklines=false`.
+
+### Working documents — `docs/`
+
+- **One sentence per line.** Break at `.` `?` `!`. A one-word change is then a one-line diff.
+- **Don't split mid-sentence.** A clause after `;` `:` or `—` stays on its sentence's line.
+
+These are read as diffs, not as prose, so sentence-level granularity is worth more than paragraph shape.
 
 ## Files
 
