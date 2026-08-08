@@ -22,11 +22,46 @@ Most real architecture damage is a violation of the first. Most harm done by *ar
 
 They are usually taught together and defended together. Separating them is the whole content of this chapter.
 
+## Reading a dependency graph
+
+Two pieces of vocabulary, because the rest of the chapter leans on them and both are usually left implicit.
+
+**An arrow from A to B means A depends on B.** A names B, A cannot be compiled or understood without B, and deleting B breaks A. The arrow points the way the *need* runs.
+
+```text
+                 main              fan-in 0, fan-out 2
+                ↙    ↘             nothing needs it
+         billing      reports      fan-in 1, fan-out 1
+                ↘    ↙
+                 money             fan-in 2, fan-out 0
+                                   it needs nothing
+```
+
+**Fan-in** is how many arrows point at you — how many things break if you change. **Fan-out** is how many you point at — how much you need in order to work at all.
+
+"Bottom" means where the arrows terminate: high fan-in, low fan-out, like `money`. Everything needs it; it needs nothing. "Top" means the entry points: low fan-in, high fan-out, like `main`. This is the sense in which the rest of the chapter says *put stable things at the bottom* — it is a claim about fan-in, not about file layout or importance.
+
+One warning, because it causes the most confusion in review: **this graph is about source-level dependency, not about who calls whom at runtime.** The two usually agree. Where they disagree, the graph is what matters, and the boundary section on inversion of control works through the case.
+
+### The nodes can be anything you handle separately
+
+The claims in this chapter are often heard as being about "layers," or about services, or about whatever unit the reader's current architecture diagram happens to use. They are not. The graph exists at every size at once:
+
+```text
+functions → types → files → packages → assemblies → libraries → services
+```
+
+A cycle between two functions is the same structural fact as a cycle between two services. What changes with size is **what detects the violation** and **how much it costs**, not whether the Law binds.
+
+Note that "layer" is absent from that list, deliberately. A layer is a *rule about which direction arrows may go*, not a size — a layer might be one function or forty packages. Treating it as a size is how the third of the three claims above gets smuggled in.
+
+The one thing that does vary with size is whether the two nodes are ever handled apart, and that turns out to be the whole question of when the Law goes quiet. The boundary section returns to it.
+
 ---
 
 ## The demonstration
 
-### Part one: a cycle, at three granularities
+### Part one: a cycle, and what notices it
 
 Two pieces of a workflow library. A store that writes rows, and a service that composes writes into a transaction.
 
@@ -70,14 +105,18 @@ That is a cycle. `Catalog` needs `insertStepDefinition`; `insertStepDefinition` 
 Here is the part worth noticing: **whether anything complains depends entirely on where the boundary happens to fall.**
 
 ```text
-same package, Go            compiles. No warning, no error, ever.
-separate packages, Go       build error: import cycle not allowed
-separate assemblies, C#     build error: circular project reference
-separate modules, Python    sometimes works, sometimes ImportError,
-                            depending on which module you import first
+two functions, Go           compiles. No warning, no error, ever.
+two package-level vars, Go  build error: initialization cycle for A
+two packages, Go            build error: import cycle not allowed
+two assemblies, C#          build error: circular project reference
+two modules, Python         works or fails, depending on which one
+                            you import first
+two modules, CommonJS       silently produces wrong values
 ```
 
-Four outcomes for one structural fact. Go's import-cycle error is famously strict, and it is strict at exactly one granularity — the package. Below that, the same cycle is invisible to it. Python's behaviour is the worst of the set, because it is *conditional*: the cycle is tolerated or fatal depending on entry order, so it can survive for months and then break when someone adds an import to a test file.
+Six outcomes for one structural fact. Go is the strictest of these and it is still partial: it rejects an import cycle between packages and an initialization cycle between package-level variables, but two mutually recursive *functions* in one file compile without comment. The detector runs where the language happened to put a boundary.
+
+The bottom two rows are the dangerous ones, and they are worth seeing run.
 
 The Law does not care about any of this. The compiler is a partial detector operating at whatever granularity that language happens to check. **The damage is the same at every granularity; only the detection varies.**
 
@@ -87,29 +126,52 @@ That sentence is worth cashing out, because "damage" is doing a lot of work and 
 
 **First, the small part: cycles that crash.**
 
-A cycle across module boundaries can break initialization, because something has to be constructed first and a cycle says nothing can be. Python is the clearest case:
+A cycle across module boundaries can break initialization, because something has to be built first and a cycle says nothing can be. Python shows it plainly:
 
 ```python
 # a.py
+BASE = 5          # defined BEFORE the import
 import b
-TIMEOUT = b.BASE * 2
+TIMEOUT = b.LIMIT * 2
 
 # b.py
 import a
-BASE = 5
-LIMIT = a.TIMEOUT + 1
+LIMIT = a.BASE + 1
 ```
 
-Import `a` first and it works. Import `b` first and you get:
+Import `a` first and it works — `TIMEOUT` is 12. Import `b` first and it does not:
 
 ```text
-AttributeError: partially initialized module 'a' has no attribute
-'TIMEOUT' (most likely due to a circular import)
+AttributeError: module 'b' has no attribute 'LIMIT'
 ```
 
-Same code, same machine, and the outcome depends on which module the process happened to touch first — so it can pass every test and fail in production, where the entry point differs. C# and Java have a nastier version of the same thing in static initializers, where instead of an exception you can get a field silently holding its zero value, because the type was still being initialized when it was read.
+The asymmetry is worth seeing, because it is the whole reason this bug survives. Entering through `a` means `BASE` is already set by the time `b` runs and reaches back into the half-built `a`. Entering through `b` means `a` starts running immediately, gets to `b.LIMIT` before `b` has defined it, and fails. **Same code, same machine, and the outcome is decided by which module the process happened to touch first** — so it passes every test and fails in production, where the entry point is different.
 
-That class of bug is real. It is also the *minority* of the damage, and if it were the whole argument, "avoid cycles" would be a tip rather than a Law.
+Note also what makes the placement of `BASE` load-bearing: move it below the `import b` line and *both* orders fail. The bug's behaviour depends on the order of lines within a file, which is not a property anyone tracks.
+
+**A worse version: cycles that produce wrong values in silence.**
+
+Node's CommonJS modules do not raise at all. A module mid-initialization hands out a partially filled `exports` object, and reads of anything not yet assigned come back `undefined`:
+
+```javascript
+// a.js
+const b = require('./b');
+exports.TIMEOUT = b.LIMIT * 2;
+
+// b.js
+const a = require('./a');
+exports.LIMIT = 5;
+exports.DOUBLE = a.TIMEOUT * 2;
+```
+
+```text
+require a first  →  a.TIMEOUT = 10    b.DOUBLE = NaN
+require b first  →  a.TIMEOUT = NaN   b.DOUBLE = NaN
+```
+
+No exception, no stack trace, a warning on stderr that nobody reads, and a number that is wrong in a different way depending on entry order. C# and Java have the same shape in static initializers: a type initializer that re-enters itself observes its own fields at their default values, so instead of an exception you get a field silently holding zero.
+
+That class of bug is real, and the silent version is genuinely nasty. It is also the *minority* of the damage, and if it were the whole argument, "avoid cycles" would be a tip rather than a Law.
 
 **Second, the large part: cycles that never crash at all.**
 
@@ -136,35 +198,36 @@ If A depends on B and B depends on A, four things become true at once:
 
 That is the whole argument, and it is why this is a Law rather than a strong opinion: it is a property of graphs, restated in the vocabulary of software. Nothing about a language, a team, or a decade changes it.
 
-It also explains why the advice is more reliable than most: **dependency damage compounds.** A missing test is a static cost — it sits there, costing what it costs, and it does not get worse on its own. A cycle spreads, in a way worth being precise about, since the obvious objection is that you can just wire things together and move on.
+### Does the damage actually spread?
 
-### "Can't I just inject A and B into C?"
+The usual claim at this point is that dependency damage compounds — that a cycle grows on its own until nothing can be moved. That claim needs splitting, because half of it is mechanical and half of it is a habit, and only the first half is this chapter's business.
 
-No, and the reason is the useful part.
+The reasonable objection is: if `billing` and `accounts` are tangled, why should that spread? A third module `C` that needs both can simply take both, and no new cycle is created.
+
+That is correct. **A cycle does not spawn further cycles by itself, and injecting both into `C` creates nothing new.** The graph does not deteriorate unattended.
+
+What *is* mechanical is narrower and still expensive: **weight is inherited.** Every new dependent of `billing` also depends on `accounts`, transitively, whether or not it names it. `C` cannot be compiled, tested, extracted, or reasoned about without both — and neither can anything that depends on `C`. The cycle's cost is now paid at every one of those sites, and that follows from the graph rather than from anyone's discipline.
+
+What is *not* mechanical, but is common enough to be worth naming, is that the first cycle makes placement ambiguous. Once `billing` and `accounts` are effectively one unit, the question "which of these does this new code belong in?" has no principled answer, so it gets answered by convenience — and answers by convenience produce edges in whatever direction was handy. That is a tendency the first cycle creates, not a law it enforces. Discipline resists it. Discipline cannot do anything about the inherited weight.
+
+So the honest version: a missing test is a static cost that does not get worse on its own, and a cycle is a cost that is re-paid by every future dependent. That is enough to justify the Law without claiming the graph rots by itself.
+
+### Breaking the cycle
+
+The cycle announces itself first at the construction site:
 
 ```go
-// The cycle is between these two. C is not in it.
 type Accounts struct{ billing *Billing }
 type Billing struct{ accounts *Accounts }
 
-// Injecting both into C changes who constructs them.
-// It does not remove either edge.
-func NewReports(a *Accounts, b *Billing) *Reports
-```
-
-Injection moves *construction* to the caller. It does not move *dependency*. `Billing`'s type still names `Accounts`, so the compiler still has to have `Accounts` in hand to compile `Billing`, the test still has to build one, and the reader still has to know both.
-
-You can see the cycle admitting itself at the construction site:
-
-```go
 a := &Accounts{}
 b := &Billing{accounts: a}
-a.billing = b // two-phase construction, because neither can be built first
+a.billing = b // two-phase construction: neither can be built first
 ```
 
-That assignment is the tell. There is now a window in which `a.billing` is nil, and nothing in the type system says when the window closes. Any code that runs during it — an init hook, a background goroutine started in a constructor, a log line — sees a half-built object.
+That last assignment is the tell. There is now a window in which `a.billing` is nil, and nothing in the type system says when the window closes — anything running during it sees a half-built object. Moving the wiring out to a caller does not help, because it changes who *constructs*, not who *depends*: `Billing`'s type still names `Accounts`, so the compiler still needs `Accounts` in hand, the test still has to build one, and the reader still has to know both.
 
-What *does* break the cycle is injecting an **interface declared by the module that needs it**:
+What removes the edge is an interface **declared by the module that needs it**:
 
 ```go
 package billing
@@ -179,7 +242,7 @@ type Billing struct{ plans PlanLookup }
 
 `accounts` implements `PlanLookup`. Now `billing` depends on nothing, `accounts` depends on `billing`, and there is one edge where there were two. Construction is single-phase, `billing` tests with a five-line fake, and `billing` can be extracted into its own service without dragging anything.
 
-The difference is not that an interface appeared. It is **which module owns it.** An interface declared by `accounts` and consumed by `billing` leaves the arrow pointing exactly where it was. The same manoeuvre appears twice more in this chapter — as one of the four ways to pay for breaking a cycle, and as the reason `net/http` may call up into your handler without a violation.
+The difference is not that an interface appeared. It is **which module owns it.** An interface declared by `accounts` and handed to `billing` would leave the arrow pointing exactly where it was; what reverses the direction is `billing` declaring what it needs, in its own terms. That distinction is the whole of dependency inversion, and it is the reason `net/http` may call up into your handler without a violation.
 
 ### Part two: layering, without directories
 
@@ -294,62 +357,23 @@ public class CompilationService {
 
 The printer is now a parameter passed down through `typecheck` into every function that might report an error — four call levels deep, in service of a diagram. This is the pass-through class, arrived at honestly: nobody set out to write it, it was the only way to satisfy a shape that was wrong.
 
+It also supplies the test that catches the type, here and later in the chapter: **does this thing decide something, or does it only forward?** `CompilationService` decides nothing — every line of it hands work to something else. A part that forwards is not a part.
+
 All three costs come from the same mistake: the real graph was a DAG, and a line was imposed on it. The failure mode is not sloppiness — it is discipline applied to the wrong claim.
 
 Sharpened:
 
 > **Managed, acyclic dependency direction is the Law. Layering is its most common shape, not its definition.**
 
----
+### Part four: what you expose
 
-## Why it holds
+Parts one to three were about which way the arrows point. This one is about how many arrows exist at all.
 
-### Cost of change scales with dependents
-
-Changing a module costs roughly in proportion to how many things depend on it. A leaf with no dependents is free to change: nothing else can notice. A module with forty dependents costs forty inspections, and the cost is paid on *every* change, not once.
-
-Two consequences follow.
-
-**Stability belongs at the bottom.** The highest-fan-in node is the most expensive to change, so it should be the one that changes least — not because stability is a virtue, but because you pay for instability there repeatedly. This is the real content behind "depend on abstractions," and that phrase is badly misleading, because it is routinely read as "add an interface."
-
-What lowers the bill is **stability**, not indirection. Compare two things sitting at the bottom of a graph with high fan-in:
-
-```go
-// A good abstraction, and not an interface. Forty things depend on it.
-// It has not changed in four years, and there is no reason it would.
-type Money struct {
-	Amount   int64  // minor units
-	Currency string // ISO 4217
-}
-```
-
-```go
-// An "abstraction" by vocabulary and by nothing else. Forty things
-// depend on it, and it changes every sprint.
-type IUserService interface {
-	GetUser(id string) (*User, error)
-	GetUserWithPreferences(id string) (*User, error)         // added in March
-	GetUserWithPreferencesAndRoles(id string) (*User, error) // added in May
-}
-```
-
-The second is an interface and buys nothing. Every added method is a change at the highest-fan-in point in the system, which is the exact cost the advice exists to avoid. The `I` prefix made it *look* like a stable boundary while the concept behind it was still moving.
-
-So the usable form of the advice is: *put the thing that changes least at the bottom.* Sometimes that is an interface. Often it is a data type, a constant, or a function signature that has earned its shape. Whether it is an interface is not the question.
-
-**You can count internal dependents. You cannot count external ones.** Inside your repository, `grep` gives you the number, and the number tells you what a change costs. Once something is published, the count is unknown, unbounded, and growing — which is where the second half of this chapter starts.
-
-### From direction to surface
-
-The first half of this chapter is about which way the edges point. The second is about how many edges exist at all.
-
-That is the whole connection, and it is worth stating plainly because the two halves are usually taught as separate subjects. A cycle is two edges where there should be one. Information hiding is about not creating an edge in the first place. Same graph, same cost model: a dependency that was never created costs nothing to change, forever.
-
-### Information hiding, and why it's a Principle
+That is the connection between the chapter's two claims, and it is worth stating plainly because they are usually taught as separate subjects. A cycle is two arrows where there should be one. Information hiding is about not creating an arrow in the first place. Same graph, same meter: a dependency that was never created costs nothing to change, forever.
 
 Parnas, 1972 — the founding paper, and still the clearest statement: decompose a system by what each module *hides*, not by the steps of the process it performs. The value of a module is the decision it keeps to itself, because that is the decision you can change later without telling anyone.
 
-The mechanism is the previous section, applied. A decision that nothing can observe has a fan-in of zero and is therefore free to change. A decision that is visible has as many dependents as care to look, and you will not be told when someone starts looking.
+The mechanism is fan-in again. A decision that nothing can observe has a fan-in of zero and is therefore free to change. A decision that is visible has as many dependents as care to look, and nobody tells you when someone starts looking.
 
 This is why the export surface, not the design document, is the real API:
 
@@ -394,13 +418,13 @@ The caller learned one thing — that a `PlanLookup` must be supplied. `Billing`
 
 The contradiction only appears if you read hiding as "less information anywhere," rather than what Parnas actually proposed: each module hides a decision, and the decision `Billing` no longer holds is *where plans come from*.
 
-### Hyrum's Law: hiding is not optional, only the mechanism is
+### Hyrum's Law
 
 **With a sufficient number of users, every observable behaviour of your system will be depended upon by somebody, regardless of what you documented.** The name comes from Hyrum Wright at Google; the observation is standard and uncontroversial.
 
 Not the documented behaviour. The observable one. Iteration order of a map that you never promised was stable. The exact wording of an error message, parsed by someone's log alert. The fact that a call currently takes 40ms, which somebody's timeout was tuned against. Whether IDs happen to be sequential.
 
-The mechanism is not carelessness. It is that a user testing against your implementation cannot distinguish your contract from your behaviour — the running system is the only specification they have direct access to. So they encode what they observe, and after enough users, every observable is encoded somewhere.
+A user testing against your implementation cannot distinguish your contract from your behaviour — the running system is the only specification they have direct access to. So they encode what they observe, and after enough users, every observable is encoded somewhere.
 
 Two practical corollaries.
 
@@ -408,7 +432,75 @@ Two practical corollaries.
 
 **Your export surface is a liability inventory, not a feature list.** Every capital letter is a commitment you did not necessarily mean to make, and taking one back is a breaking change even if no document ever mentioned it.
 
-Hiding is a **Principle** rather than a Law, and it has a sharp condition: *you do not control your callers.* When you do control every caller — a single application, one team, one repository, one deploy — the condition weakens, and hiding starts trading against convenience rather than against catastrophe. This is why library design and application design genuinely differ, and why advice from one arrives wrong in the other. (Chapter 03 takes control-of-callers seriously as a Force in its own right.)
+Worth noticing that two of the book's kinds are sitting side by side here, because the names invite confusion. Hyrum's Law is a **Law** in this book's sense — though an empirical regularity about what people do, not a theorem, which is a distinction chapter 04 grades. What to do about it is a different claim.
+
+That claim — hide what you cannot afford to commit to — is a **Principle**, and it has a sharp condition: *you do not control your callers.* When you do control every caller — a single application, one team, one repository, one deploy — the condition weakens, and hiding starts trading against convenience rather than against catastrophe. This is why library design and application design genuinely differ, and why advice from one arrives wrong in the other. (Chapter 03 takes control-of-callers seriously as a Force in its own right.)
+
+---
+
+## Why it holds
+
+### One meter, two halves
+
+Changing something costs roughly in proportion to how many things depend on it. A leaf with fan-in zero is free to change: nothing else can notice. Fan-in forty costs forty inspections, and it is paid on *every* change, not once.
+
+Both halves of this chapter are that one number, approached from two directions.
+
+**A cycle makes the number mutual, and no discipline reduces it.** If A and B point at each other, each is the other's dependent. Neither can be read, tested, built, or moved without the other, and nothing short of removing an arrow changes that.
+
+**Exposure makes the number unknowable.** Inside your repository `grep` gives you the count, and the count tells you what a change costs. Once something is published you cannot count at all — and Hyrum's Law says the real number is larger than the documented one, because people depend on what they can observe rather than on what you wrote down.
+
+That is why direction and hiding belong in one chapter. They are the only two things you control about the graph — which way the arrows point, and how many there are — and both are billed by the same meter.
+
+### Stability belongs at the bottom
+
+The highest-fan-in node is the most expensive to change, so it should be the one that changes least. Not because stability is a virtue, but because you pay for instability there over and over.
+
+This is the real content behind "depend on abstractions," and that phrase is badly misleading, because it is routinely read as *add an interface*. What lowers the bill is **stability**, not indirection:
+
+```text
+   40 modules                    40 modules
+      ↓ ↓ ↓                        ↓ ↓ ↓
+      Money                     IUserService
+
+  fan-in 40, fan-out 0        fan-in 40, fan-out 0
+  last changed 4 years ago    last changed this sprint
+  cost per year: nothing      cost per year: 40 inspections,
+                              three times over
+```
+
+```go
+// A good abstraction, and not an interface. Forty things depend on it.
+// It has not changed in four years, and there is no reason it would.
+type Money struct {
+	Amount   int64  // minor units
+	Currency string // ISO 4217
+}
+```
+
+```go
+// An "abstraction" by vocabulary and by nothing else. Forty things
+// depend on it, and it changes every sprint.
+type IUserService interface {
+	GetUser(id string) (*User, error)
+	GetUserWithPreferences(id string) (*User, error)         // added in March
+	GetUserWithPreferencesAndRoles(id string) (*User, error) // added in May
+}
+```
+
+Both sit at the bottom with the same fan-in. The second is an interface and buys nothing: every added method is a change at the highest-fan-in point in the system, which is the exact cost the advice exists to avoid. The `I` prefix made it *look* like a stable boundary while the concept behind it was still moving.
+
+So the usable form is: *put the thing that changes least at the bottom.* Sometimes that is an interface. Often it is a data type, a constant, or a function signature that has earned its shape. Whether it is an interface is not the question.
+
+### Why one is a Law and the other a Principle
+
+They share a cost model and they do not share a standing, which is worth being exact about.
+
+The acyclicity claim follows from what a graph is. Its only precondition is that the two nodes are things you handle apart — and where that fails, the claim goes quiet rather than going wrong. No situation makes it false.
+
+The hiding claim has a precondition about the world: whether you control your callers. Change that and the advice does not go quiet, it can reverse — the ECS case below is one where exposing the representation is the correct answer and hiding it is the mistake.
+
+That is the difference chapter 02 draws, arrived at from the mechanism rather than asserted: **a Law can be irrelevant but never wrong; a Principle can be wrong.**
 
 ---
 
