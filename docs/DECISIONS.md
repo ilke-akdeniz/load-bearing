@@ -402,3 +402,97 @@ The prose was verified unchanged word-for-word; the only differences are the two
 
 The visible cost is that a chapter's prose is now unreadable in a terminal without soft wrap, and that `git diff` on a revised paragraph reports the whole paragraph.
 `git diff --word-diff=color` is the intended review command and should be used on chapter files.
+
+---
+
+## 11. Provenance markers are written as prose, not as bracketed tags
+
+**Date.** 2026-08-05
+
+**Context.**
+`README.md` and `CLAUDE.md` specify three inline markers for tagging a claim's standing: `(established)`, `(contested)`, `(ours)`.
+Reviewing chapter 05, the author's reaction to `` `(established)` Parnas, 1972 `` was that the markers read as leftover draft notes rather than as content.
+
+**Options.**
+Keep the bracketed tags and explain them once in chapter 02; keep them but use them more sparingly; replace them with plain English in the prose; drop the distinction entirely.
+
+**Decision.**
+Write the standing into the sentence, in chapter 05.
+`` `(ours)` `` on the three-claims table became "Splitting them this way is this book's, not standard vocabulary."
+`` `(established)` Parnas, 1972 `` became "Parnas, 1972 — the founding paper, and still the clearest statement."
+`` `(established)` `` on Hyrum's Law became "The name comes from Hyrum Wright at Google; the observation is standard and uncontroversial."
+
+**Why.**
+The author's reading is correct, and the reason is one the book already argues in chapter 02: a marker the reader must decode before the sentence means anything is a cost, and this one earns nothing back.
+`(established)` in front of a dated citation is redundant — *Parnas, 1972* already is the provenance, stated in the form scholarship uses.
+
+The tags also fail differently in the two directions they are meant to work.
+Where a claim is genuinely contested or genuinely this book's, one clause of plain English says so *and* says how, which the tag cannot: "not standard vocabulary" tells the reader what to expect when they search for the term, where `(ours)` only tells them a category.
+Where a claim is standard, the tag adds a decoding step to a sentence that was not in doubt.
+
+This is the same argument as decision 3, which removed numbering from the five kinds on the grounds that a name is self-describing at the point of use and an index is not.
+Applying it to provenance markers is consistent rather than novel.
+
+**Open.**
+`README.md` and `CLAUDE.md` still document the bracketed form, and chapter 02 still uses it in two places.
+Reconciling them is the author's call: either the marker convention is replaced book-wide with the prose form, or chapter 05 is the exception and the rule stands.
+Nothing was changed in those files, because the convention is a structural decision and this entry records only what was done to one chapter.
+
+**Consequence.**
+No bracketed markers remain in chapter 05.
+If the prose form is adopted book-wide, `README.md`'s "Provenance markers" section and `CLAUDE.md`'s equivalent are the two places to edit, and chapter 02 has two occurrences.
+
+---
+
+## 12. Chapter 05 revised against the author's first content review
+
+**Date.** 2026-08-05
+
+**Context.**
+Chapter 05 was drafted and committed, then reviewed by the author in one pass of seventeen comments.
+The comments fell into three groups rather than being a list of wording fixes, and the grouping is the useful record.
+
+**Group one — claims asserted rather than shown.**
+Five passages stated a conclusion the reader had no way to reach.
+"The damage is the same at every granularity" never said what the damage *was*.
+The parser/`ast` example was named but not explained, so the point landed only for readers who already knew how a compiler is put together.
+"Depend on abstractions" was stated in a way that reads as *add interfaces*, which is advice the book attacks elsewhere.
+Three passages in *What it costs* asserted a bill with no worked case.
+
+**Group two — two sentences that did not parse.**
+"The cost of a cycle *is* the forced merging of units — and there is no merging to force," and the ECS paragraph ending "that agreement is the design."
+Both were compressed to the point of being unreadable; the author's note on each was "What?"
+Neither was a subtle point badly phrased — they were correct ideas written as if the reader already held them.
+
+**Group three — an objection the chapter never answered.**
+*"A cycle spreads. Once A and B are mutually dependent, any C that touches either one inherits both" — I don't get this, can't we just inject a and b to c?*
+
+**Decision.**
+All three groups were treated as defects rather than as taste, and the chapter grew from 375 to 704 lines.
+
+The structural change: **the cycle mechanism moved from *Why it holds* into the demonstration**, immediately after the four-granularities block, on the author's observation that this is where the reader asks what the damage is.
+The section that answers it is new and splits the damage in two — the small part that crashes (a worked Python partially-initialized-module failure whose outcome depends on import order) and the large part that never crashes at all (a worked change-request scenario across `billing` and `accounts`, showing the cost arriving as a bad estimate rather than a bug report).
+
+**Why the injection objection mattered most.**
+It is the obvious response, the chapter had no answer, and the answer turned out to be one of the chapter's better paragraphs: injection moves *construction*, not *dependency*, and the two-phase construction it forces (`a := &A{}; b := &B{a}; a.b = b`) is the cycle admitting itself at the wiring site.
+What does remove the edge is an interface **owned by the module that needs it** — which is the same manoeuvre as `net/http`'s `Handler`, already in the chapter's boundary section and never connected to it.
+The objection exposed a missing link between two sections that were both already there.
+
+A related question — *doesn't dependency injection contradict information hiding?* — got its own short section for the same reason: it is the reading a careful reader arrives at, and leaving it unanswered makes the chapter look self-contradictory.
+
+**Other substantive corrections.**
+
+- **"The count is what matters, not the count of *your* dependents"** was garbled. The author proposed *depth of dependency tree*. Neither was adopted verbatim: fan-in is what drives change cost, depth drives build times and comprehension chains, and the sentence was trying to say something third — that internal dependents are countable with `grep` and external ones are not. It is now a heading that says exactly that, and it is the bridge into the hiding half.
+- **"exported — a promise"** became **"a contract"**, on the author's note that *promise* collides with the async primitive.
+- **"Forty dependents is a decision; two is an afternoon"** was compressed past sense; it now spells out both cases.
+- **The bridge from cycles to hiding** — absent, and the author reported having no idea how the two halves related. A short section now states it: cycles are about which way edges point, hiding is about how many edges exist at all. Same graph, same cost model.
+- **The failure checklists** gained a clause each explaining how the symptom relates to dependency or hiding, which the author noted was not obvious for several.
+
+**Consequence.**
+`LEDGER.md` gained 10 concept rows and 6 example rows, most of them for material that did not exist before the review.
+That is the ledger working as decision 7 intended: the additions were entered at the point the chapter claimed them, so chapters 09, 13, 16, 17, and 18 now have explicit boundaries against material they would otherwise have re-derived.
+
+**Worth recording about the process.**
+Every one of the seventeen comments identified something real; none was rejected on the merits.
+Two of the three groups are failure modes specific to generated prose — asserting a conclusion in the register of having argued it, and compressing a correct idea until it stops parsing — and both survived a full self-review pass before the author saw them.
+The README's claim that the drafts are read and sent back is doing real work here, and this is the largest single instance of it so far.

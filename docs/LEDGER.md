@@ -26,15 +26,24 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Forces as inputs | 03 | Forces are properties of the situation, not advice | "the Force is X (Ch. 03)" |
 | Law grading A/B/C | 04 | Theorem, near-tautology, or empirical constant — different standing | "Grade A (Ch. 04)" |
 | Acyclic dependency | 05 | A cycle makes two components one unit of comprehension, test, and change | "the Direction Rule (Ch. 05)" |
+| What a cycle actually costs | 05 | The damage is denominated in future change, not in wrong output — which is why it accumulates unnoticed | cite 05 |
+| Injection doesn't break a cycle | 05 | Injection moves construction, not dependency; only an interface *owned by the module that needs it* removes an edge | cite 05 |
+| Two-phase construction | 05 | `a := &A{}; b := &B{a}; a.b = b` is the construction site admitting the cycle | cite 05 |
 | Dependency damage compounds | 05 | A missing test is a static cost; a cycle spreads to everything touching either end | one clause, cite 05 |
 | Cycle detection is granularity-bound | 05 | The compiler catches cycles at the one granularity it checks; the damage exists at all of them | cite 05 |
 | "Layered" is three claims | 05 | Acyclicity (Law) + the line shape (Principle) + the folder taxonomy (Idiom), under one name | "the three claims (Ch. 05)" |
 | Layering as line-shaped DAG | 05 | Layering is the special case where the dependency DAG is a total order | one clause, cite 05 |
 | Layer ≠ directory | 05 | A layer is a rule about call direction; a folder is neither necessary nor sufficient for it | cite 05; 18 owns what folders *cost* |
 | Cost of change scales with dependents | 05 | Change cost is proportional to fan-in, and is paid on every change | cite 05 |
+| Stability, not indirection | 05 | "Depend on abstractions" means put what changes least at the bottom; an interface is not automatically that | cite 05 |
+| Internal vs external dependent count | 05 | Inside the repo `grep` gives you the number; once published it is unknown and growing | cite 05 |
+| From direction to surface | 05 | Cycles are about which way edges point; hiding is about how many edges exist at all | cite 05 |
 | Information hiding / Hyrum | 05 | What is observable will be depended upon | cite 05 |
-| Hiding's condition | 05 | Information hiding is a Principle conditional on not controlling your callers | cite 05 |
-| Export surface as liability | 05 | Every exported identifier is a promise; the surface is an inventory of what you can no longer change | cite 05 |
+| DI does not contradict hiding | 05 | Injection reduces what the module knows and increases what the composition root knows | cite 05 |
+| Hiding's condition | 05 | Information hiding is a Principle conditional on not controlling your callers | cite 05; the Force itself is 03's |
+| Export surface as liability | 05 | Every exported identifier is a contract; the surface is an inventory of what you can no longer change | cite 05 |
+| Four ways to break a cycle | 05 | Interface / event / third module / identifier — four different bills, chosen deliberately | cite 05 |
+| The named escape hatch | 05 | An explicitly unsupported accessor converts an implicit Hyrum dependency into an accepted one | cite 05 |
 | Dependency inversion | 05 | The call may go up while the dependency goes down, because both parties point at an interface at the bottom | cite 05 |
 | Lower layer more capable | 05 | Layering doctrine assumes the layer below is dumber; when it is more capable, "keep logic out" inverts | cite 05 |
 | Check-then-act / TOCTOU | 06 | Between the check and the act, the world moved | "TOCTOU (Ch. 06)" |
@@ -63,7 +72,12 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | Manual wiring in Go vs C# | 02 | An Idiom difference: same shape, opposite reception |
 | Store helper taking `*Catalog` (the cycle) | 05 | One cycle, four detection outcomes across Go/C#/Python — the Law is granularity-blind, the tools are not |
 | `querier` / `txQuerier` | 05 | Dependency direction enforced by the type system rather than by directories; `Begin` absent by design |
-| Compiler DAG vs FlowCore line | 05 | An acyclic graph that is not a line, and the question ("is `ast` above `printer`?") that has no answer |
+| Python partially-initialized module | 05 | The runtime face of a cycle: same code, outcome depends on which module was imported first |
+| `billing` ↔ `accounts`, and `PlanLookup` | 05 | Why injecting both doesn't help, and what actually removes the edge. Also carries the four currencies |
+| Compiler five parts, and three ways to force a line | 05 | An acyclic graph that is not a line; `ast` at the bottom with fan-in 4; and what options A/B/C each cost |
+| `Money` vs `IUserService` | 05 | "Depend on abstractions" is about stability, not about the interface keyword |
+| `UnderlyingConn` escape hatch | 05 | Hiding's bill, paid honestly — an unsupported accessor with the comment doing the work |
+| `LoggingOrderService` vs middleware | 05 | A cross-cutting concern made into a layer; per-method forwarding tax. 13 owns Decorator-as-composition |
 | Mutually recursive `parseExpr`/`parseTerm` | 05 | A cycle that costs nothing, because the two were never separate units |
 | `Particle` class vs ECS parallel arrays | 05 | Hiding inverted by cache layout — the Principle turns over while the Law holds. 20 may cite for the domain, 08 owns the arithmetic |
 | `net/http` `Handler` | 05 | Call up, dependency down — the legitimate version of an apparent violation |
