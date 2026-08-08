@@ -178,7 +178,7 @@ The alternative demonstrated: flat structures with explicit identifiers, and wha
 
 The second case study, kept fair.
 
-Contents: what the empirical literature actually shows about test-first `(contested)`; the difference between "tests help" and "this ordering ritual helps"; **mocks assert that your code calls your mocks** — the argument, with a test that passes while the constraint it claims to verify has been deleted; how the mocking convention generates interface-per-class, which generates the DI container; what the testing pyramid assumes about where your logic lives, and what happens when your logic lives in a schema instead.
+Contents: what the empirical literature actually shows about test-first, where the controlled studies disagree with each other and most of them measure test-first against no tests rather than against test-after; the difference between "tests help" and "this ordering ritual helps"; **mocks assert that your code calls your mocks** — the argument, with a test that passes while the constraint it claims to verify has been deleted; how the mocking convention generates interface-per-class, which generates the DI container; what the testing pyramid assumes about where your logic lives, and what happens when your logic lives in a schema instead.
 
 *Where this doesn't apply:* systems where the dependency genuinely cannot be run in a test — payment gateways, hardware, third-party APIs — and the honest version of test doubles for those.
 

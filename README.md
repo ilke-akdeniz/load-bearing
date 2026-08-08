@@ -90,16 +90,6 @@ Each chapter follows a fixed shape:
 Go, C#, and Python carry most examples.
 Rust, TypeScript, C, and SQL appear where a point needs them — particularly in the chapters on translation and on domain inversions.
 
-**Provenance markers.**
-Claims are tagged so their standing is never ambiguous:
-
-- `(established)` — citable, standard, uncontroversial
-- `(contested)` — genuinely disputed by competent people
-- `(ours)` — this book's synthesis, not established terminology
-
-The five-level model itself is `(ours)`.
-"Transaction Script," "information hiding," and CAP are `(established)`.
-
 **Running example.**
 [FlowCore](https://github.com/ilke-akdeniz/flowcore) supplies many examples in Parts II and V — its 38-entry decision log means the reasoning behind a choice can be quoted rather than guessed at.
 Other domains supply the contrast, and no chapter rests on FlowCore alone.

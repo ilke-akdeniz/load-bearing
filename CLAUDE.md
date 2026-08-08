@@ -126,13 +126,15 @@ Go, C#, and Python carry most examples; Rust, TypeScript, C, and SQL appear wher
 Never "Fowler says." Always "here is what happens, and here is why."
 Cite people for provenance, never as proof.
 
-**Provenance markers.** Tag claims whose standing could be mistaken:
+**Provenance, stated in prose.**
+Before writing a claim whose standing could be mistaken, decide which it is: standard and citable, genuinely disputed, or this book's own.
+Then **write that into the sentence** — there is no tagging notation.
 
-- `(established)` — citable, standard, uncontroversial
-- `(contested)` — genuinely disputed by competent people
-- `(ours)` — this book's synthesis, not established terminology
+- Standard: cite it in the normal way. *Parnas, 1972* is already its own provenance; do not label it as well.
+- Disputed: say who disputes it and on what grounds. A bare "this is contested" is hedging, not honesty.
+- The book's own: say it is not standard vocabulary, so the reader knows what to expect when they search for the term.
 
-The five-level model itself is `(ours)`.
+The five-level model is the book's own, and every chapter that leans on it should read that way.
 
 **Running example.**
 FlowCore — a Go workflow library at `~/s/flowcore` with a 38-entry decision log — supplies examples in Parts II and V, because its reasoning was recorded at the time rather than reconstructed afterwards.

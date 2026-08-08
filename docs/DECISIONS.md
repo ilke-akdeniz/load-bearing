@@ -433,7 +433,7 @@ Where a claim is standard, the tag adds a decoding step to a sentence that was n
 This is the same argument as decision 3, which removed numbering from the five kinds on the grounds that a name is self-describing at the point of use and an index is not.
 Applying it to provenance markers is consistent rather than novel.
 
-**Open.**
+**Open.** *(Resolved by decision 13, which removed the notation entirely.)*
 `README.md` and `CLAUDE.md` still document the bracketed form, and chapter 02 still uses it in two places.
 Reconciling them is the author's call: either the marker convention is replaced book-wide with the prose form, or chapter 05 is the exception and the rule stands.
 Nothing was changed in those files, because the convention is a structural decision and this entry records only what was done to one chapter.
@@ -496,3 +496,70 @@ That is the ledger working as decision 7 intended: the additions were entered at
 Every one of the seventeen comments identified something real; none was rejected on the merits.
 Two of the three groups are failure modes specific to generated prose — asserting a conclusion in the register of having argued it, and compressing a correct idea until it stops parsing — and both survived a full self-review pass before the author saw them.
 The README's claim that the drafts are read and sent back is doing real work here, and this is the largest single instance of it so far.
+
+---
+
+## 13. Provenance markers removed entirely
+
+**Date.** 2026-08-08
+
+**Context.**
+Decision 11 left the marker convention half-applied: chapter 05 stated provenance in prose, while `README.md` and `CLAUDE.md` still documented `(established)` / `(contested)` / `(ours)`, and chapter 02 and the TOC still used them.
+
+Settling it meant choosing a form.
+The author's objection to the bare parenthesis was precise: it does not signal *this is a shorthand and the full description is elsewhere*.
+That is a fair complaint about a pointer that does not point.
+
+The design escalated across three attempts.
+A markdown footnote was proposed, then improved into a per-claim footnote carrying the substance of the dispute rather than a glossary lookup.
+The author preferred an inline link on the marker itself, which surfaced a further problem: the canonical definition lived in `README.md`, and there is no README in a printed book.
+Fixing *that* required giving the convention a home in the book body — a new front-matter file and a TOC entry.
+
+At which point the author asked whether the marker was worth anything at all.
+
+**Options.**
+Keep `(contested)` as a linked parenthesis, with a new `00_conventions.md` to link to; keep it as per-claim footnotes carrying the substance of each dispute; drop the notation entirely and state standing in prose.
+
+**Decision.**
+Drop all three markers and the notation with them.
+Nothing replaces it: where a claim's standing could be mistaken, the sentence says so.
+`CLAUDE.md` keeps the underlying discipline as a writing instruction rather than as syntax.
+
+**Why.**
+The escalation was itself the argument, and it went unnoticed while it was happening.
+By the third iteration the convention required its own file, a TOC entry, an anchor scheme, and a README edit — to save eleven characters.
+That is the book's own compression test failing (decision 3): a notation earns its place by saving more than it costs, and this one had inverted.
+
+Three further points, all available earlier than they were made.
+
+**Usage was one occurrence.**
+Two chapters drafted, zero markers in prose, one in a TOC chapter summary.
+A convention with a single instance across twenty-three planned chapters is not a convention.
+
+**The book already commits to this twice, more strongly.**
+The stated register is mechanism over authority — so a disputed claim should say *what the dispute is*, which is content a tag cannot carry.
+And every chapter carries a mandatory *Where this doesn't apply* section with a worked case.
+`(contested)` was a weaker restatement of a commitment the structure already makes.
+
+**It reads as hedging**, which the register explicitly rules out.
+
+**Attribution, and a correction.**
+The draft recommended keeping `(contested)` on the grounds that it compresses a claim Part IV must make repeatedly, and that it forces the drafter to classify.
+The author rejected it.
+The recommendation did not survive its own follow-through: the same analysis that justified keeping one marker also produced a three-step escalation in what it would cost, and the draft did not notice that the second half refuted the first.
+
+The one genuine point in favour — that the marker forced the drafter to decide whether a claim is standard, disputed, or the book's own — was preserved, but moved to where it belongs.
+`CLAUDE.md` now instructs that the decision be made and written into the sentence, with the failure modes named: do not label a dated citation, and do not write a bare "this is contested," which is hedging rather than honesty.
+
+**Consequence.**
+`README.md`'s "Provenance markers" section was deleted outright.
+The draft first replaced it with a paragraph explaining that there is no notation to learn; the author removed that too, on the grounds that it added nothing to the landing page.
+That is right, and it generalizes: a section whose content is the *absence* of a convention only makes sense to a reader who came looking for the convention, and nobody arrives at a README looking for one.
+Documenting a removal is a decision-log job, not a landing-page job.
+
+`CLAUDE.md`'s section became a writing instruction with three worked cases, and is now the only place the discipline is recorded.
+`02_the-five-levels.md`'s epigraph now reads "the book's own framework, not standard terminology you will find elsewhere under these names."
+`00_toc.md`'s chapter 17 summary now states the actual dispute — that the controlled studies disagree with each other and mostly measure test-first against no tests rather than against test-after — which is more informative than the tag it replaced and is the pattern the rest of the book should follow.
+
+No markers remain anywhere in the book or its instructions.
+The occurrences in this log are historical record and stay as written.

@@ -1,6 +1,6 @@
 # The Five Levels
 
-*This chapter is the model itself, and is therefore `(ours)`. Chapter 23 turns it into a procedure; everything between applies it.*
+*This chapter is the model itself — the book's own framework, not standard terminology you will find elsewhere under these names. Chapter 23 turns it into a procedure; everything between applies it.*
 
 ## The claim
 
