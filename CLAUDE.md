@@ -122,6 +122,16 @@ Explain a term once, at its owning chapter, then use it.
 Not an illustration bolted on afterwards; the code should be the argument.
 Go, C#, and Python carry most examples; Rust, TypeScript, C, and SQL appear where a point needs them.
 
+**Run the code before it goes in.**
+Any example whose point depends on what it *does* — output, an error, an order of events, a value that surprises — gets executed first, in the scratchpad, and the chapter quotes the real result.
+Confidence is not verification.
+A chapter shipped with a Python circular-import example that claimed one import order worked; both failed, and the mistake survived a full self-review because it looked obviously right.
+
+- **Verify, then write.** Not the reverse — a written example is one you have started defending.
+- **When the example fails to show what you expected, that is the finding.** Say what actually happens, or replace the example. Do not adjust the prose to make a broken demonstration sound correct.
+- **When a toolchain is unavailable**, say so in the chapter's review notes rather than asserting output. Go, Python, and Node are usually available; C#, Java, and Rust usually are not. Prefer a verifiable language when the point is language-independent, and describe the mechanism without invented numbers when it is not.
+- **Structural code needs no run** — a type signature, an interface, a shape being contrasted with another shape. The rule is about claims of behaviour.
+
 **Mechanism over authority.**
 Never "Fowler says." Always "here is what happens, and here is why."
 Cite people for provenance, never as proof.

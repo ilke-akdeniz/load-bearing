@@ -609,3 +609,49 @@ The author also noted that claim three's physical boundary was more often *libra
 Chapter 05 is 857 lines, from 375 before the first review. `LEDGER.md` gained four concept rows, lost the reversed escape-hatch row, and had five rows corrected where the chapter had moved beneath them.
 
 Worth recording about the process: of fourteen comments, one was a factual error in a shipped commit, two were sentences that did not parse, three were conceptual framings where the author's version was simply better than the draft's, and one reversed a decision this log had already recorded as settled. The failure modes are consistent with the first review — asserting rather than showing, and compressing until meaning is lost — with one new one: **verifying a claim by asserting it confidently.** The Python example was never run. It is now, along with the CommonJS and Go examples that replaced parts of it.
+
+---
+
+## 15. Chapter 03: a Force is a dial, not a switch
+
+**Date.** 2026-08-09
+
+**Context.**
+The TOC lists seven Forces for chapter 03 and asks for "a code demo of the same problem solved differently under different values of it."
+Chapter 02 had already established what a Force *is* — a property of the situation rather than advice, acting differently on Laws than on Principles — so 03 needed something beyond a catalogue, or it would be seven definitions and a table.
+
+**Options.**
+Present the seven as a reference list with a demonstration each; organize around one running problem shown seven ways; find the claim the catalogue is evidence for and lead with that.
+
+**Decision.**
+Lead with the claim: **a Force has a value, not just a presence, and the design changes several times across that range — each answer discarding the previous one rather than refining it.**
+The seven Forces are then the demonstration of it rather than the point.
+
+The chapter opens with one counter at four concurrency values, ending at a position where the answer is no longer a different way to increment but a different data model — an append-only log with an idempotency key, because a retried message is indistinguishable from a second event.
+
+**Why.**
+The catalogue alone is not worth a chapter. Everyone already knows concurrency and latency matter; what they do with that knowledge is treat the Force as a flag, pick the design that handles "concurrency," and stop.
+
+The dial framing is what makes the seven useful, and it is falsifiable in a way a list is not: if the design only ever changed once across a Force's range, the framing would be wrong. The counter example is chosen because its fourth position is unreachable from its third by any amount of hardening, which is the strongest available form of the claim.
+
+**A second decision inside the boundary section.**
+The TOC promised "Forces you can't measure yet, and why guessing is worse than deferring." Written straight, that produces the standard advice to defer decisions, which is wrong often enough to be worth correcting.
+
+The rule the chapter gives instead is:
+
+> Defer what you can reverse. Decide what you cannot. And when you must decide under uncertainty, choose the strict version, because strictness is the direction that can be undone later.
+
+Both halves are quoted from FlowCore's decision log — `internal/` deferred with its trigger recorded, and the unique index shipped on day one because "dropping a unique index later is trivial; adding one after clients hold duplicate rows is not."
+
+This matters because it inverts what "stay flexible" suggests. Under uncertainty the reversible choice is usually the *stricter* one, not the more permissive one.
+
+**Verification, following decision 14.**
+Every runnable example was run before it went in. The JavaScript number-precision demonstration was checked at the point that matters: a 64-bit identifier arriving as a JSON number reads back as `9007199254740992` in Node, and the same value sent as a string round-trips intact. The float-versus-minor-units sums were run rather than asserted.
+
+One example was discarded during verification. A first version of the precision demonstration used a JavaScript integer literal, which is already truncated before `JSON.stringify` sees it — so the round-trip appeared lossless and the example proved the opposite of its caption. The loss only shows when the value arrives as text and is parsed, which is also the real scenario.
+
+**Consequence.**
+`LEDGER.md` gained twelve concept rows and six example rows.
+The seven Forces are now individually owned by 03, so later chapters name a Force and cite rather than re-deriving it — and the two that were being coined in passing by earlier chapters, control-of-callers and the memory hierarchy, have a home.
+
+Chapter 03 runs 381 lines, the shortest of the three drafted so far, which suits a chapter whose job is to supply vocabulary the rest of the book spends.

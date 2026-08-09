@@ -24,6 +24,17 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Why the kinds get confused | 02 | Tone doesn't vary with authority; advocacy compresses; monoculture makes Idioms feel universal | one clause, cite 02 |
 | Law inert vs Principle wrong | 02 | A Force decides whether a Law *binds*; it decides whether a Principle is *right* | one clause, cite 02 |
 | Forces as inputs | 03 | Forces are properties of the situation, not advice | "the Force is X (Ch. 03)" |
+| A Force is a dial, not a switch | 03 | Forces have values; the design changes several times across the range, each answer discarding the last | "read the value (Ch. 03)" |
+| The seven Forces | 03 | Concurrency, durability of the medium, blast radius, change frequency and shape, team size and turnover, latency budget, control of callers | name the Force, cite 03 |
+| Concurrency | 03 | How many at once, and do they touch the same state — it binds where writers collide, not where they coexist | cite 03; 06 owns the races |
+| Durability of the medium | 03 | How long what this writes outlives the code that wrote it | cite 03; 09 owns published compatibility |
+| Blast radius | 03 | When it is wrong, what happens and who finds out — decides how much prevention is worth | cite 03 |
+| Change frequency and shape | 03 | How often, and how many places must change with it | cite 03; 05 owns fan-in pricing |
+| Team size and turnover | 03 | How many must agree, and how many will still be here — the rule migrates comment → review → type system | cite 03 |
+| Latency budget | 03 | What the budget is, and what fraction one mechanism costs | cite 03; 08 owns the arithmetic |
+| Control of the callers | 03 | Can I change every call site, and would I know if I broke one — three values, not two | cite 03; 05 owns what it implies for exposure |
+| Reversibility decides deferral | 03 | Defer what you can reverse, decide what you cannot, and prefer the strict version because strict is the undoable direction | "the reversibility rule (Ch. 03)" |
+| Forces move on their own clock | 03 | Team size, client count, and row count change without a commit, invalidating Principles nobody revisits | cite 03 |
 | Law grading A/B/C | 04 | Theorem, near-tautology, or empirical constant — different standing | "Grade A (Ch. 04)" |
 | Acyclic dependency | 05 | A cycle makes two components one unit of comprehension, test, and change | "the Direction Rule (Ch. 05)" |
 | What a cycle actually costs | 05 | The damage is denominated in future change, not in wrong output — which is why it accumulates unnoticed | cite 05 |
@@ -73,6 +84,12 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 |---|---|---|
 | Seat reservation race (read-then-update) | 02 | A Law violation: wrong in every language; also reused *within* 02 to show a Force making it inert |
 | Manual wiring in Go vs C# | 02 | An Idiom difference: same shape, opposite reception |
+| Page-view counter at four concurrency values | 03 | The dial: the fourth position is a different data model, not a hardened third |
+| `add column tip not null default 0` | 03 | Durability: a default is a claim about history, and it erases "unknown" permanently |
+| Float vs minor-unit sums | 03 | Blast radius: the same arithmetic is correct on a dashboard and a defect on an invoice |
+| Payment method: switch vs registry | 03 | Change frequency, plus the shape — how many files one addition touches |
+| `Money` as a comment vs unexported fields | 03 | Team size: the same rule migrates from comment to type system. 12 owns the technique |
+| 64-bit id in JSON, read by JavaScript | 03 | Control of callers: same defect, same fix, three different projects |
 | Store helper taking `*Catalog` (the cycle) | 05 | One cycle, six detection outcomes across Go/C#/Python/CommonJS — the Law is granularity-blind, the tools are not |
 | `querier` / `txQuerier` | 05 | Dependency direction enforced by the type system rather than by directories; `Begin` absent by design |
 | Python partially-initialized module | 05 | The runtime face of a cycle: same code, outcome depends on which module was imported first |
