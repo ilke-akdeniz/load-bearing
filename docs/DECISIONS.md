@@ -563,3 +563,49 @@ Documenting a removal is a decision-log job, not a landing-page job.
 
 No markers remain anywhere in the book or its instructions.
 The occurrences in this log are historical record and stay as written.
+
+---
+
+## 14. Chapter 05, second review: three reframings and a reversal
+
+**Date.** 2026-08-08
+
+**Context.**
+The author's second pass over chapter 05 ran to fourteen comments, worked in four batches with a commit between each. Two batches were corrections of fact and structure; two were conceptual.
+
+**The reversal, recorded first because decision 12 got it wrong.**
+
+Decision 12 called *"can't we just inject a and b to c?"* the best question of the first review and built a section around answering it. The author's second pass corrected the reading: the question was never about injecting into a third module, it was **why dependencies are bound to accumulate at all** — with the observation that accumulation looks like habit rather than necessity.
+
+They were right, and so was the underlying objection. The draft's claim that "the tangle grows monotonically" does not survive examination. What is mechanical is that every new dependent of a tangled module inherits the whole tangle transitively — it cannot be built, tested, or extracted without both ends. What is *not* mechanical is cycles begetting cycles: that is a tendency created by the placement ambiguity the first cycle introduces, and discipline resists it.
+
+The invented section was deleted. The material worth keeping — two-phase construction as the visible symptom, and the interface fix — survives under a heading that describes what it does rather than answering a question nobody asked.
+
+**Two examples were wrong, and one was wrong in the book.**
+
+The Python circular-import demonstration claimed one import order works and the other fails. Both fail. The example demonstrated nothing and had been in a commit for four days. Replaced with a verified one whose asymmetry comes from a definition sitting above the import rather than below it — a better example, since the reason is visible in the code.
+
+While rebuilding the four-currencies section, two further examples turned out to be wrong in the same way: an event type declared by `billing` would still force `accounts` to import `billing` to receive it, and a shared module accepting `accounts.Plan` would point an arrow straight back and rebuild the cycle it was introduced to break. Both are fixed, and both fixes are now *stated* in the text, because the mistake is instructive: it is possible to apply a cycle-breaking technique and leave the cycle in place.
+
+**The three reframings, all the author's.**
+
+The draft explained dependency injection in terms of *who knows more*, which produced the unreadable line "billing hides nothing from itself." The author's framing is better and was adopted wholesale: **injection is a module declining to hold decisions that were never its to make.** Where plans are stored, how they are fetched, what is configured — `billing` had helped itself to four decisions belonging elsewhere. The same voice now carries the `net/http` explanation, where the framework says what it cannot decide on a client's behalf.
+
+The author also asked for the difference between dependency *injection* and dependency *inversion*, which the chapter had been using interchangeably. The distinction is now stated: **injection decides who constructs; inversion decides who declares the interface, and only inversion turns an arrow around.**
+
+**The escape hatch was self-contradictory and is now reversed.**
+
+The draft proposed an unsupported accessor with a comment disclaiming compatibility. The author rejected it as having no technical merit — a ceremonial answer that says "yes we have that" while planning to deal with the consequences later.
+
+Correct, and worse than that: the chapter explains Hyrum's Law three sections earlier and then proposes a solution Hyrum's Law defeats. Ship the method, people call it, and removing it breaks them; the disclaimer changes only whose fault that is. The section now gives the two honest answers — a narrow API you commit to, with `database/sql`'s scoped `Conn.Raw` as the model, or a straight no — and says plainly why the disclaimer is neither.
+
+**A precision fix that propagated.**
+
+Making the three claims explicit, as the author asked, exposed a weakness in Part three. Stating claim two precisely — every part gets a rank, and may depend only on the rank immediately beneath — makes it clear that the compiler graph *can* be topologically sorted, so "you must order `parser` and `printer`" was too strong. What actually fails is the strict rank rule: `codegen` and `typecheck` both reach two ranks down to `ast`, and the ranks that fall out of the sort carry no meaning. Part three now says that, which is a stronger argument than the one it replaces.
+
+The author also noted that claim three's physical boundary was more often *libraries and assemblies* than directories in their C# experience. Generalized.
+
+**Consequence.**
+Chapter 05 is 857 lines, from 375 before the first review. `LEDGER.md` gained four concept rows, lost the reversed escape-hatch row, and had five rows corrected where the chapter had moved beneath them.
+
+Worth recording about the process: of fourteen comments, one was a factual error in a shipped commit, two were sentences that did not parse, three were conceptual framings where the author's version was simply better than the draft's, and one reversed a decision this log had already recorded as settled. The failure modes are consistent with the first review — asserting rather than showing, and compressing until meaning is lost — with one new one: **verifying a claim by asserting it confidently.** The Python example was never run. It is now, along with the CommonJS and Go examples that replaced parts of it.

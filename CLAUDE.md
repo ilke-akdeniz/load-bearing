@@ -230,3 +230,28 @@ Not breezy, not academic, no throat-clearing.
 The reader is an experienced engineer who has been burned by advice that didn't fit.
 
 Avoid: "best practice," "clean code," "simply," "just," and any sentence that would survive being deleted.
+
+### No decorative language
+
+An image earns its place only by doing work the plain sentence cannot.
+Two tests, and a phrase must pass **both**:
+
+1. **Is the image carrying the explanation?**
+   Then there is no explanation — replace it with the mechanism.
+   *"A well-encapsulated module is opaque at 3am"* explains nothing about why hiding costs you.
+   *"Every decision you hide is one your users cannot reach when they turn out to need it"* does.
+2. **Is the point already made without it?**
+   Then delete it.
+   This is the more common case and the harder to catch, because the paragraph reads well either way.
+
+The recognizable forms, all of which have shipped in drafts of this book and been cut on review:
+
+- **Personification** — "the cycle announces itself," "the Force does not negotiate." Structures do not act. Say what is observable, and where.
+- **A metaphor promoted to a term** — "same meter," "the tell." If a figure of speech starts being used as vocabulary it needs defining, and if it needs defining it is not worth the definition.
+- **Evaluative adjectives standing in for the argument** — "seductive," "elegant," "nasty." Name the consequence instead.
+- **Grand summaries** — "that is the whole of API design." The preceding sentence already said it, and better.
+- **Atmosphere** — 3am, war stories, the beleaguered engineer. The reader is one and does not need reminding.
+
+When one of these is found in review, **treat it as a signal that the surrounding claim may not be worked out.**
+Decoration usually appears where an argument is thin — it is covering the gap rather than filling it.
+Rewrite the claim, not the phrase.

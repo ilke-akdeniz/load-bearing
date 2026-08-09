@@ -14,11 +14,31 @@ Say "we use a layered architecture" and you have made three claims at three diff
 
 | Claim | Kind | Standing |
 |---|---|---|
-| Dependencies flow one way — no cycles | **Law** | near-tautology, Grade B (Ch. 04) |
-| The acyclic graph is a straight line | **Principle** | true when the shape genuinely is a line |
-| The line is `presentation → business → data`, expressed as directories | **Idiom** | 1990s enterprise Java, and arbitrary |
+| If A depends on B, then B must not depend on A — directly or through any chain | **Law** | near-tautology, Grade B (Ch. 04) |
+| The parts can be stacked into layering ranks, each depending only on the rank beneath it | **Principle** | true when the graph is that shape, and often it isn't |
+| The ideal ranking, top to bottom, is `presentation → business → data`, and each rank becomes a physical boundary | **Idiom** | 1990s enterprise Java and C#, and arbitrary |
 
-Most real architecture damage is a violation of the first. Most harm done by *architecture advocacy* comes from the third, applied to a program whose dependency graph looks nothing like a line — which then generates pass-through classes and mapping code to fill out the shape.
+Claim two is the one that needs stating carefully, because it has a loose reading and a strict one and only the strict one says anything new. Loosely — "dependencies should flow downward" — it is claim one with a picture attached.
+
+The strict reading needs the word **rank**, so here it is precisely. A rank is a whole number attached to each part, assigned by one rule:
+
+> The **bottom rank** is 1: everything that depends on nothing.
+> Every other part sits **one rank above the topmost part it depends on.**
+
+Bottom and top are worth fixing in place, because the numbers run the opposite way to the everyday phrase "high-level code." The bottom rank is the foundation — rank 1, depends on nothing, everything rests on it. The top rank is the entry points, carrying the largest number, depending on everything beneath. `main` is at the top; `money` is at the bottom.
+
+That is all a rank is. Not a folder, not a team, not a tier of importance — a number that falls out of the arrows.
+
+Two things follow, and they are the difference between the two claims:
+
+- **Claim one is exactly the condition that ranks can be assigned at all.** Try the rule on a cycle and it never terminates: A's rank needs B's, which needs A's. Acyclic and rankable are the same property.
+- **Claim two adds that every arrow crosses exactly one rank.** Rank 4 may use rank 3. It may not reach down to rank 1, even though nothing about acyclicity forbids that.
+
+The second is a real constraint, most systems do not satisfy it, and Part three works through one that doesn't.
+
+Claim three is where the physical boundary arrives, and it varies by ecosystem in a way worth noticing. In Java and C# it was usually separate projects, assemblies, or shipped libraries; elsewhere it shows up as top-level directories or packages. The mechanism is the same whichever form it takes, and chapter 18 works through what that boundary costs.
+
+Most real architecture damage is a violation of the first. Most harm done by *architecture advocacy* comes from the third, applied to a program whose graph does not have the shape claim two describes — which then generates pass-through classes and mapping code to fill out the ranks.
 
 They are usually taught together and defended together. Separating them is the whole content of this chapter.
 
@@ -175,9 +195,11 @@ That class of bug is real, and the silent version is genuinely nasty. It is also
 
 **Second, the large part: cycles that never crash at all.**
 
-Assume the program is correct, fast, and stable. The bill still arrives, and it arrives on every future change. Concretely.
+Assume the program is correct, fast, and stable. The cost still arrives — not at runtime, but on every future change.
 
-Suppose `billing` and `accounts` depend on each other — `billing` reads the merchant's plan, `accounts` asks `billing` whether the merchant is in arrears. Nothing about this is broken. Then a ticket arrives: *make the payment retry limit configurable per merchant.*
+Take a system with two modules that depend on each other. `billing` charges merchants and needs to read a merchant's plan, which `accounts` owns. `accounts` decides whether a merchant may be suspended and needs to ask `billing` whether that merchant is behind on payments. Each genuinely needs something the other has, so each imports the other. Nothing here is broken, and no test fails.
+
+Then a ticket arrives: *make the payment retry limit configurable per merchant.*
 
 - **The test you expected to write does not exist.** To test the new retry logic you need a merchant, which needs `accounts`, which needs `billing`, which needs a database. What should have been a unit test is now an integration test with fixtures, so it is slower, flakier, and less likely to be written at all.
 - **You cannot read one without the other.** The retry code calls into `accounts`, which calls back into `billing`. Following it means holding both in your head, so the fifteen-minute change becomes a morning.
@@ -214,7 +236,7 @@ So the honest version: a missing test is a static cost that does not get worse o
 
 ### Breaking the cycle
 
-The cycle announces itself first at the construction site:
+The cycle shows up first at the construction site:
 
 ```go
 type Accounts struct{ billing *Billing }
@@ -306,18 +328,39 @@ Five parts, and what each one does:
 | `typecheck` | walk the tree, resolve types, report errors | `ast`, `printer` |
 | `codegen` | typed tree → output | `ast`, `typecheck` |
 
-```text
-LAYERED (a line)        DAG BUT NOT A LINE
+FlowCore's graph, for comparison, with arrows pointing down at what is needed:
 
-  service                 parser ──→ ast ←── printer
-     ↓                      │                  ↑
-   store                    ↓                  │
-     ↓                   typecheck ────────────┘
-   errmap                   ↓
-                         codegen
+```text
+A LINE
+
+rank 3     service
+              ↓
+rank 2      store
+              ↓
+rank 1      errmap
 ```
 
-The two surprising edges are the ones that make the shape.
+The compiler's, drawn the same way:
+
+```text
+NOT A LINE
+
+rank 4     codegen
+              ↓
+rank 3    typecheck
+              ↓
+rank 2     printer        parser
+              ↓              ↓
+rank 1        └───→ ast ←────┘
+
+           plus two arrows that skip ranks:
+              codegen   ──→ ast    (4 to 1)
+              typecheck ──→ ast    (3 to 1)
+```
+
+Read these as dependency arrows, not as the order things happen in. Source text flows *forward* through parser, typecheck, and codegen at runtime; the arrows here run the other way, from each part to what it needs in order to compile. That is why `codegen` sits at the top rather than the end.
+
+The two skipping arrows are pulled out on their own because they are what the rest of this section is about. The two surprising ones in the main picture are what make the shape.
 
 **`printer` depends on `ast` and on nothing else.** It is the inverse of `parser` — one turns text into a tree, the other a tree into text. Neither calls the other. Ask which is above the other and the question is empty; they are peers over a shared type.
 
@@ -325,7 +368,25 @@ The two surprising edges are the ones that make the shape.
 
 So `ast` sits at the bottom with four things depending on it and nothing below. That is not an accident of drawing — it is the shape you want, because `ast` is the most stable part and everything else is a consumer of it. Adding a sixth part later — a linter, a documentation generator, a language server — costs exactly one new edge into `ast` and changes nothing that already exists.
 
-Now force it into a line. You must put `printer` and `parser` in some order, and each choice costs something concrete.
+Be precise about what fails here, because the graph is acyclic and ranks *can* be assigned. Run the rule from earlier — bottom rank 1 for whatever needs nothing, and every other part one rank above the topmost thing it needs:
+
+```text
+                                        topmost
+part       needs                        thing needed   rank
+ast        nothing                      —                 1
+parser     ast (1)                      1                 2
+printer    ast (1)                      1                 2
+typecheck  printer (2), ast (1)         2                 3
+codegen    typecheck (3), ast (1)       3                 4
+```
+
+Every arrow now runs from a higher number to a lower one, so claim one is satisfied. The graph is acyclic, as promised.
+
+What fails is claim two. It requires every arrow to cross **exactly one** rank, and two arrows here do not: `typecheck` reaches from 3 down to `ast` at 1, and `codegen` reaches from 4 down to `ast` at 1. Those are the reaches strict layering forbids, and they are not accidents you could refactor away — every part needs the node types, which is what it means for `ast` to be the shared vocabulary.
+
+The ranks also turn out to carry no meaning. Rank 2 holds `parser` and `printer`, which have nothing in common: one reads text, the other writes it, and neither touches the other. They share a number because they happen to be the same distance from `ast`, which is a fact about counting arrows rather than a statement about abstraction, ownership, or rate of change. There is nothing to call rank 2 — and being unable to name a rank is how you know it is an artifact of the arithmetic rather than a real division.
+
+Now force it anyway, and each way of doing so costs something concrete.
 
 **Option A: move printing into `ast`.**
 
@@ -355,7 +416,7 @@ public class CompilationService {
 }
 ```
 
-The printer is now a parameter passed down through `typecheck` into every function that might report an error — four call levels deep, in service of a diagram. This is the pass-through class, arrived at honestly: nobody set out to write it, it was the only way to satisfy a shape that was wrong.
+The printer is now a parameter passed down through `typecheck` into every function that might report an error — four call levels deep, in service of a diagram. This is the pass-through class, and nobody set out to write it — it was the only way to satisfy a shape that was wrong.
 
 It also supplies the test that catches the type, here and later in the chapter: **does this thing decide something, or does it only forward?** `CompilationService` decides nothing — every line of it hands work to something else. A part that forwards is not a part.
 
@@ -369,7 +430,7 @@ Sharpened:
 
 Parts one to three were about which way the arrows point. This one is about how many arrows exist at all.
 
-That is the connection between the chapter's two claims, and it is worth stating plainly because they are usually taught as separate subjects. A cycle is two arrows where there should be one. Information hiding is about not creating an arrow in the first place. Same graph, same meter: a dependency that was never created costs nothing to change, forever.
+That is the connection between the chapter's two claims, and it is worth stating plainly because they are usually taught as separate subjects. A cycle is two arrows where there should be one. Information hiding is about not creating an arrow in the first place. Same graph, same cost: a dependency that was never created costs nothing to change, forever.
 
 Parnas, 1972 — the founding paper, and still the clearest statement: decompose a system by what each module *hides*, not by the steps of the process it performs. The value of a module is the decision it keeps to itself, because that is the decision you can change later without telling anyone.
 
@@ -389,34 +450,38 @@ FlowCore's decision log records the reasoning for keeping `querier` private, and
 
 > An exported interface would be a public commitment to a shape pgx defines, so a pgx v6 signature change would trap the library between their break and its promise; private means free resignaturing.
 
-That is the whole of API design, stated as a bill. Exporting `querier` would have bought nothing and mortgaged the library's freedom to a third party's release schedule.
+Exporting `querier` would have bought nothing and tied the library's freedom to a third party's release schedule.
 
 ### "Doesn't dependency injection contradict hiding?"
 
-It looks like it should. Injection means the caller has to know about the thing being injected, and hiding says to know as little as possible. Both cannot be right.
+It looks like it should. Injection means the caller has to be told about the thing being injected, and hiding says to know as little as possible. Both cannot be right.
 
-They are, because they are about different parties. Look at what each arrangement knows.
+The apparent conflict comes from asking *who knows more*. Ask instead *whose decisions are being respected*, and it dissolves.
 
 ```go
-// Without injection: billing hides nothing from itself.
-// It depends on Postgres, on the pool, on the driver, on the DSN format.
+// Without injection: billing reaches through the boundary and makes
+// decisions that were never its to make.
 func NewBilling() *Billing {
 	pool, _ := pgxpool.New(ctx, os.Getenv("DATABASE_URL"))
 	return &Billing{plans: &PostgresPlanStore{pool: pool}}
 }
 ```
 
+Four decisions belonged to whoever owns plan storage: that plans live in Postgres, that the connection comes from a pool, that the pool is configured from that environment variable, that `PostgresPlanStore` is the implementation. `billing` has helped itself to all four. If plan storage moves to a cache, or the pool is shared, or the variable is renamed, `billing` breaks — not because its own job changed, but because it was depending on decisions it had no business holding.
+
 ```go
-// With injection: billing depends on three method signatures
-// and knows nothing about what is behind them.
+// With injection: billing states what it needs to do its own job,
+// and stops there.
 func NewBilling(plans PlanLookup) *Billing {
 	return &Billing{plans: plans}
 }
 ```
 
-The caller learned one thing — that a `PlanLookup` must be supplied. `Billing` unlearned four. Hiding is about what a *module* is coupled to, and injection reduces that; what it increases is what the *composition root* knows, and the composition root is one file whose entire job is knowing.
+Read this version as `billing` saying: *those were never my decisions. Where plans are stored, how they are fetched, what is configured — none of that is my business. I need exactly the operations in this interface in order to decide what I actually decide, which is what to charge.*
 
-The contradiction only appears if you read hiding as "less information anywhere," rather than what Parnas actually proposed: each module hides a decision, and the decision `Billing` no longer holds is *where plans come from*.
+That is the resolution. Hiding is about what a *module* is coupled to, and injection reduces that: `billing` unlearned four decisions and learned one interface. What grows is what the **composition root** knows, and the composition root is one file whose entire job is knowing how the pieces fit — the one place where knowing everything is correct.
+
+The contradiction only survives if you read hiding as "less information anywhere." Parnas proposed something narrower: each module hides a decision, and other modules stop depending on it. Injection is how a module *declines to hold* a decision that belongs elsewhere.
 
 ### Hyrum's Law
 
@@ -440,7 +505,7 @@ That claim — hide what you cannot afford to commit to — is a **Principle**, 
 
 ## Why it holds
 
-### One meter, two halves
+### Both halves are fan-in
 
 Changing something costs roughly in proportion to how many things depend on it. A leaf with fan-in zero is free to change: nothing else can notice. Fan-in forty costs forty inspections, and it is paid on *every* change, not once.
 
@@ -450,7 +515,7 @@ Both halves of this chapter are that one number, approached from two directions.
 
 **Exposure makes the number unknowable.** Inside your repository `grep` gives you the count, and the count tells you what a change costs. Once something is published you cannot count at all — and Hyrum's Law says the real number is larger than the documented one, because people depend on what they can observe rather than on what you wrote down.
 
-That is why direction and hiding belong in one chapter. They are the only two things you control about the graph — which way the arrows point, and how many there are — and both are billed by the same meter.
+That is why direction and hiding belong in one chapter. They are the only two things you control about the graph — which way the arrows point, and how many there are — and both are priced the same way.
 
 ### Stability belongs at the bottom
 
@@ -523,7 +588,7 @@ Nobody sane calls this an architecture violation, and the reason is precise rath
 
 The same goes for two types in one file that reference each other, or a 200-line CLI that has one layer because there is nothing to order. This is a Law that is true and inert (Ch. 02), not a Law being bent.
 
-The test is not "is there a cycle in the call graph." It is: **will these ever be understood, tested, or changed apart?** If the honest answer is no, the cycle is free. If the honest answer is "not today, but obviously yes in a year," you are paying for the merge on the schedule your future self chose.
+The test is not "is there a cycle in the call graph." It is: **will these ever be understood, tested, or changed apart?** If the honest answer is no, the cycle is free. If the honest answer is "not today, but yes within a year," the cost has not been avoided — it has been postponed, and by then there will be more code depending on both.
 
 ### ECS: hiding inverted by the memory hierarchy
 
@@ -564,9 +629,9 @@ The second is not a worse-encapsulated version of the first. It is a different d
 
 Be exact about what was traded away. In the class version the field layout is private: you could reorder the fields, widen `lifetime` to a double, or delete `tint` entirely, and no other file would need editing. In the array version the layout *is* the interface — a dozen systems index those arrays directly, so changing the layout means editing every one of them.
 
-That is a genuine loss, accepted deliberately. You gave up the ability to change the representation quietly, and what you bought is the speed that comes from every system agreeing on it. There is no hidden decision left to protect, because the decision is the contract.
+That is a genuine loss, accepted deliberately. You gave up the ability to change the representation quietly, and what you bought is the speed that comes from every system agreeing on it.
 
-The Force is the memory hierarchy, and it does not negotiate. Where it dominates, "hide the representation" inverts: hiding it is precisely what you must not do. Chapter 20 works through the rest of that domain's inversions.
+The Force is the memory hierarchy. Where it dominates, "hide the representation" inverts: hiding it is precisely what you must not do. Chapter 20 works through the rest of that domain's inversions.
 
 Note carefully what has *not* inverted. The ECS dependency graph is still acyclic — systems depend on component arrays, and the arrays depend on nothing. The Law holds untouched while the Principle turns over completely, which is the difference chapter 02 draws, seen in the wild.
 
@@ -585,11 +650,18 @@ http.Handle("/approve", approveHandler(engine, catalog))
 
 At runtime the call direction is upward: `net/http`, which you might draw as the lower layer, invokes your handler, which you would draw above it. Strictly, the lower thing calls the higher thing.
 
-It is fine, and the reason is the one from the `PlanLookup` example earlier. `net/http` does not depend on your code. It depends on `Handler` — an interface **it declares itself** — and your code depends on that same interface. The *call* goes up while the *dependency* goes down, because the interface sits at the bottom and both parties point at it.
+It is fine, and it is the same move `billing` made. Read `net/http` as saying: *I cannot decide what any future client's request handling should do, and it is not my job to. I need exactly one operation — hand me a request and a place to write, get a response back — in order to decide what I actually decide, which is how to speak HTTP.*
 
-This is what dependency inversion is for, and it is the legitimate version of the thing that usually signals a violation. Plugin systems, callback APIs, and UI frameworks are all built on it: in a framework, inversion of control is not an implementation detail, it is the product.
+So `net/http` does not depend on your code. It depends on `Handler`, an interface **it declares itself**, and your code depends on that same interface. The *call* goes up while the *dependency* goes down, because the interface sits at the bottom and both parties point at it. Plugin systems, callback APIs, and UI frameworks are all built this way: in a framework, inversion of control is not an implementation detail, it is the product.
 
-The diagnostic: draw the graph in terms of *what breaks when you delete something*, not in terms of what calls what at runtime. Delete your handler and `net/http` still compiles. That settles it.
+**Injection and inversion are not the same thing**, and the pages above have now shown both, so it is worth separating them in one place.
+
+- **Dependency injection is about who constructs.** A dependency is supplied from outside rather than built inside. It changes where the `new` happens and nothing else — you can inject a concrete `*PostgresPlanStore` and the arrow still points from `billing` at Postgres.
+- **Dependency inversion is about who declares the interface.** The module that *needs* the operation defines it, in its own vocabulary, and the provider implements it. That reverses the arrow.
+
+Only the second changes the graph. The two travel together so often that they get one name in conversation, but injecting a concrete type buys you a seam for testing and nothing structural, while inversion is what lets `billing` be extracted or `net/http` be written before your handler exists.
+
+The diagnostic for both: draw the graph in terms of *what breaks when you delete something*, not what calls what at runtime. Delete your handler and `net/http` still compiles. That settles it.
 
 ### When the lower layer is more capable
 
@@ -619,79 +691,160 @@ The Law is untouched again: the dependency still points one way. What inverted i
 
 ### Breaking a cycle is never free
 
-There are four ways to pay, and they are genuinely different bills. Take the `billing` ↔ `accounts` cycle from earlier.
+There are four ways to pay, and they are genuinely different bills. All four are shown on the same cycle — the one from earlier, reduced to the two calls that create it:
 
-**One — an interface at the boundary, declared by the module that needs it.**
+```go
+package billing
+func (b *Billing) Charge(m uuid.UUID) error {
+	plan := b.accounts.PlanFor(m) // billing → accounts
+	// ...
+}
+
+package accounts
+func (a *Accounts) Suspend(m uuid.UUID) error {
+	if a.billing.IsBehind(m) { // accounts → billing
+		return ErrBehindOnPayments
+	}
+	// ...
+}
+```
+
+Each option below removes the second arrow, `accounts → billing`, and keeps the first. That is the mirror of the fix shown earlier, which removed the other one — either arrow can be the one you turn around, and which you pick is a judgement about which module the operation more naturally belongs to.
+
+**One — `accounts` declares the operation it needs, and `billing` implements it.**
+
+```go
+package accounts
+
+// accounts states its requirement in its own vocabulary.
+type PaymentStatus interface {
+	IsBehind(m uuid.UUID) bool
+}
+
+type Accounts struct{ payments PaymentStatus }
+```
+
+*The bill:* one more name to know, and "go to definition" lands on a declaration instead of the code that runs. Debugging gains a hop at every such boundary.
+
+**Two — `billing` announces instead of being asked.**
 
 ```go
 package billing
 
-type PlanLookup interface {
-	PlanFor(ctx context.Context, merchantID uuid.UUID) (Plan, error)
-}
-```
-
-*The bill:* one more name, and "go to definition" now lands on a declaration instead of the code that runs. Debugging gains a hop.
-
-**Two — an event or callback, so the lower module announces instead of calling.**
-
-```go
-type ArrearsDetected struct {
-	MerchantID uuid.UUID
-	Amount     Money
-}
-
-func (b *Billing) Charge(ctx context.Context, emit func(ArrearsDetected)) error {
+// billing publishes. It does not know who listens, and it names
+// nothing belonging to whoever does.
+func (b *Billing) Charge(m uuid.UUID, onBehind func(uuid.UUID)) error {
 	// ...
-	emit(ArrearsDetected{MerchantID: id, Amount: owed})
+	onBehind(m)
 }
 ```
 
-*The bill:* the stack trace stops telling you who reacts. Tracing an effect goes from reading up the stack to grepping for subscribers, and the ordering of subscribers becomes a thing you have to think about.
-
-**Three — a third module both depend on.**
-
 ```go
-package pricing // depends on neither billing nor accounts
-
-func ArrearsThreshold(tier Tier, lifetime Money) Money
+// main wires the two. Neither package names the other.
+billing.Charge(id, accounts.MarkBehind)
 ```
 
-*The bill:* a new place to put things, and a recurring argument about what belongs in it. These modules attract unrelated code, and `common` or `shared` is how they end up named.
+`accounts` records what it is told and never needs to ask. Note that the callback takes a plain value: if `billing` had published an event *type*, `accounts` would have to import `billing` to receive it, and the arrow would still be there.
+
+*The bill:* the stack trace stops telling you who reacts. Tracing an effect goes from reading up the stack to grepping for subscribers, and subscriber ordering becomes something you have to think about.
+
+**Three — move the shared decision into a third module both depend on.**
+
+```go
+package standing // depends on neither
+
+type Tier int
+
+func MaySuspend(t Tier, unpaidCents int64) bool
+```
+
+Both callers pass in what they hold, and neither needs the other.
+
+*The bill:* a new place to put things, and a recurring argument about what belongs in it. Note also that `standing` had to declare its own `Tier` rather than accept the caller's — taking `accounts.Plan` would point an arrow straight back and rebuild the cycle. So each caller now translates into this module's vocabulary at the call site. Modules like this attract unrelated code, which is how they end up named `common` or `shared`.
 
 **Four — replace a reference with an identifier.**
 
+The first three break a cycle between *calls*. This one breaks a cycle between *types*, which is the form the same problem takes in data models. Suppose the two packages also hold each other's structs:
+
 ```go
+package billing
 type Invoice struct {
-	MerchantID uuid.UUID // was *Merchant
+	Merchant *accounts.Merchant // billing → accounts
+}
+
+package accounts
+type Merchant struct {
+	Invoices []*billing.Invoice // accounts → billing
 }
 ```
 
-*The bill:* `invoice.merchant.Name` becomes a lookup that can fail and can be stale. You now have to answer "what if the merchant was deleted?" explicitly, where the pointer answered it for you by existing.
+Neither package compiles without the other, and no method call is involved — the cycle is in the field types alone. Replacing one of the pointers with the identity it stands for removes that arrow:
+
+```go
+package billing
+type Invoice struct {
+	MerchantID uuid.UUID // names no other package
+}
+```
+
+*The bill:* `invoice.Merchant.Name` becomes a lookup that can fail and can be stale. "What if the merchant was deleted?" is now a question you answer explicitly, where the pointer answered it by existing. Chapter 16 works through the version of this that appears in object-oriented domain models, where the mutual pointers are the design rather than an accident.
 
 Pick deliberately. The failure is paying in interfaces by reflex — an interface at every boundary whether or not the boundary was real, which is how a codebase acquires forty interfaces with one implementation each (Ch. 17 traces where that reflex comes from).
 
 ### Hiding costs you the day you need what you hid
 
-A well-encapsulated module is opaque at 3am, and the thing you need is behind exactly the wall you built. Sealed libraries with no way through are a real and recurring frustration.
+Every decision you hide is a decision your users cannot reach when they turn out to need it. A library that exposes a connection pool but not the underlying socket has hidden the socket options too, and the user who needs `TCP_NODELAY` is stuck. This is a real and recurring cost, not a hypothetical one.
 
-The honest answer is not to stop hiding. It is to provide a way through, and name it so nobody mistakes it for supported:
+The tempting answer is a disclaimer:
 
 ```go
-type Client struct {
-	conn net.Conn // unexported: not part of the API
-}
-
 // UnderlyingConn returns the raw connection.
 //
-// It is NOT covered by this package's compatibility promise and may
-// change or disappear in any release, including a patch release. It
-// exists because setting a socket option we do not expose is a real
-// need, and the alternative is that you fork the package.
+// NOT covered by this package's compatibility promise. May change or
+// disappear in any release, including a patch release.
 func (c *Client) UnderlyingConn() net.Conn { return c.conn }
 ```
 
-The comment is doing load-bearing work. It converts an implicit dependency — the kind Hyrum's Law says forms whether you like it or not — into an explicit one that its users accepted knowingly. Without the hatch they reach through reflection, unsafe casts, or a fork, and then you are bound by their dependency without ever having agreed to it.
+**This does not work, and the reason is in this chapter.** Hyrum's Law does not read comments. Ship that method, and people call it; once they call it, removing it breaks them, and a disclaimer changes only whose fault that is. You have exported the field and written a note saying you didn't. The freedom the comment claims to preserve was already gone the moment the method existed.
+
+So the honest options are three, and none of them is a disclaimer.
+
+**One — find the actual need and expose exactly that.** The user did not want "the connection," they wanted a socket option. Ship the option, with the same compatibility promise as everything else in the package:
+
+```go
+// Supported, documented, and kept.
+func (c *Client) SetNoDelay(on bool) error
+```
+
+One method, one narrow promise, and one you can keep across versions because you control what is behind it. Most escape-hatch requests turn out to be this once someone asks what the caller was actually trying to do.
+
+**Two — if the need really is open-ended, lend the internals instead of giving them away.** The standard library does this. From `database/sql`:
+
+```go
+// Raw is a real method of *sql.Conn in the standard library.
+func (c *Conn) Raw(f func(driverConn any) error) error
+```
+
+Read it as: *you give me a function, and I will call it with the driver's own connection object.* You never receive the connection as a return value — it is handed to your function as an argument, and taken back the moment your function returns.
+
+```go
+err := conn.Raw(func(dc any) error {
+	pg, ok := dc.(*pgx.Conn) // the driver's concrete type
+	if !ok {
+		return errors.New("not a pgx connection")
+	}
+
+	return pg.CopyFrom(ctx, ...) // do the unexposed thing, here and now
+})
+```
+
+The difference from a disclaimer is not politeness, it is control. `database/sql` still owns the connection's lifetime: it knows exactly when you hold it, it takes it back afterwards, and it can return it to the pool. What the package promised — *you may reach the driver, for the duration of a call* — is a promise it can keep in every future version, because nothing about the driver's identity or lifetime was ever handed over. Compare `UnderlyingConn`, which gives you a pointer and hopes.
+
+The cost is real and worth naming: your users now write type assertions against a driver you did not choose, so their code is coupled to the driver rather than to you. That is the correct place for that coupling to sit.
+
+**Three — say no.** If serving the need would commit you to something you cannot hold across versions, "we don't support that" is a legitimate answer and a more honest one than a method with a warning label. Users who genuinely cannot proceed will fork, and a fork costs you nothing you were entitled to: it is visible, it is theirs to maintain, and it does not constrain your next release.
+
+All three have the same property, and the disclaimer is the only option that lacks it: **what the package promises is what the package can deliver.** That is the whole difference, and it is why the warning label is a marketing answer rather than an engineering one.
 
 ### Acyclicity discipline slows some changes down
 
@@ -730,9 +883,9 @@ The second is right when the code has years ahead of it. On a migration script t
 
 Expressing the graph in the type system, as `querier` does, is nearly free. Expressing it as package or assembly walls forces exports and mapping code — a real bill, worth paying at some team sizes and not at others (Ch. 18).
 
-### The line shape is seductive
+### Everything starts looking like a layer
 
-Once a team owns the word "layer," everything becomes one, including things that are stages, cross-cutting concerns, or nothing at all. Logging is the standard casualty:
+Once a team owns the word "layer," everything becomes one, including things that are stages, cross-cutting concerns, or nothing at all. Logging is the usual one:
 
 ```csharp
 // Logging as a layer. One method per method of the thing it wraps,
@@ -773,7 +926,7 @@ The test from Part three applies unchanged: does this thing decide something, or
 - **A class whose every method forwards to one other object.** It was invented to fill a slot in a shape, and it charges a file edit on every change while deciding nothing.
 - **The same entity re-typed once per layer, with mappers between.** Every boundary that isn't a real dependency boundary still bills you a type and a mapper, plus the bug where someone adds a field to two of the three (Ch. 18).
 - **A test that has to construct half the system to exercise one function.** This is the cycle showing up as a fixture: the unit of test has grown to match the unit of dependency, and the fixture is measuring it for you.
-- **Two-phase construction** — `a := &A{}; b := &B{a}; a.b = b`. The constructor cannot express the graph, which is the cycle admitting itself, and there is a window where a field is nil.
+- **Two-phase construction** — `a := &A{}; b := &B{a}; a.b = b`. The constructor cannot express the graph, and there is a window in which a field is nil.
 - **"Partially initialized module" errors, or a static field holding zero.** The runtime version of the same cycle, and the one that reaches production.
 - **An `import` at the top of a file that surprises you.** A leaf reaching for something it should not know exists — usually the first of the two edges.
 - **An `internal` or `impl` package that everything imports.** A wall with everything on the same side of it is not a wall; the real boundary is somewhere else, unmarked.
