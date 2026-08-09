@@ -20,12 +20,12 @@ Say "we use a layered architecture" and you have made three claims at three diff
 
 Claim two is the one that needs stating carefully, because it has a loose reading and a strict one and only the strict one says anything new. Loosely — "dependencies should flow downward" — it is claim one with a picture attached.
 
-The strict reading needs the word **rank**, so here it is precisely. A rank is a whole number attached to each part, assigned by one rule:
+The strict reading needs the word **rank**, so here it is precisely. A rank is a whole number attached to each part, assigned by the rules:
 
-> The **bottom rank** is 1: everything that depends on nothing.
-> Every other part sits **one rank above the topmost part it depends on.**
+> - Parts that depend on nothing are the **bottom** rank, 1.
+> - Every other part's rank is **the rank of the topmost part it depends on, plus 1**.
 
-Bottom and top are worth fixing in place, because the numbers run the opposite way to the everyday phrase "high-level code." The bottom rank is the foundation — rank 1, depends on nothing, everything rests on it. The top rank is the entry points, carrying the largest number, depending on everything beneath. `main` is at the top; `money` is at the bottom.
+The bottom rank is the foundation, depends on nothing, everything rests on it. The top rank is the entry points, carrying the largest number, depending on everything beneath. `main` is at the top; `money` is at the bottom.
 
 That is all a rank is. Not a folder, not a team, not a tier of importance — a number that falls out of the arrows.
 
@@ -368,19 +368,7 @@ The two skipping arrows are pulled out on their own because they are what the re
 
 So `ast` sits at the bottom with four things depending on it and nothing below. That is not an accident of drawing — it is the shape you want, because `ast` is the most stable part and everything else is a consumer of it. Adding a sixth part later — a linter, a documentation generator, a language server — costs exactly one new edge into `ast` and changes nothing that already exists.
 
-Be precise about what fails here, because the graph is acyclic and ranks *can* be assigned. Run the rule from earlier — bottom rank 1 for whatever needs nothing, and every other part one rank above the topmost thing it needs:
-
-```text
-                                        topmost
-part       needs                        thing needed   rank
-ast        nothing                      —                 1
-parser     ast (1)                      1                 2
-printer    ast (1)                      1                 2
-typecheck  printer (2), ast (1)         2                 3
-codegen    typecheck (3), ast (1)       3                 4
-```
-
-Every arrow now runs from a higher number to a lower one, so claim one is satisfied. The graph is acyclic, as promised.
+Be precise about what fails here, because the graph is acyclic and ranks *can* be assigned.
 
 What fails is claim two. It requires every arrow to cross **exactly one** rank, and two arrows here do not: `typecheck` reaches from 3 down to `ast` at 1, and `codegen` reaches from 4 down to `ast` at 1. Those are the reaches strict layering forbids, and they are not accidents you could refactor away — every part needs the node types, which is what it means for `ast` to be the shared vocabulary.
 
