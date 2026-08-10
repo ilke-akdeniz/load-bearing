@@ -143,6 +143,17 @@ Explain a term once, at its owning chapter, then use it.
 Not an illustration bolted on afterwards; the code should be the argument.
 Go, C#, and Python carry most examples; Rust, TypeScript, C, and SQL appear where a point needs them.
 
+**Write Go for a reader who does not know Go.**
+The audience is an experienced engineer, most likely fluent in Java, C#, or Python and not in Go.
+Go carries a large share of the book's examples because FlowCore is written in it, so every Go sample has to be readable by someone who has never used the language.
+
+- Gloss anything with no counterpart in those languages, at its first appearance, in one line — channels, goroutines, `defer`, the comma-ok idiom, struct embedding, capitalization as visibility.
+- Reach for the nearest equivalent the reader already has: *a channel is a typed in-memory queue, roughly Java's `BlockingQueue` or Python's `queue.Queue`.*
+- Comment what the line is doing when the syntax is the unfamiliar part, not what it means for the argument.
+- Never send the reader away to look something up. They will not, and the example is then spent.
+
+The same holds in reverse for a C# or Python sample carrying a point in a Go-flavoured chapter.
+
 **Run the code before it goes in.**
 Any example whose point depends on what it *does* — output, an error, an order of events, a value that surprises — gets executed first, in the scratchpad, and the chapter quotes the real result.
 Confidence is not verification.

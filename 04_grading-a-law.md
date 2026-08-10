@@ -1,113 +1,124 @@
-# Grading a Law
+# Three Kinds of True
 
-*This chapter is about **Law** alone — the top of the ladder — and about the fact that the top rung has three steps. Chapter 02 established that a Law is true by the mechanics of computation and that a Force can render it inert. This chapter says what kind of true, and what that changes.*
+*This chapter is about **Law** alone — the top of the ladder — and about the fact that the top rung is three different things. Chapter 02 established that a Law is true by the mechanics of computation and that a Force can render it inert. This chapter says what kind of true, and what that changes.*
 
 ## The claim
 
 **Not all Laws are the same kind of true, and the kind decides what you can do about one.**
 
-Against a proven theorem you can only change which assumptions hold. Against a near-tautology you can only check whether the words apply to you. Against an empirical constant you can measure, because the number may have moved since somebody wrote it down.
+Against a theorem you can only change which of its assumptions hold. Against a definitional claim you can only check whether its words describe you. Against an empirical law you can measure, because the number came from somebody else's system on some other day.
 
-Three kinds of true, three different moves, and no others available.
+Three kinds of true, three moves, and no others available.
 
-## Three grades
+## The three kinds
 
-| Grade | What makes it true | What would falsify it | The only move available |
+| Kind | What makes it true | What would falsify it | The only move available |
 |---|---|---|---|
-| **A** — theorem | a proof, from stated assumptions | nothing, unless the proof is wrong | change which assumptions hold |
-| **B** — tautology | what the words mean | nothing; the terms may simply not apply | check whether the words describe you |
-| **C** — empirical | observation of the world | a measurement | measure it yourself |
+| **Theorem** | a proof, from stated assumptions | nothing, unless the proof is wrong | change which assumptions hold |
+| **Definition** | what the words mean | nothing; the words may simply not describe you | check whether they do |
+| **Empirical law** | observed to hold, again and again | a measurement | measure it where you are |
 
-The grades are not a ranking of importance, and treating them as one is the first mistake. They rank *how firmly the thing is true*, which is a different question from how much it bears on your program. A Grade A theorem about distributed consensus is irrelevant to a single-process command-line tool, while the Grade C span between cache and main memory can dominate every design decision in a game engine.
-
-(To be exact, grade B should be called "near-tautology" but we will use "tautology" in the rest of this book for simplicity.)
+They are named rather than lettered, and the reason is the book's own: a letter has to be decoded at every use and carries nothing, while *theorem* and *definition* say what they mean at the point they appear. An ordering would be worse still — it would suggest a theorem outranks a definitional claim, and it does not. Neither can be violated. They differ in why, not in how firmly.
 
 ---
 
 ## The demonstration
-[claude as you will see below, I suggest we move the 3 kinds of laws by their names in the rest of this chapter and book: "theorem, tautology, empirical law | empirical (depending on grammatical context)". The reader shouldn't have to memorize what was Grade A, B or C
 
-Also, maybe we should consider abandoning the concept of grading all together. Grading implies a hierarchy. I don't see why a theorem comes before tautology in the hierarchy. 
-I see no obvious reason for this. I also don't see the value of this hierarchy except causing misunderstandings and fruitless dicussions.]
-### Theorem: the move is to change the model [claude ambigous word alert: model. Define precisely what you mean by model and-or if possible use a more precise word.]
+### Theorem: change the assumptions
 
-A theorem is proved from assumptions, and the assumptions are where all the engineering lives. You do not beat a theorem. You arrange to be somewhere its assumptions do not hold.
+The theorem here is the **Two Generals Problem**: over a channel that can lose messages, no protocol can leave both parties certain that the other received what was sent. Its practical consequence is that exactly-once delivery is impossible — you get at-least-once, and you make repeating safe (chapter 07 owns the result and what gets built on top of it).
 
-Take message delivery. Inside one process, delivering a job exactly once is not an achievement — it is the default, because the channel cannot lose anything:
+Watch the assumption do the work. First, handing a job from one part of a program to another:
 
-[claude in all go sample codes, assume that the reader doesn't know go but knows Java/C# and Python. 
-For example, channel would mean nothing for them and they would not bother looking it up on the web. 
-Add one liner comments in go code to explain what's going on or write introductory sentences before the code to make these readers comfortable.
-Also add an instruction CLAUDE.md for this.]
 ```go
-ch := make(chan string, 1)
-ch <- "job-1"
-fmt.Println("in-process: received", <-ch, "— delivered exactly once")
+// A Go channel is a typed in-memory queue between concurrent parts
+// of one program — roughly Java's BlockingQueue, or queue.Queue in
+// Python. It lives in memory, so nothing in it can be lost.
+ch := make(chan string, 1) // a queue holding one item
+ch <- "job-1"              // put
+job := <-ch                // take
+
+fmt.Println("in-process: received", job, "— exactly once, nothing retried")
 ```
 
-Now cross a network, and one assumption changes: a message can be lost. Not the request — the *acknowledgement*, after the work is done:
-[claude in code below, where is the network call is made? Where is the callback? Is this client code or caller's code? ]
+**This code is correct and needs nothing added.** Exactly-once here is not an achievement, it is what memory does.
+
+Now the same job crosses a network. A client asks a billing service to charge a customer; the service does it; the reply is lost on the way back. The network sits between `chargeRemote` and `billingService`, and is simulated here so the whole thing can be run:
+
 ```go
-// The work happens. The reply does not arrive.
-func callWithLostAck(id string) error {
-	charge(id)
+// --- the client, on this machine ---
+// A timeout means the reply did not arrive. It does NOT mean the
+// charge did not happen.
+func chargeRemote(id string) error { return send(id) }
+
+// --- the network ---
+// The request always arrives; the reply is always lost.
+func send(id string) error {
+	billingService(id)
 	return errors.New("timeout")
 }
+
+// --- the billing service, on another machine ---
+func billingService(id string) { charges++ }
 ```
 
-The caller sees a timeout and has to decide something it does not have the information to decide:
+The client times out and retries, because that is what a client does:
 
 ```text
-attempt 1: timeout — retry? the caller cannot tell
-attempt 2: timeout — retry? the caller cannot tell
-attempt 3: timeout — retry? the caller cannot tell
-charges actually applied: 3
+in-process: received job-1 — exactly once, nothing retried
+attempt 1: timeout — retry? the client cannot tell
+attempt 2: timeout — retry? the client cannot tell
+attempt 3: timeout — retry? the client cannot tell
+charges actually applied: 3 — one was intended
 ```
 
-Three charges, one intended. The caller was never careless; it could not distinguish *the request never arrived* from *the request arrived and the reply was lost*, and those two require opposite actions.
+Two pieces of code, and only one has a problem — but the problem is not *in* the code.
 
-[claude I read so far "Theorem: the move is to change the model" and still couldn't tell what's the Theorem in this example is. That should be clearly laid out in the beginning of this section.]
+The in-process version is correct as written. The networked version cannot be fixed by writing it more carefully: retrying is what produced three charges, and not retrying loses charges whenever a request genuinely fails to arrive. The client has no third option, because it cannot distinguish *the request never arrived* from *the request arrived and the reply was lost*, and those two demand opposite actions.
 
-**What matters for grading is the shape of the escape.** The in-process version is not a cleverer implementation of the networked one. It is the same problem with an assumption removed, and that is the only thing that ever works against a Grade A result. Chapter 07 owns this particular theorem and what you build once you accept it.
+The fix is not in the client at all. It is to make the charge **idempotent** — attach an identifier to the request, have the service record which identifiers it has already applied, and ignore a repeat. Then at-least-once delivery is sufficient, because a duplicate does nothing.
 
-The practical form of the rule: **when you meet a Grade A Law, stop looking for a way round the conclusion and go read the assumptions.** They are always listed, because a proof cannot exist without them, and they are the only negotiable part.
+Notice what that fix actually did. It removed an assumption: *applying the operation twice differs from applying it once*. The theorem still holds, unchanged and unchallenged; it simply no longer has anything to spoil.
 
-[claude I did not get the "lesson" of this section and how that applies to the example. Which code was ok? Both? First only? Why? How that relates to the claim of this section?]
+**That is the shape of every escape from a theorem.** You do not implement your way past the conclusion. You arrange to be somewhere one of its assumptions does not hold. And the assumptions are always written down, because a proof cannot exist without them — which makes them the one part you are invited to argue with.
 
-### Tautology: the move is to check whether the words apply
+### Definition: check whether the words apply
 
-A tautology is not proved so much as unpacked. Its truth is already in the terms, and reading it feels less like learning something than like noticing something.
+A definitional claim is not proved so much as unpacked. Its truth is already inside its terms, so reading it feels less like learning something than like noticing something.
 
 > A cache needs an invalidation strategy.
 
-Unpack it. A cache is a copy kept because reading the original costs too much. If the original changes and the copy does not, the copy is wrong. So "a cache with no invalidation strategy" means "a copy that is allowed to go wrong" — which is either a decision you made deliberately or a bug you have not met yet. There is no third possibility, and no proof was required to see it.
+Unpack it. A cache is a copy kept because reading the original costs too much. If the original changes and the copy does not, the copy is wrong. So "a cache with no invalidation strategy" means "a copy that is allowed to go wrong" — which is either a decision you made deliberately or a bug you have not met yet. There is no third possibility, and no proof was needed to see it.
 
 ```go
-// Read once at startup, never refreshed.
+// Read once when the program starts, never refreshed.
 var rate = mustFetchRate()
 ```
 
-Whether this is a defect depends entirely on one thing:
+Whether that line is a defect depends on exactly one thing:
 
 ```text
-rate is a compile-time constant     no original to drift from — law is inert
-rate is edited in an admin screen   bug: every process serves a stale value
-                                    until someone restarts it
+rate is a compile-time constant     no original to drift from — the
+                                    claim has nothing to act on
+rate is edited in an admin screen   a bug: every process serves a stale
+                                    value until someone restarts it
 ```
 
-**The escape is not to argue with the Law. It is to find that the words do not describe you.** In the first case there is no cache, in the strict sense — there is a precomputed value, and nothing can make it wrong. The Law is true and has nothing to act on, which is chapter 02's distinction seen from underneath.
+**The move is not to argue with the claim. It is to find that its words do not describe you.** In the first case there is no cache in the strict sense — there is a precomputed value, and nothing can make it wrong. The claim is true and inert, which is chapter 02's distinction seen from underneath.
 
-This is why Grade B claims feel unfalsifiable and are not vacuous. "Dependencies must be acyclic" is Grade B: a cycle makes two things one unit of comprehension, test, and change, because that is what a cycle is (Ch. 05 works it through). You cannot violate it. You can find that the two things were never separate units, in which case nothing was violated because nothing was joined.
+This is why definitional claims feel unfalsifiable without being vacuous. "Dependencies must be acyclic" is one: a cycle makes two things a single unit of comprehension, test, and change, because that is what a cycle *is* (chapter 05 works it through). You cannot violate it. You can find that the two things were never separate units, in which case nothing was violated, because nothing was joined.
 
-### Grade C: the move is to measure, because the number moved
+### Empirical law: measure, because the number moved
 
-An empirical Law describes the world rather than deriving from a proof, and the world is under no obligation to hold still. Every Grade C claim carries a magnitude, and the magnitude is the part people quote and stop checking.
+An empirical law describes the world rather than following from a proof, and the world is under no obligation to hold still.
 
-Hyrum's Law is Grade C. It says that with enough users, every observable behaviour of your system ends up depended on regardless of what you documented (Ch. 05 owns the Law and what to do about it). Nothing proves that. It is an observation about what people do, and its strength depends on how many people, how observable, and how long.
+First, a distinction that is easy to lose. **A measurement is not a law.** "The 99th percentile of our search endpoint is 180 milliseconds" is empirical, and it is about one endpoint on one day on one deployment. Nothing generalizes. An empirical law has two parts: a **regularity** that holds across many systems, and a **magnitude** that varies between them. The regularity is what earns the word *law*; the magnitude is the part you have to measure locally, and the part people quote instead.
 
-Two languages met that observation and moved in opposite directions.
+Hyrum's Law is one. With enough users, every observable behaviour of your system ends up depended on, whatever you documented (chapter 05 owns the law and what to do about it). Nothing proves it. It is a regularity about what people do, observed across languages and decades, and what varies is how fast the dependency forms and how firmly it sets.
 
-Go randomizes map iteration, so that order cannot be depended on:
+Two languages met that regularity and moved in opposite directions.
+
+Go randomizes the order of map iteration deliberately, so that no order can be depended upon:
 
 ```text
 $ go run .        b a c d e
@@ -115,7 +126,7 @@ $ go run .        d e b a c
 $ go run .        a c d e b
 ```
 
-Python did the reverse. Dictionary insertion order started as an implementation detail of a faster dict in 3.6, became so widely relied upon that it was made a guarantee in 3.7, and is now part of the language:
+Python did the reverse. Dictionary insertion order arrived as an implementation detail of a faster dictionary in 3.6, was relied upon widely enough that removing it became impractical, and was promoted to a language guarantee in 3.7:
 
 ```text
 $ python3 -c "d={'b':1,'a':2,'c':3}; print(list(d))"
@@ -124,78 +135,73 @@ $ python3 -c "d={'b':1,'a':2,'c':3}; print(list(d))"
 ['b', 'a', 'c']
 ```
 
-Neither is a mistake. Go decided the freedom was worth more than the convenience and made the behaviour impossible to depend on; Python found that the dependency had already formed at a scale that made removal impractical, and promoted it to a promise.
+Neither is a mistake. Go judged the freedom worth more than the convenience and made the behaviour impossible to rely on. Python found the reliance had already formed at a scale that made removal costly, and turned it into a promise.
 
-**What makes this Grade C is that both outcomes were available.** No proof forced either. And notice what happened to the claim in Python's case: the observable behaviour that "will be depended upon" became the documented behaviour, which means the Law's own prediction, taken seriously, changed the thing it was predicting.
+**What makes this an empirical law rather than a theorem is that both outcomes were available.** No proof forced either. And notice what happened to the claim in Python's case: the observable behaviour that "will be depended upon" became documented behaviour, so the law's own prediction, taken seriously, changed the thing it was predicting. A theorem cannot do that.
 
-The practical form: **a Grade C constant is a measurement someone took, somewhere, at some time.** Cache latencies, failure rates, how long a team takes to onboard, how many users notice a two-second delay. Quoting the number is not the same as having it. [claude what does "having it" mean in previous sentence? Do you mean "Quoting a number without a measurement is a guess, not an empirical law." ] Chapter 08 works through the ones that come with arithmetic.
-
-[claude I think we are missing an important distinction here. An empirical law can't just be reduced to a measurement someone took. Obviously my measurement of the latency of "myRandomSoftware's xyx endpoint" is not the same thing as Hyrum's law. If that was true we would have millions of laws floating around.]
+The practical form: **quoting somebody's number is not the same as knowing yours.** Cache latencies, failure rates, how long a new engineer takes to become productive, how many users notice a two-second delay — all real regularities, all with magnitudes that differ by machine, by team, by decade. Chapter 08 works through the ones that come with arithmetic.
 
 ---
 
 ## Why it holds
 
-The grades are not three flavours of the same thing. They differ in **where the claim's authority comes from**, and that is what makes the available moves different.
+The three are not flavours of one thing. They differ in **where the claim's authority comes from**, and that is what makes the available moves differ.
 
-**A theorem's authority is internal.** It follows from its assumptions and nothing else, which is why it cannot be refuted by evidence and why arguing with it is a category error. It is also why the assumptions are always stated — a proof that hid them would not be a proof. That is the crack, and it is deliberate: the theorem tells you exactly where to push.
+**A theorem's authority is internal.** It follows from its assumptions and nothing else, which is why evidence cannot refute it and arguing with it is a category error. It is also why the assumptions are always stated — a proof that hid them would not be a proof. That is the crack, and it is deliberate: the theorem tells you exactly where to push.
 
-**A near-tautology's authority is definitional.** It is true because of what the words pick out, so the only question it admits is whether those words pick out anything in your program. This is why Grade B claims are the easiest to state and the hardest to argue with, and also why they can evaporate without ever being wrong.
+**A definitional claim's authority is in its terms.** It is true because of what its words pick out, so the only question it admits is whether those words pick out anything in your program. This is why such claims are the easiest to state and the hardest to argue with, and also why they can evaporate without ever having been wrong.
 
-**An empirical claim's authority is a measurement**, taken by someone, under conditions. It can therefore drift, and it does. The memory hierarchy's shape has changed several times in forty years. Team communication overhead depends on tools that did not exist when it was first counted. When a Grade C number is repeated for long enough it starts to sound like a theorem, and that is the specific way this grade goes wrong.
+**An empirical law's authority is accumulated observation.** It can therefore drift, and it does. The shape of the memory hierarchy has changed several times in forty years. Team communication overhead depends on tools that did not exist when it was first counted. Repeat an empirical number long enough and it starts to sound like a theorem, which is this kind's characteristic failure.
 
-There is a fourth possibility that the grading exists to catch: **the claim is not a Law at all.**
+There is a fourth possibility the naming exists to catch: **the claim is not a Law at all.**
 
-The test is chapter 02's, applied honestly. *Can circumstances make this bad advice?* A Law cannot become bad advice, because it is not advice — it describes what happens. "Prefer composition over inheritance" can absolutely become bad advice, in a domain with a genuinely stable hierarchy and behaviour that varies on one axis. So it is a Principle, and calling it a law is how it gets applied where its Forces are absent.
+The test is chapter 02's, applied honestly. *Can circumstances make this bad advice?* A Law cannot become bad advice, because it is not advice — it describes what happens. "Prefer composition over inheritance" can certainly become bad advice, in a domain with a genuinely stable hierarchy and variation on a single axis. So it is a Principle, and calling it a law is how it gets applied where its Forces are absent.
 
-[claude maybe we need 1 sentenct simple reminder - explanation of Conway's law here, it can even be a half sentence: "Conway's Law which says ... survives the same test,"]
-Conway's Law survives the same test, and the difference is worth being exact about. It does not tell you to do anything. It says systems tend to mirror the communication structure of the organizations that build them — a description, which can be weak, strong, or countered deliberately, but which is not the kind of thing that can be *bad advice*, because it is not advice (Ch. 09 owns what it means and what to do about it). **A Law describes; a Principle prescribes.** That single question separates them faster than any amount of arguing about how universal something feels.
+Conway's Law — that a system's structure tends to mirror the communication structure of the organization that built it — survives the same test, and the difference is worth stating exactly. It tells you to do nothing. It describes a tendency, which can be weak, strong, or deliberately countered, but which cannot be *bad advice*, because it is not advice (chapter 09 owns what it means and what to do about it). **A Law describes; a Principle prescribes.** That one question separates them faster than any amount of arguing about how universal something feels.
 
 ---
 
 ## Where this doesn't apply
 
-### Grade is not importance [claude this is in line with my previous comment, if grade is not importance than why grade the laws? We can then remove this section entirely then or it just turns into a sentence in this chapter: Kind of the law is not enough to say how important it is for a given context.]
+### Kind is not importance
 
-The most common misuse of this chapter's own material.
+Naming the kind tells you how to argue with a claim. It says nothing about whether the claim bears on your program, and the two are independent.
 
-Amdahl's Law is a Grade A result: given a fraction of work that must run serially, it bounds the speedup available from any number of processors. Nothing about it is negotiable. Applied to a single-threaded command-line tool that reads a file and prints a summary, it is also completely irrelevant — there is no parallel portion to bound, so the theorem is true and has nothing to constrain.
+Amdahl's Law is a theorem: given the fraction of work that must run serially, it bounds the speedup available from any number of processors, and none of it is negotiable. Applied to a single-threaded tool that reads a file and prints a summary, it is also irrelevant — there is no parallel portion to bound. Meanwhile the gap between a cache hit and a main-memory read is empirical, drifting, and different on your machine than in whatever you read it in — and it decides the entire architecture of a physics engine.
 
-Meanwhile the gap between a cache hit and a main-memory read — a Grade C number, measured, drifting, different on the machine under your desk than in the paper you read it in — decides the entire architecture of a physics engine.
-
-So the grade tells you **how to argue with a claim**, not **whether to care about it**. Those are independent, and reading grade as a priority ranking produces exactly the error the book is about: treating a firm claim as an important one.
+Firmness and relevance are separate axes. This was easier to get wrong when the three kinds were lettered A, B, and C, because a letter invites reading as a rank.
 
 ### One name over a theorem and a slogan
 
-CAP is the standard case. The proved result is narrow and precise: in an asynchronous network model with no clocks, a register cannot be simultaneously available and consistent when partitioned. That is Grade A, and the proof names its model. 
-[claude "model" again, "network model" was fine but what is this "model" specifically, also network model?
- Also, are you saying that CAP only applies to a very narrow techical stack and not all the things we generally assume? If so this needs more expansion and I hope you are not making this up.]
+CAP is the standard case, and precision matters here because the two versions have genuinely different content.
 
-The version that travels is "pick two of consistency, availability, and partition tolerance," which is not the theorem, is not proved, and is misleading — partition tolerance is not a property you choose, it is a fact about whether your network can drop packets. People then argue past each other, one holding a theorem and the other a slogan, both correctly reporting what they were taught.
-[claude "partition tolerance is not a property you choose, it is a fact about whether your network can drop packets." This needs expansion, I don't get it with this compact version. Also I hope you are solid on this, those are the kind of statements that will attract probing.]
+**The theorem**, proved by Gilbert and Lynch in 2002, is set in the *asynchronous network*: nodes share no clock, message delay has no upper bound, and messages can be lost. In that setting no read/write register can be both **linearizable** — every read returns the most recent write, as though there were a single copy — and **available**, meaning every request to a node that has not failed returns a response, once the network partitions.
 
-When a claim has both forms, grading requires saying which one you mean before the conversation can go anywhere. Chapter 07 works through the theorem and what follows from it.
-[claude what do you mean by both forms? Theorem and Slogan? I don't get your advice: who would say: "I suggest we follow this 'Slogan'"?]
+That is narrower than the reputation, in two ways worth knowing. It is about linearizable registers, and a great many systems neither provide nor need linearizability, so the theorem says nothing about them. And its notion of availability is strict: *every* non-failed node answers, not merely that the service as a whole stays up.
 
-### The grade is sometimes genuinely open
+**The slogan** is "pick two of consistency, availability, and partition tolerance." It is not the theorem, and it misleads in one specific way: it presents partition tolerance as a third option you might decline.
 
-Some claims sit between B and C and the argument about which is not settled.
+You cannot decline it. A partition is an event, not a design choice — a cable is cut, a switch fails, a data centre becomes unreachable — and no system spanning more than one machine can guarantee those will not happen. "Sacrificing P" therefore describes nothing you can build. What you actually choose is what to do **while a partition is happening**, and there are only two answers: refuse to serve on the side that might be stale, keeping consistency and losing availability; or serve anyway, keeping availability and losing consistency. Brewer made this point himself in a 2012 retrospective, calling the two-of-three framing misleading for exactly this reason.
 
-"Adding people to a late project makes it later" can be read as near-tautological — new people consume the time of existing people, and communication paths grow faster than headcount — or as an empirical regularity with exceptions, which is how it behaves in practice. Both readings have support. The honest response is to hold the question open rather than to force a grade, because the forcing is what produces false confidence in either direction.
+So the useful advice is not "say which version you mean," which nobody would say out loud. It is that a CAP argument which will not converge is usually two people reasoning from different claims — one from a narrow proved result about linearizable registers under partition, the other from a rough summary that has drifted. Neither is being careless. The theorem cannot settle a question about a system that never needed linearizability, and the slogan cannot settle anything, because one of its three terms is not a choice.
 
-The book's rule applies to itself here: a claim that cannot be graded cleanly is telling you something about the claim, not about your grading.
+### Some claims sit between kinds
+
+"Adding people to a late project makes it later" can be read as near-definitional — new people consume the time of existing people, and communication paths grow faster than headcount — or as an empirical regularity with real exceptions, which is closer to how it behaves in practice. Both readings have support.
+
+The honest response is to leave the question open rather than force an answer, because forcing it manufactures confidence in whichever direction you picked. A claim that resists classification is telling you something about the claim.
 
 ---
 
 ## What it costs
 
-**A vocabulary that invites showing off.** "That's only Grade C" is available as a way to dismiss a measured, load-bearing constraint on the grounds that it lacks a proof. The defence is the same as for the five kinds: a grade must arrive with its reason. If you cannot say what would falsify the claim, you have not graded it.
+**A vocabulary that invites dismissal.** "That's only empirical" is available as a way to wave off a measured, load-bearing constraint on the grounds that nobody proved it. The defence is the same as for the five kinds: a classification must arrive with its reason. If you cannot say what would falsify the claim, you have not classified it.
 
-**Grade A material is genuinely hard to read.** The assumptions of a real theorem are stated in a paper, in notation, and following them is work. The realistic version is to read the assumptions and not the proof — which is enough for engineering, because the assumptions are the negotiable part — and to be honest that you are trusting the proof rather than checking it.
+**Theorems are genuinely hard to read.** The assumptions of a real one are stated in a paper, in notation, and following them is work. The realistic version is to read the assumptions and skip the proof — which is enough for engineering, since the assumptions are the negotiable part — and to be honest that you are trusting the proof rather than checking it.
 
-**Measuring a Grade C constant costs more than quoting one.** That is why people quote. Sometimes quoting is correct: an order of magnitude from a reputable source beats no number at all. The failure is quoting a number to three significant figures that you have not measured, in a context that differs from where it was taken.
+**Measuring costs more than quoting.** That is why people quote. Sometimes quoting is right: an order of magnitude from a good source beats no number at all. The failure is quoting a number to three significant figures that you have never measured, in a setting that differs from the one it came from.
 
-**Three grades imply the world has three grades.** It has more. Statistical laws with confidence intervals, results proved only under assumptions nobody believes, claims true of every implementation anyone has built but not proved. The grading is a sorting aid whose value is mostly in separating "provable" from "measured," and the finer distinctions matter far less than that one.
+**Three kinds imply the world has three.** It has more — statistical laws with confidence intervals, results proved under assumptions nobody believes, claims true of every implementation ever built but never proved. This is a sorting aid, and most of its value is in separating *proved* from *observed*. The finer distinctions matter far less than that one.
 
 ---
 
@@ -203,24 +209,26 @@ The book's rule applies to itself here: a claim that cannot be graded cleanly is
 
 **In a codebase:**
 
-- **Machinery built to defeat a theorem** — a distributed-transaction layer intended to give exactly-once delivery over an unreliable network, rather than idempotent handlers that accept redelivery.
-- **A performance constant hard-coded from a blog post**, with no measurement of the machine the code actually runs on, and no comment saying where the number came from.
-- **A cache with no invalidation and no note saying why none is needed.** Either the original cannot change — in which case say so, because the next person cannot tell — or it can, and this is a bug waiting for its first report.
-- **Elaborate structure defending against a Law whose preconditions are absent**, such as coordination machinery in a program with one writer.
+- **Machinery built to defeat a theorem** — a distributed transaction layer intended to deliver exactly-once over an unreliable network, rather than idempotent handlers that accept redelivery.
+- **A performance constant hard-coded from a blog post**, with no measurement on the machine the code runs on and no comment saying where the number came from.
+- **A cache with no invalidation and no note saying why none is needed.** Either the original cannot change — in which case say so, because the next reader cannot tell — or it can, and this is a bug waiting for its first report.
+- **Elaborate defence against a Law whose preconditions are absent**, such as coordination machinery in a program with a single writer.
 - **A comment citing a law by name to justify a design**, where the law's assumptions are never mentioned and do not hold.
 
 **In a conversation:**
 
-- **"That violates CAP"** — asked about a system with one database and no partitions, where the theorem has nothing to act on.
-- **"Conway's Law says we should reorganize."** It says no such thing; it describes a tendency. The prescription is somebody's, and it should be defended on its own.
-- **A number quoted with more precision than anybody present has measured.**
-- **"It's a law"** offered as the end of a discussion rather than the start of one — since the useful next question is always *which kind, and what are its assumptions?*
-- **Two people arguing about CAP, or about any claim with a formal and an informal version**, without either establishing which one they are holding.
+- **"That violates CAP"** — said about a system with one database and no partitions, where the theorem has nothing to act on.
+- **"Conway's Law says we should reorganize."** It says no such thing; it describes a tendency. The prescription belongs to whoever is making it, and should be defended on its own.
+- **A number quoted with more precision than anyone present has measured.**
+- **"It's a law"** offered as the end of a discussion rather than the start of one, when the useful next question is always *which kind, and what does it assume?*
+- **An argument about CAP, or about any claim with a formal and an informal version**, where neither side has noticed they are holding different claims.
 
-The question that does the work is short: **what would have to be true for this to be false?** A theorem answers *nothing, given its assumptions* — and then you go read them. A near-tautology answers *nothing, but it may not describe you*. An empirical claim answers *a measurement*, which you can go and take.
+The question that does the work is short: **what would have to be true for this to be false?**
+
+A theorem answers *nothing, given its assumptions* — and then you go and read them. A definitional claim answers *nothing, but the words may not describe me*. An empirical law answers *a measurement*, which you can go and take.
 
 Anything that cannot answer at all was never a Law.
 
 ---
 
-**Next:** chapter 05 takes the first family of Laws in detail — dependency direction and information hiding — and separates the part that is genuinely load-bearing from the two conventions that travel under the same name.
+**Next:** chapter 05 takes the first family of Laws in detail — dependency direction and information hiding — and separates the part that is genuinely load-bearing from the two conventions travelling under the same name.

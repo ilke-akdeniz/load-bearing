@@ -41,11 +41,11 @@ Each Force with a code demo of the same problem solved differently under differe
 
 ## Part II — The foundations
 
-### 04. Grading a law
+### 04. Three kinds of true
 `04_grading-a-law.md`
 
 Not every Law has the same standing.
-The A/B/C grading — proven theorem, near-tautology, physical or empirical constant — and why conflating them repeats the exact error this book is about.
+Theorem, definition, and empirical law are three different kinds of true, and each admits exactly one move.
 
 Contents: what makes CAP different from Conway's Law; what makes Conway's Law different from "prefer composition over inheritance"; how to check a claimed Law.
 
@@ -72,7 +72,7 @@ Contents: check-then-act is not atomic (the TOCTOU family, with the same bug sho
 ### 07. Distribution: what's impossible
 `07_distribution.md`
 
-Grade A theorems, and the engineering that exists because of them.
+Theorems, and the engineering that exists because of them.
 
 Contents: CAP and PACELC; FLP impossibility; Two Generals, and its practical corollary that **exactly-once delivery is impossible** — you get at-least-once plus idempotency; you cannot distinguish a slow node from a dead one, so every timeout is a guess; reliability compounds (p^N); the Transactional Outbox and Saga patterns as direct consequences.
 

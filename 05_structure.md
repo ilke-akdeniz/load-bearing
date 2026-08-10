@@ -14,7 +14,7 @@ Say "we use a layered architecture" and you have made three claims at three diff
 
 | Claim | Kind | Standing |
 |---|---|---|
-| If A depends on B, then B must not depend on A — directly or through any chain | **Law** | near-tautology, Grade B (Ch. 04) |
+| If A depends on B, then B must not depend on A — directly or through any chain | **Law** | true by definition (Ch. 04) |
 | The parts can be stacked into layering ranks, each depending only on the rank beneath it | **Principle** | true when the graph is that shape, and often it isn't |
 | The ideal ranking, top to bottom, is `presentation → business → data`, and each rank becomes a physical boundary | **Idiom** | 1990s enterprise Java and C#, and arbitrary |
 

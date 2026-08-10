@@ -696,3 +696,44 @@ The TOC asked what makes Conway's Law different from "prefer composition over in
 `LEDGER.md` gains five concept rows and three example rows.
 Chapter 05's existing commitments are honoured: acyclic dependency stays Grade B, and Hyrum's Law stays an empirical regularity rather than a theorem.
 Chapter 04 runs 206 lines, the shortest so far, which suits a chapter whose job is a distinction rather than a subject.
+
+---
+
+## 17. The A/B/C grading is dropped; the three kinds are named
+
+**Date.** 2026-08-10
+
+**Context.**
+Chapter 04 was drafted with the TOC's A/B/C grading — Grade A a proven theorem, Grade B a near-tautology, Grade C an empirical constant.
+Reviewing it, the author proposed two changes: refer to the kinds by name rather than by letter, and consider abandoning the grading concept entirely, on the grounds that grading implies a hierarchy nobody can justify — *I don't see why a theorem comes before tautology*.
+
+**Options.**
+Keep the letters with the names alongside; keep the letters and defend the ordering; drop the letters and name the kinds.
+
+**Decision.**
+Drop the grading. The kinds are **theorem**, **definition**, and **empirical law**, named at every use, in no order.
+The chapter's title changes from *Grading a Law* to *Three Kinds of True*.
+
+**Why.**
+The author's objection is correct, and the decisive support for it is that **this book already decided this question, in decision 3, and chapter 04 contradicted it.**
+
+Decision 3 removed numbering from the five kinds, with the reasoning that "a Level 0 violation" forces the reader to decode an arbitrary index before the sentence means anything, while "a Law violation" is self-describing at the point of use. Grade A, B, and C is the identical failure, introduced a week later in a chapter drafted against a file that records the earlier decision. The draft did not notice.
+
+The ordering objection is separately right. The letters imply a rank, and there is none: a theorem and a definitional claim are both unfalsifiable, and neither is more binding than the other. They differ in *why* they are true, which is what the names now carry. The draft's own boundary section conceded the point without following it — *grade is not importance* — which the author identified as a reason to question the grading rather than a caveat on it.
+
+**One substitution against the author's wording.**
+The author changed *near-tautology* to *tautology*, adding a parenthetical that this is imprecise and adopted for simplicity. That caveat is evidence the word does not fit. A tautology is true by logical form; these claims are true by what their terms pick out, which is a different thing. **Definition** is accurate, needs no apology in the text, and names the reason the claim is true. The parenthetical is gone with it.
+
+**Five corrections the review forced, beyond the terminology.**
+
+- **The theorem was never named.** The Grade A section demonstrated an escape without saying what it was escaping from. It now opens with the Two Generals Problem and says what follows from it.
+- **The lesson was not stated.** The author could not tell which of the two code samples was acceptable. The section now says: the in-process version is correct as written, the networked version cannot be fixed by writing it more carefully, and the actual fix removes an assumption rather than improving the client.
+- **"Change the model" was ambiguous**, twice. Replaced with "change the assumptions," and CAP's *asynchronous network* is now defined where it appears — no shared clock, unbounded message delay, messages can be lost.
+- **An empirical law was reduced to a measurement.** The author's objection: *my measurement of one endpoint's latency is not Hyrum's Law, or we would have millions of laws.* Correct. An empirical law is now a **regularity** across systems carrying a **magnitude** that varies between them; the regularity earns the word *law*, and the magnitude is the part people quote from somebody else's instance.
+- **CAP was asserted rather than shown**, and the author flagged both claims as ones that will attract probing. Both are now argued: the theorem is narrow because it concerns linearizable registers and requires every non-failed node to answer, and partition tolerance is not a choice because a partition is an event rather than a design option, so the only real choice is what to do while one is happening. Brewer's own 2012 retrospective is cited for the second.
+
+**Consequence.**
+`00_toc.md` gains the new chapter title and loses "Grade A theorems" from chapter 07's entry.
+`05_structure.md`'s three-claims table now reads "true by definition (Ch. 04)" rather than "near-tautology, Grade B."
+`LEDGER.md` has seven rows reworded and one added, for the regularity-versus-magnitude distinction.
+`CLAUDE.md` gains a rule the author asked for directly: **write Go for a reader who does not know Go**, since the audience is fluent in Java, C#, or Python, and an unglossed `chan` spends the example.
