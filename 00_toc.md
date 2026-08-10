@@ -249,12 +249,16 @@ The final answer to "is this load-bearing" as a repeatable procedure rather than
 
 ## Status
 
+*Not started* — no file yet.
+*Drafted* — written and under review; the author has not signed it off.
+*Complete* — reviewed to the author's satisfaction. Still open to change if a later chapter contradicts it.
+
 | Chapter | File | Status |
 |---|---|---|
 | 01 | `01_why-good-advice-goes-wrong.md` | not started |
 | 02 | `02_the-five-levels.md` | **drafted** |
 | 03 | `03_forces.md` | **drafted** |
-| 04 | `04_grading-a-law.md` | **drafted** |
+| 04 | `04_grading-a-law.md` | **complete** |
 | 05 | `05_structure.md` | **drafted** |
 | 06 | `06_time.md` | not started |
 | 07 | `07_distribution.md` | not started |
@@ -275,5 +279,8 @@ The final answer to "is this load-bearing" as a repeatable procedure rather than
 | 22 | `22_style.md` | not started |
 | 23 | `23_reading-advice.md` | not started |
 
-**Suggested build order:** 02 first (everything references the model), then 05 as a format proof on the most solid material, then 13 (the GoF audit — most immediately useful, and the most fun to demonstrate).
-Chapter 01 is easier to write once the rest exists.
+**Build order.** The original plan was 02, then 05, then 13. What happened instead was 02, 05, 03, 04 — Part I first, then the foundations in order — and the reason to continue that way is that the drafted chapters have accumulated debts to specific unwritten ones.
+
+Forward references currently outstanding: **06** (six), **18** (five), **07** (four), **17** and **09** (two each). Chapter 06 is the most owed and the most immediate: chapter 03's concurrency Force defers its races to it, and chapter 05 defers the unclosable check-then-act window to it.
+
+Chapter 01 remains easier to write once the rest exists.
