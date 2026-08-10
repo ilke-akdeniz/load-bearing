@@ -250,16 +250,17 @@ The final answer to "is this load-bearing" as a repeatable procedure rather than
 ## Status
 
 *Not started* — no file yet.
-*Drafted* — written and under review; the author has not signed it off.
-*Complete* — reviewed to the author's satisfaction. Still open to change if a later chapter contradicts it.
+*In progress* — the file exists and is being worked through review.
+*Draft* — the author is satisfied and the chapter is behind us.
+*Ready* — fit to publish.
 
 | Chapter | File | Status |
 |---|---|---|
 | 01 | `01_why-good-advice-goes-wrong.md` | not started |
-| 02 | `02_the-five-levels.md` | **drafted** |
-| 03 | `03_forces.md` | **drafted** |
-| 04 | `04_grading-a-law.md` | **complete** |
-| 05 | `05_structure.md` | **drafted** |
+| 02 | `02_the-five-levels.md` | **draft** |
+| 03 | `03_forces.md` | **draft** |
+| 04 | `04_grading-a-law.md` | **draft** |
+| 05 | `05_structure.md` | **draft** |
 | 06 | `06_time.md` | not started |
 | 07 | `07_distribution.md` | not started |
 | 08 | `08_scale.md` | not started |

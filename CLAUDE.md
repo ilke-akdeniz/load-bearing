@@ -239,6 +239,22 @@ These are read as diffs, not as prose, so sentence-level granularity is worth mo
 - Working documents in `docs/`.
 - `00_toc.md` carries the status table — update it when a chapter's status changes. The README is the landing page and should stay short.
 
+### Chapter status
+
+Four states, and the transitions are not Claude's to invent.
+Only the first is automatic; the other two happen when the author says so.
+
+| Status | Meaning | Moves there when |
+|---|---|---|
+| **not started** | no file exists | — |
+| **in progress** | the file exists and is being worked | Claude creates `NN_slug.md` |
+| **draft** | the author is satisfied and the chapter is behind us | the author says the chapter is ok, or to proceed to the next one |
+| **ready** | fit to publish | the author says it is ready for publication |
+
+A chapter sits at **in progress** for the whole review cycle, however many passes it takes.
+It moves to **draft** on the author's word and not on Claude's judgment that it looks finished.
+**Ready** is a separate, later decision, and nothing reaches it by default.
+
 ## How we work
 
 The author leads, reviews every chapter, and makes the editorial calls.
