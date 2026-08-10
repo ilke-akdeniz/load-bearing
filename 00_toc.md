@@ -254,7 +254,7 @@ The final answer to "is this load-bearing" as a repeatable procedure rather than
 | 01 | `01_why-good-advice-goes-wrong.md` | not started |
 | 02 | `02_the-five-levels.md` | **drafted** |
 | 03 | `03_forces.md` | **drafted** |
-| 04 | `04_grading-a-law.md` | not started |
+| 04 | `04_grading-a-law.md` | **drafted** |
 | 05 | `05_structure.md` | **drafted** |
 | 06 | `06_time.md` | not started |
 | 07 | `07_distribution.md` | not started |

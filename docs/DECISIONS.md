@@ -655,3 +655,44 @@ One example was discarded during verification. A first version of the precision 
 The seven Forces are now individually owned by 03, so later chapters name a Force and cite rather than re-deriving it — and the two that were being coined in passing by earlier chapters, control-of-callers and the memory hierarchy, have a home.
 
 Chapter 03 runs 381 lines, the shortest of the three drafted so far, which suits a chapter whose job is to supply vocabulary the rest of the book spends.
+
+---
+
+## 16. Chapter 04: one grade, one move
+
+**Date.** 2026-08-09
+
+**Context.**
+Chapter 04's difficulty is structural rather than editorial: it grades material that other chapters own. CAP belongs to 07, Conway to 09, the memory hierarchy to 08, acyclic dependency to 05, Hyrum's Law to 05. Written straight, the chapter becomes a tour of other chapters' examples with a letter attached to each.
+
+**Options.**
+Present the three grades as a taxonomy with examples; organize around how to check a claimed Law; find what the grade is *for* and make that the claim.
+
+**Decision.**
+Lead with what the grade buys: **each grade admits exactly one move, and no others.**
+
+- **Grade A**, a theorem — change which assumptions hold. Arguing with the conclusion is a category error, and the assumptions are always stated because a proof cannot exist without them.
+- **Grade B**, a near-tautology — check whether the words describe you. It cannot be violated; it can be found not to apply.
+- **Grade C**, an empirical constant — measure it, because the number was taken somewhere else at some other time.
+
+That framing solves the ownership problem rather than working around it. The chapter never explains CAP or Conway; it uses them to show what grading buys, and each cross-reference is a sentence.
+
+**Why the demonstrations are the ones they are.**
+Each grade needed a demonstration that was 04's own rather than a borrowed one.
+
+Grade A shows an assumption being removed instead of a theorem being stated: the same delivery problem in one process, where a channel cannot lose anything, and across a network, where the acknowledgement can be lost after the work is done. Running it prints three charges for one intended charge, and the caller was never careless — it could not distinguish *never arrived* from *arrived, reply lost*.
+
+Grade B uses a cache read once at startup. Chapter 02 lists "a cache needs an invalidation strategy" in its table of classified claims but nothing owns the argument, so 04 takes it. The point is the escape: if the original is a compile-time constant there is no cache in the strict sense, so the Law is true and inert.
+
+Grade C uses Go's randomized map iteration against Python's guaranteed dictionary order — one observation, two opposite responses, verified by running both. It carries something the other grades cannot: Python's dict order began as an implementation detail, became widely depended upon, and was promoted to a guarantee in 3.7. The empirical claim's own prediction changed the thing it predicted, which is only possible for a Grade C.
+
+**A distinction the chapter adds.**
+The TOC asked what makes Conway's Law different from "prefer composition over inheritance." The answer turned out to be one line worth keeping: **a Law describes; a Principle prescribes.** Conway's Law cannot be bad advice because it is not advice. That separates the two faster than arguing about how universal either feels, and it gives chapter 02's classification test a sharper edge for this one boundary.
+
+**The boundary section leads with the chapter's own misuse.**
+*Grade is not importance.* Amdahl's Law is Grade A and irrelevant to a single-threaded tool; the cache-to-memory gap is Grade C, drifting, machine-dependent, and decides a game engine's whole architecture. Reading the grades as a priority ranking commits the error the book is about — treating a firm claim as an important one — using the book's own vocabulary to do it.
+
+**Consequence.**
+`LEDGER.md` gains five concept rows and three example rows.
+Chapter 05's existing commitments are honoured: acyclic dependency stays Grade B, and Hyrum's Law stays an empirical regularity rather than a theorem.
+Chapter 04 runs 206 lines, the shortest so far, which suits a chapter whose job is a distinction rather than a subject.
