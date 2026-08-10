@@ -781,3 +781,44 @@ The empirical section's practical form gains a second half: quoting somebody's n
 `00_toc.md`'s chapter 04 entry names the actual examples; CAP stays with chapter 07, which owns it.
 `LEDGER.md` gains a row for the two escapes and one for the halting problem, and loses the CAP row.
 Chapter 04 runs 259 lines.
+
+---
+
+## 19. Chapter 06: two halves, one claim
+
+**Date.** 2026-08-10
+
+**Context.**
+The TOC gives chapter 06 seven topics across what look like two subjects — check-then-act, races, lock-holders, single-writer, clock skew, Lamport and vector clocks, coordination latency. Written as a list it is two chapters sharing a file.
+
+**Decision.**
+One claim, stated so both halves fall out of it:
+
+> A check tells you what was true, not what is true. And no clock tells you what happened first.
+
+Both are **there is no shared now** — locally the observation is stale by the time you act on it, globally there is no agreed ordering and timestamps cannot supply one.
+
+**The demonstration that carries the chapter.**
+A registration handler that refuses duplicate emails, with a uniqueness check before every insert, and two milliseconds of password hashing between the check and the write. Fifty concurrent requests produce **fifty rows for one email**.
+
+Three things fall out of that one number, and none of them would from a smaller one.
+
+- Every step is individually mutex-protected. The map is never corrupted. What broke spans two operations, and no lock inside either can span them — which is the chapter's real content, since composing safe things into safe things is the intuition most engineers arrive with.
+- Remove the hashing and the same code returns one row on an idle machine. The bug is unchanged; only the window narrowed. That is why these defects reach production — testing happens on idle machines, which is testing with the narrowest windows the code will ever have.
+- Nothing in the code looks wrong. There is no missing lock to find in review, because the defect is in the shape rather than in a line.
+
+**The clock demonstration, and why it is stronger than skew.**
+The obvious argument against timestamps is skew between machines. The chapter starts somewhere harder to dismiss: one machine, one process, no network.
+
+Two hundred thousand pairs of consecutive `time.Now()` calls, with **95% returning an identical value** and a smallest observed gap of 1000 ns. Python agrees within a percent. The wall clock on this machine advances in microsecond steps, so two events a hundred nanoseconds apart do not get an order — they get the same number. Skew, jumps, and the absence of any link to causality then make it worse, but the instrument has already failed before any of that arrives.
+
+**Every claim of behaviour was run.** Four demonstrations and both fixes, in Go and Python: the fifty rows, the lost-update race producing 967 then 929, the filesystem TOCTOU, the clock resolution, the atomic rewrite returning 1, and the Lamport exchange. The lost-update race was confirmed with Go's race detector.
+
+One demonstration was rebuilt during verification. The first check-then-act version had no work between the check and the insert and produced one row — the race existed and did not show. Adding what a real handler does there is not a contrivance to make the bug appear; it is what makes the example honest, and the difference between one row and fifty is the chapter's point about window width.
+
+**A corollary the chapter states separately**, because it is the part people resist: an application-level check is not wrong, but it is not the enforcement. Keep it for the error message, which is what it is good at. Do not keep it as the guarantee.
+
+**Consequence.**
+`LEDGER.md` gains eleven concept rows and five example rows; chapter 06 was previously carrying two.
+Six forward references from chapters 02, 03, and 05 are now discharged.
+Chapter 06 runs 288 lines and moves to **in progress**.

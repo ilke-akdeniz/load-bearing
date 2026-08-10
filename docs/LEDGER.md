@@ -70,8 +70,17 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Four ways to break a cycle | 05 | Interface / event / third module / identifier — four different bills, chosen deliberately | cite 05 |
 | Dependency inversion | 05 | The call may go up while the dependency goes down, because both parties point at an interface at the bottom | cite 05 |
 | Lower layer more capable | 05 | Layering doctrine assumes the layer below is dumber; when it is more capable, "keep logic out" inverts | cite 05 |
+| There is no shared now | 06 | A check reports the past; across machines there is no agreed ordering at all | "no shared now (Ch. 06)" |
 | Check-then-act / TOCTOU | 06 | Between the check and the act, the world moved | "TOCTOU (Ch. 06)" |
+| Locking each step is not locking the sequence | 06 | Individually safe operations do not compose into a safe rule | cite 06 |
+| The window is as wide as the work in it | 06 | The same defect is rare on an idle machine and constant under load | cite 06 |
 | Only the lock-holder enforces | 06 | A rule over rows you haven't read can't be enforced by code that hasn't read them | cite 06 |
+| The app check is the message, not the guarantee | 06 | Keep it for the error text; never keep it as the enforcement | cite 06 |
+| Two ways to remove a race | 06 | Remove the sharing or remove the mutability; concurrency is the term you cannot give up | cite 06 |
+| Single-writer principle | 06 | One writer means nothing can interleave, so coordination cost falls to zero | "single writer (Ch. 06)" |
+| Clocks do not order events | 06 | Wall clocks lack the resolution locally and agreement globally; counters order, clocks do not | cite 06 |
+| Lamport vs vector clocks | 06 | Lamport preserves causality but cannot detect concurrency; vector clocks can, at a cost that grows with nodes | cite 06 |
+| Coordination does not compose | 06 | Two correct locked operations are not one correct operation | cite 06 |
 | Exactly-once impossible | 07 | Two Generals ⇒ at-least-once plus idempotency | cite 07 |
 | Memory hierarchy ~6 orders | 08 | Register to network spans about a million-fold | cite 08 |
 | Conway / Brooks / Lehman | 09 | Structure mirrors org; adding people to a late project; systems must change | cite 09 |
@@ -112,6 +121,11 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | `Particle` class vs ECS parallel arrays | 05 | Hiding inverted by cache layout — the Principle turns over while the Law holds. 20 may cite for the domain, 08 owns the arithmetic |
 | `net/http` `Handler` | 05 | Call up, dependency down — the legitimate version of an apparent violation |
 | `completed_at is null` gate | 05 | The lower layer is more capable, so layering doctrine inverts. 06 owns the race it closes |
+| Registration handler, 50 rows for one email | 06 | Check-then-act with realistic work in the window; every step individually locked |
+| 1000 increments producing 967 | 06 | The lost-update race, and a different wrong answer each run |
+| `os.path.exists` then `open` | 06 | TOCTOU in its original filesystem sense — same shape, no database involved |
+| 95% of consecutive `Now()` calls identical | 06 | The wall clock cannot order two adjacent events on one machine, before any skew |
+| Lamport counter exchange | 06 | What does order events, and what it still cannot tell you |
 | Unique index vs application check | 06 | Only the enforcing layer closes the window |
 | Outbox table | 07 | Cross-system atomicity is impossible, so you sequence + retry |
 | In-process channel vs lost ACK | 04 | Two Generals' two assumptions, and the two different escapes: in-process falsifies one, idempotency drops the requirement. 07 owns the theorem |

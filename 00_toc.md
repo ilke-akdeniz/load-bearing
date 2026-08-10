@@ -261,7 +261,7 @@ The final answer to "is this load-bearing" as a repeatable procedure rather than
 | 03 | `03_forces.md` | **draft** |
 | 04 | `04_grading-a-law.md` | **draft** |
 | 05 | `05_structure.md` | **draft** |
-| 06 | `06_time.md` | not started |
+| 06 | `06_time.md` | **in progress** |
 | 07 | `07_distribution.md` | not started |
 | 08 | `08_scale.md` | not started |
 | 09 | `09_change.md` | not started |
