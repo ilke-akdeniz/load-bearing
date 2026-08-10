@@ -112,6 +112,27 @@ Each chapter follows this shape:
 5. **What it costs** — every choice has a bill.
 6. **How to recognize the failure** — what it looks like in a real codebase when someone got this wrong.
 
+### The claim sentence
+
+The claim may assert **only what the chapter goes on to demonstrate**, and the standing bias is toward asserting more.
+The bias has a specific shape: claiming *sufficiency* where only *necessity* was shown.
+
+Two drafts of chapter 03's claim failed this, in the same direction:
+
+- *"Evaluating the Forces is most of the work of choosing well"* — unquantifiable, and not what the chapter demonstrates.
+- *"…is where the design is actually decided"* — contradicted by the book itself in three places: chapter 02's *classifying is not deciding*, chapter 03's own concession that conflicting Forces are decided rather than computed, and chapter 21's case for obeying an Idiom you can out-argue.
+
+What survived was *"…is the groundwork"* — a prerequisite claim, necessary and explicitly not sufficient, provable from the seven cases the chapter works through.
+
+**The test, run before the claim ships:** list the cases the book concedes elsewhere and check whether the claim survives them.
+A chapter already written that contradicts the claim means the claim is wrong, not the other chapter.
+
+**A claim too vague to be false is not the safe fallback.**
+*"Evaluating the Forces is crucial"* cannot be disproved and cannot be used for anything.
+Asserting importance is not making a claim — say what happens, or what breaks without it.
+
+This applies to every bolded assertion in a chapter, but the claim sentence is where it costs most, because everything after it is read as support.
+
 ## Writing style
 
 **Simple language, precise terminology.**

@@ -4,13 +4,13 @@
 
 ## The claim
 
-**Evaluating the Forces acting on your situation is most of the work of choosing well** — and almost nobody does it, which is why so many design arguments cannot be settled.
+**Evaluating the Forces acting on your situation is the groundwork** — and almost nobody does it, which is why so many design arguments cannot be settled.
 
 ## A Force is a dial, not a switch
 
 Forces get read as present or absent. *Is there concurrency? Yes.* And then the design is chosen as though every concurrent system were the same system. But a Force has an **intensity**, and the design does not change once as the intensity rises — it changes several times, and each change discards the previous answer rather than adding to it.
 
-Intensity means **how hard the Force presses on the design**, which is not always the same as how large the number is. A 200 ms latency budget is a big number and a weak constraint; 200 microseconds is a small number and a fierce one. Read the pressure, not the digits.
+Intensity means **how hard the Force presses on the design**, which is not always the same as how large the number is. Latency is the case where the two run opposite: a 200 millisecond budget leaves the design free, a 200 microsecond budget dictates it, so **the smaller the budget, the stronger the Force.** Read the pressure, not the number.
 
 Below are four ways to handle the same requirement — counting page views — at four intensities of one Force. The comment above each says which intensity it is written for.
 
