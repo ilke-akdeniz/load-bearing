@@ -1,18 +1,18 @@
 # Forces: The Inputs Nobody Names
 
-*This chapter is entirely about **Force** — the one kind in the model that is not advice. Chapter 02 established what a Force is and how it acts on Laws and Principles differently. This chapter says which Forces there are, how to read the value of each, and what changes when the value changes.*
+*This chapter is entirely about **Force** — the one kind in the model that is not advice. Chapter 02 established what a Force is and how it acts on Laws and Principles differently. This chapter says which Forces there are, how to read the intensity of each, and what changes when the intensity changes.*
 
 ## The claim
 
-**Evaluating the forces that apply currently is crucial for any design** — but almost nobody does it, which is why so many design arguments cannot be settled.
+**Evaluating the Forces acting on your situation is most of the work of choosing well** — and almost nobody does it, which is why so many design arguments cannot be settled.
 
 ## A Force is a dial, not a switch
 
-Forces get read as present or absent. *Is there concurrency? Yes.* And then the design is chosen as though every concurrent system were the same system. But a Force has an **intensity**, [claude I changed the term "force value" to "force intensity". If you agree that this is better, apply that change for the rest of this chapter and then for the entire book] and the design does not change once as the value moves — it changes several times, and each change discards the previous answer rather than adding to it.
+Forces get read as present or absent. *Is there concurrency? Yes.* And then the design is chosen as though every concurrent system were the same system. But a Force has an **intensity**, and the design does not change once as the intensity rises — it changes several times, and each change discards the previous answer rather than adding to it.
 
-Let's take a look at different ways to handle concurrency for a single line of code that tracks "page view counts".
+Intensity means **how hard the Force presses on the design**, which is not always the same as how large the number is. A 200 ms latency budget is a big number and a weak constraint; 200 microseconds is a small number and a fierce one. Read the pressure, not the digits.
 
-Comments in top of each line describes which value of the Force is present.
+Below are four ways to handle the same requirement — counting page views — at four intensities of one Force. The comment above each says which intensity it is written for.
 
 ```go
 // One writer. A nightly batch job, one goroutine, nothing else running.
@@ -20,7 +20,8 @@ counts[pageID]++
 ```
 
 ```go
-// Many goroutines, one process. [claude is this similar to "many threads" situation for Java C#? If so add: "(Or many threads in Java, C#)" here.]
+// Many goroutines, one process. The same situation as many threads
+// in one JVM or one .NET process.
 atomic.AddInt64(&counts[pageID], 1)
 ```
 
@@ -30,15 +31,17 @@ update page set views = views + 1 where id = $1;
 ```
 
 ```sql
--- Many processes, and the caller retries after a timeout. [claude can we add this here: (Idempotency is important.)]
--- There is no counter any more. There is a log, and you count it.
+-- Many processes, and the caller retries after a timeout, so the same
+-- event can arrive twice. The write has to be idempotent: applying it
+-- again must change nothing. There is no counter any more — there is a
+-- log, and you count it.
 insert into page_view (page_id, request_id) values ($1, $2)
 on conflict (request_id) do nothing;
 ```
 
 Four designs, one requirement, one intensity dial. Notice what happens at the last step: the answer stops being a different way to increment and becomes **a different data model**. You cannot get there by hardening the third version, and nothing about "we have concurrency" tells you which of the four you need.
 
-That is the shape of every Force in this chapter. Read the value, not merley the presence.
+That is the shape of every Force in this chapter. Read the intensity, not merely the presence.
 
 ---
 
@@ -52,32 +55,35 @@ The demonstration is above. Two things about the intensity dial are worth statin
 
 **The positions are not evenly spaced.** Going from one writer to many goroutines is a small change. Going from many processes to many processes with retries is a change of data model, because a retried message is indistinguishable from a second event and the only fix is to make the operation idempotent.
 
-**The value is usually lower than the vocabulary suggests.** A web service is described as concurrent, and it is — but if two requests never touch the same row, the Force is inert for that code path. Concurrency binds where writers *collide*, not where they merely coexist.
+**The intensity is usually lower than the vocabulary suggests.** A web service is described as concurrent, and it is — but if two requests never touch the same row, the Force is inert for that code path. Concurrency binds where writers *collide*, not where they merely coexist.
 
 Chapter 06 owns the races themselves; chapter 07 owns why redelivery cannot be eliminated and idempotency is the answer.
 
-### Durability of the medium 
-[Claude this subsection needs many improvements. Clarify "durability" and "medium". What do these mean concretely?]
+### Durability of the medium
 
-> **How long does what this writes outlive the code that wrote it?**
-[Claude, above is an obscure, enigmatic sentence. Be explicit and simple.]
+Two words to pin down first, because both are doing specific work.
 
-The intensity dial runs further than people expect:
+**Medium** is whatever this code writes *to*: a local variable, a field in a struct, a row in a table, a message on a queue, a line in a log someone archives, a JSON field a client parses. **Durability** is how long what you wrote stays there after the code that wrote it has been replaced.
+
+> **If I get this wrong, can I still fix it once the wrong version has been running for a year?**
+
+That is the whole Force. Code can be edited; accumulated state often cannot, because fixing it requires information that was never recorded.
 
 ```text
-a local variable        microseconds [Missing code example]
-a struct field          until the next deploy
-a row in a table        longer than the current codebase
-a published format      as long as anyone keeps a copy [Missing code example]
+medium              lives for            a mistake is fixed by
+local variable      microseconds         editing the line
+struct field        until next deploy    editing it, redeploying
+row in a table      longer than the      a migration — and some are
+                    current codebase     impossible
+published format    as long as any       nothing. You add a second
+                    client keeps a copy  field and carry both
 ```
 
-Adding a field looks like the same act at every position. It is not.
+The same act — adding one field — is a different decision at each position.
+
+**At the top of the dial**, nothing is at stake, because nothing has accumulated:
 
 ```go
-// Code. Add it, ship it, done. Nothing has to be decided. 
-// [claude can't just say "Nothing has to be decided". That's obviously not true. 
-// Maybe you need to show the caller code who could be affected by those changes and has to decide tthins for all those examples.
-// Then here you can show how those places has nothing to decide. ]
 type Order struct {
 	ID    uuid.UUID
 	Total int64
@@ -85,12 +91,24 @@ type Order struct {
 }
 ```
 
+Existing callers are unaffected: Go zero-initializes the new field, and code that never mentions `Tip` compiles and behaves exactly as before.
+
+```go
+// Written before Tip existed. Still correct, still compiles.
+func Receipt(o Order) string {
+	return fmt.Sprintf("total %d", o.Total)
+}
+```
+
+If the field turns out to be a mistake, delete it and redeploy. There is no history of orders-without-tips to be wrong about, because the struct holds only what is in memory right now.
+
+**At the bottom of the dial**, the same addition forces a decision about the past:
+
 ```sql
--- Rows. Adding it forces an answer to a question the struct never asked.
 alter table "order" add column tip bigint not null default 0;
 ```
 
-Every one of the four million existing orders now reads as having a zero tip. That may be false — tips may have been taken in cash, or recorded in a notes field, or simply not tracked. Those are different facts, and the default has made them **permanently indistinguishable**: no later query separates "tipped nothing" from "we did not know."
+Every one of the four million existing orders now reads as having a zero tip. That may be false — tips may have been taken in cash, recorded in a notes field, or not tracked at all. Those are different facts, and the default has made them **permanently indistinguishable**. There is no later query that separates "tipped nothing" from "we never knew," because the distinction was never written down.
 
 The nullable version keeps them apart, and charges for it:
 
@@ -100,10 +118,17 @@ alter table "order" add column tip bigint;   -- null means "not known"
 
 Now every read site handles a null, forever, including the ones written by people who never heard of this migration.
 
-**What changes with the Force:** whether *unknown* needs to be representable. At the top of the dial the question does not arise, because there is no history to be wrong about. At the bottom it is the whole decision, and it is one you get to make once. 
-[Claude is this really the only thing that changes: "What changes with the Force:** whether *unknown* needs to be representable"?
- If so, I'm not sure if this is really a Force or you are just conflating something more minor to be a Force. 
- Or maybe you are missing the real Force which this minor thing is a small part of it. ]
+Notice that the mistake is not detectable later. Both migrations succeed, both applications work, and the difference only appears the day someone asks how many customers tipped nothing — by which point the answer is unrecoverable.
+
+**What changes with the Force: whether a mistake is correctable, and therefore how much care the decision is worth.**
+
+That is the general form, and the tip column is one instance of it. Two others follow from the same reading.
+
+**Where an invariant should be enforced.** If the rows outlive every version of the code that writes them, then a rule enforced only in application code is a rule that holds for as long as one code path remembers it. A constraint in the schema holds for the `psql` session at 2am, the data-fix script, the bulk import, and the admin tool written next year by someone who has never read your service layer. The durability of the medium is the reason that argument is not merely a preference (Ch. 06 owns the class of invariants application code *cannot* enforce at all).
+
+**Whether "we'll clean it up later" is available.** At the top of the dial it always is. At the bottom it is available only while the wrong state is small, and the window closes silently as rows accumulate.
+
+This Force is the sibling of blast radius, and they are worth keeping distinct: **blast radius is how bad it is when you are wrong; durability is whether you can stop being wrong.** A dashboard with a wrong number has a small blast radius and a short-lived medium — fix the query, and the past repairs itself. A schema with a wrong column has a modest blast radius and a permanent medium, which is why it deserves more argument than its severity alone suggests.
 
 ### Blast radius
 
@@ -243,7 +268,7 @@ user_t *u = &users[uid];
 
 > **Can I change every call site myself, and would I know if I broke one?**
 
-Three values, and the middle one is where most working systems actually sit:
+Three intensities, and the middle one is where most working systems actually sit:
 
 ```text
 you control every caller       change it, fix the call sites, done
@@ -302,7 +327,7 @@ Same defect, same fix, three different projects. Nothing about the code told you
 
 Three mechanisms support this chapter's claim and the third one is crucial.
 
-**A Force that is not evaluated is just a mood.** "It needs to scale" cannot be verified, argued with, or revisited. "Twelve thousand requests a minute at peak, of which about thirty are writes to the same row" can be looked up, can be wrong, and can be checked again next year. [claude which of our 7 force(s) plays in this example? I couldn't decipher.] Evaluation converts a mood into a claim, and claims can be tested.
+**A Force that is not evaluated is just a mood.** "It needs to scale" cannot be verified, argued with, or revisited, because it names no Force and gives no intensity. "Twelve thousand requests a minute at peak, of which about thirty are writes to the same row" reads two of them: the concurrency intensity is the thirty colliding writes, not the twelve thousand requests, and the latency budget is whatever is left of a page render after the other work. Both can be looked up, both can be wrong, and both can be checked again next year. Evaluation converts a mood into a claim, and claims can be tested.
 
 **Forces are where the disagreement actually lives.** Chapter 02 records this as a failure symptom; the mechanism is that two people arguing about a Principle have usually already agreed about the Principle and are differing about the situation it is conditioned on. Stating the Force ends the argument or relocates it to something answerable.
 
@@ -355,7 +380,7 @@ The honest response to genuine uncertainty is not a better estimate. It is to ke
 
 ## What it costs
 
-**A named Force licenses machinery.** "We have concurrency" becomes a distributed lock, in a program with one writer. Naming a Force is not the same as reading its value, and the value is almost always lower than the name suggests. The discipline: no Force may be cited in a design discussion without the number, or the answer *don't know* said out loud. [claude worth noticing that I suggested changing "named" to "evaluated" which encompasses reading its value. I don't think there is much value at purely "naming" as it adds not much, the exact point you are making here. And following same line of thought, I don't think we should focus the chapter on "naming". It should be obvious that to evaluate something, you shoule identify and name it first. This cost description is still valuable tough becaus that's precisely what loosy architects do all the time: Just naming the force and jumping into conclusions.]
+**Naming a Force, without evaluating it, licenses machinery.** "We have concurrency" becomes a distributed lock, in a program with one writer. This is the failure mode the chapter's claim is aimed at: identifying a Force is the cheap half and feels like the whole job, so the design gets chosen from the name while the intensity is never read — and the intensity is almost always lower than the name suggests. The discipline: no Force may be cited in a design discussion without a number beside it, or the words *we don't know* said out loud.
 
 **Half of these are estimates about the future wearing a measurement's clothes.** Team size in two years. Change frequency of a feature that does not exist yet. Peak traffic for a product with no users. Concurrency and latency can be measured today; the rest are forecasts, and should be labelled as such wherever they are written down.
 
