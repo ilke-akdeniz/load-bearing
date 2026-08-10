@@ -242,17 +242,43 @@ Do not batch chapters — the steering between them is where the book's judgment
 Record substantive editorial decisions in `docs/DECISIONS.md` using the existing shape: **Context / Options / Decision / Why / Consequence.**
 Note who originated what; the log doubles as the authorship record for an AI-assisted work.
 
+### The review cycle
+
+A chapter is finished by alternating commits, and **both sides commit**, so that each party's contribution stays visible in the history.
+
+1. **Claude writes and commits.** One commit per pass.
+2. **The author reviews in the file itself.** Two kinds of change arrive together: direct edits to the prose, and notes to Claude written inline as `[claude …]` tags — questions, objections, requests, or a decision to apply.
+3. **The author commits, and says so.**
+4. **Claude reviews that commit, acts on all of it, and commits again.**
+5. **Repeat** until the author says the chapter is done.
+
+**Reviewing the author's commit means reviewing the whole commit, not only the tags.**
+This is the step that has already gone wrong once: the tagged items were treated as the review and the direct edits as settled.
+Edits written quickly in the margins of a review need proofreading like any other prose.
+Read the diff line by line.
+
+- **Act on every `[claude …]` tag**, and delete it once addressed. A tag left in the file is unfinished work, and a chapter is not ready while any remain.
+- **Proofread every direct edit** — grammar, and the book's own rules. A review edit is as subject to the register and the no-decoration rules as anything Claude wrote.
+- **Disagree when there is a reason to.** A tag is not always an instruction; some are questions and some are wrong. Say so, give the reason, propose the alternative. The author repeating it settles it.
+- **Report what changed and why**, including anything found that was not asked about.
+
 ## Git
 
-**Never commit. Never push.**
+**Commit. Never push.**
+
+Pushing is the author's, always. Nothing reaches the public repository without them.
 
 After making changes:
 
 1. Stage them — `git add -A`, or the specific paths when only part of the work is ready.
-2. Print a recommended commit message to standard output.
+2. Commit, with a message that says what changed and why.
 
-The author reviews the staged diff and runs the commit.
-Keep the recommendation short: a subject line, and a body only when the change needs a reason rather than a description.
+One commit per pass, so the history alternates cleanly between Claude's work and the author's review.
+Never amend or rebase the author's commits — the point of the history is that both sides of the exchange stay readable.
+
+Keep the message short: a subject line, and a body only when the change needs a reason rather than a description.
+Where a change reverses something, or was made against a request, say so in the body.
+The history is part of the book's authorship record, alongside `docs/DECISIONS.md`.
 
 ## Register
 
