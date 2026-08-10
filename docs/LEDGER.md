@@ -33,7 +33,10 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Team size and turnover | 03 | How many must agree, and how many will still be here — the rule migrates comment → review → type system | cite 03 |
 | Latency budget | 03 | What the budget is, and what fraction one mechanism costs | cite 03; 08 owns the arithmetic |
 | Control of the callers | 03 | Can I change every call site, and would I know if I broke one — three values, not two | cite 03; 05 owns what it implies for exposure |
-| Reversibility decides deferral | 03 | Defer what you can reverse, decide what you cannot, and prefer the strict version because strict is the undoable direction | "the reversibility rule (Ch. 03)" |
+| Reversibility decides deferral | 03 | Two questions — does waiting spoil it, is it cheap today — giving three cases: defer, take it now, or admit you are betting | "the reversibility rule (Ch. 03)" |
+| Strict is the undoable direction | 03 | Under uncertainty prefer the decision you can walk back, which is usually the stricter one | cite 03 |
+| Risk vs unmeasured Force | 03 | An unmeasured Force has an instrument and a trigger; a risk has neither, so the answer is bounding the cost rather than estimating harder | cite 03 |
+| Shape of scale | 03 | "High scale" names no design — steady load, bursts, and data volume are different situations sharing a vocabulary | cite 03 |
 | Forces move on their own clock | 03 | Team size, client count, and row count change without a commit, invalidating Principles nobody revisits | cite 03 |
 | Law grading A/B/C | 04 | Theorem, near-tautology, or empirical constant — different standing | "Grade A (Ch. 04)" |
 | Acyclic dependency | 05 | A cycle makes two components one unit of comprehension, test, and change | "the Direction Rule (Ch. 05)" |
@@ -86,8 +89,8 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | Manual wiring in Go vs C# | 02 | An Idiom difference: same shape, opposite reception |
 | Page-view counter at four concurrency values | 03 | The dial: the fourth position is a different data model, not a hardened third |
 | `add column tip not null default 0` | 03 | Durability: a default is a claim about history, and it erases "unknown" permanently |
-| Float vs minor-unit sums | 03 | Blast radius: the same arithmetic is correct on a dashboard and a defect on an invoice |
-| Payment method: switch vs registry | 03 | Change frequency, plus the shape — how many files one addition touches |
+| `split(8.03, 3)` | 03 | Blast radius: literally the same function, correct behind a dashboard and defective on an invoice |
+| Payment method: switch, registry, six layers | 03 | Change frequency plus shape; the six-file version stubbed out so the count is checkable. 18 owns what the boundaries cost |
 | `Money` as a comment vs unexported fields | 03 | Team size: the same rule migrates from comment to type system. 12 owns the technique |
 | 64-bit id in JSON, read by JavaScript | 03 | Control of callers: same defect, same fix, three different projects |
 | Store helper taking `*Catalog` (the cycle) | 05 | One cycle, six detection outcomes across Go/C#/Python/CommonJS — the Law is granularity-blind, the tools are not |
