@@ -39,11 +39,12 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Shape of scale | 03 | "High scale" names no design — steady load, bursts, and data volume are different situations sharing a vocabulary | cite 03 |
 | Forces move on their own clock | 03 | Team size, client count, and row count change without a commit, invalidating Principles nobody revisits | cite 03 |
 | Three kinds of Law | 04 | Theorem, definition, empirical law — named, never lettered, and not ranked | "a theorem / a definitional claim (Ch. 04)" |
-| One kind, one move | 04 | Theorem: change which assumptions hold. Definition: check whether the words apply. Empirical: measure it where you are | cite 04 |
+| One kind, its moves | 04 | Theorem: falsify an assumption, or stop needing the conclusion. Definition: check whether the words apply. Empirical: measure it where you are | cite 04 |
+| Two escapes from a theorem | 04 | Make an assumption false so it does not apply, or stop needing the conclusion so it costs nothing — never argue with the conclusion | cite 04 |
 | Regularity vs magnitude | 04 | A measurement is not a law; an empirical law is a regularity across systems whose magnitude varies between them | cite 04 |
 | Kind is not importance | 04 | The kind says how firmly a claim is true, not how much it bears on your program | cite 04 |
 | Describes vs prescribes | 04 | A Law describes what happens; a Principle prescribes. Only a Principle can become bad advice | "describes vs prescribes (Ch. 04)" |
-| Theorem and slogan share a name | 04 | CAP's proved form is narrow and its travelling form has a term that is not a choice | cite 04 |
+| Theorem and folk version share a name | 04 | The folk version has usually dropped a quantifier or a condition — halting problem forbids a universal decider, not any decision | cite 04 |
 | The falsification question | 04 | "What would have to be true for this to be false?" — nothing / nothing but it may not apply / a measurement | cite 04 |
 | Acyclic dependency | 05 | A cycle makes two components one unit of comprehension, test, and change | "the Direction Rule (Ch. 05)" |
 | What a cycle actually costs | 05 | The damage is denominated in future change, not in wrong output — which is why it accumulates unnoticed | cite 05 |
@@ -113,7 +114,8 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | `completed_at is null` gate | 05 | The lower layer is more capable, so layering doctrine inverts. 06 owns the race it closes |
 | Unique index vs application check | 06 | Only the enforcing layer closes the window |
 | Outbox table | 07 | Cross-system atomicity is impossible, so you sequence + retry |
-| In-process channel vs lost ACK | 04 | A theorem is escaped by removing an assumption, not by implementing harder. 07 owns the theorem |
+| In-process channel vs lost ACK | 04 | Two Generals' two assumptions, and the two different escapes: in-process falsifies one, idempotency drops the requirement. 07 owns the theorem |
+| Halting problem vs its folk version | 04 | The theorem forbids a universal decider; termination checking for particular programs is routine |
 | `rate` read once at startup | 04 | A definitional claim that either binds or has no cache to act on |
 | Go map randomization vs Python dict order | 04 | One regularity, two opposite responses, and a magnitude that moved. 05 owns Hyrum's Law |
 | AoS vs SoA benchmark | 08 | Memory hierarchy beats abstraction |

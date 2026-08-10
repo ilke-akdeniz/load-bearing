@@ -47,7 +47,7 @@ Each Force with a code demo of the same problem solved differently under differe
 Not every Law has the same standing.
 Theorem, definition, and empirical law are three different kinds of true, and each admits exactly one move.
 
-Contents: what makes CAP different from Conway's Law; what makes Conway's Law different from "prefer composition over inheritance"; how to check a claimed Law.
+Contents: what makes Two Generals a different kind of claim from Conway's Law; what makes Conway's Law different from "prefer composition over inheritance"; the halting problem as a theorem whose folk version dropped a quantifier; how to check a claimed Law.
 
 *Where this doesn't apply:* Laws that are true but irrelevant at your scale — Amdahl on a single-threaded CLI.
 

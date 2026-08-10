@@ -6,15 +6,15 @@
 
 **Not all Laws are the same kind of true, and the kind decides what you can do about one.**
 
-Against a theorem you can only change which of its assumptions hold. Against a definitional claim you can only check whether its words describe you. Against an empirical law you can measure, because the number came from somebody else's system on some other day.
+Against a theorem you can work on its assumptions, or on what you actually need from it — never on the conclusion. Against a definitional claim you can only check whether its words describe you. Against an empirical law you can measure, because the number came from somebody else's system on some other day.
 
-Three kinds of true, three moves, and no others available.
+What no kind allows is arguing with the claim. The kind tells you where you are permitted to work instead.
 
 ## The three kinds
 
 | Kind | What makes it true | What would falsify it | The only move available |
 |---|---|---|---|
-| **Theorem** | a proof, from stated assumptions | nothing, unless the proof is wrong | change which assumptions hold |
+| **Theorem** | a proof, from stated assumptions | nothing, unless the proof is wrong | change its assumptions, or stop needing its conclusion |
 | **Definition** | what the words mean | nothing; the words may simply not describe you | check whether they do |
 | **Empirical law** | observed to hold, again and again | a measurement | measure it where you are |
 
@@ -28,7 +28,12 @@ They are named rather than lettered, and the reason is the book's own: a letter 
 
 The theorem here is the **Two Generals Problem**: over a channel that can lose messages, no protocol can leave both parties certain that the other received what was sent. Its practical consequence is that exactly-once delivery is impossible — you get at-least-once, and you make repeating safe (chapter 07 owns the result and what gets built on top of it).
 
-Watch the assumption do the work. First, handing a job from one part of a program to another:
+That theorem rests on two assumptions, and both are worth having in front of you:
+
+1. **The channel can lose messages.**
+2. **You need certainty** — the sender must know the receiver got it.
+
+Neither is negotiable inside the proof. Both are negotiable in a program, and each gives a different escape. Here is the first, which works by making assumption one false:
 
 ```go
 // A Go channel is a typed in-memory queue between concurrent parts
@@ -78,12 +83,18 @@ The in-process version is correct as written. The networked version cannot be fi
 
 The fix is not in the client at all. It is to make the charge **idempotent** — attach an identifier to the request, have the service record which identifiers it has already applied, and ignore a repeat. Then at-least-once delivery is sufficient, because a duplicate does nothing.
 
-Notice what that fix actually did. It removed an assumption: *applying the operation twice differs from applying it once*. The theorem still holds, unchanged and unchallenged; it simply no longer has anything to spoil.
+Be exact about what that fix did, because it is not the same manoeuvre as the first one.
 
-**That is the shape of every escape from a theorem.** You do not implement your way past the conclusion. You arrange to be somewhere one of its assumptions does not hold. And the assumptions are always written down, because a proof cannot exist without them — which makes them the one part you are invited to argue with.
-[claude more clarity on the assumptions for the example is needed. 
-"watch the assumption do the work" => which assumption?
-"It removed an assumption: *applying..." => This was the wrong assumption made by the people workin on example? Or was that an assumption that is attached to the theorem? ]
+**The in-process version made assumption one false.** Memory does not lose messages, so the theorem's precondition is absent and it has nothing to say about that code. This escape is only available when you can choose not to be distributed, which is most of the time and not all of it.
+
+**Idempotency changes neither assumption.** The channel still loses replies, the client still cannot tell what happened, and exactly-once *delivery* remains impossible. What changed is on your side of the problem: you stopped needing it. The requirement was never really exactly-once delivery — it was exactly-once *effect*, and the two were quietly assumed to be the same thing. Separate them and the theorem's conclusion stops being a problem you have.
+
+So a theorem admits two escapes and no third:
+
+- **Arrange for an assumption not to hold**, and the theorem does not apply to you.
+- **Stop needing the conclusion**, and the theorem applies but costs you nothing.
+
+What you cannot do is get the forbidden thing. And the assumptions are always written down, because a proof cannot exist without them — which is why reading them is the first move, not the last.
 
 ### Definition: check whether the words apply
 
@@ -142,7 +153,7 @@ Neither is a mistake. Go judged the freedom worth more than the convenience and 
 
 **What makes this an empirical law rather than a theorem is that both outcomes were available.** No proof forced either. And notice what happened to the claim in Python's case: the observable behaviour that "will be depended upon" became documented behaviour, so the law's own prediction, taken seriously, changed the thing it was predicting. A theorem cannot do that.
 
-The practical form: **quoting somebody's number is not the same as knowing yours.** [claude you decide I'm not sure: should this practical form be extended to be: "quoting somebody's number is not the same as knowing yours, and knowing yours doesn't necessarily mean you should chase the same outcome as others."] Cache latencies, failure rates, how long a new engineer takes to become productive, how many users notice a two-second delay — all real regularities, all with magnitudes that differ by machine, by team, by decade. Chapter 08 works through the ones that come with arithmetic.
+The practical form has two halves, and the second is the one that survives a successful measurement: **quoting somebody's number is not the same as knowing yours, and knowing yours does not mean you should be chasing their target.** A 40% cache miss rate is a fact about you; whether it should be 5% depends on what a miss costs you, which is a different measurement again.
 
 ---
 
@@ -175,18 +186,29 @@ Amdahl's Law is a theorem: given the fraction of work that must run serially, it
 Firmness and relevance are separate axes.
 
 ### One name over a theorem and a slogan
-[claude can we change this example with something more simple. It's to complicated to explain and defend properly. I found possib;e gaps - errors on your take on this but I would prefere a simpler example instead of juggling with this. If you decide to change the example, remember to check other places in the book referring CAP]
-CAP is the standard case, and precision matters here because the two versions have genuinely different content.
 
-**The theorem**, proved by Gilbert and Lynch in 2002, is set in the *asynchronous network*: nodes share no clock, message delay has no upper bound, and messages can be lost. In that setting no read/write register can be both **linearizable** — every read returns the most recent write, as though there were a single copy — and **available**, meaning every request to a node that has not failed returns a response, once the network partitions.
+The halting problem is the clearest case, because the theorem and the thing people say about it differ in a way that costs real work.
 
-That is narrower than the reputation, in two ways worth knowing. It is about linearizable registers, and a great many systems neither provide nor need linearizability, so the theorem says nothing about them. And its notion of availability is strict: *every* non-failed node answers, not merely that the service as a whole stays up.
+**The theorem**, proved by Turing in 1936, is that no single algorithm can decide, for *every* program and input, whether that program halts. The quantifier is the whole content: it forbids a universal decider.
 
-**The slogan** is "pick two of consistency, availability, and partition tolerance." It is not the theorem, and it misleads in one specific way: it presents partition tolerance as a third option you might decline.
+**The slogan** is "you can't tell whether a program halts." That is a claim about any particular program, and it is false. You can very often tell, and tools do it routinely:
 
-You cannot decline it. A partition is an event, not a design choice — a cable is cut, a switch fails, a data centre becomes unreachable — and no system spanning more than one machine can guarantee those will not happen. "Sacrificing P" therefore describes nothing you can build. What you actually choose is what to do **while a partition is happening**, and there are only two answers: refuse to serve on the side that might be stale, keeping consistency and losing availability; or serve anyway, keeping availability and losing consistency. Brewer made this point himself in a 2012 retrospective, calling the two-of-three framing misleading for exactly this reason.
+```python
+for i in range(10):     # halts. A compiler can prove it, and does.
+    total += i
+```
 
-So the useful advice is not "say which version you mean," which nobody would say out loud. It is that a CAP argument which will not converge is usually two people reasoning from different claims — one from a narrow proved result about linearizable registers under partition, the other from a rough summary that has drifted. Neither is being careless. The theorem cannot settle a question about a system that never needed linearizability, and the slogan cannot settle anything, because one of its three terms is not a choice.
+```python
+while queue:            # halts if the body always shrinks the queue.
+    item = queue.pop()  # here it does, and a checker can verify that.
+    handle(item)
+```
+
+Termination checking is a working field. Proof assistants reject a recursive definition that cannot be shown to terminate; static analysers prove loop bounds; compilers unroll loops precisely because they know the count. None of that violates the theorem, because none of it is a universal decider — each proves termination for programs of a shape it understands, and gives up on the rest.
+
+The cost of confusing the two is that the slogan gets used to end conversations. "We can't detect that statically, halting problem" is sometimes correct and often is not, and the difference is whether you need an answer for *all* programs or for the ones your codebase actually contains. The second is usually a solvable problem that nobody attempted.
+
+So the useful advice is not "say which version you mean," which nobody would say out loud. It is that when a claim has a formal version and a folk version, the folk one has usually dropped a quantifier or a condition, and that is exactly where the engineering was.
 
 ### Some claims sit between kinds
 
@@ -220,11 +242,11 @@ The honest response is to leave the question open rather than force an answer, b
 
 **In a conversation:**
 
-- **"That violates CAP"** — said about a system with one database and no partitions, where the theorem has nothing to act on.
+- **"We can't check that, halting problem"** — said about an analysis over the code in one repository, where the theorem forbids only a decider that works for every program ever written.
 - **"Conway's Law says we should reorganize."** It says no such thing; it describes a tendency. The prescription belongs to whoever is making it, and should be defended on its own.
 - **A number quoted with more precision than anyone present has measured.**
 - **"It's a law"** offered as the end of a discussion rather than the start of one, when the useful next question is always *which kind, and what does it assume?*
-- **An argument about CAP, or about any claim with a formal and an informal version**, where neither side has noticed they are holding different claims.
+- **An argument about any claim with a formal and a folk version**, where neither side has noticed they are holding different claims.
 
 The question that does the work is short: **what would have to be true for this to be false?**
 

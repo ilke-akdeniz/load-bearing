@@ -737,3 +737,47 @@ The author changed *near-tautology* to *tautology*, adding a parenthetical that 
 `05_structure.md`'s three-claims table now reads "true by definition (Ch. 04)" rather than "near-tautology, Grade B."
 `LEDGER.md` has seven rows reworded and one added, for the regularity-versus-magnitude distinction.
 `CLAUDE.md` gains a rule the author asked for directly: **write Go for a reader who does not know Go**, since the audience is fluent in Java, C#, or Python, and an unglossed `chan` spends the example.
+
+---
+
+## 18. A theorem admits two escapes, not one; CAP replaced by the halting problem
+
+**Date.** 2026-08-10
+
+**Context.**
+The author's second pass on chapter 04 raised three things. One was a question about which assumptions the worked example was talking about. Answering it exposed an error in the chapter's central framing.
+
+**The error.**
+The chapter claimed that the only move against a theorem is to change which of its assumptions hold, then demonstrated it with Two Generals and offered idempotency as the fix — describing idempotency as "removing an assumption."
+
+That is wrong. Idempotency removes nothing. The channel still loses replies, the client still cannot distinguish *never arrived* from *arrived, reply lost*, and exactly-once delivery remains impossible. The theorem is untouched.
+
+The example actually contains **two different escapes**, conflated:
+
+- **Running in one process falsifies an assumption.** Memory does not lose messages, so the theorem's precondition is absent and it has nothing to say.
+- **Idempotency drops a requirement.** The theorem applies in full and stops mattering, because the thing wanted was never exactly-once *delivery* — it was exactly-once *effect*, and the two had been silently assumed identical.
+
+**Decision.**
+State both, and correct the claim. A theorem admits two escapes and no third: make an assumption false so it does not apply, or stop needing the conclusion so it costs nothing. What is never available is arguing with the conclusion.
+
+The chapter's framing widens to match: *what no kind allows is arguing with the claim; the kind tells you where you are permitted to work instead.*
+
+**Why this matters beyond the one paragraph.**
+Dropping a requirement is the **more common** escape in practice, and the draft had no name for it. Almost nothing in engineering is solved by arranging not to be distributed; a great deal is solved by noticing that the requirement was stronger than the need. Presenting only the assumption-falsifying move would have taught the rarer half.
+
+**CAP, replaced.**
+The author asked for a simpler example in the theorem-versus-slogan section, reporting possible gaps in the draft's account and preferring not to defend it.
+
+Replaced with the **halting problem**, which carries the same point at a fraction of the defensive burden. Turing's result forbids a *universal* decider — no single algorithm deciding halting for every program and input. The folk version, "you can't tell whether a program halts," is a claim about particular programs and is false: termination checking is a working field, proof assistants reject non-terminating definitions, and compilers prove loop bounds routinely.
+
+It is also the better teaching case. The gap between the two versions is a **dropped quantifier**, which generalizes: a folk version has usually lost a quantifier or a condition, and that is exactly where the engineering was. CAP's gap needed a paragraph on linearizability and another on why partition tolerance is not a choice before it could be stated at all.
+
+The failure-list entry changes with it: *"we can't check that, halting problem"* said about an analysis over one repository, where the theorem forbids only a decider that works for every program ever written.
+
+**One addition the author proposed and left to Claude.**
+The empirical section's practical form gains a second half: quoting somebody's number is not the same as knowing yours, **and knowing yours does not mean you should be chasing their target.** Worth having — it closes the failure that follows a successful measurement, where a team measures honestly and then adopts someone else's goal for the number.
+
+**Consequence.**
+`00_toc.md`'s chapter 04 entry names the actual examples; CAP stays with chapter 07, which owns it.
+`LEDGER.md` gains a row for the two escapes and one for the halting problem, and loses the CAP row.
+Chapter 04 runs 259 lines.
