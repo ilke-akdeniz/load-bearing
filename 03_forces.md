@@ -136,7 +136,7 @@ This Force is the sibling of blast radius, and they are worth keeping distinct: 
 
 | what goes wrong | who notices | what putting it right costs |
 |---|---|---|
-| a report total is off by a few cents | an analyst, if anyone | nothing — the figure is rebuilt tomorrow |
+| a report total is off by a few cents | an analyst, if anyone | nothing — the figure is rebuilt tomorrow [claude I don't agree with this, you have to at least tell what is the condition that makes the report be off acceptable, also I don't get how the rebuilt report will have the corrent numbers and if that detail is worth telling here] |
 | an invoice total is off by a cent | the customer | a support ticket and a corrected invoice |
 | a payment is taken for the wrong amount | the buyer, a month later | a refund, plus reconciliation across every affected account |
 | a drill controller ships with the fault | the operator, on site | recall the unit, reflash it, ship it back — weeks |
@@ -165,7 +165,7 @@ In minor units the same split is exact, and the leftover has to be placed delibe
 ```python
 def split_minor(total_cents, n):
     base, remainder = divmod(total_cents, n)
-    return [base + (1 if i < remainder else 0) for i in range(n)]
+    return [base + (1 if i < remainder else 0) for i in range(n)] # [claude rewrite this one liner as regular procedural code, much easier to understand for humans, also consider adding a comment, I don't get how the leftover is distributed here.]
 ```
 
 ```text
@@ -173,7 +173,7 @@ def split_minor(total_cents, n):
 [268, 268, 267]           which sums to 803
 ```
 
-**The code did not change. The blast radius did.** That is the whole demonstration: `split` is not sloppy work that the dashboard tolerates and the invoice exposes — it is *correct* for one and *defective* for the other, and nothing you can see in the function tells you which.
+**The code did not change. The blast radius did.** [claude, this is confusing, we changed the code to split_minor. Now you say the code did not change. Maybe say "the split() code did not change..." ] That is the whole demonstration: `split` is not sloppy work that the dashboard tolerates and the invoice exposes — it is *correct* for one and *defective* for the other, and nothing you can see in the function tells you which.
 
 **What changes with the Force:** how much prevention is worth buying. This is the Force that decides whether a defensive check is diligence or noise, and it is the one most often read from habit rather than from the situation.
 
@@ -394,20 +394,20 @@ The tempting move is to guess high. It feels like prudence: assume growth, shard
 
 The rule that works is not "defer everything," and it is not "assume the worst" either. Two questions decide it, in order.
 
-> **Does waiting spoil it?** If delay lets state pile up that the decision would have prevented, the decision expires — it will not be available later on the same terms.
-> **Is it cheap today?** If it expires and it is cheap, take it now. If it expires and it is expensive, you are making a bet, and should say so.
+> **Does waiting spoil it?** [claude what is that "it". We have to name that precisely here in the bold text] If delay lets state pile up that the decision would have prevented, the decision expires — it will not be available later on the same terms.
+> **Is it cheap today?** [claude same "it" issue] If it expires and it is cheap, take it now. If it expires and it is expensive, you are making a bet, and should say so.
 
-That yields three cases rather than two, and the third is the one both halves of the usual advice get wrong.
+These questions yields three cases:
 
-**One: it does not expire, so defer it.** Nothing accumulates while you wait, so the option is worth exactly as much next year. A performance index is the clean example — adding one later is routine work, and the data was never an obstacle, because the rows are not *wrong*, they are merely unindexed.
+**1) it does not expire, so defer it.** [claude same "it" issue] Nothing accumulates while you wait, so the option is worth exactly as much next year. A performance index is the clean example — adding one later is routine work, and the data was never an obstacle, because the rows are not *wrong*, they are merely unindexed.
 
-FlowCore, a Go library for running workflows backed by Postgres, records a decision of this shape. Go's convention for hiding a package from outside consumers is to place it under a directory named `internal/`, which the compiler enforces. The library was written as a single flat package instead, and the decision log says why the wall was not built up front:
+FlowCore library records a design decision of this shape. Go's convention for hiding a package from outside consumers is to place it under a directory named `internal/`, which the compiler enforces. The library was written as a single flat package instead, and the decision log says why the wall was not built up front:
 
 > `internal/` can be introduced later if a second package genuinely needs to share machinery.
 
 Nothing degrades in the meantime. On the day a second package appears, the directory is created and the imports are updated — the same work it would have been on day one.
 
-**Two: it expires and it is cheap, so take it now.** This is where "stay flexible" gives exactly the wrong answer. From the same log, on whether to declare a database constraint that forbids duplicate rows before anyone has created one:
+**2) it expires and it is cheap, so take it now.** This is where "stay flexible" gives exactly the wrong answer. From the same log, on whether to declare a database constraint that forbids duplicate rows before anyone has created one:
 
 > Dropping a unique index later is trivial; adding one after clients hold duplicate rows is not.
 
@@ -415,7 +415,7 @@ Read that as an asymmetry rather than a prediction. Ship the constraint and disc
 
 The general form is uncomfortable and worth stating plainly: **under uncertainty, prefer the decision you can walk back — which is usually the stricter one.** Strictness is the direction that can be relaxed. Permissiveness is the direction that accumulates facts you then have to live with.
 
-**Three: it expires and it is expensive, so you are making a bet.** Sharding is the standard case. Waiting genuinely does make it worse, because every month adds data to move — so the first question says act. But it is ruinous to do early, so the second question says wait, and the two do not resolve.
+**3) it expires and it is expensive, so you are making a bet.** Sharding is the standard case. Waiting genuinely does make it worse, because every month adds data to move — so the first question says act. But it is ruinous to do early, so the second question says wait, and the two do not resolve.
 
 This is the only place where *how likely is this need* earns a vote, and it earns one because the decision is a forecast whether or not you admit it. What usually beats taking the bet is buying an option instead of the machinery: keep the code from assuming a single node — no cross-shard joins written into queries, no autoincrement keys assumed globally unique — without splitting anything. That costs little now and keeps the expensive decision cheap to make later, which converts a case-three problem into a case-one problem.
 
@@ -477,7 +477,7 @@ That is the reversibility question again, and it is the only one that still work
 - **A cache with no invalidation rule.** The latency Force was read and the change-frequency Force was not, so the design answers one question and ignores the one that decides whether it is correct.
 - **An invariant enforced by a comment, in a codebase with forty contributors** and a third of them new this year.
 - **Interfaces, queues, and feature flags added for a shape of scale that has not arrived** — and no note anywhere saying what would have to become true for them to be needed.
-That word *shape* is doing real work. "High scale" names no intensity and no design: a steady million requests an hour, an idle service that takes a million in one minute twice a day, and a modest request rate over a hundred terabytes are three different situations that share a vocabulary and share almost no design decisions. Machinery built for one is dead weight under the others, which is why "we built it for scale" is compatible with falling over on the first real load.
+*Shape* of scale is worth a clarification here. "High scale" names no intensity and no design: a steady million requests an hour, an idle service that takes a million in one minute twice a day, and a modest request rate over a hundred terabytes are three different situations that share a vocabulary and share almost no design decisions. Machinery built for one shape is dead weight under the others, which is why "we built it for scale" is compatible with falling over on the first real load.
 
 **In a conversation:**
 
