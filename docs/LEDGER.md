@@ -125,12 +125,12 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | `Particle` class vs ECS parallel arrays | 05 | Hiding inverted by cache layout — the Principle turns over while the Law holds. 20 may cite for the domain, 08 owns the arithmetic |
 | `net/http` `Handler` | 05 | Call up, dependency down — the legitimate version of an apparent violation |
 | `completed_at is null` gate | 05 | The lower layer is more capable, so layering doctrine inverts. 06 owns the race it closes |
-| Registration handler, 50 rows for one email | 06 | Check-then-act with realistic work in the window; every step individually locked |
+| Sign-up handler, 50 accounts for one email | 06 | Check-then-act with realistic work in the window; every step individually locked |
 | 1000 increments producing 967 | 06 | The lost-update race, and a different wrong answer each run |
 | `os.path.exists` then `open` | 06 | TOCTOU in its original filesystem sense — same shape, no database involved |
 | 95% of consecutive `Now()` calls identical | 06 | The wall clock cannot order two adjacent events on one machine, before any skew |
 | `atomic.AddInt64` vs `count++` | 06 | The one-instruction fix: 1000 exactly, every run |
-| EAFP file open | 06 | Removing the check removes the window |
+| Symlink swap between stat and open | 06 | TOCTOU in its original security sense: the bad version silently reads the wrong file; a descriptor binds to the object, a path does not |
 | `on conflict do nothing` | 06 | The insert becomes its own check |
 | Version-column optimistic update | 06 | Ordering from one authority instead of comparing clocks |
 | Lamport counter exchange | 06 | What does order events, and what it still cannot tell you |

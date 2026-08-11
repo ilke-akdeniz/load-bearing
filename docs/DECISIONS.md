@@ -855,3 +855,45 @@ The author could not find the mutex in the sample, because `exists` and `insert`
 Chapter 06 runs 393 lines, up from 288.
 `LEDGER.md` gains four concept rows and four example rows.
 The atomic fix moved out of *Only the lock-holder can enforce*, which now generalizes the same move to the multi-process case rather than introducing it.
+
+---
+
+## 21. Two examples in chapter 06 were contrived; both replaced
+
+**Date.** 2026-08-10
+
+**Context.**
+The author's second pass on chapter 06 rejected two demonstrations. Both objections were about the same failure: the code was arranged to produce a result rather than to be a thing anyone would write.
+
+**The sign-up example.**
+
+> I fail to grasp how email registration works. Is there a rows map where each email has a count? And the count can only be 1 at most? Why? Is this just random code?
+
+Fair. The store was `map[string]int`, and registration incremented the counter — so a duplicate registration showed up as `rows["a@example.com"] == 50`, which is a number no real system would ever hold. The shape existed because it made the failure easy to count, which is exactly backwards.
+
+Replaced with a slice of `User` records, appended on sign-up. The output is now *50 accounts for ada@example.com*, which is a sentence someone could read in an incident report.
+
+**The filesystem example, which was worse.**
+
+> I don't see any difference between bad and good version, I only see Python's syntactic sugar that gives you the FileNotFoundError in one statement.
+
+Correct, and the criticism goes deeper than the phrasing. The broken version checked `os.path.exists` and then opened the file; the fix wrapped the open in `try`. Both ended at the same `FileNotFoundError`, so the demonstration showed two spellings of one outcome and claimed a window had closed.
+
+The replacement is the case the term TOCTOU was coined for. An upload handler checks that a path is not a symlink and is under a size limit, does a few milliseconds of work, then reads it. Another process swaps the file for a symlink to a secrets file in between:
+
+```text
+BAD : SECRET-DB-PASSWORD=swordfish
+GOOD: harmless user upload
+```
+
+No exception in either case. The broken version validates one file and reads another, silently, because `os.stat(path)` and `open(path)` resolve the *name* twice and the name was repointed between them. The fix opens once and interrogates the descriptor with `fstat`, because a file descriptor refers to the object while a path refers to a name.
+
+That is a genuinely different outcome rather than different syntax, and it makes a point the chapter needed anyway: **checking twice would not help, because it only adds a third moment for the file to change.** The window closed because the check and the use now refer to the same object by construction.
+
+**A knock-on correction.**
+The chapter had named three ordinary fixes up front, and the old filesystem example was the only instance of the third — *do not check at all*. The new one demonstrates the first instead. Rather than leave a move without an example, the SQL fix now carries it explicitly: the `select` disappears, and the insert with a unique constraint is what "stop asking, let the attempt answer" looks like in practice.
+
+**Consequence.**
+Chapter 06 runs 425 lines.
+`LEDGER.md` has two example rows rewritten.
+Both replacements were run before they went in, along with the attacker process for the symlink swap.

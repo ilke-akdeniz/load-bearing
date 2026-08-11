@@ -36,51 +36,68 @@ None of those is exotic, and none costs much. The reason this chapter is long is
 
 ### Check-then-act is not atomic
 
-A registration handler. It refuses duplicate emails, and the code says so plainly:
+A sign-up handler holding user records. It refuses an email that already has an account, and the code says so plainly:
 
 ```go
+type User struct {
+	Email        string
+	PasswordHash string
+}
+
+type Store struct {
+	mu    sync.Mutex
+	users []User // every account this service has created
+}
+
 // Every step here is individually safe. The sequence is not.
-func (s *Store) Register(email, password string) {
-	if s.exists(email) { // CHECK
-		return
+func (s *Store) SignUp(email, password string) error {
+	if s.findByEmail(email) { // CHECK
+		return errors.New("email already registered")
 	}
 
-	hashPassword(password) // the work every real handler does here
-	s.insert(email)        // ACT
+	u := User{Email: email, PasswordHash: hash(password)} // ~2ms of work
+	s.append(u)                                           // ACT
+
+	return nil
 }
 ```
 
-`exists` and `insert` each take a mutex internally — a lock that lets one goroutine at a time touch the map, the way `synchronized` does in Java or `lock` in C#:
+`findByEmail` and `append` each take a mutex internally — a lock that lets one goroutine at a time touch the slice, the way `synchronized` does in Java or `lock` in C#:
 
 ```go
-func (s *Store) exists(k string) bool {
-	s.mu.Lock()         // no other goroutine may touch rows until Unlock
+func (s *Store) findByEmail(e string) bool {
+	s.mu.Lock()         // no other goroutine may touch users until Unlock
 	defer s.mu.Unlock() // defer runs this when the function returns
-	_, ok := s.rows[k] // [claude I fail to grash how email reagistration works. Is there a rows map where each email has a count? And the count can only be 1 at most? Why? If this is just random code? Maybe try making this example more meaningful and recognizable, like an email saved to a csv file or db for example. Or if the point is to show how this issue is in play witohut even a db or file, just find a business that fits better with that in memory persistence case.] 
 
-	return ok
+	for _, u := range s.users {
+		if u.Email == e {
+			return true
+		}
+	}
+
+	return false
 }
 
-func (s *Store) insert(k string) {
+func (s *Store) append(u User) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
-	s.rows[k]++
+	s.users = append(s.users, u)
 }
 ```
 
-Neither can corrupt the map. Both are correct.
+Neither can corrupt the slice. Both are correct.
 
 Fifty concurrent registrations for the same address:
 
 ```text
-rows for one email, with a uniqueness check before every insert: 50
+BAD  accounts for ada@example.com: 50
 ```
 
-Not two. Fifty. Every request checked, every request found the address free, and every request was right at the moment it looked. Then each spent two milliseconds hashing a password, and by the time the first insert landed, the other forty-nine had already made their decision.
+Not two. Fifty. Every request checked, every request found the address free, and every request was right at the moment it looked. Then each spent two milliseconds hashing a password, and by the time the first record was appended, the other forty-nine had already made their decision.
 
 Three things are worth taking from that number.
 
-**Locking each step protects each step and nothing else.** The map was never corrupted. What broke was a rule that spans two operations, and no amount of locking inside them can span them.
+**Locking each step protects each step and nothing else.** The slice was never corrupted. What broke was a rule that spans two operations, and no amount of locking inside them can span them.
 
 **The window is as wide as the work you do in it.** Remove the password hashing and the same code produces one row on this machine, most of the time — which is worse, not better, because the bug is still there and now it only appears under load, in production, when the machine is busy.
 
@@ -90,63 +107,74 @@ And here is the whole fix, which is the first of the three moves:
 
 ```go
 // One operation. The decision and the write are inseparable.
-func (s *Store) RegisterAtomic(email, password string) bool {
-	hashPassword(password) // slow work first, before taking the lock
+func (s *Store) SignUpAtomic(email, password string) error {
+	h := hash(password) // slow work first, before taking the lock
+
 	s.mu.Lock()
 	defer s.mu.Unlock()
 
-	if _, taken := s.rows[email]; taken { // CHECK
-		return false
+	for _, u := range s.users { // CHECK
+		if u.Email == email {
+			return errors.New("email already registered")
+		}
 	}
-	s.rows[email]++ // ACT, with nothing able to intervene
+	s.users = append(s.users, User{Email: email, PasswordHash: h}) // ACT
 
-	return true
+	return nil
 }
 ```
 
 ```text
-BAD  register: 50
-GOOD register: 1
+BAD  accounts for ada@example.com: 50
+GOOD accounts for ada@example.com: 1
 ```
 
-Nothing was added and nothing became slower. The check moved *inside* the same lock as the write, so no other goroutine can act between them, and the hashing moved out so the lock is held for the length of a map lookup rather than two milliseconds.
+Nothing was added and nothing became slower. The check moved *inside* the same lock as the write, so no other goroutine can act between them, and the hashing moved out so the lock is held for the length of a scan rather than two milliseconds.
 
 That is the shape of the ordinary fix: **not more locking, but locking the right span.**
 
 ### The same bug, in whatever language you own
 
-The shape does not belong to Go, or to databases. Here it is against the filesystem, which is where the name **TOCTOU** — time of check to time of use — comes from:
+The shape does not belong to Go, or to databases. Here it is against the filesystem, which is where the name **TOCTOU** — time of check to time of use — comes from, and where the consequence is worse than a duplicate row.
+
+An upload handler validates a file before reading it: it must not be a symbolic link, and it must not be enormous.
 
 ```python
-if os.path.exists(path):    # CHECK
-    time.sleep(0.005)       # any work at all
-    open(path).read()       # ACT
+if not os.path.islink(path) and os.stat(path).st_size < 1_000_000:  # CHECK
+    time.sleep(0.005)                       # parse a header, log, whatever
+    print(open(path).read())                # ACT
 ```
 
-Something deletes the file during those five milliseconds:
-
-```text
-BAD : check said it existed; open failed with FileNotFoundError
-```
-
-The fix is the third move — do not check at all:
-[claude this example is really of the mark. 
-I don't see any difference between bad and good version, I only see python's syntaxtic sugar that
-gives you the FileNotFoundError in one statement. I'm tyring to imagine a code where this would make sense, maybe if you add true meaningfull work instead of "time.sleep" and show how that work spoiled and 
-how the second version doesn't let that happen this could work.]
+While the handler is doing that work, another process deletes the file and creates a symbolic link with the same name, pointing somewhere else:
 
 ```python
-try:
-    data = open(path).read()   # ACT. The attempt is the check.
-except FileNotFoundError:
-    ...                        # handle the case you were checking for
+os.remove(path)
+os.symlink("/app/secrets.txt", path)   # same name, different file
 ```
 
 ```text
-GOOD: handled cleanly — no window, because there was no check
+BAD : SECRET-DB-PASSWORD=swordfish
 ```
 
-There is no window because there is no gap: the operating system opens the file or does not, in one step, and tells you which. Python calls this style *easier to ask forgiveness than permission*, and this is the situation it exists for.
+No exception, no error, no sign that anything went wrong. The handler validated one file and read another, because **`os.stat(path)` and `open(path)` each resolve the name separately**, and the name was repointed in between. This is the original meaning of TOCTOU and it is a security bug, not a tidiness one.
+
+The fix is the first move again — bind yourself to the object once, and ask your questions of the thing you are holding:
+
+```python
+fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)  # refuses a symlink outright
+st = os.fstat(fd)                                # asks about THIS handle
+if st.st_size < 1_000_000:
+    time.sleep(0.005)
+    print(os.read(fd, 4096).decode())
+```
+
+```text
+GOOD: harmless user upload
+```
+
+Same attacker, same timing, right file. A file descriptor refers to the *object*, not to the name, so once it is open the name can be repointed all it likes and the handle still reads what it opened. `fstat` interrogates the descriptor rather than re-resolving the path, and `O_NOFOLLOW` covers the remaining case where the swap happens before the open rather than after.
+
+Note what the fix is *not*: it is not checking more carefully, and it is not checking twice. Checking twice would just add a third moment for the file to change. **The window closed because the check and the use now refer to the same object by construction.**
 
 The same bug in SQL, where it is most common of all:
 
@@ -156,18 +184,21 @@ select count(*) from account where email = $1;   -- CHECK
 insert into account (email) values ($1);         -- ACT
 ```
 
-And the same fix, this time the second move — hand the rule to whoever holds the data:
+And the fix uses the other two moves together — hand the rule to whoever holds the data, then stop checking and let the attempt answer for itself:
 
 ```sql
 -- Declared once, when the table is created.
 create unique index ux_account_email on account (lower(email));
 
--- After which the insert is its own check.
+-- After which the insert is its own check. No select, no decision,
+-- no window: either the row goes in or the constraint refuses it.
 insert into account (email) values ($1)
 on conflict do nothing;
 ```
 
-And in C#, Java, or anything else with two statements and a gap between them. **The bug survives every translation, because it is not about the language** — and so does the fix, because in every case it is the same move: make the decision and the action one thing.
+The `select` is gone entirely. That is what "do not check at all" looks like in practice — you were never able to trust the answer, so you stop asking and let the write succeed or fail.
+
+And the same in C#, Java, or anything else with two statements and a gap between them. **The bug survives every translation, because it is not about the language** — and so does the fix, because all three moves are one idea: make the decision and the action inseparable.
 
 ### Shared mutable state plus concurrency equals races
 
