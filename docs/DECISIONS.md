@@ -897,3 +897,40 @@ The chapter had named three ordinary fixes up front, and the old filesystem exam
 Chapter 06 runs 425 lines.
 `LEDGER.md` has two example rows rewritten.
 Both replacements were run before they went in, along with the attacker process for the symlink swap.
+
+---
+
+## 22. Chapter 07 leads with the root fact, not the theorem list
+
+**Date.** 2026-08-10
+
+**Context.**
+The TOC gives chapter 07 six topics: CAP, PACELC, FLP, Two Generals, timeouts as guesses, p^N, plus the outbox and saga patterns. Written as a survey it is a reference card, and the reader leaves knowing three acronyms rather than one thing.
+
+**Decision.**
+Lead with the fact the theorems are consequences of:
+
+> **You cannot tell a slow machine from a dead one.**
+
+Two Generals, FLP, and CAP then arrive as three formalizations of one predicament — a lost message and a slow message look identical, a crashed process and a paused one look identical, a partitioned peer and a dead peer look identical. **The impossibility is always that you must act on information you cannot obtain.**
+
+`p^N` is deliberately kept outside that unification and named as the other kind of fact, because it is arithmetic about independent events rather than a limit on knowledge. Folding it in would have been tidier and false.
+
+**The theorems are presented by their assumptions rather than their proofs**, following chapter 04: the assumptions are the only negotiable part. FLP is stated with the consequence that matters — Raft and Paxos do not evade it, they add timeouts, giving up guaranteed termination to keep guaranteed safety. CAP is stated once and then set aside for PACELC, because the else-branch applies every day and CAP's branch only during an outage.
+
+**Chapter 06's review shaped the structure.**
+Two lessons carried forward without being asked for.
+
+The boundary section moved to the **front**, as *When any of this applies to you*, because chapter 06 established that a qualification arriving after the alarm does not undo it. This chapter needed it more: distributed-systems machinery is imported into single-database systems constantly, and a reader who meets four impossibility results before being told none of them binds will import them again.
+
+Every failure is **paired with its repair, adjacent** — four pairs, all run. The retry that charges three times against the idempotency key that charges once; the order that commits while the event is lost against the outbox that makes it one write.
+
+**The check offered for the boundary** is deliberately not "is this a microservice." It is *can one part be alive while another part cannot reach it?* A deployment diagram does not answer that; a shared process and connection does.
+
+**One thing the chapter says that is easy to get backwards.**
+Distributed transactions are not impossible. Two-phase commit works and is used. What it costs is availability — a participant failing while holding a prepared transaction blocks the others — and for most systems that is a worse outcome than the inconsistency being avoided. Saying "you cannot have cross-system atomicity" would have been simpler and wrong, and it would have made the boundary section dishonest.
+
+**Consequence.**
+`LEDGER.md` gains ten concept rows and four example rows.
+Debts from chapters 02, 03, 04, and 06 are discharged: exactly-once impossibility, why redelivery cannot be eliminated, and what idempotency is for.
+Chapter 07 runs 262 lines and moves to **in progress**.

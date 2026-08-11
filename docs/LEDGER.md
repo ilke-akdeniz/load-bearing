@@ -85,7 +85,16 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Clocks do not order events | 06 | Wall clocks lack the resolution locally and agreement globally; counters order, clocks do not | cite 06 |
 | Lamport vs vector clocks | 06 | Lamport preserves causality but cannot detect concurrency; vector clocks can, at a cost that grows with nodes | cite 06 |
 | Coordination does not compose | 06 | Two correct locked operations are not one correct operation | cite 06 |
+| Slow is indistinguishable from dead | 07 | The root of the impossibility results: you must decide on information you cannot obtain | "slow vs dead (Ch. 07)" |
 | Exactly-once impossible | 07 | Two Generals ⇒ at-least-once plus idempotency | cite 07 |
+| Every timeout is a guess | 07 | The observation is identical whether the peer is slow or dead, and the slow one may have committed | cite 07 |
+| Idempotency key rules | 07 | The client generates it before the first attempt, and it commits in the same transaction as the effect | cite 07 |
+| Two systems cannot share a transaction | 07 | No ordering of two commits is safe; the outbox moves the gap into one system | cite 07 |
+| CAP, FLP, Two Generals by assumption | 07 | The proofs are not the point; the assumptions are the only negotiable part | cite 07 |
+| PACELC over CAP | 07 | The else-branch — latency against consistency — applies every day; CAP's branch only during a partition | cite 07 |
+| Reliability multiplies | 07 | p^N: ten dependencies at three nines gives two nines, and better components do not fix it | "p^N (Ch. 07)" |
+| Three ways to stop multiplying | 07 | Remove the dependency, make it optional, or make it asynchronous | cite 07 |
+| Saga is not rollback | 07 | Compensations are business operations and are visible to customers | cite 07 |
 | Memory hierarchy ~6 orders | 08 | Register to network spans about a million-fold | cite 08 |
 | Conway / Brooks / Lehman | 09 | Structure mirrors org; adding people to a late project; systems must change | cite 09 |
 | Compression + constraint tests | 10 | A pattern earns its name by saving words and ruling something out | cite 10 |
@@ -135,6 +144,10 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | Version-column optimistic update | 06 | Ordering from one authority instead of comparing clocks |
 | Lamport counter exchange | 06 | What does order events, and what it still cannot tell you |
 | Unique index vs application check | 06 | Only the enforcing layer closes the window |
+| Timeout: slow peer vs dead peer | 07 | Identical observations, and the slow peer committed |
+| Retry without vs with an idempotency key | 07 | Three deliveries, three charges; three deliveries, one charge |
+| Order row then queue publish, vs outbox | 07 | The crash between two commits, and the write that removes the gap |
+| p^N availability table | 07 | Ten dependencies at three nines is two nines |
 | Outbox table | 07 | Cross-system atomicity is impossible, so you sequence + retry |
 | In-process channel vs lost ACK | 04 | Two Generals' two assumptions, and the two different escapes: in-process falsifies one, idempotency drops the requirement. 07 owns the theorem |
 | Halting problem vs its folk version | 04 | The theorem forbids a universal decider; termination checking for particular programs is routine |
