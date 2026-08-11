@@ -206,7 +206,7 @@ Notice what actually changed, because it is stronger than a relocation.
 
 That is the whole difference. Before, a crash destroyed information: nothing anywhere knew an event was owed, so no amount of retrying could recover it, and the only repair was a human noticing the discrepancy later. Now a crash costs nothing but time — the row is still there, the next pass of the drain finds it, and the event goes out late rather than never.
 
-**A permanent loss became a delay.** And what remains outside the transaction is the delivery itself, which can fail, retry, and duplicate — a problem an idempotent consumer already solves, and one the client had to solve anyway because of everything earlier in this chapter.
+**A permanent loss became a delay.** And what remains outside the transaction is the delivery itself, which can fail, retry, and duplicate — a problem an idempotent consumer already solves. [claude just applied occam's razor, it reads better this way to me. If you don't agree tell so.]
 
 The impossibility is untouched by all of this. You still cannot tell a slow machine from a dead one, and the publisher still cannot know whether the queue received what it sent. What the outbox does is arrange for that ignorance to be survivable: the thing you cannot confirm is now the thing you can safely repeat.
 
