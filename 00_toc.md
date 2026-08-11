@@ -262,7 +262,7 @@ The final answer to "is this load-bearing" as a repeatable procedure rather than
 | 04 | `04_grading-a-law.md` | **draft** |
 | 05 | `05_structure.md` | **draft** |
 | 06 | `06_time.md` | **draft** |
-| 07 | `07_distribution.md` | **in progress** |
+| 07 | `07_distribution.md` | **draft** |
 | 08 | `08_scale.md` | not started |
 | 09 | `09_change.md` | not started |
 | 10 | `10_what-a-pattern-is-for.md` | not started |
