@@ -2,8 +2,8 @@
 
 *This chapter is **Law** of the strictest kind (Ch. 04): theorems, with proofs and stated assumptions. The material is therefore not advice, cannot be argued with, and leaves exactly two moves.*
 
-- **Render the law inert** by moving your system outside one of its assumptions.
-- **Accept the law** and make your system resilient to its conclusion.
+- **Arrange for an assumption not to hold**, and the theorem does not apply to you.
+- **Stop needing the conclusion**, and the theorem applies but costs you nothing.
 
 Most of this chapter is the second one.
 
@@ -85,7 +85,7 @@ All three share one root, which is the claim at the top. A lost message and a sl
 Given that the client cannot know, retrying is the only responsible thing it can do. So the effect must be safe to repeat on the server.
 
 ```go
-// BAD charge implementation on the server: three retries by the client results in 2 additional charges.
+// BAD, on the server: three deliveries of one request charge three times.
 func chargeBad(l *Ledger, cents int) {
 	l.charges = append(l.charges, cents)
 }
@@ -98,7 +98,7 @@ BAD  charges: [4200 4200 4200]
 The fix is that the caller names the attempt, and the server remembers which names it has seen:
 
 ```go
-// Idempotent charge on the server: the key identifies the attempt, not the request.
+// GOOD, on the server: the key identifies the attempt, not the delivery.
 func chargeIdempotent(l *Ledger, key string, cents int) {
 	if l.applied[key] { // already done — say so, change nothing
 		return
