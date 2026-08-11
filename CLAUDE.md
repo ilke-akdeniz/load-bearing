@@ -139,6 +139,10 @@ This applies to every bolded assertion in a chapter, but the claim sentence is w
 Plain words wherever they work, but name the real terms — Transaction Script, information hiding, TOCTOU, Hyrum's Law — because the reader needs the vocabulary to find the literature.
 Explain a term once, at its owning chapter, then use it.
 
+**Expand an abbreviation on first use**, unless an experienced engineer would produce the long form without hesitating.
+`API`, `SQL`, `HTTP` need nothing. `FLP`, `2PC`, `PACELC`, `TOCTOU`, `ECS`, `CQRS` get the expansion once, at first appearance in the chapter, then the short form thereafter.
+Where the name is initials of people — FLP is Fischer, Lynch, and Paterson — say so, because it tells the reader what to search for.
+
 **A code demonstration for every major claim.**
 Not an illustration bolted on afterwards; the code should be the argument.
 Go, C#, and Python carry most examples; Rust, TypeScript, C, and SQL appear where a point needs them.
@@ -163,6 +167,22 @@ A chapter shipped with a Python circular-import example that claimed one import 
 - **When the example fails to show what you expected, that is the finding.** Say what actually happens, or replace the example. Do not adjust the prose to make a broken demonstration sound correct.
 - **When a toolchain is unavailable**, say so in the chapter's review notes rather than asserting output. Go, Python, and Node are usually available; C#, Java, and Rust usually are not. Prefer a verifiable language when the point is language-independent, and describe the mechanism without invented numbers when it is not.
 - **Structural code needs no run** — a type signature, an interface, a shape being contrasted with another shape. The rule is about claims of behaviour.
+
+**Verification code is not example code.**
+The program written to check a claim and the sample printed in the chapter are two different artifacts with two different jobs.
+A harness may take a `dead bool` parameter, hard-code a delay, or drive both cases from one function, because its only reader is the person checking the claim.
+A chapter sample is read by someone deciding whether their own code has this defect, so it must look like code they might have written.
+
+This has gone wrong more than once. The tell is a sample whose shape only makes sense as a test:
+
+- **Parameters that exist to select the scenario** — `call(150*time.Millisecond, false)` versus `call(0, true)`. A real caller never passes "and this time be dead."
+- **The number in the prose missing from the code.** If the text says "a 100 ms timeout," the sample must contain `100 * time.Millisecond`, not hide it inside a helper.
+- **One function standing in for two different systems**, when the point of the example is that they are two systems.
+- **Names from the harness** — `call`, `run`, `doThing` — where the chapter is discussing a payment or an order.
+
+So: verify with whatever is quickest, then **write the example again** in the shape a reader would recognize, and run *that*.
+Real client libraries, real signatures, real names.
+When the realistic version cannot be run — it needs a database, a network peer, a second machine — say so rather than reaching back for the harness.
 
 **Mechanism over authority.**
 Never "Fowler says." Always "here is what happens, and here is why."

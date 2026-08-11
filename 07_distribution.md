@@ -1,8 +1,9 @@
 # Distribution: What's Impossible
 
-*This chapter is **Law** of the strictest kind: a theorem, with proofs and stated assumptions. (Ch. 04) Which means the material is not advice, cannot be argued with, and leaves exactly two moves*: 
-- Render the law inert by moving your system outside of one of the law's assumptions. 
-- Accept the law but make your system resilient to the law's conclusion. 
+*This chapter is **Law** of the strictest kind (Ch. 04): theorems, with proofs and stated assumptions. The material is therefore not advice, cannot be argued with, and leaves exactly two moves.*
+
+- **Render the law inert** by moving your system outside one of its assumptions.
+- **Accept the law** and make your system resilient to its conclusion.
 
 Most of this chapter is the second one.
 
@@ -10,17 +11,17 @@ Most of this chapter is the second one.
 
 **You cannot tell a slow machine from a dead one.**
 
-That single fact is not a limitation of your monitoring, your language, or your budget. It is a property of asking questions over a network, and most of the impossibility in distributed systems are consequences of it. The rest of the chapter is what people build because of it.
+That single fact is not a limitation of your monitoring, your language, or your budget. It is a property of asking questions over a network, and most of the impossibility results in distributed systems are consequences of it. The rest of the chapter is what people build because of it.
 
-There is one other fact, which is arithmetic rather than epistemics: **reliability multiplies.** Enough dependencies, each individually excellent, produce a system that is not. [claude this reads like a paradox. If reliability multiplies you should have a more reliable system. I'm guessing the reverse of that is implied here. Did you mean something like "small defets multiply and result in a system that has a major defect?"]
+There is one other fact, which is arithmetic rather than epistemics: **availabilities multiply, and every one of them is less than one.** Multiplying numbers below 1 makes them smaller, so a chain of dependencies is always less available than its weakest link — and enough individually excellent dependencies produce a system that is not.
 
 ## When any of this applies to you
 
-The boundary belongs at the front, because this material is imported more often than it is needed. [claude too cryptic, I don't get what this sentence mean. It should maybe unpacked into 2-3 clear sentences.]
+Most chapters in this book put the limits of their claim at the end. This one puts them first, and the reason is that this particular material does more damage by being applied than by being ignored. Outboxes, idempotency keys, sagas, and eventual consistency get built into systems that have one process and one database, where every one of them is pure cost. So it is worth knowing whether any of this is yours before you read what it costs.
 
 You are in this chapter's territory when **two things that can fail independently must agree.** Two processes. A process and a queue. A service and somebody else's API. A database and a cache. If there is exactly one process and one database, almost nothing here binds, and the machinery below is cost with no purchase — chapter 06 is your chapter, and its coordination primitives are enough.
 
-The test is not "is this a microservice." It is: *can one part of this be alive while another part cannot reach it?* If no, you are not distributed, whatever the deployment diagram says. [claude "the test" for what? Maybe: "The test for applying a distributed architecture can't be "is this a microservice." "]
+The test for whether you are distributed is not *do we deploy several services* — plenty of multi-service systems still have one database holding every invariant that matters. It is: **can one part of this be alive while another part cannot reach it?** If nothing can, you are not distributed for the purposes of this chapter, whatever the deployment diagram says.
 
 ---
 
@@ -28,26 +29,37 @@ The test is not "is this a microservice." It is: *can one part of this be alive 
 
 ### Every timeout is a guess
 
-A client calls a service with a 100 ms timeout. Two runs, two different worlds:
+A payments client calls a charge service, with a 100 ms deadline on the request:
 
-[claude I'm guessing you just put the "test code" you used to see if a claim is true directly into the book. 
-You should never do that. Before putting the code into the book, you have to evaluate is the test code should be converted to the "book example, close to real world shape" code. 
-You can see the failure mode here: You say "a client calls a service with a 100 ms timeout", calling code has different params on each call, 100ms is nowhere.
-What's worse is that the client is setting the timeout to 0 delibaretely and nobody would see this as "slow peer".
-If this observation is true, add instruction to CLAUDE.md to prevent this, it has happened more than one time. ]
 ```go
-// Case A: the peer is alive and slow — it will answer in 150 ms.
-_, errA := call(150*time.Millisecond, false)
+func charge(ctx context.Context, url, orderID string) error {
+	ctx, cancel := context.WithTimeout(ctx, 100*time.Millisecond)
+	defer cancel() // release the timer whichever way this returns
 
-// Case B: the peer is dead and will never answer at all.
-_, errB := call(0, true)
+	req, _ := http.NewRequestWithContext(ctx, http.MethodPost, url+"?order="+orderID, nil)
+
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+
+	return nil
+}
+```
+
+Now call it twice, against two services in genuinely different states. One is alive and having a bad day — it will answer, in 150 ms. The other has stopped answering entirely:
+
+```go
+errSlow := charge(ctx, slowService, "order-1") // alive, overloaded
+errDead := charge(ctx, deadService, "order-2") // process is gone
 ```
 
 ```text
-slow peer  -> timeout
-dead peer  -> timeout
+slow service -> context deadline exceeded
+dead service -> context deadline exceeded
 identical observations: true
-meanwhile the slow peer finished its work and committed
+charges applied by the slow service after the client gave up: 1
 ```
 
 The two observations are the same string. The client has no instrument that distinguishes them, and no longer timeout would help — a longer timeout just moves the boundary, and the slow case moves with it.
@@ -58,13 +70,13 @@ This is the same shape as chapter 04's lost acknowledgement, generalized. There 
 
 ### The theorems, and what each one assumes
 
-Three results, and the point is not the proofs but the assumptions, because that is the only negotiable part. [claude previous sentence is too cryptic, I don't get what this sentence mean. Maybe just remove it.]
+Three results. Each is given with its assumptions rather than its proof, because the assumptions are the part you can do something about.
 
 **Two Generals.** Over a channel that can lose messages, no protocol can leave both parties certain the other received what was sent. *Assumes:* messages can be lost. *Consequence:* exactly-once delivery is impossible.
 
-**FLP.** [claude for abbreviations that an average engineer can't tell the long form without hesitation (FLP), tell the long form with the short form in the first usage. Add relevant instuction to CLAUDE.md] In an asynchronous system where even one process may crash, no deterministic protocol can guarantee that all correct processes reach agreement. *Assumes:* no bound on message delay, no clocks, and a deterministic algorithm. *Consequence:* consensus algorithms in real use (Raft, Paxos) do not evade FLP — they add timeouts, which means they give up guaranteed *termination* and keep guaranteed *safety*. They may take longer; they will not decide two different things.
+**FLP impossibility**, named for Fischer, Lynch, and Paterson, who proved it in 1985. In an asynchronous system where even one process may crash, no deterministic protocol can guarantee that all correct processes reach agreement. *Assumes:* no bound on message delay, no clocks, and a deterministic algorithm. *Consequence:* consensus algorithms in real use (Raft, Paxos) do not evade FLP — they add timeouts, which means they give up guaranteed *termination* and keep guaranteed *safety*. They may take longer; they will not decide two different things.
 
-**CAP.** In an asynchronous network, a linearizable register cannot also be available during a partition. *Assumes:* linearizability, and availability meaning every non-failed node answers. *Consequence:* during a partition you choose. Outside a partition you have both, which is why **PACELC** is the more useful statement: *if Partitioned, choose Availability or Consistency; Else, choose Latency or Consistency.* The second half applies every day, and the first half only during an outage.
+**CAP**, for Consistency, Availability, and Partition tolerance. In an asynchronous network, a linearizable register cannot also be available during a partition. *Assumes:* linearizability, and availability meaning every non-failed node answers. *Consequence:* during a partition you choose. Outside a partition you have both, which is why **PACELC** is the more useful statement: *if Partitioned, choose Availability or Consistency; Else, choose Latency or Consistency.* The second half applies every day, and the first half only during an outage.
 
 All three share one root, which is the claim at the top. A lost message and a slow message look identical. A crashed process and a paused one look identical. A partitioned peer and a dead peer look identical. **The impossibility is always that you must act on information you cannot obtain.**
 
@@ -114,53 +126,91 @@ Two details decide whether this works in practice.
 This is where the theorems stop being abstract. An order is placed: a row goes in the database, and an event goes on a queue so other services hear about it. Two systems, and no transaction spans them.
 
 ```go
-// BAD: two systems, two steps, nothing spanning them.
-func placeOrderBad(db *DB, q *Queue, id string) {
-	db.orders = append(db.orders, id) // commits
-	// process dies here
-	q.msgs = append(q.msgs, id)
-}
-```
-
-```text
-BAD  orders=[order-1] queue=[]  <- order exists, nobody was told
-```
-
-An order exists that no other service knows about. Swap the two statements and the failure inverts: an event announcing an order that was never stored. There is no ordering of two commits to two systems that is safe, because the gap is where the process dies.
-
-The **transactional outbox** removes the gap by removing the second system from the critical path:
-
-```go
-// GOOD: the event is written in the same transaction as the order. [claude where is the transaction? Nothing in your sample code shows it except a comment...]
-func placeOrderOutbox(db *DB, id string) {
-	db.orders = append(db.orders, id)
-	db.outbox = append(db.outbox, id) // same transaction
-}
-
-// A separate process drains the outbox afterwards, retrying until
-// the queue accepts. It may deliver the same message twice. [claude is there a transaction in "drain"? Why, why not?]
-func drain(db *DB, q *Queue) {
-	for _, m := range db.outbox {
-		q.msgs = append(q.msgs, m)
+func PlaceOrder(ctx context.Context, db *sql.DB, q Queue, o Order) error {
+	if _, err := db.ExecContext(ctx,
+		`insert into "order" (id, customer_id, total) values ($1, $2, $3)`,
+		o.ID, o.CustomerID, o.Total); err != nil {
+		return err // committed on success — the row is durable from here
 	}
 
-	db.outbox = nil
+	// A crash on this line leaves an order nobody will ever hear about.
+	return q.Publish(ctx, OrderPlaced{OrderID: o.ID})
 }
 ```
 
-```text
-GOOD orders=[order-1] queue=[order-1]  <- crash-safe, because it was one write
+Swap the two statements and the failure inverts: an event announcing an order that was never stored, and consumers acting on a purchase that does not exist. **There is no ordering of two commits to two systems that is safe**, because whichever goes first, the gap after it is where the process dies.
+
+The **transactional outbox** removes the gap by removing the second system from the critical path. The event is not published — it is *written down*, in the same transaction as the order:
+
+```go
+func PlaceOrder(ctx context.Context, db *sql.DB, o Order) error {
+	tx, err := db.BeginTx(ctx, nil)
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback() // no-op once Commit has succeeded
+
+	if _, err := tx.ExecContext(ctx,
+		`insert into "order" (id, customer_id, total) values ($1, $2, $3)`,
+		o.ID, o.CustomerID, o.Total); err != nil {
+		return err
+	}
+
+	if _, err := tx.ExecContext(ctx,
+		`insert into outbox (id, topic, payload) values ($1, $2, $3)`,
+		uuid.New(), "order.placed", o.JSON()); err != nil {
+		return err
+	}
+
+	return tx.Commit() // both rows, or neither
+}
 ```
 
-Crash anywhere and the invariant holds: the order and the intent to publish are both committed or neither is. The publisher is then free to fail, retry, and duplicate — which is fine, because the consumer is idempotent, which it had to be anyway.
+Both inserts are inside one transaction against one database, so the commit is atomic by the same mechanism that makes any transaction atomic. Crash before `Commit` and neither row exists. Crash after it and both do. There is no interval in which one is true and the other is not, which is exactly what the two-system version could not offer.
 
-Notice the shape. **The impossibility was not defeated:** you still cannot tell a slow machine from a dead one. It was simply worked-around with the help of the atomicity within one database and the remaining unreliability was pushed onto a path where at-least-once is acceptable.
+A separate process then drains the table:
+
+```go
+func Drain(ctx context.Context, db *sql.DB, q Queue) error {
+	rows, err := db.QueryContext(ctx,
+		`select id, topic, payload from outbox order by id limit 100`)
+	// ... scan into msgs ...
+
+	for _, m := range msgs {
+		if err := q.Publish(ctx, m); err != nil {
+			return err // leave the row; the next pass retries it
+		}
+
+		// Deleted only after the queue has accepted it. A crash between
+		// the two republishes on the next pass — which is why this is
+		// at-least-once, and why the consumer must be idempotent.
+		if _, err := db.ExecContext(ctx, `delete from outbox where id = $1`, m.ID); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+```
+
+**There is deliberately no transaction wrapping the publish and the delete**, and it is worth being clear why, because it is the same impossibility one level down. A transaction can only cover the database; the queue is the other system again. So you choose which way to fail:
+
+- **Publish, then delete.** A crash in between means the message goes twice. At-least-once.
+- **Delete, then publish.** A crash in between means the message never goes at all. At-most-once, and the event is gone.
+
+The first is recoverable by an idempotent consumer. The second is unrecoverable — nothing anywhere records that the event was owed. So the outbox publishes first and deletes second, every time, and accepts duplicates as the price.
+
+Notice the shape. **The impossibility was not defeated:** you still cannot tell a slow machine from a dead one, and the publisher still cannot know whether the queue received what it sent. What changed is that the *hard* half — an order existing without its event — moved inside one database, where atomicity is available, and the half left outside was reduced to duplicate delivery, which a consumer can absorb.
 
 **Sagas** are the same manoeuvre for a longer sequence. When five services must each do a thing and there is no transaction across them, you do them in order and give each step a compensating action that undoes it. There is no rollback, because there was never a transaction; there is a sequence of forward steps and a sequence of undo steps, and the undo steps are ordinary business operations — refund, cancel, release — with all the visibility that implies. A customer may see a charge and then a refund rather than never seeing a charge.
 
-### Reliability multiplies [claude same as my previous comment: "this reads like a paradox"]
+### Availability is a product, not an average
 
-The arithmetic one. A service that depends on N others, each independently available with probability p, is available with probability p^N:
+The arithmetic one, and it is worth being slow about because the intuition is wrong.
+
+Ask most people what happens to availability when you add dependencies, and they average: three services at 99.9% feel like a system at about 99.9%. Availability does not average, it multiplies — each dependency must be up *at the same time* as all the others, so you multiply their probabilities, and multiplying numbers below 1 always gives you something smaller than any of them.
+
+A service depending on N others, each independently available with probability p, is available with probability p^N:
 
 ```text
 each dependency up 99.9%:
@@ -214,9 +264,9 @@ The check is the one at the top: can one part be alive while another part cannot
 
 ### Coordination you can afford
 
-Distributed transactions are not impossible. Two-phase commit exists, works, and is used — in payment networks, in some databases, wherever the cost is justified. What it costs is availability: a participant that fails while holding a prepared transaction blocks the others until it returns or an operator intervenes.
+Distributed transactions are not impossible. Two-phase commit — 2PC — exists, works, and is used — in payment networks, in some databases, wherever the cost is justified. What it costs is availability: a participant that fails while holding a prepared transaction blocks the others until it returns or an operator intervenes.
 
-So the honest statement is not "you cannot have cross-system atomicity." It is that you can, and the price is that a failure anywhere stops everything, which for most systems is a worse outcome than the inconsistency they were avoiding. When it is not — few enough participants, high enough stakes, an operator on call — 2PC [claude expand the abbreviation] is the right answer and the sagas are the cargo cult.
+So the honest statement is not "you cannot have cross-system atomicity." It is that you can, and the price is that a failure anywhere stops everything, which for most systems is a worse outcome than the inconsistency they were avoiding. When it is not — few enough participants, high enough stakes, an operator on call — 2PC is the right answer and the sagas are the cargo cult.
 
 ### Failures that are not independent
 

@@ -934,3 +934,47 @@ Distributed transactions are not impossible. Two-phase commit works and is used.
 `LEDGER.md` gains ten concept rows and four example rows.
 Debts from chapters 02, 03, 04, and 06 are discharged: exactly-once impossibility, why redelivery cannot be eliminated, and what idempotency is for.
 Chapter 07 runs 262 lines and moves to **in progress**.
+
+---
+
+## 23. Verification code is not example code
+
+**Date.** 2026-08-11
+
+**Context.**
+The author's review of chapter 07 identified a recurring failure and asked for it to be written into `CLAUDE.md`:
+
+> I'm guessing you just put the "test code" you used to see if a claim is true directly into the book. You should never do that. […] You say "a client calls a service with a 100 ms timeout," calling code has different params on each call, 100ms is nowhere. What's worse is that the client is setting the timeout to 0 deliberately and nobody would see this as "slow peer."
+
+The observation is correct and the diagnosis is exact. The sample was:
+
+```go
+_, errA := call(150*time.Millisecond, false)
+_, errB := call(0, true)
+```
+
+A real client never passes *and this time be dead*. The `100 ms` the prose promised was inside a helper the reader never sees, and one function was standing in for two different services in two different states — in a chapter whose entire subject is that they are two systems.
+
+**Decision.**
+Two things.
+
+The example was rewritten as code a reader might have written: a `charge` function taking a `context.Context`, setting its own deadline with `context.WithTimeout`, and issuing a real HTTP request. It is then called twice against two `httptest` servers, one sleeping 150 ms and one never responding. The output is unchanged in substance and now demonstrates it honestly, including that the slow service applies the charge after the client has given up.
+
+And a rule was added to `CLAUDE.md`, under the existing verification section, naming four tells: parameters that exist to select the scenario, a number promised in prose but absent from the code, one function standing in for two systems, and harness names like `call` or `run` where the chapter is discussing a payment. The procedure is now explicit: verify with whatever is quickest, **then write the example again** in the shape a reader would recognize, and run that one.
+
+**Why this is worth a decision entry.**
+It is a distinct failure from the one decision 14 recorded. That rule says *run the code*; this one says *the thing you ran and the thing you print are two artifacts with different readers*. Following decision 14 exactly — as chapter 07 did — still produces this defect, because a verified harness is verified.
+
+**A second rule, also requested.**
+Expand an abbreviation on first use unless an experienced engineer would produce the long form without hesitating. `API` and `SQL` need nothing; `FLP`, `2PC`, `PACELC`, `TOCTOU`, `CQRS` get one expansion at first appearance. Where the name is initials of people, say so — FLP is Fischer, Lynch, and Paterson — because that is what the reader needs in order to search for it.
+
+**Two substantive corrections in the same pass.**
+
+The author flagged *reliability multiplies* as reading like a paradox, since multiplying reliability sounds like more of it. They were right that the sentence inverts its own meaning. It now reads **availabilities multiply, and every one of them is less than one**, with the section retitled *Availability is a product, not an average* and a paragraph on why the intuition fails — people average, and availability does not average because every dependency must be up at the same time.
+
+They also asked where the transaction was in the outbox example, since only a comment claimed one, and whether `drain` had a transaction. Both were fair: the sample used Go slices with a comment asserting atomicity. It is now real `BeginTx`/`Commit` code with the two inserts inside it. And `drain` deliberately has **no** transaction spanning the publish and the delete, which the chapter now explains as the same impossibility one level down — publish-then-delete gives at-least-once, delete-then-publish gives at-most-once, and only the first is recoverable.
+
+**Consequence.**
+`CLAUDE.md` gains the verification-versus-example rule and the abbreviation rule.
+`LEDGER.md` gains a row for publish-then-delete and one reworded for availability.
+Chapter 07 runs 320 lines, up from 262.

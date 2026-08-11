@@ -90,9 +90,10 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Every timeout is a guess | 07 | The observation is identical whether the peer is slow or dead, and the slow one may have committed | cite 07 |
 | Idempotency key rules | 07 | The client generates it before the first attempt, and it commits in the same transaction as the effect | cite 07 |
 | Two systems cannot share a transaction | 07 | No ordering of two commits is safe; the outbox moves the gap into one system | cite 07 |
+| Publish-then-delete, never the reverse | 07 | The drain loop chooses at-least-once over at-most-once, because duplicates are recoverable and a lost event is not | cite 07 |
 | CAP, FLP, Two Generals by assumption | 07 | The proofs are not the point; the assumptions are the only negotiable part | cite 07 |
 | PACELC over CAP | 07 | The else-branch — latency against consistency — applies every day; CAP's branch only during a partition | cite 07 |
-| Reliability multiplies | 07 | p^N: ten dependencies at three nines gives two nines, and better components do not fix it | "p^N (Ch. 07)" |
+| Availability is a product | 07 | Availabilities multiply rather than average; ten dependencies at three nines gives two nines, and better components do not fix it | "p^N (Ch. 07)" |
 | Three ways to stop multiplying | 07 | Remove the dependency, make it optional, or make it asynchronous | cite 07 |
 | Saga is not rollback | 07 | Compensations are business operations and are visible to customers | cite 07 |
 | Memory hierarchy ~6 orders | 08 | Register to network spans about a million-fold | cite 08 |
