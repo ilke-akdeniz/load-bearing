@@ -2,8 +2,8 @@
 
 *This chapter is **Law** of the strictest kind (Ch. 04): theorems, with proofs and stated assumptions. The material is therefore not advice, cannot be argued with, and leaves exactly two moves.*
 
-- **Arrange for an assumption not to hold**, and the theorem does not apply to you.
-- **Stop needing the theorem's conclusion**, and the theorem applies but costs you nothing. [claude why I did this edit? Without "theorem's" it's not easy to pinpoint what the concluesion is. It's not tied to the theorem in previous sentences the way assumptions are.]
+- **Arrange for one of its assumptions not to hold**, and the theorem does not apply to you.
+- **Stop needing the theorem's conclusion**, and the theorem applies but costs you nothing.
 
 Most of this chapter is the second one.
 
@@ -85,7 +85,7 @@ All three share one root, which is the claim at the top. A lost message and a sl
 Given that the client cannot know, retrying is the only responsible thing it can do. So the effect must be safe to repeat on the server.
 
 ```go
-// BAD implementation on the server: three deliveries of one request charge three times. [claude I added implementation back, If you don't agree tell me why. "BAD, on the server" looks obviously worse to me.]
+// BAD implementation on the server: three deliveries of one request charge three times.
 func chargeBad(l *Ledger, cents int) {
 	l.charges = append(l.charges, cents)
 }
@@ -200,7 +200,15 @@ func Drain(ctx context.Context, db *sql.DB, q Queue) error {
 
 The first is recoverable by an idempotent consumer. The second is unrecoverable — nothing anywhere records that the event was owed. So the outbox publishes first and deletes second, every time, and accepts duplicates as the price.
 
-Notice the shape. **The impossibility was not defeated:** you still cannot tell a slow machine from a dead one, and the publisher still cannot know whether the queue received what it sent. What changed is that the *hard* half — an order existing without its event — moved inside one database, [claude you can do better here. This is not just a "move". Didn't the move also eliminate the core of the problem: "an order exisrting without its event? Altough the event might still not be published, it's data is now guaranteed to exist, no?"] where atomicity is available, and the half left outside was reduced to duplicate delivery, which a consumer can absorb.
+Notice what actually changed, because it is stronger than a relocation.
+
+**The core problem is gone, not moved.** An order existing without its event is now impossible — not unlikely, impossible — because the two rows commit together or not at all. The event's data is durable the instant the order is, which means the *obligation to publish* is itself recorded state rather than something held in a variable in a process that may die.
+
+That is the whole difference. Before, a crash destroyed information: nothing anywhere knew an event was owed, so no amount of retrying could recover it, and the only repair was a human noticing the discrepancy later. Now a crash costs nothing but time — the row is still there, the next pass of the drain finds it, and the event goes out late rather than never.
+
+**A permanent loss became a delay.** And what remains outside the transaction is the delivery itself, which can fail, retry, and duplicate — a problem an idempotent consumer already solves, and one the client had to solve anyway because of everything earlier in this chapter.
+
+The impossibility is untouched by all of this. You still cannot tell a slow machine from a dead one, and the publisher still cannot know whether the queue received what it sent. What the outbox does is arrange for that ignorance to be survivable: the thing you cannot confirm is now the thing you can safely repeat.
 
 **Sagas** are the same manoeuvre for a longer sequence. When five services must each do a thing and there is no transaction across them, you do them in order and give each step a compensating action that undoes it. There is no rollback, because there was never a transaction; there is a sequence of forward steps and a sequence of undo steps, and the undo steps are ordinary business operations — refund, cancel, release — with all the visibility that implies. A customer may see a charge and then a refund rather than never seeing a charge.
 

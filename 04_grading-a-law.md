@@ -91,8 +91,8 @@ Be exact about what that fix did, because it is not the same manoeuvre as the fi
 
 So a theorem admits two escapes and no third:
 
-- **Arrange for an assumption not to hold**, and the theorem does not apply to you.
-- **Stop needing the conclusion**, and the theorem applies but costs you nothing.
+- **Arrange for one of its assumptions not to hold**, and the theorem does not apply to you.
+- **Stop needing the theorem's conclusion**, and the theorem applies but costs you nothing.
 
 What you cannot do is get the forbidden thing. And the assumptions are always written down, because a proof cannot exist without them — which is why reading them is the first move, not the last.
 

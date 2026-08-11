@@ -40,7 +40,7 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Forces move on their own clock | 03 | Team size, client count, and row count change without a commit, invalidating Principles nobody revisits | cite 03 |
 | Three kinds of Law | 04 | Theorem, definition, empirical law — named, never lettered, and not ranked | "a theorem / a definitional claim (Ch. 04)" |
 | One kind, its moves | 04 | Theorem: falsify an assumption, or stop needing the conclusion. Definition: check whether the words apply. Empirical: measure it where you are | cite 04 |
-| Two escapes from a theorem | 04 | Make an assumption false so it does not apply, or stop needing the conclusion so it costs nothing — never argue with the conclusion | cite 04 |
+| Two escapes from a theorem | 04 | Arrange for one of its assumptions not to hold, or stop needing the theorem's conclusion — never argue with the conclusion | cite 04 |
 | Regularity vs magnitude | 04 | A measurement is not a law; an empirical law is a regularity across systems whose magnitude varies between them | cite 04 |
 | Kind is not importance | 04 | The kind says how firmly a claim is true, not how much it bears on your program | cite 04 |
 | Describes vs prescribes | 04 | A Law describes what happens; a Principle prescribes. Only a Principle can become bad advice | "describes vs prescribes (Ch. 04)" |
@@ -89,7 +89,7 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Exactly-once impossible | 07 | Two Generals ⇒ at-least-once plus idempotency | cite 07 |
 | Every timeout is a guess | 07 | The observation is identical whether the peer is slow or dead, and the slow one may have committed | cite 07 |
 | Idempotency key rules | 07 | The client generates it before the first attempt, and it commits in the same transaction as the effect | cite 07 |
-| Two systems cannot share a transaction | 07 | No ordering of two commits is safe; the outbox moves the gap into one system | cite 07 |
+| Two systems cannot share a transaction | 07 | No ordering of two commits is safe; the outbox makes the obligation to publish durable state, turning a permanent loss into a delay | cite 07 |
 | Publish-then-delete, never the reverse | 07 | The drain loop chooses at-least-once over at-most-once, because duplicates are recoverable and a lost event is not | cite 07 |
 | CAP, FLP, Two Generals by assumption | 07 | The proofs are not the point; the assumptions are the only negotiable part | cite 07 |
 | PACELC over CAP | 07 | The else-branch — latency against consistency — applies every day; CAP's branch only during a partition | cite 07 |
