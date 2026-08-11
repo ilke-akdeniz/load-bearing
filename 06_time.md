@@ -1,4 +1,8 @@
 # Time: Concurrency and Clocks
+[claude this is an overall observation about this chapter. I see two issues: 
+1) This chapter reads like anytime you read a state and act on it there is a potential for a very serious problem because what you read is the "past" state. 
+2) There is only 1 "good version" code example. 
+To fix those issues, I suggest you add more code exmaples for many of the different cases stated in the chapter, with bad version and a "good enough for basic forces most systems will encounter" version. This way readers will better grasp when this becomes truly a problem and what are the basic ways to deal with it.]
 
 *This chapter is **Law**, and mostly of the definitional kind (Ch. 04) — its claims are true by what the words pick out, which is why they cannot be argued with and why they are so easy to walk past. It has two halves that look like separate subjects and are not.*
 
@@ -30,7 +34,7 @@ func (s *Store) Register(email, password string) {
 }
 ```
 
-`exists` and `insert` each take a mutex — a lock that lets one goroutine at a time touch the map (`synchronized` in Java, `lock` in C#). Neither can corrupt the map. Both are correct.
+`exists` and `insert` each take a mutex [claude maybe say "each use a mutex internally", I spents sometime trying to find the mutex in the sample code] — a lock that lets one goroutine at a time touch the map (`synchronized` in Java, `lock` in C#). Neither can corrupt the map. Both are correct.
 
 Fifty concurrent registrations for the same address:
 
@@ -83,7 +87,13 @@ count := 0
 
 for i := 0; i < 1000; i++ {
 	wg.Add(1)
-	go func() { defer wg.Done(); count++ }()
+
+	// [claude you forgot to make this accessible for no-gophers, this is my attempt]
+	// Each func exection happen on a different gouroutine, sharing the same count 
+	go func() { 
+		defer wg.Done(); 
+		count++ 
+	}()
 }
 ```
 
@@ -110,8 +120,11 @@ Here is the fix for the registration handler, and the reason it works:
 func (s *Store) RegisterAtomic(email, password string) bool {
 	hashPassword(password) // slow work first, outside the lock
 	s.mu.Lock()
+
+	// defer will release the lock safely at func exit
 	defer s.mu.Unlock()
 
+	// [claude this is not the same example, firs one inserts the email]
 	if _, taken := s.rows[email]; taken {
 		return false
 	}
