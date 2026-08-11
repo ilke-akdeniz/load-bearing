@@ -1,22 +1,26 @@
 # Distribution: What's Impossible
 
-*This chapter is **Law** of the strictest kind (Ch. 04) — theorems, with proofs and stated assumptions. Which means the material is not advice, cannot be argued with, and leaves exactly two moves: falsify an assumption, or stop needing the conclusion. Most of this chapter is the second one.*
+*This chapter is **Law** of the strictest kind: a theorem, with proofs and stated assumptions. (Ch. 04) Which means the material is not advice, cannot be argued with, and leaves exactly two moves*: 
+- Render the law inert by moving your system outside of one of the law's assumptions. 
+- Accept the law but make your system resilient to the law's conclusion. 
+
+Most of this chapter is the second one.
 
 ## The claim
 
 **You cannot tell a slow machine from a dead one.**
 
-That single fact is not a limitation of your monitoring, your language, or your budget. It is a property of asking questions over a network, and most of the impossibility results in distributed systems are consequences of it. The rest of the chapter is what people build because of it.
+That single fact is not a limitation of your monitoring, your language, or your budget. It is a property of asking questions over a network, and most of the impossibility in distributed systems are consequences of it. The rest of the chapter is what people build because of it.
 
-There is one other fact, which is arithmetic rather than epistemics: **reliability multiplies.** Enough dependencies, each individually excellent, produce a system that is not.
+There is one other fact, which is arithmetic rather than epistemics: **reliability multiplies.** Enough dependencies, each individually excellent, produce a system that is not. [claude this reads like a paradox. If reliability multiplies you should have a more reliable system. I'm guessing the reverse of that is implied here. Did you mean something like "small defets multiply and result in a system that has a major defect?"]
 
 ## When any of this applies to you
 
-The boundary belongs at the front, because this material is imported more often than it is needed.
+The boundary belongs at the front, because this material is imported more often than it is needed. [claude too cryptic, I don't get what this sentence mean. It should maybe unpacked into 2-3 clear sentences.]
 
 You are in this chapter's territory when **two things that can fail independently must agree.** Two processes. A process and a queue. A service and somebody else's API. A database and a cache. If there is exactly one process and one database, almost nothing here binds, and the machinery below is cost with no purchase — chapter 06 is your chapter, and its coordination primitives are enough.
 
-The test is not "is this a microservice." It is: *can one part of this be alive while another part cannot reach it?* If no, you are not distributed, whatever the deployment diagram says.
+The test is not "is this a microservice." It is: *can one part of this be alive while another part cannot reach it?* If no, you are not distributed, whatever the deployment diagram says. [claude "the test" for what? Maybe: "The test for applying a distributed architecture can't be "is this a microservice." "]
 
 ---
 
@@ -26,6 +30,11 @@ The test is not "is this a microservice." It is: *can one part of this be alive 
 
 A client calls a service with a 100 ms timeout. Two runs, two different worlds:
 
+[claude I'm guessing you just put the "test code" you used to see if a claim is true directly into the book. 
+You should never do that. Before putting the code into the book, you have to evaluate is the test code should be converted to the "book example, close to real world shape" code. 
+You can see the failure mode here: You say "a client calls a service with a 100 ms timeout", calling code has different params on each call, 100ms is nowhere.
+What's worse is that the client is setting the timeout to 0 delibaretely and nobody would see this as "slow peer".
+If this observation is true, add instruction to CLAUDE.md to prevent this, it has happened more than one time. ]
 ```go
 // Case A: the peer is alive and slow — it will answer in 150 ms.
 _, errA := call(150*time.Millisecond, false)
@@ -49,11 +58,11 @@ This is the same shape as chapter 04's lost acknowledgement, generalized. There 
 
 ### The theorems, and what each one assumes
 
-Three results, and the point is not the proofs but the assumptions, because that is the only negotiable part.
+Three results, and the point is not the proofs but the assumptions, because that is the only negotiable part. [claude previous sentence is too cryptic, I don't get what this sentence mean. Maybe just remove it.]
 
 **Two Generals.** Over a channel that can lose messages, no protocol can leave both parties certain the other received what was sent. *Assumes:* messages can be lost. *Consequence:* exactly-once delivery is impossible.
 
-**FLP.** In an asynchronous system where even one process may crash, no deterministic protocol can guarantee that all correct processes reach agreement. *Assumes:* no bound on message delay, no clocks, and a deterministic algorithm. *Consequence:* consensus algorithms in real use (Raft, Paxos) do not evade FLP — they add timeouts, which means they give up guaranteed *termination* and keep guaranteed *safety*. They may take longer; they will not decide two different things.
+**FLP.** [claude for abbreviations that an average engineer can't tell the long form without hesitation (FLP), tell the long form with the short form in the first usage. Add relevant instuction to CLAUDE.md] In an asynchronous system where even one process may crash, no deterministic protocol can guarantee that all correct processes reach agreement. *Assumes:* no bound on message delay, no clocks, and a deterministic algorithm. *Consequence:* consensus algorithms in real use (Raft, Paxos) do not evade FLP — they add timeouts, which means they give up guaranteed *termination* and keep guaranteed *safety*. They may take longer; they will not decide two different things.
 
 **CAP.** In an asynchronous network, a linearizable register cannot also be available during a partition. *Assumes:* linearizability, and availability meaning every non-failed node answers. *Consequence:* during a partition you choose. Outside a partition you have both, which is why **PACELC** is the more useful statement: *if Partitioned, choose Availability or Consistency; Else, choose Latency or Consistency.* The second half applies every day, and the first half only during an outage.
 
@@ -61,10 +70,10 @@ All three share one root, which is the claim at the top. A lost message and a sl
 
 ### Exactly-once is impossible, so stop wanting it
 
-Given that the client cannot know, retrying is the only responsible thing it can do. So the effect must be safe to repeat.
+Given that the client cannot know, retrying is the only responsible thing it can do. So the effect must be safe to repeat on the server.
 
 ```go
-// BAD: three retries after three lost replies.
+// BAD charge implementation on the server: three retries by the client results in 2 additional charges.
 func chargeBad(l *Ledger, cents int) {
 	l.charges = append(l.charges, cents)
 }
@@ -77,7 +86,7 @@ BAD  charges: [4200 4200 4200]
 The fix is that the caller names the attempt, and the server remembers which names it has seen:
 
 ```go
-// GOOD: the key identifies the attempt, not the request.
+// Idempotent charge on the server: the key identifies the attempt, not the request.
 func chargeIdempotent(l *Ledger, key string, cents int) {
 	if l.applied[key] { // already done — say so, change nothing
 		return
@@ -122,14 +131,14 @@ An order exists that no other service knows about. Swap the two statements and t
 The **transactional outbox** removes the gap by removing the second system from the critical path:
 
 ```go
-// GOOD: the event is written in the same transaction as the order.
+// GOOD: the event is written in the same transaction as the order. [claude where is the transaction? Nothing in your sample code shows it except a comment...]
 func placeOrderOutbox(db *DB, id string) {
 	db.orders = append(db.orders, id)
 	db.outbox = append(db.outbox, id) // same transaction
 }
 
 // A separate process drains the outbox afterwards, retrying until
-// the queue accepts. It may deliver the same message twice.
+// the queue accepts. It may deliver the same message twice. [claude is there a transaction in "drain"? Why, why not?]
 func drain(db *DB, q *Queue) {
 	for _, m := range db.outbox {
 		q.msgs = append(q.msgs, m)
@@ -145,11 +154,11 @@ GOOD orders=[order-1] queue=[order-1]  <- crash-safe, because it was one write
 
 Crash anywhere and the invariant holds: the order and the intent to publish are both committed or neither is. The publisher is then free to fail, retry, and duplicate — which is fine, because the consumer is idempotent, which it had to be anyway.
 
-Notice the shape. **The impossibility was not defeated. It was moved to a place where the answer is already known** — atomicity within one database — and the remaining unreliability was pushed onto a path where at-least-once is acceptable.
+Notice the shape. **The impossibility was not defeated:** you still cannot tell a slow machine from a dead one. It was simply worked-around with the help of the atomicity within one database and the remaining unreliability was pushed onto a path where at-least-once is acceptable.
 
 **Sagas** are the same manoeuvre for a longer sequence. When five services must each do a thing and there is no transaction across them, you do them in order and give each step a compensating action that undoes it. There is no rollback, because there was never a transaction; there is a sequence of forward steps and a sequence of undo steps, and the undo steps are ordinary business operations — refund, cancel, release — with all the visibility that implies. A customer may see a charge and then a refund rather than never seeing a charge.
 
-### Reliability multiplies
+### Reliability multiplies [claude same as my previous comment: "this reads like a paradox"]
 
 The arithmetic one. A service that depends on N others, each independently available with probability p, is available with probability p^N:
 
@@ -167,7 +176,7 @@ Ten dependencies at three nines gives you two nines. Fifty gives you 95%, which 
 The fix is not better components — chase 99.99% on all fifty and you still land at 99.5%. The fix is to **stop multiplying**, and there are only three ways:
 
 - **Remove the dependency.** Cache the answer, copy the data, or do without the feature.
-- **Make it optional.** If recommendations are down, render the page without them. A dependency you can degrade past is not in the product.
+- **Make it optional.** If recommendations are down, render the page without them. A dependency you can degrade past shouldn't block your core product.
 - **Make it asynchronous.** A queue you write to is a dependency; a queue you write to *through an outbox* is not, because your transaction commits without it.
 
 That third one is why the outbox appears in a chapter about availability as well as one about correctness.
@@ -207,7 +216,7 @@ The check is the one at the top: can one part be alive while another part cannot
 
 Distributed transactions are not impossible. Two-phase commit exists, works, and is used — in payment networks, in some databases, wherever the cost is justified. What it costs is availability: a participant that fails while holding a prepared transaction blocks the others until it returns or an operator intervenes.
 
-So the honest statement is not "you cannot have cross-system atomicity." It is that you can, and the price is that a failure anywhere stops everything, which for most systems is a worse outcome than the inconsistency they were avoiding. When it is not — few enough participants, high enough stakes, an operator on call — 2PC is the right answer and the sagas are the cargo cult.
+So the honest statement is not "you cannot have cross-system atomicity." It is that you can, and the price is that a failure anywhere stops everything, which for most systems is a worse outcome than the inconsistency they were avoiding. When it is not — few enough participants, high enough stakes, an operator on call — 2PC [claude expand the abbreviation] is the right answer and the sagas are the cargo cult.
 
 ### Failures that are not independent
 
