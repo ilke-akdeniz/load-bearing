@@ -822,3 +822,36 @@ One demonstration was rebuilt during verification. The first check-then-act vers
 `LEDGER.md` gains eleven concept rows and five example rows; chapter 06 was previously carrying two.
 Six forward references from chapters 02, 03, and 05 are now discharged.
 Chapter 06 runs 288 lines and moves to **in progress**.
+
+---
+
+## 20. Chapter 06 pairs every break with its repair
+
+**Date.** 2026-08-10
+
+**Context.**
+The author's review made one structural criticism and three local ones. The structural one:
+
+> This chapter reads like anytime you read a state and act on it there is a potential for a very serious problem. There is only 1 "good version" code example.
+
+Both halves are correct, and they are the same defect. The chapter demonstrated five failures and one fix, so a reader met four breakages before any repair, and the accumulated impression was that reading state at all is dangerous.
+
+**Decision.**
+Two changes.
+
+**Every break now carries its repair, adjacent.** Five bad/good pairs where there was one: the registration handler with its atomic rewrite, `count++` against `atomic.AddInt64`, the filesystem check against attempting the open, the SQL select-then-insert against a unique index with `on conflict`, and clock comparison against an optimistic version column. All were run.
+
+**A section was added before the demonstration**, stating when this material binds at all. Reading state and acting on it is a problem only when three conditions hold together: something else can write that state, the decision depends on what was read, and the rule spans data that was not held still. Miss one and there is nothing to fix — which covers configuration read at startup, a row already locked, a value only one writer touches, anything immutable.
+
+That section also names the three ordinary fixes before the reader meets any failure, so the failures arrive as instances of a solved problem rather than as an accumulating list.
+
+**Why the ordering mattered more than the content.**
+Nothing in the original chapter was wrong. The boundary section already said the Law is inert with one writer, and the fix for the registration handler was present. But the boundary was at the end and the fix was two sections after its failure, so the reader had already formed the impression the chapter then tried to correct. **A qualification that arrives after the alarm does not undo it.**
+
+**Three local corrections.**
+The author could not find the mutex in the sample, because `exists` and `insert` were described as taking one without being shown; both are now shown. They rewrote a Go comment for readers who do not know the language, which was a rule added at their request two chapters ago and not applied here. And they caught that the broken and fixed versions of the registration handler used different operations — one called `insert`, the other incremented the map directly — so the comparison was not quite like for like.
+
+**Consequence.**
+Chapter 06 runs 393 lines, up from 288.
+`LEDGER.md` gains four concept rows and four example rows.
+The atomic fix moved out of *Only the lock-holder can enforce*, which now generalizes the same move to the multi-process case rather than introducing it.

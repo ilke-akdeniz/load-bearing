@@ -71,6 +71,10 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Dependency inversion | 05 | The call may go up while the dependency goes down, because both parties point at an interface at the bottom | cite 05 |
 | Lower layer more capable | 05 | Layering doctrine assumes the layer below is dumber; when it is more capable, "keep logic out" inverts | cite 05 |
 | There is no shared now | 06 | A check reports the past; across machines there is no agreed ordering at all | "no shared now (Ch. 06)" |
+| Three conditions for a race | 06 | Another writer, a decision that depends on the read, and a rule spanning data you did not hold still — all three, or nothing to fix | cite 06 |
+| The three ordinary fixes | 06 | One operation; let the data-holder enforce; or do not check and handle the failure | cite 06 |
+| Lock the span, not the steps | 06 | The fix is not more locking but locking the right span | cite 06 |
+| One authority beats many clocks | 06 | Optimistic concurrency on a version counter needs no clock; the database is the single source of order | cite 06 |
 | Check-then-act / TOCTOU | 06 | Between the check and the act, the world moved | "TOCTOU (Ch. 06)" |
 | Locking each step is not locking the sequence | 06 | Individually safe operations do not compose into a safe rule | cite 06 |
 | The window is as wide as the work in it | 06 | The same defect is rare on an idle machine and constant under load | cite 06 |
@@ -125,6 +129,10 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | 1000 increments producing 967 | 06 | The lost-update race, and a different wrong answer each run |
 | `os.path.exists` then `open` | 06 | TOCTOU in its original filesystem sense — same shape, no database involved |
 | 95% of consecutive `Now()` calls identical | 06 | The wall clock cannot order two adjacent events on one machine, before any skew |
+| `atomic.AddInt64` vs `count++` | 06 | The one-instruction fix: 1000 exactly, every run |
+| EAFP file open | 06 | Removing the check removes the window |
+| `on conflict do nothing` | 06 | The insert becomes its own check |
+| Version-column optimistic update | 06 | Ordering from one authority instead of comparing clocks |
 | Lamport counter exchange | 06 | What does order events, and what it still cannot tell you |
 | Unique index vs application check | 06 | Only the enforcing layer closes the window |
 | Outbox table | 07 | Cross-system atomicity is impossible, so you sequence + retry |

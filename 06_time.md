@@ -1,8 +1,4 @@
 # Time: Concurrency and Clocks
-[claude this is an overall observation about this chapter. I see two issues: 
-1) This chapter reads like anytime you read a state and act on it there is a potential for a very serious problem because what you read is the "past" state. 
-2) There is only 1 "good version" code example. 
-To fix those issues, I suggest you add more code exmaples for many of the different cases stated in the chapter, with bad version and a "good enough for basic forces most systems will encounter" version. This way readers will better grasp when this becomes truly a problem and what are the basic ways to deal with it.]
 
 *This chapter is **Law**, and mostly of the definitional kind (Ch. 04) — its claims are true by what the words pick out, which is why they cannot be argued with and why they are so easy to walk past. It has two halves that look like separate subjects and are not.*
 
@@ -13,6 +9,26 @@ To fix those issues, I suggest you add more code exmaples for many of the differ
 Both halves are the same fact wearing different clothes: **there is no shared now.** Inside one machine that means your observation is already stale when you act on it. Across machines it means there is no agreed ordering of events at all, and the timestamps you would use to build one are not up to the job.
 
 This is the chapter that turns *be careful with shared state* into something you can check.
+
+## When this is actually a problem
+
+Say the claim out loud and it sounds like every line of code is in danger. It is not, and it is worth fixing that before the alarming part, because the alarm is what makes people either ignore this material or over-apply it.
+
+Reading state and then acting on it is only a problem when **all three** of these hold:
+
+1. **Something else can write that state** between your read and your act.
+2. **Your decision depends on what you read** — you are not just reporting it.
+3. **The rule spans data you did not hold still** — other rows, other keys, other files.
+
+Miss any one and there is nothing here to fix. Reading configuration at startup in a single-threaded process, reading a row you already hold a lock on, reading a value only you ever write, reading anything immutable — all safe, and all extremely common. Most read-then-act sequences in most programs are in this category.
+
+When all three do hold, the fix is almost always one of three ordinary moves, and all three appear below:
+
+- **Do the whole thing in one operation**, so nothing can happen in between.
+- **Let the component holding the data enforce the rule**, usually the database.
+- **Do not check at all** — attempt the thing, and handle the failure.
+
+None of those is exotic, and none costs much. The reason this chapter is long is that recognizing the shape is harder than fixing it.
 
 ---
 
@@ -34,7 +50,25 @@ func (s *Store) Register(email, password string) {
 }
 ```
 
-`exists` and `insert` each take a mutex [claude maybe say "each use a mutex internally", I spents sometime trying to find the mutex in the sample code] — a lock that lets one goroutine at a time touch the map (`synchronized` in Java, `lock` in C#). Neither can corrupt the map. Both are correct.
+`exists` and `insert` each take a mutex internally — a lock that lets one goroutine at a time touch the map, the way `synchronized` does in Java or `lock` in C#:
+
+```go
+func (s *Store) exists(k string) bool {
+	s.mu.Lock()         // no other goroutine may touch rows until Unlock
+	defer s.mu.Unlock() // defer runs this when the function returns
+	_, ok := s.rows[k]
+
+	return ok
+}
+
+func (s *Store) insert(k string) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	s.rows[k]++
+}
+```
+
+Neither can corrupt the map. Both are correct.
 
 Fifty concurrent registrations for the same address:
 
@@ -52,6 +86,33 @@ Three things are worth taking from that number.
 
 **Nothing in the code looks wrong.** There is no missing lock to spot in review. The defect is in the shape — a decision made from a reading, and an action taken later — and that shape is invisible if you are looking for unguarded variables.
 
+And here is the whole fix, which is the first of the three moves:
+
+```go
+// One operation. The decision and the write are inseparable.
+func (s *Store) RegisterAtomic(email, password string) bool {
+	hashPassword(password) // slow work first, before taking the lock
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	if _, taken := s.rows[email]; taken { // CHECK
+		return false
+	}
+	s.rows[email]++ // ACT, with nothing able to intervene
+
+	return true
+}
+```
+
+```text
+BAD  register: 50
+GOOD register: 1
+```
+
+Nothing was added and nothing became slower. The check moved *inside* the same lock as the write, so no other goroutine can act between them, and the hashing moved out so the lock is held for the length of a map lookup rather than two milliseconds.
+
+That is the shape of the ordinary fix: **not more locking, but locking the right span.**
+
 ### The same bug, in whatever language you own
 
 The shape does not belong to Go, or to databases. Here it is against the filesystem, which is where the name **TOCTOU** — time of check to time of use — comes from:
@@ -65,10 +126,25 @@ if os.path.exists(path):    # CHECK
 Something deletes the file during those five milliseconds:
 
 ```text
-check said it existed; open failed: FileNotFoundError
+BAD : check said it existed; open failed with FileNotFoundError
 ```
 
-The same in SQL, where it is the most common form:
+The fix is the third move — do not check at all:
+
+```python
+try:
+    data = open(path).read()   # ACT. The attempt is the check.
+except FileNotFoundError:
+    ...                        # handle the case you were checking for
+```
+
+```text
+GOOD: handled cleanly — no window, because there was no check
+```
+
+There is no window because there is no gap: the operating system opens the file or does not, in one step, and tells you which. Python calls this style *easier to ask forgiveness than permission*, and this is the situation it exists for.
+
+The same bug in SQL, where it is most common of all:
 
 ```sql
 select count(*) from account where email = $1;   -- CHECK
@@ -76,7 +152,18 @@ select count(*) from account where email = $1;   -- CHECK
 insert into account (email) values ($1);         -- ACT
 ```
 
-And in C#, Java, Python, or anything else with two statements and a gap between them. **The bug survives every translation, because it is not about the language.** It is about a decision outliving the reading it was based on.
+And the same fix, this time the second move — hand the rule to whoever holds the data:
+
+```sql
+-- Declared once, when the table is created.
+create unique index ux_account_email on account (lower(email));
+
+-- After which the insert is its own check.
+insert into account (email) values ($1)
+on conflict do nothing;
+```
+
+And in C#, Java, or anything else with two statements and a gap between them. **The bug survives every translation, because it is not about the language** — and so does the fix, because in every case it is the same move: make the decision and the action one thing.
 
 ### Shared mutable state plus concurrency equals races
 
@@ -88,22 +175,36 @@ count := 0
 for i := 0; i < 1000; i++ {
 	wg.Add(1)
 
-	// [claude you forgot to make this accessible for no-gophers, this is my attempt]
-	// Each func exection happen on a different gouroutine, sharing the same count 
-	go func() { 
-		defer wg.Done(); 
-		count++ 
+	// `go` starts this function on its own goroutine — a thread, for
+	// present purposes. All thousand of them share the one `count`.
+	go func() {
+		defer wg.Done()
+		count++
 	}()
 }
 ```
 
 ```text
-1000 increments produced: 967
+BAD  counter: 968
 ```
 
-Run it again and it produces 929. The count is wrong, differently, every time. `count++` is not one operation — it reads, adds, and writes back, and two goroutines that read the same value both write the same result, so one increment vanishes.
+Run it again and it produces 961. The count is wrong, differently, every time. `count++` is not one operation — it reads, adds, and writes back, and two goroutines that read the same value both write the same result, so one increment vanishes.
 
-The equation in the heading has three terms, and you only have to remove one:
+The fix is one instruction, and it is the first move again — make the read, the add, and the write a single thing nothing can split:
+
+```go
+var safe int64
+
+atomic.AddInt64(&safe, 1) // one indivisible operation
+```
+
+```text
+GOOD counter: 1000
+```
+
+Exactly a thousand, every run. This is `Interlocked.Increment` in C# and `AtomicLong.incrementAndGet` in Java, and it is not a lock — the processor guarantees the read, the add, and the write happen as a unit.
+
+That is the cheap fix for one number. For the general case, the equation in the heading has three terms, and you only have to remove one:
 
 **Remove the sharing.** Each worker gets its own counter, and one place adds them up at the end. This is the fix that scales, because it removes contention as well as the race.
 
@@ -113,44 +214,17 @@ The third term, concurrency, is usually the reason the program exists, so it is 
 
 ### Only the lock-holder can enforce
 
-Here is the fix for the registration handler, and the reason it works:
-
-```go
-// One operation. The decision and the write are inseparable.
-func (s *Store) RegisterAtomic(email, password string) bool {
-	hashPassword(password) // slow work first, outside the lock
-	s.mu.Lock()
-
-	// defer will release the lock safely at func exit
-	defer s.mu.Unlock()
-
-	// [claude this is not the same example, firs one inserts the email]
-	if _, taken := s.rows[email]; taken {
-		return false
-	}
-	s.rows[email]++
-
-	return true
-}
-```
-
-```text
-atomic version, rows for one email: 1
-```
-
-Nothing was added. The check moved *inside* the same lock as the write, so no other goroutine can act between them, and the slow work moved out so the lock is held briefly.
-
-Now scale that up. Two processes cannot share a mutex, so at the database the same move looks like this:
+The registration fix above works because one mutex covered both steps. Two processes cannot share a mutex, so raise the same move up a level:
 
 ```sql
 create unique index ux_account_email on account (lower(email));
 ```
 
-The constraint is checked by the component that holds the row locks, at the instant of the write. There is no window, because there is no separate check — the decision and the write are one statement, and the loser gets an error instead of a duplicate.
+The rule is now checked by the component that holds the row locks, at the instant of the write. There is no window, because there is no separate check — the decision and the write are one statement, and the loser of a race gets an error rather than a duplicate row.
 
-**The general rule, and it is the useful one:** a rule about data can only be enforced by the component that can see all of that data and stop it changing. Application code cannot enforce uniqueness across rows it has not read and cannot hold still. It is not that the database is a better place to put the rule — it is the only place the rule can be true.
+**The general rule, and it is the useful one:** a rule about data can only be enforced by whatever can see all of that data and stop it changing. Application code cannot enforce uniqueness across rows it has not read and cannot hold still. It is not that the database is a *better* place for the rule — it is the only place the rule can be true.
 
-That has a corollary worth stating separately, because it is the one people resist: **your application-level check is not wrong, but it is not the enforcement.** Keep it for the error message, which is what it is good at. Do not keep it as the guarantee.
+There is a corollary worth stating separately, because it is the part people resist: **an application-level check is not wrong, but it is not the enforcement.** Keep it, because it produces a good error message and saves a round trip in the common case. Do not count it as the guarantee, and do not remove the constraint because the check is there.
 
 ### The single-writer principle
 
@@ -188,9 +262,27 @@ That is on one machine, before anything has gone wrong. Now add the things that 
 
 Which is why comparing timestamps from two machines to decide what happened first is not a slightly imprecise technique. It is the wrong kind of instrument, and it fails in the direction that produces silent data loss: last-write-wins, where the loser is whoever had the slower clock.
 
+The fix for most systems is smaller than the problem sounds. **Ask one component for the order, rather than asking each machine what time it thinks it is:**
+
+```sql
+-- BAD: whoever's clock is fast wins, and nobody is told.
+update doc set body = $1, updated_at = $2   -- $2 from the client
+ where id = $3;
+
+-- GOOD: one clock, one sequence, and a stale writer is refused.
+update doc set body = $1, version = version + 1
+ where id = $2 and version = $3;            -- $3 is what the writer read
+```
+
+The second is optimistic concurrency control, and it needs no clock at all: the version number is a counter, the database is the single authority that increments it, and a writer working from a stale read matches zero rows and is told so. A database sequence, a monotonically increasing transaction id, or `now()` evaluated on the server all do the same job — **one source of order, rather than several sources of approximate time.**
+
+That is enough for the large majority of systems, which have one database. The apparatus in the next section is for when you do not.
+
 ### What does order events
 
-Counters, not clocks. A **Lamport clock** is a number per node, incremented on every event, and sent along with every message; a receiver takes the larger of its own value and the one it received, then adds one:
+When there is no single authority to ask — several databases, several regions, offline clients that reconcile later — the answer is still counters rather than clocks.
+
+A **Lamport clock** is a number per node, incremented on every event, and sent along with every message; a receiver takes the larger of its own value and the one it received, then adds one:
 
 ```go
 func (n *Node) local() int { n.clock++; return n.clock }
