@@ -56,7 +56,7 @@ func (s *Store) Register(email, password string) {
 func (s *Store) exists(k string) bool {
 	s.mu.Lock()         // no other goroutine may touch rows until Unlock
 	defer s.mu.Unlock() // defer runs this when the function returns
-	_, ok := s.rows[k]
+	_, ok := s.rows[k] // [claude I fail to grash how email reagistration works. Is there a rows map where each email has a count? And the count can only be 1 at most? Why? If this is just random code? Maybe try making this example more meaningful and recognizable, like an email saved to a csv file or db for example. Or if the point is to show how this issue is in play witohut even a db or file, just find a business that fits better with that in memory persistence case.] 
 
 	return ok
 }
@@ -130,6 +130,10 @@ BAD : check said it existed; open failed with FileNotFoundError
 ```
 
 The fix is the third move — do not check at all:
+[claude this example is really of the mark. 
+I don't see any difference between bad and good version, I only see python's syntaxtic sugar that
+gives you the FileNotFoundError in one statement. I'm tyring to imagine a code where this would make sense, maybe if you add true meaningfull work instead of "time.sleep" and show how that work spoiled and 
+how the second version doesn't let that happen this could work.]
 
 ```python
 try:
