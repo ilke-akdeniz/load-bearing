@@ -155,10 +155,18 @@ The reader is experienced, and experienced in *their* specialty rather than in a
 A single chapter may traverse queueing theory, cache hierarchies, distributed consensus, and compiler structure.
 Almost nobody is fluent in more than two of those, and the missing ones are invisible to whoever is writing — which is how a chapter ends up addressed to someone who already knew it.
 
-Calibrate with the test the abbreviation rule uses: **would an experienced engineer produce this without hesitating?**
+Calibrate on what the sentence needs, not on whether the word looks familiar: **does this claim work on the gloss an experienced engineer already has, or does it need the specialist meaning?**
 
-- **Assume, and do not explain** — big-O notation, graphs and trees, hash tables, locks, transactions, HTTP, garbage collection, indexes, interfaces, recursion. Explaining these reads as condescension and spends attention the argument needs.
-- **Explain at first use, always** — anything belonging to one specialty. Cache line, prefetcher, working set, coherency traffic, *utilization* in its queueing sense, linearizability, quorum, entity-component system, bitemporality.
+*Blockchain* is the case that shows why the question is put this way. "Blockchains are append-only" works on the common gloss — assume it and move on. "A reorg makes finality probabilistic below N confirmations" does not, and every load-bearing word there needs work.
+
+**The same word falls on either side depending on the load it carries.**
+*Transaction* is assumed everywhere in this book; *prepared transaction* is a two-phase-commit term and is not.
+*Utilization* is ordinary English until it means the fraction of time a server is busy, at which point the queueing sense has to be given.
+
+The lists below are **illustrative, not a lookup table** — a term missing from both is the normal case, and the question above decides it.
+
+- **Usually assumed** — big-O notation, graphs and trees, hash tables, locks, transactions, HTTP, garbage collection, indexes, interfaces, recursion. Explaining these reads as condescension and spends attention the argument needs.
+- **Usually explained at first use** — terms whose specialist meaning is the one being used. Cache line, prefetcher, working set, coherency traffic, linearizability, quorum, entity-component system, bitemporality.
 
 The structural fix beats the inline definition: **lead with the situation, give the number, name the thing last.**
 Chapter 08's Amdahl section works because a hundred-minute report with twenty un-splittable minutes makes the ceiling obvious before any formula appears — the name then labels something already understood rather than gating it.

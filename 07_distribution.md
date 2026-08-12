@@ -272,7 +272,7 @@ The check is the one at the top: can one part be alive while another part cannot
 
 ### Coordination you can afford
 
-Distributed transactions are not impossible. Two-phase commit — 2PC — exists, works, and is used — in payment networks, in some databases, wherever the cost is justified. What it costs is availability: a participant that fails while holding a prepared transaction blocks the others until it returns or an operator intervenes.
+Distributed transactions are not impossible. Two-phase commit — 2PC — exists, works, and is used — in payment networks, in some databases, wherever the cost is justified. What it costs is availability. Each participant is asked to vote first and commit second, and between those two steps it is holding its locks and has promised to be able to finish. A participant that fails in that gap blocks every other participant until it comes back or an operator intervenes.
 
 So the honest statement is not "you cannot have cross-system atomicity." It is that you can, and the price is that a failure anywhere stops everything, which for most systems is a worse outcome than the inconsistency they were avoiding. When it is not — few enough participants, high enough stakes, an operator on call — 2PC is the right answer and the sagas are the cargo cult.
 
