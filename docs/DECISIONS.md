@@ -13,6 +13,9 @@ Two purposes:
 Entries note who originated what.
 "The author" is the human; "the draft" is generated text prior to review.
 
+**Unattributed content in an entry is the draft's.**
+Attribution is stated where the origin changes how the entry reads later — the author originating an idea, choosing between options, or rejecting one; a correction arriving in review; a draft recommendation that did not survive; or a resolution reached jointly, which is recorded as joint rather than credited to whoever wrote it down.
+
 ---
 
 ## 1. Title: *Load-Bearing*
@@ -634,16 +637,31 @@ The catalogue alone is not worth a chapter. Everyone already knows concurrency a
 
 The dial framing is what makes the seven useful, and it is falsifiable in a way a list is not: if the design only ever changed once across a Force's range, the framing would be wrong. The counter example is chosen because its fourth position is unreachable from its third by any amount of hardening, which is the strongest available form of the claim.
 
-**A second decision inside the boundary section.**
+**A second decision inside the boundary section.** *(Superseded during review — see below.)*
 The TOC promised "Forces you can't measure yet, and why guessing is worse than deferring." Written straight, that produces the standard advice to defer decisions, which is wrong often enough to be worth correcting.
 
-The rule the chapter gives instead is:
+The draft's rule was:
 
 > Defer what you can reverse. Decide what you cannot. And when you must decide under uncertainty, choose the strict version, because strictness is the direction that can be undone later.
 
 Both halves are quoted from FlowCore's decision log — `internal/` deferred with its trigger recorded, and the unique index shipped on day one because "dropping a unique index later is trivial; adding one after clients hold duplicate rows is not."
 
-This matters because it inverts what "stay flexible" suggests. Under uncertainty the reversible choice is usually the *stricter* one, not the more permissive one.
+**The author rejected it, and the replacement was reached jointly.**
+
+Their objection was a reductio: judged purely on cost asymmetry, the rule licenses adding every possible index on every combination of columns, since each is cheap now and awkward later. It does.
+
+The draft's first response was that asymmetry, stated precisely, already excludes that — a unique constraint *expires* while you wait, because duplicate rows accumulate and then block it, whereas a performance index does not expire at all, since the data was never an obstacle. True, and insufficient: it does not cover sharding, where waiting genuinely does spoil the decision and acting early is ruinous. Asymmetry alone says shard immediately, which is wrong.
+
+What resolved it was adding a second question, giving three cases rather than two:
+
+> **Does waiting spoil this decision?** If delay lets state pile up that the decision would have prevented, the decision expires.
+> **Is this decision cheap to take today?** If it expires and it is cheap, take it now. If it expires and it is expensive, you are making a bet, and should say so.
+
+Neither party held that at the start. The author supplied the counter-example that broke the two-part rule; the draft supplied the expiry-versus-cost distinction; the third case came out of the exchange.
+
+**A reversal inside the reversal.** The author's original wording had included a likelihood clause — *and the need is likely to arise* — which the draft cut as reintroducing the guessing the rule was meant to remove. The third case restores it, scoped to that case only: where a decision both expires and is expensive, it is a forecast whether or not anyone admits it, and pretending otherwise does not make it less of one. The draft was wrong to cut it outright and right that it does not belong in the other two cases.
+
+The surviving general form still inverts what "stay flexible" suggests: under uncertainty the reversible choice is usually the *stricter* one.
 
 **Verification, following decision 14.**
 Every runnable example was run before it went in. The JavaScript number-precision demonstration was checked at the point that matters: a 64-bit identifier arriving as a JSON number reads back as `9007199254740992` in Node, and the same value sent as a string round-trips intact. The float-versus-minor-units sums were run rather than asserted.
@@ -978,3 +996,81 @@ They also asked where the transaction was in the outbox example, since only a co
 `CLAUDE.md` gains the verification-versus-example rule and the abbreviation rule.
 `LEDGER.md` gains a row for publish-then-delete and one reworded for availability.
 Chapter 07 runs 320 lines, up from 262.
+
+---
+
+## 24. AI material: distributed, not a chapter — and grilling goes to chapter 19
+
+**Date.** 2026-08-12
+
+**Context.**
+The author proposed a new chapter on AI-assisted development, reasoning that generated code and generated design amplify the failure modes the book catalogues, that models sound authoritative regardless of a claim's standing, and that they cannot see what is in your head.
+
+**Is there something real.**
+Yes, and it is more specific than amplification. Four findings, each an instance of a mechanism the book already owns:
+
+- **The training corpus is a monoculture.** Chapter 02 names monoculture as the single most common source of confusion and prescribes one cure — work in a second ecosystem until its conventions stop feeling wrong. That cure is structurally unavailable to a model, which has one distribution and no way to acquire another.
+- **The generator cannot see your Forces**, so chapter 03's groundwork is skipped by construction rather than by carelessness.
+- **Uniform confidence across all five kinds**, which is chapter 02's first mechanism with a single generator behind it.
+- **The team-size Force at its limit** — a contributor present for no conversation, retaining nothing between sessions, producing at a rate no review process was sized for. Chapter 03's migration from comment to review habit to type system is forced harder and sooner.
+
+**Decision — distribute, do not add a chapter.**
+Every finding attaches to a concept another chapter owns, so a separate chapter would be six cross-references wearing a title.
+The draft argued for a chapter on the grounds that it needs one organizing mechanism the way chapter 15 has one; testing that honestly, *the derivation never happened* explains the Forces finding and not the monoculture, confidence, or volume findings. There is no single mechanism, so there is no chapter.
+
+The author raised distribution and the draft's own evidence undercut the draft's position, which is recorded here because the log is where a reversed recommendation belongs.
+
+Distribution also ages better. A paragraph about a precondition failing survives model generations; a chapter titled for a technology is a dated object by construction.
+
+**Decision — the synthesis goes in chapter 23, and grilling in chapter 19.**
+Chapter 23's contents already list *receiving a blog post; a code review comment; a book; a colleague's strong opinion; your own past decisions.* Receiving generated code is the sixth item and the one the other five rehearse for.
+
+Grilling is a method rather than a way of reading, so it belongs to chapter 19, the force-map method — it is that method run with a generator in the loop, and the interview is how the forces get read.
+
+**A correction the author made, worth recording as such.**
+The draft asked whether the book should take a position on whether to use these tools. The author's answer: usage is a fact, and the book does not take positions on facts.
+
+That is the book's own model applied to the draft's question. Chapter 02 defines a Force as a property of the situation, *not negotiable by argument* — so the draft had misclassified a Force as a Principle while working on the chapter that defines the difference.
+
+**A second correction, on what grilling is.**
+The draft described grilling as a review technique — interrogating a draft after it exists, probing what the text does not say. That is the author's practice in *this* repo, the `[claude …]` tags, and the draft attached the wrong name to it.
+
+Grilling happens **before** generation. It is an interview that walks the decision tree, puts each decision to the human with a recommended answer, and does not act until there is shared understanding.
+
+The distinction matters more than a mislabelling, because it changes the failure mode being addressed. The draft had been writing that generated code presents an Idiom in the same voice as a Law. The author's framing is sharper:
+
+> without "grilling", I would be building a system where I didn't know the trade-offs and important decisions and where a default "recommended" decision was silently made by the AI
+
+**Generated code does not state its decisions at all.** It arrives with every branch already taken, and a taken branch leaves no mark — there is no confident sentence to be suspicious of, because there is no sentence. Review cannot reach that, since catching a silent default requires already suspecting the branch existed. Grilling makes the branch visible before anything is written.
+
+It also resolves something chapter 03 leaves open. That chapter says a model cannot see your Forces, which leaves a reader unable to act: you cannot supply the Forces in a prompt without knowing which are about to matter. The interview inverts the flow — the model surfaces the decision, the human supplies the situational fact that settles it.
+
+The load-bearing detail is the author's: *sometimes I choose an option that was not the recommended one.* The recommendation comes from the corpus, so overriding it is a local Force beating a majority convention — possible only because the convention was made visible as a choice rather than delivered as code. FlowCore's decision 18 is the artifact of exactly that: short Go names were a corpus default that lost to a local Force once it was on the table.
+
+**The limit, which the chapter must state.**
+Grilling surfaces the decisions the model recognizes *as* decisions, and that set comes from the same corpus. A question settled uniformly across the training data does not present itself as a branch point; it is simply how things are done.
+
+So **grilling is weakest exactly where the monoculture is strongest** — it surfaces contested choices and hides settled ones, and settled-in-the-corpus is the class most likely to be wrong outside the ecosystem it came from. This follows from chapter 02's mechanism rather than from measurement and must be stated as reasoning, not as a finding.
+
+Two ordinary costs alongside it: the protocol is slow by design, so it is absurd overhead on a small change; and it requires the human to hold opinions, since a user who accepts every recommendation has bought the silent defaults back with ceremony attached.
+
+**Provenance.**
+Directed by the author: cite everything, because there is no virtue in hiding it.
+
+The skill comes from Matt Pocock's skills repository, `skills/productivity/grilling/SKILL.md`, at <https://github.com/mattpocock/skills>. The author encountered this use of it during development through Jason Ku's video, <https://www.youtube.com/watch?v=ikGhv9kKFdU&t=356s>.
+
+The author uses a **frozen earlier version**, and the book quotes that one. It is recorded here in full, because it no longer exists upstream:
+
+> Interview me relentlessly about every aspect of this until we reach a shared understanding. Walk down each branch of the decision tree, resolving dependencies between decisions one-by-one. For each question, provide your recommended answer.
+>
+> Ask the questions one at a time, waiting for feedback on each question before continuing. Asking multiple questions at once is bewildering.
+>
+> If a *fact* can be found by exploring the environment (filesystem, tools, etc.), look it up rather than asking me. The *decisions*, though, are mine — put each one to me and wait for my answer.
+>
+> Do not act on it until I confirm we have reached a shared understanding.
+
+The current upstream version was fetched on 2026-08-12 and differs materially. It organizes questions into **rounds** over a **frontier** of decisions whose prerequisites are settled, and asks the whole frontier at once with numbered questions and a fixed format. It also dispatches sub-agents to establish facts.
+
+The two versions **disagree on one design point**, which is worth noting rather than smoothing over: the frozen version says *asking multiple questions at once is bewildering*; the current one asks a whole round at a time. The trade is throughput against how much the human must hold in working memory at once — which is a Force, and which one wins is situational. The book should say the author uses the earlier version and not imply the later one is a regression.
+
+Worth recording that the upstream version converged on the same language independently: it ends *"every branch of the design tree visited, nothing left silently assumed."*

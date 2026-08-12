@@ -287,7 +287,25 @@ Draft **one chapter at a time** and stop for review.
 Do not batch chapters — the steering between them is where the book's judgments are made.
 
 Record substantive editorial decisions in `docs/DECISIONS.md` using the existing shape: **Context / Options / Decision / Why / Consequence.**
-Note who originated what; the log doubles as the authorship record for an AI-assisted work.
+The log doubles as the authorship record for an AI-assisted work, so it has to say where a decision came from.
+
+### Attribution in decision entries
+
+**The default is that unattributed content is the draft's.** That is stated once in `DECISIONS.md`'s header, so it does not need repeating per sentence.
+
+Attribute explicitly where the origin changes how the entry reads later:
+
+- The author originated the idea, chose between options, or rejected one.
+- A correction came from review — say what it corrected, not merely that a correction occurred.
+- The draft's recommendation did not survive, and why.
+- The resolution was **joint**: an objection from the author, a concession, and an answer neither had at the start. Record it as joint rather than assigning it to whoever typed it.
+
+Do not attribute routine drafting, formatting, or mechanical consequences.
+*The draft wrote a section and nobody objected* is not a fact about the book.
+
+Two failures, in opposite directions.
+Tagging every sentence with its origin makes the log unreadable and is the inflation this rule exists to prevent.
+Recording a jointly reached answer as the draft's, because the draft wrote it down, is the quieter one and the more damaging — it is the case where the log stops supporting the claim the README makes.
 
 ### The review cycle
 
