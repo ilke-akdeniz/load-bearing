@@ -107,12 +107,12 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Layered packages force exports | 18 | A directory wall requires publishing the helpers it was meant to hide | cite 18 |
 | Force-map method | 19 | Read forces, derive principles, check idioms — in that order | cite 19 |
 | Domain inversions | 20 | Each domain's dominant force inverts some standard advice | cite 20 |
-| Corpus monoculture | 02 | A model has one training distribution and cannot acquire a second, so 02's prescribed cure is unavailable to it | cite 02 |
-| The generator cannot see your Forces | 03 | Forces are facts about your situation; a model has the prompt, so the groundwork is skipped by construction | cite 03 |
-| The conditions were never derived | 15 | For generated design the answer to 15's test is not that conditions were forgotten but that none were formed | "no derivation (Ch. 15)" |
-| Grilling | 19 | An interview that surfaces each decision, with a recommendation, before anything is written; the human supplies the Force that settles it | "grilling (Ch. 19)" |
-| Grilling's limit | 19 | It surfaces decisions the model recognizes as decisions, so it is weakest where the corpus is most uniform | cite 19 |
-| Silent defaults | 23 | Generated code states no decisions at all — a taken branch leaves no mark, so review cannot catch what it never suspected | "silent default (Ch. 23)" |
+| Corpus monoculture | 02 | A model has one training distribution and cannot acquire a second, so 02's prescribed cure is unavailable to it | cite 02; argument in `docs/ai-material.md` |
+| The generator cannot see your Forces | 03 | Forces are facts about your situation; a model has the prompt, so the groundwork is skipped by construction | cite 03; argument in `docs/ai-material.md` |
+| The conditions were never derived | 15 | For generated design the answer to 15's test is not that conditions were forgotten but that none were formed | "no derivation (Ch. 15)"; argument in `docs/ai-material.md` |
+| Grilling | 19 | An interview that surfaces each decision, with a recommendation, before anything is written; the human supplies the Force that settles it | "grilling (Ch. 19)"; text, provenance and limits in `docs/ai-material.md` |
+| Grilling's limit | 19 | It surfaces decisions the model recognizes as decisions, so it is weakest where the corpus is most uniform | cite 19; argument in `docs/ai-material.md` |
+| Silent defaults | 23 | Generated code states no decisions at all — a taken branch leaves no mark, so review cannot catch what it never suspected | "silent default (Ch. 23)"; argument in `docs/ai-material.md` |
 
 ## Code examples
 

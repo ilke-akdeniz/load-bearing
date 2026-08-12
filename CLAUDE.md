@@ -71,6 +71,9 @@ Most of it has already been worked through and corrected by the author, so **rea
 - **`~/s/flowcore/docs/code-map.md`** — how the library fits together; useful for picking an example that is genuinely representative.
 - **`~/s/flowcore`** — the code itself. Prefer quoting real lines over inventing illustrative ones.
 
+`docs/ai-material.md` is the same kind of document, held inside this repo: the worked argument for material owed to seven chapters, with the FlowCore evidence and the provenance already gathered.
+Read it before drafting 02, 03, 15, 17, 19, 21, or 23.
+
 Public repo: <https://github.com/ilke-akdeniz/flowcore>.
 
 ## The anti-repetition protocol

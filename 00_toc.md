@@ -281,6 +281,12 @@ The final answer to "is this load-bearing" as a repeatable procedure rather than
 | 22 | `22_style.md` | not started |
 | 23 | `23_reading-advice.md` | not started |
 
+### AI material
+
+Chapters 02, 03, 15, 17, 19, 21 and 23 each owe a piece of this, noted in their contents lines above.
+The worked argument — findings, FlowCore evidence, the grilling text with its provenance, and the traps — is in **`docs/ai-material.md`**.
+Read that rather than re-deriving it, so the seven mentions agree with each other.
+
 ### Pending revisits
 
 Chapters already at **draft** that are owed an addition. Listed here because a drafted chapter is not re-read on its own, and a decision entry is only consulted when reversing something.
@@ -290,7 +296,7 @@ Chapters already at **draft** that are owed an addition. Listed here because a d
 | 02 | corpus monoculture as a new instance of *monoculture makes Idioms look like physics* | chapter 23 exists, so the mention can point at the synthesis |
 | 03 | the generator cannot see your Forces; the team-size Force at its limit — no continuity, unbounded volume | as above |
 
-Recorded by decision 24, which holds the reasoning and the provenance.
+The worked argument is in `docs/ai-material.md`; decision 24 records what was decided and why.
 
 **Build order.** The original plan was 02, then 05, then 13. What happened instead was 02, 05, 03, 04 — Part I first, then the foundations in order — and the reason to continue that way is that the drafted chapters have accumulated debts to specific unwritten ones.
 
