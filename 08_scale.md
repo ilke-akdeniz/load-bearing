@@ -200,7 +200,8 @@ for i := range totals { // totals is just []int64
 	sum += totals[i]
 }
 ```
-
+[claude we don't need this raw duplicate measurements, the naming "BenchmarkSumFromRecords-10" is also very weird. 
+Maybe just remove the table below and start the next paragraph with: Our local benchmar was seven times faster ... ****]
 ```text
 BenchmarkSumFromRecords-10    100    3414706 ns/op
 BenchmarkSumFromRecords-10    100    3320516 ns/op
@@ -275,7 +276,7 @@ That failure is the more useful result. The same test with integer keys:
 
 Scanning wins up to about eleven integers, and never wins for strings. So the crossover point is **not a property of the two algorithms.** It is set by how expensive one comparison is against one hash, and comparing strings is expensive enough to move the crossing off the chart entirely.
 
-Which makes the familiar advice — *use a list under about twenty items* — a number quoted without the conditions that produced it, exactly the failure chapter 04 describes. The pattern is real. The threshold belongs to somebody else's data type and machine.
+Which makes the familiar advice — *use a list under about twenty items* — a number quoted without the conditions that produced it, exactly the failure chapter 04 describes: The threshold belongs to somebody else's data type and machine.
 
 In practice, at these sizes the difference is nanoseconds. Use the map and spend the attention elsewhere.
 
@@ -303,7 +304,7 @@ A batch job that must finish by 6 a.m. and takes two hours has seven hours of sl
 
 **Queue models are wrong in two directions at once.** They assume irregular arrivals, which makes them pessimistic for steady traffic, and a single server, which makes them optimistic for a pool. Two errors pointing opposite ways is not the same as being right.
 
-**The scalability curve needs the system before it can describe it.** Its coefficients come from measuring a running system at several worker counts. It explains a measurement you already have; it does not tell you in advance where your peak will be.
+**The scalability curve needs the system before it can describe it.** Its coefficients come from measuring a running system at several worker counts. It explains a measurement you already have; it does not tell you in advance where your peak will be. [claude I don't get this, is there a way to formulate this idea more clearly?]
 
 **Optimizing the wrong shape is worse than doing nothing.** Adding workers past the peak makes throughput fall. Adding cores to mostly-serial work buys almost nothing. Both cost money and both look like progress.
 
