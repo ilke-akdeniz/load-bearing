@@ -105,7 +105,14 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | The cache line is the transfer unit | 08 | Cost is set by how much of each fetched line you use, which is layout not algorithm | cite 08 |
 | Speed of light as a floor | 08 | Cross-region round trips have a floor no profiling removes; change geography or stop waiting | cite 08 |
 | The crossover is not a property of the algorithms | 08 | Where O(n) loses to O(1) is set by comparison cost against hash cost — measure yours | cite 08 |
+| Rate of change layers | 09 | Code, schema, published interface, organization — each slower than the last, and the slow ones set the terms | "rate layers (Ch. 09)" |
 | Conway / Brooks / Lehman | 09 | Structure mirrors org; adding people to a late project; systems must change | cite 09 |
+| Lehman's ratchet | 09 | Complexity rises because adding a case is cheap and local while removing one needs a project | cite 09 |
+| Compatibility is add-only | 09 | You may add optional things and relax constraints; you may not remove, rename, retype, or tighten | "add-only (Ch. 09)" |
+| A rename is a silent break | 09 | Removals and renames fail without an error; a type change at least fails loudly | cite 09 |
+| You cannot deploy other people's software | 09 | The one constraint in the book that cannot be fixed by changing code you control | cite 09 |
+| Inverse Conway is a strategy, not a finding | 09 | The observation is established; driving architecture by reshaping teams is not | cite 09 |
+| Long feedback loops | 09 | These decisions cannot be tested, because the evidence arrives after the cost is sunk | cite 09 |
 | Compression + constraint tests | 10 | A pattern earns its name by saving words and ruling something out | cite 10 |
 | The scale test | 11 | The same name is trivial at class scale and load-bearing at system scale | "scale test (Ch. 11)" |
 | Survives-translation test | 13 | If it disappears when you change language, it was a workaround | cite 13 |
@@ -176,6 +183,9 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | Linear scan vs map, ints and strings | 08 | The crossover moves with element type — the finding that the expected demo did not show |
 | Adapter at class vs system scale | 11 | The scale test |
 | GoF collapse in 4 languages | 13 | Survives-translation test |
+| Old client against four API changes | 09 | Add is safe, retype fails loudly, rename fails silently with a zero amount |
+| `io/ioutil`, deprecated 2021, running in 2026 | 09 | 175 deprecated declarations in Go's stdlib — the cost of a compatibility promise, kept |
+| Brooks n(n−1)/2 and the weekly hours | 09 | A team of 20 spends a quarter of every week staying aligned |
 | Bidirectional Order↔Customer | 16 | OOP producing cycles |
 | Deleted constraint, passing mock test | 17 | Mocks assert about mocks |
 | Store split into a package | 18 | Layered packages force exports |

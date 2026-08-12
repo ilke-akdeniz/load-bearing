@@ -1181,3 +1181,52 @@ The epigraph said *grades*, which decision 17 replaced with *kinds* — a regres
 **Consequence.**
 Chapter 08 runs 338 lines, up from 280, almost entirely in definitions and worked setup.
 `LEDGER.md` has one example row replaced and three added.
+
+---
+
+## 27. Chapter 09 organizes by rate of change, and grades Lehman honestly
+
+**Date.** 2026-08-12
+
+**Context.**
+Chapter 09 covers Lehman's laws, Conway's Law and the inverse manoeuvre, Brooks's Law, and compatibility. Four results from four different literatures, with no obvious connection beyond operating on long timescales.
+
+**Decision.**
+Organize by **rate of change**: code changes daily, schemas monthly, published interfaces rarely and never backwards, organizations yearly and expensively. The claim follows — everything changes, but not at the same rate, and the slow parts set the terms for the fast ones.
+
+That gives the chapter a usable test (*which layer does this decision land in?*) and puts the four laws in an order that explains itself. It also keeps clear of chapter 03, which owns durability as a **Force** — 03 asks whether a mistake stays correctable, 09 asks what governs change across years and adds the organization, which 03 does not cover.
+
+**The compatibility demonstration, and what it turned up.**
+An old client against four server changes, run rather than described:
+
+```text
+ADD an optional field:   parsed fine
+RENAME a field:          amount=0, err=<nil>
+CHANGE a type:           err=cannot unmarshal string
+ADD a new enum value:    parses, client has no branch for it
+```
+
+The rename is the finding. It produces **no error and a zero amount** — a payment of nothing, reported as a successful parse. The type change, by contrast, fails loudly and gets fixed within the hour. So the ordering of danger is the opposite of the ordering of noise, which is not obvious before seeing it.
+
+**Go's standard library as dated evidence.**
+`io/ioutil` was deprecated in Go 1.16, February 2021. It was compiled and run under Go 1.26.5 for this chapter and works. Counting the standard library gives **175 declarations marked deprecated** across 85 files — each one something the maintainers would remove and cannot.
+
+That is better than an assertion about compatibility promises: it is checkable, dated, and it quantifies the cost of keeping one.
+
+**Lehman is graded rather than recited.**
+There are eight of Lehman's laws and they are not equally solid. The chapter uses two — continuing change, and increasing complexity — and says plainly that the study population was mainframe systems decades ago with release cycles measured in years, and that several of the others ("conservation of familiarity," "conservation of organizational stability") are vague enough to resist checking.
+
+This follows chapter 04's empirical-law framing applied to the book's own sources: an empirical law carries a study population, and citing all eight equally would repeat the error the book exists to describe.
+
+The same treatment is given to the inverse Conway manoeuvre. Conway's observation is established; the claim that architecture can be driven by reshaping teams is a strategy rather than a finding, and the chapter says so.
+
+**Two things the chapter adds that were not in the TOC.**
+
+*Lehman's ratchet has a mechanism.* Complexity rises because the costs are asymmetric: adding a case is cheap and local, removing one requires establishing that nothing depends on it. Additions happen continuously; removals need a project.
+
+*One constraint here is unlike everything else in the book.* Every other law can be satisfied by changing code you control. Compatibility cannot, because **you cannot deploy other people's software** — the code that must change is on a machine you cannot reach, owned by someone with no reason to hurry.
+
+**Consequence.**
+`LEDGER.md` gains seven concept rows and three example rows.
+Part II is complete: chapters 04 through 09 are drafted.
+Chapter 09 runs 219 lines and moves to **in progress**.
