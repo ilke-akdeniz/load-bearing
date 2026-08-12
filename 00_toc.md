@@ -158,6 +158,7 @@ Contents: "anemic domain model" as a diagnosis dressed as a description; "code s
 The mechanism, stated once, so the case studies can be short.
 
 Contents: a true observation gets a name; the name gets a community; the community forgets the conditions; the conditions were the content.
+The test applied to generated design, where the answer is not *the conditions were forgotten* but *there were none to forget* — the derivation never happened, so there is no one to ask.
 Why practitioner credibility does not immunize anyone — Go proverbs quoted as law, Rob Pike's own complaint about it.
 The test that survives: **does the idea come with the conditions under which it's wrong?**
 
@@ -178,7 +179,7 @@ The alternative demonstrated: flat structures with explicit identifiers, and wha
 
 The second case study, kept fair.
 
-Contents: what the empirical literature actually shows about test-first, where the controlled studies disagree with each other and most of them measure test-first against no tests rather than against test-after; the difference between "tests help" and "this ordering ritual helps"; **mocks assert that your code calls your mocks** — the argument, with a test that passes while the constraint it claims to verify has been deleted; how the mocking convention generates interface-per-class, which generates the DI container; what the testing pyramid assumes about where your logic lives, and what happens when your logic lives in a schema instead.
+Contents: generated tests that pass without reaching the condition they name, and mutation as the only check that catches them (FlowCore's decision 37: five toothless tests in one iteration); what the empirical literature actually shows about test-first, where the controlled studies disagree with each other and most of them measure test-first against no tests rather than against test-after; the difference between "tests help" and "this ordering ritual helps"; **mocks assert that your code calls your mocks** — the argument, with a test that passes while the constraint it claims to verify has been deleted; how the mocking convention generates interface-per-class, which generates the DI container; what the testing pyramid assumes about where your logic lives, and what happens when your logic lives in a schema instead.
 
 *Where this doesn't apply:* systems where the dependency genuinely cannot be run in a test — payment gateways, hardware, third-party APIs — and the honest version of test doubles for those.
 
@@ -198,7 +199,7 @@ Contents: **layered packages force exports** — splitting a store into its own 
 
 The practical procedure the whole book has been building toward.
 
-Contents: read the forces, derive the principles, then check the idioms — in that order, never the reverse; a worked force-map for four systems from scratch; how to notice you have inherited a principle whose forces are absent; what to do when forces conflict.
+Contents: read the forces, derive the principles, then check the idioms — in that order, never the reverse; **grilling** as this method run with a generator in the loop — the interview that surfaces each decision before code exists, quoted in full, with its provenance and the limit that it is weakest where the training corpus is most uniform; a worked force-map for four systems from scratch; how to notice you have inherited a principle whose forces are absent; what to do when forces conflict.
 
 *Where this doesn't apply:* situations where the conventional answer is good enough and the analysis costs more than the decision is worth.
 
@@ -222,7 +223,7 @@ Each domain: which forces dominate, which standard advice inverts, and the code 
 
 Idioms, taken seriously rather than dismissed.
 
-Contents: why Go grew free functions and C# grew containers, traced to language features rather than culture; why Python skipped DI except where per-request lifetime is real; the case *for* obeying local idiom even when you can argue against it — reviewability, hiring, the cost of being interesting; when to deviate, and how to pay for it (declare it, document the reason, keep it narrow).
+Contents: why Go grew free functions and C# grew containers, traced to language features rather than culture; an Idiom whose precondition failed because the reader stopped being the author (FlowCore's decision 18: short Go names, generated idiomatically, deviated from deliberately); why Python skipped DI except where per-request lifetime is real; the case *for* obeying local idiom even when you can argue against it — reviewability, hiring, the cost of being interesting; when to deviate, and how to pay for it (declare it, document the reason, keep it narrow).
 
 *Where this doesn't apply:* idioms that encode a genuine mistake, and how to tell those from idioms you merely dislike.
 
@@ -240,7 +241,7 @@ Contents: naming, formatting, file layout, comment density; why consistency beat
 
 The field guide, and the closing.
 
-Contents: receiving a blog post; receiving a code review comment; receiving a book; receiving a colleague's strong opinion; receiving your own past decisions; the questions that do the work — *what forces does this assume? at what scale? what does it rule out? where does the author say it stops?*
+Contents: receiving a blog post; receiving a code review comment; receiving a book; receiving a colleague's strong opinion; receiving your own past decisions; **receiving generated code** — the sixth case, and the one the others rehearse for, where the artifact states no decisions at all because every branch was taken silently; the questions that do the work — *what forces does this assume? at what scale? what does it rule out? where does the author say it stops?*
 The final answer to "is this load-bearing" as a repeatable procedure rather than a judgement call.
 
 *Where this doesn't apply:* when you don't have time to analyse and must simply pick the conventional answer — which is usually the correct move, and knowing that is part of the skill.
@@ -279,6 +280,17 @@ The final answer to "is this load-bearing" as a repeatable procedure rather than
 | 21 | `21_idioms.md` | not started |
 | 22 | `22_style.md` | not started |
 | 23 | `23_reading-advice.md` | not started |
+
+### Pending revisits
+
+Chapters already at **draft** that are owed an addition. Listed here because a drafted chapter is not re-read on its own, and a decision entry is only consulted when reversing something.
+
+| Chapter | Owed | Do it when |
+|---|---|---|
+| 02 | corpus monoculture as a new instance of *monoculture makes Idioms look like physics* | chapter 23 exists, so the mention can point at the synthesis |
+| 03 | the generator cannot see your Forces; the team-size Force at its limit — no continuity, unbounded volume | as above |
+
+Recorded by decision 24, which holds the reasoning and the provenance.
 
 **Build order.** The original plan was 02, then 05, then 13. What happened instead was 02, 05, 03, 04 — Part I first, then the foundations in order — and the reason to continue that way is that the drafted chapters have accumulated debts to specific unwritten ones.
 

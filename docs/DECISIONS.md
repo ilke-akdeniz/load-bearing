@@ -1022,6 +1022,11 @@ The author raised distribution and the draft's own evidence undercut the draft's
 
 Distribution also ages better. A paragraph about a precondition failing survives model generations; a chapter titled for a technology is a dated object by construction.
 
+**These are constraints, not a work queue.**
+Five of the seven landing sites do not exist yet, so most of this material is blocked behind the ordinary drafting order and should not pull work forward.
+The placements are recorded in `00_toc.md`'s contents lines and in `LEDGER.md`, because those are read when a chapter is drafted and this entry is not.
+The two chapters already at draft — 02 and 03 — are listed under *Pending revisits* in the TOC.
+
 **Decision — the synthesis goes in chapter 23, and grilling in chapter 19.**
 Chapter 23's contents already list *receiving a blog post; a code review comment; a book; a colleague's strong opinion; your own past decisions.* Receiving generated code is the sixth item and the one the other five rehearse for.
 
