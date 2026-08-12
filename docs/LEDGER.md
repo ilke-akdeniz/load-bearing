@@ -96,7 +96,15 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Availability is a product | 07 | Availabilities multiply rather than average; ten dependencies at three nines gives two nines, and better components do not fix it | "p^N (Ch. 07)" |
 | Three ways to stop multiplying | 07 | Remove the dependency, make it optional, or make it asynchronous | cite 07 |
 | Saga is not rollback | 07 | Compensations are business operations and are visible to customers | cite 07 |
+| Five shapes of scale | 08 | Ceiling, knee, superlinear curve, discontinuity, floor — the shape decides the fix | "which shape (Ch. 08)" |
+| Amdahl: a ceiling | 08 | The serial fraction bounds speedup regardless of core count; shrink s rather than buying cores | cite 08 |
+| USL: returns go negative | 08 | Coherency cost grows with pairs, so past a peak each added worker lowers throughput | cite 08 |
+| Little's Law | 08 | L = λW, near-definitional, true of any stable queue; two knowns give the third | cite 08 |
+| Utilization is superlinear | 08 | Wait scales as 1/(1−ρ); there is no cliff at 85%, only a marginal cost that rises from the start | cite 08 |
 | Memory hierarchy ~6 orders | 08 | Register to network spans about a million-fold | cite 08 |
+| The cache line is the transfer unit | 08 | Cost is set by how much of each fetched line you use, which is layout not algorithm | cite 08 |
+| Speed of light as a floor | 08 | Cross-region round trips have a floor no profiling removes; change geography or stop waiting | cite 08 |
+| The crossover is not a property of the algorithms | 08 | Where O(n) loses to O(1) is set by comparison cost against hash cost — measure yours | cite 08 |
 | Conway / Brooks / Lehman | 09 | Structure mirrors org; adding people to a late project; systems must change | cite 09 |
 | Compression + constraint tests | 10 | A pattern earns its name by saving words and ruling something out | cite 10 |
 | The scale test | 11 | The same name is trivial at class scale and load-bearing at system scale | "scale test (Ch. 11)" |
@@ -160,7 +168,10 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | Halting problem vs its folk version | 04 | The theorem forbids a universal decider; termination checking for particular programs is routine |
 | `rate` read once at startup | 04 | A definitional claim that either binds or has no cache to act on |
 | Go map randomization vs Python dict order | 04 | One regularity, two opposite responses, and a magnitude that moved. 05 owns Hyrum's Law |
-| AoS vs SoA benchmark | 08 | Memory hierarchy beats abstraction |
+| AoS vs SoA benchmark | 08 | Memory hierarchy beats abstraction: 4.3x from field layout, no algorithm change |
+| Pointer-chase latency ladder | 08 | 1.94 ns to 196 ns across working-set sizes, same instruction |
+| Amdahl / USL / M/M/1 tables | 08 | The three computed shapes, with the 85% "cliff" shown not to exist |
+| Linear scan vs map, ints and strings | 08 | The crossover moves with element type — the finding that the expected demo did not show |
 | Adapter at class vs system scale | 11 | The scale test |
 | GoF collapse in 4 languages | 13 | Survives-translation test |
 | Bidirectional Order↔Customer | 16 | OOP producing cycles |

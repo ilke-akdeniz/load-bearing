@@ -264,7 +264,7 @@ The final answer to "is this load-bearing" as a repeatable procedure rather than
 | 05 | `05_structure.md` | **draft** |
 | 06 | `06_time.md` | **draft** |
 | 07 | `07_distribution.md` | **draft** |
-| 08 | `08_scale.md` | not started |
+| 08 | `08_scale.md` | **in progress** |
 | 09 | `09_change.md` | not started |
 | 10 | `10_what-a-pattern-is-for.md` | not started |
 | 11 | `11_the-scale-test.md` | not started |

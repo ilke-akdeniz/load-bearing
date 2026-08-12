@@ -1079,3 +1079,52 @@ The current upstream version was fetched on 2026-08-12 and differs materially. I
 The two versions **disagree on one design point**, which is worth noting rather than smoothing over: the frozen version says *asking multiple questions at once is bewildering*; the current one asks a whole round at a time. The trade is throughput against how much the human must hold in working memory at once — which is a Force, and which one wins is situational. The book should say the author uses the earlier version and not imply the later one is a regression.
 
 Worth recording that the upstream version converged on the same language independently: it ends *"every branch of the design tree visited, nothing left silently assumed."*
+
+---
+
+## 25. Chapter 08 organizes by shape, and reports two measurements that contradicted the plan
+
+**Date.** 2026-08-12
+
+**Context.**
+The TOC gives chapter 08 seven topics: Amdahl, the Universal Scalability Law, Little's Law, queueing and "why 85% utilization is a cliff," the memory hierarchy with an array-of-structs benchmark, the speed of light, and big-O against constants. Written as a list it is a formula sheet.
+
+**Decision.**
+Organize by **shape**, since the shape is what decides the fix:
+
+| Shape | Law | What to do |
+|---|---|---|
+| Ceiling | Amdahl | stop buying hardware, shrink the serial fraction |
+| Knee where the sign flips | USL | stop adding workers, remove shared state |
+| Superlinear curve | queueing | buy headroom, not speed |
+| Discontinuity | cache line | look at layout, not algorithm |
+| Floor | speed of light | change geography or stop waiting |
+
+The claim follows: adding more of a resource has a shape, and intuition assumes a straight line when nothing here is one. Naming the shape converts five unrelated formulas into one diagnostic question — *which shape am I on, and where is the knee?*
+
+**Two measurements contradicted the plan, and both are reported as found.**
+
+**The 85% cliff does not exist.** The TOC says "why 85% utilization is a cliff rather than headroom." Computing the marginal cost of one extra point of utilization shows a smooth curve with no threshold anywhere:
+
+```text
+  50% -> 51%: wait  2.00x ->  2.04x  (+2.0%)
+  85% -> 86%: wait  6.67x ->  7.14x  (+7.1%)
+  95% -> 96%: wait 20.00x -> 25.00x  (+25.0%)
+```
+
+What rises is the marginal cost, continuously, from the start. 85% is a convention marking roughly where that cost becomes obvious to humans, not a threshold in the mathematics. The chapter says so and corrects the received framing rather than repeating it.
+
+**The small-n demonstration failed.** A linear scan was expected to beat a hash map below some *n*. With string keys it never did — the map won at *n* = 4 and every size above.
+
+Following decision 14's rule that a failed demonstration is the finding, the chapter reports it and runs the integer version, where the scan wins to about eleven elements. So **the crossover is not a property of the two algorithms**: it is set by the cost of one comparison against the cost of one hash, and string comparison is expensive enough to move the crossing off the bottom of the chart.
+
+That makes the widely repeated *use a slice under about twenty items* a magnitude quoted without its conditions — chapter 04's exact failure, arriving unprompted in the material. The boundary section is stronger for the demonstration having failed than it would have been had it worked.
+
+**Provenance for the measurements.**
+Every number was measured on the machine the chapter was written on — an Apple M4, Go 1.26.5 — and a section before the demonstration says so, with the reason: the regularity holds everywhere and the magnitude is local, so the formulas are exact and the numbers are an instance. That is chapter 04's regularity-versus-magnitude distinction applied to the chapter's own evidence.
+
+The AoS/SoA benchmark uses an 80-byte struct against a 64-byte cache line and shows 4.3× from field layout alone, discharging chapter 05's deferral of the arithmetic and chapter 03's latency-Force pointer.
+
+**Consequence.**
+`LEDGER.md` gains nine concept rows and four example rows.
+Chapter 08 runs 280 lines and moves to **in progress**.
