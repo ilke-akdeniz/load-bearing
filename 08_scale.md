@@ -200,16 +200,7 @@ for i := range totals { // totals is just []int64
 	sum += totals[i]
 }
 ```
-[claude we don't need this raw duplicate measurements, the naming "BenchmarkSumFromRecords-10" is also very weird. 
-Maybe just remove the table below and start the next paragraph with: Our local benchmar was seven times faster ... ****]
-```text
-BenchmarkSumFromRecords-10    100    3414706 ns/op
-BenchmarkSumFromRecords-10    100    3320516 ns/op
-BenchmarkSumFromColumn-10     100     476261 ns/op
-BenchmarkSumFromColumn-10     100     475311 ns/op
-```
-
-**Seven times faster**, from where the bytes sit. This is also why analytics databases store data in columns rather than rows: a query that sums one column should not have to read the other twenty.
+Summing two million orders took 3.4 milliseconds from the records and 0.48 milliseconds from the column — **seven times faster**, from where the bytes sit. This is also why analytics databases store data in columns rather than rows: a query that sums one column should not have to read the other twenty.
 
 Two things about this shape. It is a **step rather than a slope** — growing a struct from 40 bytes to 60 costs nothing, and crossing 64 costs you a second fetch per record. And the expensive fields are the ones the slow loop never names, which is why the cost is invisible at the place where it is paid.
 
@@ -276,7 +267,7 @@ That failure is the more useful result. The same test with integer keys:
 
 Scanning wins up to about eleven integers, and never wins for strings. So the crossover point is **not a property of the two algorithms.** It is set by how expensive one comparison is against one hash, and comparing strings is expensive enough to move the crossing off the chart entirely.
 
-Which makes the familiar advice — *use a list under about twenty items* — a number quoted without the conditions that produced it, exactly the failure chapter 04 describes: The threshold belongs to somebody else's data type and machine.
+Which makes the familiar advice — *use a list under about twenty items* — a number quoted without the conditions that produced it, exactly the failure chapter 04 describes — the pattern holds, but the threshold belongs to somebody else's data type and machine.
 
 In practice, at these sizes the difference is nanoseconds. Use the map and spend the attention elsewhere.
 
@@ -304,7 +295,7 @@ A batch job that must finish by 6 a.m. and takes two hours has seven hours of sl
 
 **Queue models are wrong in two directions at once.** They assume irregular arrivals, which makes them pessimistic for steady traffic, and a single server, which makes them optimistic for a pool. Two errors pointing opposite ways is not the same as being right.
 
-**The scalability curve needs the system before it can describe it.** Its coefficients come from measuring a running system at several worker counts. It explains a measurement you already have; it does not tell you in advance where your peak will be. [claude I don't get this, is there a way to formulate this idea more clearly?]
+**The scalability curve cannot predict a system you have not built.** To draw it you need two numbers — how much workers contend, and how much they invalidate each other's caches — and the only way to get them is to run the real system at several worker counts and fit the curve to what you measure. So it will not tell you in advance where your peak will be. What it is good for is explaining a slowdown you can already see, and knowing to go looking for a peak at all.
 
 **Optimizing the wrong shape is worse than doing nothing.** Adding workers past the peak makes throughput fall. Adding cores to mostly-serial work buys almost nothing. Both cost money and both look like progress.
 
