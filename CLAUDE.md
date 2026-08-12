@@ -150,8 +150,26 @@ Where the name is initials of people — FLP is Fischer, Lynch, and Paterson —
 Not an illustration bolted on afterwards; the code should be the argument.
 Go, C#, and Python carry most examples; Rust, TypeScript, C, and SQL appear where a point needs them.
 
+**Write for an engineer who is a tourist in this domain.**
+The reader is experienced, and experienced in *their* specialty rather than in all the ones this book crosses.
+A single chapter may traverse queueing theory, cache hierarchies, distributed consensus, and compiler structure.
+Almost nobody is fluent in more than two of those, and the missing ones are invisible to whoever is writing — which is how a chapter ends up addressed to someone who already knew it.
+
+Calibrate with the test the abbreviation rule uses: **would an experienced engineer produce this without hesitating?**
+
+- **Assume, and do not explain** — big-O notation, graphs and trees, hash tables, locks, transactions, HTTP, garbage collection, indexes, interfaces, recursion. Explaining these reads as condescension and spends attention the argument needs.
+- **Explain at first use, always** — anything belonging to one specialty. Cache line, prefetcher, working set, coherency traffic, *utilization* in its queueing sense, linearizability, quorum, entity-component system, bitemporality.
+
+The structural fix beats the inline definition: **lead with the situation, give the number, name the thing last.**
+Chapter 08's Amdahl section works because a hundred-minute report with twenty un-splittable minutes makes the ceiling obvious before any formula appears — the name then labels something already understood rather than gating it.
+
+Two failure symptoms, opposite directions.
+Under-explaining reads as a textbook: the reader decodes vocabulary instead of following the argument, and the point is lost in the decoding.
+Over-explaining is the likelier failure once this rule is in force, and it is just as bad — the reader is being told what they know.
+
 **Write Go for a reader who does not know Go.**
-The audience is an experienced engineer, most likely fluent in Java, C#, or Python and not in Go.
+The language-specific case of the rule above.
+The audience is most likely fluent in Java, C#, or Python and not in Go.
 Go carries a large share of the book's examples because FlowCore is written in it, so every Go sample has to be readable by someone who has never used the language.
 
 - Gloss anything with no counterpart in those languages, at its first appearance, in one line — channels, goroutines, `defer`, the comma-ok idiom, struct embedding, capitalization as visibility.
