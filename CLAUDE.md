@@ -378,6 +378,24 @@ The recognizable forms, all of which have shipped in drafts of this book and bee
 - **Grand summaries** — "that is the whole of API design." The preceding sentence already said it, and better.
 - **Atmosphere** — 3am, war stories, the beleaguered engineer. The reader is one and does not need reminding.
 
+### Vary the cadence
+
+A distinct failure from decoration, and the one that makes generated prose recognizable: **every paragraph landing on a closing turn.**
+
+The shape is setup, pivot, epigram — and it is fine once. Run it for forty paragraphs and the reader stops hearing the argument and starts hearing the rhythm.
+
+The tells, all cut from drafts of this book:
+
+- **A closing clause beginning "which is why."** Two in a row is a tic; four in a section is a style.
+- **"It is not X. It is Y."** Reserve for a genuine correction. It is not a way to introduce Y.
+- **Announcing a count, then delivering it** — *two things are worth noticing here.* Say the two things.
+- **A final sentence engineered to be quotable** — *and no amount of profiling will find it.* Ask whether it adds a fact. Usually the preceding sentence already carried it.
+- **Rule of three** — three parallel clauses, three-item lists, a triple where two would do.
+
+The fix is not to delete every turn but to **let most paragraphs end flat**, on the fact, with no summary. A closing line earns its place roughly once a section, where the argument genuinely turns.
+
+Read a finished section aloud. If the paragraphs share one rhythm, rewrite the flat content first and keep the turn only where it does work.
+
 When one of these is found in review, **treat it as a signal that the surrounding claim may not be worked out.**
 Decoration usually appears where an argument is thin — it is covering the gap rather than filling it.
 Rewrite the claim, not the phrase.

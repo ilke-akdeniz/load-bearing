@@ -1128,3 +1128,56 @@ The AoS/SoA benchmark uses an 80-byte struct against a 64-byte cache line and sh
 **Consequence.**
 `LEDGER.md` gains nine concept rows and four example rows.
 Chapter 08 runs 280 lines and moves to **in progress**.
+
+---
+
+## 26. Chapter 08 rewritten: jargon, a repeated example, and a prose tic
+
+**Date.** 2026-08-12
+
+**Context.**
+The author's review of chapter 08 ran to fourteen tags and included the judgement that a rewrite might be warranted. It was. The tags were not local wording problems — three systemic faults ran through the whole chapter.
+
+**Fault one: written for someone who already knew the material.**
+The author's summary:
+
+> An average software engineer doesn't have good depth on all of these and the points are lost trying to understand the jargon.
+
+Terms used without definition, in a chapter whose subject is four separate specialist domains: *must run serially*, *speedup*, *bounded*, *ceiling*, *utilization*, *rho*, *queue length*, *wait scales as*, *pointer-chasing a shuffled ring*, *prefetcher*, *working set*, *dependent load*. The queueing section drew the verdict *"reads like a statistics textbook."*
+
+The rewrite inverts the order of every section: a concrete situation first, then the number, then the formula named afterwards. Amdahl now opens with a nightly report that takes 100 minutes, 20 of them reading a file that cannot be split, and works the arithmetic out in minutes before the notation appears. Utilization is defined as the fraction of time a server is busy. The cache line is introduced as a hardware fact — the machine always fetches 64 bytes — before anything depends on it.
+
+**Fault two: the Universal Scalability Law was asserted, not demonstrated.**
+The author noted that plotting the formula gives no insight without showing when workers interfere and what that concretely means.
+
+Correct, and the fix is a measurement that is stronger than the plot. Two million small computations spread over a growing worker pool, in two versions differing only in whether workers update one shared counter or their own:
+
+```text
+workers   shared counter    private counters
+     2      72.54 M/s        179.54 M/s
+     4      16.44 M/s        304.05 M/s
+    64      13.33 M/s        600.24 M/s
+```
+
+Between two workers and four, throughput **falls more than fourfold** and never recovers. That is the reversal measured on the machine rather than drawn from fitted coefficients, and it shows the fix in the same table: the right-hand column is the same arithmetic without the sharing.
+
+**Fault three: a repeated example, which is a ledger violation.**
+The chapter reused chapter 05's `Particle` struct for the memory-layout benchmark. The ledger had split the two — 05 owns the encapsulation argument, 08 owns the arithmetic — but using the same struct made it read as the same example twice.
+
+The author's rule, which is worth keeping: if two chapters share a *shape*, keep the shape and change the example, so it does not land as "oh, the particle thing again."
+
+Replaced with summing one field across two million order records, which is the book's running domain (orders appear in chapters 03 and 07) and gives a **7.1×** difference against a 120-byte record. It also connects outward: this is why analytics databases store columns rather than rows.
+
+**A prose tic, and a new rule.**
+The author flagged two paragraphs as *"the pinnacle"* of an AI prose style and asked for a `CLAUDE.md` entry against it.
+
+The pattern is every paragraph landing on a closing turn — setup, pivot, epigram. Fine once; run for forty paragraphs it becomes a rhythm the reader hears instead of the argument. `CLAUDE.md` gains *Vary the cadence* under the register section, naming five tells: a closing clause beginning "which is why," the *it is not X, it is Y* construction, announcing a count before delivering it, a final sentence engineered to be quotable, and the rule of three.
+
+The instruction is not to delete every turn but to **let most paragraphs end flat**, keeping one where the argument genuinely turns. The rewritten chapter uses "which is why" once, down from four.
+
+**Also corrected.**
+The epigraph said *grades*, which decision 17 replaced with *kinds* — a regression against a recorded decision, caught by the author.
+
+**Consequence.**
+Chapter 08 runs 338 lines, up from 280, almost entirely in definitions and worked setup.
+`LEDGER.md` has one example row replaced and three added.

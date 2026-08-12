@@ -98,7 +98,7 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Saga is not rollback | 07 | Compensations are business operations and are visible to customers | cite 07 |
 | Five shapes of scale | 08 | Ceiling, knee, superlinear curve, discontinuity, floor — the shape decides the fix | "which shape (Ch. 08)" |
 | Amdahl: a ceiling | 08 | The serial fraction bounds speedup regardless of core count; shrink s rather than buying cores | cite 08 |
-| USL: returns go negative | 08 | Coherency cost grows with pairs, so past a peak each added worker lowers throughput | cite 08 |
+| USL: returns go negative | 08 | Contention grows with workers and coherency with pairs, so past a peak each added worker lowers throughput | cite 08 |
 | Little's Law | 08 | L = λW, near-definitional, true of any stable queue; two knowns give the third | cite 08 |
 | Utilization is superlinear | 08 | Wait scales as 1/(1−ρ); there is no cliff at 85%, only a marginal cost that rises from the start | cite 08 |
 | Memory hierarchy ~6 orders | 08 | Register to network spans about a million-fold | cite 08 |
@@ -168,9 +168,11 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | Halting problem vs its folk version | 04 | The theorem forbids a universal decider; termination checking for particular programs is routine |
 | `rate` read once at startup | 04 | A definitional claim that either binds or has no cache to act on |
 | Go map randomization vs Python dict order | 04 | One regularity, two opposite responses, and a magnitude that moved. 05 owns Hyrum's Law |
-| AoS vs SoA benchmark | 08 | Memory hierarchy beats abstraction: 4.3x from field layout, no algorithm change |
+| Summing one field across 2M order records vs one column | 08 | 7.1x from where the bytes sit; 120-byte record, 64-byte cache line, no algorithm change. 05 owns the encapsulation argument and keeps `Particle` |
 | Pointer-chase latency ladder | 08 | 1.94 ns to 196 ns across working-set sizes, same instruction |
-| Amdahl / USL / M/M/1 tables | 08 | The three computed shapes, with the 85% "cliff" shown not to exist |
+| Nightly report, 20 of 100 minutes un-splittable | 08 | Amdahl worked concretely: a 5x ceiling, and 1024 cores beating 16 by 20% |
+| Shared counter vs private counters, 1–64 workers | 08 | Negative scaling measured: throughput falls 4x between two workers and four |
+| M/M/1 wait table and the marginal-cost table | 08 | The queue curve, with the 85% "cliff" shown not to exist |
 | Linear scan vs map, ints and strings | 08 | The crossover moves with element type — the finding that the expected demo did not show |
 | Adapter at class vs system scale | 11 | The scale test |
 | GoF collapse in 4 languages | 13 | Survives-translation test |

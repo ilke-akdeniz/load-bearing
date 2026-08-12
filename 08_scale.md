@@ -1,266 +1,311 @@
 # Scale: Queues, Parallelism, Memory
 
-*This chapter is **Law**, and the mix is unusual: two theorems, one near-definitional identity, and several empirical constants (Ch. 04). The grades [claude didn't we abaondon "grades" for "kinds"? Also recommenmd being explicit about the subject: "Kind of the laws matter more"] matter more here than anywhere else in the book, because the empirical numbers are the ones people quote and the ones that have moved.* [claude moved where? Explain clearly.]
+*This chapter is **Law**, and it mixes all three kinds (Ch. 04): two theorems, one claim true by definition, and several empirical laws. Which kind a claim is matters more here than anywhere else in the book, because the empirical ones carry numbers — and a number is the part that belongs to somebody else's machine.*
 
 ## The claim
 
-**Adding more of a resource has a shape, and the shape is arithmetic you can do before you build.**
-[claude I suggest this more direct version: "Adding more of a resource has an arithmetic shape you can do before you build."]
+**Adding more of a resource has an arithmetic shape you can work out before you build.**
 
-Intuition assumes a straight line — twice the cores, twice the speed; twice the load, twice the wait. Nothing in this chapter is a straight line. There are ceilings you cannot pass, knees past which more makes things worse [claude I don't get the meaning of "knees past which..."], discontinuities where one extra field costs a fourfold slowdown, and floors that no engineering removes.
+Intuition says the relationship is a straight line: twice the servers, twice the throughput; twice the traffic, twice the wait. It never is. This chapter works through five shapes, and the skill is recognizing **which one you are on**, because that is what decides whether the fix is more hardware, less sharing, or a different design.
 
-The useful skill is not memorizing the formulas. It is knowing **which shape you are on**, because that decides whether the answer is more hardware, less contention, or a different design.
+| Shape | You will meet it as | The fix |
+|---|---|---|
+| **Ceiling** | more cores stop helping | make the un-parallelizable part smaller |
+| **Reversal** | more workers make it *slower* | remove the shared thing they contend on |
+| **Cliff-edge curve** | fine at 80% load, unusable at 95% | leave headroom |
+| **Step** | one extra struct field costs 7× | change the memory layout |
+| **Floor** | latency you cannot optimize away | move the data, or stop waiting for it |
 
-## A note on the numbers
+## About the numbers
 
-Every measurement below was taken on the machine this chapter was written on: an Apple M4 laptop, Go 1.26.5, 128 KB L1 data cache, 16 MB L2, 32 GB of memory.
+Every measurement here was taken on the machine this was written on — an Apple M4 laptop, Go 1.26.5, 128 KB of L1 data cache, 16 MB of L2, 32 GB of memory.
 
-**They will not reproduce exactly on your machine, and that is the point.** These are empirical constants, not theorems — the regularity holds everywhere and the magnitude is local (Ch. 04). The formulas are exact; the numbers are an instance.
+**Yours will differ, and that is the point.** The formulas are exact and hold everywhere. The measurements are empirical (Ch. 04), which means the *pattern* transfers and the *number* does not. Someone else's benchmark tells you a shape exists; only your own tells you where you are on it.
 
 ---
 
 ## The demonstration
 
-### A ceiling: Amdahl's Law
-[claude this section needs lots of clarification. 
-Define "must run serially", "speedup". 
-"bounded" to what? To an upper limit? 
-ceiling of what? Processing speed? Work completion?
-How did you come up with those numbers? Are they solid?]
-If a fraction *s* of the work must run serially, the speedup from *N* processors is bounded:
+### Ceiling: the part you cannot split
+
+A nightly report takes 100 minutes on one machine. Twenty of those minutes are spent reading one file from start to finish — that part cannot be split, because you cannot read the second half before the first. The remaining eighty minutes process rows independently, so that part splits perfectly.
+
+Add cores and only the eighty minutes shrink:
 
 ```text
-speedup ≤ 1 / (s + (1−s)/N) [claude how does this formula read? What does it give? The ratio of speedup as a decimal number? 
-Give a concrete example like: a work taking x minutes, add y cores, it takes z seconds]
+   1 core     20 + 80      = 100 min      1.0x faster
+   4 cores    20 + 80/4    =  40 min      2.5x
+  16 cores    20 + 80/16   =  25 min      4.0x
+1024 cores    20 + 80/1024 =  20.08 min   5.0x
 ```
 
-Which produces a ceiling that does not care how many cores you buy:
+Twenty minutes never goes away, so the whole job can never take less than that — and 100 minutes divided by 20 is a ceiling of **five times, forever.** Buying a thousand cores instead of sixteen improves this job by 20%.
+
+That is **Amdahl's Law**. Written out, with `s` as the fraction that cannot be split and `N` as the number of cores:
 
 ```text
-  1% serial -> ceiling  100.0x   (at 16 cores: 13.9x, at 1024: 91.2x)
-  5% serial -> ceiling   20.0x   (at 16 cores:  9.1x, at 1024: 19.6x)
- 10% serial -> ceiling   10.0x   (at 16 cores:  6.4x, at 1024:  9.9x)
- 25% serial -> ceiling    4.0x   (at 16 cores:  3.4x, at 1024:  4.0x)
+speedup ≤ 1 / (s + (1 − s)/N)
 ```
 
-Read the last row carefully. At 25% serial, going from 16 cores to 1024 — sixty-four times the hardware — buys you 3.4× to 4.0×. **An 18% improvement for 6,400% of the machines.**
-
-This is a theorem, so the only moves are chapter 04's two: falsify an assumption, or stop needing the conclusion. The assumption worth attacking is that *s* is fixed. It usually is not — the serial fraction is often a lock, a single writer, or a coordination point you chose (Ch. 06), and shrinking *s* raises the ceiling in a way that buying cores cannot.
-
-### A knee, where the sign flips: the Universal Scalability Law
-[claude this needs clarification as well. When do they interfere? What's the precondition? You say the "cost of keeping...", unless you give an example that demonstrates what that conretely means and how the law applies this section doesn't give much insight.]
-
-Amdahl says returns diminish. The Universal Scalability Law says they can go **negative**, because workers do not merely fail to help each other — they interfere.
-
-It adds a second term for coherency: the cost of keeping *N* workers' views of shared state consistent, which grows with the number of *pairs*, so with N².
+The result is a multiplier: how many times faster the whole job runs. As `N` grows the second term vanishes, leaving `1/s` — so the ceiling is set entirely by the part you could not split.
 
 ```text
-   1 workers ->   1.00x
-   4 workers ->   3.63x
-   8 workers ->   6.32x
-  16 workers ->   9.47x
-  32 workers ->  10.95x
-  64 workers ->   9.25x
- 128 workers ->   6.08x
- 256 workers ->   3.46x
-
- peak at 31 workers (10.95x); more workers is slower
+ fraction that      ceiling,        what you actually
+ cannot be split    any hardware    get at 16 cores
+       1%              100x              13.9x
+       5%               20x               9.1x
+      10%               10x               6.4x
+      25%                4x               3.4x
 ```
 
-Sixty-four workers are slower than thirty-two. Two hundred and fifty-six are slower than four.
+The practical reading: **find the un-splittable fraction before you buy anything.** At 25% it barely matters what hardware you have.
 
-The shape matters more than the coefficients, which are fitted rather than derived. **There is a peak, it is often lower than the core count, and past it every worker you add makes the system worse.** A team that responds to a slow system by raising the worker count can walk down the right-hand side of that curve for months, adding capacity and losing throughput, because the intuition says more workers cannot hurt.
+This is a theorem, so there are two moves and no others (Ch. 04). Falsify an assumption, or stop needing the conclusion. The assumption worth attacking is that `s` is fixed — usually it is a lock, a single writer, or a coordination step somebody chose (Ch. 06), and making it smaller raises the ceiling in a way that hardware cannot.
 
-### Superlinear cost: queues near saturation
+### Reversal: when more workers make it slower
 
-Little's Law first, because it is the one you can always apply. For any stable system:
+Amdahl says extra workers stop helping. The next result is worse: they can start actively hurting, because workers do not merely fail to help each other — they get in each other's way.
 
-```text
-L = λ × W
-```
-
-Items in the system equals arrival rate times time in the system. It assumes almost nothing — no distribution, no independence — which makes it near-definitional (Ch. 04) and always true of a stable queue. Its use is that knowing any two gives you the third: 500 requests a second and 200 ms average latency means 100 requests in flight, which is a number you can compare against your connection pool.
-
-Then the part that surprises people. For a simple queue, the wait scales as `1/(1−ρ)` where ρ is utilization:[claude what does the "wait scales as" mean? The wait multiplies by? What is "utliziation"? What is rho? What is queue length? count of items on queue?]
-
-```text
-  rho     queue length     wait (in service times)
-  0.50        1.00              2.0x
-  0.70        2.33              3.3x
-  0.80        4.00              5.0x
-  0.85        5.67              6.7x
-  0.90        9.00             10.0x
-  0.95       19.00             20.0x
-  0.99       99.00            100.0x
-```
-
-A server at 99% utilization is not 4% busier than one at 95%. It is **five times slower.**
-
-**On the "85% rule," which is worth correcting.** It is often taught as a cliff — stay below 85% and you are fine. The arithmetic shows no cliff at 85 or anywhere else:
-
-```text
-  50% -> 51%: wait  2.00x ->  2.04x  (+2.0%)
-  70% -> 71%: wait  3.33x ->  3.45x  (+3.4%)
-  85% -> 86%: wait  6.67x ->  7.14x  (+7.1%)
-  95% -> 96%: wait 20.00x -> 25.00x  (+25.0%)
-```
-
-The curve is smooth. What rises is the *marginal* cost of one more point of utilization, continuously, from the very beginning. 85% is a convention chosen because that is roughly where the marginal cost becomes obvious to humans — not a threshold in the mathematics.
-
-Two honest caveats. This model assumes random arrivals and variable service times; a system with perfectly regular arrivals queues far less, and one with bursty arrivals queues far more. And it is a single server — real systems with N servers degrade more gently. Use it for the shape and the order of magnitude, not for a capacity plan.
-
-[claude I really think this section needs a rewrite with simpler, clear sentences and less jargon. Focus on the implications on real-world software. Right now it reads like a statistics textbook.]
-
-### A discontinuity: the memory hierarchy
-
-The formulas above are about time. This one is about distance, and it is the one most likely to make a factor-of-four difference to code you have already written.
-
-Pointer-chasing a shuffled ring, so no prefetcher can help, at four working-set sizes [claude: What? Reads like random words to me.] :
-
-```text
-working set       16 KB  ->   1.94 ns per dependent load
-working set      256 KB  ->   7.61 ns per dependent load
-working set     4096 KB  ->  14.79 ns per dependent load
-working set   262144 KB  ->  196.55 ns per dependent load
-```
-
-**A hundredfold, on one machine, for the identical instruction.** The only thing that changed is how much memory the program is touching. Add a network hop and the span from register to remote service crosses roughly six orders of magnitude.
-
-Now the consequence for code. A particle update, written the obvious way:
-
-[claude we already used this example on another chapter. I think we should not repeate code examples on chapters unless there is really big build-up or contribution to the example. If the example is more valuable here change the one on the other chapter. If the example share the commeon shape, keep the shape but change the example. It shoud not come up as "oh same particle thing again..."]
+Here is that measured rather than asserted. The same total work — two million small computations — spread across a growing pool of workers, in two versions. In the first, each worker updates one shared counter after each item. In the second, each worker keeps its own count and they are added up at the end. Nothing else differs.
 
 ```go
-type Particle struct {
-	PosX, PosY, PosZ float32
-	VelX, VelY, VelZ float32
-	R, G, B, A       float32
-	Lifetime, Mass   float32
-	// ... plus whatever else an entity accumulates
-}
+// Version A: every worker touches the same counter.
+mu.Lock()
+counter += result
+mu.Unlock()
 
-for i := range particles {
-	particles[i].PosX += particles[i].VelX * dt
-}
+// Version B: every worker touches only its own.
+local[workerID] += result
 ```
 
-That loop reads two floats — eight bytes — per particle. But memory does not move in bytes, it moves in **cache lines**, 64 bytes at a time, and this struct is 80 bytes. So every iteration drags in colour, mass, and lifetime that the loop never touches, and each particle straddles two lines.
+```text
+workers   shared counter    private counters
+     1      68.11 M/s         80.54 M/s
+     2      72.54 M/s        179.54 M/s
+     4      16.44 M/s        304.05 M/s
+     8      13.23 M/s        477.29 M/s
+    16      12.57 M/s        502.50 M/s
+    32      12.98 M/s        604.56 M/s
+    64      13.33 M/s        600.24 M/s
+```
 
-The same computation over parallel arrays:
+Look at the left column between two workers and four. Throughput does not merely stop rising — it **falls by more than four times**, and it never recovers no matter how many workers are added. The right column, doing identical arithmetic, keeps climbing.
+
+Two things cause this, and both get worse as workers are added.
+
+**Contention.** Only one worker can hold the lock, so the others wait. That cost grows with the number of workers.
+
+**Coherency.** This is the one people miss. Each core keeps its own cached copy of frequently used data. When one core writes to the counter, every other core's copy must be thrown away and re-fetched. With more workers there are more pairs of cores that have to keep agreeing with each other, and the number of pairs grows as the *square* of the worker count. That is why the curve turns down rather than flattening.
+
+The **Universal Scalability Law** is Amdahl with that second term added. Its coefficients are fitted from measurements rather than derived, so treat the curve as a description and not a prediction. What it tells you is that **a peak exists, it is often lower than your core count, and past it every worker you add costs throughput.**
+
+The practical reading: when a system is slow and adding workers does not help, adding more is not an incomplete fix — it may be the cause. Find what they all touch.
+
+### Cliff-edge curve: what queues do near capacity
+
+Two results, and the first applies to everything.
+
+**Little's Law.** For any system where things arrive, spend time inside, and leave:
+
+```text
+items inside = arrival rate × time each one spends inside
+```
+
+At 500 requests per second with 200 ms average response time, there are 100 requests inside your system at any moment. That number is worth having, because if your connection pool holds 50, then half of those requests are queuing for a connection and the pool is your bottleneck — a thing you can check this afternoon.
+
+The law assumes essentially nothing, which makes it true by definition (Ch. 04) for any queue that is not growing without limit.
+
+**Then the part that surprises people.** *Utilization* is the fraction of time a server is busy: 0.8 means busy 80% of the time, idle 20%. For a single server handling irregular traffic, the time a request spends waiting grows as `1 / (1 − utilization)`:
+
+```text
+ busy      requests waiting     a request takes
+           in the queue         this many times longer
+ 50%            1.0                  2x
+ 70%            2.3                  3x
+ 80%            4.0                  5x
+ 90%            9.0                 10x
+ 95%           19.0                 20x
+ 99%           99.0                100x
+```
+
+A server that is busy 99% of the time is not 4% busier than one at 95%. Requests take **five times longer**.
+
+The reason is idle time. At 50% utilization, half the capacity is spare, so a sudden burst of requests gets absorbed. At 95% there is almost no spare capacity, so a burst has nowhere to go except the queue — and everyone behind it waits. **Queues are not caused by load. They are caused by variation in load, and idle time is what absorbs it.**
+
+**On the "85% rule."** It is often taught as a threshold: stay under 85% and you are fine. There is no threshold. Here is the cost of one extra percentage point at four places on the curve:
+
+```text
+ from 50% to 51%:  wait  2.00x ->  2.04x    +2%
+ from 70% to 71%:  wait  3.33x ->  3.45x    +3%
+ from 85% to 86%:  wait  6.67x ->  7.14x    +7%
+ from 95% to 96%:  wait 20.00x -> 25.00x   +25%
+```
+
+The curve is smooth. What rises is the price of each additional point, continuously, from the beginning. 85% is a convention marking roughly where that price becomes obvious to a human watching a graph.
+
+Two caveats before anyone plans capacity with this. It assumes irregular arrivals — a system with perfectly steady traffic queues far less, and a bursty one far more. And it describes one server; a pool of them degrades more gently. Use it for the shape.
+
+### Step: what the machine actually fetches
+
+The results above are about time. This one is about layout, and it can cost a factor of seven in code that looks fine.
+
+Start with the hardware fact. Memory is not read a byte at a time. The processor always fetches a fixed-size block — a **cache line**, 64 bytes on most machines — and keeps recently used blocks in a small fast store near the core. Reading one byte that is already in that store takes about a nanosecond. Reading one that is not takes a hundred times longer, because the whole 64-byte block has to come from main memory.
+
+That difference is the whole of this section:
+
+```text
+ total data being touched      time per read
+        16 KB                    1.94 ns      fits in the fastest cache
+       256 KB                    7.61 ns      fits in the second-level cache
+     4,096 KB                   14.79 ns      still cached, mostly
+   262,144 KB                  196.55 ns      main memory
+```
+
+Same instruction, hundredfold difference, decided only by how much memory the program is touching. Add a network call and the range from processor register to remote service spans roughly six orders of magnitude.
+
+Now the consequence for ordinary code. Here is an order record of the kind any commerce system accumulates:
 
 ```go
-posX, velX := soa.PosX, soa.VelX
-
-for i := range posX {
-	posX[i] += velX[i] * dt
+type Order struct {
+	ID            [16]byte
+	CustomerID    [16]byte
+	TotalMinor    int64      // the only field the loop below reads
+	TaxMinor      int64
+	ShippingMinor int64
+	PlacedAt      time.Time
+	ShippedAt     time.Time
+	Currency      [3]byte
+	Status        uint8
+	Channel       uint8
+	WarehouseID   int32
 }
 ```
 
-Now a 64-byte line carries sixteen useful floats instead of parts of one particle. Over 1,048,576 particles:
+That is 120 bytes. Now total up two million of them:
 
-```text
-BenchmarkAoS-10    200    2628190 ns/op
-BenchmarkAoS-10    200    2632114 ns/op
-BenchmarkAoS-10    200    2707792 ns/op
-BenchmarkSoA-10    200     611411 ns/op
-BenchmarkSoA-10    200     610686 ns/op
-BenchmarkSoA-10    200     609759 ns/op
+```go
+var sum int64
+for i := range orders {
+	sum += orders[i].TotalMinor
+}
 ```
 
-[claude this applies to this chapter in general: Either make this examples, cases, less technical or describe clearly concepts, labels, abbreviations for the examples. I would prefer the first option. Altough sections are short they deals with deep technical domains like Memory, Parallelism, Networks.... An average software engineer doesn't have good depth on all of these and the points are lost trying to understand the jargon.]
+The loop needs 8 bytes from each order. The machine fetches 120 — every field, including two timestamps and a warehouse ID that this loop never mentions. **Fifteen times more memory crosses the bus than the calculation requires.**
 
-**4.3×**, from rearranging fields. No algorithm changed, no work was removed, and the source of both loops is the same arithmetic.
+Store that one field on its own and the arithmetic is unchanged:
 
-This is why chapter 05's entity-component case gives up encapsulation deliberately: the layout *is* the interface there, and hiding it costs the margin the design exists for. Two things worth noticing about the shape. It is a **discontinuity** rather than a slope — nothing happens as the struct grows from 40 bytes to 60, and then crossing 64 costs you. And the fields that hurt are the ones the loop never mentions, which is why this defect is invisible in the code that suffers from it. [claude is there a way to prevent this "AI" prose style somehow? This paragraph was the pinnacle of that and it becomes annying fast. Try to find a claude.md entry to alleviate this. "The x is why, and... Which is why..."]
-
-### A floor: the speed of light
-
-Some latency is not an engineering problem.
-
-```text
-London <-> New York:  5,570 km  ->   54.62 ms round trip
-London <-> Sydney:   16,990 km  ->  166.62 ms round trip
+```go
+var sum int64
+for i := range totals { // totals is just []int64
+	sum += totals[i]
+}
 ```
 
-That is signal propagation in fibre — light at roughly two-thirds of *c* through glass — with no routers, no queueing, no TLS handshake, no processing. Real numbers are one and a half to two times these.
+```text
+BenchmarkSumFromRecords-10    100    3414706 ns/op
+BenchmarkSumFromRecords-10    100    3320516 ns/op
+BenchmarkSumFromColumn-10     100     476261 ns/op
+BenchmarkSumFromColumn-10     100     475311 ns/op
+```
 
-You cannot optimize past it, and the only moves are the ones chapter 04 names: change an assumption (put the data nearer the user), or stop needing the conclusion (make the operation asynchronous so nobody waits for the round trip). A synchronous cross-Atlantic call in a request path has a floor of 55 ms, and no amount of profiling will find it.
+**Seven times faster**, from where the bytes sit. This is also why analytics databases store data in columns rather than rows: a query that sums one column should not have to read the other twenty.
+
+Two things about this shape. It is a **step rather than a slope** — growing a struct from 40 bytes to 60 costs nothing, and crossing 64 costs you a second fetch per record. And the expensive fields are the ones the slow loop never names, which is why the cost is invisible at the place where it is paid.
+
+Chapter 05 uses the same underlying fact for a different argument: in an entity-component system the memory layout is deliberately made public, because hiding it would cost exactly the margin measured here.
+
+### Floor: distance
+
+Some latency is not an engineering problem at all.
+
+Light travels through fibre at about two-thirds of its speed in vacuum. That gives a hard minimum for a round trip, before any router, queue, handshake, or line of code:
+
+```text
+ London  <-> New York      5,570 km       54.6 ms round trip
+ London  <-> Sydney       16,990 km      166.6 ms round trip
+```
+
+Real measurements run one and a half to two times these, because cables do not follow great circles and routers take time. A synchronous call from London to Sydney inside a request handler has a floor of 167 ms, and no profiler will ever show you why.
+
+The moves are chapter 04's two. Change an assumption: put a copy of the data near the user. Or stop needing the conclusion: make the operation asynchronous, so nobody is waiting for the round trip to finish.
 
 ---
 
 ## Why it holds
 
-Each shape has a different mechanism, and mistaking one for another is how the wrong fix gets applied. [claude AI prose style example]
+Each shape has a different cause, and applying the wrong fix is the common failure.
 
-**Ceilings come from work that cannot be divided.** Amdahl is arithmetic on a fraction, so it needs no assumptions about hardware and cannot be engineered around — only reduced by making the serial part smaller.
+**Ceilings** come from work that cannot be divided. That is arithmetic on a fraction, needing no assumption about hardware, so no hardware changes it.
 
-**Sign flips come from pairwise interaction.** Contention costs grow with *N*; coherency costs grow with the number of pairs, so with *N²*. Any quantity growing quadratically eventually beats one growing linearly, and that crossing is the peak. This is why the fix for a system past its knee is never more workers — it is removing shared state so the quadratic term shrinks (Ch. 06's single writer is the extreme case).
+**Reversals** come from pairs. Contention grows with the number of workers; coherency grows with the number of pairs of workers, which grows as the square. A quantity growing as the square eventually overtakes one growing in proportion, and where they cross is the peak. This is why the fix is never more workers — it is removing what they share, and chapter 06's single-writer design is that taken to its limit.
 
-**Superlinear queueing comes from variance, not from load.** At 50% utilization a burst is absorbed by the idle half. At 95% there is no idle half, so a burst has nowhere to go but the queue, and the queue is what you wait behind. This is why the average tells you so little: the system is not slow on average, it is slow exactly when it is busy, which is when anyone notices.
+**Queue cliffs** come from variation, not from load. Idle capacity is what absorbs a burst; near saturation there is none left. This is also why average latency is such a poor measure here — the system is not slow on average, it is slow precisely when it is busiest.
 
-**The memory discontinuity comes from a fixed transfer unit.** The hardware moves 64 bytes whether you asked for four or forty. So the question is never "how much data do I need" but "how much of each line I fetch will I use" — and that is decided by layout rather than by algorithm.
+**Steps** come from the fixed fetch size. The machine moves 64 bytes whether you wanted 8 or 64, so the question is never how much data you need but how much of each fetched block you use. That is decided by layout, not by algorithm.
 
-**The floor comes from physics.** There is no mechanism to explain, which is what makes it a different kind of constraint from everything else here.
+**Floors** come from physics, and there is no mechanism to explain.
 
 ---
 
 ## Where this doesn't apply
 
-### Small n, where the constant beats the exponent
+### Small collections, where the constant wins
 
-The asymptotically better algorithm loses when *n* is small enough, because big-O deliberately discards the constant and at small *n* the constant is all there is.
+Big-O notation deliberately ignores constant factors, so at small sizes it can point the wrong way: a scan of a few items can beat a hash lookup, because hashing costs more than a handful of comparisons.
 
-I set out to demonstrate this with a linear scan against a hash map, expecting the scan to win below some *n*. With string keys it never won:
-
-```text
-   n    linear scan    map lookup    winner
-   4       12.5 ns        11.0 ns     map
-   8       25.2 ns        13.5 ns     map
-  16       24.5 ns         8.7 ns     map
-```
-
-**That is the more useful result.** The same test with integer keys:
+I set out to demonstrate that with a linear scan against a map, and with string keys the scan never won:
 
 ```text
-   n    linear scan    map lookup    winner
-   2        1.27 ns       2.95 ns     SCAN
-   4        2.16 ns       3.92 ns     SCAN
-   8        4.08 ns       5.86 ns     SCAN
-  12        7.08 ns       5.39 ns     map
-  16        8.98 ns       5.46 ns     map
+  items   scan      map lookup    faster
+     4    12.5 ns     11.0 ns      map
+     8    25.2 ns     13.5 ns      map
+    16    24.5 ns      8.7 ns      map
 ```
 
-The crossover is at about eleven elements for integers and below four for strings. So the crossover is **not a property of the two algorithms.** It is set by the cost of one comparison against the cost of one hash, and string comparison is expensive enough to move the crossing point off the bottom of the chart.
+That failure is the more useful result. The same test with integer keys:
 
-Which means the widely repeated advice — *use a slice under about twenty items* — is a magnitude quoted without its conditions, exactly the failure chapter 04 describes. The regularity is real; the number belongs to somebody else's element type, language, and machine. Measure yours, or use the map and stop thinking about it, because at these sizes the difference is nanoseconds and your time costs more.
+```text
+  items   scan      map lookup    faster
+     2     1.27 ns     2.95 ns     scan
+     4     2.16 ns     3.92 ns     scan
+     8     4.08 ns     5.86 ns     scan
+    12     7.08 ns     5.39 ns     map
+    16     8.98 ns     5.46 ns     map
+```
 
-### Systems small enough that the shape never bends
+Scanning wins up to about eleven integers, and never wins for strings. So the crossover point is **not a property of the two algorithms.** It is set by how expensive one comparison is against one hash, and comparing strings is expensive enough to move the crossing off the chart entirely.
+
+Which makes the familiar advice — *use a list under about twenty items* — a number quoted without the conditions that produced it, exactly the failure chapter 04 describes. The pattern is real. The threshold belongs to somebody else's data type and machine.
+
+In practice, at these sizes the difference is nanoseconds. Use the map and spend the attention elsewhere.
+
+### Systems nowhere near the bend
 
 Every curve here is flat at the left-hand end.
 
-At 20% utilization the queueing term is 1.25× and the difference between good and bad capacity planning is invisible. At four cores, the gap between 1% and 5% serial is a rounding error. A working set of 10 MB in a program that runs once a day does not need a layout decision.
+At 20% utilization, requests wait 1.25 times the service time and no capacity planning is visible. On four cores, the difference between 1% and 5% un-splittable work is a rounding error. A program touching 10 MB, run once a day, does not need a layout decision.
 
-The mistake is not ignoring the arithmetic at small scale. It is *building for the right-hand side of a curve you are nowhere near*, which chapter 03 covers as the case where a decision expires and is expensive: the machinery is paid for now and the benefit arrives only in a future you may not reach.
+The mistake is not ignoring the arithmetic when small. It is building for the right-hand end of a curve you are nowhere near — chapter 03's case of a decision that both expires and is expensive, where the cost is paid now and the benefit arrives only in a future that may not come.
 
-### When throughput is not the thing you are optimizing
+### When speed is not the constraint
 
-All of this optimizes throughput or latency. Plenty of systems are constrained by neither.
+All of this optimizes time. Plenty of systems are limited by something else.
 
-A batch job that must finish before 6 a.m. has one deadline and eight hours of slack; a system whose cost is dominated by a per-request charge to a third party is optimizing money; a device on a battery is optimizing joules, and the cache-friendly version usually wins there too but for a different reason. Reaching for these formulas when the binding constraint is elsewhere produces a faster system that is no better.
+A batch job that must finish by 6 a.m. and takes two hours has seven hours of slack, so making it faster buys nothing. A system whose cost is dominated by per-call charges to a third party is optimizing money. A battery-powered device is optimizing energy — where the cache-friendly version usually still wins, but for a different reason, and it is worth knowing which reason you are relying on.
 
 ---
 
 ## What it costs
 
-**Cache-friendly layouts cost readability and cohesion.** Parallel arrays scatter one concept across several places, and adding a field means touching every array, every constructor, and every loop that iterates in lockstep. The 4.3× is real and so is the maintenance bill (Ch. 05's boundary works through what is given up).
+**Column layouts cost cohesion.** Splitting a record into parallel arrays scatters one concept across many places. Adding a field means touching every array and every loop that walks them together. The 7× is real; so is the maintenance bill, and chapter 05 works through what gets given up.
 
-**Measuring is slow, and microbenchmarks lie.** Every number in this chapter took several attempts. Benchmarks that fit entirely in L1, or that the compiler optimizes away because the result is unused, produce confident numbers that describe nothing. Budget for getting it wrong twice.
+**Measuring is slow and easy to get wrong.** Every number here took several attempts. A benchmark whose data fits entirely in cache, or whose result the compiler discards as unused, produces a confident figure that describes nothing. Expect to throw away your first two.
 
-**Queueing models are wrong in a specific direction.** The formula assumes random arrivals and one server. Real traffic is bursty, which makes waits worse than the model, and real systems have many servers, which makes them better. Two errors in opposite directions is not the same as being right — use the shape, not the value.
+**Queue models are wrong in two directions at once.** They assume irregular arrivals, which makes them pessimistic for steady traffic, and a single server, which makes them optimistic for a pool. Two errors pointing opposite ways is not the same as being right.
 
-**The USL coefficients are fitted, not derived.** You get them by measuring a system at several concurrency levels and fitting the curve, which means you need the system before you can predict its knee. Its value is in explaining a measurement you already have, and in telling you the peak exists.
+**The scalability curve needs the system before it can describe it.** Its coefficients come from measuring a running system at several worker counts. It explains a measurement you already have; it does not tell you in advance where your peak will be.
 
-**Optimizing the wrong shape is worse than doing nothing.** Adding workers to a system past its USL peak makes it slower. Adding cores to a 25%-serial workload buys almost nothing. Both consume budget and both look like action.
+**Optimizing the wrong shape is worse than doing nothing.** Adding workers past the peak makes throughput fall. Adding cores to mostly-serial work buys almost nothing. Both cost money and both look like progress.
 
 ---
 
@@ -268,26 +313,26 @@ A batch job that must finish before 6 a.m. has one deadline and eight hours of s
 
 **In a codebase:**
 
-- **A struct that has grown past a cache line**, iterated in a hot loop that reads two of its fields. The cost is invisible at the loop and was added by whoever appended the last field.
-- **A worker-pool size that was raised whenever things got slow**, with no measurement of whether throughput rose with it.
-- **A connection pool smaller than `λ × W`.** Little's Law gives you the number of in-flight requests; if the pool is smaller, the queue moved into your application and the pool is the bottleneck you are not measuring.
-- **A capacity plan expressed as average utilization**, which says nothing about the wait at peak.
-- **A synchronous cross-region call in a request path**, where the floor exceeds the latency budget and no profiling will explain it.
-- **A performance constant hard-coded from a blog post**, which is chapter 04's failure and belongs here too.
-- **`O(1)` chosen over `O(n)` for a collection that has never held more than six items**, which costs a hash and an allocation to avoid a scan that would fit in a cache line.
+- **A struct that has grown past 64 bytes**, walked by a hot loop that reads one or two of its fields. Whoever appended the last field paid nothing; the loop pays every time it runs.
+- **A worker count that was raised each time the system felt slow**, with no measurement of whether throughput rose too.
+- **A connection pool smaller than arrival rate times response time.** Little's Law gives the number of in-flight requests; if the pool is smaller, requests are queuing somewhere you are not watching.
+- **Capacity planned on average utilization**, which says nothing about the wait at peak.
+- **A synchronous cross-region call in a request path**, where the distance alone exceeds the latency budget.
+- **A performance constant copied from an article**, with no measurement on the machine that runs the code.
+- **A hash map holding six items**, chosen because it is `O(1)`, costing a hash and an allocation to avoid a scan that would fit in one cache line.
 
 **In a conversation:**
 
-- **"We'll add more workers."** The right question is whether throughput went up last time, and whether anybody checked.
-- **"It's only at 90% utilization."** That is ten times the service time in queue. There is no headroom left, and the graph looks fine right up until it does not.
-- **"The average latency is fine."** Averages hide the distribution, and queueing pathology lives entirely in the tail.
-- **"That's O(1), so it's faster."** For what *n*, and measured against what constant?
-- **"We optimized the algorithm"** on a workload where the cost was memory layout, and the algorithm was never the bottleneck.
+- **"We'll add more workers."** Did throughput go up last time, and did anyone check?
+- **"It's only at 90%."** That is ten times the service time spent waiting. The graph looks fine until it does not.
+- **"Average latency is fine."** Averages hide exactly the tail that queueing produces.
+- **"It's O(1), so it's faster."** At what size, and against what constant?
+- **"We optimized the algorithm"** — on a workload whose cost was memory layout, where the algorithm was never the problem.
 
-The question that does the work: **which shape am I on, and where is the knee?**
+The question that does the work: **which shape am I on?**
 
-A ceiling means stop buying hardware and shrink the serial part. A knee means stop adding workers and remove shared state. A superlinear curve means the fix is headroom, not speed. A discontinuity means look at the layout, not the algorithm. And a floor means change the geography or stop waiting for the answer.
+A ceiling means stop buying hardware and shrink the serial part. A reversal means stop adding workers and find what they share. A queue cliff means buy headroom rather than speed. A step means look at the layout. A floor means move the data or stop waiting for it.
 
 ---
 
-**Next:** chapter 09 moves to the timescale where the arithmetic stops being about milliseconds and starts being about years — how systems evolve, how organizations shape them, and why a published interface is a decision you cannot take back.
+**Next:** chapter 09 moves to the timescale where the arithmetic is measured in years rather than milliseconds — how systems change, how the shape of an organization ends up in its software, and why a published interface is a decision you do not get to take back.
