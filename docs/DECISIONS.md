@@ -1411,3 +1411,42 @@ Where a source genuinely cannot be reached — paywalled, offline, out of print 
 
 **Attribution.**
 The failure and the rule are both the draft's; the author identified the pattern and asked for the rule. The correction that started it — reading the paper and returning with excerpts — was theirs.
+
+---
+
+## 33. A pattern is not one of the five kinds
+
+**Date.** 2026-08-12
+
+**Context.**
+Chapter 10 opens Part III and has to say what the two tests are testing. The book's model classifies claims into five kinds, and the obvious move was to ask which kind a pattern is.
+
+**Decision.**
+None of them, and the chapter says so in its first line.
+
+Law, Force, Principle, Idiom, and Style classify **claims** — things capable of being true, false, or conditional. A pattern is a **name for a shape**, and names are not true or false. The trouble starts when a name is used as though it were a claim, which is the subject of the rest of Part III.
+
+That is worth stating rather than glossing, because a reader arriving from Part II will reasonably try to run the classification test on *Repository* and find that it does not fit. The answer is that the question is malformed.
+
+**The two tests, and one thing the TOC did not anticipate.**
+The TOC gives compression and constraint. Drafting them showed they are **independent**, which the plan had left implicit and which turns out to be the useful part.
+
+*Facade* is the case that proves it: it compresses well — one word for "an object providing a simplified interface to a larger body of code" — and forbids nothing. Any object that calls several things and exposes fewer methods qualifies. So the tests give four outcomes rather than a single axis, and the top-right cell (compresses, constrains nothing) is where most pattern arguments happen, because those names feel informative while excluding nothing.
+
+**Both tests are made mechanical**, since a test nobody can run is a slogan.
+
+Compression is counted in words: *Transaction Script* is two words standing for twenty-six, a ratio of 13:1, while *Manager* has no agreed description to stand for — the failure is not that the word is short but that there is nothing specific behind it.
+
+Constraint is tested by trying to write the code the name forbids. Singleton forbids a second instance; Transaction Script forbids a loaded entity graph carrying the rule; Facade forbids nothing anyone could write down.
+
+**A condition on compression that is easy to miss.**
+The saving exists only for a reader who already knows the term. Introducing a name costs its definition plus the name, so a term coined inside one codebase compresses nothing for anyone outside it. Compression is therefore a claim about shared vocabulary rather than about a word, and the boundary section keeps local vocabulary as legitimate rather than treating it as a lesser thing.
+
+**Provenance.**
+The vocabulary-versus-prescription distinction and the Transaction Script compression example come from the FlowCore architecture dialogue at `~/c/TechIter/01/coding-style-architecture.md`, where the author worked them through — including the observation that a catalogue is ethnography, and that a name's other value is as an index into the literature on its failure modes.
+
+Two things from that document are deliberately left alone: *anemic domain model* as a term that smuggles a verdict belongs to chapter 14, and *does the idea come with the conditions under which it's wrong* belongs to chapter 15.
+
+**Consequence.**
+`LEDGER.md` gains six concept rows and two example rows.
+Chapter 10 runs 181 lines and moves to **in progress**.

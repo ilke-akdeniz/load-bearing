@@ -118,7 +118,13 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | One team per service, read correctly | 09 | A constraint on who may own a service, not a recipe for how many to have | cite 09 |
 | "Late" in Brooks's Law | 09 | Remaining work shorter than the time a new person takes to become useful — not the same as behind schedule | "what late means (Ch. 09)" |
 | Long feedback loops | 09 | These decisions cannot be tested, because the evidence arrives after the cost is sunk | cite 09 |
-| Compression + constraint tests | 10 | A pattern earns its name by saving words and ruling something out | cite 10 |
+| Compression + constraint tests | 10 | A pattern earns its name by saving words and ruling something out | "the two tests (Ch. 10)" |
+| A pattern is not one of the five kinds | 10 | The kinds classify claims; a pattern is a name for a shape, and names are not true or false | cite 10 |
+| The tests are independent | 10 | Facade compresses and constrains nothing — four outcomes, not a single axis | cite 10 |
+| Compression needs a shared referent | 10 | The saving exists only for a reader who knows the term; a local coinage compresses nothing outside | cite 10 |
+| The constraint test is mechanical | 10 | Try to write code the name forbids; if you can and still use the name, it constrains nothing | cite 10 |
+| A catalogue is ethnography | 10 | It records shapes that were occurring; read as a checklist it becomes obligations. 04 owns describes-vs-prescribes | cite 10 |
+| A name as a search term | 10 | Some names are bad descriptions and good indexes into the literature on their failure modes | cite 10 |
 | The scale test | 11 | The same name is trivial at class scale and load-bearing at system scale | "scale test (Ch. 11)" |
 | Survives-translation test | 13 | If it disappears when you change language, it was a workaround | cite 13 |
 | Smuggled verdict | 14 | Vocabulary arriving with its conclusion attached | cite 14 |
@@ -186,6 +192,8 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | Shared counter vs private counters, 1–64 workers | 08 | Negative scaling measured: throughput falls 4x between two workers and four |
 | M/M/1 wait table and the marginal-cost table | 08 | The queue curve, with the 85% "cliff" shown not to exist |
 | Linear scan vs map, ints and strings | 08 | The crossover moves with element type — the finding that the expected demo did not show |
+| Word counts: Transaction Script, Singleton, Manager | 10 | Compression measured, and the two names with no referent to compress |
+| Code each name forbids | 10 | Singleton and Transaction Script forbid something; Facade forbids nothing. 11 owns Facade at scale |
 | Adapter at class vs system scale | 11 | The scale test |
 | GoF collapse in 4 languages | 13 | Survives-translation test |
 | Old client against four API changes | 09 | Add is safe, retype fails loudly, rename fails silently with a zero amount |
