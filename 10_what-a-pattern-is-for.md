@@ -53,6 +53,9 @@ The harder test, and the one that separates a name carrying information from a n
 
 The test is mechanical: **take the name, and try to write code it forbids.** If you can write the forbidden code and still honestly use the name, the name is not constraining anything.
 
+[claude two code samples below are fine but they would be better if they showed first what's "allowed"
+ex: a := Thing.GetInstance() // always returns the same instance]
+
 **Singleton** — a type with exactly one instance for the lifetime of the process. What does it forbid?
 
 ```go
@@ -124,6 +127,8 @@ There is one more reason a name can be worth having even when both tests are mar
 
 A beginner needs somewhere to put a new idea before they can evaluate it. "This is a Factory" gives them a hook to hang the shape on, and the fact that *Factory* rules almost nothing out matters less than the fact that it lets them recognize the shape again next week.
 
+[claude I don't get this argument, what can you realistically teach with a name that doesn't compress and doesn't forbid? This is a facade. Ok so what? Did I learn how to design good - ergonomic constructors with that naming? Maybe yes maybe not. Did the naming contribute anything for that learning? Generally not, in fact most of the times it clouds the learning because the different reasons - principles behind that shape is not identified. "This is a Factory we use that when we have x big classes and so on..." Then you never encounter that particular requirements in real life and you forget the pattern even exists.]
+
 The failure is not teaching with weak names. It is never coming back to say which ones were scaffolding — chapter 02 lists exactly this as one of the four ways the kinds get confused, and this is the pattern-shaped instance of it.
 
 The check, for anyone teaching: can you state what this name rules out? If not, say so at the time, rather than leaving the student to discover it in a design review five years later.
@@ -148,7 +153,7 @@ If you are building something that periodically stops calling a failing service,
 
 **The tests are a licence to be tiresome.** "Well, what does that rule out?" is a real question and also an excellent way to stall a design discussion. Ask it when a name is carrying the weight of a decision. Do not ask it about every noun in the room.
 
-**Naming precisely costs more than naming vaguely.** `OrderManager` takes no thought, which is why it exists. Naming the file for what it actually does requires knowing what it actually does, and sometimes the reason nobody named it well is that it does four unrelated things — in which case the naming problem is a structural problem wearing a disguise.
+**Naming precisely costs more than naming vaguely.** `OrderManager` takes no thought, which is why it exists. Naming the file for what it actually does requires knowing what it actually does, and sometimes the reason nobody named it well is that it does four unrelated things — in which case the naming problem is a structural problem wearing a disguise. [claude just an addition: sometimes that could be the best move because the design is not mature yet, you don't have enought data to make those decisions and so on...  As long as you are aware of this possible debt. Maybe it's better to wait a slight accumulation of functionality so that those four unrelated things give birth two 3 meaningful, natural classes.]
 
 **A name that passes both tests can still be the wrong shape for you.** Singleton compresses and constrains beautifully, and is usually a mistake. The tests measure whether a name carries information, not whether the thing it names is a good idea. That is a separate question, and Part III spends the rest of its chapters on it.
 
@@ -161,13 +166,13 @@ If you are building something that periodically stops calling a failing service,
 - **`Manager`, `Helper`, `Util`, `Service`, `Handler`, `Processor`, `Data` in a type name**, where removing the suffix would lose nothing. The suffix is standing in for the description nobody wrote.
 - **Two files whose names differ only by suffix** — `OrderService` and `OrderManager` — where nothing tells you which does what.
 - **A pattern name in a type name that is not true of the type.** `UserFactory` that returns one hard-coded instance, `PaymentStrategy` with one implementation and no second in prospect.
-- **A directory named for a pattern rather than for the domain**, so `strategies/` holds four unrelated things whose only common property is that somebody applied the same word to them.
+- **A directory named for a pattern rather than for the domain**, so `strategies/` holds four unrelated things whose only common property is that somebody applied the same word to them. [claude what's the failure reason here in one sentence? I agree this is failure but can't put the reason into words.]
 - **A design document that names patterns and never says what they exclude.**
 
 **In a conversation:**
 
 - **"That should be a Repository."** Followed up with: what would that rule out that the current code does?
-- **"We're using the Strategy pattern here."** Sometimes real information. Sometimes a description of `if`.
+- **"We're using the Strategy pattern here."** Sometimes real information. Sometimes a description of `if`. [claude are we gonna expand this in other chapters? This could be good example to expand on in some place.]
 - **"This doesn't follow the pattern."** Which pattern, and what makes following it correct here rather than elsewhere?
 - **A design review scored against a catalogue**, where the finding is that a named shape is absent rather than that something concrete goes wrong.
 - **A name introduced in a meeting and used as a premise by the end of it.** The gap between naming a thing and having established anything about it is where most of this goes wrong.
