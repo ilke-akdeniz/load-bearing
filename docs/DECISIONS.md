@@ -1230,3 +1230,53 @@ The same treatment is given to the inverse Conway manoeuvre. Conway's observatio
 `LEDGER.md` gains seven concept rows and three example rows.
 Part II is complete: chapters 04 through 09 are drafted.
 Chapter 09 runs 219 lines and moves to **in progress**.
+
+---
+
+## 28. Conway's mechanism corrected, and Brooks given its actual condition
+
+**Date.** 2026-08-12
+
+**Context.**
+The author's review of chapter 09 raised eight points. Two were challenges to the substance, and both found real defects.
+
+**Conway's mechanism was written so that it implied something absurd.**
+The draft's illustration set two engineers at neighbouring desks, who build tightly coupled code, against two teams in different time zones, who build a versioned interface. The author's objection:
+
+> Does this mean that the only way to develop maintainable software with a team is to let each team member talk to each other in carefully crafted messages, in given times, in preset conversational topics? To me this logical extension sounds absurd.
+
+It is absurd, and the draft had earned it. The two examples were written with the low-friction case as the bad outcome and the high-friction case as the good one, which smuggles a value judgement into a law that has none. Conway's Law describes; it does not recommend friction.
+
+Rewritten so the point is that **neither outcome is better in itself.** Tight coupling between things that genuinely are one thing is correct. A firm interface between things that genuinely are separate is correct. What the law predicts is a **mismatch** — your software gets its seams where your organization has its seams, whether or not the problem has seams there — and both directions of mismatch are now given: one team owning what should be two things, and two teams owning what should be one.
+
+The illustration is also now marked as this book's rather than Conway's, since his 1968 paper argues the general claim and the desks-and-time-zones mechanism is one ordinary way it comes about.
+
+**Brooks's Law was stated without the condition that makes it true.**
+The author posed a thought experiment: a project estimated at 100 hours, two people, 120 hours spent and not finished. One manager says 80 hours remain; another says the estimate was wrong and 988 remain. Is it late in Brooks's sense in both cases? Does adding people hurt in both?
+
+Working it rather than answering from intuition produced the sharper statement the chapter was missing:
+
+```text
+A:  80h remaining    2 people:  8 days    +1 person:  9 days   -> later
+B: 988h remaining    2 people: 99 days    +1 person: 71 days   -> sooner
+```
+
+Same team, same hire, opposite answers — and sweeping the remaining work puts the break-even at roughly the length of the ramp-up itself. So:
+
+> **"Late" means the remaining work is shorter than the time it takes a new person to become useful.**
+
+That is not the same question as *are we behind schedule*, and the two come apart precisely in case B: a project badly behind a wrong estimate is not late in Brooks's sense, it is under-staffed, and the fix is people added now rather than later, since the ramp-up cost is fixed and the runway only shrinks.
+
+The ramp-up figures are marked illustrative rather than measured, with the note that substituting your own moves the break-even — which is the reason to compute it rather than quote it (Ch. 04).
+
+**An expansion the author asked for, and the ledger allowed.**
+They asked whether one-team-per-service deserved treatment here. Nothing else in `LEDGER.md` owns organizational structure, so it landed in 09.
+
+The section states the heuristic's real content and the two ways it is misapplied: many services owned by one team is fine, one service owned by many teams is the failure it prevents, and services sized to the team chart is the failure it causes. The honest form is that it constrains **who may own a service**, not **how many services there should be**.
+
+**Smaller corrections.**
+A sentence reading as an instruction to the writer — *cite the two, treat the rest as observations of their era* — was removed. Go struct tags are now explained, with the Java and C# equivalents, which is the audience rule applied in a chapter drafted after that rule was added. And the demonstration now says the server sends the new shape in every case and the output is what the client makes of it, since the draft said "reaches" while the output said "parsed."
+
+**Consequence.**
+Chapter 09 runs 278 lines, up from 219.
+`LEDGER.md` gains three concept rows and one example row.

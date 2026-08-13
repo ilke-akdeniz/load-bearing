@@ -112,6 +112,9 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | A rename is a silent break | 09 | Removals and renames fail without an error; a type change at least fails loudly | cite 09 |
 | You cannot deploy other people's software | 09 | The one constraint in the book that cannot be fixed by changing code you control | cite 09 |
 | Inverse Conway is a strategy, not a finding | 09 | The observation is established; driving architecture by reshaping teams is not | cite 09 |
+| Conway detects mismatch | 09 | Neither tight coupling nor a firm interface is better in itself; the failure is seams landing where the org has them rather than where the problem does | cite 09 |
+| One team per service, read correctly | 09 | A constraint on who may own a service, not a recipe for how many to have | cite 09 |
+| "Late" in Brooks's Law | 09 | Remaining work shorter than the time a new person takes to become useful — not the same as behind schedule | "what late means (Ch. 09)" |
 | Long feedback loops | 09 | These decisions cannot be tested, because the evidence arrives after the cost is sunk | cite 09 |
 | Compression + constraint tests | 10 | A pattern earns its name by saving words and ruling something out | cite 10 |
 | The scale test | 11 | The same name is trivial at class scale and load-bearing at system scale | "scale test (Ch. 11)" |
@@ -186,6 +189,7 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | Old client against four API changes | 09 | Add is safe, retype fails loudly, rename fails silently with a zero amount |
 | `io/ioutil`, deprecated 2021, running in 2026 | 09 | 175 deprecated declarations in Go's stdlib — the cost of a compatibility promise, kept |
 | Brooks n(n−1)/2 and the weekly hours | 09 | A team of 20 spends a quarter of every week staying aligned |
+| The 80h vs 988h remaining scenario | 09 | Same team, same hire, opposite answers; break-even sits at the ramp-up length |
 | Bidirectional Order↔Customer | 16 | OOP producing cycles |
 | Deleted constraint, passing mock test | 17 | Mocks assert about mocks |
 | Store split into a package | 18 | Layered packages force exports |
