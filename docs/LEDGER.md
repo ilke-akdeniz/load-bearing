@@ -128,6 +128,12 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Too young to name | 10 | The tests assume you can say what the code does; before that a vague name is honest, and the failure is losing track that it is provisional | cite 10 |
 | Directories group by change, names group by shape | 10 | A folder named for a pattern collects code belonging to different features | cite 10 |
 | The scale test | 11 | The same name is trivial at class scale and load-bearing at system scale | "scale test (Ch. 11)" |
+| Scale means ownership, not size | 11 | The axis is whether you can change the other side, not how much code is involved | "can I change the other side (Ch. 11)" |
+| The third option | 11 | At class scale you can change the other side instead of adapting; at system scale that option is gone | cite 11 |
+| Shapes are scale-free, Forces are not | 11 | A pattern name transfers the picture and drops the constraints, which were the expensive half | cite 11 |
+| System scale adds failure modes | 11 | The same shape acquires loss, duplication, latency, and published commitment — Part II's Laws, one at a time | cite 11 |
+| Trivial at every scale | 11 | If you cannot state the system-scale version, it is a code-organization device — Strategy, Template Method | cite 11 |
+| Singleton inverts at scale | 11 | "Exactly one" across a cluster is leader election, which needs consensus (Ch. 07) | cite 11 |
 | Survives-translation test | 13 | If it disappears when you change language, it was a workaround | cite 13 |
 | Smuggled verdict | 14 | Vocabulary arriving with its conclusion attached | cite 14 |
 | Principle→movement mechanism | 15 | Observation gets a name, name gets a community, community forgets the conditions | cite 15 |
@@ -196,6 +202,8 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | Linear scan vs map, ints and strings | 08 | The crossover moves with element type — the finding that the expected demo did not show |
 | Word counts: Transaction Script, Singleton, Manager | 10 | Compression measured, and the two names with no referent to compress |
 | Code each name forbids | 10 | Singleton and Transaction Script forbid something; Facade forbids nothing. 11 owns Facade at scale |
+| `querier` satisfied structurally vs C# wrapper classes | 11 | Adapter at class scale: four lines and no adapter in Go, a class per type elsewhere |
+| Stripe status leaking vs `fromStripe` | 11 | Adapter at system scale: three call sites change, or one |
 | Adapter at class vs system scale | 11 | The scale test |
 | GoF collapse in 4 languages | 13 | Survives-translation test |
 | Old client against four API changes | 09 | Add is safe, retype fails loudly, rename fails silently with a zero amount |

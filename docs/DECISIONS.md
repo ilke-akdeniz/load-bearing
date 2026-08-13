@@ -1483,3 +1483,44 @@ And the failure list's `strategies/` entry now carries its reason, which the aut
 `00_toc.md`'s boundary line for chapter 10 is rewritten, since the promised boundary is gone. The TOC now names the three that survive.
 `LEDGER.md` gains two concept rows and one reworded.
 Chapter 10 runs 202 lines.
+
+---
+
+## 35. The scale test's axis is ownership, not size
+
+**Date.** 2026-08-12
+
+**Context.**
+The TOC frames chapter 11 around scale: the same name is trivial at class scale and load-bearing at system scale, with Adapter becoming an Anti-Corruption Layer. Written literally, "scale" means size, which is wrong in a way that would have made the chapter unusable — a fifty-line integration with a vendor is system scale, and a thousand-line internal refactor is not.
+
+**Decision.**
+State the axis as **ownership**: can you change the other side?
+
+Class scale means both sides are yours — same repository, same deploy — so if two things do not fit you may change either. System scale means one side is not yours to edit: a vendor's API, another team's service, a published format.
+
+That reframing does three things the size framing cannot. It explains why a small integration is a serious commitment and a large refactor is not. It connects the chapter to material the book already owns — chapter 03's control-of-the-callers Force and chapter 09's *you cannot deploy other people's software*. And it produces the diagnostic the chapter ends on, which is a question with an answer rather than a judgement call.
+
+**The insight that carries the demonstration.**
+What makes Adapter cheap at class scale is not the line count. It is that **a third option exists**: change the other side so no adapter is needed. Rename the method, change the signature, move the parameter.
+
+At system scale that option is gone, and the pattern stops being one fix among several and becomes the only move. That is the whole difference, and it is why the same word denotes a convenience in one place and a maintained translation layer in the other.
+
+**What the scale table is actually tracking.**
+Drafting the table showed that the second column is not "the same thing but bigger." Every entry acquires a **failure mode** that the class-scale version does not have — the vendor changes without asking, the surface becomes a commitment, delivery can fail or repeat, the call can be slow or partial.
+
+Those are Part II's Laws arriving one at a time. So the table's last column names them, and the chapter can say what it is really about: a pattern name transfers the shape and drops the Forces, and the Forces were the expensive half. That is chapter 02's mechanism — advice stripped of its conditions — in a new place.
+
+**Both demonstrations were run.**
+Go's structural typing satisfying `querier` with two vendor types and zero wrapper code, against the C# shape that needs a class and two forwarding methods per type. And the Stripe status leaking into three call sites versus stopping at one translation function, with the counts taken from the file rather than asserted.
+
+**A question chapter 10 left open is answered here.**
+Chapter 10 used Facade to show that compression and constraint are independent — it compresses well and forbids nothing — and handed the scale question forward. The answer: at class scale a facade is a word for a wrapper; at system scale it is what other teams call, so chapter 09's compatibility rule applies and it may be added to but never narrowed. The name did not change; the commitment did.
+
+**The boundary section found a genuine asymmetry.**
+The TOC asked for patterns trivial at every scale. The test that works is whether you can state the system-scale version at all — Strategy and Template Method have none, because nothing about passing a function becomes unreliable when the program grows.
+
+Singleton turns out to do the opposite, and is worth the contrast: at system scale "exactly one" means one across a cluster, which is leader election, which needs consensus. It does not stay trivial; it becomes one of the hardest items on the list under an unchanged name.
+
+**Consequence.**
+`LEDGER.md` gains six concept rows and two example rows.
+Chapter 11 runs 222 lines and moves to **in progress**.
