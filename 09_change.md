@@ -101,6 +101,8 @@ That is what the commitment costs when it is kept. Chapter 05 covers the other h
 
 It is a description, not advice — chapter 04 uses exactly this distinction, since a law describes what happens while a principle tells you to do something. Conway's Law tells nobody to do anything.
 
+[claude the example below is still off. Maybe we should remove it. Everybody works with messaging apps like slack, many devs and teams work remotely. A neighbouring desk is rarely seen as quick commumnication nowadays. Also you make this sound like inevitable but I doubt it. Two good engineers at neihgbouring desks will talk about many different things but will build the right structure the situation demands. That's why we would call them good enginners no? I don't see an invisible force between the desks, tempting them to not use an interface when it's obviouslty the right solution. Same with different timezones. Either come up with different, solid examples or just remove this and tie Conway's Law to the organization seams part below. Or if you have a better idea tell me.]
+
 The mechanism is about what is cheap. Two engineers at neighbouring desks can settle a question by turning around, so they build things that call each other directly, share types, and rely on each other's invariants — because agreeing informally costs them nothing. Two teams in different time zones cannot do that, so they are forced to write down what they promise each other, and what gets written down becomes an interface.
 
 **Neither result is better than the other**, and this is where the law is most often misread. Tight coupling between two things that genuinely are one thing is correct — splitting them would add ceremony to something indivisible. A firm interface between two things that genuinely are separate is also correct. The law does not say that difficult communication produces good software, and it would be absurd if it did.
@@ -109,7 +111,7 @@ What it says is that **your software will have its seams where your organization
 
 Both directions of mismatch are common and neither is subtle once you look for it.
 
-- **One team, one natural boundary.** A team that owns what should be two independent things builds them as one, because there was never a moment when writing an interface was cheaper than a conversation. The result is correct and hard to separate later.
+- **One team, one natural boundary.** A team that owns what should be two independent things builds them as one, because there was never a moment when writing an interface was cheaper than a conversation. The result is correct and hard to separate later. [claude what do you mean by "the result is correct" I don't think building what should be independent as one is "correct."]
 - **Two teams, one natural unit.** Two teams that own halves of one indivisible thing put a network call, a queue, or a versioned interface through the middle of it. Every change that should be one commit becomes two releases and a coordination meeting.
 
 *(The desks-and-time-zones illustration is this book's, not Conway's. His 1968 paper, "How Do Committees Invent?", argues the general claim; the mechanism above is one ordinary way it comes about.)*
