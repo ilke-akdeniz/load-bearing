@@ -32,11 +32,13 @@ The second law is the one with teeth: as a system evolves, its complexity increa
 
 That is a ratchet, and it works because of an asymmetry in what changes cost. Adding a case to a system is cheap and local — one `if`, one column, one flag. Removing one is expensive and diffuse: you have to establish that nobody depends on it, which means finding every caller, every saved row, every customer whose workflow quietly relies on it. So additions happen continuously and removals need a project, and the ratio between those two costs is what makes the direction one-way.
 
-**On how much weight these carry.** Lehman's laws are empirical, and the study population was mainframe systems, decades ago, with release cycles measured in years. There are eight of them, and they are not equally solid — the two above are widely recognizable, and several of the others ("conservation of familiarity," "conservation of organizational stability") are vague enough that they resist being checked at all. Cite the two; treat the rest as observations of their era.
+**On how much weight these carry.** Lehman's laws are empirical, and the study population was mainframe systems, decades ago, with release cycles measured in years. There are eight of them, and they are not equally solid — the two above are widely recognizable, and several of the others ("conservation of familiarity," "conservation of organizational stability") are vague enough that they resist being checked at all. Cite the two; treat the rest as observations of their era. [claude the last sentence reads like a prompt for you, should be removed in my opinion.]
 
 ### Once published, it is forever
 
 This is the sharpest constraint in the chapter, and the one that is most often discovered late.
+
+[claude below example is another failure of assuming the reader knows go. You have to explain what the `json:` does.]
 
 Here is a client written against version 1 of an API. It is installed on machines you do not control and will not be recompiled:
 
@@ -48,7 +50,10 @@ type OldClient struct {
 }
 ```
 
-Now change the server four ways and watch what reaches that client:
+Now change the server four ways and watch what reaches that client: 
+[claude you say what reaches that client but then you say "parsed"
+My suggestion is to us pare here as well" "watch what client parses". 
+The distinction matters, because server is sending new fields but client is not able to parse them.]
 
 ```text
 v1, what the old client was built for:
@@ -100,6 +105,7 @@ That is what the commitment costs when it is kept. Chapter 05 covers the other h
 It is a description, not advice — chapter 04 uses exactly this distinction, since a law describes what happens while a principle tells you to do something. Conway's Law tells nobody to do anything.
 
 The mechanism is ordinary. Two engineers at neighbouring desks who talk twenty times a day will build things that call each other directly, share types, and assume each other's invariants — because that is the cheap thing to do when coordination is free. Two teams in different time zones who talk through a ticket queue will build things that communicate through a versioned interface, because everything else is unbearable. Neither team decided on an architecture. **The interface between two pieces of software ends up as expensive to cross as the conversation between the people who own them.**
+[claude this example sounds unreal. Maybe it's true but I just want to confirm, are the examples above canonical and attested? I fail to grasp how this works. Does this mean that the only way to develop maintainable software with a team is to let each team member talk to each other in carefully crafted messages, in given times, in preset coversational topics? (encapsulation, public API). To me this logical extension of the example sounds absurd.]
 
 That gives the manoeuvre the TOC calls the inverse: if you want a particular architecture, arrange the teams to match it and let the structure follow. It is used deliberately when organizations split a monolith — reorganize into teams that own separable areas, and the seams appear because crossing them has become expensive.
 
@@ -134,6 +140,13 @@ At twenty people, a quarter of everyone's time goes on staying aligned, before a
 
 Note what the law does *not* say. It is not "adding people never works," which would be absurd. It is that adding people **to a late project** makes it later, because the ramp-up and coordination costs land immediately and the extra capacity arrives after the deadline. Teams do grow, and it works when there is time to absorb it and the work can be split along a seam that already exists — which is Conway's Law being used on purpose.
 
+[claude a tought exercise: Project was estimated 100 hours. 2 people started, producing 2 x 5 = 10 hours of work everyday. 
+After 12 days project is not finished yet altought 120 hours was spent.
+Then two managers study the project plan and come up with different forecast: A says remaining work is 80 hours more, so 200 in total.
+B says a huge mistake was made in the inital estimate, total is 1000 hours and remaining is 988 hours.
+Now how do you assess this with Brook's Law? What is late when A is right vs B is right? Does adding people make the project late in each case?
+What's the optimal approach for each case? ]
+
 ---
 
 ## Why it holds
@@ -154,7 +167,7 @@ The compatibility rule follows from something narrower and worth stating separat
 
 A migration script that runs once. A spike written to answer a question. A report generated for one meeting. An import job for a system being decommissioned in March.
 
-None of the four applies, and the reason is worth being precise about: **each of these laws is a claim about accumulated time**, and there is not going to be any. Lehman's ratchet needs years of additions to ratchet. Compatibility needs a second party. Conway needs a second team.
+None of the four applies, and the reason is worth being precise about: **each of these laws is a claim about accumulated time**, and there is not going to be any. Lehman's ratchet needs years of additions to ratchet. Compatibility needs a second party. Conway needs a second team. 
 
 The failure here is not ignoring the laws — it is applying them. Versioning the output of a one-off report, or designing a spike for extension, spends the effort that these laws exist to justify on the one case where the justification is absent.
 
@@ -200,6 +213,7 @@ Neither law is false at that size; they have nothing to act on (Ch. 02). The fai
 - **`v2` of an API with no plan for retiring `v1`**, which is how you get to `v4` while still supporting all of them.
 - **Two services that cannot be released independently.** They are one system with a network call in the middle, and the deployment boundary does not match the design boundary.
 - **A service whose boundary matches a team that no longer exists.** Conway's Law recording an organization from three reorganizations ago.
+[claude should each service owned by separate teams ideally? If so I think this idea of team structure and software architecture - org could be worthy of an expansion with examples inside this chapter. Unless we have other places talking about this in the ledger.]
 - **No dead-code removal in the history.** Lehman's ratchet, visible: additions every week, removals never.
 
 **In a conversation:**
@@ -208,7 +222,7 @@ Neither law is false at that size; they have nothing to act on (Ch. 02). The fai
 - **"We'll add people to catch up."** How long until they are productive, and who trains them — from which team's capacity?
 - **"We'll clean it up in the next quarter."** Ask which quarter this was first said in.
 - **"Nobody uses that endpoint."** Measured how, and over what window? Quarterly jobs are invisible in a week of logs.
-- **"Let's split it into services so teams can move independently."** That is the inverse Conway manoeuvre, and it works when the teams already have separable ownership. It does not create that ownership.
+- **"Let's split it into services so teams can move independently."** That is the inverse Conway manoeuvre, and it works when the teams already have separable ownership. It does not create that ownership. [claude could be treated in the same expansion section I refer in my previous comment]
 
 The question that does the work: **how long am I going to live with this, and who else has to agree to change it?**
 
@@ -216,4 +230,4 @@ A day and nobody — do whatever is quickest. A decade and strangers — that is
 
 ---
 
-**Next:** Part III turns from laws to patterns, starting with the question the whole part depends on — what a pattern is actually for, and the two tests that separate a name worth having from a name that only sounds like one.
+**Next:** Part III turns from laws to patterns, starting with the question the whole part depends on — what a pattern is actually for, and the two tests that separate a name worth having from a name that only sounds like one. [claude a name? What do you mean?]
