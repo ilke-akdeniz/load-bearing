@@ -113,6 +113,18 @@ Conway also states the consequence that matters most here:
 
 > Given any design team organization, there is a class of design alternatives which cannot be effectively pursued by such an organization because the necessary communication paths do not exist.
 
+[claude I read the paper and found more strong statements supporting our case. 
+This is my reading:  "linear graph of a system" => software architecture, services, components
+"linear graph of its design organization" => teams, ownwership boundaries
+Check this interpretation by readind the source material.
+Take a look at these excerpts and decide if they are worth using:
+---
+This kind of a structure-preserving relationship between two sets of things is called a homomorphism. Speaking as a mathematician might, we would say that there is a homomorphism from the linear graph of a system to the linear graph of its design organization.
+
+Systems Image Their Design Groups
+---
+]
+
 Some designs are simply not available to you, given who owns what.
 
 Work has to be divided before it can start. Someone decides that this team takes billing and that team takes fulfilment, or that these three engineers own the importer. **That division is already a decomposition of the system** — you cannot hand out the work without partitioning the design — and it is usually settled before anyone has read the problem closely, by whoever was arranging the work.
