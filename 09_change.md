@@ -98,6 +98,7 @@ That is what the commitment costs when it is kept. Chapter 05 covers the other h
 ### The organization ends up in the software
 
 **Conway's Law**, from Melvin Conway in 1968: organizations produce designs that copy their own communication structures.
+[claude I'm happy with the way this chapter is now. However I see another problem now, law says: "...copy their own communication structures." We say "Ease of communication does not help", "The mechanism is not about communication being easy or hard" and then we show the "ownership" problem. I didn't read Conway's work but I suspect this is a respectable stretch. If it isn't, maybe we should just drop the conway's law from the book and frame this "law" for what it is, as a new law or as part of another existing law. But the ides is around: "ownership imposes design boundaries." ]
 
 It is a description, not advice — chapter 04 uses exactly this distinction, since a law describes what happens while a principle tells you to do something. Conway's Law tells nobody to do anything.
 
@@ -112,7 +113,7 @@ What makes the partition stick is an asymmetry in who can change what.
 
 So internal boundaries stay fluid and shared ones calcify — not because anyone is tempted into bad design, but because one kind of correction is free and the other needs a meeting, a quarter, and somebody's agreement.
 
-This is why good engineers do not escape it. Two excellent engineers who own the two halves of a badly split problem will each build their half well. Neither is in a position to notice that the split itself was wrong, and if one does notice, fixing it is not an engineering decision they are allowed to make. Slack does not help, because the constraint was never the cost of talking. It is that agreement is required at all.
+This is why good engineers do not escape it. Two excellent engineers who own the two halves of a badly split problem will each build their half well. Neither is in a position to notice that the split itself was wrong, and if one does notice, fixing it is not an engineering decision they are allowed to make. Ease of communication does not help, because the constraint was never the cost of talking. [claude I replaced slack and removed the unnecessary cryptic final sentence.]
 
 **Neither shape is better in itself**, and this is where the law is most often misread. Tight coupling between two things that genuinely are one thing is right — splitting them adds ceremony to something indivisible. A firm interface between things that genuinely are separate is also right. The law does not say that distance improves design.
 
