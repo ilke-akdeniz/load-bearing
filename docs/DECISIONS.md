@@ -1280,3 +1280,38 @@ A sentence reading as an instruction to the writer — *cite the two, treat the 
 **Consequence.**
 Chapter 09 runs 278 lines, up from 219.
 `LEDGER.md` gains three concept rows and one example row.
+
+---
+
+## 29. Conway's mechanism is ownership, not communication distance
+
+**Date.** 2026-08-12
+
+**Context.**
+The chapter's account of *why* Conway's Law holds was rewritten once already (decision 28) and was still wrong. The author rejected the second version too:
+
+> Everybody works with messaging apps like Slack, many devs and teams work remotely. A neighbouring desk is rarely seen as quick communication nowadays. Also you make this sound like inevitable but I doubt it. Two good engineers at neighbouring desks will talk about many different things but will build the right structure the situation demands. I don't see an invisible force between the desks, tempting them to not use an interface when it's obviously the right solution.
+
+Two separate objections, both correct. The illustration was dated, and — more seriously — the mechanism it described was implausible: it framed the law as a *temptation acting on individual engineers*, which invites the obvious reply that competent engineers are not tempted.
+
+**Decision.**
+Replace communication distance with **ownership** as the mechanism.
+
+Work must be divided before it can start, and dividing it is already a decomposition of the system — you cannot hand out the work without partitioning the design. That partition is usually settled before anyone has read the problem closely, by whoever was arranging the work rather than by anyone who would call it architecture.
+
+What makes it stick is an asymmetry in who may change what. A boundary **inside** one owner's area can be moved on a Tuesday afternoon by the person who noticed it. A boundary **between** owners requires persuading another team to reopen something settled, reschedule committed work, and accept a change with no benefit to them this quarter. So internal boundaries stay fluid and shared ones calcify.
+
+**Why this answers the objection rather than dodging it.**
+It explains why good engineers do not escape the law. Two excellent engineers owning the two halves of a badly split problem will each build their half well; neither is positioned to see that the split was wrong, and the one who does see it cannot fix it, because it is not an engineering decision they are permitted to make.
+
+It also survives the tooling objection completely. Slack changes the cost of talking. It does not change who owns what, and the constraint was never the cost of talking — it is that agreement is required at all.
+
+**A related correction.**
+The author queried "the result is correct" in the one-owner-two-parts case, objecting that building separable things as one is not correct. Right — the word was doing two jobs. The passage now says nothing is broken and every test passes, which is why nobody notices, until the two need to ship on different schedules or one has to be replaced.
+
+**Attribution.**
+The ownership mechanism is the draft's; the two objections that forced it are the author's, and the second version would have shipped without them. Conway's 1968 paper argues the general claim, and the chapter now marks the mechanism as this book's account of why it holds rather than implying it is Conway's.
+
+**Consequence.**
+`LEDGER.md` gains a row for the ownership asymmetry.
+Chapter 09 runs 289 lines.

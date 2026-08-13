@@ -101,20 +101,29 @@ That is what the commitment costs when it is kept. Chapter 05 covers the other h
 
 It is a description, not advice — chapter 04 uses exactly this distinction, since a law describes what happens while a principle tells you to do something. Conway's Law tells nobody to do anything.
 
-[claude the example below is still off. Maybe we should remove it. Everybody works with messaging apps like slack, many devs and teams work remotely. A neighbouring desk is rarely seen as quick commumnication nowadays. Also you make this sound like inevitable but I doubt it. Two good engineers at neihgbouring desks will talk about many different things but will build the right structure the situation demands. That's why we would call them good enginners no? I don't see an invisible force between the desks, tempting them to not use an interface when it's obviouslty the right solution. Same with different timezones. Either come up with different, solid examples or just remove this and tie Conway's Law to the organization seams part below. Or if you have a better idea tell me.]
+The mechanism is not about communication being easy or hard, and it has nothing to do with how far apart people sit. It is about **who was given which part**.
 
-The mechanism is about what is cheap. Two engineers at neighbouring desks can settle a question by turning around, so they build things that call each other directly, share types, and rely on each other's invariants — because agreeing informally costs them nothing. Two teams in different time zones cannot do that, so they are forced to write down what they promise each other, and what gets written down becomes an interface.
+Work has to be divided before it can start. Someone decides that this team takes billing and that team takes fulfilment, or that these three engineers own the importer. **That division is already a decomposition of the system** — you cannot hand out the work without partitioning the design — and it is usually settled before anyone has read the problem closely, by whoever was arranging the work.
 
-**Neither result is better than the other**, and this is where the law is most often misread. Tight coupling between two things that genuinely are one thing is correct — splitting them would add ceremony to something indivisible. A firm interface between two things that genuinely are separate is also correct. The law does not say that difficult communication produces good software, and it would be absurd if it did.
+What makes the partition stick is an asymmetry in who can change what.
 
-What it says is that **your software will have its seams where your organization has its seams**, whether or not the problem has seams there. So the failure it predicts is a *mismatch*: when the shape of the problem and the shape of the org disagree, the org wins.
+- A boundary **inside** your own area is yours to move. Notice it is wrong on Tuesday, change it on Wednesday, and nobody else is involved.
+- A boundary **between** areas is a negotiation. Moving it means persuading another team to reopen something they consider settled, reschedule work they have committed to, and accept a change with no benefit to them this quarter.
 
-Both directions of mismatch are common and neither is subtle once you look for it.
+So internal boundaries stay fluid and shared ones calcify — not because anyone is tempted into bad design, but because one kind of correction is free and the other needs a meeting, a quarter, and somebody's agreement.
 
-- **One team, one natural boundary.** A team that owns what should be two independent things builds them as one, because there was never a moment when writing an interface was cheaper than a conversation. The result is correct and hard to separate later. [claude what do you mean by "the result is correct" I don't think building what should be independent as one is "correct."]
-- **Two teams, one natural unit.** Two teams that own halves of one indivisible thing put a network call, a queue, or a versioned interface through the middle of it. Every change that should be one commit becomes two releases and a coordination meeting.
+This is why good engineers do not escape it. Two excellent engineers who own the two halves of a badly split problem will each build their half well. Neither is in a position to notice that the split itself was wrong, and if one does notice, fixing it is not an engineering decision they are allowed to make. Slack does not help, because the constraint was never the cost of talking. It is that agreement is required at all.
 
-*(The desks-and-time-zones illustration is this book's, not Conway's. His 1968 paper, "How Do Committees Invent?", argues the general claim; the mechanism above is one ordinary way it comes about.)*
+**Neither shape is better in itself**, and this is where the law is most often misread. Tight coupling between two things that genuinely are one thing is right — splitting them adds ceremony to something indivisible. A firm interface between things that genuinely are separate is also right. The law does not say that distance improves design.
+
+What it says is that **your software gets its seams where the work was divided**, whether or not the problem has seams there. The failure it predicts is a *mismatch*: when the shape of the problem and the shape of the ownership disagree, ownership wins.
+
+Both directions of mismatch are common.
+
+- **One owner, two natural parts.** A team that owns what should be two separable things builds them as one. Nothing is broken and every test passes, so nobody notices — until the day the two need to ship on different schedules, or scale differently, or one has to be replaced, and it turns out they share state, types, and a deployment.
+- **Two owners, one natural unit.** Two teams owning halves of something indivisible put a network call, a queue, or a versioned interface through the middle of it. Every change that should be one commit becomes two releases and a coordination meeting.
+
+*(Conway's 1968 paper, "How Do Committees Invent?", argues the general claim. The ownership mechanism above is this book's account of why it holds.)*
 
 ### One team per service, and where that heuristic breaks
 
