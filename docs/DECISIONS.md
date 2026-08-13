@@ -1315,3 +1315,39 @@ The ownership mechanism is the draft's; the two objections that forced it are th
 **Consequence.**
 `LEDGER.md` gains a row for the ownership asymmetry.
 Chapter 09 runs 289 lines.
+
+---
+
+## 30. Conway checked against the source, and quoted
+
+**Date.** 2026-08-12
+
+**Context.**
+Having accepted the ownership mechanism, the author raised the obvious problem with it:
+
+> law says "...copy their own communication structures." We say "Ease of communication does not help", "The mechanism is not about communication being easy or hard" and then we show the "ownership" problem. I didn't read Conway's work but I suspect this is a respectable stretch. If it isn't, maybe we should just drop Conway's law from the book and frame this "law" for what it is.
+
+A fair challenge: the chapter was contradicting the words of the law it was citing, which is the misattribution the book's provenance rule exists to prevent.
+
+**Decision.**
+Fetch the paper rather than reason about it. Conway's own account of the mechanism settles it:
+
+> If there is a branch, then the two […] design groups X and Y which designed the two nodes must have **negotiated and agreed upon an interface specification** […] If, on the other hand, there is no branch between x and y, then the subsystems do not communicate with each other, there was nothing for the two corresponding design groups to negotiate.
+
+*Negotiated and agreed upon.* Conway's "communication structure" is not about how easily people can reach each other — it is about which design groups had to settle something between them. The ownership reading is his mechanism in modern vocabulary, not a stretch.
+
+So the chapter now quotes him directly, with a short passage explaining that "communication structure" is easy to misread and what he meant by it. It also quotes the consequence, which is stronger than anything the draft had written:
+
+> Given any design team organization, there is a class of design alternatives which cannot be effectively pursued by such an organization because the necessary communication paths do not exist.
+
+**Attribution corrected in the other direction.**
+Decision 29 recorded the ownership mechanism as the draft's. That over-claimed. The negotiation mechanism is Conway's; what this book adds is the asymmetry that makes a partition stick — free to move inside one owner, expensive across — and the translation of "design groups" into teams. The chapter's note now says exactly that.
+
+**Worth recording as method.**
+Two rounds were spent rewriting an explanation of Conway's Law without reading Conway. The second rewrite was defensible and still could not answer *is this what he said*, which is the question the author asked. Fetching the source took one call and produced a better section than either rewrite, because his own words are more precise than the paraphrase — *negotiated and agreed upon* is the phrase the whole argument turns on.
+
+The book's rule is mechanism over authority, which is about not using citation as proof. It is not a licence to skip reading the thing being cited.
+
+**Consequence.**
+Chapter 09 runs 301 lines.
+`LEDGER.md`'s row is reworded: the mechanism is negotiation, and it is Conway's.

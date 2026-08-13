@@ -113,7 +113,7 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | You cannot deploy other people's software | 09 | The one constraint in the book that cannot be fixed by changing code you control | cite 09 |
 | Inverse Conway is a strategy, not a finding | 09 | The observation is established; driving architecture by reshaping teams is not | cite 09 |
 | Conway detects mismatch | 09 | Neither tight coupling nor a firm interface is better in itself; the failure is seams landing where the work was divided rather than where the problem divides | cite 09 |
-| Conway's mechanism is ownership | 09 | Dividing the work is already a decomposition, and a boundary between owners needs agreement to move while one inside an owner does not | "the ownership asymmetry (Ch. 09)" |
+| Conway's mechanism is negotiation | 09 | His own wording: an interface exists where two design groups had to negotiate one. "Communication structure" means who must agree with whom, not who can reach whom | "the ownership asymmetry (Ch. 09)" |
 | One team per service, read correctly | 09 | A constraint on who may own a service, not a recipe for how many to have | cite 09 |
 | "Late" in Brooks's Law | 09 | Remaining work shorter than the time a new person takes to become useful — not the same as behind schedule | "what late means (Ch. 09)" |
 | Long feedback loops | 09 | These decisions cannot be tested, because the evidence arrives after the cost is sunk | cite 09 |

@@ -97,12 +97,23 @@ That is what the commitment costs when it is kept. Chapter 05 covers the other h
 
 ### The organization ends up in the software
 
-**Conway's Law**, from Melvin Conway in 1968: organizations produce designs that copy their own communication structures.
-[claude I'm happy with the way this chapter is now. However I see another problem now, law says: "...copy their own communication structures." We say "Ease of communication does not help", "The mechanism is not about communication being easy or hard" and then we show the "ownership" problem. I didn't read Conway's work but I suspect this is a respectable stretch. If it isn't, maybe we should just drop the conway's law from the book and frame this "law" for what it is, as a new law or as part of another existing law. But the ides is around: "ownership imposes design boundaries." ]
+**Conway's Law**, from Melvin Conway in 1968. In his words:
+
+> Organizations which design systems […] are constrained to produce designs which are copies of the communication structures of these organizations.
 
 It is a description, not advice — chapter 04 uses exactly this distinction, since a law describes what happens while a principle tells you to do something. Conway's Law tells nobody to do anything.
 
-The mechanism is not about communication being easy or hard, and it has nothing to do with how far apart people sit. It is about **who was given which part**.
+**"Communication structure" is easy to misread**, so it is worth taking from the same paper what Conway meant by it. He is not talking about how easily people can reach each other. He is talking about which groups have to agree with which:
+
+> If there is a branch, then the two […] design groups X and Y which designed the two nodes must have **negotiated and agreed upon an interface specification** […] If, on the other hand, there is no branch between x and y, then the subsystems do not communicate with each other, there was nothing for the two corresponding design groups to negotiate.
+
+*Negotiated and agreed upon.* An interface exists between two parts of the system exactly where two groups had to settle something between them. So the structure that gets copied is **who owns what and therefore who must agree with whom** — which is why messaging tools do not change the outcome. They lower the cost of talking; the constraint was never talking, it was agreement.
+
+Conway also states the consequence that matters most here:
+
+> Given any design team organization, there is a class of design alternatives which cannot be effectively pursued by such an organization because the necessary communication paths do not exist.
+
+Some designs are simply not available to you, given who owns what.
 
 Work has to be divided before it can start. Someone decides that this team takes billing and that team takes fulfilment, or that these three engineers own the importer. **That division is already a decomposition of the system** — you cannot hand out the work without partitioning the design — and it is usually settled before anyone has read the problem closely, by whoever was arranging the work.
 
@@ -113,7 +124,7 @@ What makes the partition stick is an asymmetry in who can change what.
 
 So internal boundaries stay fluid and shared ones calcify — not because anyone is tempted into bad design, but because one kind of correction is free and the other needs a meeting, a quarter, and somebody's agreement.
 
-This is why good engineers do not escape it. Two excellent engineers who own the two halves of a badly split problem will each build their half well. Neither is in a position to notice that the split itself was wrong, and if one does notice, fixing it is not an engineering decision they are allowed to make. Ease of communication does not help, because the constraint was never the cost of talking. [claude I replaced slack and removed the unnecessary cryptic final sentence.]
+This is why good engineers do not escape it. Two excellent engineers who own the two halves of a badly split problem will each build their half well. Neither is in a position to notice that the split itself was wrong, and if one does notice, fixing it is not an engineering decision they are allowed to make.
 
 **Neither shape is better in itself**, and this is where the law is most often misread. Tight coupling between two things that genuinely are one thing is right — splitting them adds ceremony to something indivisible. A firm interface between things that genuinely are separate is also right. The law does not say that distance improves design.
 
@@ -124,7 +135,7 @@ Both directions of mismatch are common.
 - **One owner, two natural parts.** A team that owns what should be two separable things builds them as one. Nothing is broken and every test passes, so nobody notices — until the day the two need to ship on different schedules, or scale differently, or one has to be replaced, and it turns out they share state, types, and a deployment.
 - **Two owners, one natural unit.** Two teams owning halves of something indivisible put a network call, a queue, or a versioned interface through the middle of it. Every change that should be one commit becomes two releases and a coordination meeting.
 
-*(Conway's 1968 paper, "How Do Committees Invent?", argues the general claim. The ownership mechanism above is this book's account of why it holds.)*
+*(The quotations are from Conway's 1968 paper, "How Do Committees Invent?" The negotiation mechanism is his. What this book adds is the asymmetry that makes a partition stick — free to change inside an owner, expensive across — and the reading of "communication structure" as ownership, which is how his design-group argument lands in an organization that has teams rather than committees.)*
 
 ### One team per service, and where that heuristic breaks
 
