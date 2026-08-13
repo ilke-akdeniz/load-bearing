@@ -105,7 +105,7 @@ Two tests, applied throughout the rest of Part III.
 
 Contents: **compression** — does naming it save more words than it costs? **constraint** — does it rule anything out? Patterns as vocabulary versus patterns as prescription; why catalogues get misread as checklists; the difference between describing a shape and recommending one.
 
-*Where this doesn't apply:* teaching contexts, where a name with low information content is still a useful handle for a beginner.
+*Where this doesn't apply:* a design too young to name, where a vague name is the honest one; local vocabulary that compresses for insiders and nobody else; and names kept because they are how you find the literature on a shape's failure modes.
 
 ### 11. The scale test
 `11_the-scale-test.md`

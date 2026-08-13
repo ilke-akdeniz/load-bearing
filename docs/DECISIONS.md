@@ -1450,3 +1450,36 @@ Two things from that document are deliberately left alone: *anemic domain model*
 **Consequence.**
 `LEDGER.md` gains six concept rows and two example rows.
 Chapter 10 runs 181 lines and moves to **in progress**.
+
+---
+
+## 34. The teaching boundary does not survive, and is replaced
+
+**Date.** 2026-08-12
+
+**Context.**
+The TOC promised chapter 10 a boundary at teaching: *a name with low information content is still a useful handle for a beginner.* The draft wrote it that way. The author rejected the argument:
+
+> what can you realistically teach with a name that doesn't compress and doesn't forbid? This is a facade. Ok so what? […] in fact most of the times it clouds the learning because the reasons — principles behind that shape is not identified. […] Then you never encounter that particular requirement in real life and you forget the pattern even exists.
+
+**Decision.**
+The objection holds and the boundary is removed.
+
+Attempts to steelman it all collapse into a boundary the chapter already had. The strongest version — that a name gives a learner something to recognize the shape by later — fails on the author's point that recognition without the reason is not usable knowledge: you can identify a Facade and still not know when a simplified interface is the right move, what it costs, or how to design a good one.
+
+What survives is narrower and is folded into the *search* boundary: a name a learner can look up is a door into the discussion of when the shape fails, and a name without that discussion attached is a sound they can make in a meeting. The chapter now says the widely assumed opposite is wrong, and connects the failure to chapter 15's mechanism — a compressed judgement, repeated without its conditions, becomes a slogan.
+
+**The replacement boundary is the author's, from a separate note.**
+Commenting on *naming precisely costs more than naming vaguely*, they added that a vague name is sometimes the right move because the design is not mature enough to decide, and that waiting for a little more functionality often turns four awkward things into three natural ones.
+
+That is a genuine counter-example to the chapter's claim, and a better one than teaching: **the two tests assume you can say what the code does.** Before that is true, a precise name is a claim you have not earned. The chapter states the failure precisely — not the vague name, but losing track that it is provisional — and borrows chapter 03's device for any deferred decision: write down what would have to become true for the name to be settled.
+
+**Two smaller corrections.**
+The constraint demonstrations now show what each name *permits* before what it forbids, at the author's suggestion, which makes the forbidden case legible rather than requiring the reader to infer the permitted one.
+
+And the failure list's `strategies/` entry now carries its reason, which the author could see was a failure but not articulate: **a directory should group things that change together, while a pattern name groups things that are shaped alike.** So every feature change reaches into a folder holding other features' code.
+
+**Consequence.**
+`00_toc.md`'s boundary line for chapter 10 is rewritten, since the promised boundary is gone. The TOC now names the three that survive.
+`LEDGER.md` gains two concept rows and one reworded.
+Chapter 10 runs 202 lines.

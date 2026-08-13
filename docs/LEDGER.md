@@ -124,7 +124,9 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Compression needs a shared referent | 10 | The saving exists only for a reader who knows the term; a local coinage compresses nothing outside | cite 10 |
 | The constraint test is mechanical | 10 | Try to write code the name forbids; if you can and still use the name, it constrains nothing | cite 10 |
 | A catalogue is ethnography | 10 | It records shapes that were occurring; read as a checklist it becomes obligations. 04 owns describes-vs-prescribes | cite 10 |
-| A name as a search term | 10 | Some names are bad descriptions and good indexes into the literature on their failure modes | cite 10 |
+| A name as a search term | 10 | Some names are mediocre descriptions and good indexes into the literature on their failure modes; this is also all a weak name gives a learner | cite 10 |
+| Too young to name | 10 | The tests assume you can say what the code does; before that a vague name is honest, and the failure is losing track that it is provisional | cite 10 |
+| Directories group by change, names group by shape | 10 | A folder named for a pattern collects code belonging to different features | cite 10 |
 | The scale test | 11 | The same name is trivial at class scale and load-bearing at system scale | "scale test (Ch. 11)" |
 | Survives-translation test | 13 | If it disappears when you change language, it was a workaround | cite 13 |
 | Smuggled verdict | 14 | Vocabulary arriving with its conclusion attached | cite 14 |

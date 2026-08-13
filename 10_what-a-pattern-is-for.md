@@ -53,28 +53,40 @@ The harder test, and the one that separates a name carrying information from a n
 
 The test is mechanical: **take the name, and try to write code it forbids.** If you can write the forbidden code and still honestly use the name, the name is not constraining anything.
 
-[claude two code samples below are fine but they would be better if they showed first what's "allowed"
-ex: a := Thing.GetInstance() // always returns the same instance]
-
-**Singleton** — a type with exactly one instance for the lifetime of the process. What does it forbid?
+**Singleton** — a type with exactly one instance for the lifetime of the process.
 
 ```go
-a := NewThing()
-b := NewThing() // forbidden: if this is possible, it is not a Singleton
+// Permitted, and the only way in.
+a := Thing.Instance()
+b := Thing.Instance() // a and b are the same object, always
 ```
 
-That is a strong constraint. Knowing something is a Singleton tells you that any two references to it are the same object, which is a fact you can rely on when reading code elsewhere.
+```go
+// Forbidden. If this compiles, it is not a Singleton.
+a := NewThing()
+b := NewThing()
+```
 
-**Transaction Script** — what does it forbid?
+A strong constraint. Being told something is a Singleton tells you that any two references to it are the same object, without opening the file.
+
+**Transaction Script** — a procedure that handles one business operation end to end.
+
+```go
+// Permitted: the rule is in the procedure, the data is inert.
+func ApplyDiscount(ctx context.Context, db *sql.DB, id string, pct int) error {
+	tx, _ := db.BeginTx(ctx, nil)
+	// read rows, compute, write rows, commit
+}
+```
 
 ```go
 // Forbidden: a persistent object model between the operation and the data.
-order := repo.Load(id)       // an entity, with behaviour and identity
-order.ApplyDiscount(pct)     // the rule lives on the object
-repo.Save(order)             // and is written back through a mapper
+order := repo.Load(id)   // an entity with behaviour and identity
+order.ApplyDiscount(pct) // the rule lives on the object
+repo.Save(order)         // written back through a mapper
 ```
 
-Also a real constraint. It tells you where the business rule is *not*: not on a loaded object graph. That rules out an entire style, which is why the name carries information.
+Also a real constraint. It tells you where the business rule is *not* — not on a loaded object graph — and that rules out an entire style.
 
 **Facade** — an object providing a simplified interface to a larger body of code. Now try to write what it forbids:
 
@@ -123,15 +135,15 @@ There is one more reason a name can be worth having even when both tests are mar
 
 ## Where this doesn't apply
 
-### Teaching, where a weak name is still a handle
+### Before you know what the shapes are
 
-A beginner needs somewhere to put a new idea before they can evaluate it. "This is a Factory" gives them a hook to hang the shape on, and the fact that *Factory* rules almost nothing out matters less than the fact that it lets them recognize the shape again next week.
+The tests assume you can say what the code does. Early on you cannot, and then a vague name is the honest one.
 
-[claude I don't get this argument, what can you realistically teach with a name that doesn't compress and doesn't forbid? This is a facade. Ok so what? Did I learn how to design good - ergonomic constructors with that naming? Maybe yes maybe not. Did the naming contribute anything for that learning? Generally not, in fact most of the times it clouds the learning because the different reasons - principles behind that shape is not identified. "This is a Factory we use that when we have x big classes and so on..." Then you never encounter that particular requirements in real life and you forget the pattern even exists.]
+A folder holding four things that do not yet belong together is a holding pen, and calling it something precise would be a claim you have not earned — one you would then have to maintain, or quietly break. Waiting for a little more functionality to accumulate often turns four awkward things into three natural ones, and the natural ones name themselves.
 
-The failure is not teaching with weak names. It is never coming back to say which ones were scaffolding — chapter 02 lists exactly this as one of the four ways the kinds get confused, and this is the pattern-shaped instance of it.
+So the failure is not the vague name. It is **losing track of the fact that it is provisional**, at which point the holding pen becomes the architecture by default, and a name that was honest becomes a name that hides.
 
-The check, for anyone teaching: can you state what this name rules out? If not, say so at the time, rather than leaving the student to discover it in a design review five years later.
+The check is the one chapter 03 gives for any deferred decision: write down what would have to become true for the name to be settled. *This is `pending/` until the third importer lands, and then we split it* is a different artifact from `pending/` with no note attached, even though the code is identical.
 
 ### Local vocabulary, where compression is real and private
 
@@ -143,7 +155,11 @@ That is fine, and it is not a lesser thing than a published pattern. It fails th
 
 Some names are worth using even where they compress poorly, because they are how you find the prior art.
 
-If you are building something that periodically stops calling a failing service, calling it a *Circuit Breaker* buys you access to two decades of people writing about half-open states, failure thresholds, and what happens when the breaker itself becomes a single point of failure. The name is a bad description and an excellent search term. Use it, and do not pretend it is doing the other job.
+If you are building something that periodically stops calling a failing service, calling it a *Circuit Breaker* buys you access to two decades of people writing about half-open states, failure thresholds, and what happens when the breaker itself becomes a single point of failure. The name is a mediocre description and an excellent search term. Use it, and do not pretend it is doing the other job.
+
+**This is also the whole of what a weak name gives a learner**, which is worth saying because the opposite is widely assumed. Telling a student *this is a Facade* does not teach them when a simplified interface is the right move, what it costs, or how to design one that is pleasant to use. It teaches them a word — and if the reason behind the shape is not given alongside it, the name can make things worse, because the student now has a label and believes they have an idea. The conditions under which the shape is wrong were never mentioned, which is the mechanism chapter 15 traces from compressed judgement to slogan.
+
+The defensible version is narrow: a name a learner can search is a door into the discussion of when the shape fails. A name without that discussion attached is a sound they can make in a meeting.
 
 ---
 
@@ -153,7 +169,7 @@ If you are building something that periodically stops calling a failing service,
 
 **The tests are a licence to be tiresome.** "Well, what does that rule out?" is a real question and also an excellent way to stall a design discussion. Ask it when a name is carrying the weight of a decision. Do not ask it about every noun in the room.
 
-**Naming precisely costs more than naming vaguely.** `OrderManager` takes no thought, which is why it exists. Naming the file for what it actually does requires knowing what it actually does, and sometimes the reason nobody named it well is that it does four unrelated things — in which case the naming problem is a structural problem wearing a disguise. [claude just an addition: sometimes that could be the best move because the design is not mature yet, you don't have enought data to make those decisions and so on...  As long as you are aware of this possible debt. Maybe it's better to wait a slight accumulation of functionality so that those four unrelated things give birth two 3 meaningful, natural classes.]
+**Naming precisely costs more than naming vaguely.** `OrderManager` takes no thought, which is why it exists. Naming the file for what it actually does requires knowing what it actually does, and sometimes the reason nobody named it well is that it does four unrelated things — in which case the naming problem is a structural problem wearing a disguise — unless the design is genuinely too young to name, which the boundary section above covers.
 
 **A name that passes both tests can still be the wrong shape for you.** Singleton compresses and constrains beautifully, and is usually a mistake. The tests measure whether a name carries information, not whether the thing it names is a good idea. That is a separate question, and Part III spends the rest of its chapters on it.
 
@@ -166,13 +182,13 @@ If you are building something that periodically stops calling a failing service,
 - **`Manager`, `Helper`, `Util`, `Service`, `Handler`, `Processor`, `Data` in a type name**, where removing the suffix would lose nothing. The suffix is standing in for the description nobody wrote.
 - **Two files whose names differ only by suffix** — `OrderService` and `OrderManager` — where nothing tells you which does what.
 - **A pattern name in a type name that is not true of the type.** `UserFactory` that returns one hard-coded instance, `PaymentStrategy` with one implementation and no second in prospect.
-- **A directory named for a pattern rather than for the domain**, so `strategies/` holds four unrelated things whose only common property is that somebody applied the same word to them. [claude what's the failure reason here in one sentence? I agree this is failure but can't put the reason into words.]
+- **A directory named for a pattern rather than for the domain**, so `strategies/` holds four unrelated things whose only common property is that somebody applied the same word to them. The reason it fails: **a directory should group things that change together, and a pattern name groups things that are shaped alike** — so every feature change reaches into a folder of code belonging to other features, and nothing in it can be read without first working out which feature it serves.
 - **A design document that names patterns and never says what they exclude.**
 
 **In a conversation:**
 
 - **"That should be a Repository."** Followed up with: what would that rule out that the current code does?
-- **"We're using the Strategy pattern here."** Sometimes real information. Sometimes a description of `if`. [claude are we gonna expand this in other chapters? This could be good example to expand on in some place.]
+- **"We're using the Strategy pattern here."** Sometimes real information. Sometimes a description of `if`, or of passing a function — chapter 13 works through the GoF names that turn out to be language features once the language has them, and Strategy is the clearest case.
 - **"This doesn't follow the pattern."** Which pattern, and what makes following it correct here rather than elsewhere?
 - **A design review scored against a catalogue**, where the finding is that a named shape is absent rather than that something concrete goes wrong.
 - **A name introduced in a meeting and used as a premise by the end of it.** The gap between naming a thing and having established anything about it is where most of this goes wrong.
