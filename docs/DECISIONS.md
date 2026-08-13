@@ -1351,3 +1351,63 @@ The book's rule is mechanism over authority, which is about not using citation a
 **Consequence.**
 Chapter 09 runs 301 lines.
 `LEDGER.md`'s row is reworded: the mechanism is negotiation, and it is Conway's.
+
+---
+
+## 31. The author read the source; the paper had a better example than the draft invented
+
+**Date.** 2026-08-12
+
+**Context.**
+After decision 30, the author read Conway's paper themselves and returned with excerpts, an interpretation to check, and the instruction to decide what was worth using.
+
+Their reading — that "linear graph of a system" means the architecture and its components, and "linear graph of its design organization" means teams and ownership boundaries — is correct against the source. Conway maps *system* to *committee*, *subsystem* to *subcommittee*, and *interface* to *coordinator*, and says of the system graph that "each node is a subsystem which communicates with other subsystems along the branches."
+
+**What was added, and what was left out.**
+
+Two of the excerpts earn their place.
+
+The **homomorphism** is more precise than "copies": every subsystem corresponds to a design group and every interface to a negotiation. It is a structure-preserving map, and it runs in one direction.
+
+The **COBOL/ALGOL example** is the strongest thing in the paper and better than anything the draft had written. Five people on a COBOL compiler and three on an ALGOL compiler produced a five-phase compiler and a three-phase compiler. Nobody chose the phase count; it was chosen when the people were assigned.
+
+Left out: "stamps out an image of itself in every design it produces," which is rhetoric adding nothing over the homomorphism, and the two military services producing a copy of their organization chart, which is funny but less precise than the compiler example. One demonstration is enough; the second would be padding.
+
+**An unplanned payoff.**
+The homomorphism runs *from* the system *to* the organization, and following that direction settles a heuristic the chapter had already stated informally. A map in that direction gives every subsystem exactly one design group — so several subsystems may share a group, and none may have two. That is precisely *many services per team is fine, one service across many teams is not*, which the chapter had argued from experience two sections later.
+
+Marked as this book's reading. Conway states the homomorphism and does not draw the consequence out.
+
+**Consequence.**
+`LEDGER.md` gains a row for the homomorphism and its direction.
+Chapter 09 runs 311 lines.
+
+---
+
+## 32. Read the source before explaining why someone else's result holds
+
+**Date.** 2026-08-12
+
+**Context.**
+Chapter 09 explained Conway's Law twice without reading Conway, and the author asked for a rule that would prevent it.
+
+**What actually happened.**
+The first attempt described the law as a temptation acting on individual engineers; the author rejected it as implausible, since competent engineers are not tempted into bad structure. The second replaced that with an ownership mechanism. It was defensible, survived scrutiny, and still could not answer the question the author then asked — *is this what he said*. Only fetching the paper settled it.
+
+**Decision.**
+A rule in `CLAUDE.md`, placed directly after *Mechanism over authority*, because the two are easily confused and the second was being read as licence for the first failure.
+
+Naming a result is one thing. Explaining its mechanism, or saying what its terms mean, is another. The trigger is writing a sentence of the form *the mechanism is…*, *what X actually meant was…*, or *the reason this holds is…* about a named law or argument. At that point, read it.
+
+**Why the rule is worth its cost.**
+Two reasons, and the second is the one that decides it.
+
+The paraphrase is less precise than the original. *Communication structures* is vague; Conway's *negotiated and agreed upon an interface specification* is not, and the entire argument turns on that phrase.
+
+And **the source contains material nobody would have invented.** The five-phase and three-phase compilers are better than the draft's illustration, and were sitting in the paper through two rewrites of a section about that paper.
+
+**Boundary.**
+Where a source genuinely cannot be reached — paywalled, offline, out of print — say so in the chapter's review notes and keep the claim to what is uncontroversially attributed, rather than explaining a mechanism from inference.
+
+**Attribution.**
+The failure and the rule are both the draft's; the author identified the pattern and asked for the rule. The correction that started it — reading the paper and returning with excerpts — was theirs.

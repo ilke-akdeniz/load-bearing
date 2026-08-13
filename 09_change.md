@@ -109,23 +109,19 @@ It is a description, not advice — chapter 04 uses exactly this distinction, si
 
 *Negotiated and agreed upon.* An interface exists between two parts of the system exactly where two groups had to settle something between them. So the structure that gets copied is **who owns what and therefore who must agree with whom** — which is why messaging tools do not change the outcome. They lower the cost of talking; the constraint was never talking, it was agreement.
 
-Conway also states the consequence that matters most here:
+He states the relationship more precisely than "copy" suggests. Both the system and the organization are graphs — for the system, "each node is a subsystem which communicates with other subsystems along the branches"; for the organization, the nodes are design groups and the branches are the pairs who had to negotiate something. His claim is that there is
+
+> a homomorphism from the linear graph of a system to the linear graph of its design organization.
+
+A homomorphism is a map that preserves structure: every subsystem corresponds to a group, every interface to a negotiation. It also runs in one direction only, which turns out to matter.
+
+His own example is the one worth carrying. A research organization put five people on a COBOL compiler and three on an ALGOL compiler, and got **a five-phase COBOL compiler and a three-phase ALGOL compiler.** Nobody chose the number of phases. It was chosen when the people were assigned.
+
+And the consequence that matters most here:
 
 > Given any design team organization, there is a class of design alternatives which cannot be effectively pursued by such an organization because the necessary communication paths do not exist.
 
-[claude I read the paper and found more strong statements supporting our case. 
-This is my reading:  "linear graph of a system" => software architecture, services, components
-"linear graph of its design organization" => teams, ownwership boundaries
-Check this interpretation by readind the source material.
-Take a look at these excerpts and decide if they are worth using:
----
-This kind of a structure-preserving relationship between two sets of things is called a homomorphism. Speaking as a mathematician might, we would say that there is a homomorphism from the linear graph of a system to the linear graph of its design organization.
-
-Systems Image Their Design Groups
----
-]
-
-Some designs are simply not available to you, given who owns what.
+Some designs are not available to you, given who owns what.
 
 Work has to be divided before it can start. Someone decides that this team takes billing and that team takes fulfilment, or that these three engineers own the importer. **That division is already a decomposition of the system** — you cannot hand out the work without partitioning the design — and it is usually settled before anyone has read the problem closely, by whoever was arranging the work.
 
@@ -154,6 +150,8 @@ Both directions of mismatch are common.
 Conway's Law is the reason behind the common advice that each service should have exactly one owning team, and the reasoning is sound as far as it goes: a deployment boundary that crosses a team boundary needs coordination on every release, which is the cost the boundary was supposed to remove.
 
 But the advice is regularly applied in the wrong direction. It is a constraint on **who may own a service**, not a recipe for **how many services to have**.
+
+Conway's homomorphism says why, if you follow the direction it runs. A map from the system to the organization assigns every subsystem exactly one design group — so several subsystems may share a group, and no subsystem may have two. *(Conway states the homomorphism; drawing this consequence out of its direction is this book's.)*
 
 - **Many services owned by one team** is fine. It costs that team some operational overhead and nothing in coordination, because every release is theirs to schedule.
 - **One service owned by many teams** is the failure the heuristic exists to prevent. Every release needs agreement from people with different priorities, so releases get slower, get batched, and eventually get scheduled.

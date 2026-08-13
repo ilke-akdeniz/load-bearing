@@ -217,6 +217,26 @@ When the realistic version cannot be run — it needs a database, a network peer
 Never "Fowler says." Always "here is what happens, and here is why."
 Cite people for provenance, never as proof.
 
+**Read the source before explaining why someone else's result holds.**
+The rule above is about not using a citation as an argument.
+It is not permission to skip the paper — and it was read that way twice in one chapter.
+
+Naming a result is one thing; explaining its mechanism, or saying what its terms mean, is another.
+The trigger is writing a sentence of the form *the mechanism is…*, *what X actually meant was…*, or *the reason this holds is…* about a named law, paper, or person's argument.
+At that point, go and read it.
+
+Chapter 09 explained Conway's Law twice without reading Conway.
+The first attempt made it a temptation acting on individuals, which the author rejected as implausible.
+The second replaced that with an ownership mechanism, which was defensible and still could not answer *is this what he said*.
+One fetch settled it: Conway's own words are *negotiated and agreed upon*, which is the ownership reading in his vocabulary — and the paper contained a sharper example than anything invented for it, a five-person team producing a five-phase compiler and a three-person team producing a three-phase one.
+
+Two things follow, and the second is the reason the rule is worth the trouble.
+
+- **The paraphrase is usually less precise than the original.** *Communication structures* is vague; *negotiated and agreed upon an interface specification* is not, and the whole argument turns on it.
+- **The source contains material you would not have thought of.** Examples, edge cases, and the author's own statement of what the result does *not* cover.
+
+When the source genuinely cannot be reached — paywalled, offline, out of print — say so in the chapter's review notes and keep the claim to what is uncontroversially attributed, rather than explaining a mechanism from inference.
+
 **Provenance, stated in prose.**
 Before writing a claim whose standing could be mistaken, decide which it is: standard and citable, genuinely disputed, or this book's own.
 Then **write that into the sentence** — there is no tagging notation.
