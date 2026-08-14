@@ -1641,3 +1641,45 @@ The file was renamed `11_the-scale-test.md` → `11_patterns-that-cross.md`. Two
 
 **Worth recording about process.**
 The instruction was a reminder: *always check my direct edits as well.* This pass is why the rule exists — one of five edits contained a correction the draft would have absorbed silently, and following it through produced a better example than either version had.
+
+---
+
+## 39. Chapter 12 is not a catalogue
+
+**Date.** 2026-08-14
+
+**Context.**
+The TOC planned chapter 12 as a graded catalogue: roughly sixty patterns, each with a definition, the constraint it imposes, a code demo, and its Force. Drafting it as specified would have produced four problems at once.
+
+It **re-covers owned material** — the Outbox, Saga, and Idempotency Key are chapter 07's; the Anti-Corruption Layer is 11's; Transaction Script is 10's compression example; the test-double taxonomy is 17's; data-oriented layout is 05's and 08's. A catalogue explains them again, which is what `LEDGER.md` exists to prevent.
+
+It **has no claim.** The rubric requires one sentence the chapter demonstrates, and sixty entries have sixty. The TOC's own boundary line conceded it: *each entry carries its own boundary* is not a boundary section.
+
+It **undercuts chapter 10**, which argues that a name earns its place by compressing and ruling something out. Listing sixty names without applying those tests contradicts the chapter two before it.
+
+And it **overlaps chapter 13**, which owns *if it disappears when you change language, it was a workaround*. The catalogue as planned is the positive cases of that same test.
+
+**Decision.**
+Keep the material and replace the organizing idea. The claim is that **the patterns which last are answers to Forces, and grouping them by Force finds the name from the situation** — the direction that is actually useful, and the one a catalogue organized by shape cannot serve, since it can only be searched by a name you already have.
+
+**The coverage question, put to the author.**
+The first proposal had two or three exemplars per Force, about fifteen patterns. They asked whether that meant all the patterns or a select few, which surfaced the real objection: a reader can reply *you picked the ones that fit your grouping*.
+
+Resolved by splitting the entries in two. **Worked** entries — two per Force, with code, constraint, and cost — carry the argument. **Listed** entries — the rest of each family, one line each — are placed rather than explained, and their job is evidence: if fifty patterns sort into six Forces, the grouping covers the field rather than the chosen cases. Patterns another chapter owns appear with a pointer instead of a definition.
+
+**The sort was done before the chapter was written, and produced the boundary section.**
+Forty-three patterns fall into six Forces. Seven refuse, and they fail in two distinct ways, which is more useful than a tidy result would have been.
+
+Some answer a **goal** rather than a situation — golden tests, property-based testing, the test-double taxonomy, functional core / imperative shell. All answer *how will I know this works*, which is something you want, not a fact about where you are standing. Chapter 03 is explicit that a Force is not negotiable by argument; testability is.
+
+Some answer the **shape of the problem** rather than the situation. A state machine is right when the domain has states and transitions, which is a fact about the business. Transaction Script is what you write when no Force pushes you anywhere else.
+
+So the chapter's claim is stated in its narrower true form, and the boundary section names the three-way distinction — Force, goal, problem shape — as one way people end up applying machinery to a question they were not asking.
+
+**Verification.**
+Most entries are structural, which needs no run. The one behavioural claim was measured: at a millisecond per round trip, a thousand rows takes 1,145 ms one call at a time and 11 ms in batches of a hundred.
+
+**Consequence.**
+`00_toc.md`'s entry for chapter 12 is rewritten, since the planned chapter no longer describes this one.
+`LEDGER.md` gains four concept rows and six example rows.
+Chapter 12 runs 385 lines, the longest so far, against 600–900 for the catalogue it replaces.

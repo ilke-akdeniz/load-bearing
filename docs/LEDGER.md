@@ -134,6 +134,10 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Crossing the line adds failure modes | 11 | The same shape acquires loss, duplication, latency, and published commitment — Part II's Laws, one at a time | cite 11 |
 | Unchanged by the boundary | 11 | If you cannot state what the pattern would be on the other side, it is a code-organization device — Strategy, Template Method | cite 11 |
 | Singleton inverts | 11 | "Exactly one" across machines is leader election, which needs consensus (Ch. 07) | cite 11 |
+| Patterns are Forces with a shape | 12 | The durable patterns answer a Force; grouping by Force finds the name from the situation, where a catalogue only finds it from the name | "the Force groups (Ch. 12)" |
+| Six Force families | 12 | Something must survive; two at once; a failure must not spread; this changes and that does not; fast enough; someone else must not break it | cite 12 |
+| Goal vs Force vs problem shape | 12 | Testing patterns answer a goal, State Machine answers the problem's shape, and neither sorts by Force | "the three that do not sort (Ch. 12)" |
+| Same Force, several answers | 12 | The Force narrows the field; the intensity picks the answer, and 19 does the choosing | cite 12 |
 | Survives-translation test | 13 | If it disappears when you change language, it was a workaround | cite 13 |
 | Smuggled verdict | 14 | Vocabulary arriving with its conclusion attached | cite 14 |
 | Principle→movement mechanism | 15 | Observation gets a name, name gets a community, community forgets the conditions | cite 15 |
@@ -205,6 +209,12 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | FastSell: `Receipt` to `LedgerEntry`, both sides owned | 11 | The adapter is the second-best answer — renaming two fields deletes it |
 | FastSell moves to Stripe | 11 | The rename is unavailable, so adapting is the only move; six call sites speak Stripe, or one |
 | Partial ownership | 11 | An internal service two other teams call — changeable, but not unilaterally |
+| Unit of Work / append-only log | 12 | Durability's two shapes, and what each constrains |
+| Aggregate / identity map | 12 | The consistency boundary, and one row loaded once |
+| Bulkhead / Result types | 12 | Containment in capacity and in the type system |
+| Ports and adapters / strangler fig | 12 | Seams where two things move at different rates |
+| Batching measured: 1145 ms to 11 ms | 12 | Latency's arithmetic; 08 owns the curve |
+| Tolerant reader / consumer-driven contracts | 12 | Surviving a boundary you do not control |
 | GoF collapse in 4 languages | 13 | Survives-translation test |
 | Old client against four API changes | 09 | Add is safe, retype fails loudly, rename fails silently with a zero amount |
 | `io/ioutil`, deprecated 2021, running in 2026 | 09 | 175 deprecated declarations in Go's stdlib — the cost of a compatibility promise, kept |

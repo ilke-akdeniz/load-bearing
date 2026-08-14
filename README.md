@@ -6,7 +6,7 @@ Some software rules hold everywhere.
 Most only hold where they were written.
 This is a book about telling them apart.
 
-> **Status: early draft.** Ten chapters of twenty-three are written — Parts I and II, and the first two of Part III.
+> **Status: early draft.** Twelve chapters of twenty-three are written — Parts I and II, and the first three of Part III.
 > The table of contents below is the plan, not a promise.
 
 ## How this book was written
