@@ -306,7 +306,7 @@ An internal dependency that changes weekly and is called from forty places behav
 
 The question that does the work: **can I change the other side?**
 
-If yes, you are choosing between options and following the pattern is rarely the cheapest option. If no, you are not choosing — you are pricing a constraint, and the pattern is what the price looks like.
+If yes, you are choosing between options, and following the pattern is rarely the cheapest option. If no, you are not choosing — you are pricing a constraint, and the pattern is what the price looks like.
 
 ---
 
