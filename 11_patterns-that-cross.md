@@ -172,16 +172,18 @@ func (o *Orders) Cancel(ctx context.Context, id string) error
 func (o *Orders) resolvePricing(...)   // unexported; nobody outside can call it
 ```
 
-Rename `Place`, merge `Cancel` into it, or change what `PlaceRequest` contains, and you fix the call sites in the same commit. Now the same object is reachable by two other teams, over HTTP:
+You can rename `Place`, merge `Cancel` into it, or change what `PlaceRequest` contains with a reasonable effort. You just have to fix the call sites in the same commit. 
+
+Imaging the same object is reachable by two other teams, over HTTP:
 
 ```text
 POST /v1/orders          -> Place
 DELETE /v1/orders/{id}   -> Cancel
 ```
 
-Nothing about the code changed. What changed is that `Place` and `Cancel` are now names in somebody else's source, deployed on a schedule you do not set. You may add `POST /v1/orders/{id}/hold`. You may not rename `Place`, remove `Cancel`, or make a field of `PlaceRequest` required — those are chapter 09's forbidden moves, and the client that breaks is one you cannot deploy.
+Nothing about the code changed. What changed is that `Place` and `Cancel` are now names in somebody else's source, deployed on a schedule you do not set. You may add `POST /v1/orders/{id}/hold`. You may not rename the endpoints `Place`, remove `Cancel`, or make a field of `PlaceRequest` required — those are chapter 09's forbidden moves, and the client that breaks is one you cannot deploy.
 
-The name did not change. What it commits you to did. The name did not change; what it commits you to did.
+The name of the pattern did not change. What it commits you to did. 
 
 ### Why these arguments do not converge
 
@@ -219,7 +221,7 @@ Some names do not have a version on the other side of the line, and the test is 
 
 **Strategy** — passing behaviour as a parameter — is the clearest. In your own code, it's passing a function or class as a parameter. Across a boundary is it… configuration? A plugin? Nothing sharpens, because nothing about passing a function becomes unreliable when the program grows. **Template Method** and most uses of **Decorator** are the same.
 
-**Singleton is the exception to this exception**, and it belongs here because it shows the boundary's limit. Strategy and Template Method do not change when they cross the line. Singleton changes more than anything else in the chapter.
+**Singleton is a notable exception**, it changes more than anything else when it crosses the line.
 
 The invariant is the same on both sides, and stating it precisely is what makes the connection real rather than a play on words:
 
