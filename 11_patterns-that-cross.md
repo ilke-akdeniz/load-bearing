@@ -172,18 +172,27 @@ func (o *Orders) Cancel(ctx context.Context, id string) error
 func (o *Orders) resolvePricing(...)   // unexported; nobody outside can call it
 ```
 
-You can rename `Place`, merge `Cancel` into it, or change what `PlaceRequest` contains with a reasonable effort. You just have to fix the call sites in the same commit. 
+You can rename `Place`, merge `Cancel` into it, or change what `PlaceRequest` contains with reasonable effort. You just have to fix the call sites in the same commit.
 
-Imaging the same object is reachable by two other teams, over HTTP:
+Now imagine the same object reachable by two other teams, over HTTP:
 
 ```text
 POST /v1/orders          -> Place
 DELETE /v1/orders/{id}   -> Cancel
 ```
 
-Nothing about the code changed. What changed is that `Place` and `Cancel` are now names in somebody else's source, deployed on a schedule you do not set. You may add `POST /v1/orders/{id}/hold`. You may not rename the endpoints `Place`, remove `Cancel`, or make a field of `PlaceRequest` required — those are chapter 09's forbidden moves, and the client that breaks is one you cannot deploy.
+Nothing about the Go code changed, and it is worth being exact about what did. `Place` is still your method name — rename it tomorrow, adjust the routing line, and nobody outside notices. What is now in somebody else's source is `POST /v1/orders` and the shape of the JSON it accepts, deployed on a schedule you do not set.
 
-The name of the pattern did not change. What it commits you to did. 
+So the line falls between the two, in a place the pattern name never mentioned:
+
+```text
+still yours     the method name, its parameters, everything behind it
+now theirs      the route, the field names on the wire, which are optional
+```
+
+You may add `POST /v1/orders/{id}/hold`. You may not rename the route, remove `DELETE /v1/orders/{id}`, or make a field of the request body required — those are chapter 09's forbidden moves, and the client that breaks is one you cannot deploy.
+
+The name of the pattern did not change. What it commits you to did.
 
 ### Why these arguments do not converge
 
@@ -221,7 +230,7 @@ Some names do not have a version on the other side of the line, and the test is 
 
 **Strategy** — passing behaviour as a parameter — is the clearest. In your own code, it's passing a function or class as a parameter. Across a boundary is it… configuration? A plugin? Nothing sharpens, because nothing about passing a function becomes unreliable when the program grows. **Template Method** and most uses of **Decorator** are the same.
 
-**Singleton is a notable exception**, it changes more than anything else when it crosses the line.
+**Singleton is the notable exception to this section** — it changes more than anything else in the chapter when it crosses the line.
 
 The invariant is the same on both sides, and stating it precisely is what makes the connection real rather than a play on words:
 

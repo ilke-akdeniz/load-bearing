@@ -1604,3 +1604,40 @@ Changed by the author to *Patterns That Cross The Line*, on the grounds that cha
 
 **Consequence.**
 Chapter 11 runs 302 lines, up from 222, almost all of it in the graded table, the Singleton expansion, and worked code for the facade and partial-ownership cases the author asked to see rather than be told about.
+
+---
+
+## 38. Reviewing the author's edits found a real imprecision in the facade example
+
+**Date.** 2026-08-14
+
+**Context.**
+The author's third pass on chapter 11 was direct edits only, with no tags, plus a file rename. They asked for the edits to be reviewed rather than absorbed.
+
+**Their catch, which was substantive.**
+The draft said that once the orders object is exposed over HTTP, *you may not rename `Place`*. That is false, and the author's edit — changing it to "the endpoints `Place`" — was reaching for the right correction even though the wording conflated two things.
+
+`Place` is a Go method name and stays entirely yours: rename it, adjust the routing line, and nobody outside notices. What is now in somebody else's source is `POST /v1/orders` and the shape of the JSON body.
+
+So the example was making the chapter's own error in miniature — treating "the facade" as one undivided thing when the published surface is only part of it. Rewritten to draw the line explicitly:
+
+```text
+still yours     the method name, its parameters, everything behind it
+now theirs      the route, the field names on the wire, which are optional
+```
+
+That is a better demonstration than the original, because it shows the boundary falling *inside* what the pattern name covers — which is exactly the information the name omits.
+
+**Three edits kept, with mechanical fixes.**
+
+*"You can rename … with reasonable effort. You just have to fix the call sites"* is better than the draft's phrasing, which implied renaming is free. Kept; the typo *Imaging* corrected to *Now imagine*, and a trailing space removed.
+
+*"The name of the pattern did not change"* fixes a duplicated sentence the draft had left in — the same clause appeared twice, once with a full stop and once with a semicolon. Their version is right and the duplication was the draft's error.
+
+*"Singleton is a notable exception"* is shorter and clearer than the draft's "the exception to this exception," which was cute and hard to parse. Kept, with the comma splice repaired and the referent named, since the point of the original tag was that a reader inside *Where this doesn't apply* needs to know what Singleton is an exception **to**.
+
+**Housekeeping.**
+The file was renamed `11_the-scale-test.md` → `11_patterns-that-cross.md`. Two references in `00_toc.md` still pointed at the old name and are updated.
+
+**Worth recording about process.**
+The instruction was a reminder: *always check my direct edits as well.* This pass is why the rule exists — one of five edits contained a correction the draft would have absorbed silently, and following it through produced a better example than either version had.
