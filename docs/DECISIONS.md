@@ -1564,3 +1564,43 @@ Adopted as sketched. FastSell's own `Receipt` and `LedgerEntry` for the owned ca
 **Consequence.**
 `LEDGER.md` has five rows reworded and three examples replaced.
 Chapter 11 stays at 222 lines; almost all of it is different.
+
+---
+
+## 37. Chapter 11's axis is chapter 03's Force, and the pattern table is graded
+
+**Date.** 2026-08-14
+
+**Context.**
+Sixteen review notes. Three of them were challenges to whether the chapter was sound rather than to how it read, and answering those changed the chapter's relationship to the rest of the book.
+
+**The axis was already in the book, and the chapter had not noticed.**
+The author asked whether *can I change the other side* is one of the seven Forces, and if so which.
+
+It is. Chapter 03's **control of the callers** asks whether you can change everyone who calls you; chapter 11 asks whether you can change what you call. Same Force, same three settings, pointed the other way — which the chapter now says explicitly rather than presenting the axis as new.
+
+The same oversight produced the repetition the author flagged separately. The *partial ownership* boundary had re-derived chapter 03's middle setting — *you can see them but not change them* — in fresh words, which is precisely what `LEDGER.md` exists to prevent. It now cites 03 for the three settings and spends its space on what the middle one does to the pattern question: a temporary forwarding method with a removal date, which is neither an adapter nor a permanent translation layer.
+
+**The pattern table is now graded rather than asserted.**
+The author asked whether the table was solid or this book's theory, and separately whether a message bus is really Observer with a network in it or only a surface resemblance.
+
+Checked row by row, and they are not equally supported:
+
+- **Proxy** is canonical. The Gang of Four list a *remote proxy* — "a local representative for an object in a different address space" — among the pattern's named variants. Crossing the line was in the original definition.
+- **Adapter** is supported by the anti-corruption layer literature; Evans describes such a layer as containing translators.
+- **Facade** is this book's extension, and is marked as such. No catalogue says a facade becomes a public API.
+- **Observer is the weakest, and the author's suspicion was right.** A broker is genuinely new structure, and the publisher stops holding references to its subscribers — a change in mechanism, not only in what can fail. The chapter now calls it a family resemblance rather than the same pattern relocated.
+
+Grading the rows turned out to strengthen the chapter rather than weaken it, because the distribution is informative: **the rows that survive best are the ones where nothing structural is added.** That is a condition on when this reading applies at all, and it was not visible while every row was asserted equally.
+
+**Singleton expanded, at the author's request.**
+Their question was what invariant ties one object in one process to consensus across machines, given that a cluster obviously *has* many machines. The answer needed stating: the singleton is in the **role**, not the hardware — exactly one machine running the billing job while the others stand ready. The shared invariant is *at most one holder at a time, and everyone agrees which one*, and both halves are free in one process and expensive across machines, for reasons chapter 07 owns.
+
+**A claim that was simply wrong.**
+The draft said a ten-thousand-line refactor is not a serious commitment. The author rejected that, correctly. The point being reached for was about *kinds* of expense: a large refactor is a large piece of work that ends, while a small integration is a standing obligation that does not. Rewritten to say that.
+
+**Title.**
+Changed by the author to *Patterns That Cross The Line*, on the grounds that chapter 08 is already called *Scale* and using the word here is confusing when the chapter argues it is the wrong word. Kept, with the TOC entry, the ledger row, and chapter 10's two forward references updated to match.
+
+**Consequence.**
+Chapter 11 runs 302 lines, up from 222, almost all of it in the graded table, the Singleton expansion, and worked code for the facade and partial-ownership cases the author asked to see rather than be told about.

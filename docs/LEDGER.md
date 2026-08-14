@@ -127,7 +127,7 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | A name as a search term | 10 | Some names are mediocre descriptions and good indexes into the literature on their failure modes; this is also all a weak name gives a learner | cite 10 |
 | Too young to name | 10 | The tests assume you can say what the code does; before that a vague name is honest, and the failure is losing track that it is provisional | cite 10 |
 | Directories group by change, names group by shape | 10 | A folder named for a pattern collects code belonging to different features | cite 10 |
-| The scale test | 11 | The same pattern name is an afternoon's work or a years-long commitment, and "scale" is the wrong word for what separates them | "the scale test (Ch. 11)" |
+| Crossing the ownership line | 11 | The same pattern name is an afternoon's work or a years-long commitment, and "scale" is the wrong word for what separates them | "crossing the line (Ch. 11)" |
 | Ownership, not size | 11 | The deciding question is whether you can change the other side; size only correlates, because systems acquire other owners as they grow | "can I change the other side (Ch. 11)" |
 | The third option | 11 | At class scale you can change the other side instead of adapting; at system scale that option is gone | cite 11 |
 | Shapes are scale-free, Forces are not | 11 | A pattern name transfers the picture and drops the constraints, which were the expensive half | cite 11 |

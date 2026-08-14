@@ -100,7 +100,7 @@ func (b *Billing) Charge(id string) error {
 
 Is that a Facade? Yes. Is anything that calls several things and exposes fewer methods a Facade? Also yes. **There is no code the name forbids**, which means being told something is a Facade tells you approximately nothing about what you will find when you open the file.
 
-That is not an argument against the word existing. It is an observation that it belongs in the vocabulary bucket, not the constraint bucket — and chapter 11 shows that the answer changes with scale, which is a different question from this one.
+That is not an argument against the word existing. It is an observation that it belongs in the vocabulary bucket, not the constraint bucket — and chapter 11 shows that the answer changes once the other side stops being yours, which is a different question from this one.
 
 ### The two tests are independent
 
@@ -199,4 +199,4 @@ If the answer is a description you no longer have to write, the name compresses.
 
 ---
 
-**Next:** chapter 11 takes the pattern vocabulary the two tests just filtered and shows that the answer changes with size — the same name that carries nothing at the scale of a class can be a serious architectural commitment at the scale of a system.
+**Next:** chapter 11 takes the pattern vocabulary the two tests just filtered and shows that the answer changes once the thing on the other side stops being yours to edit — the same name that costs nothing between your own files can be a permanent obligation across a boundary you do not own.

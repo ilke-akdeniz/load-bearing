@@ -1,13 +1,16 @@
-# Patterns That Cross The Line [claude we already have "Scale: Queues, Parallelism, Memory" chapter. Using scale in the title of this chapter is very confusing when the chapter admits that scale is the wrong word. Feel free to change my suggestion if you find a better title.]
+# Patterns That Cross The Line
 
-*Chapter 10 asked whether a pattern name carries information. This one asks what else you need to know before the name is usable — and answers that the received term for it, **scale**, is the wrong word for the thing that matters.* [claude "and answers that the received term for it, **scale**, is the wrong word for the thing that matters." So the claim both asks and answers? Not sure if that is ok... "Received term for it" received from whom, how? "For the thing that matters"... This thing reads like a koan or Yoda speaking. Maybe just remove this scale sentence which makes sense for our internal discussions only...]
+*Chapter 10 asked whether a pattern name carries information. This one asks what the name leaves out — and the omission is the same one chapter 03 named as a Force: whether the thing on the other side is yours to change.*
 
 ## The claim
 
 **The same pattern name describes a change you can make in an afternoon and a commitment you will maintain for years when it crosses the ownership line. What separates them is not size. It is whether you can change the other side.**
 
-People usually call this a question of scale, and that is close enough to be misleading. Size correlates with the thing that matters, because systems tend to acquire other owners as they grow. But size is not the cause, and reasoning from it gives wrong answers in both directions: a fifty-line integration with a payment provider is a serious commitment, and a ten-thousand-line refactor inside your own repository is not. 
-[claude I get your point that both cases are different in the nature of the commitment but telling that a ten-thousansd-line refactor is not a serious commitment is not acceptable.]
+People usually call this a question of scale, and size does correlate with it, because systems acquire other owners as they grow. But size is not the cause, and the two come apart in a way worth being precise about.
+
+A ten-thousand-line refactor inside your own repository is a large piece of work. It is not a large *commitment*: when it is done it is done, nobody else's release schedule bears on it, and if you get the design wrong you can change it again. A fifty-line integration with a payment provider is a small piece of work and a permanent obligation — it has to keep working through their changes, forever, and you will not be consulted about them.
+
+Those are different kinds of expensive, and only the second is what this chapter is about.
 
 The question that decides it is one sentence long:
 
@@ -28,29 +31,42 @@ Throughout: **FastSell**, a shop. It takes payments and it keeps a ledger.
 FastSell started with its own payment code. Two internal packages, both written in-house, and their types do not quite line up:
 
 ```go
-// package payments — what it hands back [claude add more info: Cents is... complete true means...]
+// package payments — what a completed charge hands back
 type Receipt struct {
-	Ref      string
-	Cents    int64
-	Complete bool
+	Ref      string // the payment's identifier
+	Cents    int64  // amount in cents; never a float (Ch. 03)
+	Complete bool   // true once the money has actually moved
 }
 
-// package billing — what it wants [claude add more info: Minor is... final means ...]
+// package billing — what the ledger wants to store
 type LedgerEntry struct {
-	Ref   string
-	Minor int64
-	Final bool
+	Ref   string // same identifier, so the two can be reconciled
+	Minor int64  // amount in minor units — cents, pence, yen
+	Final bool   // true when this entry will not change again
 }
 ```
 
-[claude without the line(s) of code where handover between packages is done this example is on the air]
+The two carry the same three facts under different names. That matters because of where they meet — the checkout handler, which takes one and must produce the other:
 
-**Adapter** is the pattern for exactly this: wrap a thing so it fits an interface it was not built for. Here it is:
+```go
+func (h *Checkout) Complete(orderID string) error {
+	receipt, err := h.payments.Charge(orderID)
+	if err != nil {
+		return err
+	}
+
+	return h.billing.Record( /* a LedgerEntry, from a Receipt */ )
+}
+```
+
+**Adapter** is the pattern for exactly this: wrap a thing so it fits an interface it was not built for. Filling that gap:
 
 ```go
 func adapt(r Receipt) LedgerEntry {
 	return LedgerEntry{Ref: r.Ref, Minor: r.Cents, Final: r.Complete}
 }
+
+// h.billing.Record(adapt(receipt))
 ```
 
 Three lines, works fine, and **it is the second-best answer.** Both files are yours, so there is another move available:
@@ -125,9 +141,6 @@ The pattern literature calls this an **Anti-Corruption Layer**, a name from Eric
 
 ### The names, and what crossing the line does to them
 
-[claude the table below looks good but I wonder if it's solid? Do each of these patterns really become those things after crossing the line?
-Is this our own theory or is this widely accepted?]
-
 | Pattern | Both sides yours | The other side is theirs | What appears when it crosses |
 |---|---|---|---|
 | **Adapter** | a wrapper, or nothing at all | Anti-Corruption Layer | their model changes without asking (Ch. 09) |
@@ -135,11 +148,40 @@ Is this our own theory or is this widely accepted?]
 | **Observer** | a list of callbacks | a message bus | delivery can fail, or repeat (Ch. 07) |
 | **Proxy** | a wrapper adding behaviour | a network hop, with retries and caching | latency floor, partial failure (Ch. 07, 08) |
 
-The last column is what the table is about. Column two is not column one with more code in it. In each row the shape has **acquired a failure mode**, and the failure modes are Part II's Laws arriving one at a time. [claude AI "poetic" prose style again... Also I don't get the meaning of sentence "In each row..."]
+Read the last column first. What changes across a row is not the amount of code — it is that something can now go wrong that could not go wrong before, and each of those is a Law from Part II.
 
-Observer makes it plainest. Among your own objects, notifying a listener is calling a function: it cannot be lost, cannot arrive twice, cannot arrive out of order. Across a process boundary all three become possible, and every one is a design decision the word "Observer" does not mention. [claude to illustrate my previous "if it's solid" point: are we sure that a message bus can be interpreted as an advanced pattern of Observer? Or is it possible that that this is a mistake because they onlt share a surface resemblance? I don't know the answer myself but I want to be very informed about this as the chapter is built on top of these assumptions.]
+**How solid is each row?** Worth answering, because the rows are not equally well supported and the chapter should not pretend otherwise.
 
-Chapter 10 left a question here. **Facade** compresses well and rules nothing out, so what is it doing in a book about load-bearing claims? This is the answer. Among your own classes it is a word for a wrapper. Once other teams call it, it is published — chapter 09's rule applies, you may add to it and never narrow it, and removing a method is a breaking change for people you cannot deploy. [claude what do you mean by "publishing" a facade? A code example of before and after would be good here.] The name did not change; what it commits you to did.
+- **Proxy** is in the original catalogue. The Gang of Four list a *remote proxy* — "a local representative for an object in a different address space" — as one of the pattern's named variants. Crossing the line is not an extension here; it was in the definition.
+- **Adapter** is supported by the anti-corruption layer literature. Evans describes such a layer as containing translators, which is what an adapter is. The structure is genuinely the same on both sides; what is added is the obligation to maintain it.
+- **Facade** is this book's extension. Nobody's catalogue says a facade becomes a public API. The observation is that the structure is identical — fewer methods over more machinery — and that once the callers are outside your deploy, chapter 09's rule attaches to it.
+- **Observer is the weakest row, and it is worth saying why.** A message bus is not simply an observer with a network in the middle: a broker is genuinely new structure, and the publisher stops holding references to its subscribers, which is a change in the mechanism rather than only in what can fail. Treat the row as a family resemblance rather than the same pattern relocated. The point about failure modes still holds — delivery can be lost or repeated — but the "same shape" claim is looser here than in the rows above.
+
+That distribution is itself informative. **The rows that survive best are the ones where nothing structural is added**, which is a hint about when this reading applies at all.
+
+Observer makes it plainest. Among your own objects, notifying a listener is calling a function: it cannot be lost, cannot arrive twice, cannot arrive out of order. Across a process boundary all three become possible, and every one is a design decision the word "Observer" does not mention.
+
+Chapter 10 left a question here. **Facade** compresses well and rules nothing out, so what is it doing in a book about load-bearing claims? This is the answer, and "published" is worth making concrete.
+
+```go
+// Called only from inside this repository. Nothing here is a promise.
+type Orders struct{ ... }
+
+func (o *Orders) Place(ctx context.Context, req PlaceRequest) (Order, error)
+func (o *Orders) Cancel(ctx context.Context, id string) error
+func (o *Orders) resolvePricing(...)   // unexported; nobody outside can call it
+```
+
+Rename `Place`, merge `Cancel` into it, or change what `PlaceRequest` contains, and you fix the call sites in the same commit. Now the same object is reachable by two other teams, over HTTP:
+
+```text
+POST /v1/orders          -> Place
+DELETE /v1/orders/{id}   -> Cancel
+```
+
+Nothing about the code changed. What changed is that `Place` and `Cancel` are now names in somebody else's source, deployed on a schedule you do not set. You may add `POST /v1/orders/{id}/hold`. You may not rename `Place`, remove `Cancel`, or make a field of `PlaceRequest` required — those are chapter 09's forbidden moves, and the client that breaks is one you cannot deploy.
+
+The name did not change. What it commits you to did. The name did not change; what it commits you to did.
 
 ### Why these arguments do not converge
 
@@ -147,7 +189,7 @@ Two engineers argue about whether something should be a Facade. One is picturing
 
 Both are reasoning correctly. They agree about the shape, which is all the word conveys, and disagree about who is on the other side, which it does not — so the argument runs on the part they agree about.
 
-What ends it is not a better argument about Facades. It is asking who is on the other side and whether we can change them, which replaces a matter of taste with a question that has an answer. 
+What ends it is not a better argument about Facades. It is asking who is on the other side and whether we can change them, which replaces a matter of taste with a question that has an answer.
 
 ---
 
@@ -155,11 +197,17 @@ What ends it is not a better argument about Facades. It is asking who is on the 
 
 A pattern name describes a **shape**: what calls what, which way the dependencies point, where the indirection sits. Shapes are genuinely independent of context, which is what makes the vocabulary useful at all — the same picture on a whiteboard works whether the boxes are classes or services.
 
-Everything the shape sits in is not. [claude "is not" what?] A call inside a process cannot be lost; a call between machines can. A type you own can be renamed this afternoon; a vendor's cannot be renamed at all. A method only your package calls can be deleted; a method other teams call is permanent.
+Everything the shape sits *in* varies, and it varies exactly where the pattern's cost is decided. A call inside a process cannot be lost; a call between machines can. A type you own can be renamed this afternoon; a vendor's cannot be renamed at all. A method only your package calls can be deleted; a method other teams call is permanent.
 
 So the name carries the part that transfers and silently drops the part that does not. **It gives you the picture and withholds the constraints, and the constraints were the expensive half.**
 
-That is chapter 02's mechanism appearing somewhere new. There, advice arrived stripped of the Forces that made it good advice. Here a shape arrives stripped of the Forces that make it costly — the same loss, because a shape without its Forces is exactly as unusable as a Principle without its conditions. [claude this argument looks good but we moved from "ownership - crossing the line" to forces suddenly. Maybe more explanation of the relation is needed. Is the "ownership - crossing the line" a force? If so which of the seven Forces it is? Or do you mean another thing by the word Force in this paragraphl; not ownership but other thins that fall into one of the seven Forces?]
+**And the axis this chapter turns on is not a new one.** *Can I change the other side* is chapter 03's **control of the callers**, read from the other end: that Force asks whether you can change everyone who calls you, and this chapter asks whether you can change what you call. Same Force, same three settings, pointed the other way.
+
+The other Forces arrive through the failure modes. A message that can be lost is chapter 03's concurrency and chapter 07's distribution; a call that can be slow is the latency budget; a field you can never remove is durability of the medium. So the general statement is:
+
+> A pattern name transfers the **shape** and none of the **Forces**, and the Forces are what decide the cost.
+
+That is chapter 02's mechanism in a new place. There, advice arrived stripped of the Forces that made it good advice. Here a shape arrives stripped of the Forces that make it expensive — the same loss, because a shape without its Forces is as unusable as a Principle without its conditions.
 
 ---
 
@@ -171,15 +219,41 @@ Some names do not have a version on the other side of the line, and the test is 
 
 **Strategy** — passing behaviour as a parameter — is the clearest. In your own code, it's passing a function or class as a parameter. Across a boundary is it… configuration? A plugin? Nothing sharpens, because nothing about passing a function becomes unreliable when the program grows. **Template Method** and most uses of **Decorator** are the same.
 
-**Singleton does the opposite**, and the contrast is worth having. [claude so this applies to singleton? If so state this clearly because we are onside the "Where this doesn't apply" section.] In one process it means one instance. Across several machines, "exactly one" means one *for the whole cluster*, which is leader election, which needs consensus, which chapter 07 shows cannot be had cheaply or reliably. It does not stay trivial. It becomes one of the hardest things on the list, under an unchanged name. [claude this is worth expanding a little bit. I think it could work but as I evaluate this I have lots of questions: "Singleton is for objects - instances. Consencus is for servers - clusters? What's the same invariant that ties this two different situations together? Having a single source of truth? But then clusters need multiple machines, singleton is trying to prevent anything more then one..."]
+**Singleton is the exception to this exception**, and it belongs here because it shows the boundary's limit. Strategy and Template Method do not change when they cross the line. Singleton changes more than anything else in the chapter.
+
+The invariant is the same on both sides, and stating it precisely is what makes the connection real rather than a play on words:
+
+> **At most one holder of this role at a time, and everyone agrees which one it is.**
+
+In one process, both halves are free. There is one memory space, so a single variable *is* the one instance, and "everyone agrees" is not a question anyone can ask — there is nothing that could disagree.
+
+Across machines the same sentence becomes hard. Note what is *not* being claimed: the cluster obviously has many machines, and nobody is trying to prevent that. The singleton is in the **role**, not the hardware — exactly one machine may be running the nightly billing job, holding the write lease, or acting as primary, while the others stand ready.
+
+Both halves now cost something. "At most one" needs a mechanism that stops a second machine from starting when the first is merely slow — and chapter 07 shows you cannot tell a slow machine from a dead one, so that mechanism is a lease with a timeout and a guess. "Everyone agrees" is consensus, which chapter 07 shows cannot be guaranteed to terminate.
+
+So the name survives the crossing and its cost does not. In one process, `sync.Once` and a package variable. Across machines, a consensus protocol, a lease duration nobody is confident about, and a plan for what the old holder does when it wakes up believing it is still in charge.
 
 ### Where ownership is partial
 
-The two-sided question is a simplification, and the awkward case is a boundary you half-control.
+The question has two answers in this chapter and three in reality, and the third is where most working code sits.
 
-An internal service used by two other teams in the same company is neither. You *can* change both sides; doing it takes a conversation, a coordinated release, and someone else's cooperation. The alternatives did not disappear — they became expensive.
+Chapter 03 already sets it out: you control every caller; or you can see them but not change them; or you can neither see nor change them. The middle one is an internal service two other teams call. You *can* change both sides — it takes a conversation, a coordinated release, and somebody else's cooperation.
 
-That is the ordinary condition of most large codebases, and the honest answer is a third setting: *changeable, but not unilaterally*. Treat it as fully yours and you break people. Treat it as fully theirs and you build versioning ceremony for two callers you could have messaged. [claude this sounds good on paper but very vague. Show me in code with before and after samples how this third setting works]
+What that does to the pattern question is make the alternatives expensive rather than absent:
+
+```go
+// Fully yours: rename it, fix the callers, one commit.
+func (o *Orders) Place(...) (Order, error)
+
+// Partial: rename it, and you own the migration.
+func (o *Orders) Submit(...) (Order, error)          // the new name
+func (o *Orders) Place(...) (Order, error)           // kept, forwarding
+// ... until both teams have moved, then delete Place
+```
+
+That middle version is not an adapter and not a permanent translation layer. It is a temporary forwarding method with a removal date, and it exists because the change is possible but not unilateral.
+
+Treat the middle case as fully yours and you break people. Treat it as fully theirs and you build versioning ceremony for two callers you could have messaged.
 
 ### When a boundary is worth it inside your own code
 
@@ -208,7 +282,7 @@ An internal dependency that changes weekly and is called from forty places behav
 - **A vendor's type in a signature far from the integration** — their status enum in a reporting query, their error type in domain logic. The spread already happened; the only question left is how many files.
 - **A translation layer around a library you could have forked**, where the option was never actually closed.
 - **An interface with one implementation, wrapping a type you own** — a pattern solving a problem you could have solved by editing the other file (Ch. 17 traces where the reflex comes from).
-- **An in-process event bus with retry logic**, where nothing can be lost because nothing leaves the process. [claude this is a verbatim repetition from another chapter we drafted]
+- **An in-process event bus with retry logic**, where nothing can be lost because nothing leaves the process.
 - **A published API that grew by accretion**, because nobody noticed when it stopped being internal and no removal has been possible since.
 - **Version numbers on an interface with two callers, both yours.**
 

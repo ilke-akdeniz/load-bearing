@@ -107,17 +107,17 @@ Contents: **compression** — does naming it save more words than it costs? **co
 
 *Where this doesn't apply:* a design too young to name, where a vague name is the honest one; local vocabulary that compresses for insiders and nobody else; and names kept because they are how you find the literature on a shape's failure modes.
 
-### 11. The scale test
+### 11. Patterns that cross the line
 `11_the-scale-test.md`
 
 The chapter that rescues the useful half of the GoF material.
 
-The core claim: **the same name is trivial at one scale and load-bearing at another.**
-Adapter at class scale is a function with a fancy name; Adapter at system scale is an Anti-Corruption Layer with a maintenance budget and a real architectural commitment.
+The core claim: **the same pattern name describes an afternoon's work or a permanent obligation, and what separates them is whether you can change the other side.**
+Usually called a question of scale; size only correlates, because systems acquire other owners as they grow. The axis is chapter 03's control-of-callers Force, read from the other end.
 
-Contents: the scale table (Adapter, Facade, Strategy, Observer, Proxy — noise at class scale, architecture at system scale); how to ask "at what scale does this name start carrying information"; why most pattern arguments are two people discussing different scales.
+Contents: one integration crossing the line, before and after; which rows of the pattern table are canonical and which are this book's reading; why most pattern arguments are two people answering different ownership questions.
 
-*Where this doesn't apply:* patterns that are trivial at every scale, and how to tell.
+*Where this doesn't apply:* patterns unchanged by the crossing (Strategy, Template Method); partial ownership, where the alternatives are expensive rather than absent; and Singleton, which changes more than anything else in the chapter.
 
 ### 12. Patterns that survive translation
 `12_patterns-that-survive-translation.md`
