@@ -1524,3 +1524,43 @@ Singleton turns out to do the opposite, and is worth the contrast: at system sca
 **Consequence.**
 `LEDGER.md` gains six concept rows and two example rows.
 Chapter 11 runs 222 lines and moves to **in progress**.
+
+---
+
+## 36. Chapter 11 fought its own vocabulary; the word "scale" is now the thing being corrected
+
+**Date.** 2026-08-14
+
+**Context.**
+The author traced their confusion through the chapter's opening sentence by sentence:
+
+> "size matters, five line convenience" → *size of involved code is important I guess*
+> "the scale decides" → *oh it's not size of code but scale. What scale?*
+> "not how much code is involved. It is whether you can change the other side" → *ok not size, not scale but whether you are on an integration point*
+> "two scales: class — system" → *ok not integration point but the size of the component matters*
+> "the size is not what changes the answer" → *does the author even know what his point is?*
+
+**The diagnosis.**
+The draft argued that the deciding axis is ownership while continuing to call it *scale*, and while naming its two ends **class scale** and **system scale** — terms that denote size. Twenty-one occurrences across the chapter. So the prose spent four paragraphs contradicting its own vocabulary, and a reader following the words rather than the argument arrives exactly where the author did.
+
+This is decision 17's failure in a new place: vocabulary that has to be decoded and that contradicts what it labels.
+
+**Decision.**
+Delete the terms. The two ends are now described rather than named — *both sides yours*, *the other side is theirs* — because coining a replacement term invites the same decoding problem.
+
+And confront the word in the opening rather than working around it. The chapter now says people call this a question of scale, that this is close enough to be misleading, and why: size correlates with the thing that matters because systems acquire other owners as they grow, but reasoning from size gives wrong answers in both directions.
+
+The title stays. *The Scale Test* now names the received framing the chapter examines, which is the same move chapter 05 makes with "layered architecture" — worth flagging to the author as reversible if they would rather the title matched the conclusion.
+
+**One running example, replacing two borrowed ones.**
+The author objected that the `querier` demonstration had already been used repeatedly — it appears nine times in chapter 05 — and suggested one coherent example carrying the whole chapter, sketching it as *we own FastSell and have our own payment processor, then we switch to Stripe*.
+
+Adopted as sketched. FastSell's own `Receipt` and `LedgerEntry` for the owned case, then the same problem after moving to Stripe. That is better than two static examples because it shows **the transition** — the moment an option disappears — rather than two unrelated states, and the pattern's shape is identical on both sides of it, which is the chapter's whole point.
+
+**The third option is now shown rather than asserted**, at the author's request. The owned case gives the adapter, then gives the better answer as code: rename two fields in `payments.Receipt` and delete the adapter. Seeing the alternative is what makes its later absence land.
+
+**Counts taken mechanically.** Six sites test Stripe's vocabulary without a boundary, one with. Both versions were run and produce identical output, which is worth having — the boundary costs nothing functionally, so its whole value is what happens on the day the vendor changes.
+
+**Consequence.**
+`LEDGER.md` has five rows reworded and three examples replaced.
+Chapter 11 stays at 222 lines; almost all of it is different.
