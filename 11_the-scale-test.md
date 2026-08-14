@@ -18,6 +18,13 @@ Two scales, and the boundary between them is ownership rather than size.
 
 A "class-scale" pattern can involve thousands of lines and a "system-scale" one can be a fifty-line file. The size is not what changes the answer. **What changes is how many of your options survive**, and that is settled by chapter 03's control-of-the-callers Force and chapter 09's blunter version: you cannot deploy other people's software.
 
+[claude this is a confusing intro that needs clarifications and simplification. It reads like this:
+"size matters, five line convenience ..." => "Ok size of involved code is important I guess"
+"the scale, scale decides" => "Oh it's not size of code but scale. What scale? Should be the load on system right?"
+"is not how much code is involved. It is whether **you can change the other side**." => "Ok not size, not scale but wath matters is if you are on an integration point."
+"two scales: class - system" => "Ok not integration point but the size of the component matters."
+"the size is not what changes the answer" => "Does the author even know what his point is!?" ]
+
 ---
 
 ## The demonstration
@@ -26,7 +33,7 @@ A "class-scale" pattern can involve thousands of lines and a "system-scale" one 
 
 **Adapter** is the pattern of wrapping something so it fits an interface it was not built for.
 
-Here is a real case. FlowCore needs its storage helpers to work against either a connection pool or an open transaction. Those are two different types from a third-party library, and neither knows anything about FlowCore:
+Here is a real case. FlowCore needs its storage helpers to work against either a connection pool or an open transaction. Those are two different types from a third-party library, and neither knows anything about FlowCore: [claude we used this ecact examples many times already for other claims, time to find something else. Also could be better to cover a simple coherent example in all this chapter as it will demonstrate the points better. So maybe something like: We own "fastSell" app and we have our own payment processor implementation ... Then we switch to stripe and ...  ]
 
 ```go
 // The interface, declared where it is used — three methods, because
@@ -70,7 +77,7 @@ class TxQuerier : IQuerier { /* the same two methods again */ }
 
 The deeper reason Adapter is cheap here is not the line count. It is that **a third option exists.**
 
-If two of your own types do not fit, you can wrap one — or you can change one so no wrapper is needed. Rename the method. Change the signature. Move the parameter. All of those are available because both files are yours, and most of the time one of them is simpler than an adapter.
+If two of your own types do not fit, you can wrap one — or you can change one so no wrapper is needed. Rename the method. Change the signature. Move the parameter. All of those are available because both files are yours, and most of the time one of them is simpler than an adapter. [claude when you describe an important point in an existing code example, it's better to show it with the code example rather than stating it. How would that simple than an adapter arrangement look in the code?]
 
 That option is what disappears next.
 
