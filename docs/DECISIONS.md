@@ -1751,3 +1751,44 @@ Chapter 02 has no *Why the claim holds* section at all — it has *Why the kinds
 
 **Still open.**
 Two `[claude …]` tags remain in `CLAUDE.md`, on the *five levels* heading: what the five are five *of*, and whether the book has drifted from *level* to *kind*. Both are unresolved pending the author's decision, and the tags are left in place rather than removed, because the questions are live.
+
+---
+
+## 42. Four levels, five kinds
+
+**Date.** 2026-08-14
+
+**Context.**
+The author queried the `CLAUDE.md` heading *The five levels* on two grounds: five levels **of what**, given that Force is not advice; and whether the book had drifted from *level* to *kind* without the structural labels following.
+
+Both were right, and the first exposed a live contradiction in the book's foundational sentence. Chapter 02 opened with
+
+> Every piece of software advice is one of five kinds
+
+and said ten lines later
+
+> The fifth, Force, is **not advice at all.**
+
+**The count, measured.**
+
+```text
+ "five kinds"    15        "the kinds"    12
+ "five levels"    9        "the levels"    0
+```
+
+Zero occurrences of *the levels* in prose is decisive: the drift had already happened everywhere except in structural labels — Part I's name, chapter 02's title and one heading, the README's spine heading, `CLAUDE.md`'s heading, and one `LEDGER.md` row.
+
+**Decision.**
+**Four levels, five kinds**, and the two words now mean different things rather than being synonyms.
+
+The four levels are rungs on the ladder of authority: Law → Principle → Idiom → Style. Force is the fifth *kind* precisely because it is not on the ladder. So *level* is reserved for position, and *kind* for membership.
+
+That also fixes the contradiction without weakening anything. The five classify **claims** — anything that can be true, false, or conditional — which is the answer chapter 10 had already reached independently while arguing that a pattern is not one of the five. Chapter 02's opening becomes *every claim you meet about software is one of five kinds*, which is true of Force as well as of the other four.
+
+**This partly reverses decision 2**, which chose *Levels* over *Altitudes*. That decision's reasoning was plainness and consistency, and both now favour the change: *kind* is what the prose had already settled on, and *level* was being used for two things at once.
+
+**Consequence.**
+`02_the-five-levels.md` renamed to `02_the-five-kinds.md`, titled *The Five Kinds*, with a paragraph stating the four-and-five distinction where the ladder is introduced.
+Part I renamed. The README's spine section renamed, with a sentence on why the counts differ. `CLAUDE.md`'s section renamed, now saying the five classify claims and reserving *level* for the ladder. `LEDGER.md`'s row rewritten. The five-level model becomes the five-kind model in both places `CLAUDE.md` names it.
+
+Chapter 23's title, *Reading advice at the right level*, is deliberately left alone — that chapter is about placing advice on the ladder, which is what *level* now means.

@@ -23,10 +23,12 @@ Its central question is the one a builder asks before knocking out a wall: **is 
 The book is written to be **received**, not obeyed.
 Its subject is how to read advice — a blog post, a review comment, a pattern name, a strong opinion in a meeting — and place it correctly before deciding what to do about it.
 
-## The five levels [claude five levels of what? I think we should name this explicitly. Can't be advice because force is not advice]
-[claude also I thought we moved from the "level" terminology to "kind". No? Notice that changing CLAUDE.md is not enough for these decisions. You will have to sweep other existing book content in the repo so that they are applied consistently.]
+## The five kinds
 
-The spine. Every chapter classifies its material against these.
+The spine. Every chapter classifies **claims** against these — anything that can be true, false, or conditional.
+
+Four of the five are advice and form a ladder of authority; Force is not advice, and sits outside the ladder.
+So the count is **four levels and five kinds**, and the word *level* is reserved for position on the ladder rather than used as a synonym for *kind*.
 
 Four are advice, forming a ladder of authority: **Law → Principle → Idiom → Style.**
 The fifth, **Force**, is not advice — it is the input that decides where on the ladder you are standing.
@@ -246,7 +248,7 @@ Then **write that into the sentence** — there is no tagging notation.
 - Disputed: say who disputes it and on what grounds. A bare "this is contested" is hedging, not honesty.
 - The book's own: say it is not standard vocabulary, so the reader knows what to expect when they search for the term.
 
-The five-level model is the book's own, and every chapter that leans on it should read that way.
+The five-kind model is the book's own, and every chapter that leans on it should read that way.
 
 **Running example.**
 FlowCore — a Go workflow library at `~/s/flowcore` with a 38-entry decision log — supplies examples in Parts II and V, because its reasoning was recorded at the time rather than reconstructed afterwards.
@@ -330,7 +332,7 @@ It moves to **draft** on the author's word and not on Claude's judgment that it 
 The author leads, reviews every chapter, and makes the editorial calls.
 Claude drafts and makes local writing decisions.
 
-**Ask before** changing the five-level model, the chapter rubric, the TOC structure, or anything recorded in `docs/DECISIONS.md`.
+**Ask before** changing the five-kind model, the chapter rubric, the TOC structure, or anything recorded in `docs/DECISIONS.md`.
 Those are the author's, and they land in the decision log first.
 
 Draft **one chapter at a time** and stop for review.

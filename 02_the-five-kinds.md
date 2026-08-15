@@ -1,20 +1,22 @@
-# The Five Levels
+# The Five Kinds
 
 ## The claim
 
-Every piece of software advice is one of five kinds, and **the kind determines how much authority it has** — not the confidence of the person saying it, not their track record, not how widely it is repeated.
+Every claim you meet about software is one of five kinds, and **the kind determines how much authority it has** — not the confidence of the person saying it, not their track record, not how widely it is repeated.
 
 The model is this book's own. You will not find these five names used this way elsewhere, so expect nothing when you search for them — what you should find, if the model is any good, is that the distinctions it draws were already familiar and only unnamed.
 
 Throughout the book these are called by name — Law, Force, Principle, Idiom, Style — never by number. The names carry the meaning; a number would be one more thing to decode.
 
-## The five levels
+## The five kinds
 
-Four of them are advice, and they form a ladder of authority:
+Four of them are advice, and those four form a ladder of authority:
 
 > **Law → Principle → Idiom → Style**
 
-The fifth, Force, is not advice at all. It is the input that decides where on that ladder you should be standing. That distinction matters more than it first appears, and the rest of the chapter turns on it.
+The fifth, Force, is not advice at all. It is the input that decides where on that ladder you should be standing.
+
+So the count is not five of one thing. **There are four levels and five kinds** — the levels are rungs on the ladder, and Force is the fifth kind precisely because it is not on it. That distinction matters more than it first appears, and the rest of the chapter turns on it.
 
 ### Law
 

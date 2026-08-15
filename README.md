@@ -47,9 +47,9 @@ Removing the first brings the roof down; removing the second is redecorating.
 The book is written to be **received**, not obeyed.
 Its subject is how to read advice — a blog post, a review comment, a pattern name, a strong opinion in a meeting — and place it correctly before deciding what to do about it.
 
-## The spine: five levels
+## The spine: five kinds
 
-Every chapter classifies its material against this table.
+Every chapter classifies its material against this table. Four of the five are advice and form a ladder of authority; Force is not advice, which is why there are four levels and five kinds.
 
 | | What it is | Authority | Example |
 |---|---|---|---|
