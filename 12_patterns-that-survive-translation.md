@@ -20,14 +20,14 @@ Two kinds of pattern entry, and the difference matters.
 
 ## The demonstration
 
-### Concurrency
+### Force: Concurrency
 
 > **Can two of these run at the same time and touch the same state?**
 
 Chapter 06 owns the Law here and chapter 07 owns what happens across machines. These are the shapes that answer them.
 
-**Aggregate** — a group of objects with one entry point, where the whole group is the unit of consistency.
-
+**Pattern: Aggregate** — a group of objects with one entry point, where the whole group is the unit of consistency.
+[claude I recommend adding "Force:" and "Pattern:" in this manner for all listed force, and worked pattern titles.]
 ```go
 // The order is the aggregate root. Nothing outside reaches a line item.
 type Order struct {
@@ -36,15 +36,30 @@ type Order struct {
 }
 
 func (o *Order) AddLine(sku string, qty int) error {
+	// An invariant across the whole group:
+	// can't add a line that brings the order over it's credit limit
+	// [claude what happens when two thread opens the same order and starts adding lines?
+	// does that invalidate our point that the aggregate is an answer for concurrency or is it fair to say that
+	// those are different shapes of concurrency issues and aggregate deals only with one of those shapes?]
 	if o.total()+price(sku)*qty > o.creditLimit {
-		return ErrOverLimit // an invariant across the whole group
+		return ErrOverLimit 
 	}
 	o.lines = append(o.lines, Line{SKU: sku, Qty: qty})
 
 	return nil
 }
 ```
+[claude 01 what "the constaint" paragraphs mean in this chapter? Is it more like "Conditions". 
+If so maybe we should use "limitations" as title on these. Also worth addin a small "legend" like paragraph at the intro:
+Conditions describe the limitations and prerequisites for the pattern to work with the Force. Cost is ...]
 
+claude now I understand that this "constraint" part is where questions similar to what I asked in the previous tag could be answered but
+I don't see the answer to my question here and currect text reads more like a tech spec rather then concrete, clear style I would prefer.
+"the boundary is the transaction boundary" => difficult to get the concrete meaning
+
+It could also be good to show the points raised in this section and/or "the cost" section with code if it adds value. 
+Ex: an exampele with wring aggregate boundaries, and/or example with "draw it too large."
+But you have to be careful with examples, they should not be a repetition of previous examples already used on other chapters.]
 *The constraint:* the boundary is the transaction boundary. One aggregate is locked, read, and written as a unit, and a rule spanning two aggregates cannot be enforced synchronously — which is why aggregate boundaries are the most consequential modelling decision in a transactional system.
 
 *The cost:* draw it too large and every operation contends on one row; too small and invariants leak out to the caller, where chapter 06 shows they cannot be enforced.
@@ -73,8 +88,6 @@ func (m *IdentityMap) Order(id uuid.UUID) (*Order, error) {
 - **Saga** — chapter 07 owns it; the answer when the unit of consistency spans systems and no transaction can.
 
 ### Durability of the medium
-
-> **If this process dies right now, what must still be true when it comes back?**
 
 > **If this process dies right now, what must still be true when it comes back?**
 
@@ -134,6 +147,8 @@ The patterns are all forms of containment.
 
 ```go
 // One shared pool: a slow report starves checkout.
+// [claude this style of showing the wrong code without pattern at first is valuable
+// try to apply this to other worked patterns if it makes sense and if it doesn't make the code example worse ]
 var db = pool(50)
 
 // Separate pools: the report can exhaust its own and nothing else.
@@ -213,9 +228,10 @@ type Rates interface {
 
 ### Team size and turnover
 
-> **How many must agree to change this, and how many will still be here in two years?**
+> **How many must agree to change this, and how many will still be here in two years?** 
+[claude how many what? Developers? I think that should be articulated here and if this version is used on other chapters those should be fixed as well.]
 
-This Force is the odd one, and the shape of its answer is worth noticing. It does not change *what* the rule is. It changes **where the rule lives** — chapter 03's migration from a comment, to a review habit, to the type system. So it produces fewer patterns of its own than the others, and mostly relocates rules the other Forces already produced.
+This Force is the odd one, and the shape of its answer is worth noticing. It does not change *what* the rule is. [claude what you mean by rule here? I can't pinpoint it.] It changes **where the rule lives** — chapter 03's migration from a comment, to a review habit, to the type system. So it produces fewer patterns of its own than the others, and mostly relocates rules the other Forces already produced.
 
 **Make illegal states unrepresentable** — give the invalid combination no representation, so no code path can produce it.
 
@@ -235,6 +251,8 @@ type Pending struct{}
 type Shipped struct{ At time.Time }
 type Delivered struct{ At time.Time; SignedBy string }
 ```
+[claude for me above is useless without the Pending, Shipped, Delivered struct definitions.
+I also don't get how "delivered but not shipped" is not possible.]
 
 *The constraint:* the invalid case cannot be written down, so it cannot be checked for, forgotten, or reintroduced by someone who never heard the rule.
 
@@ -246,7 +264,10 @@ type Delivered struct{ At time.Time; SignedBy string }
  testdata/invoice_v3.golden      the exact bytes this produced last time
  go test -update                 deliberately re-record, in a visible commit
 ```
-
+[claude the example above needs more meat. I can't figure out what's going on. 
+What fails the golden test? Is it the developer commits the output and sees the data change in diff with his eyes?
+If so this is very brittle. I also can't figure out how - when this will be better then classical assertions on a test suite like 
+"assert total = ..." ]
 *The constraint:* behaviour cannot change silently. Whoever changes it must either fix the code or re-record the file, and re-recording shows up in review as a diff someone has to defend.
 
 *The cost:* it captures everything, including things nobody meant to promise — which is Hyrum's Law (Ch. 05) turned into a test file. Golden tests over-constrain, and the noise from irrelevant changes is the price of catching the relevant ones.
@@ -255,7 +276,7 @@ type Delivered struct{ At time.Time; SignedBy string }
 
 - **Architecture decision record** — the reasoning written down at the time, for the people who were not there. Its whole value is turnover; on a stable team of two it is overhead.
 - **Composition root** — one place where everything is assembled, so a newcomer has one file to read rather than a graph to trace (Ch. 05).
-- **Parse, don't validate** — also a blast-radius pattern, and listed there. Its team-size value is separate: a parsed type carries the rule, so nobody downstream has to know it.
+- **Parse, don't validate** — also a blast-radius pattern, and listed there. Its team-size value is separate: a parsed type carries the rule, so nobody downstream has to know it. [claude I don't know this pattern but to me it sound more interesting then the worked pattern golden test. Maybe consider expending this instead of golden test.]
 - **Contract tests** — also a control-of-callers pattern. Same double duty: the agreement is written down rather than remembered.
 
 ### Latency budget
@@ -314,6 +335,7 @@ cache.Set(k, v, ttl)
 > **Who else depends on this, and can I change them?**
 
 Chapter 09's compatibility rule and chapter 11's ownership line both land here. The patterns are ways of making a boundary survivable.
+[claude I started to thing that lines like this after each worked pattern are like the chapter epigraphs we got rid off. Not much value and they create noise. Evaluate if removing these while preserving valuable parts without saying chapter this chapter that is better]
 
 **Tolerant reader** — read only the fields you need, and ignore everything else.
 
@@ -331,7 +353,9 @@ type OrderView struct {
 *The cost:* a field that disappears reads as its zero value rather than as an error — chapter 09 shows that is the silent failure, and it is the price of the tolerance.
 
 **Consumer-driven contracts** — each consumer publishes the subset of your interface it actually relies on, and your build fails if you break one.
-
+[claude this looks like an interesting example but I can't figure out if it's a real thing or your hallucination.
+How does this work on practice? How different consumers using an API publish a contract to the API provider and 
+API provider uses those on the build. This sounds impossible in practice to me, but maybe I'm reading your example incorrectly.]
 ```text
  checkout-service expects:  POST /v1/orders  ->  {id, total_minor}
  reporting-service expects: GET  /v1/orders  ->  {id, total_minor, placed_at}
@@ -373,11 +397,14 @@ Sorting the field left five patterns that do not answer a Force, and they fail i
 
 That is a real gap in this chapter's method, not a defect in the patterns. Chapter 17 covers the testing material, and it is organized by what the techniques actually buy rather than by Force, for exactly this reason.
 
-**Golden tests used to be in this list and no longer are**, which is worth recording because it shows the sort is doing work rather than confirming a guess. A first pass ran against six invented Force names and left golden tests homeless. Using chapter 03's actual seven — and so restoring *team size and turnover*, which the invented list had dropped — gave them an obvious home: a golden test exists so that behaviour cannot change silently under people who did not write it. **A pattern that will not sort is sometimes evidence about the categories rather than about the pattern.**
+**Golden tests used to be in this list and no longer are**, which is worth recording because it shows the sort is doing work rather than confirming a guess. A first pass ran against six invented Force names and left golden tests homeless. Using chapter 03's actual seven — and so restoring *team size and turnover*, which the invented list had dropped — gave them an obvious home: a golden test exists so that behaviour cannot change silently under people who did not write it. **A pattern that will not sort is sometimes evidence about the categories rather than about the pattern.** [claude this is a specific situation that happened about our book writing process, in my opinion worth deleting completely, not valuable for the audience of the book.]
 
 **Some answer what the problem is rather than what the situation is.** A state machine is the right shape when the domain genuinely has states and transitions — an order that is placed, then paid, then shipped. That is a fact about the business, not about your concurrency or your latency budget. The same goes for Transaction Script, which chapter 10 uses as its compression example: it is what you write when *no* Force is pushing you anywhere else, and it is right far more often than its reputation suggests.
 
 So the honest form of this chapter's claim is narrower than the opening states it: **patterns that answer situational Forces sort by Force. Patterns that answer the shape of the problem, or a goal you have chosen, do not** — and confusing the three is one way people end up applying machinery that answers a question they were not asking.
+[claude saying "the honest form of this chapter's claim is narrower than the opening states it" is not ok for me. It implies we build the chapter over a lie. Let's say the honest form from the opening of the chapter and follow trough it:
+Chapter claim: "The patterns that last are answers to Forces or answers to the shape of the domain problem." 
+A logical expansion of the claim: grouping them by the Force they answer explains which one you need better than any catalogue organized by the pattern shape." (I say pattern shape so that it's not confused with the domain shape)]
 
 ### One Force, several answers, and no way to choose from here
 
@@ -406,7 +433,8 @@ Run chapter 10's tests before using any of them, and chapter 11's question befor
 ---
 
 ## How to recognize the failure
-
+[claude I get the feeling that some of those failure bullet points exist in multiple chapters with slight variations.
+Check if this is true and consider deleting those to preserve them only where they have the most impact or changing them so that they are not repetitions.]
 **In a codebase:**
 
 - **A pattern whose Force you cannot name.** Ask what would break without it. If the answer is nothing concrete, it is structure that was applied rather than derived.
