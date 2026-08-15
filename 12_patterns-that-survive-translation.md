@@ -10,19 +10,21 @@ So this chapter sorts the field. Forty-three patterns fall into six Forces. Seve
 
 ## How to read this chapter
 
-Two kinds of entry, and the difference matters.
+Two kinds of pattern entry, and the difference matters.
 
-**Worked** — two per Force, with code, the constraint the pattern imposes, and what it costs. These carry the argument.
+**Worked patterns** — two per Force, with code, the constraint the pattern imposes, and what it costs. These carry the argument.
 
-**Listed** — the rest of each family, one line each. These are not explained, only placed. By now you have chapter 10's tests, so a one-line entry is something you can evaluate rather than something you have to accept.
-
-Patterns another chapter owns appear with a pointer instead of a definition. That is the ledger rule this book runs on, and it also keeps the chapter from becoming the catalogue it is arguing against.
+**Listed patterns** — the rest of each family, one line each. These are not explained, only placed. By now you have chapter 10's tests, so a one-line entry is something you can evaluate rather than something you have to accept.
 
 ---
 
 ## The demonstration
 
-### Force one: something must survive
+### Force one: something must survive 
+[claude we alreay named and listed forces on chapter 2. Follow the exact namings here in the chapter,
+then you don't have to say "this is ... durability of medium" later.  
+Also follow the exact order of forces use on that chapter unless there is a very good reason to not to do so.
+We need to be consistent with our namings and clear on our statements. ]
 
 > **If this process dies right now, what must still be true when it comes back?**
 
