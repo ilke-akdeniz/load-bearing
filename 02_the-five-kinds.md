@@ -1,4 +1,12 @@
-# The Five Kinds
+# The Five Kinds 
+[claude this is the second chapter where our statements our introduced, I prefer being precise and explicit here in the heading,
+in fact this could even be the "subtitle" of the book: "The Five Kinds Of Claims About Software"]
+[claude now I see another related problem in this chapter: Chapter's claim is that "there are five kinds of claims" and then we have titles like why "Where the claim doesn't apply", "what the claim costs". This is slightly confusing similar to a recursive situation. "Are we talking about the chapter's claim or one of those five kinds?"]
+[claude a third point that could resolve the issue above. This is related to the concern you voiced: "Chapter 02 has no Why the claim holds section."
+I think the reason chapter two doesn't have "Why the claim holds" is that it's not really a "claim" in the sense we used in this book. 
+We can maybe call the premise of this chapter an axiom or an empirical observation. It's not something we can prove with arguments and proofs. 
+If that is true we should simple rename those "claim doens't apply", "the claim costs" titles accordingly. 
+However this is big change and I want you to think it carefully, to rule out that this is not a claim you should try to find satisfactory proofs for this chapters "claim" and be unsuccessful.]
 
 ## The claim
 
