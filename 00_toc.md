@@ -128,7 +128,7 @@ Fifty-four patterns sorted against chapter 03's seven Forces, in chapter 03's or
 
 The Forces are chapter 03's, named and ordered as that chapter names them, so the grouping can be checked against the definition rather than against a fresh set of labels.
 
-*Where the claim doesn't apply:* the five that refuse to sort, which split into patterns answering a goal (the testing family) and patterns answering the shape of the problem (State Machine, Transaction Script); one Force with several answers, where only intensity decides; and the fact that a list places patterns without endorsing them.
+*Where the claim doesn't apply:* the five that refuse to sort, which split into patterns answering a goal — a property you elected to want, and could decide to want less of — and patterns answering the shape of the problem (State Machine, Transaction Script); one Force with several answers, where only intensity decides; and the fact that a list places patterns without endorsing them.
 
 ### 13. Patterns that are missing language features
 `13_missing-language-features.md`

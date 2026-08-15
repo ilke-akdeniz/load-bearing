@@ -1898,3 +1898,53 @@ The failure is the one the epigraph decision found. A line that names another ch
 The pattern generalizes past chapter 12 and is worth applying whenever cross-references accumulate: **write what the other chapter established, not that it established it.**
 The same review applied the author's other standing note — that showing the failing code before the pattern is worth doing where it does not make the example worse — to the tolerant reader, which now opens with a strict decoder that breaks on the one change chapter 09 calls always safe.
 Both tags were the author's; the test that separates a fact-carrying reference from a locating one is the draft's.
+
+---
+
+## 46. Go has no way to withhold a zero value, and the chapter says so
+
+**Date.** 2026-08-15
+
+**Context.**
+The author's fourth review of chapter 12 asked for caller code under *Make illegal states unrepresentable*:
+
+> just show this with caller's code at the end with a simple comment at the top of the code
+
+Writing that caller and compiling it disproved the sentence the section rested on. The chapter said that outside the package "the only way to obtain a `Delivered` is to call `Deliver` on a `Shipped`." That is false. `delivery.Delivered{}` — the empty composite literal, naming no fields — compiles from any package. Go gives every struct type a zero value and provides no mechanism to withhold it. Only naming an unexported field is rejected: *cannot refer to unexported field at in struct literal of type delivery.Delivered*.
+
+**Options.**
+Switch the example to an exported interface with an unexported method, which is airtight in Go; keep the struct and narrow the claim; or move the example to a language with sum types.
+
+**Decision.**
+Keep the struct and narrow the claim. What the transition types actually buy is that no *populated* illegal state can be constructed — nobody outside the package can hold a `Delivered` carrying a signature and a delivery time without having held a `Shipped`. The zero value is a hole, and the chapter now names it.
+
+**Why not the interface.**
+It works, and it costs an exported interface, an unexported implementation, and a marker method for a section that has two paragraphs to make its point. The machinery would become the thing the reader remembers.
+
+**Why the narrowed version is better than the original anyway.**
+It gives the section a second observation it did not have. `Delivery{Delivered: true}` is a lie that reads as data; a zero `Delivered` has no times and no signature and fails at the first field anyone reads. And the gap is the chapter's own subject in miniature — the shape crosses into Go, the guarantee does not, and the difference is invisible to anyone who carried only the name. Rust's `enum` and F#'s discriminated union have no zero value to fall back to; neither could be compiled here, so the chapter states the mechanism and claims no output.
+
+**Consequence.**
+This is the rule about running code catching an error that a reading pass would not have. The claim was not careless — it is what the pattern's name asserts, and it is what the pattern does in the languages it came from. The author's request for caller code is what turned a plausible sentence into a compiled one.
+`LEDGER.md` gains a row for the zero-value hole, so a later chapter reaching for this example knows the limit is already stated.
+
+---
+
+## 47. Removed the golden-test paragraph: the book's process is not the book's subject
+
+**Date.** 2026-08-15
+
+**Context.**
+Decision 44 recorded that golden tests moved out of the *refuses to sort* list once chapter 03's real Force names were restored, and the chapter carried a paragraph saying so. The author's fourth review cut it:
+
+> above paragraph is a specific situation that happened durung our book writing process, delete the paragraph, not valuable for the audience of the book.
+
+**Decision.**
+Deleted. Decision 44's record of the reordering stands; the chapter's account of it does not.
+
+**Why.**
+The paragraph's claim — *a pattern that will not sort is sometimes evidence about the categories rather than about the pattern* — is true and is about method rather than about patterns, which is 19's subject. What made it into the chapter was the anecdote, and the anecdote is about drafting this book. A reader deciding whether their aggregate is drawn correctly gains nothing from knowing that an earlier pass used different labels.
+
+**Consequence.**
+Decision 44's line "The chapter now records that" is no longer true, and is left as written — the log records what was decided when, and correcting it retroactively would remove the evidence that this entry reverses it.
+A general test worth keeping: **the drafting history belongs in the decision log, not in the chapter.** The log exists so the chapter does not have to carry it.

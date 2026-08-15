@@ -69,14 +69,36 @@ So the two are not alternatives. One draws the boundary; the other defends it.
 **Pattern: Identity map** — within one unit of work, a given row is loaded once and the same object is returned to everyone.
 
 ```go
-func (m *IdentityMap) Order(id uuid.UUID) (*Order, error) {
-	if o, ok := m.loaded[id]; ok {
+// One map per unit of work, so two lookups of the same row give one object.
+type IdentityMap struct {
+	db     *sql.DB
+	loaded map[uuid.UUID]*Order
+}
+
+func (m *IdentityMap) Order(ctx context.Context, id uuid.UUID) (*Order, error) {
+	if o, ok := m.loaded[id]; ok { // comma-ok: ok reports whether the key was there
 		return o, nil // the same pointer, not a second copy
-		[claude this example is not good, after the load you always return if no errors, so all the hypothetical codes to follow are meaningless]
 	}
-	// ... load, store in m.loaded, return
+	o, err := loadOrder(ctx, m.db, id)
+	if err != nil {
+		return nil, err
+	}
+	m.loaded[id] = o
+	return o, nil
 }
 ```
+
+The effect is at the call sites, where two parts of one operation each load what they need:
+
+```go
+shipping, err := m.Order(ctx, id)
+billing, err := m.Order(ctx, id) // no second query
+
+shipping.AddLine(1000)
+billing.Total() // 3500 — includes the line shipping just added
+```
+
+One round trip, and no way for the two to disagree about what order 42 currently is.
 
 *The constraint:* two parts of one operation cannot hold divergent copies of the same row, which is a lost-update race (Ch. 06) that no amount of care at the call sites removes.
 
@@ -217,7 +239,7 @@ type Rates interface {
 
 *The constraint:* both systems run at once, and something must decide per request which one serves it. That decision point is the pattern.
 
-*The cost:* two systems in production, two on-call rotations, and data that may have to be written to both during the overlap. The migration is cheaper than a rewrite because it is reversible at every step, and it is not cheap. [claude I don't understand the last sentence at all]
+*The cost:* two systems in production, two on-call rotations, and data that may have to be written to both during the overlap — for as long as the migration runs, which is usually longer than planned. What you buy is the ability to stop: every route moved is a route you can move back, and at no point is there a version that only works once all of it is done.
 
 **The rest of this family**
 
@@ -237,7 +259,7 @@ So team size produces fewer patterns of its own than the others; mostly it reloc
 
 **Pattern: Parse, don't validate** — check once at the edge and return a type that cannot be invalid, instead of checking a plain value and passing it on.
 
-The version where the invariants lives in people's heads:
+The version where the invariants live in people's heads:
 
 ```go
 func handleSignup(w http.ResponseWriter, r *http.Request) {
@@ -298,7 +320,6 @@ func (Pending) Ship(at time.Time) Shipped {
 	return Shipped{at: at}
 }
 
-
 type Shipped struct{ at time.Time }
 
 // The only constructor for Delivered, and it needs a Shipped to exist.
@@ -313,11 +334,26 @@ type Delivered struct {
 }
 ```
 
-"Delivered but not shipped" is now unwritable: the fields are unexported, so outside this package the only way to obtain a `Delivered` is to call `Deliver` on a `Shipped`, and a `Shipped` only exists because someone called `Ship`. [claude just show this with caller's code at the end with a simple comment at the top of the code]
+From a caller in another package, the sequence is the only route through:
 
-*The constraint:* the invalid combination has no representation, so it cannot be produced, tested for, or reintroduced.
+```go
+// A Delivered can only be reached by shipping first. The compiler enforces it.
+d := delivery.Pending{}.Ship(shippedAt).Deliver(deliveredAt, "A. Okonkwo")
 
-*The cost:* more types, and consumers need a type switch rather than a field read. And the guarantee stops at the package wall — inside the package, `Delivered{}` still compiles.
+// Will not compile: cannot refer to unexported field at
+// in struct literal of type delivery.Delivered
+d2 := delivery.Delivered{at: deliveredAt}
+```
+
+**Go stops one step short of the pattern's name, and it is worth being exact about where.** `delivery.Delivered{}` — the empty literal, naming no fields — compiles from anywhere. Go gives every struct type a zero value and offers no way to withhold it. So the state is not strictly unrepresentable; what is unreachable is a *populated* illegal state. Nobody outside the package can produce a `Delivered` carrying a signature and a delivery time without having held a `Shipped` first.
+
+That is a weaker guarantee than the pattern promises, and a different one from what the original struct gave you. `Delivery{Delivered: true}` is a lie that reads as data. A zero `Delivered` has no times and no signature, so it fails at the first field anyone reads.
+
+The languages this pattern comes from do not have the hole. A Rust `enum` or an F# discriminated union has no zero value to fall back to, and the compiler will not let a `match` ignore a case. Which is the chapter's own subject arriving in miniature: the shape crosses into Go, the guarantee does not, and the difference is invisible if you only carry the name across.
+
+*The constraint:* the populated invalid combination has no representation, so it cannot be produced, tested for, or reintroduced.
+
+*The cost:* more types, and consumers need a type switch rather than a field read. Plus the zero value above, and the fact that the wall is the package — inside it, every field is reachable and the guarantee is a convention again.
 
 **The rest of this family**
 
@@ -434,14 +470,13 @@ Pact is the widely used implementation of this, and the shape above is how it wo
 
 The payoff is knowing what is safe to change:
 
-```text
-Can we remove order status from our orders endpoint? 
-We don't need it internally anymore but what if any client depends on it?
-[claude here add how the mechanism that let's the API authors get the information below in one sentence]
+*Can we drop `status` from the orders endpoint? We do not need it internally any more, but something out there might.* Without contracts that question has no answer short of asking every team and believing them. With contracts you read it off the broker, which holds the union of what every consumer's tests actually asked for:
 
+```text
  checkout-service uses:   POST /v1/orders  ->  id, total_minor
  reporting-service uses:  GET  /v1/orders  ->  id, total_minor, placed_at
 
+ status is published, and no contract mentions it — so it can go
 ```
 
 *The constraint:* the contract set becomes the real interface, and it is smaller than the published one. You may change anything nobody recorded.
@@ -479,12 +514,11 @@ Sorting the field left five patterns that do not answer a Force, and they fail i
 
 That is a real gap in this chapter's method, not a defect in the patterns. Chapter 17 covers the testing material, and it is organized by what the techniques actually buy rather than by Force, for exactly this reason.
 
-**Golden tests used to be in this list and no longer are**, which is worth recording because it shows the sort is doing work rather than confirming a guess. A first pass ran against six invented Force names and left golden tests homeless. Using chapter 03's actual seven — and so restoring *team size and turnover*, which the invented list had dropped — gave them an obvious home: a golden test exists so that behaviour cannot change silently under people who did not write it. **A pattern that will not sort is sometimes evidence about the categories rather than about the pattern.**
-[claude above paragraph is a specific situation that happened durung our book writing process, delete the paragraph, not valuable for the audience of the book.]
-
 **Some answer what the problem is rather than what the situation is.** A state machine is the right shape when the domain genuinely has states and transitions — an order that is placed, then paid, then shipped. That is a fact about the business, not about your concurrency or your latency budget. The same goes for Transaction Script, which chapter 10 uses as its compression example: it is what you write when *no* Force is pushing you anywhere else, and it is right far more often than its reputation suggests.
 
-That is the residue the claim leaves, and it is worth naming as a third category rather than folding into either. **A Force is a fact about your circumstances. The shape of the problem is a fact about the business. A goal is something you chose and could choose differently** — and only the first two generate patterns that sort. [claude "goal is something you chose" sounds interesting but needs an expansion of 1-3 sentences unlesss I missed a previous clarification of it. What is a "goal" in this context, give a short example.]
+That is the residue the claim leaves, and it is worth naming as a third category rather than folding into either. **A Force is a fact about your circumstances. The shape of the problem is a fact about the business. A goal is something you chose and could choose differently** — and only the first two generate patterns that sort.
+
+A goal is a property you have decided to want in the system: testability, observability, portability, a particular standard of code review. The test that separates it from a Force is whether you can decide to want less of it and stay honest. You cannot decide that four teams will stop needing to agree, or that the network will stop dropping packets — those are true whatever you want. You can decide that a prototype does not need to be portable, or that a script does not need tests, and nothing has been denied. That is why the testing patterns will not sort: they answer *how will I know this works*, which is a question you elected to ask.
 
 Confusing the three is one way people end up applying machinery to a question they were not asking: reaching for an event-sourced log because durability sounds important, when what the domain actually has is a state machine; or adopting a testing technique because it is rigorous, rather than because anything about the situation called for it.
 

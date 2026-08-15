@@ -137,7 +137,8 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Patterns are Forces with a shape | 12 | The durable patterns answer a Force; grouping by Force finds the name from the situation, where a catalogue only finds it from the name | "the Force groups (Ch. 12)" |
 | Patterns sorted by Force | 12 | Chapter 03's seven Forces, in chapter 03's order and names; 49 patterns sort, 5 refuse | cite 12 |
 | Team size relocates rules | 12 | This Force changes where a rule lives rather than what it is, so it produces few patterns of its own | cite 12 |
-| Goal vs Force vs problem shape | 12 | A Force is a fact about your circumstances, the problem's shape a fact about the business, a goal something you chose; only the first two generate patterns that sort | "the three kinds of input (Ch. 12)" |
+| Goal vs Force vs problem shape | 12 | A Force is a fact about your circumstances, the problem's shape a fact about the business, a goal something you chose; the test is whether you can decide to want less of it | "the three kinds of input (Ch. 12)" |
+| The zero value is a hole in the pattern | 12 | Go gives every struct a zero value and no way to withhold it, so *make illegal states unrepresentable* reaches populated illegal states only; Rust and F# have no such fallback | "the zero-value hole (Ch. 12)" |
 | Same Force, several answers | 12 | The Force narrows the field; the intensity picks the answer, and 19 does the choosing | cite 12 |
 | Survives-translation test | 13 | If it disappears when you change language, it was a workaround | cite 13 |
 | Smuggled verdict | 14 | Vocabulary arriving with its conclusion attached | cite 14 |
@@ -216,6 +217,7 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | Ports and adapters / strangler fig | 12 | Seams where two things move at different rates |
 | Batching measured: 1145 ms to 11 ms | 12 | Latency's arithmetic; 08 owns the curve |
 | Tolerant reader / consumer-driven contracts | 12 | Surviving a boundary you do not control |
+| Delivery states as transition types | 12 | Illegal states in Go, and where the guarantee stops |
 | GoF collapse in 4 languages | 13 | Survives-translation test |
 | Old client against four API changes | 09 | Add is safe, retype fails loudly, rename fails silently with a zero amount |
 | `io/ioutil`, deprecated 2021, running in 2026 | 09 | 175 deprecated declarations in Go's stdlib — the cost of a compatibility promise, kept |
