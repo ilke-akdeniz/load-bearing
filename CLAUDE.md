@@ -111,9 +111,9 @@ Each chapter follows this shape:
 
 1. **The claim** — one sentence, and the chapter opens on it. No epigraph, no framing paragraph before it: a reader who does not yet know the subject cannot use a note about the subject's standing.
 2. **The demonstration** — code, in two or more languages when the point concerns translation.
-3. **Why it holds** — the mechanism, never the authority. No argument from who said it.
-4. **Where this doesn't apply** — mandatory, with a worked counter-example.
-5. **What it costs** — every choice has a bill.
+3. **Why the claim holds** — the mechanism, never the authority. No argument from who said it.
+4. **Where the claim doesn't apply** — mandatory, with a worked counter-example.
+5. **Cost of the claim** — every choice has a bill.
 6. **How to recognize the failure** — what it looks like in a real codebase when someone got this wrong.
 
 ### The claim sentence
