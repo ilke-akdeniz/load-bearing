@@ -1869,3 +1869,32 @@ Counts move from forty-three sorted and seven refusing, to forty-nine sorted and
 `00_toc.md`'s entry for chapter 12 gives the new counts and says the Forces are chapter 03's, so the grouping can be checked against the definition rather than against a fresh set of labels.
 `LEDGER.md` loses the six-family row and gains two: the sort against chapter 03's seven, and the observation about team size relocating rules.
 Chapter 12 runs 432 lines, up from 385.
+
+---
+
+## 45. A cross-reference must carry a fact, not a location
+
+**Date.** 2026-08-15
+
+**Context.**
+The author's third review of chapter 12 raised a pattern that had built up unnoticed:
+
+> I started to thing that lines like this after each worked pattern are like the chapter epigraphs we got rid off. Not much value and they create noise. Evaluate if removing these while preserving valuable parts without saying chapter this chapter that is better
+
+Eleven of the fourteen worked patterns ended on a line naming another chapter — *chapter 04's definitional claim applies*, *which is chapter 07's territory*, *Chapter 06's registration example puts the hashing outside the lock for exactly this reason*.
+
+**Options.**
+Delete them all, which loses real pointers; keep them, which is the status quo the author objected to; or separate the two things they were doing.
+
+**Decision.**
+Separate them. A cross-reference stays when the fact it carries is one the reader needs at that moment, and it is then written as the fact with a compact `(Ch. NN)` pointer. It goes when the sentence exists only to say another chapter owns the idea.
+
+By that test six lines lost their scaffolding and kept their content — *a copy with no invalidation strategy is a copy that is allowed to be wrong (Ch. 04)* says the thing rather than reporting that chapter 04 says it. One sentence was deleted outright: chapter 06's registration example was a pure location, and the claim before it already stood.
+
+**Why.**
+The failure is the one the epigraph decision found. A line that names another chapter reads as though it is adding authority, and authority is not what the book runs on — the mechanism is. It also degrades over time: a pointer to *where* a claim lives breaks silently when chapters move, while a pointer that states the claim survives being wrong about the number.
+
+**Consequence.**
+The pattern generalizes past chapter 12 and is worth applying whenever cross-references accumulate: **write what the other chapter established, not that it established it.**
+The same review applied the author's other standing note — that showing the failing code before the pattern is worth doing where it does not make the example worse — to the tolerant reader, which now opens with a strict decoder that breaks on the one change chapter 09 calls always safe.
+Both tags were the author's; the test that separates a fact-carrying reference from a locating one is the draft's.

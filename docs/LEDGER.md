@@ -137,7 +137,7 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Patterns are Forces with a shape | 12 | The durable patterns answer a Force; grouping by Force finds the name from the situation, where a catalogue only finds it from the name | "the Force groups (Ch. 12)" |
 | Patterns sorted by Force | 12 | Chapter 03's seven Forces, in chapter 03's order and names; 49 patterns sort, 5 refuse | cite 12 |
 | Team size relocates rules | 12 | This Force changes where a rule lives rather than what it is, so it produces few patterns of its own | cite 12 |
-| Goal vs Force vs problem shape | 12 | Testing patterns answer a goal, State Machine answers the problem's shape, and neither sorts by Force | "the three that do not sort (Ch. 12)" |
+| Goal vs Force vs problem shape | 12 | A Force is a fact about your circumstances, the problem's shape a fact about the business, a goal something you chose; only the first two generate patterns that sort | "the three kinds of input (Ch. 12)" |
 | Same Force, several answers | 12 | The Force narrows the field; the intensity picks the answer, and 19 does the choosing | cite 12 |
 | Survives-translation test | 13 | If it disappears when you change language, it was a workaround | cite 13 |
 | Smuggled verdict | 14 | Vocabulary arriving with its conclusion attached | cite 14 |

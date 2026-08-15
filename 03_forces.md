@@ -378,7 +378,7 @@ Same defect, same fix, three different projects. Nothing about the code told you
 | Durability of the medium | How long does this outlive the code that wrote it? |
 | Blast radius | When it is wrong, what happens and who finds out? |
 | Change frequency and shape | How often, and how many places at a time? |
-| Team size and turnover | How many must agree, and how many will still be here? |
+| Team size and turnover | How many people must agree, and how many will still be here? |
 | Latency budget | What is the budget, and what does one mechanism cost of it? |
 | Control of the callers | Can I change every call site, and would I know if I broke one? |
 

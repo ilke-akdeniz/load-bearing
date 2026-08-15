@@ -2,11 +2,11 @@
 
 ## The claim
 
-**The patterns that last are answers to Forces, and grouping them by the Force they answer explains which one you need better than any catalogue organized by shape.**
+**The patterns that last are answers to Forces, or answers to the shape of the problem — and grouping them by the Force they answer tells you which one you need, where a catalogue organized by pattern shape cannot.**
 
-That is a stronger claim than it sounds, and it is checkable. If it holds, then naming your Force should mostly hand you the pattern — and a pattern whose Force you cannot name is one you should be suspicious of.
+Two halves, and the second is the practical one. A catalogue is arranged by what patterns look like, so it can only be searched by a name you already have. Arranged by Force, the same material can be searched from the situation, which is the direction you are actually travelling.
 
-So this chapter sorts the field against chapter 03's seven Forces, in chapter 03's order. Forty-nine patterns fall into them. Five refuse, and those five are the most interesting part, because what they have in common says something about the limits of the book's own model.
+So this chapter sorts the field against chapter 03's seven Forces, in chapter 03's order. Forty-nine patterns fall into them, and a handful answer the shape of the problem instead — a state machine is right when the domain has states, which is a fact about the business rather than about your circumstances. What is left over after both is the interesting residue, and it is dealt with in the boundary section.
 
 ## How to read this chapter
 
@@ -15,6 +15,13 @@ Two kinds of pattern entry, and the difference matters.
 **Worked patterns** — two per Force, with code, the constraint the pattern imposes, and what it costs. These carry the argument.
 
 **Listed patterns** — the rest of each family, one line each. These are not explained, only placed. By now you have chapter 10's tests, so a one-line entry is something you can evaluate rather than something you have to accept.
+
+Each worked pattern carries two labelled lines, and they answer different questions.
+
+- ***The constraint*** — what the pattern **forbids** once you adopt it. This is chapter 10's second test applied: a name that rules nothing out carries no information, so a pattern with no constraint is not a pattern. It is not a list of prerequisites; it is what you may no longer do.
+- ***The cost*** — what you pay for the constraint, in work, in performance, or in something you can no longer see.
+
+Patterns another chapter owns appear with a pointer instead of a definition.
 
 ---
 
@@ -26,8 +33,10 @@ Two kinds of pattern entry, and the difference matters.
 
 Chapter 06 owns the Law here and chapter 07 owns what happens across machines. These are the shapes that answer them.
 
+The Force splits into two questions, and the patterns split with it. **What has to change together?** — and, separately, **what stops two writers changing it at once?** The first must be answered before the second can be applied, because you cannot lock a boundary you have not drawn.
+
 **Pattern: Aggregate** — a group of objects with one entry point, where the whole group is the unit of consistency.
-[claude I recommend adding "Force:" and "Pattern:" in this manner for all listed force, and worked pattern titles.]
+
 ```go
 // The order is the aggregate root. Nothing outside reaches a line item.
 type Order struct {
@@ -36,35 +45,28 @@ type Order struct {
 }
 
 func (o *Order) AddLine(sku string, qty int) error {
-	// An invariant across the whole group:
-	// can't add a line that brings the order over it's credit limit
-	// [claude what happens when two thread opens the same order and starts adding lines?
-	// does that invalidate our point that the aggregate is an answer for concurrency or is it fair to say that
-	// those are different shapes of concurrency issues and aggregate deals only with one of those shapes?]
+	// An invariant across the whole group: no line may take the order
+	// over its credit limit, which is only checkable with every line in hand.
 	if o.total()+price(sku)*qty > o.creditLimit {
-		return ErrOverLimit 
+		return ErrOverLimit
 	}
 	o.lines = append(o.lines, Line{SKU: sku, Qty: qty})
 
 	return nil
 }
 ```
-[claude 01 what "the constaint" paragraphs mean in this chapter? Is it more like "Conditions". 
-If so maybe we should use "limitations" as title on these. Also worth addin a small "legend" like paragraph at the intro:
-Conditions describe the limitations and prerequisites for the pattern to work with the Force. Cost is ...]
 
-claude now I understand that this "constraint" part is where questions similar to what I asked in the previous tag could be answered but
-I don't see the answer to my question here and currect text reads more like a tech spec rather then concrete, clear style I would prefer.
-"the boundary is the transaction boundary" => difficult to get the concrete meaning
+*The constraint:* nothing outside the root may touch a line item, and the whole group is read and written as one. So a rule spanning two aggregates cannot be enforced in a single transaction — which is what makes aggregate boundaries the most consequential modelling decision in a transactional system.
 
-It could also be good to show the points raised in this section and/or "the cost" section with code if it adds value. 
-Ex: an exampele with wring aggregate boundaries, and/or example with "draw it too large."
-But you have to be careful with examples, they should not be a repetition of previous examples already used on other chapters.]
-*The constraint:* the boundary is the transaction boundary. One aggregate is locked, read, and written as a unit, and a rule spanning two aggregates cannot be enforced synchronously — which is why aggregate boundaries are the most consequential modelling decision in a transactional system.
+*The cost:* draw the boundary too large and every operation contends on one row; too small and invariants leak out to the caller, where they cannot be enforced at all.
 
-*The cost:* draw it too large and every operation contends on one row; too small and invariants leak out to the caller, where chapter 06 shows they cannot be enforced.
+**It answers the first question only, and this is worth being exact about.** Two requests that both load order 42, both check the credit limit, and both add a line will both succeed — the aggregate did not stop them, and nothing in the pattern claims it would. That is chapter 06's lost update, and it needs a mechanism: a version column that refuses the stale writer, or a lock held across the read and the write.
 
-**Identity map** — within one unit of work, a given row is loaded once and the same object is returned to everyone.
+What the aggregate contributes is the thing that mechanism needs. It says **order 42 and its lines are one unit**, so there is exactly one row to version and one boundary to lock. Without it you are left asking which of eleven tables to lock and in what order, which is how deadlocks are made.
+
+So the two are not alternatives. One draws the boundary; the other defends it.
+
+**Pattern: Identity map** — within one unit of work, a given row is loaded once and the same object is returned to everyone.
 
 ```go
 func (m *IdentityMap) Order(id uuid.UUID) (*Order, error) {
@@ -77,7 +79,7 @@ func (m *IdentityMap) Order(id uuid.UUID) (*Order, error) {
 
 *The constraint:* two parts of one operation cannot hold divergent copies of the same row, which is a lost-update race (Ch. 06) that no amount of care at the call sites removes.
 
-*The cost:* it is a cache, so chapter 04's definitional claim applies — it needs a lifetime, and the lifetime must be the unit of work rather than the process, or it becomes a stale-data source.
+*The cost:* it is a cache, so it needs a lifetime — and the lifetime must be the unit of work rather than the process, or it quietly becomes a source of stale data.
 
 **The rest of this family**
 
@@ -87,13 +89,13 @@ func (m *IdentityMap) Order(id uuid.UUID) (*Order, error) {
 - **Idempotency key** — chapter 07 owns it; it is what makes at-least-once delivery survivable.
 - **Saga** — chapter 07 owns it; the answer when the unit of consistency spans systems and no transaction can.
 
-### Durability of the medium
+### Force: Durability of the medium
 
 > **If this process dies right now, what must still be true when it comes back?**
 
 It produces more patterns than any other Force.
 
-**Unit of Work** — collect every change a business operation makes, then commit them together.
+**Pattern: Unit of Work** — collect every change a business operation makes, then commit them together.
 
 ```go
 func (u *UnitOfWork) Do(ctx context.Context, fn func(tx *sql.Tx) error) error {
@@ -111,11 +113,11 @@ func (u *UnitOfWork) Do(ctx context.Context, fn func(tx *sql.Tx) error) error {
 }
 ```
 
-*The constraint:* no part of the operation may write outside the transaction. Anything that does — a queue publish, an HTTP call, a log line someone later depends on — breaks the guarantee, which is chapter 07's territory and the reason the Outbox exists.
+*The constraint:* no part of the operation may write outside the transaction. Anything that does — a queue publish, an HTTP call, a log line someone later depends on — breaks the guarantee, and is the reason the outbox exists.
 
-*The cost:* the transaction is open for the whole operation, so slow work inside it holds locks. Chapter 06's registration example puts the hashing outside the lock for exactly this reason.
+*The cost:* the transaction is open for the whole operation, so slow work inside it holds locks.
 
-**Append-only log** — never update a row; write a new fact and derive the current state.
+**Pattern: Append-only log** — never update a row; write a new fact and derive the current state.
 
 ```sql
 -- Not: update account set balance = balance - 100
@@ -137,18 +139,17 @@ values ($1, -100, 'withdrawal', now());
 - **Data Mapper** — the object model and the tables are allowed to differ, and something translates. Its cost is the translation; its benefit is that neither side constrains the other.
 - **Transactional Outbox** — chapter 07 owns this one, and it is what you reach for when Unit of Work's constraint cannot be met.
 
-### Blast radius
+### Force: Blast radius
 
 > **When this breaks, what else stops working?**
 
 The patterns are all forms of containment.
 
-**Bulkhead** — partition the resource so one consumer's failure cannot exhaust it.
+**Pattern: Bulkhead** — partition the resource so one consumer's failure cannot exhaust it.
 
 ```go
 // One shared pool: a slow report starves checkout.
-// [claude this style of showing the wrong code without pattern at first is valuable
-// try to apply this to other worked patterns if it makes sense and if it doesn't make the code example worse ]
+//
 var db = pool(50)
 
 // Separate pools: the report can exhaust its own and nothing else.
@@ -158,9 +159,9 @@ var reportingDB = pool(10)
 
 *The constraint:* each partition has a hard ceiling and cannot borrow. That is the whole point — borrowing is what turns one component's bad day into everybody's.
 
-*The cost:* utilization falls, because reserved capacity sits idle when its owner is quiet. You are buying isolation with efficiency, which is chapter 08's arithmetic and a genuinely uncomfortable trade to defend in a capacity review.
+*The cost:* utilization falls, because reserved capacity sits idle when its owner is quiet. You are buying isolation with efficiency, which is an uncomfortable trade to defend in a capacity review.
 
-**Result types** — make failure part of the return value rather than a separate channel.
+**Pattern: Result types** — make failure part of the return value rather than a separate channel.
 
 ```rust
 fn parse_amount(s: &str) -> Result<Money, ParseError>
@@ -179,16 +180,16 @@ func ParseAmount(s string) (Money, error)
 - **Circuit breaker** — stop calling a failing dependency, so its slowness stops consuming your capacity. Chapter 10 uses the name as its example of a term that is a mediocre description and an excellent search key.
 - **Timeout with backoff and jitter** — bound the wait, and spread the retries so recovery does not arrive as a synchronized stampede (Ch. 07).
 - **Dead-letter queue** — a message that cannot be processed goes somewhere a human will find it, instead of blocking the queue or vanishing.
-- **Parse, don't validate** — do the check once at the edge and return a type that cannot be invalid, so nothing downstream re-checks or forgets to.
+- **Parse, don't validate** — worked under team size, where its distinctive value is; it belongs here too, because a value that cannot be invalid cannot spread an invalid one.
 - **Make illegal states unrepresentable** — the same move in the type system: if the invalid combination has no representation, no code path can produce it.
 
-### Change frequency, and its shape
+### Force: Change frequency, and its shape
 
 > **Which parts of this move at different rates?**
 
 Every pattern here is a seam placed where two things move at different speeds — chapter 09's rate-of-change layers, made structural.
 
-**Ports and adapters** — the application defines the interfaces it needs; the outside world implements them.
+**Pattern: Ports and adapters** — the application defines the interfaces it needs; the outside world implements them.
 
 ```go
 package billing
@@ -201,11 +202,11 @@ type Rates interface {
 // The adapter lives elsewhere and depends on billing, not the reverse.
 ```
 
-*The constraint:* the dependency points inward. Chapter 05 owns why that matters — the interface is declared by the consumer, which is the only version that actually reverses an arrow.
+*The constraint:* the interface is declared by the consumer rather than the provider, which is what reverses the arrow — a provider-declared interface leaves the dependency pointing exactly where it was (Ch. 05).
 
 *The cost:* an interface per boundary, and the reflex to add one everywhere is how a codebase acquires forty interfaces with one implementation each (Ch. 17).
 
-**Strangler fig** — route traffic through a facade, move one route at a time, delete the old system when the last route has moved.
+**Pattern: Strangler fig** — route traffic through a facade, move one route at a time, delete the old system when the last route has moved.
 
 ```text
             ┌──────────────┐
@@ -226,66 +227,111 @@ type Rates interface {
 - **Feature toggle** — separate deploying code from enabling it, so the two can move at different rates. Its cost is that every live toggle doubles the paths under test.
 - **Anti-corruption layer** — chapter 11 owns it: what a translation boundary becomes when the thing on the other side is not yours to change.
 
-### Team size and turnover
+### Force: Team size and turnover
 
-> **How many must agree to change this, and how many will still be here in two years?** 
-[claude how many what? Developers? I think that should be articulated here and if this version is used on other chapters those should be fixed as well.]
+> **How many people must agree to change this, and how many of today's people will still be here in two years?**
 
-This Force is the odd one, and the shape of its answer is worth noticing. It does not change *what* the rule is. [claude what you mean by rule here? I can't pinpoint it.] It changes **where the rule lives** — chapter 03's migration from a comment, to a review habit, to the type system. So it produces fewer patterns of its own than the others, and mostly relocates rules the other Forces already produced.
+This Force is the odd one, and the shape of its answer is worth noticing. It does not change *what* the rule is — by **rule** meaning any invariant the code must keep that no single line states: *amounts are in minor units, never floats*; *these two columns are set together or not at all*; *a visit may be completed once*. What the Force changes is **where the rule lives**, along chapter 03's migration from a comment, to a review habit, to the type system.
 
-**Make illegal states unrepresentable** — give the invalid combination no representation, so no code path can produce it.
+So it produces fewer patterns of its own than the others. Mostly it relocates rules the remaining Forces already produced, and both worked patterns here are relocations.
+
+**Pattern: Parse, don't validate** — check once at the edge and return a type that cannot be invalid, instead of checking a plain value and passing it on.
+
+The version where the rule lives in people's heads:
 
 ```go
-// Before: four fields, and three of the sixteen combinations are nonsense.
+func handleSignup(w http.ResponseWriter, r *http.Request) {
+	email := r.FormValue("email")
+	if !looksLikeEmail(email) {
+		http.Error(w, "bad email", 400)
+		return
+	}
+
+	signUp(email) // a plain string; the check did not travel with it
+}
+
+func signUp(email string) { /* trust it? re-check it? nobody knows */ }
+```
+
+`signUp` takes a `string`, so nothing distinguishes a checked email from any other text. The rule — *emails are validated before they get here* — exists in whoever wrote the handler. The next caller, added in a year by somebody else, may not know it.
+
+The version where the rule lives in the compiler:
+
+```go
+// Email's only constructor is ParseEmail, so holding one is proof it parsed.
+type Email struct{ addr string }
+
+func ParseEmail(s string) (Email, error) {
+	if !looksLikeEmail(s) {
+		return Email{}, ErrBadEmail
+	}
+
+	return Email{addr: s}, nil
+}
+
+func signUp(e Email) { /* nothing to check; it could not have got here otherwise */ }
+```
+
+*The constraint:* `signUp` can no longer be called with an unchecked string — the code does not compile. So the check cannot be skipped, duplicated, or forgotten by someone who never heard of it.
+
+*The cost:* a type and a constructor per rule, and a conversion at every boundary where raw input arrives. Go enforces this across packages rather than within one, so the guarantee is only as strong as the package boundary you put it behind.
+
+**Pattern: Make illegal states unrepresentable** — the same move applied to combinations rather than to values.
+
+A delivery has four fields, and most of their sixteen combinations are nonsense — delivered but not shipped, a signature with no delivery time:
+
+```go
 type Delivery struct {
 	Shipped   bool
 	ShippedAt time.Time
 	Delivered bool
 	SignedBy  string
 }
+```
 
-// After: the states are the type, and there is no "delivered but not shipped".
-type Delivery interface{ isDelivery() }
+Make each state its own type, and make the *transition* the only way to reach the next one:
 
+```go
 type Pending struct{}
-type Shipped struct{ At time.Time }
-type Delivered struct{ At time.Time; SignedBy string }
+
+func (Pending) Ship(at time.Time) Shipped {
+	return Shipped{at: at}
+}
+
+type Shipped struct{ at time.Time }
+
+// The only constructor for Delivered, and it needs a Shipped to exist.
+func (s Shipped) Deliver(at time.Time, signedBy string) Delivered {
+	return Delivered{shippedAt: s.at, at: at, signedBy: signedBy}
+}
+
+type Delivered struct {
+	shippedAt time.Time // carried over, so it cannot be missing
+	at        time.Time
+	signedBy  string
+}
 ```
-[claude for me above is useless without the Pending, Shipped, Delivered struct definitions.
-I also don't get how "delivered but not shipped" is not possible.]
 
-*The constraint:* the invalid case cannot be written down, so it cannot be checked for, forgotten, or reintroduced by someone who never heard the rule.
+"Delivered but not shipped" is now unwritable: the fields are unexported, so outside this package the only way to obtain a `Delivered` is to call `Deliver` on a `Shipped`, and a `Shipped` only exists because someone called `Ship`.
 
-*The cost:* more types, and every consumer needs a switch rather than a field access. Worth it when the rule matters more than the convenience, and overhead when it does not.
+*The constraint:* the invalid combination has no representation, so it cannot be produced, tested for, or reintroduced.
 
-**Golden test** — record the current output, and fail when it changes.
-
-```text
- testdata/invoice_v3.golden      the exact bytes this produced last time
- go test -update                 deliberately re-record, in a visible commit
-```
-[claude the example above needs more meat. I can't figure out what's going on. 
-What fails the golden test? Is it the developer commits the output and sees the data change in diff with his eyes?
-If so this is very brittle. I also can't figure out how - when this will be better then classical assertions on a test suite like 
-"assert total = ..." ]
-*The constraint:* behaviour cannot change silently. Whoever changes it must either fix the code or re-record the file, and re-recording shows up in review as a diff someone has to defend.
-
-*The cost:* it captures everything, including things nobody meant to promise — which is Hyrum's Law (Ch. 05) turned into a test file. Golden tests over-constrain, and the noise from irrelevant changes is the price of catching the relevant ones.
+*The cost:* more types, and consumers need a type switch rather than a field read. And the guarantee stops at the package wall — inside the package, `Delivered{}` still compiles.
 
 **The rest of this family**
 
-- **Architecture decision record** — the reasoning written down at the time, for the people who were not there. Its whole value is turnover; on a stable team of two it is overhead.
-- **Composition root** — one place where everything is assembled, so a newcomer has one file to read rather than a graph to trace (Ch. 05).
-- **Parse, don't validate** — also a blast-radius pattern, and listed there. Its team-size value is separate: a parsed type carries the rule, so nobody downstream has to know it. [claude I don't know this pattern but to me it sound more interesting then the worked pattern golden test. Maybe consider expending this instead of golden test.]
-- **Contract tests** — also a control-of-callers pattern. Same double duty: the agreement is written down rather than remembered.
+- **Architecture decision record** — the reasoning written down when it was fresh, for the people who were not in the room. Its entire value is turnover; on a stable team of two it is overhead.
+- **Composition root** — one place where the object graph is assembled, so a newcomer reads one file rather than tracing a graph (Ch. 05).
+- **Golden test** — assert a whole recorded artifact rather than picked-out fields. Worth it where the output is too large or too structured to assert piecemeal — a rendered invoice, a generated migration — and where you want changes nobody anticipated to show up as a diff. It over-constrains by design, which is the trade.
+- **Contract tests** — also a control-of-callers pattern, worked there. Same double duty: an agreement written down rather than remembered.
 
-### Latency budget
+### Force: Latency budget
 
 > **What is the budget, and what does one mechanism cost of it?**
 
 Chapter 08 supplies the arithmetic underneath all of these.
 
-**Batching** — replace N round trips with one.
+**Pattern: Batching** — replace N round trips with one.
 
 ```go
 // N round trips
@@ -308,7 +354,7 @@ At one millisecond per round trip:
 
 *The cost:* latency for the first item rises, because it waits for the batch to fill. Throughput and latency trade against each other here, and which you want is a product decision rather than an engineering one.
 
-**Cache-aside** — check the cache, fall through to the source, populate on the way back.
+**Pattern: Cache-aside** — check the cache, fall through to the source, populate on the way back.
 
 ```go
 if v, ok := cache.Get(k); ok {
@@ -318,7 +364,7 @@ v := source.Get(k)
 cache.Set(k, v, ttl)
 ```
 
-*The constraint:* the cached copy may be stale, so the design is not the lookup — it is the invalidation. Chapter 04 uses this exact claim as its example of something true by definition: a copy with no invalidation strategy is a copy that is allowed to be wrong.
+*The constraint:* the cached copy may be stale, so the design is not the lookup — it is the invalidation. A copy with no invalidation strategy is a copy that is allowed to be wrong (Ch. 04).
 
 *The cost:* a second source of truth, a stampede when a popular key expires and every request misses at once, and a debugging surface where the answer depends on what happened earlier.
 
@@ -330,14 +376,26 @@ cache.Set(k, v, ttl)
 - **Materialised view** — precompute the answer, and accept that it lags.
 - **Data-oriented layout** — chapters 05 and 08 own it; the 7× that comes from where the bytes sit rather than what the algorithm does.
 
-### Control of the callers
+### Force: Control of the callers
 
 > **Who else depends on this, and can I change them?**
 
 Chapter 09's compatibility rule and chapter 11's ownership line both land here. The patterns are ways of making a boundary survivable.
-[claude I started to thing that lines like this after each worked pattern are like the chapter epigraphs we got rid off. Not much value and they create noise. Evaluate if removing these while preserving valuable parts without saying chapter this chapter that is better]
 
-**Tolerant reader** — read only the fields you need, and ignore everything else.
+**Pattern: Tolerant reader** — read only the fields you need, and ignore everything else.
+
+The version that breaks when the other side improves:
+
+```go
+// Strict: rejects any field it does not know about.
+dec := json.NewDecoder(body)
+dec.DisallowUnknownFields()
+
+var v OrderView
+err := dec.Decode(&v) // the day they add "currency", this starts failing
+```
+
+Adding a field is the one change chapter 09 says is always safe, so a reader that fails on it has turned their safe change into your outage. The tolerant version simply does not look:
 
 ```go
 // Only these three. Any other field in the payload is discarded silently.
@@ -346,25 +404,45 @@ type OrderView struct {
 	Total  int64  `json:"total_minor"`
 	Status string `json:"status"`
 }
+
+var v OrderView
+err := json.Unmarshal(body, &v) // unknown fields are skipped
 ```
 
 *The constraint:* you may not fail on an unrecognized field, which means you cannot use strict schema validation on the inbound side.
 
-*The cost:* a field that disappears reads as its zero value rather than as an error — chapter 09 shows that is the silent failure, and it is the price of the tolerance.
+*The cost:* a field that disappears reads as its zero value rather than as an error, which is the silent failure of chapter 09 and the price of the tolerance.
 
-**Consumer-driven contracts** — each consumer publishes the subset of your interface it actually relies on, and your build fails if you break one.
-[claude this looks like an interesting example but I can't figure out if it's a real thing or your hallucination.
-How does this work on practice? How different consumers using an API publish a contract to the API provider and 
-API provider uses those on the build. This sounds impossible in practice to me, but maybe I'm reading your example incorrectly.]
+**Pattern: Consumer-driven contracts** — each consumer records the subset of your interface it actually uses, and your build replays those recordings against the real implementation.
+
+The part that sounds impossible is that consumers hand-write a specification and send it to you. They do not. The contract is a **by-product of the consumer's own tests**, and the flow is mechanical:
+
 ```text
- checkout-service expects:  POST /v1/orders  ->  {id, total_minor}
- reporting-service expects: GET  /v1/orders  ->  {id, total_minor, placed_at}
-                                                  ^ nobody depends on `status`
+1  checkout-service writes a test against a mock of your API,
+   declaring the request it sends and the response it needs
+2  running that test emits a contract file — the interactions,
+   as JSON, generated rather than written
+3  the file is published to a shared broker
+4  your CI fetches every consumer's file and replays the requests
+   against the real service, checking the responses still match
+5  a response that no longer satisfies a consumer fails YOUR build,
+   before release rather than after
 ```
 
-*The constraint:* the contract set is the real interface, and it is smaller than the published one — which tells you what you can change, a thing that is otherwise unknowable (Ch. 05's Hyrum's Law).
+Pact is the widely used implementation of this, and the shape above is how it works. What makes it tractable is step two: nobody maintains a contract document, because the contract falls out of a test the consumer wanted anyway.
 
-*The cost:* every consumer must maintain its contract, and a consumer that does not participate is invisible to the check. The pattern works exactly as well as its coverage.
+The payoff is knowing what is safe to change:
+
+```text
+ checkout-service uses:   POST /v1/orders  ->  id, total_minor
+ reporting-service uses:  GET  /v1/orders  ->  id, total_minor, placed_at
+
+ status is published, and nothing depends on it — so it can go
+```
+
+*The constraint:* the contract set becomes the real interface, and it is smaller than the published one. You may change anything nobody recorded.
+
+*The cost:* both sides must adopt the tooling, and a broker is one more piece of infrastructure to run. More seriously, **a consumer who does not participate is invisible** — the green build says "no recorded expectation broke," not "nobody broke." The pattern is exactly as good as its coverage, and it converts chapter 05's unknowable dependency set into a known-but-incomplete one.
 
 **The rest of this family**
 
@@ -397,14 +475,13 @@ Sorting the field left five patterns that do not answer a Force, and they fail i
 
 That is a real gap in this chapter's method, not a defect in the patterns. Chapter 17 covers the testing material, and it is organized by what the techniques actually buy rather than by Force, for exactly this reason.
 
-**Golden tests used to be in this list and no longer are**, which is worth recording because it shows the sort is doing work rather than confirming a guess. A first pass ran against six invented Force names and left golden tests homeless. Using chapter 03's actual seven — and so restoring *team size and turnover*, which the invented list had dropped — gave them an obvious home: a golden test exists so that behaviour cannot change silently under people who did not write it. **A pattern that will not sort is sometimes evidence about the categories rather than about the pattern.** [claude this is a specific situation that happened about our book writing process, in my opinion worth deleting completely, not valuable for the audience of the book.]
+**Golden tests used to be in this list and no longer are**, which is worth recording because it shows the sort is doing work rather than confirming a guess. A first pass ran against six invented Force names and left golden tests homeless. Using chapter 03's actual seven — and so restoring *team size and turnover*, which the invented list had dropped — gave them an obvious home: a golden test exists so that behaviour cannot change silently under people who did not write it. **A pattern that will not sort is sometimes evidence about the categories rather than about the pattern.**
 
 **Some answer what the problem is rather than what the situation is.** A state machine is the right shape when the domain genuinely has states and transitions — an order that is placed, then paid, then shipped. That is a fact about the business, not about your concurrency or your latency budget. The same goes for Transaction Script, which chapter 10 uses as its compression example: it is what you write when *no* Force is pushing you anywhere else, and it is right far more often than its reputation suggests.
 
-So the honest form of this chapter's claim is narrower than the opening states it: **patterns that answer situational Forces sort by Force. Patterns that answer the shape of the problem, or a goal you have chosen, do not** — and confusing the three is one way people end up applying machinery that answers a question they were not asking.
-[claude saying "the honest form of this chapter's claim is narrower than the opening states it" is not ok for me. It implies we build the chapter over a lie. Let's say the honest form from the opening of the chapter and follow trough it:
-Chapter claim: "The patterns that last are answers to Forces or answers to the shape of the domain problem." 
-A logical expansion of the claim: grouping them by the Force they answer explains which one you need better than any catalogue organized by the pattern shape." (I say pattern shape so that it's not confused with the domain shape)]
+That is the residue the claim leaves, and it is worth naming as a third category rather than folding into either. **A Force is a fact about your circumstances. The shape of the problem is a fact about the business. A goal is something you chose and could choose differently** — and only the first two generate patterns that sort.
+
+Confusing the three is one way people end up applying machinery to a question they were not asking: reaching for an event-sourced log because durability sounds important, when what the domain actually has is a state machine; or adopting a testing technique because it is rigorous, rather than because anything about the situation called for it.
 
 ### One Force, several answers, and no way to choose from here
 
@@ -433,15 +510,12 @@ Run chapter 10's tests before using any of them, and chapter 11's question befor
 ---
 
 ## How to recognize the failure
-[claude I get the feeling that some of those failure bullet points exist in multiple chapters with slight variations.
-Check if this is true and consider deleting those to preserve them only where they have the most impact or changing them so that they are not repetitions.]
 **In a codebase:**
 
 - **A pattern whose Force you cannot name.** Ask what would break without it. If the answer is nothing concrete, it is structure that was applied rather than derived.
 - **Two patterns answering the same Force, both present.** An optimistic version column *and* a pessimistic lock on the same rows means somebody added the second without removing the first, and the invariant now depends on which path ran.
 - **A pattern from the durability family with no durable medium** — event sourcing over a cache, an append-only log that is truncated weekly.
 - **Bulkheads that share a limit.** Two pools that both draw from the same connection ceiling are one pool with extra configuration.
-- **A cache with no invalidation** and no note saying why none is needed (Ch. 04).
 - **A strangler facade with no route ever migrated**, which is two systems and none of the benefit.
 
 **In a conversation:**
