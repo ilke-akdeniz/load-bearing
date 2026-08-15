@@ -23,7 +23,8 @@ Its central question is the one a builder asks before knocking out a wall: **is 
 The book is written to be **received**, not obeyed.
 Its subject is how to read advice — a blog post, a review comment, a pattern name, a strong opinion in a meeting — and place it correctly before deciding what to do about it.
 
-## The five levels
+## The five levels [claude five levels of what? I think we should name this explicitly. Can't be advice because force is not advice]
+[claude also I thought we moved from the "level" terminology to "kind". No? Notice that changing CLAUDE.md is not enough for these decisions. You will have to sweep other existing book content in the repo so that they are applied consistently.]
 
 The spine. Every chapter classifies its material against these.
 
