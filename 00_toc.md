@@ -17,7 +17,7 @@ The book's thesis, stated plainly: the problem is rarely that advice is wrong, i
 
 Contents: the anatomy of a misapplication; why "it depends" is an unsatisfying answer that happens to be correct; what this book gives you instead of a checklist.
 
-*Where this doesn't apply:* some advice really is unconditional, and treating everything as contextual is its own failure mode.
+*Where the claim doesn't apply:* some advice really is unconditional, and treating everything as contextual is its own failure mode.
 
 ### 02. The five levels
 `02_the-five-levels.md`
@@ -26,7 +26,7 @@ The model above, with a classification test you can run on any claim in under a 
 
 Contents: the five kinds, named rather than numbered; how Forces relate differently to Laws and to Principles — a Law can be inert but never wrong, a Principle can be wrong; the five-question classification test; twenty common claims classified; why the kinds get confused.
 
-*Where this doesn't apply:* claims that genuinely span two kinds, and why forcing one label is worse than holding both.
+*Where the claim doesn't apply:* claims that genuinely span two kinds, and why forcing one label is worse than holding both.
 
 ### 03. Forces: the inputs nobody names
 `03_forces.md`
@@ -37,7 +37,7 @@ Principles are conditional on Forces; naming them is most of the work of choosin
 Contents: concurrency; durability of the medium (a schema outlives the code that writes it); blast radius of a bug; change frequency and its shape; team size and turnover; latency budget; whether you control the callers.
 Each Force with a code demo of the same problem solved differently under different values of it.
 
-*Where this doesn't apply:* Forces you can't measure yet, and why guessing is worse than deferring.
+*Where the claim doesn't apply:* Forces you can't measure yet, and why guessing is worse than deferring.
 
 ## Part II — The foundations
 
@@ -49,7 +49,7 @@ Theorem, definition, and empirical law are three different kinds of true, and ea
 
 Contents: what makes Two Generals a different kind of claim from Conway's Law; what makes Conway's Law different from "prefer composition over inheritance"; the halting problem as a theorem whose folk version dropped a quantifier; how to check a claimed Law.
 
-*Where this doesn't apply:* Laws that are true but irrelevant at your scale — Amdahl on a single-threaded CLI.
+*Where the claim doesn't apply:* Laws that are true but irrelevant at your scale — Amdahl on a single-threaded CLI.
 
 ### 05. Structure: dependency and hiding
 `05_structure.md`
@@ -58,7 +58,7 @@ The Direction Rule and its family.
 
 Contents: acyclic dependency, and why it's a Law rather than a preference; layering as the line-shaped special case of a DAG; shapes that aren't layers (pipelines, DAGs, inversion of control, cross-cutting concerns); information hiding (Parnas 1972); **Hyrum's Law** — with enough users, every observable behavior becomes a dependency; the export surface as the real API design; cost of change scaling with dependents.
 
-*Where this doesn't apply:* ECS architectures, where cache layout outranks encapsulation; plugin systems where inversion makes calls legitimately go "up."
+*Where the claim doesn't apply:* ECS architectures, where cache layout outranks encapsulation; plugin systems where inversion makes calls legitimately go "up."
 
 ### 06. Time: concurrency and clocks
 `06_time.md`
@@ -67,7 +67,7 @@ The chapter that turns "be careful" into a rule you can apply.
 
 Contents: check-then-act is not atomic (the TOCTOU family, with the same bug shown in four languages); **shared mutable state + concurrency = races**, and the two ways to remove it; only the lock-holder can enforce; the single-writer principle; clock skew and why timestamps don't order events; Lamport and vector clocks; coordination costs latency.
 
-*Where this doesn't apply:* genuinely single-threaded systems (embedded loops, some game main-loops), where the whole apparatus is dead weight.
+*Where the claim doesn't apply:* genuinely single-threaded systems (embedded loops, some game main-loops), where the whole apparatus is dead weight.
 
 ### 07. Distribution: what's impossible
 `07_distribution.md`
@@ -76,7 +76,7 @@ Theorems, and the engineering that exists because of them.
 
 Contents: CAP and PACELC; FLP impossibility; Two Generals, and its practical corollary that **exactly-once delivery is impossible** — you get at-least-once plus idempotency; you cannot distinguish a slow node from a dead one, so every timeout is a guess; reliability compounds (p^N); the Transactional Outbox and Saga patterns as direct consequences.
 
-*Where this doesn't apply:* a single process with one database — where reaching for distributed-systems machinery is cargo cult.
+*Where the claim doesn't apply:* a single process with one database — where reaching for distributed-systems machinery is cargo cult.
 
 ### 08. Scale: queues, parallelism, memory
 `08_scale.md`
@@ -85,7 +85,7 @@ Where the arithmetic beats the intuition.
 
 Contents: Amdahl's Law; the Universal Scalability Law and why throughput can *decrease* with more workers; Little's Law; queueing theory and why 85% utilization is a cliff rather than headroom; **the memory hierarchy across six orders of magnitude**, with a benchmark showing array-of-structs versus struct-of-arrays; the speed of light as a latency floor; big-O versus constants in both directions.
 
-*Where this doesn't apply:* small-n, where the constant factor wins and the asymptotically better algorithm loses.
+*Where the claim doesn't apply:* small-n, where the constant factor wins and the asymptotically better algorithm loses.
 
 ### 09. Change: evolution, organization, compatibility
 `09_change.md`
@@ -94,7 +94,7 @@ The laws that operate on the timescale of years rather than milliseconds.
 
 Contents: Lehman's Laws of Software Evolution; Conway's Law, and the inverse manoeuvre; Brooks' Law and the n(n−1)/2 arithmetic underneath it; compatibility is forever once published; the durable-artifact question — schema, protocol, and public API outlive the code that touches them, which changes where invariants should live.
 
-*Where this doesn't apply:* code with a known short life — a migration script, a spike, a one-off report.
+*Where the claim doesn't apply:* code with a known short life — a migration script, a spike, a one-off report.
 
 ## Part III — Patterns, graded
 
@@ -105,7 +105,7 @@ Two tests, applied throughout the rest of Part III.
 
 Contents: **compression** — does naming it save more words than it costs? **constraint** — does it rule anything out? Patterns as vocabulary versus patterns as prescription; why catalogues get misread as checklists; the difference between describing a shape and recommending one.
 
-*Where this doesn't apply:* a design too young to name, where a vague name is the honest one; local vocabulary that compresses for insiders and nobody else; and names kept because they are how you find the literature on a shape's failure modes.
+*Where the claim doesn't apply:* a design too young to name, where a vague name is the honest one; local vocabulary that compresses for insiders and nobody else; and names kept because they are how you find the literature on a shape's failure modes.
 
 ### 11. Patterns that cross the line
 `11_patterns-that-cross.md`
@@ -117,7 +117,7 @@ Usually called a question of scale; size only correlates, because systems acquir
 
 Contents: one integration crossing the line, before and after; which rows of the pattern table are canonical and which are this book's reading; why most pattern arguments are two people answering different ownership questions.
 
-*Where this doesn't apply:* patterns unchanged by the crossing (Strategy, Template Method); partial ownership, where the alternatives are expensive rather than absent; and Singleton, which changes more than anything else in the chapter.
+*Where the claim doesn't apply:* patterns unchanged by the crossing (Strategy, Template Method); partial ownership, where the alternatives are expensive rather than absent; and Singleton, which changes more than anything else in the chapter.
 
 ### 12. Patterns that survive translation
 `12_patterns-that-survive-translation.md`
@@ -128,7 +128,7 @@ Fifty patterns sorted: forty-three fall into six Forces, seven refuse. Two worke
 
 The six: something must survive; two things at once; a failure must not spread; this will change and that will not; this must be fast enough; someone else must not break it.
 
-*Where this doesn't apply:* the seven that refuse to sort, which split into patterns answering a goal (the testing family) and patterns answering the shape of the problem (State Machine, Transaction Script); one Force with several answers, where only intensity decides; and the fact that a list places patterns without endorsing them.
+*Where the claim doesn't apply:* the seven that refuse to sort, which split into patterns answering a goal (the testing family) and patterns answering the shape of the problem (State Machine, Transaction Script); one Force with several answers, where only intensity decides; and the fact that a list places patterns without endorsing them.
 
 ### 13. Patterns that are missing language features
 `13_missing-language-features.md`
@@ -139,7 +139,7 @@ Contents: Strategy is a function; Command is a closure; Iterator is syntax now; 
 Norvig's observation that most of the catalogue is invisible in a sufficiently expressive language, demonstrated in four languages side by side.
 The diagnostic: **if the pattern disappears when you change language, it was a workaround, not an idea.**
 
-*Where this doesn't apply:* languages that genuinely lack the feature — the pattern is the right answer in Java 6, and calling it obsolete is its own misclassification.
+*Where the claim doesn't apply:* languages that genuinely lack the feature — the pattern is the right answer in Java 6, and calling it obsolete is its own misclassification.
 
 ### 14. Patterns that smuggle a verdict
 `14_smuggled-verdicts.md`
@@ -148,7 +148,7 @@ Vocabulary that arrives with its conclusion already attached.
 
 Contents: "anemic domain model" as a diagnosis dressed as a description; "code smell" and the rhetoric of hygiene; how a term coined inside one argument (rich OO domain models versus J2EE entity beans) travels to contexts whose premises it doesn't fit; the third option such terms cannot see — behaviour placed by *scope* rather than by doctrine; how to spot the pattern in new vocabulary.
 
-*Where this doesn't apply:* some pejorative terms name real defects, and refusing all judgment-laden vocabulary is over-correction.
+*Where the claim doesn't apply:* some pejorative terms name real defects, and refusing all judgment-laden vocabulary is over-correction.
 
 ## Part IV — Methodologies versus principles
 
@@ -162,7 +162,7 @@ The test applied to generated design, where the answer is not *the conditions we
 Why practitioner credibility does not immunize anyone — Go proverbs quoted as law, Rob Pike's own complaint about it.
 The test that survives: **does the idea come with the conditions under which it's wrong?**
 
-*Where this doesn't apply:* movements that genuinely improved practice, and why dismissing all methodology is the mirror-image error.
+*Where the claim doesn't apply:* movements that genuinely improved practice, and why dismissing all methodology is the mirror-image error.
 
 ### 16. OOP versus the Direction Rule
 `16_oop-vs-direction.md`
@@ -172,7 +172,7 @@ The first case study, and the one with the most code.
 Contents: bidirectional associations in domain models; how inheritance creates dependencies that point both ways in practice; "tell, don't ask" pushing toward object webs; ORMs materializing cyclic graphs; what cycles cost concretely — serialization, test setup, comprehension.
 The alternative demonstrated: flat structures with explicit identifiers, and what you give up by choosing it.
 
-*Where this doesn't apply:* domains with genuinely rich single-entity invariants, where behaviour on the object is the right answer and this chapter's advice would produce anaemia for real.
+*Where the claim doesn't apply:* domains with genuinely rich single-entity invariants, where behaviour on the object is the right answer and this chapter's advice would produce anaemia for real.
 
 ### 17. TDD, mocks, and what testing actually buys
 `17_tdd-and-mocks.md`
@@ -181,7 +181,7 @@ The second case study, kept fair.
 
 Contents: generated tests that pass without reaching the condition they name, and mutation as the only check that catches them (FlowCore's decision 37: five toothless tests in one iteration); what the empirical literature actually shows about test-first, where the controlled studies disagree with each other and most of them measure test-first against no tests rather than against test-after; the difference between "tests help" and "this ordering ritual helps"; **mocks assert that your code calls your mocks** — the argument, with a test that passes while the constraint it claims to verify has been deleted; how the mocking convention generates interface-per-class, which generates the DI container; what the testing pyramid assumes about where your logic lives, and what happens when your logic lives in a schema instead.
 
-*Where this doesn't apply:* systems where the dependency genuinely cannot be run in a test — payment gateways, hardware, third-party APIs — and the honest version of test doubles for those.
+*Where the claim doesn't apply:* systems where the dependency genuinely cannot be run in a test — payment gateways, hardware, third-party APIs — and the honest version of test doubles for those.
 
 ### 18. Clean Architecture versus the language
 `18_clean-architecture-vs-language.md`
@@ -190,7 +190,7 @@ The third case study: what happens when a structural idea is expressed as direct
 
 Contents: **layered packages force exports** — splitting a store into its own package requires making its helpers public, so the wall meant to hide them is what exposes them; the mapping tax of one entity type per layer; interfaces with one implementation; the `internal/` manoeuvre and what it's actually for; why the same architecture in Go, C#, and Python produces three different file layouts and only one of them needs the ceremony.
 
-*Where this doesn't apply:* large teams and multi-module builds, where a compiler-enforced import boundary buys something a convention cannot.
+*Where the claim doesn't apply:* large teams and multi-module builds, where a compiler-enforced import boundary buys something a convention cannot.
 
 ## Part V — Contextual programming
 
@@ -201,7 +201,7 @@ The practical procedure the whole book has been building toward.
 
 Contents: read the forces, derive the principles, then check the idioms — in that order, never the reverse; **grilling** as this method run with a generator in the loop — the interview that surfaces each decision before code exists, quoted in full, with its provenance and the limit that it is weakest where the training corpus is most uniform; a worked force-map for four systems from scratch; how to notice you have inherited a principle whose forces are absent; what to do when forces conflict.
 
-*Where this doesn't apply:* situations where the conventional answer is good enough and the analysis costs more than the decision is worth.
+*Where the claim doesn't apply:* situations where the conventional answer is good enough and the analysis costs more than the decision is worth.
 
 ### 20. Six domains, six inversions
 `20_six-domains.md`
@@ -216,7 +216,7 @@ Each domain: which forces dominate, which standard advice inverts, and the code 
 - **UI frameworks and libraries** — inversion of control is the product; your code is the leaf; the framework calls you.
 - **Distributed services** — no shared transaction, so idempotency and retries replace atomicity; the entire consistency toolkit changes shape.
 
-*Where this doesn't apply:* systems that straddle two domains, which is most interesting systems — and how to decide which forces win at each boundary.
+*Where the claim doesn't apply:* systems that straddle two domains, which is most interesting systems — and how to decide which forces win at each boundary.
 
 ### 21. Idioms: why ecosystems diverge
 `21_idioms.md`
@@ -225,7 +225,7 @@ Idioms, taken seriously rather than dismissed.
 
 Contents: why Go grew free functions and C# grew containers, traced to language features rather than culture; an Idiom whose precondition failed because the reader stopped being the author (FlowCore's decision 18: short Go names, generated idiomatically, deviated from deliberately); why Python skipped DI except where per-request lifetime is real; the case *for* obeying local idiom even when you can argue against it — reviewability, hiring, the cost of being interesting; when to deviate, and how to pay for it (declare it, document the reason, keep it narrow).
 
-*Where this doesn't apply:* idioms that encode a genuine mistake, and how to tell those from idioms you merely dislike.
+*Where the claim doesn't apply:* idioms that encode a genuine mistake, and how to tell those from idioms you merely dislike.
 
 ### 22. Style: the level where being right doesn't matter
 `22_style.md`
@@ -234,7 +234,7 @@ Short chapter, deliberately.
 
 Contents: naming, formatting, file layout, comment density; why consistency beats correctness here; why style arguments consume energy disproportionate to their stakes; the one case where style becomes substance — when a naming convention encodes a real distinction the type system can't.
 
-*Where this doesn't apply:* nothing, really — which makes this the one chapter whose counter-example section argues that its own subject barely matters.
+*Where the claim doesn't apply:* nothing, really — which makes this the one chapter whose counter-example section argues that its own subject barely matters.
 
 ### 23. Reading advice at the right level
 `23_reading-advice.md`
@@ -244,7 +244,7 @@ The field guide, and the closing.
 Contents: receiving a blog post; receiving a code review comment; receiving a book; receiving a colleague's strong opinion; receiving your own past decisions; **receiving generated code** — the sixth case, and the one the others rehearse for, where the artifact states no decisions at all because every branch was taken silently; the questions that do the work — *what forces does this assume? at what scale? what does it rule out? where does the author say it stops?*
 The final answer to "is this load-bearing" as a repeatable procedure rather than a judgement call.
 
-*Where this doesn't apply:* when you don't have time to analyse and must simply pick the conventional answer — which is usually the correct move, and knowing that is part of the skill.
+*Where the claim doesn't apply:* when you don't have time to analyse and must simply pick the conventional answer — which is usually the correct move, and knowing that is part of the skill.
 
 ---
 

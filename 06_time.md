@@ -340,7 +340,7 @@ What a Lamport clock does *not* give you is the reverse reading: a smaller numbe
 
 ---
 
-## Why it holds
+## Why the claim holds
 
 Both halves reduce to one property of the world: **an observation is a statement about the past.**
 
@@ -354,7 +354,7 @@ And it is why the failures are so hard to catch in review. **Every line of the b
 
 ---
 
-## Where this doesn't apply
+## Where the claim doesn't apply
 
 ### One writer, and the whole apparatus is dead weight
 
@@ -382,7 +382,7 @@ The failure is importing distributed-systems machinery — vector clocks, causal
 
 ---
 
-## What it costs
+## What the claim costs
 
 **Coordination costs latency, and it is not optional.** Every lock, every transaction, every quorum is a point where one party waits for another. That wait is bounded by how far the signal has to travel — nanoseconds within a core, microseconds across a machine, milliseconds across a continent — and it is paid on every operation, forever. The cheapest correct design is the one that needs the least coordination, which is why single-writer partitions win where they fit.
 

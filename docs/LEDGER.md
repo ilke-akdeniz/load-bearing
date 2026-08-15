@@ -228,6 +228,6 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 
 Only these ideas may appear more than once, because the book's structure depends on them:
 
-- **The kind of the current material** — stated where it does work, in the claim or in *Why it holds*, not as a standing opener. Chapters no longer carry an epigraph.
+- **The kind of the current material** — stated where it does work, in the claim or in *Why the claim holds*, not as a standing opener. Chapters no longer carry an epigraph.
 - **The mandatory boundary section** — every chapter has one. It is a section, not a repeated argument.
 - **FlowCore as running example** — appears across Parts II and V, but each appearance must show a *different* facet.

@@ -236,7 +236,7 @@ That third one is why the outbox appears in a chapter about availability as well
 
 ---
 
-## Why it holds
+## Why the claim holds
 
 Every result above is the same shape: **an actor must decide, and the information needed to decide correctly is on the other side of a link that may not deliver.**
 
@@ -248,7 +248,7 @@ The arithmetic result is different and worth separating. p^N is not about knowle
 
 ---
 
-## Where this doesn't apply
+## Where the claim doesn't apply
 
 ### One process and one database
 
@@ -281,7 +281,7 @@ Which means p^N is a *lower bound on the problem* rather than a prediction. Use 
 
 ---
 
-## What it costs
+## What the claim costs
 
 **Idempotency keys cost a table, a lookup, and a retention policy.** Keys must be stored to be checked, stored keys grow forever, and deleting them re-opens the window for any client slow enough to retry after the deletion. Nobody enjoys choosing that number.
 

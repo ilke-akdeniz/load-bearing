@@ -202,7 +202,7 @@ What ends it is not a better argument about Facades. It is asking who is on the 
 
 ---
 
-## Why it holds
+## Why the claim holds
 
 A pattern name describes a **shape**: what calls what, which way the dependencies point, where the indirection sits. Shapes are genuinely independent of context, which is what makes the vocabulary useful at all — the same picture on a whiteboard works whether the boxes are classes or services.
 
@@ -220,7 +220,7 @@ That is chapter 02's mechanism in a new place. There, advice arrived stripped of
 
 ---
 
-## Where this doesn't apply
+## Where the claim doesn't apply
 
 ### Patterns that stay the same wherever you put them
 
@@ -272,7 +272,7 @@ An internal dependency that changes weekly and is called from forty places behav
 
 ---
 
-## What it costs
+## What the claim costs
 
 **The question is overhead on most naming.** Asked of every noun, it is an obstacle. Asked when someone proposes a pattern as an architectural decision, it is what settles it.
 

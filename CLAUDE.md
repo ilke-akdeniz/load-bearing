@@ -98,7 +98,7 @@ A repetition found in review is a **ledger defect** — a missing or mis-assigne
 
 **No chapter ships without a real counter-example.**
 
-Every chapter has a mandatory *Where this doesn't apply* section containing a worked case, not a hedge.
+Every chapter has a mandatory *Where the claim doesn't apply* section containing a worked case, not a hedge.
 "This always applies" is never an acceptable answer.
 If a boundary cannot be found, that is evidence the claim is too vague to be useful — not evidence that it is universal.
 
@@ -113,7 +113,7 @@ Each chapter follows this shape:
 2. **The demonstration** — code, in two or more languages when the point concerns translation.
 3. **Why the claim holds** — the mechanism, never the authority. No argument from who said it.
 4. **Where the claim doesn't apply** — mandatory, with a worked counter-example.
-5. **Cost of the claim** — every choice has a bill.
+5. **What the claim costs** — every choice has a bill.
 6. **How to recognize the failure** — what it looks like in a real codebase when someone got this wrong.
 
 ### The claim sentence

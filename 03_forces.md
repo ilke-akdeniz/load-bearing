@@ -384,7 +384,7 @@ Same defect, same fix, three different projects. Nothing about the code told you
 
 ---
 
-## Why it holds
+## Why the claim holds
 
 Three mechanisms support this chapter's claim. The third is the one that catches working teams out, because it operates without anyone touching the code.
 
@@ -396,7 +396,7 @@ Three mechanisms support this chapter's claim. The third is the one that catches
 
 ---
 
-## Where this doesn't apply
+## Where the claim doesn't apply
 
 ### Forces you cannot measure yet
 
@@ -468,7 +468,7 @@ That is the reversibility question again, and it is the only one that still work
 
 ---
 
-## What it costs
+## What the claim costs
 
 **Naming a Force, without evaluating it, licenses machinery.** "We have concurrency" becomes a distributed lock, in a program with one writer. This is the failure mode the chapter's claim is aimed at: identifying a Force is the cheap half and feels like the whole job, so the design gets chosen from the name while the intensity is never read — and the intensity is almost always lower than the name suggests. The discipline: no Force may be cited in a design discussion without a number beside it, or the words *we don't know* said out loud.
 

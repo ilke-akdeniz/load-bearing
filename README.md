@@ -67,7 +67,7 @@ The recurring failure, which appears in every part of this book:
 
 **No chapter ships without a real counter-example.**
 
-Every chapter has a mandatory *Where this doesn't apply* section containing a worked case, not a hedge.
+Every chapter has a mandatory *Where the claim doesn't apply* section containing a worked case, not a hedge.
 "This always applies" is never an acceptable answer — if a boundary can't be found, that is evidence the claim is too vague to be useful, not evidence that it is universal.
 
 This applies to Laws too.
@@ -79,9 +79,9 @@ Each chapter follows a fixed shape:
 
 1. **The claim** — one sentence.
 2. **The demonstration** — code, in two or more languages when the point concerns translation.
-3. **Why it holds** — the mechanism, never the authority. No argument from who said it.
-4. **Where this doesn't apply** — mandatory, with a worked counter-example.
-5. **What it costs** — every choice has a bill.
+3. **Why the claim holds** — the mechanism, never the authority. No argument from who said it.
+4. **Where the claim doesn't apply** — mandatory, with a worked counter-example.
+5. **What the claim costs** — every choice has a bill.
 6. **How to recognize the failure** — what it looks like in a real codebase when someone got this wrong.
 
 ## Conventions

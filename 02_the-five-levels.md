@@ -238,7 +238,7 @@ Four mechanisms, none of them anyone's fault in particular.
 
 ---
 
-## Where this doesn't apply
+## Where the claim doesn't apply
 
 Five boundaries, and the last is the important one.
 
@@ -266,7 +266,7 @@ Until then, follow the local convention — not because it is a good proxy for c
 
 ---
 
-## What it costs
+## What the claim costs
 
 **Analysis where a default would do.** Most decisions are small and the conventional answer is fine. Running a five-question test on a variable name is worse than picking a name.
 

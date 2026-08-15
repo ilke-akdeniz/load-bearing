@@ -304,7 +304,7 @@ type OrderView struct {
 
 ---
 
-## Why it holds
+## Why the claim holds
 
 Two questions worth separating: why do these patterns last, and why does the grouping work?
 
@@ -316,7 +316,7 @@ That is the practical use of the whole chapter. **Catalogues are organized by sh
 
 ---
 
-## Where this doesn't apply
+## Where the claim doesn't apply
 
 ### The seven that refuse to sort
 
@@ -344,7 +344,7 @@ Run chapter 10's tests before using any of them, and chapter 11's question befor
 
 ---
 
-## What it costs
+## What the claim costs
 
 **The grouping is a lens, and lenses distort.** Several patterns answer two Forces — an outbox is both durability and concurrency, a bounded context is both change frequency and ownership — and filing each under one is a simplification. Where a pattern appears matters less than that it appears somewhere; do not read the placement as a claim about its essence.
 

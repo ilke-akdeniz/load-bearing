@@ -226,7 +226,7 @@ The other half of Brooks stands regardless of arithmetic: some work does not div
 
 ---
 
-## Why it holds
+## Why the claim holds
 
 The four results have one thing in common: **their feedback loops are longer than the decisions that cause them.**
 
@@ -238,7 +238,7 @@ The compatibility rule follows from something narrower and worth stating separat
 
 ---
 
-## Where this doesn't apply
+## Where the claim doesn't apply
 
 ### Code with a known death date
 
@@ -266,7 +266,7 @@ Neither law is false at that size; they have nothing to act on (Ch. 02). The fai
 
 ---
 
-## What it costs
+## What the claim costs
 
 **Backward compatibility costs you the design you now know is right.** Every deprecated function is a maintenance burden, a documentation footnote, and a thing that must keep working while the replacement is built beside it. Go carries 175 of them. That is the price of the promise, paid in every release, and Go's maintainers consider it worth paying — which is a judgement about their users, not a universal one.
 

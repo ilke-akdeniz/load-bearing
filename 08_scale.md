@@ -221,7 +221,7 @@ The moves are chapter 04's two. Change an assumption: put a copy of the data nea
 
 ---
 
-## Why it holds
+## Why the claim holds
 
 Each shape has a different cause, and applying the wrong fix is the common failure.
 
@@ -237,7 +237,7 @@ Each shape has a different cause, and applying the wrong fix is the common failu
 
 ---
 
-## Where this doesn't apply
+## Where the claim doesn't apply
 
 ### Small collections, where the constant wins
 
@@ -285,7 +285,7 @@ A batch job that must finish by 6 a.m. and takes two hours has seven hours of sl
 
 ---
 
-## What it costs
+## What the claim costs
 
 **Column layouts cost cohesion.** Splitting a record into parallel arrays scatters one concept across many places. Adding a field means touching every array and every loop that walks them together. The 7× is real; so is the maintenance bill, and chapter 05 works through what gets given up.
 

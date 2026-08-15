@@ -489,7 +489,7 @@ That claim — hide what you cannot afford to commit to — is a **Principle**, 
 
 ---
 
-## Why it holds
+## Why the claim holds
 
 ### Both halves are fan-in
 
@@ -555,7 +555,7 @@ That is the difference chapter 02 draws, arrived at from the mechanism rather th
 
 ---
 
-## Where this doesn't apply
+## Where the claim doesn't apply
 
 Four boundaries.
 
@@ -673,7 +673,7 @@ The Law is untouched again: the dependency still points one way. What inverted i
 
 ---
 
-## What it costs
+## What the claim costs
 
 ### Breaking a cycle is never free
 

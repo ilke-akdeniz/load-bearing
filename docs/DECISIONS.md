@@ -1716,3 +1716,38 @@ Chapter 10's carried a substantive argument — a pattern is not one of the five
 **Consequence.**
 `CLAUDE.md`'s rubric now says the chapter opens on the claim, with the reason: a reader who does not yet know the subject cannot use a note about the subject's standing.
 `LEDGER.md`'s sanctioned-repetition entry is rewritten — the kind is stated where it does work, not as a standing opener.
+
+---
+
+## 41. The rubric headings name the claim
+
+**Date.** 2026-08-14
+
+**Context.**
+The author changed three rubric item names in `CLAUDE.md` — *Why it holds* to *Why the claim holds*, and similarly for the other two — and asked whether the change should reach the actual chapter headings, or whether naming the claim three times would make the prose repetitive.
+
+Their reason was a reading experience: the questions read as though they were about a point just made, rather than about the claim at the top of the chapter.
+
+**The measurement, which is stronger than the impression.**
+The distance from `## The claim` to `## Why it holds` runs from 125 to 489 lines, median about 224.
+
+More decisive than distance is what immediately precedes the heading, since a pronoun binds to its nearest antecedent. In chapter 05 the reader has just finished *Hyrum's Law*, so "Why it holds" reads as *why Hyrum's Law holds*. In chapter 12 they have just finished *Force six*. **That is the default reading rather than a risk**, which makes the author's experience the predictable one.
+
+Chapter 05 supplies a sharper case: its claim is two claims joined by *and* — the dependency graph must be acyclic, and what a module makes observable is what it has committed to. "Why it holds" has no referent there even in principle.
+
+**Decision.**
+Change the headings, not only the rubric. Thirty-two headings across eleven chapters, plus the rubric in `CLAUDE.md` and `README.md`, the mandatory-boundary sentence in both, one `LEDGER.md` reference, and twenty-three boundary labels in `00_toc.md`.
+
+*Cost of the claim* was reverted to **What the claim costs**, since items three and four are clauses and a noun phrase broke the parallel.
+
+**On repetitiveness, which the author asked about directly.**
+Not a problem, and for a reason specific to headings. Three `##` headings containing the same phrase are separated by 50 to 200 lines and encountered one at a time; the only place they appear adjacent is a table of contents, and there the repetition carries navigational information — it signals that the three sections interrogate one object, which is the fact the old headings concealed.
+
+**What was deliberately not changed.**
+`docs/DECISIONS.md` keeps the old names throughout. Entries are contemporaneous records of what was decided when, and rewriting them to match later terminology would falsify the log the README points at as evidence.
+
+**A gap the sweep exposed.**
+Chapter 02 has no *Why the claim holds* section at all — it has *Why the kinds get confused*, which serves a different purpose. Ten chapters have three rubric sections and 02 has two. Left alone for now, since the instruction was to make the headings uniform rather than to add a missing section, but it is a real omission in the chapter that introduces the model.
+
+**Still open.**
+Two `[claude …]` tags remain in `CLAUDE.md`, on the *five levels* heading: what the five are five *of*, and whether the book has drifted from *level* to *kind*. Both are unresolved pending the author's decision, and the tags are left in place rather than removed, because the questions are live.

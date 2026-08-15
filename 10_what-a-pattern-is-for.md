@@ -125,7 +125,7 @@ The bottom-right is where naming goes to die. `OrderManager`, `PaymentHelper`, `
 
 ---
 
-## Why it holds
+## Why the claim holds
 
 Both tests are about the same thing from two directions: **how much does knowing this name reduce what I still have to find out?**
 
@@ -139,7 +139,7 @@ There is one more reason a name can be worth having even when both tests are mar
 
 ---
 
-## Where this doesn't apply
+## Where the claim doesn't apply
 
 ### Before you know what the shapes are
 
@@ -169,7 +169,7 @@ The defensible version is narrow: a name a learner can search is a door into the
 
 ---
 
-## What it costs
+## What the claim costs
 
 **Applying the tests takes longer than accepting the name.** Most of the time the name is fine, the shape is obvious, and running two tests on it is wasted effort. These are for the cases where a name is being used to win an argument.
 

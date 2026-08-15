@@ -155,7 +155,7 @@ The practical form has two halves, and the second is the one that survives a suc
 
 ---
 
-## Why it holds
+## Why the claim holds
 
 The three are not flavours of one thing. They differ in **where the claim's authority comes from**, and that is what makes the available moves differ.
 
@@ -173,7 +173,7 @@ Conway's Law — that a system's structure tends to mirror the communication str
 
 ---
 
-## Where this doesn't apply
+## Where the claim doesn't apply
 
 ### Kind is not importance
 
@@ -216,7 +216,7 @@ The honest response is to leave the question open rather than force an answer, b
 
 ---
 
-## What it costs
+## What the claim costs
 
 **A vocabulary that invites dismissal.** "That's only empirical" is available as a way to wave off a measured, load-bearing constraint on the grounds that nobody proved it. The defence is the same as for the five kinds: a classification must arrive with its reason. If you cannot say what would falsify the claim, you have not classified it.
 
