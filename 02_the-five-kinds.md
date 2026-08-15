@@ -1,12 +1,12 @@
 # The Five Kinds of Claim
 
-## The premise
+## The Book's Model
 
-Every claim you meet about software is one of five kinds, and **the kind determines how much authority it has** — not the confidence of the person saying it, not their track record, not how widely it is repeated.
+**Every claim you meet about software is one of five kinds, and the kind determines how much authority it has** — not the confidence of the person saying it, not their track record, not how widely it is repeated.
 
-The model is this book's own. You will not find these five names used this way elsewhere, so expect nothing when you search for them — what you should find, if the model is any good, is that the distinctions it draws were already familiar and only unnamed.
+This premise and the model attached to it is this book's own. You will not find these five names used this way elsewhere, so expect nothing when you search for them — what you should find, if the model is any good, is that the distinctions it draws were already familiar and only unnamed.
 
-**And a premise is what this is** — something the rest of the book assumes and builds on, rather than something this chapter proves. Worth saying, because every other chapter makes a claim and then demonstrates it. This one cannot, in two different ways. That the kind determines authority is true by construction, since the kinds are *defined* by their authority — there is nothing left to show. That every claim falls into one of the five is an exhaustiveness claim, and it is not exhaustive: a fact about one program, an evaluative remark, a sociological observation about the industry are all claims about software that fit nowhere here.
+Those are what the rest of the book assumes and builds on, rather than something this chapter proves. Worth saying, because every other chapter makes a claim and then demonstrates it. This one cannot, in two different ways. That the kind determines authority is true by construction, since the kinds are *defined* by their authority — there is nothing left to show. That every claim falls into one of the five is an exhaustiveness claim, and it is not exhaustive: a fact about one program, an evaluative remark, a sociological observation about the industry are all claims about software that fit nowhere here.
 
 So what follows is a way of sorting rather than a proof, and it is judged by what it lets you see. Its later sections ask *where the model breaks down* and *what the model costs* rather than the usual questions, because those are the honest ones to ask of a tool.
 
