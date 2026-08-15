@@ -1836,3 +1836,36 @@ It also echoes `README.md`'s own *The premise* section, where the book states th
 
 **Consequence.**
 Prose uses of *the model* inside chapter 02 are left alone — by that point the chapter has defined the referent, and the overloading risk is in a heading a reader arrives at cold.
+
+---
+
+## 44. Chapter 12 uses chapter 03's Force names and order, which changed the sort
+
+**Date.** 2026-08-14
+
+**Context.**
+The author's second review of chapter 12 made one point:
+
+> we already named and listed forces on chapter 2. Follow the exact namings here in the chapter, then you don't have to say "this is … durability of medium" later. Also follow the exact order of forces used on that chapter unless there is a very good reason not to.
+
+The draft had invented six group names — *something must survive*, *two things at once*, and so on — in an order of its own, and then annotated each with which chapter 03 Force it corresponded to. That is a fresh vocabulary for concepts the book had already named, which is the drift `LEDGER.md` exists to prevent, and it cost a line per section explaining the mapping.
+
+**Decision.**
+Use chapter 03's seven names, in chapter 03's order: concurrency, durability of the medium, blast radius, change frequency and its shape, team size and turnover, latency budget, control of the callers. The per-section translation lines are gone, since there is nothing left to translate.
+
+**What that exposed.**
+The invented list had six entries against chapter 03's seven, and the missing one was **team size and turnover**. That was not a considered omission — it was invisible while the labels were the draft's own, and it became obvious the moment the two lists were laid side by side.
+
+Writing the missing section produced a finding worth keeping. This Force does not change *what* a rule is, it changes **where the rule lives** — chapter 03's migration from comment, to review habit, to type system. So it generates fewer patterns of its own than the others and mostly relocates rules the remaining Forces produced, which is why the section is short and says so.
+
+**The sort changed, and the change is evidence the sort is real.**
+Golden tests had been in the *refuses to sort* list, filed under patterns that answer a goal rather than a situation. With team size restored they have an obvious home: a golden test exists so behaviour cannot change silently under people who did not write it.
+
+The chapter now records that, because it demonstrates the method doing work rather than confirming a guess: **a pattern that will not sort is sometimes evidence about the categories rather than about the pattern.**
+
+Counts move from forty-three sorted and seven refusing, to forty-nine sorted and five refusing.
+
+**Consequence.**
+`00_toc.md`'s entry for chapter 12 gives the new counts and says the Forces are chapter 03's, so the grouping can be checked against the definition rather than against a fresh set of labels.
+`LEDGER.md` loses the six-family row and gains two: the sort against chapter 03's seven, and the observation about team size relocating rules.
+Chapter 12 runs 432 lines, up from 385.

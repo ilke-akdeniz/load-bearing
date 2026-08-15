@@ -135,7 +135,8 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Unchanged by the boundary | 11 | If you cannot state what the pattern would be on the other side, it is a code-organization device — Strategy, Template Method | cite 11 |
 | Singleton inverts | 11 | "Exactly one" across machines is leader election, which needs consensus (Ch. 07) | cite 11 |
 | Patterns are Forces with a shape | 12 | The durable patterns answer a Force; grouping by Force finds the name from the situation, where a catalogue only finds it from the name | "the Force groups (Ch. 12)" |
-| Six Force families | 12 | Something must survive; two at once; a failure must not spread; this changes and that does not; fast enough; someone else must not break it | cite 12 |
+| Patterns sorted by Force | 12 | Chapter 03's seven Forces, in chapter 03's order and names; 49 patterns sort, 5 refuse | cite 12 |
+| Team size relocates rules | 12 | This Force changes where a rule lives rather than what it is, so it produces few patterns of its own | cite 12 |
 | Goal vs Force vs problem shape | 12 | Testing patterns answer a goal, State Machine answers the problem's shape, and neither sorts by Force | "the three that do not sort (Ch. 12)" |
 | Same Force, several answers | 12 | The Force narrows the field; the intensity picks the answer, and 19 does the choosing | cite 12 |
 | Survives-translation test | 13 | If it disappears when you change language, it was a workaround | cite 13 |

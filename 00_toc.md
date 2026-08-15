@@ -124,9 +124,9 @@ Contents: one integration crossing the line, before and after; which rows of the
 
 Not a catalogue. The claim is that the patterns which last are answers to Forces, so grouping them by Force finds the name from the situation — which is the direction you actually need, and the one a catalogue organized by shape cannot serve.
 
-Fifty patterns sorted: forty-three fall into six Forces, seven refuse. Two worked per Force with code, the constraint, and the cost; the rest of each family listed one line each, so the grouping can be checked against the whole field rather than the chosen cases. Patterns another chapter owns are cited, not re-explained.
+Fifty-four patterns sorted against chapter 03's seven Forces, in chapter 03's order: forty-nine fall into them, five refuse. Two worked per Force with code, the constraint, and the cost; the rest of each family listed one line each, so the grouping can be checked against the whole field rather than the chosen cases. Patterns another chapter owns are cited, not re-explained.
 
-The six: something must survive; two things at once; a failure must not spread; this will change and that will not; this must be fast enough; someone else must not break it.
+The Forces are chapter 03's, named and ordered as that chapter names them, so the grouping can be checked against the definition rather than against a fresh set of labels.
 
 *Where the claim doesn't apply:* the seven that refuse to sort, which split into patterns answering a goal (the testing family) and patterns answering the shape of the problem (State Machine, Transaction Script); one Force with several answers, where only intensity decides; and the fact that a list places patterns without endorsing them.
 

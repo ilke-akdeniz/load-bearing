@@ -6,7 +6,7 @@
 
 That is a stronger claim than it sounds, and it is checkable. If it holds, then naming your Force should mostly hand you the pattern — and a pattern whose Force you cannot name is one you should be suspicious of.
 
-So this chapter sorts the field. Forty-three patterns fall into six Forces. Seven refuse to sort, and those seven are the most interesting part, because what they have in common says something about the limits of the book's own model.
+So this chapter sorts the field against chapter 03's seven Forces, in chapter 03's order. Forty-nine patterns fall into them. Five refuse, and those five are the most interesting part, because what they have in common says something about the limits of the book's own model.
 
 ## How to read this chapter
 
@@ -20,65 +20,11 @@ Two kinds of pattern entry, and the difference matters.
 
 ## The demonstration
 
-### Force one: something must survive 
-[claude we alreay named and listed forces on chapter 2. Follow the exact namings here in the chapter,
-then you don't have to say "this is ... durability of medium" later.  
-Also follow the exact order of forces use on that chapter unless there is a very good reason to not to do so.
-We need to be consistent with our namings and clear on our statements. ]
-
-> **If this process dies right now, what must still be true when it comes back?**
-
-This is chapter 03's durability of the medium, and it produces more patterns than any other Force.
-
-**Unit of Work** — collect every change a business operation makes, then commit them together.
-
-```go
-func (u *UnitOfWork) Do(ctx context.Context, fn func(tx *sql.Tx) error) error {
-	tx, err := u.db.BeginTx(ctx, nil)
-	if err != nil {
-		return err
-	}
-	defer tx.Rollback() // no-op after a successful Commit
-
-	if err := fn(tx); err != nil {
-		return err // nothing written
-	}
-
-	return tx.Commit() // everything, or nothing
-}
-```
-
-*The constraint:* no part of the operation may write outside the transaction. Anything that does — a queue publish, an HTTP call, a log line someone later depends on — breaks the guarantee, which is chapter 07's territory and the reason the Outbox exists.
-
-*The cost:* the transaction is open for the whole operation, so slow work inside it holds locks. Chapter 06's registration example puts the hashing outside the lock for exactly this reason.
-
-**Append-only log** — never update a row; write a new fact and derive the current state.
-
-```sql
--- Not: update account set balance = balance - 100
-insert into ledger_entry (account_id, delta_minor, reason, at)
-values ($1, -100, 'withdrawal', now());
-```
-
-*The constraint:* nothing is ever destroyed, so history is a query rather than an archaeology project. In exchange, "the current balance" stops being a column and becomes a computation.
-
-*The cost:* the table grows without limit, reads need aggregation or a maintained projection, and correcting a mistake means appending a compensating entry rather than fixing the wrong one — which is the honest version of what happened, and also more work.
-
-**The rest of this family**
-
-- **Write-ahead log** — record the intention to change before changing anything, so a crash can be replayed forward.
-- **Event sourcing** — the append-only log as the *only* store, with all state derived from it.
-- **Snapshot / freeze-at-time** — record what a value was when a decision used it, because the source will change and the decision must not.
-- **Bitemporal modelling** — two timelines, what was true and when you learned it, so corrections do not rewrite history.
-- **Table Data Gateway** — one object per table, holding the SQL; the minimum structure that keeps schema knowledge in one place.
-- **Data Mapper** — the object model and the tables are allowed to differ, and something translates. Its cost is the translation; its benefit is that neither side constrains the other.
-- **Transactional Outbox** — chapter 07 owns this one, and it is what you reach for when Unit of Work's constraint cannot be met.
-
-### Force two: two things at once
+### Concurrency
 
 > **Can two of these run at the same time and touch the same state?**
 
-Chapter 06 owns the Law and chapter 07 owns what happens across machines. The patterns here are the shapes that answer them.
+Chapter 06 owns the Law here and chapter 07 owns what happens across machines. These are the shapes that answer them.
 
 **Aggregate** — a group of objects with one entry point, where the whole group is the unit of consistency.
 
@@ -126,11 +72,63 @@ func (m *IdentityMap) Order(id uuid.UUID) (*Order, error) {
 - **Idempotency key** — chapter 07 owns it; it is what makes at-least-once delivery survivable.
 - **Saga** — chapter 07 owns it; the answer when the unit of consistency spans systems and no transaction can.
 
-### Force three: a failure must not spread
+### Durability of the medium
+
+> **If this process dies right now, what must still be true when it comes back?**
+
+> **If this process dies right now, what must still be true when it comes back?**
+
+It produces more patterns than any other Force.
+
+**Unit of Work** — collect every change a business operation makes, then commit them together.
+
+```go
+func (u *UnitOfWork) Do(ctx context.Context, fn func(tx *sql.Tx) error) error {
+	tx, err := u.db.BeginTx(ctx, nil)
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback() // no-op after a successful Commit
+
+	if err := fn(tx); err != nil {
+		return err // nothing written
+	}
+
+	return tx.Commit() // everything, or nothing
+}
+```
+
+*The constraint:* no part of the operation may write outside the transaction. Anything that does — a queue publish, an HTTP call, a log line someone later depends on — breaks the guarantee, which is chapter 07's territory and the reason the Outbox exists.
+
+*The cost:* the transaction is open for the whole operation, so slow work inside it holds locks. Chapter 06's registration example puts the hashing outside the lock for exactly this reason.
+
+**Append-only log** — never update a row; write a new fact and derive the current state.
+
+```sql
+-- Not: update account set balance = balance - 100
+insert into ledger_entry (account_id, delta_minor, reason, at)
+values ($1, -100, 'withdrawal', now());
+```
+
+*The constraint:* nothing is ever destroyed, so history is a query rather than an archaeology project. In exchange, "the current balance" stops being a column and becomes a computation.
+
+*The cost:* the table grows without limit, reads need aggregation or a maintained projection, and correcting a mistake means appending a compensating entry rather than fixing the wrong one — which is the honest version of what happened, and also more work.
+
+**The rest of this family**
+
+- **Write-ahead log** — record the intention to change before changing anything, so a crash can be replayed forward.
+- **Event sourcing** — the append-only log as the *only* store, with all state derived from it.
+- **Snapshot / freeze-at-time** — record what a value was when a decision used it, because the source will change and the decision must not.
+- **Bitemporal modelling** — two timelines, what was true and when you learned it, so corrections do not rewrite history.
+- **Table Data Gateway** — one object per table, holding the SQL; the minimum structure that keeps schema knowledge in one place.
+- **Data Mapper** — the object model and the tables are allowed to differ, and something translates. Its cost is the translation; its benefit is that neither side constrains the other.
+- **Transactional Outbox** — chapter 07 owns this one, and it is what you reach for when Unit of Work's constraint cannot be met.
+
+### Blast radius
 
 > **When this breaks, what else stops working?**
 
-Chapter 03's blast radius, and the patterns are all forms of containment.
+The patterns are all forms of containment.
 
 **Bulkhead** — partition the resource so one consumer's failure cannot exhaust it.
 
@@ -169,11 +167,11 @@ func ParseAmount(s string) (Money, error)
 - **Parse, don't validate** — do the check once at the edge and return a type that cannot be invalid, so nothing downstream re-checks or forgets to.
 - **Make illegal states unrepresentable** — the same move in the type system: if the invalid combination has no representation, no code path can produce it.
 
-### Force four: this will change, that will not
+### Change frequency, and its shape
 
 > **Which parts of this move at different rates?**
 
-Chapter 03's change frequency, and chapter 09's rate-of-change layers. Every pattern here is a seam placed where two things move at different speeds.
+Every pattern here is a seam placed where two things move at different speeds — chapter 09's rate-of-change layers, made structural.
 
 **Ports and adapters** — the application defines the interfaces it needs; the outside world implements them.
 
@@ -213,11 +211,58 @@ type Rates interface {
 - **Feature toggle** — separate deploying code from enabling it, so the two can move at different rates. Its cost is that every live toggle doubles the paths under test.
 - **Anti-corruption layer** — chapter 11 owns it: what a translation boundary becomes when the thing on the other side is not yours to change.
 
-### Force five: this must be fast enough
+### Team size and turnover
+
+> **How many must agree to change this, and how many will still be here in two years?**
+
+This Force is the odd one, and the shape of its answer is worth noticing. It does not change *what* the rule is. It changes **where the rule lives** — chapter 03's migration from a comment, to a review habit, to the type system. So it produces fewer patterns of its own than the others, and mostly relocates rules the other Forces already produced.
+
+**Make illegal states unrepresentable** — give the invalid combination no representation, so no code path can produce it.
+
+```go
+// Before: four fields, and three of the sixteen combinations are nonsense.
+type Delivery struct {
+	Shipped   bool
+	ShippedAt time.Time
+	Delivered bool
+	SignedBy  string
+}
+
+// After: the states are the type, and there is no "delivered but not shipped".
+type Delivery interface{ isDelivery() }
+
+type Pending struct{}
+type Shipped struct{ At time.Time }
+type Delivered struct{ At time.Time; SignedBy string }
+```
+
+*The constraint:* the invalid case cannot be written down, so it cannot be checked for, forgotten, or reintroduced by someone who never heard the rule.
+
+*The cost:* more types, and every consumer needs a switch rather than a field access. Worth it when the rule matters more than the convenience, and overhead when it does not.
+
+**Golden test** — record the current output, and fail when it changes.
+
+```text
+ testdata/invoice_v3.golden      the exact bytes this produced last time
+ go test -update                 deliberately re-record, in a visible commit
+```
+
+*The constraint:* behaviour cannot change silently. Whoever changes it must either fix the code or re-record the file, and re-recording shows up in review as a diff someone has to defend.
+
+*The cost:* it captures everything, including things nobody meant to promise — which is Hyrum's Law (Ch. 05) turned into a test file. Golden tests over-constrain, and the noise from irrelevant changes is the price of catching the relevant ones.
+
+**The rest of this family**
+
+- **Architecture decision record** — the reasoning written down at the time, for the people who were not there. Its whole value is turnover; on a stable team of two it is overhead.
+- **Composition root** — one place where everything is assembled, so a newcomer has one file to read rather than a graph to trace (Ch. 05).
+- **Parse, don't validate** — also a blast-radius pattern, and listed there. Its team-size value is separate: a parsed type carries the rule, so nobody downstream has to know it.
+- **Contract tests** — also a control-of-callers pattern. Same double duty: the agreement is written down rather than remembered.
+
+### Latency budget
 
 > **What is the budget, and what does one mechanism cost of it?**
 
-Chapter 03's latency budget, with chapter 08's arithmetic underneath.
+Chapter 08 supplies the arithmetic underneath all of these.
 
 **Batching** — replace N round trips with one.
 
@@ -264,11 +309,11 @@ cache.Set(k, v, ttl)
 - **Materialised view** — precompute the answer, and accept that it lags.
 - **Data-oriented layout** — chapters 05 and 08 own it; the 7× that comes from where the bytes sit rather than what the algorithm does.
 
-### Force six: someone else must not break it
+### Control of the callers
 
 > **Who else depends on this, and can I change them?**
 
-Chapter 03's control of the callers, chapter 09's compatibility rule, and chapter 11's ownership line. The patterns here are all ways of making a boundary survivable.
+Chapter 09's compatibility rule and chapter 11's ownership line both land here. The patterns are ways of making a boundary survivable.
 
 **Tolerant reader** — read only the fields you need, and ignore everything else.
 
@@ -320,13 +365,15 @@ That is the practical use of the whole chapter. **Catalogues are organized by sh
 
 ## Where the claim doesn't apply
 
-### The seven that refuse to sort
+### The five that refuse to sort
 
-Sorting the field left seven patterns that do not answer a Force, and they fail in two distinct ways.
+Sorting the field left five patterns that do not answer a Force, and they fail in two distinct ways.
 
-**Some answer a goal rather than a situation.** Golden tests, property-based testing, the test-double taxonomy, and functional core / imperative shell all answer *how will I know this works* — which is something you want, not a property of your circumstances. Chapter 03 is explicit that a Force is a fact about where you are standing and is not negotiable by argument. Testability is negotiable: you may decide you want less of it.
+**Some answer a goal rather than a situation.** Property-based testing, the test-double taxonomy, and functional core / imperative shell all answer *how will I know this works* — which is something you want, not a property of your circumstances. Chapter 03 is explicit that a Force is a fact about where you are standing and is not negotiable by argument. Testability is negotiable: you may decide you want less of it.
 
 That is a real gap in this chapter's method, not a defect in the patterns. Chapter 17 covers the testing material, and it is organized by what the techniques actually buy rather than by Force, for exactly this reason.
+
+**Golden tests used to be in this list and no longer are**, which is worth recording because it shows the sort is doing work rather than confirming a guess. A first pass ran against six invented Force names and left golden tests homeless. Using chapter 03's actual seven — and so restoring *team size and turnover*, which the invented list had dropped — gave them an obvious home: a golden test exists so that behaviour cannot change silently under people who did not write it. **A pattern that will not sort is sometimes evidence about the categories rather than about the pattern.**
 
 **Some answer what the problem is rather than what the situation is.** A state machine is the right shape when the domain genuinely has states and transitions — an order that is placed, then paid, then shipped. That is a fact about the business, not about your concurrency or your latency budget. The same goes for Transaction Script, which chapter 10 uses as its compression example: it is what you write when *no* Force is pushing you anywhere else, and it is right far more often than its reputation suggests.
 
