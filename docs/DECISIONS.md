@@ -1792,3 +1792,47 @@ That also fixes the contradiction without weakening anything. The five classify 
 Part I renamed. The README's spine section renamed, with a sentence on why the counts differ. `CLAUDE.md`'s section renamed, now saying the five classify claims and reserving *level* for the ladder. `LEDGER.md`'s row rewritten. The five-level model becomes the five-kind model in both places `CLAUDE.md` names it.
 
 Chapter 23's title, *Reading advice at the right level*, is deliberately left alone — that chapter is about placing advice on the ladder, which is what *level* now means.
+
+---
+
+## 43. Chapter 02 states a premise, not a claim
+
+**Date.** 2026-08-14
+
+**Context.**
+The author raised three connected points about chapter 02. The heading *The five kinds* did not say five kinds of what. The rubric headings created a recursion — *where the claim doesn't apply* inside a chapter whose subject is kinds of claim. And a hypothesis: perhaps the chapter's opening is not a claim in this book's sense at all, which would explain the missing *Why the claim holds* section noted in decision 41.
+
+They asked for the hypothesis to be tested rather than accepted: *to rule out that this is not a claim you should try to find satisfactory proofs for this chapter's claim and be unsuccessful.*
+
+**The attempt, and its failure.**
+
+*Derive the five from an exhaustive partition.* Split claims into descriptive and prescriptive; descriptive ones are about your situation (Force) or about computation (Law); prescriptive ones are conditional on situation (Principle), on ecosystem (Idiom), or on nothing (Style). It fails three ways. Evaluative claims — *this design is ugly* — are neither descriptive nor prescriptive, and Style absorbs them by fiat. The branches overlap: *don't write race conditions* is prescriptive in form and a Law in content. And claims about one program, or about the industry, fit nowhere.
+
+*Exhaustive survey.* The chapter classifies twenty claims. That is evidence a taxonomy is useful; it is not proof that it is exhaustive, and the counter-examples above show it is not.
+
+*Prove the second half.* "The kind determines how much authority it has" needs no proof: the kinds are **defined** by their authority. It is analytic, and there is nothing to demonstrate.
+
+So the sentence has two halves and neither can be shown, for opposite reasons — one is true by construction and the other is an exhaustiveness claim that admits counter-examples. The author's hypothesis is correct.
+
+**It also explains the gap.**
+Decision 41 noted that chapter 02 has no *Why the claim holds* section and called it an omission. It is not. There is nothing to hold.
+
+**Decision.**
+Chapter 02's rubric headings change: *The claim* becomes **The premise**, *Where the claim doesn't apply* becomes **Where the model breaks down**, *What the claim costs* becomes **What the model costs**. A paragraph after the premise names both reasons it cannot be demonstrated and says why the chapter's headings differ from every other one's, so the deviation reads as deliberate rather than as an oversight.
+
+This makes chapter 02 a deliberate exception to the uniformity decision 41 established, on the grounds that 02 defines the model while every other chapter applies it.
+
+**Why not "axiom", which the author proposed.**
+It is closer than *model* and still over-claims, for two reasons.
+
+An axiom is posited without justification, and this chapter justifies itself — three worked demonstrations and twenty classified claims. Something offering evidence is not an axiom.
+
+More seriously, it borrows mathematical authority the thing has not got. Chapter 04 grades claims as theorem, definition, or empirical law, and warns that folk versions drop quantifiers and conditions. *Axiom* sits adjacent to *theorem*, so using it would claim standing the model cannot support — in the chapter that defines the test for exactly that error. **Premise** keeps the derivation role and drops the over-claim.
+
+It also echoes `README.md`'s own *The premise* section, where the book states the same idea informally; chapter 02 is that premise made precise, and the TOC entry now says so.
+
+**Title.**
+*The Five Kinds of Claim*, from the author, which answers "five kinds of what" permanently.
+
+**Consequence.**
+Prose uses of *the model* inside chapter 02 are left alone — by that point the chapter has defined the referent, and the overloading risk is in a heading a reader arrives at cold.

@@ -19,14 +19,14 @@ Contents: the anatomy of a misapplication; why "it depends" is an unsatisfying a
 
 *Where the claim doesn't apply:* some advice really is unconditional, and treating everything as contextual is its own failure mode.
 
-### 02. The five kinds
+### 02. The five kinds of claim
 `02_the-five-kinds.md`
 
-The model above, with a classification test you can run on any claim in under a minute.
+The book's premise, made precise, with a classification test you can run on any claim in under a minute.
 
 Contents: the five kinds, named rather than numbered — four of them advice, forming a ladder of authority, and Force outside it, which is why there are four levels and five kinds; how Forces relate differently to Laws and to Principles — a Law can be inert but never wrong, a Principle can be wrong; the five-question classification test; twenty common claims classified; why the kinds get confused.
 
-*Where the claim doesn't apply:* claims that genuinely span two kinds, and why forcing one label is worse than holding both.
+*Where the model breaks down:* claims that genuinely span two kinds, and why forcing one label is worse than holding both; and the fact that this chapter offers a lens rather than a claim it can demonstrate.
 
 ### 03. Forces: the inputs nobody names
 `03_forces.md`

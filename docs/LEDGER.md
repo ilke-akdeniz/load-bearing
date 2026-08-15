@@ -19,7 +19,7 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 
 | Concept | Owner | Canonical statement | Others may say |
 |---|---|---|---|
-| The five kinds | 02 | A claim is one of five kinds — Law, Force, Principle, Idiom, Style — and the kind sets its authority. Four are advice and form a ladder; Force is not, so there are four levels and five kinds | "a Law / an Idiom (Ch. 02)" |
+| The five kinds of claim | 02 | A claim is one of five kinds — Law, Force, Principle, Idiom, Style — and the kind sets its authority. Four are advice and form a ladder; Force is not, so there are four levels and five kinds | "a Law / an Idiom (Ch. 02)" |
 | Classification test | 02 | Five questions that place a claim in one of the five kinds | "run the test (Ch. 02)" |
 | Why the kinds get confused | 02 | Tone doesn't vary with authority; advocacy compresses; monoculture makes Idioms feel universal | one clause, cite 02 |
 | Law inert vs Principle wrong | 02 | A Force decides whether a Law *binds*; it decides whether a Principle is *right* | one clause, cite 02 |
