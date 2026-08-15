@@ -1,10 +1,5 @@
 # Patterns That Survive Translation
 
-*Chapter 10 gave two tests for whether a name carries information. Chapter 11 gave the question the name leaves out. This chapter answers a third: **why do some names last?** The ones that survive being carried between languages, decades, and problem domains are not the elegant ones. They are the ones that answer a Force.*
-
-[claude This is a general observation about all chapters. I find the introductory sentences in italics in each chapter unbearable. They are like the
-  famous paperclip character on old word, popping suddenly and giving marginally useful data when you are trying to focus on an important task. I suggest you remove all these. Each chapter begins directly with the claim. If any of these contains information you think useful or important, put them in the appropriate places inside the chapter.]
-
 ## The claim
 
 **The patterns that last are answers to Forces, and grouping them by the Force they answer explains which one you need better than any catalogue organized by shape.**

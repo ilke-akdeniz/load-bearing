@@ -1,7 +1,5 @@
 # Three Kinds of True
 
-*This chapter is about **Law** alone — the top of the ladder — and about the fact that the top rung is three different things. Chapter 02 established that a Law is true by the mechanics of computation and that a Force can render it inert. This chapter says what kind of true, and what that changes.*
-
 ## The claim
 
 **Not all Laws are the same kind of true, and the kind decides what you can do about one.**

@@ -1,12 +1,5 @@
 # Distribution: What's Impossible
 
-*This chapter is **Law** of the strictest kind (Ch. 04): theorems, with proofs and stated assumptions. The material is therefore not advice, cannot be argued with, and leaves exactly two moves.*
-
-- **Arrange for one of its assumptions not to hold**, and the theorem does not apply to you.
-- **Stop needing the theorem's conclusion**, and the theorem applies but costs you nothing.
-
-Most of this chapter is the second one.
-
 ## The claim
 
 **You cannot tell a slow machine from a dead one.**
@@ -14,6 +7,8 @@ Most of this chapter is the second one.
 That single fact is not a limitation of your monitoring, your language, or your budget. It is a property of asking questions over a network, and most of the impossibility results in distributed systems are consequences of it. The rest of the chapter is what people build because of it.
 
 There is one other fact, which is arithmetic rather than epistemics: **availabilities multiply, and every one of them is less than one.** Multiplying numbers below 1 makes them smaller, so a chain of dependencies is always less available than its weakest link — and enough individually excellent dependencies produce a system that is not.
+
+These are theorems, which means chapter 04's rule governs what you can do about them: not argue with the conclusion, but either **arrange for one of the assumptions not to hold**, so the theorem does not apply, or **stop needing the conclusion**, so it applies and costs nothing. Most of this chapter is the second.
 
 ## When any of this applies to you
 

@@ -1,7 +1,5 @@
 # Structure: Dependency and Hiding
 
-*This chapter is mostly **Law**, with a **Principle** and an **Idiom** attached — and the attaching is the problem. "Layered architecture" is all three at once under one name, which is why it is simultaneously the most reliable structural advice in software and the source of some of the worst structure you will read.*
-
 ## The claim
 
 **The dependency graph must be acyclic**, and **what a module makes observable is what it has committed to** — everything else people say about architecture is a shape or a convention layered on top of those two.

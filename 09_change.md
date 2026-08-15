@@ -1,7 +1,5 @@
 # Change: Evolution, Organization, Compatibility
 
-*This chapter is **Law**, and almost all of it is the empirical kind (Ch. 04). That matters more than usual. An empirical law is a pattern somebody observed, in particular systems, at a particular time — so the pattern may transfer while the numbers do not, and it is worth knowing what was studied before leaning on the result.*
-
 ## The claim
 
 **Everything you build changes, but not at the same rate — and the slow parts set the terms for the fast ones.**

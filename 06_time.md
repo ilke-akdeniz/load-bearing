@@ -1,7 +1,5 @@
 # Time: Concurrency and Clocks
 
-*This chapter is **Law**, and mostly of the definitional kind (Ch. 04) — its claims are true by what the words pick out, which is why they cannot be argued with and why they are so easy to walk past. It has two halves that look like separate subjects and are not.*
-
 ## The claim
 
 **A check tells you what was true, not what is true. And no clock tells you what happened first.**

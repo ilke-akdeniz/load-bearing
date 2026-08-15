@@ -1,7 +1,5 @@
 # Scale: Queues, Parallelism, Memory
 
-*This chapter is **Law**, and it mixes all three kinds (Ch. 04): two theorems, one claim true by definition, and several empirical laws. Which kind a claim is matters more here than anywhere else in the book, because the empirical ones carry numbers — and a number is the part that belongs to somebody else's machine.*
-
 ## The claim
 
 **Adding more of a resource has an arithmetic shape you can work out before you build.**

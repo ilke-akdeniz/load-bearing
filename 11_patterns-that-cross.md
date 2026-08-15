@@ -1,7 +1,5 @@
 # Patterns That Cross The Line
 
-*Chapter 10 asked whether a pattern name carries information. This one asks what the name leaves out — and the omission is the same one chapter 03 named as a Force: whether the thing on the other side is yours to change.*
-
 ## The claim
 
 **The same pattern name describes a change you can make in an afternoon and a commitment you will maintain for years when it crosses the ownership line. What separates them is not size. It is whether you can change the other side.**

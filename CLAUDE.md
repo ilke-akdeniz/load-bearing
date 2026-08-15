@@ -108,7 +108,7 @@ They don't stop being true, but they stop being *relevant*, and knowing when the
 
 Each chapter follows this shape:
 
-1. **The claim** — one sentence.
+1. **The claim** — one sentence, and the chapter opens on it. No epigraph, no framing paragraph before it: a reader who does not yet know the subject cannot use a note about the subject's standing.
 2. **The demonstration** — code, in two or more languages when the point concerns translation.
 3. **Why it holds** — the mechanism, never the authority. No argument from who said it.
 4. **Where this doesn't apply** — mandatory, with a worked counter-example.

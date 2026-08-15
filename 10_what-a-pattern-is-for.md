@@ -1,12 +1,18 @@
 # What a Pattern Is For
 
-*A pattern is not one of the book's five kinds, and that is the first thing to get straight. Law, Force, Principle, Idiom, and Style classify **claims** — things that can be true, false, or conditional. A pattern is a **name for a shape**. Names are not true or false. The trouble starts when a name is used as though it were a claim, which is most of what Part III is about.*
-
 ## The claim
 
 **A pattern name earns its place by doing two things: saving more words than it costs, and ruling something out. Most named things do the first. Far fewer do the second.**
 
 Those are the two tests, and the rest of Part III applies them. They are independent — a name can pass one and fail the other, and the names that fail the second are the ones that cause trouble, because they feel informative while carrying almost nothing.
+
+## A pattern is not one of the five kinds
+
+Worth settling first, because a reader arriving from Part II will try to run the classification test on *Repository* and find that it does not fit.
+
+The five kinds classify **claims** — things that can be true, false, or conditional. A pattern is a **name for a shape**, and names are neither. The question is malformed, and asking it is not a failure of the test.
+
+The trouble starts when a name is used as though it were a claim, which is most of what Part III is about.
 
 ## What a catalogue actually is
 

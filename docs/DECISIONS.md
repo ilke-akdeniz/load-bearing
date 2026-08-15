@@ -1683,3 +1683,36 @@ Most entries are structural, which needs no run. The one behavioural claim was m
 `00_toc.md`'s entry for chapter 12 is rewritten, since the planned chapter no longer describes this one.
 `LEDGER.md` gains four concept rows and six example rows.
 Chapter 12 runs 385 lines, the longest so far, against 600–900 for the catalogue it replaces.
+
+---
+
+## 40. The chapter epigraphs are removed
+
+**Date.** 2026-08-14
+
+**Context.**
+Every chapter from 02 to 12 opened with an italic paragraph before the claim, stating what kind the chapter's material was — *this chapter is **Law**, and mostly of the definitional kind*. The author's objection was about reading, not content:
+
+> I find the introductory sentences in italics in each chapter unbearable. They are like the famous paperclip character on old Word, popping suddenly and giving marginally useful data when you are trying to focus on an important task.
+
+**Decision.**
+Remove all eleven. Every chapter now opens directly on its claim.
+
+**Why the objection holds even though the content was defensible.**
+The convention had a real justification: this book argues that you should know what kind of claim you are holding, so a chapter announcing its own kind is the book practising what it preaches. `LEDGER.md` even recorded it as sanctioned repetition.
+
+But the placement was wrong, and that is what the author identified. *This chapter is Law of the strictest kind* means nothing to a reader who does not yet know what the chapter is about. The classification is useful **after** the claim, not before — which is where several chapters already stated it anyway, making the epigraph a duplicate as well as an interruption.
+
+Checked before deleting: eight of the eleven were already covered in their bodies. Chapter 06 states the definitional point at line 353, chapter 09 gives the study-population caveat inside the Lehman section, chapter 08 has an entire *About the numbers* section.
+
+**Three needed relocating first**, and were.
+
+Chapter 02's epigraph carried the only statement that the five-level model is this book's own rather than standard vocabulary — provenance that decision 13 requires be in the prose. It now sits in the claim section, with the addition that the reader should expect nothing when they search for the names, and should instead find the distinctions already familiar and only unnamed.
+
+Chapter 07's carried the two escapes from a theorem as a bulleted list. Those are load-bearing: the chapter refers back to them, and the boundary section depends on them. Moved into the body before *When any of this applies to you*.
+
+Chapter 10's carried a substantive argument — a pattern is not one of the five kinds, because the kinds classify claims and a name is not a claim. That is the question a reader arriving from Part II will actually ask, so it became a short named section immediately after the claim rather than a note before it.
+
+**Consequence.**
+`CLAUDE.md`'s rubric now says the chapter opens on the claim, with the reason: a reader who does not yet know the subject cannot use a note about the subject's standing.
+`LEDGER.md`'s sanctioned-repetition entry is rewritten — the kind is stated where it does work, not as a standing opener.

@@ -1,7 +1,5 @@
 # Forces: The Inputs Nobody Names
 
-*This chapter is entirely about **Force** — the one kind in the model that is not advice. Chapter 02 established what a Force is and how it acts on Laws and Principles differently. This chapter says which Forces there are, how to read the intensity of each, and what changes when the intensity changes.*
-
 ## The claim
 
 **Evaluating the Forces acting on your situation is the groundwork** — and almost nobody does it, which is why so many design arguments cannot be settled.

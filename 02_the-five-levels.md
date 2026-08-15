@@ -1,10 +1,10 @@
 # The Five Levels
 
-*This chapter is the model itself — the book's own framework, not standard terminology you will find elsewhere under these names. Chapter 23 turns it into a procedure; everything between applies it.*
-
 ## The claim
 
 Every piece of software advice is one of five kinds, and **the kind determines how much authority it has** — not the confidence of the person saying it, not their track record, not how widely it is repeated.
+
+The model is this book's own. You will not find these five names used this way elsewhere, so expect nothing when you search for them — what you should find, if the model is any good, is that the distinctions it draws were already familiar and only unnamed.
 
 Throughout the book these are called by name — Law, Force, Principle, Idiom, Style — never by number. The names carry the meaning; a number would be one more thing to decode.
 
