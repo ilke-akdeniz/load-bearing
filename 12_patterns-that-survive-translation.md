@@ -510,21 +510,13 @@ That is the practical use of the whole chapter. **Catalogues are organized by sh
 
 Sorting the field left five patterns that do not answer a Force, and they fail in two distinct ways.
 
-**Some answer a goal rather than a situation.** Property-based testing, the test-double taxonomy, and functional core / imperative shell all answer *how will I know this works* — which is something you want, not a property of your circumstances. Chapter 03 is explicit that a Force is a fact about where you are standing and is not negotiable by argument. Testability is negotiable: you may decide you want less of it.
+**Some answer a goal rather than a situation.** Property-based testing, the test-double taxonomy, and functional core / imperative shell all answer *how will I know this works*, and a goal is a property you have decided to want in the system: testability, observability, portability, a particular standard of code review. The test that separates it from a Force is whether you can decide to want less of it and stay honest. You cannot decide that four teams will stop needing to agree, or that the network will stop dropping packets — those are true whatever you want. You can decide that a prototype does not need to be portable, or that a script does not need tests, and nothing has been denied.
 
 That is a real gap in this chapter's method, not a defect in the patterns. Chapter 17 covers the testing material, and it is organized by what the techniques actually buy rather than by Force, for exactly this reason.
 
 **Some answer what the problem is rather than what the situation is.** A state machine is the right shape when the domain genuinely has states and transitions — an order that is placed, then paid, then shipped. That is a fact about the business, not about your concurrency or your latency budget. The same goes for Transaction Script, which chapter 10 uses as its compression example: it is what you write when *no* Force is pushing you anywhere else, and it is right far more often than its reputation suggests.
 
-That is the residue the claim leaves, and it is worth naming as a third category rather than folding into either. **A Force is a fact about your circumstances. The shape of the problem is a fact about the business. A goal is something you chose and could choose differently** — and only the first two generate patterns that sort.
-
-[claude I noticed two paragraphs below are mainly a repetision of the previous paragraphs that start on line 513
-My sugeestion: replace the paragraph on line 513 with the paragraph below this tag, keeping the **Some answer a goal...**
-Remove "That is the residue..." paragraph. Adding "your circumstances" seems like a strecht with no real value to me.
-Also replace the opening of "Confusing the three" paragraph with "Confusing the forces, goals and problem shapes in play is one way..." ]
-A goal is a property you have decided to want in the system: testability, observability, portability, a particular standard of code review. The test that separates it from a Force is whether you can decide to want less of it and stay honest. You cannot decide that four teams will stop needing to agree, or that the network will stop dropping packets — those are true whatever you want. You can decide that a prototype does not need to be portable, or that a script does not need tests, and nothing has been denied. That is why the testing patterns will not sort: they answer *how will I know this works*, which is a question you elected to ask.
-
-Confusing the three is one way people end up applying machinery to a question they were not asking: reaching for an event-sourced log because durability sounds important, when what the domain actually has is a state machine; or adopting a testing technique because it is rigorous, rather than because anything about the situation called for it.
+Confusing the Forces, goals, and problem shapes in play is one way people end up applying machinery to a question they were not asking: reaching for an event-sourced log because durability sounds important, when what the domain actually has is a state machine; or adopting a testing technique because it is rigorous, rather than because anything about the situation called for it.
 
 ### One Force, several answers, and no way to choose from here
 

@@ -1948,3 +1948,24 @@ The paragraph's claim — *a pattern that will not sort is sometimes evidence ab
 **Consequence.**
 Decision 44's line "The chapter now records that" is no longer true, and is left as written — the log records what was decided when, and correcting it retroactively would remove the evidence that this entry reverses it.
 A general test worth keeping: **the drafting history belongs in the decision log, not in the chapter.** The log exists so the chapter does not have to carry it.
+
+---
+
+## 48. The three-way distinction is made by the section's structure, not by a sentence naming it
+
+**Date.** 2026-08-15
+
+**Context.**
+Chapter 12's *five that refuse to sort* ended on a bolded summary: **A Force is a fact about your circumstances. The shape of the problem is a fact about the business. A goal is something you chose and could choose differently.** The author's fifth review cut it, on the grounds that the two paragraphs above already made the distinction, and that *your circumstances* was adding a phrase rather than a fact.
+
+**Decision.**
+Removed. The section now has two bolded lead-ins — *Some answer a goal rather than a situation* and *Some answer what the problem is rather than what the situation is* — and the paragraph that follows them names all three in passing: *confusing the Forces, goals, and problem shapes in play.* Nothing states the taxonomy as a taxonomy.
+
+**Why.**
+It was a grand summary of the two preceding paragraphs, and a rule of three, which are both on the cadence list. The stronger reason is that it read as though it were introducing a distinction the section had spent two paragraphs making — so a reader who had followed the argument was told it again in the voice of a first telling.
+
+**One change to the author's suggestion.**
+The suggestion was to replace the *Some answer a goal* paragraph wholesale with the goal definition written in the fourth review. That paragraph names the three patterns at issue — property-based testing, the test-double taxonomy, functional core / imperative shell — and this is the section that says which five refuse to sort, so the names cannot go. Merged instead: the lead-in keeps the names, the definition and its test follow.
+
+**Consequence.**
+`LEDGER.md`'s row for this concept is reworded, since the canonical phrasing it pointed at no longer exists. The concept is still chapter 12's; it is now carried by the section rather than by a quotable line.
