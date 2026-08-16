@@ -373,7 +373,9 @@ A chapter is finished by alternating commits, and **both sides commit**, so that
 This is the step that has already gone wrong once: the tagged items were treated as the review and the direct edits as settled.
 Edits written quickly in the margins of a review need proofreading like any other prose.
 Read the diff line by line.
-Start your review with a full sweep of the direct edits first, process tags only after that full sweep. Direct edits can alter the meaning of the text and change how the tags should be procecessed. Reversing this order could yield unwanted results.
+Sweep the direct edits first, and act on the tags only after that sweep is complete.
+Direct edits can alter the meaning of the text and change how the tags should be processed.
+Reversing this order could yield unwanted results.
 
 - **Review every direct edit on the merits, not only for grammar.** Ask whether it made the chapter better, and say so either way. Two failures a spellcheck cannot see: an edit that restates a concept another chapter *owns*, in different words, which is the drift `docs/LEDGER.md` exists to prevent; and an edit that weakens a claim while reading more smoothly. Check terms the ledger assigns elsewhere against their canonical wording.
 - **Proofread every direct edit** — grammar, and the book's own rules. A review edit is as subject to the register and the no-decoration rules as anything Claude wrote. Note that automated checks skip fenced code, so comments inside samples need reading by eye.
