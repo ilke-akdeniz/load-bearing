@@ -268,7 +268,7 @@ The final answer to "is this load-bearing" as a repeatable procedure rather than
 | 09 | `09_change.md` | **draft** |
 | 10 | `10_what-a-pattern-is-for.md` | **draft** |
 | 11 | `11_patterns-that-cross.md` | **draft** |
-| 12 | `12_patterns-that-survive-translation.md` | **in progress** |
+| 12 | `12_patterns-that-survive-translation.md` | **draft** |
 | 13 | `13_missing-language-features.md` | not started |
 | 14 | `14_smuggled-verdicts.md` | not started |
 | 15 | `15_principle-to-movement.md` | not started |
