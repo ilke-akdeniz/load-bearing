@@ -448,3 +448,17 @@ Read a finished section aloud. If the paragraphs share one rhythm, rewrite the f
 When one of these is found in review, **treat it as a signal that the surrounding claim may not be worked out.**
 Decoration usually appears where an argument is thin — it is covering the gap rather than filling it.
 Rewrite the claim, not the phrase.
+
+## Identifier naming in code samples
+
+Full, complete-word identifiers for domain-concept variables, struct fields, and parameters — no truncation, regardless of scope (`catalog`, not `c`; `definition`, not `def`; `action`, not `act`).
+This is a deliberate deviation from Go's usual short-local-name convention: abbreviations that must be decoded rather than read cost more for a solo maintainer returning to code after a context switch than the convention assumes.
+
+Three narrow exceptions, all reasoned from the same test — does this identifier require project-specific memory to decode, or is its meaning self-evident at every site it's used:
+
+- Go's structural particles, fixed in meaning across all Go code, not just this codebase: `err`, `ok`, `ctx`, loop indices (`i`, `j`), generic type parameters (`T`).
+- Method receivers keep Go's ordinary 1-2 letter convention, and so does a function's single dominant parameter — the one value a short, single-purpose function operates on throughout, with no other parameter of comparable weight (e.g. `fillIDs(d *WorkflowDefinition)`). This does not extend to struct fields, occasional-use locals, loop variables, or any function with more than one parameter of comparable importance.
+- An identifier is not expanded if doing so would make it textually identical to its own type name (e.g. a `querier`-typed parameter stays `q`, not `querier querier`), since that shadows the type and makes it unreferenceable by name in that scope.
+
+When in doubt, use the full word — these exceptions are meant to be rare, not a broad loophole.
+Reasoning and worked examples: `docs/decisions.md`, decision 18.

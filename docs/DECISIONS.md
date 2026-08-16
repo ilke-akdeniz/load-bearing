@@ -1969,3 +1969,41 @@ The suggestion was to replace the *Some answer a goal* paragraph wholesale with 
 
 **Consequence.**
 `LEDGER.md`'s row for this concept is reworded, since the canonical phrasing it pointed at no longer exists. The concept is still chapter 12's; it is now carried by the section rather than by a quotable line.
+
+---
+
+## 49. Full-word identifiers over Go's short-name convention
+
+**Date.** 2026-08-15
+
+**Context.**
+Reviewing generated code (test files especially) surfaced a real comprehension cost: abbreviated domain-concept names (`def`, `act`, `mgr`, `c` for a Catalog) required constantly re-deriving what they stood for, and that cost recurs every time the code is revisited — it does not amortize away with familiarity the way idiom usually assumes it does.
+This is a deliberate, informed deviation from Go convention, not an oversight: Go's own style guidance ties name length to scope and distance from declaration, and idiomatic Go leans hard on short local names.
+
+**Decision.**
+Full, complete-word identifiers for all domain-concept variables, struct fields, and parameters, everywhere in this codebase — library and test code alike.
+No truncation of domain nouns, regardless of scope size (`catalog`, `definition`, `action`, `managerStepID`, not `c`, `def`, `act`, `mgr`).
+
+Two exceptions, both narrow:
+
+- Go's small set of structural particles whose meaning is fixed across all Go code, not just this codebase — `err`, `ok`, `ctx`, loop indices (`i`, `j`), generic type parameters (`T`).
+- A single-letter name, on the same convention as a method receiver, for a function's single dominant parameter: the one value the whole function operates on, used repeatedly throughout a short function with no other parameter of comparable weight (e.g. `fillIDs(d *WorkflowDefinition)`, not `def` or `definition`).
+  The letter is chosen the same way a receiver letter is chosen, with the same collision fallback.
+  This does not extend to struct fields, occasional-use locals, loop variables, or any function with more than one parameter of comparable importance — those get full words regardless of scope.
+- An identifier is not expanded if doing so would make it textually identical to its own type name — e.g. a parameter of type `querier` stays `q`, not `querier querier`.
+  Shadowing the type's name with a same-named parameter makes the type unreferenceable by name for the rest of that function's scope, which is a real Go hazard independent of this decision's abbreviation concern.
+
+Method receivers themselves (`func (c *Catalog) Get(...)`) keep Go's ordinary 1-2 letter convention, unaffected by this decision.
+
+**Why.**
+The convention's own justification — short names are fine because their meaning is obvious from a small, nearby scope — assumes the reader is holding the whole function in working memory in one sitting.
+That assumption breaks when developer returns to code after a context switch: `def`, `act`, and `mgr` are arbitrary per-codebase truncations that must be decoded, not read, every single time, and that decoding cost does not go away with re-exposure the way the convention implicitly assumes.
+Structural particles are exempted because they are not domain shorthand — `err` means the same thing in every Go codebase ever written, so there is nothing project-specific to decode.
+The dominant-parameter exception exists because that case is functionally identical to a receiver: one value, the evident subject of a short function, referenced constantly — spelling it out repeatedly adds length without adding information, the same trade-off that justifies short receivers.
+The type-shadow exception is not about decoding cost at all — `q querier` is exactly as instantly clear as `querier querier` would be, since the type is visible right next to the name at every declaration site.
+It exists to avoid a distinct problem: a parameter name identical to its own type name shadows the type, making it unreferenceable inside that function should anything ever need to reference it by name.
+It is kept deliberately narrow (one letter, one qualifying shape) so it cannot become a loophole for the broader abbreviation habit this decision exists to stop.
+
+**Consequence.**
+Every future variable, struct field, and function parameter follows this rule; a short domain-concept name in a review is a defect to flag, unless it is a structural particle, a genuine single-dominant-parameter case, or a type-shadow case.
+This is recorded so the deviation reads as a deliberate, reasoned choice — not unfamiliarity with Go idiom.
