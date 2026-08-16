@@ -7,7 +7,7 @@ Back to [README](README.md).
 
 ---
 
-## Part I — The five kinds
+## Part I — Claims and Forces
 
 ### 01. Why good advice goes wrong
 `01_why-good-advice-goes-wrong.md`

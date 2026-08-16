@@ -312,7 +312,25 @@ These are read as diffs, not as prose, so sentence-level granularity is worth mo
 
 - Chapters at the repo root: `NN_slug.md`, matching the TOC in `00_toc.md`.
 - Working documents in `docs/`.
+- `tools/check-drift.py` — the mechanical consistency checks. Run it before committing.
 - `00_toc.md` carries the status table — update it when a chapter's status changes. The README is the landing page and should stay short.
+
+### Keeping the TOC honest
+
+The TOC drifts in two ways, and they need different handling.
+
+**Local drift** — an entry describing its own chapter wrongly, because the chapter changed during review.
+Chapter 13's entry said *"Decorator is function composition"* after the chapter had measured that and found it false.
+This needs judgment, so **update a chapter's entry when it moves to draft**, while what changed is still fresh.
+Folding it into the status change costs a minute; finding it later means re-reading the chapter to reconstruct a conclusion nobody remembers reaching.
+
+Entries for chapters that do not exist yet are a different thing again: they are the plan a drafting session reads, not a description.
+A stale one produces a wrong chapter rather than a wrong paragraph, so update those when a decision changes them.
+
+**Global drift** — two things that must differ don't, a retired term survives in one place, a count disagrees across files.
+No per-chapter review catches these, because no single chapter is wrong.
+Part I was called "The five kinds" while chapter 02 was called "The five kinds of claim" — neither wrong alone, and the collision was *created* by the sweep that fixed the terminology.
+This is what `tools/check-drift.py` is for. Run it rather than looking for these by eye.
 
 ### Chapter status
 
