@@ -2194,3 +2194,43 @@ Two cross-references to chapters 10 and 11 were cut as detours; the author's sta
 **Consequence.**
 Twelve code fences, all compiled and run as printed.
 The chapter grew from 379 to about 470 lines, almost entirely in the boundary section, which is the right place for it to grow.
+
+---
+
+## 54. The book has no authorial "we", and chapter 13 nearly acquired one
+
+**Date.** 2026-08-16
+
+**Context.**
+The author's second review of chapter 13 was direct edits only, no tags.
+Two of them introduced first-person plural: "Before **we** see the Java 26 version" and "So **we** keep the names."
+
+**The check, and what it found.**
+Every occurrence of *we*, *our*, and *us* across the eleven drafted chapters was surveyed outside code fences.
+Forty-five hits, and all of them are **quoted speech** — a developer saying "We'll just make it exactly-once", "We can't change that, things depend on it", "We should put an adapter there" — or a claim quoted inside a table.
+There is no authorial *we* anywhere in the book.
+
+**Decision.**
+Reverted both to the impersonal form the rest of the book uses.
+A third instance in a paragraph the author added — "As we have seen with Java and the visitor pattern" — went the same way.
+
+**Why it matters more than a pronoun.**
+The book is written to be *received*, and it addresses the reader as *you* while never speaking as a *we* that includes them.
+An authorial *we* invites the reader into a collaboration that is not on offer and quietly changes who is responsible for the claim, which is a live question for a book whose README says the sentences are generated and the judgment is the author's.
+This is worth recording because the drift is invisible one sentence at a time and only shows up under a survey.
+
+**Also on this review.**
+
+The author deleted the chapter-04 halting-problem parallel, which had been added in response to their own first-review tag asking for it to be explained or cut.
+The cut is accepted: the paragraph before it already states the principle concretely — with the five words the claim survives a counter-example, without them a single case knocks it over — so the parallel was restating in the abstract what the local case had just shown.
+This makes decision 53's line about that parallel no longer true of the shipped chapter; it is left as written, being the record of what was decided when.
+
+Three edits were corrected rather than kept.
+"Norvigs" for the possessive.
+"A blog post recommending a pattern **that** was written in some language, and if it does not say which…" — the inserted *that* left the sentence with no main verb.
+"There are key distinctions" was a repair for a count made stale by the deletion above, and is now "Three distinctions", since three is what follows and *key* is an evaluative filler the register rules exclude.
+
+One addition was kept and rewritten rather than reverted.
+The author's closing point — that *language* need not mean a different language, because two releases of Java were enough — is a good one and ties the ending back to the chapter's centrepiece.
+It arrived with "It is worth reiterating that", which is throat-clearing, and "drastically", which asserts rather than shows.
+The kept version is: *Visitor changed status between two releases of Java, so the version you compile with is part of the answer.*

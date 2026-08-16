@@ -20,11 +20,11 @@ Peter Norvig, in a 1996 talk called *Design Patterns in Dynamic Programming*, wo
 > Multimethods (1): Builder.
 > Modules (1): Facade.
 
-There are key distinctions from that talk that do not survive into the version people quote.
+Three distinctions in the talk do not survive into the version people quote.
 
 **Being simpler is not the same as being invisible.** The folk version — *patterns are just missing language features* — asserts complete disappearance. Norvig's own taxonomy has three levels, not two: a pattern is **invisible** when it is "so much a part of the language that you don't notice", **informal** when it exists as prose you reimplement by hand each time, and **formal** when the language lets you implement the pattern itself once and call it. Moving from informal to formal is a real gain and is not disappearance.
 
-**Five words were dropped from Norvigs preceding slide, and they were the ones that mattered.** The slide reads: "16 of 23 patterns have qualitatively simpler implementation in Lisp or Dylan than in C++ *for at least some uses of each pattern*."
+**Five words were dropped from Norvig's preceding slide, and they were the ones that mattered.** The slide reads: "16 of 23 patterns have qualitatively simpler implementation in Lisp or Dylan than in C++ *for at least some uses of each pattern*."
 
 *For at least some uses.* Not all uses. With those words the claim survives you finding a Visitor somewhere that a first-class function does not improve, because Norvig never said every one. Without them it becomes *these patterns are always simpler*, and a single stubborn case knocks it over.
 
@@ -147,9 +147,9 @@ final class Checkout {
 }
 ```
 
-**Before we see the Java 26 version, one thing has to be separated out, because conflating the two is how this comparison is usually rigged.** Two independent things could change here. One is the scaffolding — the interface and the classes implementing it. The other is whether the two policies keep their names and their home. Those are not the same decision, and replacing named classes with lambdas dropped into call sites changes both at once, which is not a fair trade and is worth objecting to.
+**Before the Java 26 version, one thing has to be separated out, because conflating the two is how this comparison is usually rigged.** Two independent things could change here. One is the scaffolding — the interface and the classes implementing it. The other is whether the two policies keep their names and their home. Those are not the same decision, and replacing named classes with lambdas dropped into call sites changes both at once, which is not a fair trade and is worth objecting to.
 
-So we keep the names:
+So keep the names:
 
 ```java
 // Still named, still in one place, still callable from anywhere.
@@ -462,9 +462,9 @@ Whatever survives is the design. Whatever vanishes was the cost of expressing it
 
 Which gives a concrete move, and it is not *strip patterns out of your design documents*. The catalogue is not language-independent, so a document that says "use Strategy here" without saying what it is being written in has underspecified the work: in one language that sentence means an interface and three classes, and in another it means passing a function. **Name the language first, then the design.** Where a pattern name is doing real work, say which part is the design and which part is what your compiler makes you write to get it — because the second part is the part that changes when the language does, and the first part is the part you are actually deciding.
 
-The same reading applies in reverse to advice you receive. A blog post recommending a pattern that was written in some language, and if it does not say which, you cannot tell whether you are being given a design idea or a workaround for a compiler you do not use. 
+The same reading applies in reverse to advice you receive. A blog post recommending a pattern was written in some language, and if it does not say which, you cannot tell whether you are being given a design idea or a workaround for a compiler you do not use.
 
-It is worth reiterating that the word "language" doesn't necessarily mean a completely different language. As we have seen with Java and the visitor pattern, different versions of the same language can alter the meaning of a pattern drastically.  
+And *language* here does not have to mean a different one. Visitor changed status between two releases of Java, so the version you compile with is part of the answer — a design document naming Java and not naming the version has answered half the question.
 
 ---
 
