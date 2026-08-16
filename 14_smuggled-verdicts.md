@@ -1,8 +1,8 @@
-# Patterns That Smuggle a Verdict
+# Smuggled a Verdict
 
 ## The claim
 
-**Some vocabulary carries its verdict inside the noun. You can use a word like that or you can disagree with it, but not both — so whoever picked the word has already settled the argument.**
+**Some pattern vocabulary carries its verdict inside the noun. You can use a word like that or you can disagree with it, but not both — so whoever picked the word has already settled the argument.**
 
 Chapter 10 says a pattern name is not one of the five kinds, because names are not true or false. This chapter is about the exception: a name built so that using it asserts something. Those behave like claims while keeping a name's exemption from having to be defended.
 
@@ -10,13 +10,13 @@ Chapter 10 says a pattern name is not one of the five kinds, because names are n
 
 Not standard vocabulary — this grading is the book's own, and it exists because "loaded language" is too coarse to be useful. Terms differ in how much room they leave you.
 
-The test is one sentence long. **Say the term about your own code, then disagree with it, and see whether the result parses.**
+The test is one sentence long. **Apply the term to your own code, and state that the code is ok that way, and see whether the statement is meaningful.**
 
-- *"This is a Transaction Script, and that is the right shape here."* Parses. **A shape name.** It says what the code is and stops.
-- *"That is a code smell, and it is fine here."* Parses, slightly uncomfortably. **A hint word.** It leans, and it lets you push back.
-- *"This is an anemic domain model, and that is correct here."* Does not parse. **A verdict noun.** *Anemic* means sick; the sentence contradicts itself, so the word cannot be used by anyone who disagrees with it.
+- *"This is a Transaction Script, and that is the right shape here."* Meaningful. **Term is just a shape name.** It says what the code is and stops.
+- *"That is a code smell, and it is fine here."* Meaningful, slightly uncomfortably. **Terms is a hint word.** It leans, and it lets you push back.
+- *"This is an anemic domain model, and that is correct here."* Meaningless. **Temr is a verdict noun.** *Anemic* means sick; the sentence contradicts itself, so the word cannot be used by anyone who disagrees with it.
 
-The third tier is the subject of this chapter. The first two are here to show that the problem is not judgment in vocabulary — it is judgment that cannot be answered without abandoning the vocabulary.
+Test yields three tiers of term: shape name, hint, verdict. The third tier is the subject of this chapter. The first two are here to show that the problem is not judgment in vocabulary — it is judgment that cannot be answered without abandoning the vocabulary.
 
 ---
 
@@ -88,7 +88,7 @@ And the article says so directly:
 
 > Domain Models aren't always the best tool.
 
-He also separates the service-layer question from the anemia question — advocating a service layer *"isn't an argument to make the domain model void of behavior; indeed service layer advocates use a service layer in conjunction with a behaviorally rich domain model."*
+He also separates the service-layer question from the anemia question — advocating a service layer *"isn't an argument to make the domain model void of behavior; indeed service layer advocates use a service layer in conjunction with a behaviorally rich domain model."* [claude this paragraph looks like a deviation from the current argument with not much benefit. I suggest to remove it.]
 
 So the argument is: *if* you bought the machinery, use it. Applied to the invoice above, the antecedent is absent. There is no mapping layer, no object graph, no identity map, no lazy loading — a struct, some functions, and a table. Nothing was paid, so nothing was wasted, and the cost-benefit argument has nothing to attach to.
 
@@ -98,7 +98,7 @@ So the argument is: *if* you bought the machinery, use it. Applied to the invoic
 
 The term offers two positions: behaviour on the objects, or behaviour nowhere. The invoice above is in neither, and the reason it looks like the second is that the term has no name for the third.
 
-**Behaviour is not absent, it is placed** — and what decides the placement is **scope**, meaning how much data you have to be looking at before you can tell whether a rule holds. This is the author's formulation, developed while building FlowCore, and it is not standard vocabulary.
+**Behaviour is not absent, it is placed** — and what decides the placement is **scope**, meaning how much data you have to be looking at before you can tell whether a business rule holds. This is the author's formulation, developed while building FlowCore, and it is not standard vocabulary.
 
 Ask the question of any rule and it answers where the rule can live:
 
@@ -134,7 +134,7 @@ Chapter 05 reaches the same place from the structural side, where a `completed_a
 
 ### "Code smell" carries its own dissent, and usage removes it
 
-The second tier, and it fails differently — which is why it is worth putting next to the first.
+This is a "Hint" term, and it fails differently — which is why it is worth putting next to the first.
 
 Fowler's definition, crediting Kent Beck with the coinage:
 
@@ -173,10 +173,11 @@ Two properties follow, and they are why this is worth a chapter rather than a co
 
 Some loaded terms are loaded correctly, and the test is whether the condition can fail.
 
-*Use-after-free.* *SQL injection.* *Data race.* *Buffer overflow.* Each carries a verdict, and each is fine, because there is no configuration of Forces under which reading freed memory or concatenating user input into a query becomes the right answer. The condition holds everywhere, so nothing is smuggled by leaving it out.
+*SQL injection.* *Data race.* *Buffer overflow.* Each carries a verdict, and each is fine, because there is no configuration of Forces under which concatenating user input into a query becomes the right answer. The condition holds everywhere, so nothing is smuggled by leaving it out. [claude I deleted the lesser known example which would complicate the understanding for most readers in my opinion.]
 
-That gives the boundary a form the book already has: **a verdict noun is legitimate when it names a Law violation, and dangerous when it names a Principle violation.** A Law has no conditions that can fail (Ch. 02), so a term naming one loses nothing by compressing. A Principle is conditional by definition, so a term naming its violation drops exactly the part that mattered.
+That gives the claim's boundary a form the book already has: **a verdict noun is legitimate when it names a Law violation, and dangerous when it names a Principle violation.** A Law has no conditions that can fail (Ch. 02), so a term naming one loses nothing by compressing. A Principle is conditional by definition, so a term naming its violation drops exactly the part that mattered. 
 
+[claude examples for these two modes for Law and Principle are needed here. Examples below are too succint, I don't get them. Also if you think Use-after-free example is irreplaceable use it but first explain what the term means.]
 *Anemic domain model* fails this because its condition — you already paid for a domain model — is a Force question, and the answer varies. *Use-after-free* passes because there is nothing to vary.
 
 ### Refusing all judgment-laden vocabulary is its own over-correction
@@ -189,9 +190,11 @@ The reading to avoid is that technical language should be neutral. It should not
 
 The practical case for knowing this vocabulary has nothing to do with whether it is fair.
 
-Someone will eventually apply *anemic domain model* to a design of yours, in a review or a hiring loop or an architecture forum. Having the counter-argument ready is worth more than not knowing the term exists — and the counter-argument is not *that term is unfair*, which sounds like a dodge. It is *which cost do you think I paid, and where do you think this rule should live instead?*
+Someone will eventually apply *anemic domain model* to a design of yours, in a review or a hiring loop or an architecture forum. Having the counter-argument ready is worth more than not knowing the term exists — and the counter-argument is not *that term is unfair*, which sounds like a dodge. It is *which cost do you think I paid, and where do you think this rule should live instead?* 
 
 Both are questions the term cannot answer, and asking them moves the conversation back to the design.
+
+[claude this "you still need the term" section's tone is maybe good for the book: "How to stop bullying in software design" but not for this book. You can delete this section or replace with a better alternative I learve that up to you.]
 
 ---
 
@@ -199,7 +202,7 @@ Both are questions the term cannot answer, and asking them moves the conversatio
 
 **Auditing vocabulary is a way to avoid answering.** "That term smuggles a verdict" can be true and can also be a refusal to discuss the code. If someone calls a design anemic and the design *is* an object graph with an ORM and no behaviour, they are right, and the etymology of their word is not the topic.
 
-**The three tiers are a spectrum, and the middle is genuinely contested.** *Code smell* was placed on the second tier here because its author defined it with the hedge attached. Someone could argue it belongs on the third, on the grounds that the hygiene metaphor overwhelms the definition in every real use — and that is a reasonable position rather than a misreading.
+**The three tiers are a spectrum, and the middle is genuinely contested.** *Code smell* was placed as a "hint term" here because its author defined it with the hedge attached. Someone could argue it is a "verdict", on the grounds that the hygiene metaphor overwhelms the definition in every real use — and that is a reasonable position rather than a misreading.
 
 **Watching your own words is a tax on saying anything.** Stating the condition every time you use a compressed term is correct and it is slower, and in a review with forty comments it will not happen. The realistic version is to spend it on the load-bearing ones: the comment that will decide whether something gets rewritten.
 
@@ -218,7 +221,7 @@ Both are questions the term cannot answer, and asking them moves the conversatio
 
 **In a conversation:**
 
-- **"That is an anti-pattern."** Which one, and what did its author say the conditions were? The word *anti-pattern* is itself tier three.
+- **"That is an anti-pattern."** Which one, and what did its author say the conditions were? The word *anti-pattern* is itself a verdict.
 - **"This isn't clean."** Against what definition, and what happens if it stays?
 - **A design defended by renaming it.** If *Transaction Script* and *anemic domain model* describe the same file, the argument is about the word and the design was never in question.
 - **Agreement reached suspiciously fast after a term is introduced.** Nobody wants to be the person defending sick code, which is what the word is for.
