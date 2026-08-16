@@ -38,7 +38,7 @@ So the honest form is narrower than the slogan and still worth having: for a spe
 
 ## The demonstration
 
-### Visitor got simplified in the same language
+### Visitor got simplified in the language that needed it
 
 Visitor exists because a program sometimes has to do different work for each member of a fixed set of types, and 1994 Java could not switch on a type. The way around that was **double dispatch**: every node type gets an `accept` method that calls back into the operation, so the node's own method dispatch chooses which branch runs.
 
@@ -121,7 +121,7 @@ New.java:11: error: the switch expression does not cover all possible input valu
 
 Identical guarantee. One costs an interface, a method per node type, and a callback protocol every reader has to hold in their head; the other costs a keyword. Nothing about the design changed — there is still a closed set of node types and an operation defined over all of them, which is the idea Visitor was carrying. What went away was the machinery for expressing it.
 
-And notice which language this happened in. Not Lisp, not Dylan — Java, the language where Visitor was most entrenched. The pattern did not fail to survive translation into some language more expressive. It expired in place in Java.
+And notice which language this happened in. Not Lisp, not Dylan — Java, the language where Visitor was most entrenched. The pattern did not fail to survive translation into some more expressive language. It expired in place.
 
 ### Strategy, in four languages
 
