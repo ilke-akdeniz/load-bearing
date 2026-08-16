@@ -32,12 +32,14 @@ Contents: the five kinds, named rather than numbered — four of them advice, fo
 `03_forces.md`
 
 Forces, and the most underrated chapter in the book.
-Principles are conditional on Forces; naming them is most of the work of choosing well.
 
-Contents: concurrency; durability of the medium (a schema outlives the code that writes it); blast radius of a bug; change frequency and its shape; team size and turnover; latency budget; whether you control the callers.
-Each Force with a code demo of the same problem solved differently under different values of it.
+The claim: **evaluating the Forces acting on your situation is the groundwork** — a prerequisite, explicitly not sufficient.
+Naming a Force is the cheap half and is not the same act: "we have concurrency" becomes a distributed lock in a program with one writer, and the chapter's cost section is about exactly that.
 
-*Where the claim doesn't apply:* Forces you can't measure yet, and why guessing is worse than deferring.
+Contents: a Force is a dial rather than a switch, so the design changes several times across its range; then the seven — concurrency; durability of the medium (a schema outlives the code that writes it); blast radius of a bug; change frequency and its shape; team size and turnover; latency budget; whether you control the callers.
+Each Force with a code demo of the same problem solved differently under different values of it, and the seven restated as questions.
+
+*Where the claim doesn't apply:* Forces you cannot measure yet, where the reversibility rule decides whether to defer; a Force that is present and has no design consequence; and things that are risk rather than unmeasured Force, which have no instrument and so cannot be deferred *to*.
 
 ## Part II — The foundations
 
@@ -49,7 +51,7 @@ Theorem, definition, and empirical law are three different kinds of true, and ea
 
 Contents: what makes Two Generals a different kind of claim from Conway's Law; what makes Conway's Law different from "prefer composition over inheritance"; the halting problem as a theorem whose folk version dropped a quantifier; how to check a claimed Law.
 
-*Where the claim doesn't apply:* Laws that are true but irrelevant at your scale — Amdahl on a single-threaded CLI.
+*Where the claim doesn't apply:* kind is not importance, so a theorem can be irrelevant at your scale — Amdahl on a single-threaded CLI — while an empirical number decides your architecture; one name covering both a theorem and a slogan; and claims that sit between kinds, where forcing one label loses the argument.
 
 ### 05. Structure: dependency and hiding
 `05_structure.md`
@@ -58,34 +60,38 @@ The Direction Rule and its family.
 
 Contents: acyclic dependency, and why it's a Law rather than a preference; layering as the line-shaped special case of a DAG; shapes that aren't layers (pipelines, DAGs, inversion of control, cross-cutting concerns); information hiding (Parnas 1972); **Hyrum's Law** — with enough users, every observable behavior becomes a dependency; the export surface as the real API design; cost of change scaling with dependents.
 
-*Where the claim doesn't apply:* ECS architectures, where cache layout outranks encapsulation; plugin systems where inversion makes calls legitimately go "up."
+*Where the claim doesn't apply:* the Law goes inert when nothing is ever separated, which is the boundary for acyclicity itself; ECS architectures, where the memory hierarchy inverts hiding; inversion of control, where the call goes up and the dependency does not; and the case where the lower layer is the more capable one.
 
 ### 06. Time: concurrency and clocks
 `06_time.md`
 
 The chapter that turns "be careful" into a rule you can apply.
 
-Contents: check-then-act is not atomic (the TOCTOU family, with the same bug shown in four languages); **shared mutable state + concurrency = races**, and the two ways to remove it; only the lock-holder can enforce; the single-writer principle; clock skew and why timestamps don't order events; Lamport and vector clocks; coordination costs latency.
+Contents: check-then-act is not atomic (the TOCTOU family, with the same bug in Go, Python, and SQL); **shared mutable state + concurrency = races**, and the two ways to remove it; only the lock-holder can enforce; the single-writer principle; clock skew and why timestamps don't order events, with the resolution measured rather than asserted; Lamport and vector clocks; coordination costs latency.
 
-*Where the claim doesn't apply:* genuinely single-threaded systems (embedded loops, some game main-loops), where the whole apparatus is dead weight.
+*Where the claim doesn't apply:* one writer, where the whole apparatus is dead weight (embedded loops, some game main-loops); windows that are cheaper to accept than to close; and single-machine ordering, which is often good enough.
 
 ### 07. Distribution: what's impossible
 `07_distribution.md`
 
 Theorems, and the engineering that exists because of them.
 
-Contents: CAP and PACELC; FLP impossibility; Two Generals, and its practical corollary that **exactly-once delivery is impossible** — you get at-least-once plus idempotency; you cannot distinguish a slow node from a dead one, so every timeout is a guess; reliability compounds (p^N); the Transactional Outbox and Saga patterns as direct consequences.
+The claim: **you cannot tell a slow machine from a dead one**, and most of what is impossible in distributed systems follows from it.
 
-*Where the claim doesn't apply:* a single process with one database — where reaching for distributed-systems machinery is cargo cult.
+Contents: every timeout is a guess; CAP and PACELC, where the else-branch is the half that applies daily; FLP impossibility; Two Generals, and its practical corollary that **exactly-once delivery is impossible** — you get at-least-once plus idempotency; two systems cannot share a transaction, which is where the outbox comes from; availability is a product rather than an average (p^N), so better components do not fix it.
+
+*Where the claim doesn't apply:* one process and one database, where reaching for distributed-systems machinery is cargo cult; coordination you can simply afford; and correlated failures, where the p^N arithmetic assumes an independence you do not have.
 
 ### 08. Scale: queues, parallelism, memory
 `08_scale.md`
 
 Where the arithmetic beats the intuition.
 
-Contents: Amdahl's Law; the Universal Scalability Law and why throughput can *decrease* with more workers; Little's Law; queueing theory and why 85% utilization is a cliff rather than headroom; **the memory hierarchy across six orders of magnitude**, with a benchmark showing array-of-structs versus struct-of-arrays; the speed of light as a latency floor; big-O versus constants in both directions.
+Five shapes, and which one you are on decides the fix: ceiling, reversal, cliff-edge curve, step, floor.
 
-*Where the claim doesn't apply:* small-n, where the constant factor wins and the asymptotically better algorithm loses.
+Contents: Amdahl's Law as a ceiling; the Universal Scalability Law and why throughput can *decrease* with more workers; Little's Law; what queues do near capacity — **there is no threshold at 85%**, only a marginal cost that rises smoothly from the start, with the cost of one extra point tabulated at four places on the curve; **the memory hierarchy across six orders of magnitude**, with a measured 7.1x from array-of-structs versus struct-of-arrays and no algorithm change; the speed of light as a latency floor; big-O versus constants in both directions.
+
+*Where the claim doesn't apply:* small collections, where the constant factor wins and the asymptotically better algorithm loses; systems nowhere near the bend, where the arithmetic is real and inert; and cases where speed is not the constraint.
 
 ### 09. Change: evolution, organization, compatibility
 `09_change.md`
@@ -94,7 +100,7 @@ The laws that operate on the timescale of years rather than milliseconds.
 
 Contents: Lehman's Laws of Software Evolution; Conway's Law, and the inverse manoeuvre; Brooks' Law and the n(n−1)/2 arithmetic underneath it; compatibility is forever once published; the durable-artifact question — schema, protocol, and public API outlive the code that touches them, which changes where invariants should live.
 
-*Where the claim doesn't apply:* code with a known short life — a migration script, a spike, a one-off report.
+*Where the claim doesn't apply:* code with a known death date — a migration script, a spike, a one-off report; internal interfaces you can change atomically, where "published" does not yet apply; and small teams, where Brooks and Conway both go quiet.
 
 ## Part III — Patterns, graded
 
@@ -133,13 +139,17 @@ The Forces are chapter 03's, named and ordered as that chapter names them, so th
 ### 13. Patterns that are missing language features
 `13_missing-language-features.md`
 
-The GoF audit, worked rather than asserted.
+The Gang of Four audit, worked rather than asserted.
 
-Contents: Strategy is a function; Command is a closure; Iterator is syntax now; Observer is channels or events; Factory is a function returning a thing; Template Method is passing a function; Visitor is pattern matching over a sum type; Decorator is function composition; Singleton is a package-level variable and usually a mistake.
-Norvig's observation that most of the catalogue is invisible in a sufficiently expressive language, demonstrated in four languages side by side.
-The diagnostic: **if the pattern disappears when you change language, it was a workaround, not an idea.**
+The claim: **much of the catalogue is scaffolding that mimics a language feature** — build the same design in a language that has the feature and the scaffold disappears while the design stays.
+Chapter 12 asked what a pattern answers; this asks what it is made of, and the two are independent.
 
-*Where the claim doesn't apply:* languages that genuinely lack the feature — the pattern is the right answer in Java 6, and calling it obsolete is its own misclassification.
+Contents: Norvig's 1996 count read from the slides rather than from its retelling — 16 of 23 "invisible **or simpler**", "for at least some uses of each pattern", and three levels rather than two, none of which survives the folk version.
+The centrepiece is Visitor written twice **in Java**: the 1994 double dispatch, and the same design in Java 26 with `sealed`, `record`, and pattern matching, which is a sum type in all but name.
+The argument is the guarantee rather than the line count — both versions refuse to compile when a case is added and a consumer is not updated, at 28 lines against 11.
+Then Strategy in four languages, with the policies kept named on both sides so the comparison is not rigged; and the rest of the catalogue placed compactly.
+
+*Where the claim doesn't apply:* the same feature that dissolves Visitor leaves **Composite** standing in the same file, because containment is a claim about the domain; **Decorator**, where the test returns no — measured in Go the function form is *longer*, and interface width rather than language decides what decoration costs; Observer, which dissolves in one process and returns across a machine, so the test is scoped; and the fact that the test names the language you moved *to*, so "Visitor is a workaround" is true and useless if your compiler lacks the feature.
 
 ### 14. Patterns that smuggle a verdict
 `14_smuggled-verdicts.md`
