@@ -1972,38 +1972,51 @@ The suggestion was to replace the *Some answer a goal* paragraph wholesale with 
 
 ---
 
-## 49. Full-word identifiers over Go's short-name convention
+## 49. Full-word identifiers in code samples, adopted from FlowCore on different grounds
 
 **Date.** 2026-08-15
 
 **Context.**
-Reviewing generated code (test files especially) surfaced a real comprehension cost: abbreviated domain-concept names (`def`, `act`, `mgr`, `c` for a Catalog) required constantly re-deriving what they stood for, and that cost recurs every time the code is revisited — it does not amortize away with familiarity the way idiom usually assumes it does.
-This is a deliberate, informed deviation from Go convention, not an oversight: Go's own style guidance ties name length to scope and distance from declaration, and idiomatic Go leans hard on short local names.
+The author imported FlowCore's decision 18 — full-word identifiers over Go's short-name convention — into this repo verbatim, as an instruction in `CLAUDE.md` and as a decision entry, having noticed the same comprehension problem in this book's samples that prompted it in that codebase.
+
+FlowCore's reasoning is about maintenance.
+Its stated cost is a solo maintainer returning to code after a context switch, re-deriving what `def`, `act`, and `mgr` stand for, and the observation that the cost does not amortize away with familiarity.
+
+**The problem with importing the reasoning.**
+Neither half of that applies here.
+Nobody maintains the book's samples, and the reader's exposure is a single pass, so there is no second reading for familiarity to build across.
+
+The book has a stronger reason FlowCore does not, and `CLAUDE.md` had already committed to it: **write Go for a reader who does not know Go.**
+FlowCore's reader is fluent in Go and paying a re-derivation cost.
+This book's reader is most likely fluent in Java, C#, or Python, is already spending attention on `:=`, receivers, and the comma-ok idiom, and has an argument to follow underneath the sample.
+A truncated domain noun spends attention that is already committed elsewhere.
+
+So the conclusion is over-determined and the imported premise is false in this repo.
+That matters beyond tidiness: a rule whose stated grounds do not hold is a rule someone later overturns for the right reason applied to the wrong argument.
 
 **Decision.**
-Full, complete-word identifiers for all domain-concept variables, struct fields, and parameters, everywhere in this codebase — library and test code alike.
-No truncation of domain nouns, regardless of scope size (`catalog`, `definition`, `action`, `managerStepID`, not `c`, `def`, `act`, `mgr`).
+Keep the rule, replace the reasoning, and narrow the exceptions.
+The rule applies to every language the book uses, not only Go — the author's call, on the grounds that a Go sample and a C# sample in the same chapter should read the same way.
+Go is still the case the instruction argues, because Go style is the only one of the book's languages that pushes the other way.
 
-Two exceptions, both narrow:
+**What changed from FlowCore's version.**
 
-- Go's small set of structural particles whose meaning is fixed across all Go code, not just this codebase — `err`, `ok`, `ctx`, loop indices (`i`, `j`), generic type parameters (`T`).
-- A single-letter name, on the same convention as a method receiver, for a function's single dominant parameter: the one value the whole function operates on, used repeatedly throughout a short function with no other parameter of comparable weight (e.g. `fillIDs(d *WorkflowDefinition)`, not `def` or `definition`).
-  The letter is chosen the same way a receiver letter is chosen, with the same collision fallback.
-  This does not extend to struct fields, occasional-use locals, loop variables, or any function with more than one parameter of comparable importance — those get full words regardless of scope.
-- An identifier is not expanded if doing so would make it textually identical to its own type name — e.g. a parameter of type `querier` stays `q`, not `querier querier`.
-  Shadowing the type's name with a same-named parameter makes the type unreferenceable by name for the rest of that function's scope, which is a real Go hazard independent of this decision's abbreviation concern.
+*The single-dominant-parameter exception is gone.*
+FlowCore allows a receiver-style short name for the one value a short function operates on — `fillIDs(d *WorkflowDefinition)`.
+A survey of every Go sample in chapters 02 through 12 found about seventy-five short-name sites, and this exception licensed nearly all the ones that read badly: `FromMinorUnits(a int64, c string)` reduces amount and currency to letters in a chapter arguing about money handling, and `(b *Billing) Charge(m uuid.UUID)` uses a letter that is not the initial of anything on the line, so there is nothing to recover it from.
+The exception is written as a structural rule, which is how it stops applying FlowCore's own test.
+Receivers keep the convention, because the receiver's type is on the same line and a spelled-out receiver stops looking like Go.
 
-Method receivers themselves (`func (c *Catalog) Get(...)`) keep Go's ordinary 1-2 letter convention, unaffected by this decision.
+*A fourth exception was added: quoted code is quoted.*
+`CLAUDE.md` tells the draft to prefer real lines over invented ones, and a quotation with the names changed is a paraphrase.
+Where a real signature carries a name that will not read, the fix is a comment, not an edit.
 
-**Why.**
-The convention's own justification — short names are fine because their meaning is obvious from a small, nearby scope — assumes the reader is holding the whole function in working memory in one sitting.
-That assumption breaks when developer returns to code after a context switch: `def`, `act`, and `mgr` are arbitrary per-codebase truncations that must be decoded, not read, every single time, and that decoding cost does not go away with re-exposure the way the convention implicitly assumes.
-Structural particles are exempted because they are not domain shorthand — `err` means the same thing in every Go codebase ever written, so there is nothing project-specific to decode.
-The dominant-parameter exception exists because that case is functionally identical to a receiver: one value, the evident subject of a short function, referenced constantly — spelling it out repeatedly adds length without adding information, the same trade-off that justifies short receivers.
-The type-shadow exception is not about decoding cost at all — `q querier` is exactly as instantly clear as `querier querier` would be, since the type is visible right next to the name at every declaration site.
-It exists to avoid a distinct problem: a parameter name identical to its own type name shadows the type, making it unreferenceable inside that function should anything ever need to reference it by name.
-It is kept deliberately narrow (one letter, one qualifying shape) so it cannot become a loophole for the broader abbreviation habit this decision exists to stop.
+*The structural-particle exception gained a clause.* It exempts `err`, `ok`, and `ctx` from being renamed, not from being explained — the gloss rule still applies at first appearance.
+
+*The type-shadow exception is unchanged*, and it earns its place: `05_structure.md` carries a real `q querier` quoted from FlowCore.
 
 **Consequence.**
-Every future variable, struct field, and function parameter follows this rule; a short domain-concept name in a review is a defect to flag, unless it is a structural particle, a genuine single-dominant-parameter case, or a type-shadow case.
-This is recorded so the deviation reads as a deliberate, reasoned choice — not unfamiliarity with Go idiom.
+About thirty-five identifiers across chapters 02 through 12 do not comply.
+Those chapters are at **draft**, so the cleanup is a separate pass on the author's word rather than a silent edit.
+`CLAUDE.md`'s pointer now resolves: it named `docs/decisions.md, decision 18`, which in this repo is the entry on theorems and the halting problem, and now cites FlowCore's file by path alongside this entry.
+Three copy artifacts from the verbatim import were fixed: an exception list introduced as "two" and containing three, a missing article, and a lost trailing newline.

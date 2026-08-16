@@ -451,14 +451,25 @@ Rewrite the claim, not the phrase.
 
 ## Identifier naming in code samples
 
-Full, complete-word identifiers for domain-concept variables, struct fields, and parameters — no truncation, regardless of scope (`catalog`, not `c`; `definition`, not `def`; `action`, not `act`).
-This is a deliberate deviation from Go's usual short-local-name convention: abbreviations that must be decoded rather than read cost more for a solo maintainer returning to code after a context switch than the convention assumes.
+Full, complete-word identifiers for domain concepts — variables, struct fields, parameters — in every language the book uses, regardless of scope (`catalog`, not `c`; `definition`, not `def`; `amount`, not `a`).
 
-Three narrow exceptions, all reasoned from the same test — does this identifier require project-specific memory to decode, or is its meaning self-evident at every site it's used:
+In Go this is a deliberate deviation from the usual short-local-name convention, and Go is the case that needs stating, because its style guidance actively ties name length to scope and distance from declaration.
+C#, Python, and TypeScript conventions already favour full words.
+The rule is written for all of them so that a Go sample and a C# sample in the same chapter read the same way.
 
-- Go's structural particles, fixed in meaning across all Go code, not just this codebase: `err`, `ok`, `ctx`, loop indices (`i`, `j`), generic type parameters (`T`).
-- Method receivers keep Go's ordinary 1-2 letter convention, and so does a function's single dominant parameter — the one value a short, single-purpose function operates on throughout, with no other parameter of comparable weight (e.g. `fillIDs(d *WorkflowDefinition)`). This does not extend to struct fields, occasional-use locals, loop variables, or any function with more than one parameter of comparable importance.
-- An identifier is not expanded if doing so would make it textually identical to its own type name (e.g. a `querier`-typed parameter stays `q`, not `querier querier`), since that shadows the type and makes it unreferenceable by name in that scope.
+**The reason is this book's reader, not a maintainer's convenience**, and the distinction decides the exceptions below.
+Most readers do not write Go, and are already spending attention on `:=`, receivers, and the comma-ok idiom before they reach the argument the sample exists to make.
+A truncated domain noun is one more thing to decode, in a sample they will read once and never return to.
+This is **Write Go for a reader who does not know Go**, applied to names.
 
-When in doubt, use the full word — these exceptions are meant to be rare, not a broad loophole.
-Reasoning and worked examples: `docs/decisions.md`, decision 18.
+The test for every exception: **is this identifier's meaning recoverable from the line it appears on, by someone who does not know the codebase?**
+
+- **Structural particles**, fixed in meaning across all code in that language rather than within one project: `err`, `ok`, `ctx`, loop indices (`i`, `j`), generic type parameters (`T`). They are exempt from being renamed, not from being explained — `ok` still gets its one-line gloss at first appearance, like any other Go-specific idiom.
+- **Method receivers** keep Go's ordinary one- or two-letter convention (`func (c *Catalog) Get(...)`). The receiver's type is on the same line, and a spelled-out receiver stops looking like the Go the reader will meet everywhere else. This does **not** extend to ordinary parameters, which get full words however short the function is: `func (b *Billing) Charge(customerID uuid.UUID)`, never `Charge(m uuid.UUID)`.
+- **Type shadowing.** An identifier is not expanded when the full word would be textually identical to its own type name — a `querier`-typed parameter stays `q`, not `querier querier`, since that shadows the type and makes it unreferenceable by name for the rest of the scope.
+- **Quoted code is quoted.** Real lines from FlowCore, a standard library, or anyone else's published API keep the names they have. Renaming them turns a quotation into a paraphrase, and the book's claim to be showing real code rests on the difference. Where a real signature carries a name that will not read, gloss it in a comment rather than editing the source.
+
+When in doubt, use the full word.
+The exceptions are meant to be rare, not a broad loophole.
+
+Adopted from FlowCore's decision 18 (`~/s/flowcore/docs/decisions.md`), on different grounds and with a narrower exception list; this book's version is `docs/DECISIONS.md`, decision 49.
