@@ -44,13 +44,13 @@ type Order struct {
 	lines []Line // unexported: only Order may change these
 }
 
-func (o *Order) AddLine(sku string, qty int) error {
+func (o *Order) AddLine(sku string, quantity int) error {
 	// An invariant across the whole group: no line may take the order
 	// over its credit limit, which is only checkable with every line in hand.
-	if o.total()+price(sku)*qty > o.creditLimit {
+	if o.total()+price(sku)*quantity > o.creditLimit {
 		return ErrOverLimit
 	}
-	o.lines = append(o.lines, Line{SKU: sku, Qty: qty})
+	o.lines = append(o.lines, Line{SKU: sku, Quantity: quantity})
 
 	return nil
 }
@@ -75,24 +75,24 @@ type IdentityMap struct {
 	loaded map[uuid.UUID]*Order
 }
 
-func (m *IdentityMap) Order(ctx context.Context, id uuid.UUID) (*Order, error) {
-	if o, ok := m.loaded[id]; ok { // comma-ok: ok reports whether the key was there
-		return o, nil // the same pointer, not a second copy
+func (m *IdentityMap) Order(ctx context.Context, orderID uuid.UUID) (*Order, error) {
+	if order, ok := m.loaded[orderID]; ok { // comma-ok: ok reports whether the key was there
+		return order, nil // the same pointer, not a second copy
 	}
-	o, err := loadOrder(ctx, m.db, id)
+	order, err := loadOrder(ctx, m.db, orderID)
 	if err != nil {
 		return nil, err
 	}
-	m.loaded[id] = o
-	return o, nil
+	m.loaded[orderID] = order
+	return order, nil
 }
 ```
 
 The effect is at the call sites, where two parts of one operation each load what they need:
 
 ```go
-shipping, err := m.Order(ctx, id)
-billing, err := m.Order(ctx, id) // no second query
+shipping, err := identityMap.Order(ctx, orderID)
+billing, err := identityMap.Order(ctx, orderID) // no second query
 
 shipping.AddLine(1000)
 billing.Total() // 3500 — includes the line shipping just added
@@ -186,11 +186,11 @@ var reportingDB = pool(10)
 **Pattern: Result types** — make failure part of the return value rather than a separate channel.
 
 ```rust
-fn parse_amount(s: &str) -> Result<Money, ParseError>
+fn parse_amount(text: &str) -> Result<Money, ParseError>
 ```
 
 ```go
-func ParseAmount(s string) (Money, error)
+func ParseAmount(text string) (Money, error)
 ```
 
 *The constraint:* the caller cannot reach the value without confronting the error. In Rust the compiler enforces it; in Go the convention plus a linter does; in a language with unchecked exceptions, nothing does, and the failure travels up until someone catches it or nobody does.
@@ -283,15 +283,15 @@ The version where the rule lives in the compiler:
 // Email's only constructor is ParseEmail, so holding one is proof it parsed.
 type Email struct{ addr string }
 
-func ParseEmail(s string) (Email, error) {
-	if !looksLikeEmail(s) {
+func ParseEmail(addr string) (Email, error) {
+	if !looksLikeEmail(addr) {
 		return Email{}, ErrBadEmail
 	}
 
-	return Email{addr: s}, nil
+	return Email{addr: addr}, nil
 }
 
-func signUp(e Email) { /* nothing to check; it could not have got here otherwise */ }
+func signUp(email Email) { /* nothing to check; it could not have got here otherwise */ }
 ```
 
 *The constraint:* `signUp` can no longer be called with an unchecked string — the code does not compile. So the check cannot be skipped, duplicated, or forgotten by someone who never heard of it.
@@ -338,11 +338,11 @@ From a caller in another package, the sequence is the only route through:
 
 ```go
 // A Delivered can only be reached by shipping first. The compiler enforces it.
-d := delivery.Pending{}.Ship(shippedAt).Deliver(deliveredAt, "A. Okonkwo")
+delivered := delivery.Pending{}.Ship(shippedAt).Deliver(deliveredAt, "A. Okonkwo")
 
 // Will not compile: cannot refer to unexported field at
 // in struct literal of type delivery.Delivered
-d2 := delivery.Delivered{at: deliveredAt}
+shortcut := delivery.Delivered{at: deliveredAt}
 ```
 
 **Go stops one step short of the pattern's name, and it is worth being exact about where.** `delivery.Delivered{}` — the empty literal, naming no fields — compiles from anywhere. Go gives every struct type a zero value and offers no way to withhold it. So the state is not strictly unrepresentable; what is unreachable is a *populated* illegal state. Nobody outside the package can produce a `Delivered` carrying a signature and a delivery time without having held a `Shipped` first.
@@ -394,11 +394,11 @@ At one millisecond per round trip:
 **Pattern: Cache-aside** — check the cache, fall through to the source, populate on the way back.
 
 ```go
-if v, ok := cache.Get(k); ok {
-	return v
+if value, ok := cache.Get(key); ok {
+	return value
 }
-v := source.Get(k)
-cache.Set(k, v, ttl)
+value := source.Get(key)
+cache.Set(key, value, ttl)
 ```
 
 *The constraint:* the cached copy may be stale, so the design is not the lookup — it is the invalidation. A copy with no invalidation strategy is a copy that is allowed to be wrong (Ch. 04).
@@ -425,11 +425,11 @@ The version that breaks when the other side improves:
 
 ```go
 // Strict: rejects any field it does not know about.
-dec := json.NewDecoder(body)
-dec.DisallowUnknownFields()
+decoder := json.NewDecoder(body)
+decoder.DisallowUnknownFields()
 
-var v OrderView
-err := dec.Decode(&v) // the day they add "currency", this starts failing
+var view OrderView
+err := decoder.Decode(&view) // the day they add "currency", this starts failing
 ```
 
 Adding a field is the one change chapter 09 says is always safe, so a reader that fails on it has turned their safe change into your outage. The tolerant version simply does not look:
@@ -442,8 +442,8 @@ type OrderView struct {
 	Status string `json:"status"`
 }
 
-var v OrderView
-err := json.Unmarshal(body, &v) // unknown fields are skipped
+var view OrderView
+err := json.Unmarshal(body, &view) // unknown fields are skipped
 ```
 
 *The constraint:* you may not fail on an unrecognized field, which means you cannot use strict schema validation on the inbound side.

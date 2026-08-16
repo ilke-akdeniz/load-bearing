@@ -37,9 +37,9 @@ Neither is negotiable inside the proof. Both are negotiable in a program, and ea
 // A Go channel is a typed in-memory queue between concurrent parts
 // of one program — roughly Java's BlockingQueue, or queue.Queue in
 // Python. It lives in memory, so nothing in it can be lost.
-ch := make(chan string, 1) // a queue holding one item
-ch <- "job-1"              // put
-job := <-ch                // take
+jobs := make(chan string, 1) // a queue holding one item
+jobs <- "job-1"              // put
+job := <-jobs                // take
 
 fmt.Println("in-process: received", job, "— exactly once, nothing retried")
 ```
@@ -52,17 +52,17 @@ Now the same job crosses a network. A client asks a billing service to charge a 
 // --- the client, on this machine ---
 // A timeout means the reply did not arrive. It does NOT mean the
 // charge did not happen.
-func chargeRemote(id string) error { return send(id) }
+func chargeRemote(orderID string) error { return send(orderID) }
 
 // --- the network ---
 // The request always arrives; the reply is always lost.
-func send(id string) error {
-	billingService(id)
+func send(orderID string) error {
+	billingService(orderID)
 	return errors.New("timeout")
 }
 
 // --- the billing service, on another machine ---
-func billingService(id string) { charges++ }
+func billingService(orderID string) { charges++ }
 ```
 
 The client times out and retries, because that is what a client does:

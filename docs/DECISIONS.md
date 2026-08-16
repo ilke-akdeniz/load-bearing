@@ -2020,3 +2020,45 @@ About thirty-five identifiers across chapters 02 through 12 do not comply.
 Those chapters are at **draft**, so the cleanup is a separate pass on the author's word rather than a silent edit.
 `CLAUDE.md`'s pointer now resolves: it named `docs/decisions.md, decision 18`, which in this repo is the entry on theorems and the halting problem, and now cites FlowCore's file by path alongside this entry.
 Three copy artifacts from the verbatim import were fixed: an exception list introduced as "two" and containing three, a missing article, and a lost trailing newline.
+
+---
+
+## 50. The identifier sweep across chapters 02 through 12
+
+**Date.** 2026-08-15
+
+**Context.**
+Decision 49 set the naming rule; the eleven drafted chapters predated it.
+A survey found about seventy-five short-name sites, of which roughly half were genuine violations.
+
+**Decision.**
+Swept all of them in one pass, verifying rather than assuming: every Go sample whose behaviour the chapter claims was recompiled and re-run, and the chapters' quoted output was checked against the new run.
+
+**What was renamed, and the reasoning where it was not obvious.**
+
+*Domain nouns reduced to letters* — the bulk of it.
+`FromMinorUnits(a int64, c string)` became `(amount int64, currency string)` in a chapter arguing that money must not be a float.
+`(b *Billing) Charge(m uuid.UUID)` became `Charge(merchantID uuid.UUID)`; `m` was the initial of nothing on the line, which is the case the rule exists for.
+Also `Receipt(o Order)`, `Register(name string, m Method)`, `chargeBad(l *Ledger, …)`, `PlaceOrder(…, q Queue, o Order)`, `receipt(c StripeCharge)` and its four neighbours, `adapt(r Receipt)`, `signUp(e Email)`, and the sign-up store's `u`, `e`, and `h` in chapter 06.
+
+*Truncations* — `qty` to `quantity`, `pct` to `percent`, `dec` to `decoder`, `st` to `stat`, `dt` to `deltaTime`, `msgs`/`m` to `messages`/`message`, `Cur` to `Currency`, `src` to `source`, `key` to `idempotencyKey` where the chapter's own pattern name is *Idempotency key*.
+
+*Paired letters standing for two things* — `a`/`b` became `accounts`/`billing` in the cycle example, `first`/`second` in Singleton, `timestampA`/`timestampB` in the clock-resolution measurement, where the prose already spoke of events A and B.
+
+*One rename beyond the letter of the rule*, flagged because the rule names variables, fields, and parameters but not functions: chapter 06's Lamport-clock method `recv` became `receive`.
+The defect is the same and the fix was free; it is recorded here so it can be reverted if the author disagrees.
+
+**What was deliberately left, all fourteen sites.**
+
+- **Type shadowing** — `q querier`, `q txQuerier`, `p *parser`. The exception, working as intended.
+- **The `http.Handler` signature** — `handleSignup(w http.ResponseWriter, r *http.Request)`. The types are on the line and self-describing, and a spelled-out version stops looking like the Go the reader will meet everywhere else.
+- **Complete words and standard terms** — `mux`, `job`, `row`, `sku`, `on`, `id`, `tx`, `db`, `req`, `fd`. None is a project-specific truncation, and each is recoverable from its line.
+- **`(c *Conn) Raw(f func(driverConn any) error)`** is labelled in the chapter as a real standard-library method, so the quoted-code exception applies and it keeps `f`. The caller written beneath it is the book's own, and its `dc` and `pg` became `driverConn` and `pgxConn`.
+
+**What the verification caught.**
+Nothing behavioural, but two formatting defects the renames introduced: `Currency` lengthened chapter 11's struct and broke `gofmt`'s field alignment, and chapter 12's identity map needed its call sites updated to match.
+Chapter 04's retranscribed output, chapter 06's race, chapter 12's identity map, and chapter 12's compiler error were all re-run and match what the chapters print — including the error text quoted in a comment, *cannot refer to unexported field at in struct literal of type delivery.Delivered*.
+
+**Consequence.**
+Chapters 02, 08, and 09 needed no changes.
+The eleven drafted chapters now comply, so the rule applies to new drafting rather than accumulating a backlog behind it.

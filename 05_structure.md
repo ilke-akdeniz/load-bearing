@@ -107,8 +107,8 @@ Now someone needs validation inside the insert, and the validation logic lives o
 
 ```go
 // The store reaching back up.
-func insertStepDefinition(ctx context.Context, q querier, c *Catalog, step StepDefinition) error {
-	if !c.validate(step) {
+func insertStepDefinition(ctx context.Context, q querier, catalog *Catalog, step StepDefinition) error {
+	if !catalog.validate(step) {
 		return ErrInvalidStep
 	}
 
@@ -240,9 +240,9 @@ The cycle shows up first at the construction site:
 type Accounts struct{ billing *Billing }
 type Billing struct{ accounts *Accounts }
 
-a := &Accounts{}
-b := &Billing{accounts: a}
-a.billing = b // two-phase construction: neither can be built first
+accounts := &Accounts{}
+billing := &Billing{accounts: accounts}
+accounts.billing = billing // two-phase construction: neither can be built first
 ```
 
 That last assignment is the tell. There is now a window in which `a.billing` is nil, and nothing in the type system says when the window closes — anything running during it sees a half-built object. Moving the wiring out to a caller does not help, because it changes who *constructs*, not who *depends*: `Billing`'s type still names `Accounts`, so the compiler still needs `Accounts` in hand, the test still has to build one, and the reader still has to know both.
@@ -394,8 +394,8 @@ Now there are two printers, and they drift. The formatter emits `x + y*2`; the e
 ```csharp
 // The layer that exists to hold the thing that didn't fit.
 public class CompilationService {
-    public void Compile(string src) {
-        var tree = _parser.Parse(src);
+    public void Compile(string source) {
+        var tree = _parser.Parse(source);
         _typecheck.Check(tree, _printer);   // printer threaded through
         _codegen.Emit(tree);
     }
@@ -589,11 +589,11 @@ class Particle {
     private Vector3 velocity;
     private Color    tint;
     private float    lifetime;
-    public void Update(float dt) { position += velocity * dt; lifetime -= dt; }
+    public void Update(float deltaTime) { position += velocity * deltaTime; lifetime -= deltaTime; }
 }
 
 Particle[] particles;                          // 100,000 of them
-foreach (var p in particles) p.Update(dt);
+foreach (var particle in particles) particle.Update(deltaTime);
 ```
 
 The entity-component-system version, which deliberately does the opposite:
@@ -606,8 +606,8 @@ Color[]   tint;       // 100,000 — never touched by this loop
 float[]   lifetime;   // 100,000
 
 for (int i = 0; i < count; i++) {
-    position[i] += velocity[i] * dt;
-    lifetime[i] -= dt;
+    position[i] += velocity[i] * deltaTime;
+    lifetime[i] -= deltaTime;
 }
 ```
 
@@ -681,14 +681,14 @@ There are four ways to pay, and they are genuinely different bills. All four are
 
 ```go
 package billing
-func (b *Billing) Charge(m uuid.UUID) error {
-	plan := b.accounts.PlanFor(m) // billing → accounts
+func (b *Billing) Charge(merchantID uuid.UUID) error {
+	plan := b.accounts.PlanFor(merchantID) // billing → accounts
 	// ...
 }
 
 package accounts
-func (a *Accounts) Suspend(m uuid.UUID) error {
-	if a.billing.IsBehind(m) { // accounts → billing
+func (a *Accounts) Suspend(merchantID uuid.UUID) error {
+	if a.billing.IsBehind(merchantID) { // accounts → billing
 		return ErrBehindOnPayments
 	}
 	// ...
@@ -704,7 +704,7 @@ package accounts
 
 // accounts states its requirement in its own vocabulary.
 type PaymentStatus interface {
-	IsBehind(m uuid.UUID) bool
+	IsBehind(merchantID uuid.UUID) bool
 }
 
 type Accounts struct{ payments PaymentStatus }
@@ -719,15 +719,15 @@ package billing
 
 // billing publishes. It does not know who listens, and it names
 // nothing belonging to whoever does.
-func (b *Billing) Charge(m uuid.UUID, onBehind func(uuid.UUID)) error {
+func (b *Billing) Charge(merchantID uuid.UUID, onBehind func(uuid.UUID)) error {
 	// ...
-	onBehind(m)
+	onBehind(merchantID)
 }
 ```
 
 ```go
 // main wires the two. Neither package names the other.
-billing.Charge(id, accounts.MarkBehind)
+billing.Charge(merchantID, accounts.MarkBehind)
 ```
 
 `accounts` records what it is told and never needs to ask. Note that the callback takes a plain value: if `billing` had published an event *type*, `accounts` would have to import `billing` to receive it, and the arrow would still be there.
@@ -741,7 +741,7 @@ package standing // depends on neither
 
 type Tier int
 
-func MaySuspend(t Tier, unpaidCents int64) bool
+func MaySuspend(tier Tier, unpaidCents int64) bool
 ```
 
 Both callers pass in what they hold, and neither needs the other.
@@ -814,13 +814,13 @@ func (c *Conn) Raw(f func(driverConn any) error) error
 Read it as: *you give me a function, and I will call it with the driver's own connection object.* You never receive the connection as a return value — it is handed to your function as an argument, and taken back the moment your function returns.
 
 ```go
-err := conn.Raw(func(dc any) error {
-	pg, ok := dc.(*pgx.Conn) // the driver's concrete type
+err := conn.Raw(func(driverConn any) error {
+	pgxConn, ok := driverConn.(*pgx.Conn) // the driver's concrete type
 	if !ok {
 		return errors.New("not a pgx connection")
 	}
 
-	return pg.CopyFrom(ctx, ...) // do the unexposed thing, here and now
+	return pgxConn.CopyFrom(ctx, ...) // do the unexposed thing, here and now
 })
 ```
 
@@ -838,8 +838,8 @@ Sometimes the cheap fix genuinely is to let the lower thing call up.
 
 ```go
 // Ten minutes. Ship it before lunch.
-func insertStepDefinition(ctx context.Context, q querier, c *Catalog, s StepDefinition) error {
-	if !c.validate(s) {
+func insertStepDefinition(ctx context.Context, q querier, catalog *Catalog, step StepDefinition) error {
+	if !catalog.validate(step) {
 		return ErrInvalidStep
 	}
 	// ...
@@ -849,12 +849,12 @@ func insertStepDefinition(ctx context.Context, q querier, c *Catalog, s StepDefi
 ```go
 // An afternoon. Validation moves above both, and the store
 // never learns that Catalog exists.
-func (c *Catalog) Create(ctx context.Context, d WorkflowDefinition) error {
-	if err := validate(d); err != nil {
+func (c *Catalog) Create(ctx context.Context, definition WorkflowDefinition) error {
+	if err := validate(definition); err != nil {
 		return err
 	}
 
-	for _, step := range d.Steps {
+	for _, step := range definition.Steps {
 		if err := insertStepDefinition(ctx, tx, step); err != nil {
 			return err
 		}
@@ -884,9 +884,9 @@ public class LoggingOrderService : IOrderService {
         return _inner.Get(id);
     }
 
-    public Task<Order> Place(OrderRequest r) {
-        _log.LogInformation("Place {Customer}", r.CustomerId);
-        return _inner.Place(r);
+    public Task<Order> Place(OrderRequest request) {
+        _log.LogInformation("Place {Customer}", request.CustomerId);
+        return _inner.Place(request);
     }
     // ... and twenty more
 }

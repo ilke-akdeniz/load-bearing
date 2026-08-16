@@ -63,14 +63,14 @@ The test is mechanical: **take the name, and try to write code it forbids.** If 
 
 ```go
 // Permitted, and the only way in.
-a := Thing.Instance()
-b := Thing.Instance() // a and b are the same object, always
+first := Thing.Instance()
+second := Thing.Instance() // first and second are the same object, always
 ```
 
 ```go
 // Forbidden. If this compiles, it is not a Singleton.
-a := NewThing()
-b := NewThing()
+first := NewThing()
+second := NewThing()
 ```
 
 A strong constraint. Being told something is a Singleton tells you that any two references to it are the same object, without opening the file.
@@ -79,7 +79,7 @@ A strong constraint. Being told something is a Singleton tells you that any two 
 
 ```go
 // Permitted: the rule is in the procedure, the data is inert.
-func ApplyDiscount(ctx context.Context, db *sql.DB, id string, pct int) error {
+func ApplyDiscount(ctx context.Context, db *sql.DB, orderID string, percent int) error {
 	tx, _ := db.BeginTx(ctx, nil)
 	// read rows, compute, write rows, commit
 }
@@ -87,9 +87,9 @@ func ApplyDiscount(ctx context.Context, db *sql.DB, id string, pct int) error {
 
 ```go
 // Forbidden: a persistent object model between the operation and the data.
-order := repo.Load(id)   // an entity with behaviour and identity
-order.ApplyDiscount(pct) // the rule lives on the object
-repo.Save(order)         // written back through a mapper
+order := repo.Load(orderID)  // an entity with behaviour and identity
+order.ApplyDiscount(percent) // the rule lives on the object
+repo.Save(order)             // written back through a mapper
 ```
 
 Also a real constraint. It tells you where the business rule is *not* — not on a loaded object graph — and that rules out an entire style.
@@ -99,7 +99,7 @@ Also a real constraint. It tells you where the business rule is *not* — not on
 ```go
 type Billing struct{ /* ... */ }
 
-func (b *Billing) Charge(id string) error {
+func (b *Billing) Charge(orderID string) error {
 	// calls four other packages, exposes one method
 }
 ```

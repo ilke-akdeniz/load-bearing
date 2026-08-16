@@ -53,8 +53,8 @@ func (s *Store) SignUp(email, password string) error {
 		return errors.New("email already registered")
 	}
 
-	u := User{Email: email, PasswordHash: hash(password)} // ~2ms of work
-	s.append(u)                                           // ACT
+	user := User{Email: email, PasswordHash: hash(password)} // ~2ms of work
+	s.append(user)                                           // ACT
 
 	return nil
 }
@@ -63,12 +63,12 @@ func (s *Store) SignUp(email, password string) error {
 `findByEmail` and `append` each take a mutex internally — a lock that lets one goroutine at a time touch the slice, the way `synchronized` does in Java or `lock` in C#:
 
 ```go
-func (s *Store) findByEmail(e string) bool {
+func (s *Store) findByEmail(email string) bool {
 	s.mu.Lock()         // no other goroutine may touch users until Unlock
 	defer s.mu.Unlock() // defer runs this when the function returns
 
-	for _, u := range s.users {
-		if u.Email == e {
+	for _, user := range s.users {
+		if user.Email == email {
 			return true
 		}
 	}
@@ -76,10 +76,10 @@ func (s *Store) findByEmail(e string) bool {
 	return false
 }
 
-func (s *Store) append(u User) {
+func (s *Store) append(user User) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
-	s.users = append(s.users, u)
+	s.users = append(s.users, user)
 }
 ```
 
@@ -106,17 +106,17 @@ And here is the whole fix, which is the first of the three moves:
 ```go
 // One operation. The decision and the write are inseparable.
 func (s *Store) SignUpAtomic(email, password string) error {
-	h := hash(password) // slow work first, before taking the lock
+	passwordHash := hash(password) // slow work first, before taking the lock
 
 	s.mu.Lock()
 	defer s.mu.Unlock()
 
-	for _, u := range s.users { // CHECK
-		if u.Email == email {
+	for _, user := range s.users { // CHECK
+		if user.Email == email {
 			return errors.New("email already registered")
 		}
 	}
-	s.users = append(s.users, User{Email: email, PasswordHash: h}) // ACT
+	s.users = append(s.users, User{Email: email, PasswordHash: passwordHash}) // ACT
 
 	return nil
 }
@@ -160,8 +160,8 @@ The fix is the first move again — bind yourself to the object once, and ask yo
 
 ```python
 fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)  # refuses a symlink outright
-st = os.fstat(fd)                                # asks about THIS handle
-if st.st_size < 1_000_000:
+stat = os.fstat(fd)                              # asks about THIS handle
+if stat.st_size < 1_000_000:
     time.sleep(0.005)
     print(os.read(fd, 4096).decode())
 ```
@@ -274,8 +274,8 @@ The second half, and it surprises people who accept the first half easily.
 The intuition is that if event A has an earlier timestamp than event B, A happened first. Start with one machine — no network, no skew, one process — and ask whether the clock can even distinguish two adjacent events:
 
 ```go
-a := time.Now().UnixNano()
-b := time.Now().UnixNano()
+timestampA := time.Now().UnixNano()
+timestampB := time.Now().UnixNano()
 ```
 
 Two hundred thousand times:
@@ -320,7 +320,7 @@ A **Lamport clock** is a number per node, incremented on every event, and sent a
 ```go
 func (n *Node) local() int { n.clock++; return n.clock }
 
-func (n *Node) recv(stamp int) int {
+func (n *Node) receive(stamp int) int {
 	if stamp > n.clock {
 		n.clock = stamp
 	}

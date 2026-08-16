@@ -81,8 +81,8 @@ Given that the client cannot know, retrying is the only responsible thing it can
 
 ```go
 // BAD implementation on the server: three deliveries of one request charge three times.
-func chargeBad(l *Ledger, cents int) {
-	l.charges = append(l.charges, cents)
+func chargeBad(ledger *Ledger, cents int) {
+	ledger.charges = append(ledger.charges, cents)
 }
 ```
 
@@ -94,13 +94,13 @@ The fix is that the caller names the attempt, and the server remembers which nam
 
 ```go
 // GOOD implementation on the server: the key identifies the attempt, not the delivery.
-func chargeIdempotent(l *Ledger, key string, cents int) {
-	if l.applied[key] { // already done — say so, change nothing
+func chargeIdempotent(ledger *Ledger, idempotencyKey string, cents int) {
+	if ledger.applied[idempotencyKey] { // already done — say so, change nothing
 		return
 	}
 
-	l.charges = append(l.charges, cents)
-	l.applied[key] = true
+	ledger.charges = append(ledger.charges, cents)
+	ledger.applied[idempotencyKey] = true
 }
 ```
 
@@ -121,15 +121,15 @@ Two details decide whether this works in practice.
 This is where the theorems stop being abstract. An order is placed: a row goes in the database, and an event goes on a queue so other services hear about it. Two systems, and no transaction spans them.
 
 ```go
-func PlaceOrder(ctx context.Context, db *sql.DB, q Queue, o Order) error {
+func PlaceOrder(ctx context.Context, db *sql.DB, queue Queue, order Order) error {
 	if _, err := db.ExecContext(ctx,
 		`insert into "order" (id, customer_id, total) values ($1, $2, $3)`,
-		o.ID, o.CustomerID, o.Total); err != nil {
+		order.ID, order.CustomerID, order.Total); err != nil {
 		return err // committed on success — the row is durable from here
 	}
 
 	// A crash on this line leaves an order nobody will ever hear about.
-	return q.Publish(ctx, OrderPlaced{OrderID: o.ID})
+	return queue.Publish(ctx, OrderPlaced{OrderID: order.ID})
 }
 ```
 
@@ -138,7 +138,7 @@ Swap the two statements and the failure inverts: an event announcing an order th
 The **transactional outbox** removes the gap by removing the second system from the critical path. The event is not published — it is *written down*, in the same transaction as the order:
 
 ```go
-func PlaceOrder(ctx context.Context, db *sql.DB, o Order) error {
+func PlaceOrder(ctx context.Context, db *sql.DB, order Order) error {
 	tx, err := db.BeginTx(ctx, nil)
 	if err != nil {
 		return err
@@ -147,13 +147,13 @@ func PlaceOrder(ctx context.Context, db *sql.DB, o Order) error {
 
 	if _, err := tx.ExecContext(ctx,
 		`insert into "order" (id, customer_id, total) values ($1, $2, $3)`,
-		o.ID, o.CustomerID, o.Total); err != nil {
+		order.ID, order.CustomerID, order.Total); err != nil {
 		return err
 	}
 
 	if _, err := tx.ExecContext(ctx,
 		`insert into outbox (id, topic, payload) values ($1, $2, $3)`,
-		uuid.New(), "order.placed", o.JSON()); err != nil {
+		uuid.New(), "order.placed", order.JSON()); err != nil {
 		return err
 	}
 
@@ -166,20 +166,20 @@ Both inserts are inside one transaction against one database, so the commit is a
 A separate process then drains the table:
 
 ```go
-func Drain(ctx context.Context, db *sql.DB, q Queue) error {
+func Drain(ctx context.Context, db *sql.DB, queue Queue) error {
 	rows, err := db.QueryContext(ctx,
 		`select id, topic, payload from outbox order by id limit 100`)
-	// ... scan into msgs ...
+	// ... scan into messages ...
 
-	for _, m := range msgs {
-		if err := q.Publish(ctx, m); err != nil {
+	for _, message := range messages {
+		if err := queue.Publish(ctx, message); err != nil {
 			return err // leave the row; the next pass retries it
 		}
 
 		// Deleted only after the queue has accepted it. A crash between
 		// the two republishes on the next pass — which is why this is
 		// at-least-once, and why the consumer must be idempotent.
-		if _, err := db.ExecContext(ctx, `delete from outbox where id = $1`, m.ID); err != nil {
+		if _, err := db.ExecContext(ctx, `delete from outbox where id = $1`, message.ID); err != nil {
 			return err
 		}
 	}

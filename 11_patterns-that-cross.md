@@ -60,8 +60,8 @@ func (h *Checkout) Complete(orderID string) error {
 **Adapter** is the pattern for exactly this: wrap a thing so it fits an interface it was not built for. Filling that gap:
 
 ```go
-func adapt(r Receipt) LedgerEntry {
-	return LedgerEntry{Ref: r.Ref, Minor: r.Cents, Final: r.Complete}
+func adapt(receipt Receipt) LedgerEntry {
+	return LedgerEntry{Ref: receipt.Ref, Minor: receipt.Cents, Final: receipt.Complete}
 }
 
 // h.billing.Record(adapt(receipt))
@@ -80,7 +80,7 @@ type Receipt struct {
 
 ```go
 // billing now takes it directly. No wrapper, no mapping, nothing to keep in step.
-func Record(r payments.Receipt) { ... }
+func Record(receipt payments.Receipt) { ... }
 ```
 
 That is the whole fix: rename two fields and delete the adapter. It is smaller, there is no second representation to drift, and nothing has to be updated when a field is added.
@@ -96,10 +96,10 @@ FastSell drops its own payment code and moves to Stripe. Nothing about the shape
 ```go
 // Theirs. You cannot edit it, and it changes on their schedule.
 type StripeCharge struct {
-	ID     string
-	Amount int64
-	Status string // "succeeded" "pending" "failed" "requires_action" ...
-	Cur    string
+	ID       string
+	Amount   int64
+	Status   string // "succeeded" "pending" "failed" "requires_action" ...
+	Currency string
 }
 ```
 
@@ -108,18 +108,18 @@ You cannot rename `Amount` to `Minor`. You cannot collapse their eleven statuses
 Which turns the question into *where*. Without a boundary, their vocabulary goes wherever it is convenient:
 
 ```go
-func receipt(c StripeCharge) string   { if c.Status == "succeeded" { ... } }
-func ledger(c StripeCharge) int64     { if c.Status == "succeeded" { ... } }
-func alert(c StripeCharge) bool       { return c.Status == "failed" }
-func refundable(c StripeCharge) bool  { return c.Status == "succeeded" }
-func reconcile(c StripeCharge) bool   { return c.Status == "succeeded" || c.Status == "pending" }
+func receipt(charge StripeCharge) string   { if charge.Status == "succeeded" { ... } }
+func ledger(charge StripeCharge) int64     { if charge.Status == "succeeded" { ... } }
+func alert(charge StripeCharge) bool       { return charge.Status == "failed" }
+func refundable(charge StripeCharge) bool  { return charge.Status == "succeeded" }
+func reconcile(charge StripeCharge) bool   { return charge.Status == "succeeded" || charge.Status == "pending" }
 ```
 
 With one, it stops at the edge and everything behind it speaks FastSell:
 
 ```go
-func fromStripe(c StripeCharge) LedgerEntry {
-	return LedgerEntry{Ref: c.ID, Minor: c.Amount, Final: c.Status == "succeeded"}
+func fromStripe(charge StripeCharge) LedgerEntry {
+	return LedgerEntry{Ref: charge.ID, Minor: charge.Amount, Final: charge.Status == "succeeded"}
 }
 ```
 
@@ -165,8 +165,8 @@ Chapter 10 left a question here. **Facade** compresses well and rules nothing ou
 // Called only from inside this repository. Nothing here is a promise.
 type Orders struct{ ... }
 
-func (o *Orders) Place(ctx context.Context, req PlaceRequest) (Order, error)
-func (o *Orders) Cancel(ctx context.Context, id string) error
+func (o *Orders) Place(ctx context.Context, request PlaceRequest) (Order, error)
+func (o *Orders) Cancel(ctx context.Context, orderID string) error
 func (o *Orders) resolvePricing(...)   // unexported; nobody outside can call it
 ```
 

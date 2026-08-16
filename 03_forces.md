@@ -93,8 +93,8 @@ Existing callers are unaffected: Go zero-initializes the new field, and code tha
 
 ```go
 // Written before Tip existed. Still correct, still compiles.
-func Receipt(o Order) string {
-	return fmt.Sprintf("total %d", o.Total)
+func Receipt(order Order) string {
+	return fmt.Sprintf("total %d", order.Total)
 }
 ```
 
@@ -213,7 +213,7 @@ case "invoice":
 // The registry pays for itself in the second year.
 var methods = map[string]Method{}
 
-func Register(name string, m Method) { methods[name] = m }
+func Register(name string, method Method) { methods[name] = method }
 ```
 
 Now the shape. The same change, under three structures:
@@ -236,18 +236,18 @@ public class PaymentMethodEntity { public string Kind {get;set;} ... }
 
 // 3. translation between them, in both directions
 public static class PaymentMethodMapper {
-    public static PaymentMethodDto ToDto(PaymentMethodEntity e) => ...
-    public static PaymentMethodEntity ToEntity(PaymentMethodDto d) => ...
+    public static PaymentMethodDto ToDto(PaymentMethodEntity entity) => ...
+    public static PaymentMethodEntity ToEntity(PaymentMethodDto dto) => ...
 }
 
 // 4. the operation
-public interface IPaymentService { Task<Receipt> Charge(PaymentMethodDto m); }
+public interface IPaymentService { Task<Receipt> Charge(PaymentMethodDto method); }
 
 // 5. storage
-public interface IPaymentRepository { Task Save(PaymentMethodEntity e); }
+public interface IPaymentRepository { Task Save(PaymentMethodEntity entity); }
 
 // 6. the endpoint
-[HttpPost] public Task<IActionResult> Pay(PaymentMethodDto m) => ...
+[HttpPost] public Task<IActionResult> Pay(PaymentMethodDto method) => ...
 ```
 
 Adding *direct debit* means a new case, or a new field, in each of the six — and the mapper twice, once per direction. None of the six decides anything about direct debit that the others do not already know.
@@ -282,8 +282,8 @@ type Money struct {
 	currency string
 }
 
-func FromMinorUnits(a int64, c string) Money {
-	return Money{amount: a, currency: c}
+func FromMinorUnits(amount int64, currency string) Money {
+	return Money{amount: amount, currency: currency}
 }
 
 // There is deliberately no FromFloat.
@@ -310,8 +310,8 @@ user = db.query("select * from users where id = %s", uid)
 // page finishes loading, or the slot is sold to someone else. A round
 // trip now eats most of the budget, so the design question changes from
 // "how do I fetch this" to "how stale is this allowed to be."
-if u, ok := cache.Get(uid); ok {
-	return u
+if user, ok := cache.Get(uid); ok {
+	return user
 }
 ```
 
@@ -320,7 +320,7 @@ if u, ok := cache.Get(uid); ok {
    millionths of a second, about the time a single main-memory read
    takes. There is no lookup at all. The data is already resident and
    indexed by id, and the memory layout is the design. */
-user_t *u = &users[uid];
+user_t *user = &users[uid];
 ```
 
 **What changes with the Force:** what you are able to spend on abstraction. At 200 milliseconds an interface, a copy, and an allocation are all invisible against a database round trip, so buy them. At 200 microseconds those same three cost a measurable share of everything you have, and the code stops looking like the code in books — not because its authors are cleverer, but because they cannot afford what you can. Chapter 08 owns the arithmetic underneath this; chapter 05's entity-component case is this Force pushed to its end.
