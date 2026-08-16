@@ -140,7 +140,15 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Goal vs Force vs problem shape | 12 | Some patterns answer a goal and some answer the problem's shape, and neither sorts by Force; the test for a goal is whether you can decide to want less of it and stay honest | "the three kinds of input (Ch. 12)" |
 | The zero value is a hole in the pattern | 12 | Go gives every struct a zero value and no way to withhold it, so *make illegal states unrepresentable* reaches populated illegal states only; Rust and F# have no such fallback | "the zero-value hole (Ch. 12)" |
 | Same Force, several answers | 12 | The Force narrows the field; the intensity picks the answer, and 19 does the choosing | cite 12 |
-| Survives-translation test | 13 | If it disappears when you change language, it was a workaround | cite 13 |
+| Survives-translation test | 13 | Build the same design where the feature exists; the construction disappears and the design does not | "the translation test (Ch. 13)" |
+| Norvig's count, with its qualifier | 13 | 16 of 23 "invisible **or simpler**", "for at least some uses" — and three levels, invisible/informal/formal, not two | cite 13; 04 owns dropped quantifiers |
+| Constructed vs given | 13 | A pattern is something you construct, a feature something you get; the tell is parts with no counterpart in the problem | "constructed, not given (Ch. 13)" |
+| Visitor expired in place | 13 | Java grew sealed types and pattern matching, so the pattern died in the language that entrenched it — not by translation elsewhere | cite 13 |
+| The dissolving four are one request | 13 | Command, Strategy, Template Method and Visitor all ask the caller to supply behaviour; one feature answers all four | cite 13 |
+| Composite outlives the feature that killed Visitor | 13 | Sum types dissolve one and not the other in the same file, because containment is a claim about the domain (Ch. 12) | cite 13 |
+| The translation test is scoped | 13 | Observer dissolves in one process and returns across a machine; run at the wrong scope the test returns a confident wrong answer | cite 13 |
+| The test names the target language | 13 | "Visitor is a workaround" is a claim about a pair, and is true and useless if your compiler lacks the feature | cite 13 |
+| Decorator dissolves only while narrow | 13 | Composition replaces it when the interface is one function; at twenty methods you are forwarding again (Ch. 05) | cite 13 |
 | Smuggled verdict | 14 | Vocabulary arriving with its conclusion attached | cite 14 |
 | Principle→movement mechanism | 15 | Observation gets a name, name gets a community, community forgets the conditions | cite 15 |
 | Mocks assert about mocks | 17 | A mocked test passes when the real constraint has been deleted | cite 17 |
@@ -218,7 +226,10 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | Batching measured: 1145 ms to 11 ms | 12 | Latency's arithmetic; 08 owns the curve |
 | Tolerant reader / consumer-driven contracts | 12 | Surviving a boundary you do not control |
 | Delivery states as transition types | 12 | Illegal states in Go, and where the guarantee stops |
-| GoF collapse in 4 languages | 13 | Survives-translation test |
+| Visitor: Java 1994 vs Java 26 | 13 | 28 lines to 11, same compile-time exhaustiveness |
+| Strategy in four languages | 13 | Java class-per-algorithm, Java lambda, Go func field, Python callable |
+| Fetcher with retry and cache | 13 | Decorator as function composition, and the interface-width limit |
+| Filesystem tree, Java and Go | 13 | Composite unchanged by the presence or absence of sum types |
 | Old client against four API changes | 09 | Add is safe, retype fails loudly, rename fails silently with a zero amount |
 | `io/ioutil`, deprecated 2021, running in 2026 | 09 | 175 deprecated declarations in Go's stdlib — the cost of a compatibility promise, kept |
 | Brooks n(n−1)/2 and the weekly hours | 09 | A team of 20 spends a quarter of every week staying aligned |

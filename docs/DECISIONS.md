@@ -2096,3 +2096,49 @@ Two hooks were pulled back on a check against the chapters, and the corrections 
 **Consequence.**
 The rule this establishes for any promotional copy: **a hook must be cashable by the chapter it links to.**
 A reader who arrives on an overclaim and then meets chapter 04's careful separation of theorem, definition, and empirical law will feel the mismatch, and not overclaiming is the book's differentiator.
+
+---
+
+## 52. Chapter 13 argues from Java's own history rather than across four languages
+
+**Date.** 2026-08-15
+
+**Context.**
+`00_toc.md` planned chapter 13 as Norvig's observation "demonstrated in four languages side by side."
+The author installed a JDK on request, which made a better argument available and changed the chapter's centrepiece.
+
+**Decision.**
+The four-language comparison stays, carrying Strategy.
+But the chapter opens on Visitor written twice **in Java** — the 1994 double-dispatch shape, and the same design in Java 26 using `sealed`, `record`, and pattern matching in `switch`.
+
+**Why.**
+A cross-language comparison invites the reply *that is just a different language*, and the reader who has to ship Java can dismiss it.
+Watching the pattern die inside the language that entrenched it removes that exit.
+Visitor did not fail to survive translation somewhere more expressive; it expired in place.
+
+The demonstration also had to be about the guarantee rather than the line count, because line count is the weak version of this argument.
+Visitor's actual payment is that adding a node type breaks every un-updated operation at compile time.
+Both versions were compiled with a `Neg` case added and the consumer left alone; both refuse, one with *does not override abstract method visitNeg*, one with *the switch expression does not cover all possible input values*.
+Same guarantee, 28 lines against 11.
+
+**Reading the source changed the chapter's claim.**
+The talk was fetched and its slides extracted rather than paraphrased from memory, and two things in it do not survive into the version people quote.
+
+Norvig's count is "16 of 23 patterns are either **invisible or simpler**", and the preceding slide adds "**for at least some uses of each pattern**".
+The folk version — *patterns are just missing language features* — drops both, which is chapter 04's dropped-quantifier failure applied to a smaller result.
+He also defines three levels, invisible / informal / formal, where the retelling has two.
+And he lists five purposes for patterns, of which "to avoid limitations of implementation language" is one; the claim that patterns are *only* workarounds is something readers added.
+
+The chapter therefore states the narrower version, and is better for it: the strong version is easy to disprove and the real one is not.
+
+**The counter-example came out of the source too.**
+Norvig's sixteen omit seven — Adapter, Bridge, Composite, Decorator, Memento, Prototype, Singleton — and that omission is the boundary section.
+The sharpest form is that **sum types dissolve Visitor and leave Composite standing in the same file**: the dispatch mechanism changes completely and the containment does not, because directories containing files is a fact about filesystems rather than about a compiler.
+That is chapter 12's category of patterns answering the shape of the problem, reached from a different direction.
+
+Two further boundaries: Observer dissolves in one process and returns across a machine with all of chapter 07's failure modes, so the test is scoped and returns a confident wrong answer when run at the wrong scope; and the test names the language you moved *to*, so "Visitor is a workaround" is true and useless if your compiler lacks sum types.
+
+**Consequence.**
+Every sample was compiled and run as printed — nine fences across Java, Go, and Python, plus both quoted `javac` errors.
+`LEDGER.md` gains nine concept rows and four example rows.
+The relationship to chapter 12 is stated in the second sentence rather than left implicit: 12 asks what a pattern answers, 13 asks what it is made of, and the two are independent.
