@@ -2234,3 +2234,46 @@ One addition was kept and rewritten rather than reverted.
 The author's closing point — that *language* need not mean a different language, because two releases of Java were enough — is a good one and ties the ending back to the chapter's centrepiece.
 It arrived with "It is worth reiterating that", which is throat-clearing, and "drastically", which asserts rather than shows.
 The kept version is: *Visitor changed status between two releases of Java, so the version you compile with is part of the answer.*
+
+---
+
+## 55. Chapter 14 grades loaded terms into three tiers rather than condemning them
+
+**Date.** 2026-08-16
+
+**Context.**
+The chapter's subject is vocabulary that arrives with its conclusion attached, and the obvious failure mode was writing loaded language about loaded language.
+
+Both sources were read rather than paraphrased, and both turned out to be carefully qualified in ways their reputations are not.
+Fowler's *AnemicDomainModel* (2003): *"they incur all of the costs of a domain model, without yielding any of the benefits"*, plus *"Domain Models aren't always the best tool."*
+Fowler on *CodeSmell*, crediting Kent Beck with the coinage: *"a surface indication that usually corresponds to a deeper problem"*, and that smells *"don't always indicate a problem."*
+
+**The finding that shaped the chapter: the two terms fail differently.**
+*Code smell* can be used with its hedge intact — *"that is a smell and it is fine here"* is a sentence the definition licenses, and the author is on your side when you say it.
+*Anemic domain model* cannot — *"this is anemic and that is correct here"* contradicts itself, because *anemic* means sick.
+
+So the chapter grades terms in three tiers rather than treating loadedness as binary: **shape name, hint word, verdict noun**, separated by a one-sentence test — say the term about your own code, then disagree with it, and see whether the result parses.
+This grading is the book's own and the chapter says so.
+
+**Why this is not a repeat of chapters 04 and 13.**
+Both of those are about a claim losing a qualifier — the halting problem's quantifier, Norvig's *for at least some uses*.
+Chapter 14's mechanism is lexical rather than propositional: a claim can be qualified and a noun cannot, so the condition is not merely dropped but made unsayable while the word is in play.
+The chapter states that difference rather than leaving the three to look alike.
+
+**The boundary comes from the book's own spine.**
+*Use-after-free*, *SQL injection*, and *data race* carry verdicts and are fine, because there is no configuration of Forces under which they are the right answer.
+That gives the rule: **a verdict noun is legitimate when it names a Law violation and dangerous when it names a Principle violation**, since a Law has no condition that can fail and a Principle is conditional by definition.
+Two further boundaries: refusing all judgment-laden vocabulary is itself a slogan with its conditions removed, and you need the term anyway because it will be used on you.
+
+**Source material.**
+The argument is largely the author's, worked through while building FlowCore and recorded in `~/c/TechIter/01/coding-style-architecture.md` — the *anemic domain model* critique, the vocabulary-versus-prescription distinction, and *placed by scope* with its worked rules.
+Per `CLAUDE.md`, that was read rather than re-derived.
+Chapter 19 owns the placement method; chapter 14 takes only what the vocabulary argument needs and cites 06 for why the widest scope is not a preference.
+
+**Verification.**
+The Go sample compiles and runs as printed.
+The sqlite demonstration was run and the chapter quotes the real output — a first draft of that block invented `sqlite>` prompts and trimmed the error text, which is the failure the run-the-code rule exists to prevent, caught on re-reading before commit.
+
+**Open question for the author.**
+The chapter is titled *Patterns That Smuggle a Verdict*, matching the TOC, but its subject is vocabulary rather than patterns — *code smell* is not a pattern, and neither is *anti-pattern*.
+*Smuggled Verdicts* would be more accurate. The title is the author's call, and the drift check enforces H1 against the TOC either way.
