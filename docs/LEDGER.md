@@ -148,7 +148,10 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Composite outlives the feature that killed Visitor | 13 | Sum types dissolve one and not the other in the same file, because containment is a claim about the domain (Ch. 12) | cite 13 |
 | The translation test is scoped | 13 | Observer dissolves in one process and returns across a machine; run at the wrong scope the test returns a confident wrong answer | cite 13 |
 | The test names the target language | 13 | "Visitor is a workaround" is a claim about a pair, and is true and useless if your compiler lacks the feature | cite 13 |
-| Decorator dissolves only while narrow | 13 | Composition replaces it when the interface is one function; at twenty methods you are forwarding again (Ch. 05) | cite 13 |
+| Decorator is where the test returns no | 13 | Measured in Go the function form is *longer* — 37 lines against 31 — because Go asks nothing for a one-method interface, so there is no ceremony to remove; what function values buy is composability at the call site | "the test returns no (Ch. 13)" |
+| Interface width, not language, limits decoration | 13 | Five methods means four forwarding methods no feature removes, because they are not simulating anything (Ch. 05) | cite 13 |
+| The scaffold's failure modes move to the feature | 13 | Not *you lose the literature* — decorator gotchas become function-composition gotchas, and order is the big one | cite 13 |
+| Name the language, then the design | 13 | "Use Strategy" means an interface and three classes in one language and passing a function in another, so a design document that omits the language has underspecified the work | "name the language first (Ch. 13)" |
 | Smuggled verdict | 14 | Vocabulary arriving with its conclusion attached | cite 14 |
 | Principle→movement mechanism | 15 | Observation gets a name, name gets a community, community forgets the conditions | cite 15 |
 | Mocks assert about mocks | 17 | A mocked test passes when the real constraint has been deleted | cite 17 |
@@ -227,8 +230,10 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | Tolerant reader / consumer-driven contracts | 12 | Surviving a boundary you do not control |
 | Delivery states as transition types | 12 | Illegal states in Go, and where the guarantee stops |
 | Visitor: Java 1994 vs Java 26 | 13 | 28 lines to 11, same compile-time exhaustiveness |
-| Strategy in four languages | 13 | Java class-per-algorithm, Java lambda, Go func field, Python callable |
-| Fetcher with retry and cache | 13 | Decorator as function composition, and the interface-width limit |
+| Strategy in four languages | 13 | Java class-per-algorithm vs named static methods, Go func field, Python callable — names kept on both sides |
+| Fetcher, struct form vs function form | 13 | Decorator measured both ways; the function form is longer |
+| loggingStore forwarding four methods | 13 | What decoration costs when the interface is not one function |
+| WithLog/WithCache ordering | 13 | Composition order changes behaviour; both orders compile |
 | Filesystem tree, Java and Go | 13 | Composite unchanged by the presence or absence of sum types |
 | Old client against four API changes | 09 | Add is safe, retype fails loudly, rename fails silently with a zero amount |
 | `io/ioutil`, deprecated 2021, running in 2026 | 09 | 175 deprecated declarations in Go's stdlib — the cost of a compatibility promise, kept |

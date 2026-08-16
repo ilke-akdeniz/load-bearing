@@ -2142,3 +2142,55 @@ Two further boundaries: Observer dissolves in one process and returns across a m
 Every sample was compiled and run as printed — nine fences across Java, Go, and Python, plus both quoted `javac` errors.
 `LEDGER.md` gains nine concept rows and four example rows.
 The relationship to chapter 12 is stated in the second sentence rather than left implicit: 12 asks what a pattern answers, 13 asks what it is made of, and the two are independent.
+
+---
+
+## 53. The Strategy comparison was rigged, and Decorator fails the chapter's own test
+
+**Date.** 2026-08-16
+
+**Context.**
+The author's first review of chapter 13 objected to the Strategy demonstration:
+
+> most reader will object that two versions don't offer the same guarantee or maintainability. In the first example the shipping formulas are defined in one place, they are named and can be reused easily. […] But if there is a trade-off then does our claim that the pattern became simpler still hold here?
+
+**The objection was correct and the diagnosis is worth stating.**
+The draft compared an interface plus two implementing classes against two lambdas written inline at the call site.
+That changes two independent things at once — whether the scaffolding exists, and whether the policies keep their names and their home — and only the first is what the chapter claims.
+
+**Decision.**
+Keep the names on both sides.
+The new version is a class of named static methods, referenced as `ShippingPolicies::flatRate`, which is nine lines of interface and classes reduced to four lines of methods with reuse, discoverability, and a single home all intact.
+The chapter now separates the two changes explicitly before showing the second version, because conflating them is how this comparison is usually rigged.
+
+**A second claim was also overstated and is now measured.**
+The draft's cost section said a closure has no name in a stack trace.
+Throwing from both forms shows the anonymity belongs to inlining, not to function values: a method reference reports `Trace.byWeight(Trace.java:4)` and an inline lambda reports `Trace.lambda$main$0`.
+So the cost is real but avoidable, and the honest version is that the feature removed a requirement rather than a capability — which is also the chapter's general shape.
+
+**Decorator moved from the demonstration to the boundary section, because writing it both ways disproved it.**
+The author asked to see the pattern first in the form that lacks the feature.
+Written as an interface and two wrapper structs, and again as a function type and two closures, the **function version is longer** — thirty-seven non-blank lines against thirty-one.
+Go asks nothing for a one-method interface, so a feature that removes ceremony has no ceremony to collect.
+
+That is not a small correction. It means Decorator does not demonstrate the chapter's claim, and it explains an omission the draft had noticed without understanding: **Decorator is not among Norvig's sixteen.**
+What function values actually buy is composability at the call site, which is a real gain and a different one.
+The section now says so, and carries the second limit as well — a five-method interface costs four forwarding methods that no language feature removes, because they are not simulating anything.
+
+**Two prescriptions were replaced with the author's.**
+
+The draft said a dissolved pattern loses its name and with it the literature on its failure modes.
+The author's correction: when the scaffold goes, the scaffold's own problems go with it, and what you inherit is the failure modes of the language feature — *decorator gotchas becomes function composition gotchas*.
+That is right, and the chapter now demonstrates the largest of them, composition order, with two orderings that both compile and log differently.
+
+The chapter closed on *whatever survives is the design, whatever vanishes was the cost of expressing it*, which the author flagged as having no real-world move attached.
+The move is now stated: **name the language first, then the design.** A document saying "use Strategy" means an interface and three classes in one language and passing a function in another, so omitting the language underspecifies the work — and the same reading applies to advice you receive.
+
+**Also on review.**
+The quantifier discussion was rewritten in plain words with chapter 04's halting-problem parallel given enough context to work without turning back, per the author's note that nobody re-reads an earlier chapter.
+*Sum type* is now defined at first use.
+Two cross-references to chapters 10 and 11 were cut as detours; the author's standing objection to "abrupt flashbacks" is that they need to earn their place, and these restated a convergence the local argument did not need.
+
+**Consequence.**
+Twelve code fences, all compiled and run as printed.
+The chapter grew from 379 to about 470 lines, almost entirely in the boundary section, which is the right place for it to grow.
