@@ -2062,3 +2062,37 @@ Chapter 04's retranscribed output, chapter 06's race, chapter 12's identity map,
 **Consequence.**
 Chapters 02, 08, and 09 needed no changes.
 The eleven drafted chapters now comply, so the rule applies to new drafting rather than accumulating a backlog behind it.
+
+---
+
+## 51. The README gets a "Start here" block, written as back-cover copy
+
+**Date.** 2026-08-15
+
+**Context.**
+The author is preparing to promote the book publicly before it is finished — it is free, on GitHub, and functions as a portfolio piece alongside FlowCore, so waiting for twenty-three chapters costs more than launching partial.
+
+The draft's observation was that the highest-leverage change was not another chapter but the README, which had no reading path: a visitor arriving from a link had to read the premise, the five-kind table, and the rubric before reaching a pointer to a twenty-three-chapter table of contents, eight of whose entries do not exist.
+
+**The draft's first attempt failed, and the author said why.**
+It described what each chapter covered — *"why acyclic dependency is a Law and layering is one shape among several"* — which is a table of contents in prose.
+
+> I think the book has many surprising claims parts that can condensed in simple terms to attract attention. […] Another way to thinkg about this is like the cover or back-cover of a technical book. No matter how boring and technical the book is, they always try to put simple and attention grabing statements there and I think that's the right move. We believe that the book is good and worth reading but other people don't believe that, and we are trying to convince them in a very short amount of time.
+
+**Decision.**
+Four hooks, in the author's chosen order — 06, 07, 10, 03 — each a claim rather than a description, each followed by two lines and a link.
+Placed directly under the status callout, so the first thing after a reader learns the book is a draft is a reason to read it anyway.
+
+**Why this does not conflict with the book's register.**
+The hooks are the chapters' own claim sentences at full strength, not copy written over them.
+*You cannot tell a slow machine from a dead one* is chapter 07's claim verbatim.
+The 95% is chapter 06's measured figure.
+So the promotional voice and the book's voice are the same sentences, which is the only version of this the book can defend.
+
+Two hooks were pulled back on a check against the chapters, and the corrections are the substance of this entry.
+*"You cannot, and it is a theorem"* was wrong: chapter 07 calls the indistinguishability a property of asking questions over a network, and the theorems are its consequences. Now *"most of what is impossible in distributed systems follows from it."*
+*"'This should be a Repository' forbids nothing"* asserted something the chapter does not demonstrate — it works the test on Facade and lists Repository as a case for the reader to apply it to. Now phrased as chapter 10's own question, *what would that rule out?*, which is both accurate and a better invitation.
+
+**Consequence.**
+The rule this establishes for any promotional copy: **a hook must be cashable by the chapter it links to.**
+A reader who arrives on an overclaim and then meets chapter 04's careful separation of theorem, definition, and empirical law will feel the mismatch, and not overclaiming is the book's differentiator.
