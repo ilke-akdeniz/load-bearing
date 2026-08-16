@@ -147,7 +147,7 @@ final class Checkout {
 }
 ```
 
-**Before the Java 26 version, one thing has to be separated out, because conflating the two is how this comparison is usually rigged.** Two independent things could change here. One is the scaffolding — the interface and the classes implementing it. The other is whether the two policies keep their names and their home. Those are not the same decision, and replacing named classes with lambdas dropped into call sites changes both at once, which is not a fair trade and is worth objecting to.
+**Before showing the Java 26 version, one thing has to be separated out, because conflating the two is how this comparison is usually rigged.** Two independent things could change here. One is the scaffolding — the interface and the classes implementing it. The other is whether the two policies keep their names and their home. Those are not the same decision, and replacing named classes with lambdas dropped into call sites changes both at once, which is not a fair trade and is worth objecting to.
 
 So keep the names:
 
