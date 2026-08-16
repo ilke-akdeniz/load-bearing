@@ -372,10 +372,10 @@ A chapter is finished by alternating commits, and **both sides commit**, so that
 **Reviewing the author's commit means reviewing the whole commit, not only the tags.**
 This is the step that has already gone wrong once: the tagged items were treated as the review and the direct edits as settled.
 Edits written quickly in the margins of a review need proofreading like any other prose.
-Read the diff line by line.
-Sweep the direct edits first, and act on the tags only after that sweep is complete.
-Direct edits can alter the meaning of the text and change how the tags should be processed.
-Reversing this order could yield unwanted results.
+**Read the whole diff, line by line, before changing anything.**
+Evaluate the direct edits first — they may have moved what the tags are asking about — then act on the tags.
+Direct edits can alter the meaning of the text, including the claim sentence every tag is measured against.
+Reversing this order could yield unwanted results, and tags sometimes explain a direct edit, so the reading is whole-diff even though the acting is ordered.
 
 - **Review every direct edit on the merits, not only for grammar.** Ask whether it made the chapter better, and say so either way. Two failures a spellcheck cannot see: an edit that restates a concept another chapter *owns*, in different words, which is the drift `docs/LEDGER.md` exists to prevent; and an edit that weakens a claim while reading more smoothly. Check terms the ledger assigns elsewhere against their canonical wording.
 - **Proofread every direct edit** — grammar, and the book's own rules. A review edit is as subject to the register and the no-decoration rules as anything Claude wrote. Note that automated checks skip fenced code, so comments inside samples need reading by eye.
