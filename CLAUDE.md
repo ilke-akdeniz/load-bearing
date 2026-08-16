@@ -77,6 +77,9 @@ Most of it has already been worked through and corrected by the author, so **rea
 `docs/ai-material.md` is the same kind of document, held inside this repo: the worked argument for material owed to seven chapters, with the FlowCore evidence and the provenance already gathered.
 Read it before drafting 02, 03, 15, 17, 19, 21, or 23.
 
+`docs/speculative-abstraction.md` is the second: the argument that an abstraction bought as insurance against a future change usually cannot pay out, because it was shaped by the thing it was insuring against.
+Read it before drafting 17, 18, or 20.
+
 Public repo: <https://github.com/ilke-akdeniz/flowcore>.
 
 ## The anti-repetition protocol

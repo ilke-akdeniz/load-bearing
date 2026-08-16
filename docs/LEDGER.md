@@ -156,6 +156,9 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Principle→movement mechanism | 15 | Observation gets a name, name gets a community, community forgets the conditions | cite 15 |
 | Mocks assert about mocks | 17 | A mocked test passes when the real constraint has been deleted | cite 17 |
 | Layered packages force exports | 18 | A directory wall requires publishing the helpers it was meant to hide | cite 18 |
+| Plurality vs sequential replacement | 18 | Two implementations live at once is what an interface is for; replacing one engine with another forever is not, and only the first is a Force — see `docs/speculative-abstraction.md` | "plurality, not replacement (Ch. 18)" |
+| Insurance that cannot pay out | 18 | An abstraction bought against a future swap is shaped by the engine it was written against, sits in the code layer while the migration is a data problem, and costs the features you already run | "the premium is paid daily (Ch. 18)" |
+| Injection is not abstraction | 18 | Passing a dependency in and hiding it behind an interface are two decisions; 05 argues for the first, and only the second is the speculative one | cite 18 |
 | Force-map method | 19 | Read forces, derive principles, check idioms — in that order | cite 19 |
 | Domain inversions | 20 | Each domain's dominant force inverts some standard advice | cite 20 |
 | Corpus monoculture | 02 | A model has one training distribution and cannot acquire a second, so 02's prescribed cure is unavailable to it | cite 02; argument in `docs/ai-material.md` |
