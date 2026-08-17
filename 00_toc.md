@@ -156,9 +156,14 @@ Then Strategy in four languages, with the policies kept named on both sides so t
 
 Vocabulary that arrives with its conclusion already attached.
 
-Contents: "anemic domain model" as a diagnosis dressed as a description; "code smell" and the rhetoric of hygiene; how a term coined inside one argument (rich OO domain models versus J2EE entity beans) travels to contexts whose premises it doesn't fit; the third option such terms cannot see — behaviour placed by *scope* rather than by doctrine; how to spot the pattern in new vocabulary.
+The claim: **some vocabulary arrives with its verdict attached, so accepting the word concedes the argument** — and how much you conceded depends on whether the word also names something you can go and check.
 
-*Where the claim doesn't apply:* some pejorative terms name real defects, and refusing all judgment-laden vocabulary is over-correction.
+Two independent questions, graded the way chapter 10 grades names rather than on a single ladder: does the term pick out something in the code, and does it carry a verdict.
+All four cells are occupied, and the damaging one is **names a shape *and* convicts it** — the shape is checkable, so the term reads as description while the verdict rides along unexamined.
+
+Contents: one invoice described twice, accurately, as a Transaction Script and as an anemic domain model; what Fowler actually wrote in 2003, read from the source — *"they incur all of the costs of a domain model, without yielding any of the benefits"* — and the antecedent that does not travel with the verdict; the third option the term cannot see, which is behaviour **placed by scope**, with sqlite enforcing the rule no Go code could; and the cell where a word names no shape at all, where *this smells* is a fact about the reader rather than about the file.
+
+*Where the claim doesn't apply:* verdict nouns that name a Law violation — *SQL injection*, where the condition attached is *always* — against ones naming a Principle violation, like *premature optimization*, where the answer is a latency budget; refusing all judgment-laden vocabulary, which is a slogan of the same kind; and the fact that a term's cell is not fixed, shown by *monolith* crossing the verdict axis and partly back without ever leaving the top row.
 
 ## Part IV — Methodologies versus principles
 
@@ -280,7 +285,7 @@ The final answer to "is this load-bearing" as a repeatable procedure rather than
 | 11 | `11_patterns-that-cross.md` | **draft** |
 | 12 | `12_patterns-that-survive-translation.md` | **draft** |
 | 13 | `13_missing-language-features.md` | **draft** |
-| 14 | `14_smuggled-verdicts.md` | **in progress** |
+| 14 | `14_smuggled-verdicts.md` | **draft** |
 | 15 | `15_principle-to-movement.md` | not started |
 | 16 | `16_oop-vs-direction.md` | not started |
 | 17 | `17_tdd-and-mocks.md` | not started |
