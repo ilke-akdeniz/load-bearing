@@ -286,7 +286,7 @@ The final answer to "is this load-bearing" as a repeatable procedure rather than
 | 12 | `12_patterns-that-survive-translation.md` | **draft** |
 | 13 | `13_missing-language-features.md` | **draft** |
 | 14 | `14_smuggled-verdicts.md` | **draft** |
-| 15 | `15_principle-to-movement.md` | not started |
+| 15 | `15_principle-to-movement.md` | **in progress** |
 | 16 | `16_oop-vs-direction.md` | not started |
 | 17 | `17_tdd-and-mocks.md` | not started |
 | 18 | `18_clean-architecture-vs-language.md` | not started |

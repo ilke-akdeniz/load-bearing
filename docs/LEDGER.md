@@ -165,7 +165,13 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Verdict nouns are legitimate for Laws | 14 | SQL injection carries its verdict correctly because the condition attached is *always*; *premature optimization* does not, because whether it is premature is a latency-budget question | cite 14 |
 | A term's cell is not fixed | 14 | *Monolith* crossed the verdict axis and back while never leaving the top row — the tests measure a term in a community at a time | cite 14 |
 | Compression is what strips the condition | 14 | The terms that travel furthest compress best, and compression is the operation that leaves conditions behind (Ch. 10 owns the compression test) | cite 14 |
-| Principle→movement mechanism | 15 | Observation gets a name, name gets a community, community forgets the conditions | cite 15 |
+| Principle→movement mechanism | 15 | Observation true under conditions, compressed to be teachable, community teaches the name, conditions were never in the name | "the four steps (Ch. 15)" |
+| Compression selects against conditions | 15 | What travels is selected for being short and memorable; a condition is longer, breaks the rhythm, and is useless to anyone not in the situation — so the loss is structural rather than careless | "compression strips it (Ch. 15)" |
+| Pike published the condition beside the proverb | 15 | *Channels orchestrate; mutexes serialize* is the third item in the talk that produced *don't communicate by sharing memory*, and he said in it that sometimes the exact opposite is right | cite 15 |
+| Credibility gives no protection | 15 | The filter runs downstream of the author, so a source with Unix and Plan 9 behind it produced cargo cults inside a decade | cite 15 |
+| The test that survives | 15 | Does the idea arrive with the conditions under which it is wrong — a sorting instrument, not an acceptance test | "the conditions test (Ch. 15)" |
+| Unconditional advice loses nothing | 15 | gofmt compresses perfectly because there is no situation in which one consistent format is wrong; 14's boundary in a different costume | cite 15 |
+| The book runs its own mechanism | 15 | Twenty-three chapters plus a named method is step 2 with the author as originator; the two non-negotiable conditions are stated where they are hard to skip | cite 15 |
 | Mocks assert about mocks | 17 | A mocked test passes when the real constraint has been deleted | cite 17 |
 | Layered packages force exports | 18 | A directory wall requires publishing the helpers it was meant to hide | cite 18 |
 | Plurality vs sequential replacement | 18 | Two implementations live at once is what an interface is for; replacing one engine with another forever is not, and only the first is a Force — see `docs/speculative-abstraction.md` | "plurality, not replacement (Ch. 18)" |
@@ -256,6 +262,7 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | The 80h vs 988h remaining scenario | 09 | Same team, same hire, opposite answers; break-even sits at the ramp-up length |
 | Invoice, named twice | 14 | One file, two accurate descriptions — one a shape, one a conviction |
 | Invoice rules at three scopes | 14 | Value on the type, whole-object in the operation, cross-row in the schema, with sqlite refusing the duplicate |
+| Mutex vs channel counter, measured | 15 | 14 lines against 34, and 145 ns against 355 — what a proverb costs when its condition did not travel |
 | Bidirectional Order↔Customer | 16 | OOP producing cycles |
 | Deleted constraint, passing mock test | 17 | Mocks assert about mocks |
 | Store split into a package | 18 | Layered packages force exports |

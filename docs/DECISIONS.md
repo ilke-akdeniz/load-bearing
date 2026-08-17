@@ -2428,3 +2428,44 @@ The framing deliberately avoids the author's *office politics* and *non-technica
 "Four combinations, and only three of them occur" becomes "all four are occupied".
 The grid's bottom-left cell is filled in.
 The paragraph closes on the chapter's own test — *if you accept the word, what have you agreed is true?* — where the answer is nothing, which is the finding rather than a gap.
+
+---
+
+## 60. Chapter 15 gets its mechanism from Pike's own transcript, not from the paraphrase
+
+**Date.** 2026-08-16
+
+**Context.**
+`00_toc.md` planned the chapter around "Go proverbs quoted as law, Rob Pike's own complaint about it", and the author's source document states it the same way: *"Rob Pike has publicly complained about Go proverbs being quoted as rules — he wrote them as observations, and watched them become slogans."*
+
+**Reading the source changed what the chapter argues.**
+The complaint as described could not be found — no such statement appears on `go-proverbs.github.io`, and searches turned up nothing.
+What exists is better: a transcript of the Gopherfest 2015 talk itself, in which Pike says the thing the paraphrase reports him complaining about later.
+
+> they might be contradictory. Proverbs aren't always — real proverbs in the real world you can find lots that are exactly the opposite. And that's okay too, because sometimes one engineering decision is right, sometimes the exact opposite is right.
+
+So the chapter does not need a later complaint. **The disclaimer was in the original talk**, and it did not travel, which is a sharper instance of the chapter's own claim than a subsequent grumble would have been.
+
+**The finding that became the chapter's mechanism.**
+Pike also states his selection criteria for a proverb: "really short", "kind of poetic", "memorable", "a little saying".
+Those are criteria on *form*, and a condition cannot survive them — it is longer, it does not scan, and it is useless to anyone not in the situation it names.
+
+That converts the chapter from a description of a sequence into an explanation of why the sequence is the normal outcome: **compression is what makes advice transmissible and is the same operation that strips it.** The claim sentence is now that, rather than the four-step narration the TOC planned.
+
+**The demonstration is the proverb and its condition, three lines apart.**
+*Don't communicate by sharing memory* is the first item on the list; *Channels orchestrate; mutexes serialize* is the third.
+One is quoted in code reviews a decade later and the other is not, and the difference is length and rhythm rather than correctness.
+A counter written both ways: 14 lines and 145 ns/op with a mutex, 34 lines and 355 ns/op with a goroutine and three channels — one machine, ratio 2.4–2.5 across repeats, and the chapter says so rather than quoting a single run as if it were a constant.
+Chapter 06 owns why the channel version is a correct way to protect state, so this cites it rather than re-deriving it.
+
+**The AI material owed to this chapter is a section rather than a paragraph.**
+`docs/ai-material.md` assigns 15 "a paragraph applying 15's own test", and the finding is that generated design fails it in a way the four steps cannot describe: not that the conditions were forgotten but that none were ever formed.
+The chapter also draws the consequence the source material implies — this is a *harder* case than a movement, because a slogan leaves a thread to pull and a taken branch leaves no mark.
+
+**The third boundary is the trap the material warned about.**
+`ai-material.md` says the book is most likely to commit its own diagnosed error by closing with a method and a name.
+Chapter 15 is where that has to be answered, since it is the chapter that names the mechanism, so its boundary section states the two non-negotiable conditions: chapter 02's model is a lens that cannot be proved, and the review practice requires the expertise it appears to replace.
+
+**Verification.**
+Both Go samples compiled, `gofmt` clean, `go vet` clean. Benchmarks run four times.
+One error caught on re-reading before commit: the line counts were quoted inverted — *"the second is fourteen lines against thirty-four"* — which reversed the point the sentence was making.
