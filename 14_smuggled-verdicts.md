@@ -4,7 +4,9 @@
 
 **Some vocabulary carries its verdict inside the noun. You can use a word like that or you can disagree with it, but not both — so whoever picked the word has already settled the argument.**
 
-Chapter 10 says a pattern name is not one of the five kinds, because names are not true or false. This chapter is about the exception: a name built so that using it asserts something. Those behave like claims while keeping a name's exemption from having to be defended.
+Part III has been about names. Chapter 10 asked what a name buys and answered in two tests, which it ran on `Manager` and `Helper` as readily as on Singleton — because the tests are about names, and patterns are only the richest supply of them. The three chapters since graded the catalogue's names against ownership, against Forces, and against the language you write them in.
+
+This is the last thing a name can do. Chapter 10's finding was that a name sits outside the five kinds: it picks out a shape, and a shape is not true or false. Some names are built to break that — using one asserts something — and they do it while keeping a name's exemption from ever having to be defended. Pattern culture produces the densest supply of those too, which is why the chapter sits in this part; the mechanism is not confined to patterns, which is why its boundary cases come from outside.
 
 ## Three tiers, and the test that separates them
 

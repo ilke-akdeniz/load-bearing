@@ -2313,3 +2313,34 @@ This is the book's own rule about the five kinds — **never number them, the na
 
 **Also.**
 A latency table written for the Principle example was cut before commit: it ran to 75 columns, and it re-presented chapter 03's own order-matcher example rather than citing it. It is now one sentence with a cross-reference.
+
+---
+
+## 57. Part III is about names, and chapter 14 now says so
+
+**Date.** 2026-08-16
+
+**Context.**
+The author asked why chapter 14 sits in *Part III — Patterns, graded* if its subject is vocabulary rather than patterns, having added *pattern* to the claim sentence for that reason and had it reverted:
+
+> If chapter 14 is about vocabulary and not patterns I'm not sure how to justify this placement. […] So I'm still confused how vocabulary, namings and patterns relate and is it still ok for chapter 14 to belong to part III?
+
+**What settled it was chapter 10's actual scope.**
+Its formal claim is about names, not patterns: *"A pattern is a name for a shape, and names are neither"* true nor false.
+Both of its tests are run on `Manager`, `Helper`, `Util`, `OrderManager`, `PaymentHelper`, and `DataUtil` — none of which are patterns — alongside Singleton and Transaction Script.
+
+So the part's opening chapter already generalises past the catalogue. **Part III is about names, with the pattern catalogue as the densest supply of them.**
+Chapter 10 asks what a name buys; 11, 12, and 13 grade the catalogue's names against ownership, Forces, and language; 14 is what a name can do when it stops being neutral.
+
+**Decision.**
+Chapter 14 stays in Part III, and the claim stays general.
+The defect was that the chapter never justified its own placement — it leaned on chapter 10 in a single clause and left the relationship implicit.
+Two paragraphs now state it, including why the demonstration is pattern vocabulary and the boundary cases are not.
+
+**Why the claim is not narrowed to "pattern vocabulary".**
+The chapter's own material defeats it — *code smell*, *anti-pattern*, *premature optimization*, and *SQL injection* are none of them patterns, and the *monolith* boundary is architecture vocabulary.
+Narrowing the claim to fit the part title would have made the chapter assert less than it demonstrates, which is the failure the claim-sentence rule exists to prevent, pointed the other way.
+
+**Part III's title is left as "Patterns, graded".**
+It names the part's centre of gravity, which is the catalogue, and chapters 10 and 14 are the frame around it — what a name is worth going in, and what a name can do coming out.
+The alternatives considered were vaguer, and the author's question was about placement rather than about the title.
