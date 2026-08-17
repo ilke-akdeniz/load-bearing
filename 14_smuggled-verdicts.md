@@ -29,7 +29,7 @@ Four combinations, and only three of them occur:
                                             "not clean"
 ```
 
-The bottom-left is empty, and that is not an accident — a word that neither picks anything out nor asserts anything gives nobody a reason to say it.
+The bottom-left is empty, and that is not an accident — a word that neither picks anything out nor asserts anything gives nobody a reason to say it. [claude it might surprise you but bottom-left words are very commonly used maybe even more than the others on some orgs. They are basically "corporate land - office politics filler words". You use it when you are forced to say something about a situation you have no control and you don't want involvement. Or some no-technical people use all the time because the other combinations are not available to them. Example: "What do you think about this design? It looks exciting, I'm sure lots of effort went into it. With the age of AI..." I'm not sure if this is worth putting in the book tough, you decide.]
 
 **The top-right cell is this chapter's subject.** A term there names a shape *and* convicts it, which is the combination that does damage inside pattern vocabulary: you can check the shape, so the term looks like a description, and the verdict rides along unexamined.
 
