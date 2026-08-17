@@ -2344,3 +2344,56 @@ Narrowing the claim to fit the part title would have made the chapter assert les
 **Part III's title is left as "Patterns, graded".**
 It names the part's centre of gravity, which is the catalogue, and chapters 10 and 14 are the frame around it — what a name is worth going in, and what a name can do coming out.
 The alternatives considered were vaguer, and the author's question was about placement rather than about the title.
+
+---
+
+## 58. Chapter 14 restructured onto two axes, because a ladder made *Decorator* and *code smell* the same species
+
+**Date.** 2026-08-16
+
+**Context.**
+The author, after the first review, kept returning to a discomfort with the chapter's placement in Part III:
+
+> With this chapter organizations and terminology, aren't we implying in the book that "code smell" and "decorator" are of the same species? That feels wrong to me.
+
+They were right, and the fault was structural rather than presentational.
+
+**The diagnosis.**
+The chapter graded terms on a single ladder — shape name, hint word, verdict noun — which collapsed two independent questions into one ordering.
+
+- **Does the term pick out something in the code?** *Decorator*: yes. *Anemic domain model*: yes. *Code smell*: no.
+- **Does the term carry a verdict?** *Decorator*: no. *Anemic*: yes. *Code smell*: yes.
+
+On those axes *Decorator* and *code smell* are diagonally opposite, and the ladder had put them adjacent with *anemic* in between.
+
+**Chapter 10 had already got this right and the draft ignored it.**
+It grades names on compression and constraint, has a section headed *The two tests are independent*, and prints a 2×2 with four named outcomes.
+Chapter 14 took a related question about the same objects and flattened it, which is also why the chapter read as though it did not belong in the part.
+Restructuring makes it fit better, not worse: it is chapter 10's method applied to a different pair of questions.
+
+**The ladder also had the ordering backwards on one axis.**
+By *can you dissent*, the shape-plus-verdict cell is worse — *anemic* forbids the sentence that disagrees with it and *smell* does not.
+By *is there anything here to check*, the no-shape cell is worse — with *anemic* you can open the file, establish that behaviour is off the entities, and argue about whether that is a defect; with *smell* there is nothing to establish.
+Two axes give two orderings, and the chapter had been presenting one of them as the ordering.
+
+**What the author added, and it is the practical core of the new section.**
+That a no-shape term is admissible when it is marked as what it is, contrasted in two sentences of theirs:
+
+> "This code has smells, should be rewritten from sctach"
+
+> "This part has code smells, but I can't make up what could go wrong. Can you walk me over why you choose this shape"
+
+The first goes hunch to conclusion with nothing checkable between, so only deference and refusal are available and seniority decides.
+The second declares its own status and converts into a request for the reasoning — which is chapter 03's Forces question.
+The rule the chapter now states: **a no-shape term is admissible when it is stated as the speaker's state and turned into a question.**
+
+**Two things the draft added on top.**
+That a no-shape term is **a fact about the reader rather than about the code** — Fowler's own *"surface indication"* says exactly this and the word will not carry it.
+And that **chapter 02's classification test has nothing to grip** on *this smells*: it is not a Law, Force, Principle, Idiom, or Style, because it is not a claim about software. If the test cannot take it, it was not a design claim.
+
+**Consequences.**
+The claim sentence now covers both axes.
+*Tier* vocabulary is gone from the chapter entirely.
+The *monolith* boundary is sharper against a grid than against a ladder — it crossed the verdict axis and partly back while never leaving the top row, because the shape it named never changed.
+The closing questions are now two, one per axis.
+`LEDGER.md` loses the three-tier row and gains five.

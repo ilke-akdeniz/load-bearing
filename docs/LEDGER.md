@@ -153,12 +153,16 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | The scaffold's failure modes move to the feature | 13 | Not *you lose the literature* — decorator gotchas become function-composition gotchas, and order is the big one | cite 13 |
 | Name the language, then the design | 13 | "Use Strategy" means an interface and three classes in one language and passing a function in another, so a design document that omits the language has underspecified the work | "name the language first (Ch. 13)" |
 | Smuggled verdict | 14 | A term with its judgment inside the noun; using it asserts something while keeping a name's exemption from being defended | "a verdict noun (Ch. 14)" |
-| The meaning test | 14 | Apply the term to your own code, then say the code is fine as it stands; a shape name and a hint word still mean something, a verdict noun does not | "run the meaning test (Ch. 14)" |
-| Three tiers of loaded term | 14 | Shape name, hint word, verdict noun — the book's own grading, because "loaded language" is too coarse to act on | cite 14 |
+| The meaning test | 14 | Apply the term to your own code, then say the code is fine as it stands, and see whether the result means anything — this measures the verdict axis only | "run the meaning test (Ch. 14)" |
+| Two axes, not one ladder | 14 | Does the term pick out something inspectable, and does it carry a verdict — independent questions giving four cells, of which the bottom-left is empty | "the two axes (Ch. 14)" |
+| Shape-plus-verdict is the damaging cell | 14 | The shape is checkable so the term reads as description, and the verdict rides along unexamined; this is the pattern-vocabulary case | cite 14 |
+| A no-shape term reports the reader | 14 | *This smells* is evidence about the reader's pattern-matching rather than a property of the file, and ch 02's classification test has nothing to grip | "no shape to check (Ch. 14)" |
+| Marking a hunch makes it usable | 14 | Stated as the speaker's state and converted into a question about why this shape, a hunch becomes the Forces question; unmarked it is a verdict with no subject | cite 14 |
+| Two axes give two orderings | 14 | By *can you dissent* the shape-plus-verdict cell is worse; by *is there anything to check* the no-shape cell is worse, and neither is the ordering | cite 14 |
 | Anemic drops an antecedent | 14 | Fowler's argument is that you incurred a domain model's costs and got none of its benefits; without the mapping layer and object graph there is no wasted payment to complain about | cite 14 |
 | Behaviour is placed, not absent | 14 | Scope — how much data you must see to tell whether a rule holds — decides where a rule can live; 06 owns why the widest scope is not a preference | "placed by scope (Ch. 14)" |
 | Verdict nouns are legitimate for Laws | 14 | SQL injection carries its verdict correctly because the condition attached is *always*; *premature optimization* does not, because whether it is premature is a latency-budget question | cite 14 |
-| A term's tier is not fixed | 14 | *Monolith* was a shape name, became a verdict, and was partly reclaimed — the test measures a term in a community at a time, so it has to be re-run | cite 14 |
+| A term's cell is not fixed | 14 | *Monolith* crossed the verdict axis and back while never leaving the top row — the tests measure a term in a community at a time | cite 14 |
 | Compression is what strips the condition | 14 | The terms that travel furthest compress best, and compression is the operation that leaves conditions behind (Ch. 10 owns the compression test) | cite 14 |
 | Principle→movement mechanism | 15 | Observation gets a name, name gets a community, community forgets the conditions | cite 15 |
 | Mocks assert about mocks | 17 | A mocked test passes when the real constraint has been deleted | cite 17 |

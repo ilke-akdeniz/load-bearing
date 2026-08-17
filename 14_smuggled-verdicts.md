@@ -2,23 +2,46 @@
 
 ## The claim
 
-**Some vocabulary carries its verdict inside the noun. You can use a word like that or you can disagree with it, but not both — so whoever picked the word has already settled the argument.**
+**Some vocabulary arrives with its verdict attached, so accepting the word concedes the argument — and how much you have conceded depends on whether the word also names something you can go and check.**
 
 Part III has been about names. Chapter 10 asked what a name buys and answered in two tests, which it ran on `Manager` and `Helper` as readily as on Singleton — because the tests are about names, and patterns are only the richest supply of them. The three chapters since graded the catalogue's names against ownership, against Forces, and against the language you write them in.
 
 This is the last thing a name can do. Chapter 10's finding was that a name sits outside the five kinds: it picks out a shape, and a shape is not true or false. Some names are built to break that — using one asserts something — and they do it while keeping a name's exemption from ever having to be defended. Pattern culture produces the densest supply of those too, which is why the chapter sits in this part; the mechanism is not confined to patterns, which is why its boundary cases come from outside.
 
-## Three tiers, and the test that separates them
+## Two questions about any term
 
-Not standard vocabulary — this grading is the book's own, and it exists because "loaded language" is too coarse to be useful. Terms differ in how much room they leave you.
+Chapter 10 graded names on two independent properties and refused to put them on one line — a name can compress well and constrain nothing, and Facade is the case that proves it. The same discipline is needed here, because two different things are being asked and they come apart.
 
-The test is one sentence long. **Apply the term to your own code, then say the code is fine as it stands, and see whether the result means anything.**
+**Does the term pick out something in the code?** Something you could open the file and confirm or deny.
 
-- *"This is a Transaction Script, and that is the right shape here."* Means something. **The term is a shape name.** It says what the code is and stops.
-- *"That is a code smell, and it is fine here."* Means something, slightly uncomfortably. **The term is a hint word.** It leans, and it lets you push back.
-- *"This is an anemic domain model, and that is correct here."* Means nothing. **The term is a verdict noun.** *Anemic* means sick; the sentence contradicts itself, so the word cannot be used by anyone who disagrees with it.
+**Does the term carry a verdict?** Something you would be agreeing with by using it.
 
-The test yields three tiers: shape name, hint word, verdict noun. The third tier is the subject of this chapter. The first two are here to show that the problem is not judgment in vocabulary — it is judgment that cannot be answered without abandoning the vocabulary.
+Four combinations, and only three of them occur:
+
+```text
+                    no verdict              carries a verdict
+ -----------------  ----------------------  --------------------
+ names a shape      Decorator               anemic domain model
+ you can inspect    Transaction Script      SQL injection
+
+ names no shape     (nobody uses these)     code smell
+                                            anti-pattern
+                                            "not clean"
+```
+
+The bottom-left is empty, and that is not an accident — a word that neither picks anything out nor asserts anything gives nobody a reason to say it.
+
+**The top-right cell is this chapter's subject.** A term there names a shape *and* convicts it, which is the combination that does damage inside pattern vocabulary: you can check the shape, so the term looks like a description, and the verdict rides along unexamined.
+
+The bottom-right is a different failure, and reaching it means leaving the territory Part III has been about. Those terms name no shape, so there is nothing to open the file and check. The chapter deals with them at the end of the demonstration, where the crossing is marked.
+
+Two tests follow from the two questions, and they are worth keeping separate.
+
+**For the verdict.** Apply the term to your own code, then say the code is fine as it stands, and see whether the result means anything. *"This is a Transaction Script, and that is the right shape here"* means something. *"This is an anemic domain model, and that is correct here"* does not — *anemic* means sick, so the sentence argues with itself, and the word is unavailable to anyone who disagrees with it.
+
+**For the shape.** Ask what you would be agreeing is true about the code if you accepted the word. For *Decorator*, that is answerable: something wraps something else with the same interface. For *anemic*, it is answerable: behaviour is not on the entities. For *smell*, there is no answer, which is the whole of the bottom-right cell's problem.
+
+This grading is the book's own, and the axes are not standard vocabulary.
 
 ---
 
@@ -132,24 +155,31 @@ That constraint is a business rule, fully enforced, and it is behaviour by any d
 
 Chapter 05 reaches the same place from the structural side, where a `completed_at is null` gate makes the lower layer the more capable one and inverts layering doctrine. Here the point is narrower: a term that cannot see the third option will misclassify every design that uses it.
 
-### "Code smell" carries its own dissent, and usage removes it
+### Off the map: when the word names nothing at all
 
-This is a hint word, and it fails differently — which is why it is worth putting next to the first.
+This is the bottom-right cell, and reaching it means leaving pattern territory. *Decorator* and *code smell* are not two grades of the same thing; on the grid above they sit diagonally opposite, and the difference matters more than the similarity.
 
 Fowler's definition, crediting Kent Beck with the coinage:
 
 > A code smell is a surface indication that usually corresponds to a deeper problem in the system.
 
-*Surface indication.* *Usually.* And elsewhere in the same piece, that smells "don't *always* indicate a problem" and "aren't inherently bad on their own — they are often an indicator of a problem rather than the problem themselves."
+**A surface indication is a hunch, described accurately.** Elsewhere in the same piece: smells "don't *always* indicate a problem", and they "aren't inherently bad on their own — they are often an indicator of a problem rather than the problem themselves." The definition is built to be arguable, and it is right about what it is defining.
 
-The definition is built to be arguable. A smell is a reason to look, and the word was chosen for exactly that: you investigate a smell, you do not convict on one. So *"that is a smell and it is fine here"* is a sentence the definition licenses.
+What the definition does not say, and what the word will not carry, is **whose state it reports**. *This smells* says that something in the file tripped an experienced reader's pattern-matching before they could say what. That is real evidence and worth having — compressed experience is why senior reviewers are worth their salary. But it is evidence about the reader, not a property of the file, and no amount of it can be checked by opening the file.
 
-What happens in practice is that the hedge is dropped and the metaphor is not. *Smell* belongs to a family — rot, hygiene, cleanliness, clean code — and that family does not have a neutral setting. Told your code smells, you are not being handed a place to look. Chapter 15 traces how a name outlives the conditions it was issued with; this is the special case where the leftover word is one that implies dirt.
+The tell is that the book's own classification test has nothing to grip. Run chapter 02's five questions on *this smells* and it will not place: it is not a Law, a Force, a Principle, an Idiom, or a Style, because it is not a claim about software at all. **If the test cannot take it, you were not handed a design claim.**
 
-The difference from *anemic* is worth keeping, because it decides what to do:
+So the practical difference is not whether the word gets used. It is whether it is marked as what it is:
 
-- With **code smell**, the qualifier exists and can be restored. *A smell is a place to look* is a defensible reading with the author on your side.
-- With **anemic domain model**, there is no qualifier to restore, because the judgment is in the noun rather than in the sentence around it.
+> This code has smells, it should be rewritten from scratch.
+
+> This part has code smells, but I can't work out what would go wrong. Can you walk me through why you chose this shape?
+
+The first goes from hunch to conclusion in one step with nothing checkable in between, so the only moves available are deference and refusal, and seniority decides which. The second declares its own status — *I can't work out what would go wrong* — which keeps the hunch labelled, and then converts it into a request for the reasoning. That second question is the one chapter 03 says should have been asked anyway: which Forces produced this shape.
+
+**A no-shape term is admissible when it is stated as the speaker's state and turned into a question.** Unmarked, it is a verdict with no subject, and there is no design discussion available until somebody supplies the missing shape.
+
+One consequence worth stating, because it inverts the ordering the rest of this chapter implies. Measured by *can you dissent*, the top-right is worse: *anemic* forbids the sentence that disagrees with it and *smell* does not. Measured by *is there anything here to check*, the bottom-right is worse: with *anemic* you can at least open the file, establish that behaviour is off the entities, and argue about whether that is a defect. With *smell* there is nothing to establish. Two axes give two orderings, and neither is the ordering.
 
 ---
 
@@ -191,15 +221,15 @@ The reading to avoid is that technical language should be neutral. It should not
 
 *Never use a loaded term* is a slogan of the same kind as the ones this chapter is about — a compressed rule with its conditions removed. The working version is narrower: **when you use a term that convicts, say the condition out loud in the same breath**, because the term will not carry it for you. *This is anemic in Fowler's sense — you are paying for the mapping layer and getting nothing back* is a sentence somebody can answer. *This is anemic* is not.
 
-### A term's tier is not fixed, so the test has to be re-run
+### A term's cell is not fixed, so the tests have to be re-run
 
 The grading above describes words as they are used now, by the people around you. It is not a property the word carries permanently, and the clearest evidence is a term that has moved in both directions inside fifteen years.
 
-*Monolith* began as a shape name. A single deployable unit — that is all it meant, and *"it is a monolith, and that is the right shape here"* was an unremarkable sentence. Through the middle of the 2010s it became a verdict noun: the thing you were migrating away from, the answer to what went wrong, and saying your system was a monolith was conceding a point. Then *modular monolith* arrived and pulled it partly back, and the neutral sentence is sayable again in some rooms and not in others.
+*Monolith* began in the left column. A single deployable unit — that is all it meant, and *"it is a monolith, and that is the right shape here"* was an unremarkable sentence. Through the middle of the 2010s it crossed to the right: the thing you were migrating away from, the answer to what went wrong, and saying your system was a monolith conceded a point before you had made one. Then *modular monolith* arrived and pulled it partway back, and the neutral sentence is sayable again in some rooms and not in others.
 
-Nothing about the word changed. What changed is what a listener assumes you have conceded by using it.
+Note which way it moved. It stayed on the top row the whole time — *monolith* always named a shape you could go and check, and the shape never changed. What moved is what a listener assumes you have agreed to by using the word.
 
-Two consequences. **The test is about a term in a community at a time**, so running it once and remembering the answer will eventually be wrong. And **a word can be a shape name in one room and a verdict in the next** — which is not a flaw in the test, it is the thing the test measures, and it is why the answer has to come from the people you are actually talking to rather than from a glossary.
+Two consequences. **The tests measure a term in a community at a time**, so running them once and remembering the answer will eventually be wrong. And **a word can sit in different cells in two adjacent rooms** — which is not a flaw in the tests, it is the thing they measure, and it is why the answer has to come from the people you are talking to rather than from a glossary.
 
 ---
 
@@ -207,7 +237,7 @@ Two consequences. **The test is about a term in a community at a time**, so runn
 
 **Auditing vocabulary is a way to avoid answering.** "That term smuggles a verdict" can be true and can also be a refusal to discuss the code. If someone calls a design anemic and the design *is* an object graph with an ORM and no behaviour, they are right, and the etymology of their word is not the topic.
 
-**The three tiers are a spectrum, and the middle is genuinely contested.** *Code smell* is a hint word here because its author defined it with the hedge attached. Someone could argue it is a verdict noun, on the grounds that the hygiene metaphor overwhelms the definition in every real use — and that is a reasonable position rather than a misreading.
+**Which cell a term sits in is genuinely contested for some of them.** *Code smell* is placed as carrying a mild verdict here, because its author defined it as an indication rather than a finding. Someone could argue the hygiene metaphor overwhelms that definition in every real use, which would move it toward the strength of *anemic* without moving it off the bottom row — and that is a reasonable position rather than a misreading.
 
 **Watching your own words is a tax on saying anything.** Stating the condition every time you use a compressed term is correct and it is slower, and in a review with forty comments it will not happen. The realistic version is to spend it on the load-bearing ones: the comment that will decide whether something gets rewritten.
 
@@ -226,14 +256,16 @@ Two consequences. **The test is about a term in a community at a time**, so runn
 
 **In a conversation:**
 
-- **"That is an anti-pattern."** Which one, and what did its author say the conditions were? The word *anti-pattern* is itself a verdict.
+- **"That is an anti-pattern."** Which one, and what did its author say the conditions were? *Anti-pattern* names no shape of its own — it is a verdict with a filing category attached.
 - **"This isn't clean."** Against what definition, and what happens if it stays?
 - **A design defended by renaming it.** If *Transaction Script* and *anemic domain model* describe the same file, the argument is about the word and the design was never in question.
 - **Agreement reached suspiciously fast after a term is introduced.** Nobody wants to be the person defending sick code, which is what the word is for.
 
-The question that does the work: **what would have to be true for this to be fine, and does the term let me say it?**
+Two questions do the work, and they are the two axes.
 
-If the answer is a condition you can state and check, you have a claim and can argue with it. If the term forbids the sentence, you have been handed a conclusion.
+**If I accept this word, what have I agreed is true about the code?** If there is an answer, you can go and check it, and the disagreement has a subject. If there is no answer, nothing has been said about the code yet and the discussion has not started.
+
+**What would have to be true for this to be fine, and does the term let me say it?** If you can state the condition, you have a claim and can argue with it. If the word forbids the sentence, you have been handed a conclusion.
 
 ---
 
