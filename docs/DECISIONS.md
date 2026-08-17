@@ -2397,3 +2397,34 @@ The claim sentence now covers both axes.
 The *monolith* boundary is sharper against a grid than against a ladder — it crossed the verdict axis and partly back while never leaving the top row, because the shape it named never changed.
 The closing questions are now two, one per axis.
 `LEDGER.md` loses the three-tier row and gains five.
+
+---
+
+## 59. The fourth cell is occupied, and what fills it is worth one paragraph
+
+**Date.** 2026-08-16
+
+**Context.**
+The chapter's grid claimed the bottom-left cell — names no shape, carries no verdict — was empty, and gave a reason: *"a word that neither picks anything out nor asserts anything gives nobody a reason to say it."*
+
+The author's second review disproved it:
+
+> it might surprise you but bottom-left words are very commonly used maybe even more than the others on some orgs. […] You use it when you are forced to say something about a situation you have no control and you don't want involvement. […] Example: "What do you think about this design? It looks exciting, I'm sure lots of effort went into it."
+> I'm not sure if this is worth putting in the book tough, you decide.
+
+**The correction was not optional.**
+Whether to expand on it was a judgment call; whether to fix it was not.
+The draft had asserted a mechanism for a non-fact, which is the failure this book spends chapters diagnosing in other people, sitting inside a grid whose purpose is to sort claims by how checkable they are.
+
+**Decision: include it, in one paragraph, framed by what it tells the reader.**
+
+Against including it: the book's subject is technical advice, and filler is the absence of advice; the register rules exclude office atmosphere; the author had already objected to an earlier section of this chapter for a tone that belonged in a different book.
+
+For including it, which won: the cell is real, and there is a use for knowing it. **A word from it means no design feedback was given.** Rewriting something because a senior reviewer called it *interesting* is acting on a statement that was never about the code — and correctly placing what you have been handed is the book's actual subject, so this is in scope where a complaint about corporate language would not be.
+
+The framing deliberately avoids the author's *office politics* and *non-technical people* wording. Neither is needed to make the point, both invite a reading in which the book is sneering at colleagues, and the useful content survives without them: these words get said when a response is required and a position is not.
+
+**Consequence.**
+"Four combinations, and only three of them occur" becomes "all four are occupied".
+The grid's bottom-left cell is filled in.
+The paragraph closes on the chapter's own test — *if you accept the word, what have you agreed is true?* — where the answer is nothing, which is the finding rather than a gap.

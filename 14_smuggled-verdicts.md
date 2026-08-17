@@ -16,7 +16,7 @@ Chapter 10 graded names on two independent properties and refused to put them on
 
 **Does the term carry a verdict?** Something you would be agreeing with by using it.
 
-Four combinations, and only three of them occur:
+Four combinations, and all four are occupied:
 
 ```text
                     no verdict              carries a verdict
@@ -24,12 +24,14 @@ Four combinations, and only three of them occur:
  names a shape      Decorator               anemic domain model
  you can inspect    Transaction Script      SQL injection
 
- names no shape     (nobody uses these)     code smell
-                                            anti-pattern
+ names no shape     "interesting approach"  code smell
+ nothing to check   "a lot of work in this" anti-pattern
                                             "not clean"
 ```
 
-The bottom-left is empty, and that is not an accident — a word that neither picks anything out nor asserts anything gives nobody a reason to say it. [claude it might surprise you but bottom-left words are very commonly used maybe even more than the others on some orgs. They are basically "corporate land - office politics filler words". You use it when you are forced to say something about a situation you have no control and you don't want involvement. Or some no-technical people use all the time because the other combinations are not available to them. Example: "What do you think about this design? It looks exciting, I'm sure lots of effort went into it. With the age of AI..." I'm not sure if this is worth putting in the book tough, you decide.]
+**The bottom-left is easy to miss, because the words in it are not doing a technical job.** *Interesting approach.* *A lot of work has clearly gone into this.* They name no shape and pass no verdict, and that is their function rather than their failure — they are what gets said when a response is required and a position is not.
+
+Recognizing the cell is worth something, because of what a word from it tells you: **no design feedback was given.** Rewriting something because a senior reviewer called it interesting is acting on a statement that was never about the code. The check is the same one used everywhere else in this chapter — if you accept the word, what have you agreed is true? Here the answer is nothing, and that is the finding rather than a gap in the grid.
 
 **The top-right cell is this chapter's subject.** A term there names a shape *and* convicts it, which is the combination that does damage inside pattern vocabulary: you can check the shape, so the term looks like a description, and the verdict rides along unexamined.
 

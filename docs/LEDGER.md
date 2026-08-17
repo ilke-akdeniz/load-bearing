@@ -154,7 +154,8 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Name the language, then the design | 13 | "Use Strategy" means an interface and three classes in one language and passing a function in another, so a design document that omits the language has underspecified the work | "name the language first (Ch. 13)" |
 | Smuggled verdict | 14 | A term with its judgment inside the noun; using it asserts something while keeping a name's exemption from being defended | "a verdict noun (Ch. 14)" |
 | The meaning test | 14 | Apply the term to your own code, then say the code is fine as it stands, and see whether the result means anything — this measures the verdict axis only | "run the meaning test (Ch. 14)" |
-| Two axes, not one ladder | 14 | Does the term pick out something inspectable, and does it carry a verdict — independent questions giving four cells, of which the bottom-left is empty | "the two axes (Ch. 14)" |
+| Two axes, not one ladder | 14 | Does the term pick out something inspectable, and does it carry a verdict — independent questions giving four occupied cells | "the two axes (Ch. 14)" |
+| Neither shape nor verdict | 14 | *Interesting approach* names nothing and asserts nothing, which is its function; a word from that cell means no design feedback was given | cite 14 |
 | Shape-plus-verdict is the damaging cell | 14 | The shape is checkable so the term reads as description, and the verdict rides along unexamined; this is the pattern-vocabulary case | cite 14 |
 | A no-shape term reports the reader | 14 | *This smells* is evidence about the reader's pattern-matching rather than a property of the file, and ch 02's classification test has nothing to grip | "no shape to check (Ch. 14)" |
 | Marking a hunch makes it usable | 14 | Stated as the speaker's state and converted into a question about why this shape, a hunch becomes the Forces question; unmarked it is a verdict with no subject | cite 14 |
