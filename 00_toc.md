@@ -151,7 +151,7 @@ Then Strategy in four languages, with the policies kept named on both sides so t
 
 *Where the claim doesn't apply:* the same feature that dissolves Visitor leaves **Composite** standing in the same file, because containment is a claim about the domain; **Decorator**, where the test returns no — measured in Go the function form is *longer*, and interface width rather than language decides what decoration costs; Observer, which dissolves in one process and returns across a machine, so the test is scoped; and the fact that the test names the language you moved *to*, so "Visitor is a workaround" is true and useless if your compiler lacks the feature.
 
-### 14. Patterns that smuggle a verdict
+### 14. Smuggled verdicts
 `14_smuggled-verdicts.md`
 
 Vocabulary that arrives with its conclusion already attached.

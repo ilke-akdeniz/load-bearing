@@ -2277,3 +2277,39 @@ The sqlite demonstration was run and the chapter quotes the real output — a fi
 **Open question for the author.**
 The chapter is titled *Patterns That Smuggle a Verdict*, matching the TOC, but its subject is vocabulary rather than patterns — *code smell* is not a pattern, and neither is *anti-pattern*.
 *Smuggled Verdicts* would be more accurate. The title is the author's call, and the drift check enforces H1 against the TOC either way.
+
+---
+
+## 56. Chapter 14: "meaningful" beats "parses", and the title loses "Patterns"
+
+**Date.** 2026-08-16
+
+**The author's correction to the test was substantive, not stylistic.**
+The draft's test read *"say the term about your own code, then disagree with it, and see whether the result parses."*
+That is wrong. *"This is an anemic domain model, and that is correct here"* parses perfectly — it is grammatical English. What it fails to be is *meaningful*, because the noun contradicts the predicate.
+The author's rewrite substituted meaning for grammar, and the chapter is now: **apply the term to your own code, then say the code is fine as it stands, and see whether the result means anything.**
+`LEDGER.md`'s row is renamed accordingly.
+
+**The title.**
+The author's edit changed the H1 to *Smuggled a Verdict*, which the drift check caught against the TOC, and which is not a title.
+The intent is clear and matches decision 55's open question and the filename, so both H1 and the TOC entry are now **Smuggled Verdicts**.
+
+**One direct edit reverted, with a reason.**
+The claim was narrowed to *"some pattern vocabulary carries its verdict inside the noun."*
+The chapter's own examples defeat that: *code smell*, *anti-pattern*, *clean*, *premature optimization*, and *SQL injection* are none of them patterns.
+The edit also runs against the title change made in the same commit, which removed *Patterns* from the chapter's name. Reverted to *some vocabulary*.
+
+**Naming the tiers instead of numbering them.**
+The author replaced *"the second tier"* and *"tier three"* with *hint word* and *verdict noun* throughout.
+This is the book's own rule about the five kinds — **never number them, the names carry meaning** — applied to a taxonomy the book invented two hours earlier, and it was applied by the author rather than by the draft that wrote the rule down.
+
+**Three tags.**
+
+*The Fowler service-layer paragraph* was cut as a detour. Correct: it defends Fowler against a misreading, which is not this chapter's argument.
+
+*The Law/Principle boundary needed worked examples* — the author reported not following it. It now works two: **SQL injection**, where the condition attached to the verdict is *always*, so compressing it costs nothing; and **premature optimization**, where the judgment sits in the first word and whether it is premature is a latency-budget question that chapter 03 measures across four orders of magnitude. *Use-after-free* was dropped rather than explained, since three Law examples were already enough.
+
+*The "you still need the term" section was deleted*, on the author's objection that its tone belonged in a different book. That was right, and the register rules name the failure: atmosphere, the beleaguered engineer. It is replaced by a boundary that does more work — **a term's tier is not fixed**, evidenced by *monolith* moving from shape name to verdict noun and partly back within fifteen years, which means the test measures a term in a community at a time and has to be re-run rather than memorized.
+
+**Also.**
+A latency table written for the Principle example was cut before commit: it ran to 75 columns, and it re-presented chapter 03's own order-matcher example rather than citing it. It is now one sentence with a cross-reference.

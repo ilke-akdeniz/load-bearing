@@ -1,8 +1,8 @@
-# Smuggled a Verdict
+# Smuggled Verdicts
 
 ## The claim
 
-**Some pattern vocabulary carries its verdict inside the noun. You can use a word like that or you can disagree with it, but not both — so whoever picked the word has already settled the argument.**
+**Some vocabulary carries its verdict inside the noun. You can use a word like that or you can disagree with it, but not both — so whoever picked the word has already settled the argument.**
 
 Chapter 10 says a pattern name is not one of the five kinds, because names are not true or false. This chapter is about the exception: a name built so that using it asserts something. Those behave like claims while keeping a name's exemption from having to be defended.
 
@@ -10,13 +10,13 @@ Chapter 10 says a pattern name is not one of the five kinds, because names are n
 
 Not standard vocabulary — this grading is the book's own, and it exists because "loaded language" is too coarse to be useful. Terms differ in how much room they leave you.
 
-The test is one sentence long. **Apply the term to your own code, and state that the code is ok that way, and see whether the statement is meaningful.**
+The test is one sentence long. **Apply the term to your own code, then say the code is fine as it stands, and see whether the result means anything.**
 
-- *"This is a Transaction Script, and that is the right shape here."* Meaningful. **Term is just a shape name.** It says what the code is and stops.
-- *"That is a code smell, and it is fine here."* Meaningful, slightly uncomfortably. **Terms is a hint word.** It leans, and it lets you push back.
-- *"This is an anemic domain model, and that is correct here."* Meaningless. **Temr is a verdict noun.** *Anemic* means sick; the sentence contradicts itself, so the word cannot be used by anyone who disagrees with it.
+- *"This is a Transaction Script, and that is the right shape here."* Means something. **The term is a shape name.** It says what the code is and stops.
+- *"That is a code smell, and it is fine here."* Means something, slightly uncomfortably. **The term is a hint word.** It leans, and it lets you push back.
+- *"This is an anemic domain model, and that is correct here."* Means nothing. **The term is a verdict noun.** *Anemic* means sick; the sentence contradicts itself, so the word cannot be used by anyone who disagrees with it.
 
-Test yields three tiers of term: shape name, hint, verdict. The third tier is the subject of this chapter. The first two are here to show that the problem is not judgment in vocabulary — it is judgment that cannot be answered without abandoning the vocabulary.
+The test yields three tiers: shape name, hint word, verdict noun. The third tier is the subject of this chapter. The first two are here to show that the problem is not judgment in vocabulary — it is judgment that cannot be answered without abandoning the vocabulary.
 
 ---
 
@@ -88,8 +88,6 @@ And the article says so directly:
 
 > Domain Models aren't always the best tool.
 
-He also separates the service-layer question from the anemia question — advocating a service layer *"isn't an argument to make the domain model void of behavior; indeed service layer advocates use a service layer in conjunction with a behaviorally rich domain model."* [claude this paragraph looks like a deviation from the current argument with not much benefit. I suggest to remove it.]
-
 So the argument is: *if* you bought the machinery, use it. Applied to the invoice above, the antecedent is absent. There is no mapping layer, no object graph, no identity map, no lazy loading — a struct, some functions, and a table. Nothing was paid, so nothing was wasted, and the cost-benefit argument has nothing to attach to.
 
 **The verdict travels and the condition does not.** That is not a fact about Fowler; it is a fact about the shape of the term. *Incurring the costs of a domain model without the benefits* is nine words carrying a condition. *Anemic* is one word carrying the conclusion, and it is the one word that survives being repeated.
@@ -134,7 +132,7 @@ Chapter 05 reaches the same place from the structural side, where a `completed_a
 
 ### "Code smell" carries its own dissent, and usage removes it
 
-This is a "Hint" term, and it fails differently — which is why it is worth putting next to the first.
+This is a hint word, and it fails differently — which is why it is worth putting next to the first.
 
 Fowler's definition, crediting Kent Beck with the coinage:
 
@@ -173,12 +171,17 @@ Two properties follow, and they are why this is worth a chapter rather than a co
 
 Some loaded terms are loaded correctly, and the test is whether the condition can fail.
 
-*SQL injection.* *Data race.* *Buffer overflow.* Each carries a verdict, and each is fine, because there is no configuration of Forces under which concatenating user input into a query becomes the right answer. The condition holds everywhere, so nothing is smuggled by leaving it out. [claude I deleted the lesser known example which would complicate the understanding for most readers in my opinion.]
+**A verdict noun naming a Law violation.** *SQL injection* — building a query by pasting user input into the text of it, so that input containing a quote can close the string and start a statement of its own. The judgment is in the name: *injection* is something done to you. And it is warranted, because there is no configuration of Forces that makes it right. Not on an internal tool, not on an admin page nobody outside can reach, not at any size of team or any latency budget. The condition attached to the verdict is *always*, so compressing it away costs nothing. *Data race* and *buffer overflow* work the same way.
 
-That gives the claim's boundary a form the book already has: **a verdict noun is legitimate when it names a Law violation, and dangerous when it names a Principle violation.** A Law has no conditions that can fail (Ch. 02), so a term naming one loses nothing by compressing. A Principle is conditional by definition, so a term naming its violation drops exactly the part that mattered. 
+**A verdict noun naming a Principle violation.** *Premature optimization* — where the judgment is in the first word. Chapter 02 classifies the slogan it comes from as a Principle routinely quoted with its conditions removed; here the interest is the noun phrase, which asserts that the timing question is settled.
 
-[claude examples for these two modes for Law and Principle are needed here. Examples below are too succint, I don't get them. Also if you think Use-after-free example is irreplaceable use it but first explain what the term means.]
-*Anemic domain model* fails this because its condition — you already paid for a domain model — is a Force question, and the answer varies. *Use-after-free* passes because there is nothing to vary.
+Whether an optimization is premature is a latency-budget question, and chapter 03 works that budget across four orders of magnitude — a page render with 200 milliseconds to spend, against an order matcher with 200 microseconds. Hand-tuning a loop on the first day is waste in the first case and is the entire job in the second.
+
+Same work, same point in the schedule, opposite verdicts. So the term does not describe the code — it announces a conclusion about a Force it never asked anyone to measure, and somebody who disagrees has to reject the word before they can say which case they are in.
+
+That gives the claim's boundary a form the book already has: **a verdict noun is legitimate when it names a Law violation, and dangerous when it names a Principle violation.** A Law has no conditions that can fail (Ch. 02), so a term naming one loses nothing by compressing. A Principle is conditional by definition, so a term naming its violation drops exactly the part that mattered.
+
+*Anemic domain model* fails on the same grounds as *premature optimization*: its condition — you already paid for a domain model — is a Force question, and the answer varies by project.
 
 ### Refusing all judgment-laden vocabulary is its own over-correction
 
@@ -186,15 +189,15 @@ The reading to avoid is that technical language should be neutral. It should not
 
 *Never use a loaded term* is a slogan of the same kind as the ones this chapter is about — a compressed rule with its conditions removed. The working version is narrower: **when you use a term that convicts, say the condition out loud in the same breath**, because the term will not carry it for you. *This is anemic in Fowler's sense — you are paying for the mapping layer and getting nothing back* is a sentence somebody can answer. *This is anemic* is not.
 
-### You still need the term, because it will be used on you
+### A term's tier is not fixed, so the test has to be re-run
 
-The practical case for knowing this vocabulary has nothing to do with whether it is fair.
+The grading above describes words as they are used now, by the people around you. It is not a property the word carries permanently, and the clearest evidence is a term that has moved in both directions inside fifteen years.
 
-Someone will eventually apply *anemic domain model* to a design of yours, in a review or a hiring loop or an architecture forum. Having the counter-argument ready is worth more than not knowing the term exists — and the counter-argument is not *that term is unfair*, which sounds like a dodge. It is *which cost do you think I paid, and where do you think this rule should live instead?* 
+*Monolith* began as a shape name. A single deployable unit — that is all it meant, and *"it is a monolith, and that is the right shape here"* was an unremarkable sentence. Through the middle of the 2010s it became a verdict noun: the thing you were migrating away from, the answer to what went wrong, and saying your system was a monolith was conceding a point. Then *modular monolith* arrived and pulled it partly back, and the neutral sentence is sayable again in some rooms and not in others.
 
-Both are questions the term cannot answer, and asking them moves the conversation back to the design.
+Nothing about the word changed. What changed is what a listener assumes you have conceded by using it.
 
-[claude this "you still need the term" section's tone is maybe good for the book: "How to stop bullying in software design" but not for this book. You can delete this section or replace with a better alternative I learve that up to you.]
+Two consequences. **The test is about a term in a community at a time**, so running it once and remembering the answer will eventually be wrong. And **a word can be a shape name in one room and a verdict in the next** — which is not a flaw in the test, it is the thing the test measures, and it is why the answer has to come from the people you are actually talking to rather than from a glossary.
 
 ---
 
@@ -202,7 +205,7 @@ Both are questions the term cannot answer, and asking them moves the conversatio
 
 **Auditing vocabulary is a way to avoid answering.** "That term smuggles a verdict" can be true and can also be a refusal to discuss the code. If someone calls a design anemic and the design *is* an object graph with an ORM and no behaviour, they are right, and the etymology of their word is not the topic.
 
-**The three tiers are a spectrum, and the middle is genuinely contested.** *Code smell* was placed as a "hint term" here because its author defined it with the hedge attached. Someone could argue it is a "verdict", on the grounds that the hygiene metaphor overwhelms the definition in every real use — and that is a reasonable position rather than a misreading.
+**The three tiers are a spectrum, and the middle is genuinely contested.** *Code smell* is a hint word here because its author defined it with the hedge attached. Someone could argue it is a verdict noun, on the grounds that the hygiene metaphor overwhelms the definition in every real use — and that is a reasonable position rather than a misreading.
 
 **Watching your own words is a tax on saying anything.** Stating the condition every time you use a compressed term is correct and it is slower, and in a review with forty comments it will not happen. The realistic version is to spend it on the load-bearing ones: the comment that will decide whether something gets rewritten.
 
