@@ -2555,3 +2555,54 @@ That is a better tell than a dispute, and quieter — **a competent reader who c
 Chapter 15's TOC entry is rewritten; the old one described the movement chapter that no longer exists.
 `LEDGER.md` loses the row for the deleted section and has two rows corrected — the claim's wording, and the note that Pike glosses rather than coins.
 The chapter runs 193 lines.
+
+---
+
+## 63. How chapter 15's claim sentence was arrived at
+
+**Date.** 2026-08-17
+
+Recorded at the author's request, because the claim took six exchanges and each one removed a specific defect. The final sentence is unremarkable to read, which is the point — the record is of what it had to survive.
+
+**Where it started.**
+The first draft claimed the mechanism was conditions being lost to compression: *"what travels is selected for being short, and a condition makes a saying longer."*
+That died with the draft it belonged to (decision 61).
+
+**Version two, after the rewrite.**
+*"A compressed principle does not fix the scope of its own key words. A reader without the author's context has to supply that scope, and the widest reading is the only one available without it."*
+
+**The author's first correction: it contradicted the chapter.**
+They tagged it against a line two sections later — *scope lives either inside the sentence or in machinery around the collection*.
+A claim asserting a principle **does not** contain its scope cannot stand in a chapter demonstrating that four-character rules do, and that four of Pike's nineteen do.
+The fix had to be conditional rather than absolute.
+
+**The author's second proposal, and the one thing in it the draft argued against.**
+They offered a three-sentence version turning on *"if the compression didn't wipe it"*, with *reconstruct* in place of *supply*.
+
+Two of those three moves were improvements and were kept: three short sentences read better than two packed clauses, and **reconstruct** is the right verb because it names the task the reader is handed and connects the claim to the chapter's third act, where the Go wiki and two commenters do exactly that.
+
+The draft argued against the third, and the author accepted: *the compression wiped it* makes compression the agent, which the chapter disproves twice. The *Wei Qi Shi Jue* rules are four Chinese characters — compression at maximum — and most carry their trigger. *Syscall must always be guarded with build tags* is short and cannot drift, because its subject fixes the domain. Compression is orthogonal; what decides it is whether the principle names its own situation.
+
+**The author's third correction: the word *sentence* had no referent.**
+This is the one the draft kept missing. Their objection, verbatim: *"We have principle, slogan claim and then 'sentence'. What sentence, which sentence?"* — plus the substantive point that a compressed principle need not be one sentence. *Design the architecture, name the components, document the details* is three imperatives.
+
+The draft had twice patched around this rather than fixing it, keeping *sentence* while adjusting everything else. Correcting it exposed **nine more places in the body** where *sentence* was standing in as general vocabulary for the chapter's subject, including its second-strongest line and its actionable test. In a chapter about imprecise vocabulary, that was a poor thing to have shipped.
+
+**The author's fourth correction: *what it applies to* invites a useless answer.**
+*"It obviously applies to Go or it obviously applies to software, what does it have to name?"*
+Correct — a domain is not a narrowing.
+
+**What resolved it was already in the book.**
+The thing the good ones name is a **situation**. Go is not a situation; software is not a situation. And *situation* is chapter 03's word for what a Force is a property of, and chapter 02's first classification question asks whether a claim is a statement about your situation.
+So the claim borrows vocabulary the reader has had since Part I rather than introducing a third term — which was the author's original objection to *sentence*, satisfied rather than worked around.
+
+**The result.**
+
+> **A compressed principle carries its scope only when it names the situation it applies to. Where it doesn't, the reader has to reconstruct that scope from the surrounding context. Without that context, only the widest reading is available.**
+
+Sentence one covers scope living inside the principle. *Surrounding context* in sentence two covers scope living in apparatus around the collection — Segoe's diagrams, the wiki's categories. Sentence three is the failure case, and the chapter's Reddit reader is an instance of it.
+
+**Attribution.**
+The three-sentence shape, *reconstruct*, the removal of *sentence*, and the objection to *applies to* are the author's.
+The argument against compression-as-agent, the conditional form, and the identification of *situation* as vocabulary the book already owns are the draft's.
+That the claim contradicted its own chapter was caught by the author reading the two against each other, which is the check no single pass performs.

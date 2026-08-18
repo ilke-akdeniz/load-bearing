@@ -2,7 +2,7 @@
 
 ## The claim
 
-**A compressed principle carries the scope of its key words only where the sentence names it. Where the sentence does not, a reader without the surrounding context has to supply that scope — and the widest reading is the only one available.**
+**A compressed principle carries its scope only when it names the situation it applies to. Where it doesn't, the reader has to reconstruct that scope from the surrounding context. Without that context, only the widest reading is available.**
 
 Part IV is three case studies, and this chapter is the mechanism they share, stated once.
 
@@ -36,7 +36,7 @@ So the proverb is about **transferring ownership**. One goroutine has the thing,
 
 Two items later comes a separate proverb, *channels orchestrate, mutexes serialize*, with its own explanation and its own scope. It answers a different question — which primitive for which job — and in explaining it Pike says a mutex is often very important and sometimes exactly what you want.
 
-### What the sentence says when nobody is there to gloss it
+### What the proverb says when nobody is there to gloss it
 
 Near the end of the talk, Pike guesses what will become of the idea of "Go Proverbs":
 
@@ -82,7 +82,7 @@ The code is fine. What is interesting is the reading that made it look wrong, wh
 
 **There is the mechanism, self-reported.** And it is more specific than channel over-use. The phrase *sharing memory* has no fixed extent in the sentence containing it. Does writing to your own index in a shared slice count? Pike's forty seconds answer no — the proverb is about handing off a pointer and losing access to it. The eleven words alone do not answer it, and the reader resolved it outward, to any memory two goroutines can both reach.
 
-The same post asks a second question worth as much: is the proverb about maintainability and safety, or is there some other reason for it? **They cannot tell what kind of claim it is.** That is chapter 02's subject arriving in the wild. Sorting the sentence into one of the five kinds is what tells you how much authority it has — a Law binds regardless, a Principle holds only under certain Forces, an Idiom is local — and the compressed form gives you nothing to sort it with.
+The same post asks a second question worth as much: is the proverb about maintainability and safety, or is there some other reason for it? **They cannot tell what kind of claim it is.** That is chapter 02's subject arriving in the wild. Sorting the proverb into one of the five kinds is what tells you how much authority it has — a Law binds regardless, a Principle holds only under certain Forces, an Idiom is local — and the compressed form gives you nothing to sort it with.
 
 ### The scope gets rebuilt by hand, more than once
 
@@ -98,9 +98,9 @@ Then it happens a third time, in the Reddit thread itself. One commenter, unprom
 
 And one reply reaches for a **meta-proverb** to bound the proverb, along the lines that a good developer follows the rules and a great one knows when to break them. That improvisation has an institutional form elsewhere. Sensei's Library, a wiki for go the board game rather than the language, sorts its proverbs into scope categories, italicizes the ones amateurs devised so you can see which have centuries behind them, and keeps a *Meta Proverbs* group whose entries include *don't follow proverbs blindly*. Its introduction says the proverbs apply often — and then that one must always evaluate whether they apply in a particular situation, and that sometimes they are contradictory.
 
-None of that apparatus in the game wiki was designed in, and the oldest collection did without it in a different way. The Tang-dynasty *Wei Qi Shi Jue* is ten rules of four Chinese characters each, and most of them spend part of that budget on the situation they apply to — *when in danger, sacrifice*; *against strong positions, play safely*; *take care of oneself when attacking*. The scope is inside the sentence rather than around the collection.
+None of that apparatus in the game wiki was designed in, and the oldest collection did without it in a different way. The Tang-dynasty *Wei Qi Shi Jue* is ten rules of four Chinese characters each, and most of them spend part of that budget on the situation they apply to — *when in danger, sacrifice*; *against strong positions, play safely*; *take care of oneself when attacking*. The scope is inside the principle rather than around the collection.
 
-Which is the more useful way to put the whole progression. **Scope lives either inside the sentence or in an apparatus around the proverb collection, and where it is in neither, the reader supplies it.** Segoe's book puts it in worked game diagrams beside each phrase. The game wiki puts it in categories, provenance marks, and a warning to evaluate before applying. The list of nineteen on the go language wiki has none of the three.
+Which is the more useful way to put the whole progression. **Scope lives either inside the principle or in an apparatus around the collection it belongs to, and where it is in neither, the reader reconstructs it — or fails to.** Segoe's book puts it in worked game diagrams beside each phrase. The game wiki puts it in categories, provenance marks, and a warning to evaluate before applying. The list of nineteen on the go language wiki has none of the three.
 
 ### The same list contains proverbs this cannot happen to
 
@@ -118,11 +118,11 @@ Pike's nineteen are not uniform, and the difference is visible in the grammar.
  Reflection is never clear
 ```
 
-The left column names a package. *Syscall* is a specific import, and a sentence whose subject is that import **has nowhere to drift to** — you cannot resolve *syscall* outward, because the word fixes the domain. The right column takes a whole way of working as its subject, and the extent is wherever the reader puts it.
+The left column names a package. *Syscall* is a specific import, and a proverb whose subject is that import **has nowhere to drift to** — you cannot resolve *syscall* outward, because the word fixes the domain. The right column takes a whole way of working as its subject, and the extent is wherever the reader puts it.
 
-This is a structural claim rather than an empirical one. It says the left column cannot lose its scope, not that nobody ever misapplies those sentences. But it is the strongest control available here: same author, same talk, same form, same afternoon, and the only variable is whether the sentence carries its own extent. The proverb this chapter followed is in the right column.
+This is a structural claim rather than an empirical one. It says the left column cannot lose its scope, not that nobody ever misapplies those proverbs. But it is the strongest control available here: same author, same talk, same form, same afternoon, and the only variable is whether the proverb names the situation it applies to. The proverb this chapter followed is in the right column.
 
-So the test gets sharper, and becomes something you can check rather than hope for. **Look at the grammatical subject.** If it names a package, a file format, a specific operation, the extent arrived with the sentence. If it names a style of programming, it did not, and supplying it is your job.
+So the test gets sharper, and becomes something you can check rather than hope for. **Look at the grammatical subject.** If it names a package, a file format, a specific operation, the situation arrived with the proverb. If it names a style of programming, it did not, and reconstructing it is your job.
 
 **On what these sources are worth**, because they are not equal. Pike's talk is primary. The Go project's wiki page is an official artifact and the strongest evidence that the misreading was real enough to be worth correcting — though note that it attributes the over-use to enthusiasm rather than to the proverb, and this chapter does not claim the proverb caused it. The forum thread is community anecdote: one instance, dated, and useful only because the over-application is self-reported rather than attributed by somebody else. It shows the confusion exists and what shape it takes. It establishes nothing about how often, and nothing here claims otherwise.
 
@@ -134,7 +134,7 @@ Compression fixes words. It does not fix their extent.
 
 *Sharing memory* is two words in Pike's sentence and about a paragraph in his explanation of it. The sentence survives repetition; the paragraph does not. So what circulates is a term whose boundary was set somewhere the reader cannot see — and the reader still has to act, so they resolve it. With no context to narrow it, the widest reading is the only one available. That is why the error has a direction. Nobody reads a proverb too narrowly.
 
-**The form causes this, and the form was chosen deliberately.** Pike sets out his criteria near the end: really short, kind of poetic, a little saying, something memorable. Those are constraints on shape, indifferent to whether the surviving sentence is complete. A statement of extent is longer, does not scan, and is useless to anyone not in the situation it names. It is the first thing that will not fit.
+**The form causes this, and the form was chosen deliberately.** Pike sets out his criteria near the end: really short, kind of poetic, a little saying, something memorable. Those are constraints on shape, indifferent to whether the surviving proverb is complete. A statement of extent is longer, does not scan, and is useless to anyone not in the situation it names. It is the first thing that will not fit.
 
 He also says of the whole list that the entries might be contradictory, and that sometimes one engineering decision is right and sometimes its exact opposite is. **That is a scope statement covering the entire collection, made once, at the end of a talk, and it is not on the page that carries the proverbs.**
 
@@ -151,7 +151,7 @@ Which gives the test worth keeping: **does this advice say how wide it is?**
 
 Some advice is unconditional, and then nothing is missing from the compressed form.
 
-*Gofmt's style is no one's favorite, yet gofmt is everyone's favorite* is on the same list of nineteen, and it became a norm — mandatory automatic formatting, no configuration — without incident. There is no situation in which one consistent format is wrong, so a reader who receives only the sentence has received all of it. Chapter 14 reached this boundary from the other side: a compressed statement is safe exactly when its condition is *always*. Chapter 22 is the general case.
+*Gofmt's style is no one's favorite, yet gofmt is everyone's favorite* is on the same list of nineteen, and it became a norm — mandatory automatic formatting, no configuration — without incident. There is no situation in which one consistent format is wrong, so a reader who receives only the proverb has received all of it. Chapter 14 reached this boundary from the other side: a compressed statement is safe exactly when its condition is *always*. Chapter 22 is the general case.
 
 ### The domains are not alike, and it explains the lag
 
@@ -169,13 +169,13 @@ Where that does not happen — where the wide reading hardens and nobody writes 
 
 ## What the claim costs
 
-**Recovering a scope is slow, and usually nobody wrote it down.** Pike's is recoverable because the talk was recorded. For most advice the context is a mailing list that no longer resolves, or a conversation. At that point you are reconstructing rather than reading, which is how a plausible mechanism gets attached to somebody else's sentence — this chapter's first draft did exactly that, asserting a relationship between two of Pike's proverbs that he never claimed.
+**Recovering a scope is slow, and usually nobody wrote it down.** Pike's is recoverable because the talk was recorded. For most advice the context is a mailing list that no longer resolves, or a conversation. At that point you are reconstructing rather than reading, which is how a plausible mechanism gets attached to somebody else's words — this chapter's first draft did exactly that, asserting a relationship between two of Pike's proverbs that he never claimed.
 
 **The test rejects nearly everything.** Almost no advice states its own extent, because the extent was compressed out before it reached you. *Does this say how wide it is* discards most of what is true along with what is not. It sorts. It does not accept or reject.
 
 **Noticing is cheap and answers nothing.** Observing that a saying has lost its scope takes no work. Finding what the scope was takes a recorded talk, a wiki page, or an afternoon, and that is the part people skip while keeping the posture.
 
-**Compression is not the enemy, and this reads as though it might be.** A sentence that fits in a review comment is how most real knowledge moves between people, and the alternative is everybody re-deriving everything, which is worse and does not happen anyway. The finding is about what to do on receipt.
+**Compression is not the enemy, and this reads as though it might be.** A saying that fits in a review comment is how most real knowledge moves between people, and the alternative is everybody re-deriving everything, which is worse and does not happen anyway. The finding is about what to do on receipt.
 
 ---
 
@@ -192,7 +192,7 @@ Where that does not happen — where the wide reading hardens and nobody writes 
 
 - **A saying offered as the end of a discussion.** The useful follow-up is not *I disagree* but *how would we apply that here, concretely, and what would it improve?* — which is answerable from the code in front of you, where a dispute about the saying is not.
 - **"That's just how it's done here."** Sometimes a real Idiom with reasons behind it (Ch. 21), sometimes a wide reading nobody has revisited. One question separates them.
-- **An appeal to who said it.** The credibility is usually genuine and answers a question nobody asked: it suggests the original observation was sound, and says nothing about whether the sentence you received still contains it.
+- **An appeal to who said it.** The credibility is usually genuine and answers a question nobody asked: it suggests the original observation was sound, and says nothing about whether the version that reached you still contains it.
 - **Anyone, including this book, saying a practice always applies.**
 
 The question that does the work: **what did the person who said this go on to say next?**
