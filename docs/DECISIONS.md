@@ -2707,3 +2707,30 @@ It used *extent* ten times for exactly what it called *scope* — two words, one
 Two `DECISIONS.md` entries mention *placed by scope* and stay as written.
 Chapter 14's *value-scoped rules* also went, being the retired sense leaking into a passage.
 The sweep turned up that chapter 15's TOC entry still carried the pre-review claim, including the word *sentence* that three reviews removed from the chapter; it now matches.
+
+---
+
+## 67. Chapter 15 defines *scope* against *conditions* at first use
+
+**Date.** 2026-08-18
+
+**Context.**
+Decision 66 settled that the book keeps both words — *conditions* in the earlier chapters, *scope* in chapter 15 — on the grounds that they are not synonyms. The author then made the obvious follow-on point:
+
+> This confusion between principle's conditions, and principle's scope is a real risk for the reader and we are not stating the exact meaning of scope in chapter 15 as it is introduced.
+
+Correct, and the risk was created by the previous decision. Keeping two words for one boundary is only defensible if the chapter says which is which.
+
+**Decision.**
+Two short paragraphs after the claim, before anything else.
+
+**Conditions** are what must be true for a Principle to hold, which is always some fact about your Forces — chapter 05's information-hiding Principle has a sharp one, *you do not control your callers*.
+**Scope is the same boundary seen from the other side: the situations the advice reaches.**
+
+**Why the book needs both, stated in the chapter rather than left implicit.**
+Stating the conditions gives you the scope, and naming the situation gives you the scope too — they are two routes to one boundary.
+Chapter 15 says *scope* because it tracks **what the wording carries** rather than what the advice requires, and a principle can carry that boundary either way. *Don't store money in a float* names a situation and states no condition, and passes the chapter's test regardless. A chapter using *conditions* would have to call that a principle whose conditions are absent, which is false.
+
+**Consequence.**
+`LEDGER.md` gains a row for the relationship, so a later chapter reaching for either word knows it is picking a view rather than a synonym.
+This closes the terminology work opened by decision 66.

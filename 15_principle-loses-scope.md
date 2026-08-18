@@ -4,6 +4,10 @@
 
 **A compressed principle carries its scope only when it names the situation it applies to. Where it doesn't, the reader has to reconstruct that scope from the surrounding context. Without that context, only the widest reading is available.**
 
+**A word on *scope*, because the book has used a different one for this.** Earlier chapters say a Principle has **conditions** — what must be true for it to hold, which is always some fact about your Forces. Chapter 05's information-hiding Principle has a sharp one: *you do not control your callers.*
+
+**Scope is the same boundary seen from the other side: the situations the advice reaches.** State the conditions and you have given the scope; name the situation and you have given it too. This chapter says *scope* rather than *conditions* because it tracks what the wording carries rather than what the advice requires — and a principle can carry that boundary either way. *Don't store money in a float* names a situation and states no condition, and it passes the test below regardless.
+
 Part IV is three case studies, and this chapter is the mechanism they share, stated once.
 
 ---
