@@ -117,7 +117,7 @@ And the article says so directly:
 
 So the argument is: *if* you bought the machinery, use it. Applied to the invoice above, the antecedent is absent. There is no mapping layer, no object graph, no identity map, no lazy loading — a struct, some functions, and a table. Nothing was paid, so nothing was wasted, and the cost-benefit argument has nothing to attach to.
 
-**The verdict travels and the condition does not.** That is not a fact about Fowler; it is a fact about the shape of the term. *Incurring the costs of a domain model without the benefits* is nine words carrying a condition. *Anemic* is one word carrying the conclusion, and it is the one word that survives being repeated.
+**The verdict travels and the condition does not.** *Incurring the costs of a domain model without the benefits* is nine words carrying a condition; *anemic* is one word carrying the conclusion. Chapter 15 is about why the second outlives the first in transmission. This chapter's interest is narrower and starts where that leaves off: the word that survived **convicts**, so a reply has to reject the vocabulary before it can reach the design.
 
 ### The third option the binary cannot see
 
@@ -195,7 +195,7 @@ Two properties follow, and they are why this is worth a chapter rather than a co
 
 **It is not a claim, so it never has to be defended.** Chapter 10's point is that names sit outside the five kinds — they are not true or false. A verdict noun exploits that: it does the work of a claim while keeping a name's exemption. Nobody has to state the condition, because on the surface nothing has been asserted.
 
-**It compresses well, which is why it spreads.** Run chapter 10's first test on it and *anemic domain model* passes easily — three words standing in for a paragraph. It is a good name by that measure. That is the uncomfortable part: the terms that travel furthest are the ones that compress best, and compression is exactly the operation that leaves conditions behind.
+**It compresses well, which is why it spreads.** Run chapter 10's first test on it and *anemic domain model* passes easily — three words standing in for a paragraph. It is a good name by that measure. That is the uncomfortable part: the terms that travel furthest are the ones that compress best, and compressing well is what got this one into every code review it appears in (Ch. 15).
 
 ---
 
@@ -271,4 +271,4 @@ Two questions do the work, and they are the two axes.
 
 ---
 
-**Next:** chapter 15 opens Part IV with the mechanism behind all of this — how a true observation acquires a name, the name acquires a community, and the community forgets the conditions that made the observation true.
+**Next:** chapter 15 opens Part IV with the mechanism behind this one — why the fragment that survives repetition is always the part telling you what to do, and never the part telling you when.

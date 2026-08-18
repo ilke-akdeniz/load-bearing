@@ -2767,3 +2767,36 @@ This is a limit on the chapter's sharpest tool, discovered from the same source 
 `LEDGER.md` gains two rows, one for the proxy and one for what the test actually measures.
 Chapter 15's TOC boundary line now leads with the proxy limit.
 The chapter runs 240 lines.
+
+---
+
+## 69. Chapter 14's Fowler section was chapter 15's mechanism, and the overlap was a ledger defect
+
+**Date.** 2026-08-18
+
+**Context.**
+The author, rereading chapter 14 after 15 was finished:
+
+> This section of chapter 14 has many parallels with chapter 15, it reads like a mini chapter 15 to me now. I'm not saying that is bad, that's interesting and I'm wondering if we should do anything about it, like at least acknowledging that and trying to find some insight from it
+
+They were right, and `CLAUDE.md` names the diagnosis: **a repetition found in review is a ledger defect, not a local wording problem.** Two rows were wrong.
+
+Row: *Compression is what strips the condition* was assigned to **14**. That is chapter 15's mechanism, and 15 was rewritten after 14 shipped, so nothing caught it. It is now split — 14 keeps *compressing well is why a verdict noun spreads*, 15 keeps why the qualifier is the part that goes.
+
+Row: *Scope is carried only where named* still carried chapter 15's pre-review wording, including *extent* and *sentence*, both retired from the chapter by later reviews.
+
+**Two other things the reread surfaced.**
+Chapter 14's closing line still described the chapter 15 that no longer exists — *a true observation acquires a name, the name acquires a community.* That is the movement chapter, deleted in decision 61.
+And chapter 14's Fowler section had generalised past its own subject: *that is not a fact about Fowler; it is a fact about the shape of the term… the one word that survives being repeated.* That sentence states 15's mechanism. It is trimmed to hand the transmission question to 15 and keep 14's own narrower point — the word that survived **convicts**, so a reply must reject the vocabulary before it can reach the design.
+
+**The insight the author asked for, now in chapter 15.**
+
+The two cases are different kinds of vocabulary losing different kinds of qualifier. *Anemic domain model* is a verdict noun and lost an **antecedent**. *Don't communicate by sharing memory* is an imperative proverb and lost a **situation**.
+
+Same selection, though: **what survives is the part that tells you what to do, and what goes is the part that tells you whether to do it.**
+
+That earns its place because it explains something neither chapter had accounted for — why the error only ever runs one way. Nobody under-applies a principle received without its scope, because the fragment that would have narrowed them is exactly the fragment that was dropped.
+
+**Consequence.**
+`LEDGER.md` gains a row for the actionable-half finding, so a later chapter meeting the same shape has somewhere to point.
+The overlap is now a relationship the book states rather than a duplication a reader notices.

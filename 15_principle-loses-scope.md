@@ -164,6 +164,12 @@ Compression fixes words. It does not fix their scope.
 
 *Sharing memory* is two words in Pike's sentence and about a paragraph in his explanation of it. The sentence survives repetition; the paragraph does not. So what circulates is a term whose boundary was set somewhere the reader cannot see — and the reader still has to act, so they resolve it. With no context to narrow it, the widest reading is the only one available. That is why the error has a direction. Nobody reads a proverb too narrowly.
 
+**The mechanism does not care what kind of vocabulary it works on.** Chapter 14's case is not a proverb at all. *Anemic domain model* is a verdict noun, and its author gave it a clear antecedent — you already paid for a domain model and are collecting none of the return. That antecedent is absent from every use of the term, and what circulates is the conviction.
+
+Different artifact, different missing piece — an antecedent there, a situation here — and the same selection running on both. **What survives is the part that tells you what to do. What goes is the part that tells you whether to do it.**
+
+Which explains why neither failure runs the other way. Nobody under-applies a principle they received without its scope, because the fragment that would have narrowed them is precisely the fragment that was dropped.
+
 **The form causes this, and the form was chosen deliberately.** Pike sets out his criteria near the end: really short, kind of poetic, a little saying, something memorable. Those are constraints on shape, indifferent to whether the surviving proverb is complete. A statement of scope is longer, does not scan, and is useless to anyone not in the situation it names. It is the first thing that will not fit.
 
 He also says of the whole list that the entries might be contradictory, and that sometimes one engineering decision is right and sometimes its exact opposite is. **That is a scope statement covering the entire collection, made once, at the end of a talk, and it is not on the page that carries the proverbs.**
