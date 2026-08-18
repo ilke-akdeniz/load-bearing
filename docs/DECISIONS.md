@@ -2606,3 +2606,29 @@ Sentence one covers scope living inside the principle. *Surrounding context* in 
 The three-sentence shape, *reconstruct*, the removal of *sentence*, and the objection to *applies to* are the author's.
 The argument against compression-as-agent, the conditional form, and the identification of *situation* as vocabulary the book already owns are the draft's.
 That the claim contradicted its own chapter was caught by the author reading the two against each other, which is the check no single pass performs.
+
+---
+
+## 64. The chapter stops confessing its own first draft
+
+**Date.** 2026-08-17
+
+**Context.**
+The author's third review deleted a clause from chapter 15's cost section. It had read that reconstructing rather than reading is how a plausible mechanism gets attached to somebody else's words — *"this chapter's first draft did exactly that, asserting a relationship between two of Pike's proverbs that he never claimed."*
+
+**Decision.**
+Accepted. The clause is gone.
+
+**Why it is the right cut, and why it took a second pass to see.**
+The reader has no first draft to compare against, so the confession is unverifiable from inside the chapter and reads as a credibility move rather than as evidence.
+The failure is already recorded where the authorship record belongs — decisions 61, 62, and 63 — and the README points there rather than at the prose.
+
+It is also the second time the author has cut the book talking about itself in this chapter. The first was *This book is doing it too*, removed in the second review as pre-emptive. **The pattern is worth naming: a chapter about how advice goes wrong is unusually tempting to decorate with the book's own fallibility, and every such passage costs the reader something and buys the book nothing.**
+
+**Consequence.**
+Decision 61's line saying the chapter names its own first draft in the costs section is no longer true of the shipped chapter, and is left as written — the log records what was decided when.
+
+**One correction to the review, in the other direction.**
+The third review changed the description of Segoe's book to *published fifty years earlier*. Pike's words are that it *"was translated about 50 years ago from Japanese into English"*, and the Japanese original is older than that. Restored to *translated into English about fifty years earlier*, which keeps the author's disambiguation — that this is go the board game rather than the language — and their split of an overstuffed sentence.
+
+The rest of both reviews stands: *scope* for *content* where the chapter's own key term applies; *proverb* for *sentence* in a place the vocabulary sweep missed; *the Reddit thread* for *the forum thread*; and *shows the book's cover* for the ambiguous *shows it*.
