@@ -421,6 +421,17 @@ Reversing this order could yield unwanted results, and tags sometimes explain a 
 - **Act on every `[claude …]` tag**, and delete it once addressed. A tag left in the file is unfinished work, and a chapter is not ready while any remain.
 - **Report what changed and why**, including anything found that was not asked about.
 
+**A wording problem found in one place is a survey, not a fix.**
+Three times while finishing chapter 15, a single word caught in review was doing the same wrong job elsewhere, and the one-site fix would have left the rest.
+
+- *Sentence* was vague in the claim. Correcting it exposed **thirteen** more uses in the body standing in as general vocabulary, including the chapter's second-strongest line and its closing test.
+- *Extent* was a private synonym for *scope*, used **ten** times for the same thing inside one chapter.
+- A table column confused a principle's scope with a term's extent. The same slip was in two further paragraphs.
+
+So when a word is found doing the wrong job, **grep every use of it before calling it fixed** — and not only in the chapter. `docs/LEDGER.md` and `00_toc.md` carry the same vocabulary, go stale silently, and were wrong in each of these cases.
+
+The cross-chapter version is the same rule at larger scale. *Scope* had acquired three incompatible meanings across chapters 13, 14, and 15, two of them bold definitions in adjacent chapters, before anyone counted. One survey found it; a lot of careful reading had not. `tools/check-drift.py` catches structural drift and cannot catch this, so the survey has to be run by hand when a term is in question.
+
 ## Git
 
 **Commit. Never push.**
