@@ -104,7 +104,7 @@ On concurrency, he says the use cases the team had in mind were mostly server so
 
 It also produced the third repair in this chapter. He gave an entire talk in 2012, *Concurrency is not Parallelism*, whose job was to supply the missing distinction, and says of it that it should have happened earlier.
 
-**One thing this is not.** It is not more evidence about the proverb. *Don't communicate by sharing memory* and *concurrency support in the language* are different artifacts, and nothing here says the proverb caused what Pike is describing. It is the same mechanism, twice, from the same person — once diagnosed in someone else's advice and once confessed in his own.
+**One thing this is not.** It is not more evidence about the proverbs. *Don't communicate by sharing memory* and *concurrency support in the language* are different artifacts, and nothing here says the proverb caused what Pike is describing. However, the underlying mechanism is the same: a principle loses it's scope and causes long-term harm.
 
 ### The scope gets rebuilt by hand, more than once
 
