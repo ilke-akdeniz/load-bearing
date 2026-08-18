@@ -172,12 +172,17 @@ Contents: one invoice described twice, accurately, as a Transaction Script and a
 
 The mechanism, stated once, so the case studies can be short.
 
-Contents: a true observation gets a name; the name gets a community; the community forgets the conditions; the conditions were the content.
-The test applied to generated design, where the answer is not *the conditions were forgotten* but *there were none to forget* — the derivation never happened, so there is no one to ask.
-Why practitioner credibility does not immunize anyone — Go proverbs quoted as law, Rob Pike's own complaint about it.
-The test that survives: **does the idea come with the conditions under which it's wrong?**
+The claim: **a compressed principle carries the scope of its key words only where the sentence names it** — and where it does not, a reader without the surrounding context supplies that scope, with the widest reading being the only one available.
 
-*Where the claim doesn't apply:* movements that genuinely improved practice, and why dismissing all methodology is the mirror-image error.
+One sentence followed from the talk that glossed it to the people who received it, the whole path on the record.
+Pike borrows the proverb form from Segoe's *Go Proverbs Illustrated* and describes it as opaque by design; gives *don't communicate by sharing memory* a narrow reading — hand off the pointer and lose access to it; says the proverbs are for people who already know them, as tools for explaining; and predicts the wiki that now carries the nineteen sentences and none of that.
+Then a reader resolving *sharing memory* outward, in their own words, about code that is race-clean.
+Then the scope rebuilt by hand three times — the Go project's own wiki page reconstructing Pike's reading in a table, two commenters doing it again, and a meta-proverb improvised in a thread.
+
+The finding the go-game collections supply: **scope lives inside the sentence or in apparatus around the collection, and where it is in neither the reader supplies it.**
+Which exposes a control inside Pike's own list — four proverbs take a named package as their grammatical subject and have nowhere to drift to, so the test becomes checkable rather than hopeful.
+
+*Where the claim doesn't apply:* advice with no scope to lose, where gofmt travelled intact; the domain gap between a fixed board game and software, which explains the lag without excusing it; and the fact that this chapter ends in repair rather than entrenchment, which is why the endpoint term belongs to 23.
 
 ### 16. OOP versus the Direction Rule
 `16_oop-vs-direction.md`
@@ -262,6 +267,9 @@ The final answer to "is this load-bearing" as a repeatable procedure rather than
 Also the **folk remedy** — the author's term, held back from chapter 15 because that chapter's evidence ends in repair rather than entrenchment.
 A folk remedy is advice applied far outside the context it was made for, which stays misapplied because nobody rebuilds its scope; *drink two litres of water a day* is the pattern.
 By 23 the Part IV case studies have supplied endpoints that earn the term, so this is where it belongs — and the receiving question it generates is *how wide is this advice, and who decided that?*
+
+Also **the book's own conditions**, cut from chapter 15 as pre-emptive there and belonging here, where the method is actually delivered.
+Two are not negotiable: chapter 02's classification model is a lens rather than a finding and cannot be proved, only used; and the review practice this book runs on requires the expertise it appears to replace, since a reviewer without depth in the material reads the same confident paragraph and approves it.
 
 *Where the claim doesn't apply:* when you don't have time to analyse and must simply pick the conventional answer — which is usually the correct move, and knowing that is part of the skill.
 

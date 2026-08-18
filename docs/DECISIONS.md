@@ -2525,3 +2525,33 @@ The draft argued against it and the author accepted: the chapter's evidence ends
 `LEDGER.md`'s eleven rows for chapter 15 are replaced; the old ones describe a chapter that no longer exists.
 Sensei's Library material is used under short quotation for commentary — its content is under the OpenContent License, whose share-alike clause defers to fair use, so the chapter states facts about the page and quotes two sentences rather than reproducing lists.
 The author's review file keeps its words; only trailing whitespace was normalised so the drift check stops failing on it.
+
+---
+
+## 62. Chapter 15, second review: Pike glosses the proverb rather than coining it
+
+**Date.** 2026-08-17
+
+**The author's warning was correct and changed three headings.**
+The draft called Pike the proverb's author. The transcript has him introducing it as *"there is already one proverb you all know"* — he is glossing something in circulation, not coining it.
+The chapter now says so, and the point survives: he is the language's designer saying what the sentence is taken to mean, which makes the gloss more authoritative rather than less.
+
+**The claim contradicted the chapter's own later finding.**
+It said a compressed principle *does not contain* the scope of its key words, while the chapter goes on to show scope living inside the sentence in the *Wei Qi Shi Jue* and in four of Pike's own nineteen.
+Now conditional: **it carries the scope only where the sentence names it**, and where it does not, the reader supplies it.
+
+**Two sections cut on the author's judgement.**
+
+*This book is doing it too* — their objection was that it read as "part splitting hairs, part self-flattery, and part trying to counter every possible argument against the book pre-emptively like a paranoid."
+That is right about its placement. The material came from `docs/ai-material.md`'s warning that the book is most likely to commit its own diagnosed error, but answering the charge in the chapter that names the mechanism is pre-emption. The two non-negotiable conditions move to chapter 23's TOC entry, where the method is actually delivered.
+
+The opening paragraph listing chapters 04, 13, and 14 as prior instances also went. It was orientation rather than argument.
+
+**One recognition bullet was wrong about its own evidence.**
+The draft described the Reddit thread as an argument about what a word covers. The author quoted the post to show it is not: the poster found working code, could not fault it, still suspected it violated the proverb, and asked.
+That is a better tell than a dispute, and quieter — **a competent reader who cannot reconcile a rule with code they have no complaint about is missing the rule's extent, not their own judgement.** The bullet now says that.
+
+**Consequence.**
+Chapter 15's TOC entry is rewritten; the old one described the movement chapter that no longer exists.
+`LEDGER.md` loses the row for the deleted section and has two rows corrected — the claim's wording, and the note that Pike glosses rather than coins.
+The chapter runs 193 lines.
