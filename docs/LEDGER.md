@@ -189,6 +189,8 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Insurance that cannot pay out | 18 | An abstraction bought against a future swap is shaped by the engine it was written against, sits in the code layer while the migration is a data problem, and costs the features you already run | "the premium is paid daily (Ch. 18)" |
 | Injection is not abstraction | 18 | Passing a dependency in and hiding it behind an interface are two decisions; 05 argues for the first, and only the second is the speculative one | cite 18 |
 | Force-map method | 19 | Read forces, derive principles, check idioms — in that order | cite 19 |
+| An Idiom bounds its own designers | 21 | Pike: interfaces coloured the team's thinking for more than a decade, so every proposed polymorphism had to be reconciled with them — the cost is not thoughtless obedience, it is what the convention makes unimaginable | "the Idiom bounded them (Ch. 21)"; argument in `docs/pike-retrospective.md` |
+| A deviation, declared and dated | 21 | The early Go compiler in C: reason stated, offence taken, and the reason later expired and the deviation reversed | cite 21 |
 | Domain inversions | 20 | Each domain's dominant force inverts some standard advice | cite 20 |
 | Corpus monoculture | 02 | A model has one training distribution and cannot acquire a second, so 02's prescribed cure is unavailable to it | cite 02; argument in `docs/ai-material.md` |
 | The generator cannot see your Forces | 03 | Forces are facts about your situation; a model has the prompt, so the groundwork is skipped by construction | cite 03; argument in `docs/ai-material.md` |

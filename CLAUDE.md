@@ -80,6 +80,9 @@ Read it before drafting 02, 03, 15, 17, 19, 21, or 23.
 `docs/speculative-abstraction.md` is the second: the argument that an abstraction bought as insurance against a future change usually cannot pay out, because it was shaped by the thing it was insuring against.
 Read it before drafting 17, 18, or 20.
 
+`docs/pike-retrospective.md` is the third: Rob Pike's 2023 GopherConAU talk on what the Go project got right and wrong, with the passages sorted by which chapter is owed them.
+Chapter 15 has taken its share. Read it before drafting 21, and before reopening 02, 09, or 13.
+
 Public repo: <https://github.com/ilke-akdeniz/flowcore>.
 
 ## The anti-repetition protocol

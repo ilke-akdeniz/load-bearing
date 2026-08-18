@@ -259,6 +259,8 @@ Each domain: which forces dominate, which standard advice inverts, and the code 
 
 Idioms, taken seriously rather than dismissed.
 
+**Two cases from Pike's 2023 retrospective**, worked in `docs/pike-retrospective.md`: interfaces **coloured their own designers' thinking** for more than a decade, which is an Idiom bounding what the people best placed to see past it could imagine; and the early compiler written in C against every expectation of the language community, a declared deviation with its reason stated and its expiry recognised.
+
 Contents: why Go grew free functions and C# grew containers, traced to language features rather than culture; an Idiom whose precondition failed because the reader stopped being the author (FlowCore's decision 18: short Go names, generated idiomatically, deviated from deliberately); why Python skipped DI except where per-request lifetime is real; the case *for* obeying local idiom even when you can argue against it — reviewability, hiring, the cost of being interesting; when to deviate, and how to pay for it (declare it, document the reason, keep it narrow).
 
 *Where the claim doesn't apply:* idioms that encode a genuine mistake, and how to tell those from idioms you merely dislike.
@@ -338,6 +340,9 @@ Chapters already at **draft** that are owed an addition. Listed here because a d
 |---|---|---|
 | 02 | corpus monoculture as a new instance of *monoculture makes Idioms look like physics* | chapter 23 exists, so the mention can point at the synthesis |
 | 03 | the generator cannot see your Forces; the team-size Force at its limit — no continuity, unbounded volume | as above |
+| 02 | Pike on arguments about language features being opinion argued with certainty — a witness for *tone does not vary with authority*, in `docs/pike-retrospective.md` | next time 02 is open |
+| 09 | Pike pricing Go's compatibility promise: it costs, and it blocks feature-itis — the constraint adopted deliberately rather than suffered | next time 09 is open |
+| 13 | possibly the async/await aside and *coloured functions*; check the fit before using it, it may belong to 20 or nowhere | next time 13 is open |
 
 The worked argument is in `docs/ai-material.md`; decision 24 records what was decided and why.
 

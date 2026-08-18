@@ -2925,3 +2925,42 @@ The author proposed opening the turn with *However*. The turn is needed — afte
 
 **Consequence.**
 `LEDGER.md` gains a row for the reading-versus-advice distinction, since it is what licenses the word *harm* anywhere in Part IV.
+
+---
+
+## 74. Pike's retrospective gets a source document, and drafted chapters wait
+
+**Date.** 2026-08-18
+
+**Context.**
+Chapter 15 took two passages from Pike's 2023 GopherConAU talk. Reading it turned up material owed to several other chapters, four of which are already at **draft**, and the author asked for a record plus a decision on whether to apply it now.
+
+**Decision, part one: a source document.**
+`docs/pike-retrospective.md`, in the shape of `docs/ai-material.md` — the passages sorted by which chapter is owed them, with the fit argued once so the mentions agree.
+It says at the top to read the talk rather than the file, because everything in it is an excerpt chosen for one argument, which is the partial reading `CLAUDE.md` warns about.
+
+**What it assigns.**
+
+*Chapter 21* gets the most, and the strongest. Pike says interfaces **coloured the team's thinking** in ways it took more than a decade to correct — an Idiom bounding what its own designers could imagine, which is a cost the chapter can state without needing a community that got something wrong. Second, the early compiler written in C against the language community's expectations: reason stated, offence taken, right at the time, and reversed later once the reason expired. That is 21's promised *declare it, document the reason, keep it narrow* with all three present.
+
+*Chapter 02* gets a paragraph: Pike observing that what is good and bad in a language is largely opinion, argued with certainty. That is 02's *tone does not vary with authority*, witnessed by a language designer about arguments over his own language.
+
+*Chapter 09* gets the compatibility promise priced by the person who made it — it costs, and it blocks feature-itis. The chapter argues the constraint; this is somebody adopting it deliberately as a feature.
+
+*Chapter 13* gets a flagged maybe — the async/await aside and *coloured functions* — with an explicit instruction not to force it, since 13 is about patterns dissolving into features and this is closer to the inverse.
+
+**Decision, part two: chapters at draft wait.**
+
+Record now, apply when the chapter is next open.
+
+Applying to four finished chapters at once means four review cycles in parallel, which is the batching this project avoids everywhere.
+Material of this kind is strongest when the chapter is live, because the argument can be shaped around it — chapter 15's use worked for that reason, and a quotation bolted onto a finished chapter is the decoration the register rules exclude.
+And the precedent exists: `ai-material.md` holds material for 02 and 03 the same way, and the TOC's *Pending revisits* table is the mechanism for not losing it.
+
+**The test that would have overridden this**, stated because it is the part that matters: **a revisit can wait, a contradiction cannot.**
+The talk was checked against what is already shipped and contradicts none of it. Had it made a drafted chapter wrong rather than merely incomplete, it would not be a pending item.
+
+**Consequence.**
+`CLAUDE.md` names the document as the third of its kind and says when to read it.
+`00_toc.md` gains three rows in *Pending revisits* and a block in chapter 21's entry.
+`LEDGER.md` gains two rows for 21, since those concepts are definite enough to be owned before the chapter exists.
