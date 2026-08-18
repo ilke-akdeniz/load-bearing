@@ -2830,3 +2830,33 @@ The paragraph after the table was rewritten to match: the top four fail not beca
 
 **Consequence.**
 `LEDGER.md`'s row for the bridge section is reworded, since it described the finding in the term-level vocabulary that has now been retired from the chapter.
+
+---
+
+## 71. `CLAUDE.md` is canonical and does not know about other agents
+
+**Date.** 2026-08-18
+
+**Context.**
+The author experimented with a second coding agent on this repository, which added `AGENTS.md` — an adapter that defers to `CLAUDE.md` as the project guide rather than restating it.
+
+The draft suggested listing `AGENTS.md` in `CLAUDE.md`'s Files section, on the grounds that a rules file nobody mentions is the stale-pointer problem this repo has already hit twice.
+
+**Decision.**
+No. The author's ruling:
+
+> Think claude is primary and doesn't care and shouldn't know about codex, codex is secondary and is responsible for it's setup when/if it's needed.
+
+`CLAUDE.md` is canonical and stays unaware of any other agent. An adapter file is responsible for its own adaptation. A third agent writes its own adapter and does not edit the canonical file either.
+
+**Why, in the book's own terms.**
+The dependency runs adapter → canonical, and it has to stay one-way. `AGENTS.md` names `CLAUDE.md` in its second line. If `CLAUDE.md` named `AGENTS.md` back, the two would each require the other as context, which is chapter 05's cycle — and the cost is the one that chapter states: neither file can then be read or changed without the other, for as long as both exist.
+
+Keeping the arrow single means `CLAUDE.md` can be edited without checking anything else, which is the property that matters for the file every session loads.
+
+**Also worth recording, because it is the more embarrassing half.**
+`AGENTS.md` already contains a line instructing agents not to add it to `CLAUDE.md` unless the author explicitly asks to invert the relationship. The draft had read that file and proposed the thing it forbids.
+
+**Consequence.**
+`CLAUDE.md` is unchanged and lists no adapter files.
+The stale-pointer concern that motivated the suggestion is real but lands on the adapter rather than on the canonical file: if `CLAUDE.md` moves or is renamed, fixing `AGENTS.md` is the adapter's problem.
