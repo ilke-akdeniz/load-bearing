@@ -2860,3 +2860,37 @@ Keeping the arrow single means `CLAUDE.md` can be edited without checking anythi
 **Consequence.**
 `CLAUDE.md` is unchanged and lists no adapter files.
 The stale-pointer concern that motivated the suggestion is real but lands on the adapter rather than on the canonical file: if `CLAUDE.md` moves or is renamed, fixing `AGENTS.md` is the adapter's problem.
+
+---
+
+## 72. Pike's 2023 retrospective gives chapter 15 the harm it had conceded it lacked
+
+**Date.** 2026-08-18
+
+**Context.**
+The author supplied Pike's closing talk from GopherConAU 2023, *What We Got Right, What We Got Wrong*, published on his own site. Two passages in it are chapter 15's mechanism with Pike naming it.
+
+**What it supplies.**
+
+*An instance in someone else's advice.* Google banned threads around 2002, engineers citing John Ousterhout's position that threads were bad. Pike's diagnosis is that Ousterhout was **generalizing beyond the domain he was interested in**, and was complaining about low-level packages like pthreads rather than about the idea. The situation was pthreads in a particular kind of program; what arrived was *threads are bad*, applied organisation-wide, for years, with a name attached.
+
+*An admission about his own project.* On concurrency, the team's use cases were server software and he says they should have explained that up front, that programmers who tried it elsewhere struggled to see how it helped, and that the lack of guidance was theirs. On concurrency versus parallelism, that the team did a terrible job explaining it and it probably drove some programmers away.
+
+**Why this changes the chapter rather than decorating it.**
+Chapter 15 had conceded it has **no documented harm**, and that concession shaped its boundary section — the chain ends in repair, harm deferred to 16 through 18. That is now only half true. This is the source of a piece of advice stating that the situation was never named and what it cost, which is stronger than a reader's complaint or an inference from a codebase.
+
+It also supplies a third repair. Pike gave a whole talk in 2012 to restore the concurrency/parallelism distinction, and says it should have happened earlier.
+
+**What the chapter is careful not to claim.**
+*Don't communicate by sharing memory* and *concurrency support in the language* are different artifacts. Nothing here says the proverb caused what Pike describes, and the chapter says so in as many words. It is the same mechanism twice from the same person, not more evidence for one artifact.
+
+This distinction is the one the whole chapter-15 review was about, and it is stated rather than left for a reader to notice.
+
+**Process note.**
+When the author first offered this source, the draft was asked for a one-word answer and gave one — without having read the file. The answer happened to be right. It should have been *let me read it first*, and the entry records that because the same shortcut is how the chapter's original fabricated centrepiece got written.
+
+**Consequence.**
+`LEDGER.md` gains two concept rows and one example row.
+The TOC entry for 15 carries both instances.
+The boundary line saying the scope was rebuilt twice now says three times, the third being the source himself.
+The chapter runs 282 lines.

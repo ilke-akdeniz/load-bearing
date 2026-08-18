@@ -177,6 +177,8 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Scope lives inside or around | 15 | Either in the sentence, or in machinery around the collection; where it is in neither, the reader supplies it | "inside or around (Ch. 15)" |
 | The property is in the wording, not the genre | 15 | The single responsibility principle and *don't repeat yourself* were never written to be memorable and name no situation anyway, so the reader answers a question the principle never asked; *money* and *cgo* name one | "past proverbs (Ch. 15)" |
 | A named situation is a proxy | 15 | Naming a situation gives *a* scope, not necessarily the right one — syscall and cgo are two proverbs for one condition, so a third platform-specific case has none | "the proxy fits badly (Ch. 15)" |
+| Ousterhout, threads, and Google's ban | 15 | Advice whose situation was pthreads in a particular domain arrived as *threads are bad* and held org-wide for years; Pike diagnoses it as generalizing beyond the domain | "the threads ban (Ch. 15)" |
+| The source admits the omission | 15 | Pike's 2023 retrospective: the concurrency use cases were server software and they should have said so, and the concurrency/parallelism confusion drove people away | "the retrospective (Ch. 15)" |
 | The test measures checkability, not fit | 15 | Passing it means the principle handed you something to compare your case against, not that it handed you the correct extent | cite 15 |
 | Some sentences cannot lose scope | 15 | A proverb whose grammatical subject is a named package has nowhere to drift to — structural, not a claim that those are never misapplied | "check the subject (Ch. 15)" |
 | Unconditional advice loses nothing | 15 | gofmt travelled intact because there is no situation in which one consistent format is wrong; 14's boundary in a different costume | cite 15 |
@@ -271,6 +273,7 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | Invoice, named twice | 14 | One file, two accurate descriptions — one a shape, one a conviction |
 | Invoice rules at three scopes | 14 | Value on the type, whole-object in the operation, cross-row in the schema, with sqlite refusing the duplicate |
 | ParallelMap into a shared slice | 15 | The code a reader thought the proverb forbade; race-clean, because each goroutine writes one index |
+| Pike's GopherConAU retrospective, 2023 | 15 | Two admissions of missing scope — Ousterhout's, and his own team's on concurrency |
 | Pike's nineteen, split by grammatical subject | 15 | Named packages against ways of working — the control inside one talk |
 | Bidirectional Order↔Customer | 16 | OOP producing cycles |
 | Deleted constraint, passing mock test | 17 | Mocks assert about mocks |

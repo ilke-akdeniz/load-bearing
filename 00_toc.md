@@ -178,6 +178,7 @@ One sentence followed from the talk that glossed it to the people who received i
 Pike borrows the proverb form from Segoe's *Go Proverbs Illustrated* and describes it as opaque by design; gives *don't communicate by sharing memory* a narrow reading — hand off the pointer and lose access to it; says the proverbs are for people who already know them, as tools for explaining; and predicts the wiki that now carries the nineteen sentences and none of that.
 Then a reader resolving *sharing memory* outward, in their own words, about code that is race-clean.
 Then the scope rebuilt by hand three times — the Go project's own wiki page reconstructing Pike's reading in a table, two commenters doing it again, and a meta-proverb improvised in a thread.
+Then the same mechanism twice more in Pike's 2023 GopherConAU retrospective: Ousterhout's *threads are bad*, whose situation was pthreads and which Google banned company-wide anyway, diagnosed by Pike as generalizing beyond the domain; and his own team's concurrency guidance, where he says the use cases were server software, that they should have said so, and that the confusion probably drove people away.
 
 The finding the go-game collections supply: **scope lives inside the principle or in an apparatus around the collection it belongs to, and where it is in neither the reader reconstructs it — or fails to.**
 Which exposes a control inside Pike's own list — four proverbs take a named package as their grammatical subject and have nowhere to drift to, so the test becomes checkable rather than hopeful.

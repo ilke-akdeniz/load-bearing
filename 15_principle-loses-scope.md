@@ -88,6 +88,24 @@ The code is fine. What is interesting is the reading that made it look wrong, wh
 
 The same post asks a second question worth as much: is the proverb about maintainability and safety, or is there some other reason for it? **They cannot tell what kind of claim the proverb is.** That is chapter 02's subject arriving in the wild. Sorting the proverb into one of the five kinds is what tells you how much authority it has — a Law binds regardless, a Principle holds only under certain Forces, an Idiom is local — and the compressed form gives you nothing to sort it with.
 
+### The same failure, twice more, admitted by the same person
+
+Eight years after the proverbs talk, Pike gave a closing talk at GopherConAU looking back on fourteen years of Go. Two passages in it are this chapter's mechanism, and he is the one naming it.
+
+The first is about somebody else's advice. Around 2002 Google had effectively banned threads, and engineers doing the banning cited John Ousterhout, who had written that threads were bad. Pike's diagnosis is that Ousterhout made two mistakes — that he was **generalizing beyond the domain he was interested in**, and that his complaint was really about clumsy low-level packages like pthreads rather than about the underlying idea. Then, in one line: it is a mistake common to engineers everywhere to confuse the solution with the problem.
+
+Read that as an instance rather than as an opinion about Ousterhout. The advice had a situation — pthreads, in a particular kind of program. The situation did not travel. What arrived at Google was *threads are bad*, applied to everything, and it held for years with a name attached to it.
+
+The second passage is about his own project, and it is the more useful one because the source is admitting it.
+
+On concurrency, he says the use cases the team had in mind were mostly server software, and that they **should have explained up front** that this was what the feature brought to the table — that programmers who tried it elsewhere struggled to see how it helped them, and that the lack of guidance was theirs. On the confusion between concurrency and parallelism, he is blunter: people parallelised with goroutines expecting speed, were baffled by the slowdown, and the team did a terrible job explaining it. He adds that it probably drove some of them away.
+
+**That is the author of a piece of advice saying the situation was never named, and stating what it cost.** Not a reader's complaint, not an inference from a codebase — the source, on the record, eight years later.
+
+It also produced the third repair in this chapter. He gave an entire talk in 2012, *Concurrency is not Parallelism*, whose job was to supply the missing distinction, and says of it that it should have happened earlier.
+
+**One thing this is not.** It is not more evidence about the proverb. *Don't communicate by sharing memory* and *concurrency support in the language* are different artifacts, and nothing here says the proverb caused what Pike is describing. It is the same mechanism, twice, from the same person — once diagnosed in someone else's advice and once confessed in his own.
+
 ### The scope gets rebuilt by hand, more than once
 
 The Go project's own wiki has a page for this, and its first line is the proverb. Immediately after comes the qualification — the language also ships traditional locks in `sync` — and then this:
@@ -221,7 +239,7 @@ So a proverb about the board can accumulate a stable scope, while a proverb abou
 
 ### The repair sometimes arrives
 
-This chapter ends in repair, which is why it does not claim that a principle stripped of its scope stays that way. The scope was rebuilt twice here: officially, in a wiki page with a table, and informally, by strangers answering a question.
+This chapter ends in repair, which is why it does not claim that a principle stripped of its scope stays that way. The scope was rebuilt three times here: officially, in a wiki page with a table; informally, by strangers answering a question; and by the source himself, in a talk given to supply a distinction he had left out.
 
 Where that does not happen — where the wide reading hardens and nobody writes the page — you get what chapter 23 calls a folk remedy. Chapters 16, 17, and 18 are three cases that travelled further than this one did.
 
