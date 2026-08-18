@@ -104,7 +104,7 @@ On concurrency, he says the use cases the team had in mind were mostly server so
 
 It also produced the third repair in this chapter. He gave an entire talk in 2012, *Concurrency is not Parallelism*, whose job was to supply the missing distinction, and says of it that it should have happened earlier.
 
-**One thing this is not.** It is not more evidence about the proverbs. *Don't communicate by sharing memory* and *concurrency support in the language* are different artifacts, and nothing here says the proverb caused what Pike is describing. **But the mechanism is the same, and that is the whole of it: a principle arrives without its scope, the reader takes the widest reading available, and the damage follows from the reading rather than from the advice.** Ousterhout was not wrong about pthreads and the Go team were not wrong about concurrency — in both cases what did the harm was a reading neither of them wrote.
+**This is not more evidence about the proverbs.** *Don't communicate by sharing memory* and *concurrency support in the language* are different artifacts, and nothing here says the proverb caused what Pike is describing. **But the mechanism is the same, and that is the whole of it: a principle arrives without its scope, the reader takes the widest reading available, and the damage follows from the reading rather than from the advice.** Ousterhout was not wrong about pthreads and the Go team were not wrong about concurrency — in both cases what did the harm was a reading neither of them wrote.
 
 ### The scope gets rebuilt by hand, more than once
 
