@@ -12,7 +12,7 @@ Part IV is three case studies, and this chapter is the mechanism they share, sta
 
 ### The form Pike borrowed, and what it was for
 
-In November 2015 Rob Pike gave a talk at Gopherfest that produced the Go proverbs. He opens by naming his source: a book about the Japanese board game go, published fifty years earlier, called *Go Proverbs Illustrated*. The author is Kensaku Segoe and the slide behind Pike shows it.
+In November 2015 Rob Pike gave a talk at Gopherfest that produced the Go proverbs. He opens by naming his source: a book about the Japanese board game go, published fifty years earlier, called *Go Proverbs Illustrated*. The author is Kensaku Segoe and the slide behind Pike shows the book's cover.
 
 He reads out two of Segoe's proverbs, and then says this about whether the audience is following:
 
