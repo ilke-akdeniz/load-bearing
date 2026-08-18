@@ -2670,3 +2670,40 @@ Without it, 16 gets written as a standalone critique of object orientation and h
 **Consequence.**
 `LEDGER.md` gains a row for the wording-not-genre finding.
 Chapter 15 runs 214 lines.
+
+---
+
+## 66. "Scope" gets one meaning; chapter 14's is renamed and chapter 15 drops its synonym
+
+**Date.** 2026-08-18
+
+**Context.**
+The author noticed chapter 15 had started saying *scope* where earlier chapters say *conditions*, and asked whether the book should sweep one word for the other.
+
+The survey said no to the sweep and found a different problem. Of 92 uses of *condition*, only about a third are chapter 15's sense; the rest are logical antecedents, code branches, and ordinary English including the README's licence terms. And *conditions* already carries one clean meaning across seven chapters, tied to Forces by `CLAUDE.md`'s own definition of a Principle as *good advice given certain Forces — conditional*. Replacing it would cut the word loose from the thing it names.
+
+**The real defect was that *scope* meant three things.**
+
+- Chapter 13, casually: whether a test runs in one process or across machines.
+- Chapter 14, defined in bold: how much data you must see before you can tell whether a rule holds.
+- Chapter 15, defined and in the title: how far a piece of advice reaches.
+
+Chapters 14 and 15 are adjacent, and each defines the word.
+
+**Decisions, all the author's.**
+Chapter 15 keeps *scope*. Chapter 13 stays as it is, its single use being casual rather than definitional. Chapter 14's term is renamed.
+
+**Why not *data access*, which the author proposed.**
+It collides with *data access layer*, a term of art in exactly the architecture space this book argues about, and *access* names permission rather than quantity, which is the wrong axis.
+
+**Why no replacement noun at all.**
+The chapter already had the plain version one line below the bold term: its table is headed *how much you must see*. The noun was carrying nothing the table did not. So the term becomes the phrase — **what the rule must see** — which is self-defining and has nothing to look up. `CLAUDE.md`'s rule points the same way: a figure of speech promoted to vocabulary needs defining, and if it needs defining it is not worth the definition.
+
+**Chapter 15's private synonym also went.**
+It used *extent* ten times for exactly what it called *scope* — two words, one meaning, inside one chapter. All ten are now *scope*.
+
+**Consequence.**
+`CLAUDE.md`'s Sources line still says the author's FlowCore document feeds *placement-by-scope*, and is left alone: it describes what is in that file, and that file says *scope*. Chapter 19 should note the book renamed it, or a later session will search the source for a phrase that is not there.
+Two `DECISIONS.md` entries mention *placed by scope* and stay as written.
+Chapter 14's *value-scoped rules* also went, being the retired sense leaking into a passage.
+The sweep turned up that chapter 15's TOC entry still carried the pre-review claim, including the word *sentence* that three reviews removed from the chapter; it now matches.

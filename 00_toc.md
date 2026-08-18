@@ -161,7 +161,7 @@ The claim: **some vocabulary arrives with its verdict attached, so accepting the
 Two independent questions, graded the way chapter 10 grades names rather than on a single ladder: does the term pick out something in the code, and does it carry a verdict.
 All four cells are occupied, and the damaging one is **names a shape *and* convicts it** — the shape is checkable, so the term reads as description while the verdict rides along unexamined.
 
-Contents: one invoice described twice, accurately, as a Transaction Script and as an anemic domain model; what Fowler actually wrote in 2003, read from the source — *"they incur all of the costs of a domain model, without yielding any of the benefits"* — and the antecedent that does not travel with the verdict; the third option the term cannot see, which is behaviour **placed by scope**, with sqlite enforcing the rule no Go code could; and the cell where a word names no shape at all, where *this smells* is a fact about the reader rather than about the file.
+Contents: one invoice described twice, accurately, as a Transaction Script and as an anemic domain model; what Fowler actually wrote in 2003, read from the source — *"they incur all of the costs of a domain model, without yielding any of the benefits"* — and the antecedent that does not travel with the verdict; the third option the term cannot see, which is behaviour **placed by what the rule must see**, with sqlite enforcing the rule no Go code could; and the cell where a word names no shape at all, where *this smells* is a fact about the reader rather than about the file.
 
 *Where the claim doesn't apply:* verdict nouns that name a Law violation — *SQL injection*, where the condition attached is *always* — against ones naming a Principle violation, like *premature optimization*, where the answer is a latency budget; refusing all judgment-laden vocabulary, which is a slogan of the same kind; and the fact that a term's cell is not fixed, shown by *monolith* crossing the verdict axis and partly back without ever leaving the top row.
 
@@ -172,14 +172,14 @@ Contents: one invoice described twice, accurately, as a Transaction Script and a
 
 The mechanism, stated once, so the case studies can be short.
 
-The claim: **a compressed principle carries the scope of its key words only where the sentence names it** — and where it does not, a reader without the surrounding context supplies that scope, with the widest reading being the only one available.
+The claim: **a compressed principle carries its scope only when it names the situation it applies to** — and where it doesn't, the reader has to reconstruct that scope from the surrounding context, with only the widest reading available without it.
 
 One sentence followed from the talk that glossed it to the people who received it, the whole path on the record.
 Pike borrows the proverb form from Segoe's *Go Proverbs Illustrated* and describes it as opaque by design; gives *don't communicate by sharing memory* a narrow reading — hand off the pointer and lose access to it; says the proverbs are for people who already know them, as tools for explaining; and predicts the wiki that now carries the nineteen sentences and none of that.
 Then a reader resolving *sharing memory* outward, in their own words, about code that is race-clean.
 Then the scope rebuilt by hand three times — the Go project's own wiki page reconstructing Pike's reading in a table, two commenters doing it again, and a meta-proverb improvised in a thread.
 
-The finding the go-game collections supply: **scope lives inside the sentence or in apparatus around the collection, and where it is in neither the reader supplies it.**
+The finding the go-game collections supply: **scope lives inside the principle or in an apparatus around the collection it belongs to, and where it is in neither the reader reconstructs it — or fails to.**
 Which exposes a control inside Pike's own list — four proverbs take a named package as their grammatical subject and have nowhere to drift to, so the test becomes checkable rather than hopeful.
 
 *Where the claim doesn't apply:* advice with no scope to lose, where gofmt travelled intact; the domain gap between a fixed board game and software, which explains the lag without excusing it; and the fact that this chapter ends in repair rather than entrenchment, which is why the endpoint term belongs to 23.
@@ -192,7 +192,7 @@ The first case study, and the one with the most code.
 **Chapter 15's mechanism, running on:** *behaviour belongs with the data it operates on.*
 The term with no fixed extent is **belongs with**.
 The wide reading gives every entity methods that reach other entities, which produces object webs and then cycles.
-The narrow reading already exists in this book — chapter 14's *placed by scope*, where what decides the location is how much data you must see to tell whether a rule holds.
+The narrow reading already exists in this book — chapter 14's *placed by what the rule must see*, where the location follows from how much data you must be looking at before you can tell whether a rule holds.
 
 Contents: bidirectional associations in domain models; how inheritance creates dependencies that point both ways in practice; "tell, don't ask" pushing toward object webs; ORMs materializing cyclic graphs; what cycles cost concretely — serialization, test setup, comprehension.
 The alternative demonstrated: flat structures with explicit identifiers, and what you give up by choosing it.

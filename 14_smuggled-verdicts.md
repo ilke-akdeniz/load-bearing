@@ -93,7 +93,7 @@ create unique index ux_invoice_number_per_year on invoice (year, number);
 
 Now two sentences about that code. Both are accurate.
 
-> It is a Transaction Script over a table gateway. Value-scoped rules are methods on the type, the whole-invoice rule is in the operation, and the uniqueness rule is a database constraint.
+> It is a Transaction Script over a table gateway. Rules checkable from one value are methods on the type, the whole-invoice rule is in the operation, and the uniqueness rule is a database constraint.
 
 > It is an anemic domain model — objects with hardly any behaviour, a bag of getters and setters, with the logic pulled out into services.
 
@@ -123,7 +123,7 @@ So the argument is: *if* you bought the machinery, use it. Applied to the invoic
 
 The term offers two positions: behaviour on the objects, or behaviour nowhere. The invoice above is in neither, and the reason it looks like the second is that the term has no name for the third.
 
-**Behaviour is not absent, it is placed** — and what decides the placement is **scope**, meaning how much data you have to be looking at before you can tell whether a business rule holds. This is the author's formulation, developed while building FlowCore, and it is not standard vocabulary.
+**Behaviour is not absent, it is placed** — and what decides the placement is **what the rule must see**: how much data you have to be looking at before you can tell whether a business rule holds. This is the author's formulation, developed while building FlowCore, and it is not standard vocabulary.
 
 Ask the question of any rule and it answers where the rule can live:
 

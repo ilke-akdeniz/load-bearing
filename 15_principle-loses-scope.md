@@ -80,7 +80,7 @@ The code is fine. What is interesting is the reading that made it look wrong, wh
 
 > I thought the proverb related to not even having the possibility of sharing memory, not that you shouldn't intentionally share memory
 
-**There is the mechanism, self-reported.** And it is more specific than channel over-use. The phrase *sharing memory* has no fixed extent in the proverb containing it. Does writing to your own index in a shared slice count? Pike's forty seconds answer no — the proverb is about handing off a pointer and losing access to it. The eleven words alone do not answer it, and the reader resolved it outward, to any memory two goroutines can both reach.
+**There is the mechanism, self-reported.** And it is more specific than channel over-use. The phrase *sharing memory* has no fixed scope in the proverb containing it. Does writing to your own index in a shared slice count? Pike's forty seconds answer no — the proverb is about handing off a pointer and losing access to it. The eleven words alone do not answer it, and the reader resolved it outward, to any memory two goroutines can both reach.
 
 The same post asks a second question worth as much: is the proverb about maintainability and safety, or is there some other reason for it? **They cannot tell what kind of claim the proverb is.** That is chapter 02's subject arriving in the wild. Sorting the proverb into one of the five kinds is what tells you how much authority it has — a Law binds regardless, a Principle holds only under certain Forces, an Idiom is local — and the compressed form gives you nothing to sort it with.
 
@@ -118,7 +118,7 @@ Pike's nineteen are not uniform, and the difference is visible in the grammar.
  Reflection is never clear
 ```
 
-The left column names a package. *Syscall* is a specific import, and a proverb whose subject is that import **has nowhere to drift to** — you cannot resolve *syscall* outward, because the word fixes the domain. The right column takes a whole way of working as its subject, and the extent is wherever the reader puts it.
+The left column names a package. *Syscall* is a specific import, and a proverb whose subject is that import **has nowhere to drift to** — you cannot resolve *syscall* outward, because the word fixes the domain. The right column takes a whole way of working as its subject, and the scope is wherever the reader puts it.
 
 This is a structural claim rather than an empirical one. It says the left column cannot lose its scope, not that nobody ever misapplies those proverbs. But it is the strongest control available here: same author, same talk, same form, same afternoon, and the only variable is whether the proverb names the situation it applies to. The proverb this chapter followed is in the right column.
 
@@ -133,7 +133,7 @@ It does not, and the test settles it without leaving the page. Asking whether a 
 Run it on advice nobody compressed for memorability:
 
 ```text
- principle                      situation?   term with no fixed extent
+ principle                      situation?   term with no fixed scope
  ----------------------------   ----------   -------------------------
  one reason to change           no           responsibility
  don't repeat yourself          no           repeat
@@ -144,7 +144,7 @@ Run it on advice nobody compressed for memorability:
  guard cgo with build tags      yes, cgo     —
 ```
 
-The top four are not proverbs. Nobody wrote *a class should have one reason to change* to scan, and it does not. It fails the test anyway, and for the same reason the Go proverb did: *responsibility* has no fixed extent, so two people who agree with the principle can disagree about every class in the codebase and neither is misreading it.
+The top four are not proverbs. Nobody wrote *a class should have one reason to change* to scan, and it does not. It fails the test anyway, and for the same reason the Go proverb did: *responsibility* has no fixed scope, so two people who agree with the principle can disagree about every class in the codebase and neither is misreading it.
 
 The bottom two are not proverbs either, and they pass. *Money* and *cgo* name situations. There is nowhere to resolve them outward to.
 
@@ -156,18 +156,18 @@ The bottom two are not proverbs either, and they pass. *Money* and *cgo* name si
 
 ## Why the claim holds
 
-Compression fixes words. It does not fix their extent.
+Compression fixes words. It does not fix their scope.
 
 *Sharing memory* is two words in Pike's sentence and about a paragraph in his explanation of it. The sentence survives repetition; the paragraph does not. So what circulates is a term whose boundary was set somewhere the reader cannot see — and the reader still has to act, so they resolve it. With no context to narrow it, the widest reading is the only one available. That is why the error has a direction. Nobody reads a proverb too narrowly.
 
-**The form causes this, and the form was chosen deliberately.** Pike sets out his criteria near the end: really short, kind of poetic, a little saying, something memorable. Those are constraints on shape, indifferent to whether the surviving proverb is complete. A statement of extent is longer, does not scan, and is useless to anyone not in the situation it names. It is the first thing that will not fit.
+**The form causes this, and the form was chosen deliberately.** Pike sets out his criteria near the end: really short, kind of poetic, a little saying, something memorable. Those are constraints on shape, indifferent to whether the surviving proverb is complete. A statement of scope is longer, does not scan, and is useless to anyone not in the situation it names. It is the first thing that will not fit.
 
 He also says of the whole list that the entries might be contradictory, and that sometimes one engineering decision is right and sometimes its exact opposite is. **That is a scope statement covering the entire collection, made once, at the end of a talk, and it is not on the page that carries the proverbs.**
 
 Which gives the test worth keeping: **does this advice say how wide it is?**
 
-- *Use dependency injection.* No extent. You cannot tell whether your situation is one it fits.
-- *Channels are for passing ownership of data; mutexes are for caches and state.* States its own extent — which is why the Go project wrote that, and not another proverb.
+- *Use dependency injection.* No scope. You cannot tell whether your situation is one it fits.
+- *Channels are for passing ownership of data; mutexes are for caches and state.* States its own scope — which is why the Go project wrote that, and not another proverb.
 
 ---
 
@@ -197,7 +197,7 @@ Where that does not happen — where the wide reading hardens and nobody writes 
 
 **Recovering a scope is slow, and usually nobody wrote it down.** Pike's is recoverable because the talk was recorded. For most advice the context is a mailing list that no longer resolves, or a conversation. At that point you are reconstructing rather than reading, which is how a plausible mechanism gets attached to somebody else's words.
 
-**The test rejects nearly everything.** Almost no advice states its own extent, because the extent was compressed out before it reached you. *Does this say how wide it is* discards most of what is true along with what is not. It sorts. It does not accept or reject.
+**The test rejects nearly everything.** Almost no advice states its own scope, because the scope was compressed out before it reached you. *Does this say how wide it is* discards most of what is true along with what is not. It sorts. It does not accept or reject.
 
 **Noticing is cheap and answers nothing.** Observing that a saying has lost its scope takes no work. Finding what the scope was takes a recorded talk, a wiki page, or an afternoon, and that is the part people skip while keeping the posture.
 
@@ -212,7 +212,7 @@ Where that does not happen — where the wide reading hardens and nobody writes 
 - **A structure that only makes sense as obedience** — machinery whose justification is a saying rather than a property of this program.
 - **A comment citing a rule instead of a reason.** If the line needed the rule written beside it, the rule was not explaining the line.
 - **A convention nobody can date.** When nobody can say who decided it or what it was for, the scope is gone and the convention is being maintained rather than used.
-- **Code you cannot fault that seems to break the rule anyway.** This is the tell, and it is quieter than an argument. The Reddit poster was not disputing anything — they found working code, could not identify what was wrong with it, and still suspected it violated the proverb, so they went and asked. When a competent reader cannot reconcile a rule with code they have no complaint about, the rule's extent is the thing that is missing, not their judgement.
+- **Code you cannot fault that seems to break the rule anyway.** This is the tell, and it is quieter than an argument. The Reddit poster was not disputing anything — they found working code, could not identify what was wrong with it, and still suspected it violated the proverb, so they went and asked. When a competent reader cannot reconcile a rule with code they have no complaint about, the rule's scope is the thing that is missing, not their judgement.
 
 **In a conversation:**
 
