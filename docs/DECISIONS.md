@@ -2469,3 +2469,59 @@ Chapter 15 is where that has to be answered, since it is the chapter that names 
 **Verification.**
 Both Go samples compiled, `gofmt` clean, `go vet` clean. Benchmarks run four times.
 One error caught on re-reading before commit: the line counts were quoted inverted — *"the second is fourteen lines against thirty-four"* — which reversed the point the sentence was making.
+
+---
+
+## 61. Chapter 15 rewritten after the draft fabricated its own centrepiece
+
+**Date.** 2026-08-17
+
+**Context.**
+The first draft of chapter 15 rested on a claim the author disproved by watching the source.
+The draft said Pike's *channels orchestrate, mutexes serialize* is the **condition** for *don't communicate by sharing memory* — "the condition was published beside the proverb, by the same person, on the same afternoon."
+He never says that. They are two entries on a list, each with its own explanation, and the relationship was the draft's inference presented as his structure.
+
+Every quotation in that draft was genuine. The claim built from them was not, which is why it survived a self-review.
+
+**The failure repeated once more during the review**, which is the part worth recording.
+Correcting the first error, the draft then asserted that the folk reading of proverb one is *use channels, not mutexes* — another unevidenced bridge between the same two proverbs, in the message reporting the first one.
+Twice, the same span, opposite directions.
+
+The cause was not careless source-reading; the full transcript was in hand for the second attempt.
+It was that **the chapter shape required a harm demonstration, no evidence supported one, and the draft supplied the missing piece rather than reporting its absence.**
+The `CLAUDE.md` rule added in response covers reading sources; it does not cover this, and the honest record is that the corrective here was the author watching the talk.
+
+**What reading the whole transcript produced instead.**
+
+Pike's own gloss on proverb one is narrow and specific: pass the address of a data structure over a channel, and *"if you don't keep the pointer then you don't have access to it anymore."* Ownership transfer.
+He describes the borrowed form as opaque by design — reading two of Segoe's aloud and saying *"don't worry whether you understand that or not."*
+He says the proverbs are for people who already know them, to be used *"to explain to somebody."*
+And two minutes before the end he predicts the artifact detaching from the speaker: *"maybe this will turn into something that the community maintains on the wiki."*
+
+**The harm the draft kept trying to invent turned out to be documented.**
+The Go project's own wiki page opens by quoting the proverb, then says over-using channels is a common newcomer mistake, and supplies a table whose channel column reads *passing ownership of data* — Pike's gloss, reconstructed by his own project.
+A forum thread the author saved has a reader stating the over-application in their own words, twice, about code that is race-clean.
+The chapter states explicitly that the wiki attributes the over-use to enthusiasm rather than to the proverb, and does not claim causation.
+
+**The claim changed as a result, and narrowed.**
+Not *conditions are lost in transmission* but: **a compressed principle does not fix the scope of its own key words, and a reader without the context resolves them outward.**
+The underdetermined thing in this case is the phrase *sharing memory* — whether writing to your own index in a shared slice counts. Eleven words do not settle it.
+
+**The strongest evidence arrived last, from the author.**
+Supplied with the *Wei Qi Shi Jue*, the draft noticed that most of its ten four-character rules spend part of that budget on their trigger — *when in danger, sacrifice*; *against strong positions, play safely*.
+Which generalises: **scope lives inside the sentence or in machinery around the collection, and where it is in neither the reader supplies it.**
+
+And that exposed a control inside Pike's own list. Four of his nineteen take a named package as their grammatical subject — syscall, cgo, unsafe, reflect — and **have nowhere to drift to**, because the word fixes the domain. The rest take a way of working as their subject. Same author, same talk, same form, one variable.
+The chapter's test is now checkable rather than hopeful: look at the grammatical subject.
+
+**Title.**
+*How a Principle Becomes a Movement* asserted something the chapter never showed — no movement was named, dated, or traced.
+The author proposed *How a Principle Becomes a Folk Remedy*.
+The draft argued against it and the author accepted: the chapter's evidence ends in **repair** rather than entrenchment, so a title naming a bad endpoint overshoots what is demonstrated.
+*How a Principle Loses Its Scope* claims exactly what is shown.
+*Folk remedy* is a good term for the case where repair never arrives, and moves to chapter 23, recorded in its TOC entry so it is not lost.
+
+**Consequence.**
+`LEDGER.md`'s eleven rows for chapter 15 are replaced; the old ones describe a chapter that no longer exists.
+Sensei's Library material is used under short quotation for commentary — its content is under the OpenContent License, whose share-alike clause defers to fair use, so the chapter states facts about the page and quotes two sentences rather than reproducing lists.
+The author's review file keeps its words; only trailing whitespace was normalised so the drift check stops failing on it.

@@ -1,202 +1,191 @@
-# How a Principle Becomes a Movement
+# How a Principle Loses Its Scope
 
 ## The claim
 
-**The conditions are what made the advice true, and they are the first thing lost — because what travels is selected for being short, and a condition makes a saying longer.**
+**A compressed principle does not fix the scope of its own key words. A reader without the author's context has to supply that scope, and the widest reading is the only one available without it.**
 
-Part IV is three case studies, and this chapter is the mechanism they share, stated once so that each of them can be about its own subject instead of re-deriving this.
+Part IV is three case studies, and this chapter is the mechanism they share, stated once so each of them can be about its own subject.
 
-The book has met the result of this several times: a theorem repeated without its quantifier (Ch. 04), a count repeated without its *for at least some uses* (Ch. 13), a diagnosis repeated without the payment that justified it (Ch. 14). Those chapters own the instances. **This one owns the transmission** — not that conditions get lost, but why losing them is the normal outcome rather than a lapse by careless people.
+The book has met the result before: a theorem repeated without its quantifier (Ch. 04), a count repeated without its *for at least some uses* (Ch. 13), a diagnosis repeated without the payment that justified it (Ch. 14). Those chapters own the instances. This one follows a single sentence from the person who wrote it to the people who received it, and the whole path is on the record — which is unusual, and is the reason for using this example rather than a better-known one.
 
 ---
 
 ## The demonstration
 
-### A proverb, and the condition published beside it
+### The form Pike borrowed, and what it was for
 
-In November 2015 Rob Pike gave a talk at Gopherfest that became the Go proverbs. Nineteen sayings, and the first is the one everybody knows:
+In November 2015 Rob Pike gave a talk at Gopherfest that produced the Go proverbs. He opens by naming his source: a book translated from Japanese about fifty years earlier, called *Go Proverbs Illustrated* — Kensaku Segoe's — and the slide behind him shows it.
+
+He reads out two of Segoe's, about board positions, and then says this about whether the audience is following:
+
+> don't worry whether you understand that or not
+
+That is the form, described by the person borrowing it. **A proverb of this kind is not self-contained and was never meant to be.** Segoe's foreword says as much: the phrases compress measures that apply across the enormous variety of positions on the board, and a single one of them may be worth ten games of teaching. The phrase indexes the teaching. It does not replace it.
+
+Pike also says what one buys a player who *does* have the context — that seeing a shape on the board tells you what will happen if you play into it, *and it may or may not be a good thing.*
+
+That last clause is the point. The proverb tells you the consequence; whether you want it is a judgement it declines to make. Board proverbs are predictive. Several of Pike's are imperative — *don't communicate by sharing memory*, *clear is better than clever* — and that change of mood is the first thing that crossed over unremarked.
+
+### What the first proverb means, according to its author
 
 > Don't communicate by sharing memory, share memory by communicating.
 
-Two things he said in the same talk did not travel with it. The first is what he thought a proverb was for:
+Pike spends about forty seconds on what it takes to read that sentence, and the content is narrow. You pass the address of a data structure over a channel. And then the part that does the work:
 
-> as ideas you might use to explain. Maybe in a code review, or when you're teaching someone new about something, or trying to stop an argument on Stack Overflow or whatever.
+> when you send that object over a channel if you don't keep the pointer then you don't have access to it anymore
 
-The second is stronger, and it is a direct statement that the sayings are not rules:
+So the proverb is about **transferring ownership**. One goroutine has the thing, hands it off, and no longer has it. That handoff is what makes the concurrency safe. He is explicit that reading the sentence is not trivial — *there's actually a lot behind there*.
 
-> they might be contradictory. Proverbs aren't always — real proverbs in the real world you can find lots that are exactly the opposite. And that's okay too, because sometimes one engineering decision is right, sometimes the exact opposite is right.
+Two items later comes a separate proverb, *channels orchestrate, mutexes serialize*, with its own explanation and its own scope. It answers a different question — which primitive for which job — and in explaining it Pike says a mutex is often very important and sometimes exactly what you want. The two are not a rule and its exception. They are two entries on a list.
 
-*Sometimes the exact opposite is right*, said by the author, in the talk that produced the list.
+### What the sentence says when its author is not present
 
-And he was not being vague about which opposite. It is the third item on the same slide deck:
+Near the end of the talk, Pike guesses what will become of the list:
 
-> Channels orchestrate; mutexes serialize.
+> maybe this will turn into something that the community maintains on the wiki or maybe when you leave tonight this will be the end of the idea I don't know
 
-**The condition was published beside the proverb, by the same person, on the same afternoon.** One of the two is quoted in code reviews a decade later and the other is not, and the difference between them is not correctness. It is length, rhythm, and the fact that the first one is a complete instruction while the second requires you to already know what your problem is.
+It became the wiki. There is now a canonical page of the nineteen proverbs, credited to that talk, carrying the nineteen sentences and nothing else. Not the forty seconds on what the first one means. Not *don't worry whether you understand that or not*. And not this, from two minutes earlier:
 
-Pike also said what he was selecting for. A proverb has to be "really short", "kind of poetic", "memorable", "a little saying". Those are the criteria, stated plainly — and **they are the criteria a condition cannot survive.** A conditional is longer than an imperative, it does not scan, and it is not memorable, because the thing that makes it useful is exactly the thing that makes it specific to a situation the listener may not be in.
+> I don't think of these things that you guys need to know I think you know them already but think about them as ideas that you might use to explain to somebody
 
-### What the proverb costs when the condition is missing
+**The proverbs were built to be spoken by someone holding the context to someone who is not.** The speaker carries the scope; the sentence is the handle. Detached, the handle travels alone.
 
-Take a counter that several goroutines increment. The state is one integer, there is no orchestration to do, and by the third proverb this is a mutex.
+### A reader supplying the missing scope
 
-```go
-type Counter struct {
-	mu    sync.Mutex
-	value int64
-}
+In late 2023 someone posted a genuine question to the Go subreddit. They had found a parallel map in a real library where each goroutine writes its result straight into a shared slice, with no channel anywhere, and asked whether that violates the proverb.
 
-func (c *Counter) Add(delta int64) {
-	c.mu.Lock()
-	c.value += delta
-	c.mu.Unlock()
-}
-
-func (c *Counter) Value() int64 {
-	c.mu.Lock()
-	defer c.mu.Unlock()
-	return c.value
-}
-```
-
-Now the version the first proverb asks for, where the state is owned by a goroutine and reached only by messages. (Chapter 06 owns why this is a correct way to protect state — here the question is only what it costs when it was not the right one.)
+The shape in question is this:
 
 ```go
-type ChanCounter struct {
-	adds  chan int64
-	reads chan chan int64
-	done  chan struct{}
-}
+func ParallelMap(input []int, transform func(int) int) []int {
+	results := make([]int, len(input))
 
-func NewChanCounter() *ChanCounter {
-	counter := &ChanCounter{
-		adds:  make(chan int64),
-		reads: make(chan chan int64),
-		done:  make(chan struct{}),
+	var waitGroup sync.WaitGroup
+	for index, value := range input {
+		waitGroup.Add(1)
+		go func(index, value int) {
+			defer waitGroup.Done()
+			results[index] = transform(value)
+		}(index, value)
 	}
-	go counter.run()
-	return counter
+	waitGroup.Wait()
+
+	return results
 }
-
-func (c *ChanCounter) run() {
-	var value int64
-	for {
-		select {
-		case delta := <-c.adds:
-			value += delta
-		case reply := <-c.reads:
-			reply <- value
-		case <-c.done:
-			return
-		}
-	}
-}
-
-func (c *ChanCounter) Add(delta int64) { c.adds <- delta }
-
-func (c *ChanCounter) Value() int64 {
-	reply := make(chan int64)
-	c.reads <- reply
-	return <-reply
-}
-
-func (c *ChanCounter) Close() { close(c.done) }
 ```
 
-Both are correct. The second is thirty-four lines against fourteen, and it introduces a goroutine that must be started, a shutdown path that must be called, and a reply channel allocated on every read. It also does this:
+Every goroutine writes into the same backing array. Nothing is sent and nothing is locked. Run it under Go's race detector across a thousand elements and it reports nothing, because each goroutine writes one index and reads none — there is no unsynchronized access to any single location, which is the only thing correctness requires here.
+
+The code is fine. What is interesting is the reading that made it look wrong, which the poster states themselves, twice:
+
+> I thought the proverb meant something more literal, as in the goroutines should not ever be allowed to share memory
+
+> I thought the proverb related to not even having the possibility of sharing memory, not that you shouldn't intentionally share memory
+
+**There is the mechanism, self-reported.** And it is more specific than channel over-use. The phrase *sharing memory* has no fixed extent in the sentence containing it. Does writing to your own index in a shared slice count? Pike's forty seconds answer no — the proverb is about handing off a pointer and losing access to it. The eleven words alone do not answer it, and the reader resolved it outward, to any memory two goroutines can both reach.
+
+The same post asks a second question worth as much: is the proverb about maintainability and safety, or is there some other reason for it? **They cannot tell what kind of claim it is.** That is chapter 02's subject arriving in the wild — the compressed form does not say, and placing a claim is prerequisite to knowing what authority to give it.
+
+### The scope gets rebuilt by hand, more than once
+
+The Go project's own wiki has a page for this, and its first line is the proverb. Immediately after comes the qualification — the language also ships traditional locks in `sync` — and then this:
+
+> A common Go newbie mistake is to over-use channels and goroutines just because it's possible
+
+It tells you not to be afraid of a mutex, and gives a table of what each tool is for. Channels: passing ownership of data, distributing units of work, communicating async results. Mutexes: caches, state.
+
+**That table is Pike's forty seconds, reconstructed.** *Passing ownership of data* is what he said the proverb meant. The Go project needed a wiki page and a comparison table to restore a scope its author had given in one sentence on stage — because the sentence did not travel and the proverb did.
+
+Then it happens a third time, in the thread itself. One commenter, unprompted, says channels are about ownership, and that where ownership is not clear — a shared cache is their example — a mutex may be the better tool. Another states Pike's condition exactly, including what breaks without it: send a pointer over a channel while still holding it yourself and the race is back.
+
+And one reply reaches for a **meta-proverb** to bound the proverb, along the lines that a good developer follows the rules and a great one knows when to break them. That improvisation has an institutional form elsewhere. Sensei's Library, the wiki for the board game, sorts its proverbs into scope categories, italicizes the ones amateurs devised so you can see which have centuries behind them, and keeps a *Meta Proverbs* group whose entries include *don't follow proverbs blindly*. Its introduction says the proverbs apply often — and then that one must always evaluate whether they apply in a particular situation, and that sometimes they are contradictory.
+
+None of that apparatus was designed in, and the oldest collection did without it in a different way. The Tang-dynasty *Wei Qi Shi Jue* is ten rules of four Chinese characters each, and most of them spend part of that budget on the situation they apply to — *when in danger, sacrifice*; *against strong positions, play safely*; *take care of oneself when attacking*. The scope is inside the sentence rather than around the collection.
+
+Which is the more useful way to put the whole progression. **Scope lives either inside the sentence or in machinery around the collection, and where it is in neither, the reader supplies it.** Segoe's book puts it in worked diagrams beside each phrase. The wiki puts it in categories, provenance marks, and a warning to evaluate before applying. The list of nineteen has none of the three.
+
+### The same list contains proverbs this cannot happen to
+
+Pike's nineteen are not uniform, and the difference is visible in the grammar.
 
 ```text
-BenchmarkMutexAdd-10        300000       145.4 ns/op
-BenchmarkChannelAdd-10      300000       354.7 ns/op
+ scope in the sentence            scope not in the sentence
+ ------------------------------   ------------------------------
+ Syscall must always be guarded   Don't communicate by sharing
+   with build tags                  memory
+ Cgo must always be guarded       Clear is better than clever
+   with build tags                Errors are values
+ With the unsafe package there    Don't panic
+   are no guarantees
+ Reflection is never clear
 ```
 
-One machine, one run, and the ratio held between 2.4 and 2.5 across repeats — call it two and a half times the cost, for a program that gained nothing, written by somebody following published advice from the language's designer. **The advice was not wrong. It arrived without the sentence that said when it applied**, and that sentence was available the whole time, three lines further down the same list.
+The left column names a package. *Syscall* is a specific import, and a sentence whose subject is that import **has nowhere to drift to** — you cannot resolve *syscall* outward, because the word fixes the domain. The right column takes a whole way of working as its subject, and the extent is wherever the reader puts it.
 
-### The four steps, and why none of them is a mistake
+This is a structural claim rather than an empirical one. It says the left column cannot lose its scope, not that nobody ever misapplies those sentences. But it is the strongest control available here: same author, same talk, same form, same afternoon, and the only variable is whether the sentence carries its own extent. The proverb this chapter followed is in the right column.
 
-Nobody in this sequence does anything unreasonable.
+So the test gets sharper, and becomes something you can check rather than hope for. **Look at the grammatical subject.** If it names a package, a file format, a specific operation, the extent arrived with the sentence. If it names a style of programming, it did not, and supplying it is your job.
 
-```text
- 1  an observation is true, under conditions its author knows
- 2  it gets compressed into a name or a saying, to be teachable
- 3  the name acquires a community, which teaches the name
- 4  the conditions are not in the name, so they stop being taught
-```
-
-Step 2 is the load-bearing one and it is also the one nobody can skip. Advice that is not compressed does not get transmitted at all — an unabridged account of when to prefer channels over mutexes is a chapter, and chapters do not get quoted in code reviews. **The compression is what makes the advice useful and is the same operation that strips it**, which is why this keeps happening to careful people.
-
-By step 4 the community is not withholding the conditions. It does not have them. They were never in the artifact that was passed along, and the person who knew them said them once, out loud, in a talk that is now a decade old and has been watched by a small fraction of the people repeating its output.
-
-### The case where there were never any conditions
-
-Run the same test on generated code and it returns something the four steps cannot describe.
-
-Ask a model for a workflow library and you get a repository interface, a service layer, and a dependency-injection wiring file. Every one of those is a decision, and none is announced. There is no name to look up, no talk to re-watch, no author who once stated the conditions. **The answer to *what were the conditions* is not that they were forgotten but that none were ever formed** — the artifact is the output of a corpus in which that shape was common, and commonness is not a derivation.
-
-That makes it a harder case than a movement, not an easier one. A slogan at least leaves a thread to pull: you can find who said it and what they said around it, which is what this chapter just did to Pike. Generated code leaves no thread, because a taken branch leaves no mark. There is nothing to be suspicious of, since nothing was asserted.
+**On what these sources are worth**, because they are not equal. Pike's talk is primary. The Go project's wiki page is an official artifact and the strongest evidence that the misreading was real enough to be worth correcting — though note that it attributes the over-use to enthusiasm rather than to the proverb, and this chapter does not claim the proverb caused it. The forum thread is community anecdote: one instance, dated, and useful only because the over-application is self-reported rather than attributed by somebody else. It shows the confusion exists and what shape it takes. It establishes nothing about how often, and nothing here claims otherwise.
 
 ---
 
 ## Why the claim holds
 
-The mechanism is selection, and it operates on sayings rather than on people.
+Compression fixes words. It does not fix their extent.
 
-Of everything a practitioner knows, only some of it is short enough to repeat. Of what is repeated, the memorable survives. Pike named the filter himself — short, poetic, memorable — and it is a filter on *form*, entirely indifferent to whether the surviving sentence is complete.
+*Sharing memory* is two words in Pike's sentence and about a paragraph in his explanation of it. The sentence survives repetition; the paragraph does not. So what circulates is a term whose boundary was set somewhere the reader cannot see — and the reader still has to act, so they resolve it. With no context to narrow it, the widest reading is the only one available. That is why the error has a direction. Nobody reads a proverb too narrowly.
 
-A condition is the part that loses. It makes the saying longer, it breaks the rhythm, and it is useless to anyone not in the situation it names. So the same saying, transmitted twice, arrives shorter each time, and what falls off is not random.
+**The form causes this, and the form was chosen deliberately.** Pike sets out his criteria near the end: really short, kind of poetic, a little saying, something memorable. Those are constraints on shape, indifferent to whether the surviving sentence is complete. A statement of extent is longer, does not scan, and is useless to anyone not in the situation it names. It is the first thing that will not fit.
 
-**This is why practitioner credibility provides no protection.** The usual defence of a movement is that its originator had built real things — Pike had Unix, Plan 9, and UTF-8 behind him before Go, and the proverbs are compressed scar tissue rather than theory. All of that is true and none of it helps, because the filter is applied downstream of the author by everyone who repeats them. The Go community produced its own cargo cults inside a decade, from a source with about as much credibility as is available.
+He also says of the whole list that the entries might be contradictory, and that sometimes one engineering decision is right and sometimes its exact opposite is. **That is a scope statement covering the entire collection, made once, at the end of a talk, and it is not on the page that carries the proverbs.**
 
-Which gives the test that survives, and it is the one to keep from this chapter: **does the idea arrive with the conditions under which it is wrong?**
+Which gives the test worth keeping: **does this advice say how wide it is?**
 
-- *Use dependency injection.* No conditions. A slogan, and you cannot tell from it whether your situation is one of the ones it fits.
-- *Channels orchestrate; mutexes serialize.* States its own boundary in four words, which is why it is worth more than the proverb that outran it.
+- *Use dependency injection.* No extent. You cannot tell whether your situation is one it fits.
+- *Channels are for passing ownership of data; mutexes are for caches and state.* States its own extent — which is why the Go project wrote that, and not another proverb.
 
 ---
 
 ## Where the claim doesn't apply
 
-### Advice with no conditions loses nothing in transmission
+### Advice with no scope to lose
 
-The mechanism only bites when there were conditions to lose. Some advice has none, and it compresses perfectly because there is nothing to strip.
+Some advice is unconditional, and then nothing is missing from the compressed form.
 
-The clearest case is on the same list of proverbs:
+*Gofmt's style is no one's favorite, yet gofmt is everyone's favorite* is on the same list of nineteen, and it became a norm — mandatory automatic formatting, no configuration — without incident. There is no situation in which one consistent format is wrong, so a reader who receives only the sentence has received all of it. Chapter 14 reached this boundary from the other side: a compressed statement is safe exactly when its condition is *always*. Chapter 22 is the general case.
 
-> Gofmt's style is no one's favorite, yet gofmt is everyone's favorite.
+### The domains are not alike, and it explains the lag
 
-That became a movement — mandatory automatic formatting, no configuration, no argument — and the movement was an improvement, unambiguously. It works because there is no situation in which having one consistent format is wrong. The advice is unconditional, so a reader who receives only the slogan has received all of it.
+Board go is one rule set, fixed for centuries, with a single objective and a bounded space. Software has domains that share almost nothing, tools that turn over in a decade, and no settled agreement about what counts as better.
 
-This is chapter 14's boundary in a different costume: a compressed statement is safe exactly when its condition is *always*. Chapter 22 is the general case, where being right matters less than being consistent, and the compression loses nothing because there was nothing underneath.
+So a proverb about the board can accumulate a stable scope, while a proverb about software aims at a target moving faster than any apparatus can follow. That predicts what the two collections actually show: twenty-five years of accretion in one, a flat list in the other. It explains the lag rather than excusing it, and it does not change what a reader should do — if anything it raises the odds that the scope you need has not been written down by anyone.
 
-### Movements that were right, and the mirror-image error
+### The repair sometimes arrives
 
-Automated testing, version control, code review, and memory-safe languages by default all arrived as movements, with advocacy and slogans and people who overdid it. All four were improvements, and the field is better for the overdoing.
+This chapter ends in repair, which is why it does not claim that a principle stripped of its scope stays that way. The scope was rebuilt twice here: officially, in a wiki page with a table, and informally, by strangers answering a question.
 
-**Dismissing methodology as such is the same error running the other way.** *All movements are cargo cults* is itself a compressed claim with its conditions removed, and it fails the test in this chapter exactly as *use dependency injection* does. The chapter's finding is that a movement's slogan is not evidence about the underlying observation — in either direction. You still have to go and find the conditions, and *find them* is the work, not *dismiss the movement*.
+Where that does not happen — where the wide reading hardens and nobody writes the page — you get what chapter 23 calls a folk remedy. Chapters 16, 17, and 18 are three cases that travelled further than this one did.
 
-The specific error to avoid is treating this chapter as permission to ignore advice from people who have organized. Organization is not evidence of wrongness. It is evidence that compression happened, which tells you where to look.
+### This book is doing it too
 
-### This book is running the same mechanism
+Twenty-three chapters arguing that advice arrives without its scope, ending in a method with a name, is this mechanism with the author as the source.
 
-Twenty-three chapters arguing that advice arrives stripped of its conditions, ending with a method and a name for it, is step 2 of the sequence above with the author as the originator.
+The answer is not modesty but stating the extent where it is hard to skip, so **two of them are not negotiable.** Chapter 02's classification model is a lens rather than a finding, and that chapter says so — it cannot be proved, only used. And the review practice this book runs on requires the expertise it appears to replace: the errors in these drafts were caught by someone who already knew the material well enough to be suspicious, and a reviewer without that knowledge reads the same confident paragraph and approves it.
 
-The honest response is not modesty, it is to state the conditions here where they are hard to skip. **Two of them are not negotiable.**
-
-The classification model in chapter 02 is a lens rather than a finding, and that chapter says so — it cannot be proved, only used, and where it stops being useful is where you stop using it. And the review practice this book runs on requires the expertise it appears to replace: the errors in these drafts were caught by somebody who already knew the material well enough to be suspicious, and a reviewer without that knowledge reads the same confident paragraph and approves it.
-
-If either of those gets compressed away in the retelling, this book will have become an instance of its own subject, and the retelling will sound exactly like it does now.
+If those get compressed away in the retelling, the retelling will sound exactly like this does now.
 
 ---
 
 ## What the claim costs
 
-**Finding the conditions is slow, and often they are not written down anywhere.** Pike's are recoverable because the talk was recorded and transcribed. For most advice the original context is a mailing list that no longer resolves, a team that dispersed, or a conversation. At that point you are reconstructing rather than reading, and reconstruction is how a plausible mechanism gets attached to somebody else's claim.
+**Recovering a scope is slow, and usually nobody wrote it down.** Pike's is recoverable because the talk was recorded. For most advice the context is a mailing list that no longer resolves, or a conversation. At that point you are reconstructing rather than reading, which is how a plausible mechanism gets attached to somebody else's sentence — this chapter's first draft did exactly that, asserting a relationship between two of Pike's proverbs that he never claimed.
 
-**The test rejects most usable advice.** Almost nothing arrives with its conditions attached, because the conditions were compressed out before it reached you. Applied strictly, *does this state when it is wrong* discards nearly everything, including things that are true. It is a sorting instrument, not an acceptance test — a saying that fails it is unfinished, not false.
+**The test rejects nearly everything.** Almost no advice states its own extent, because the extent was compressed out before it reached you. *Does this say how wide it is* discards most of what is true along with what is not. It sorts. It does not accept or reject.
 
-**Suspicion of movements is cheap and feels like rigour.** Noticing that something has become a movement takes no work and produces no answer. The work is finding what the original observation was and under what conditions it held, and that is the part people skip while keeping the posture.
+**Noticing is cheap and answers nothing.** Observing that a saying has lost its scope takes no work. Finding what the scope was takes a recorded talk, a wiki page, or an afternoon, and that is the part people skip while keeping the posture.
 
-**Compression is genuinely valuable and this chapter can be read as an argument against it.** It is not. A saying that fits in a code review comment is how a large amount of real knowledge actually moves between people, and the alternative — everybody re-deriving everything — is worse and does not happen anyway. The finding is about what to do when you receive one, not about refusing to make them.
+**Compression is not the enemy, and this reads as though it might be.** A sentence that fits in a review comment is how most real knowledge moves between people, and the alternative is everybody re-deriving everything, which is worse and does not happen anyway. The finding is about what to do on receipt.
 
 ---
 
@@ -204,17 +193,22 @@ If either of those gets compressed away in the retelling, this book will have be
 
 **In a codebase:**
 
-- **A structure that only makes sense as obedience.** A goroutine and three channels guarding one integer; an interface with one implementation and no second in prospect; a package layout that costs an export on every helper (Ch. 18).
-- **Advice cited by name rather than by consequence.** A code comment reading *// don't communicate by sharing memory* explains nothing about this program, and the fact that it needed a comment suggests the author knew that.
-- **A convention nobody can date.** If nobody on the team can say who decided it or what problem it was for, the conditions are gone, and the convention is now being maintained rather than used.
+- **A structure that only makes sense as obedience** — machinery whose justification is a saying rather than a property of this program.
+- **A comment citing a rule instead of a reason.** If the line needed the rule written beside it, the rule was not explaining the line.
+- **A convention nobody can date.** When nobody can say who decided it or what it was for, the scope is gone and the convention is being maintained rather than used.
+- **An argument about what a word in the rule covers.** The whole question in that thread was whether a slice index counts as *sharing memory*. When that is the dispute, the rule is not deciding anything and has not been for a while.
 
 **In a conversation:**
 
-- **A saying offered as the end of a discussion.** The follow-up that works is not *I disagree* but *what does that rule out here* — the constraint question from chapter 10, aimed at a slogan instead of a pattern name.
-- **"That's just how it's done in X."** Sometimes a genuine Idiom with real reasons behind it (Ch. 21), and sometimes step 4 with no memory of steps 1 through 3. Asking which costs one question.
-- **An appeal to who said it.** The credibility is usually real and it is answering a question nobody asked. What the originator built tells you the observation was probably sound; it tells you nothing about whether the compressed version you were handed still contains it.
-- **Anyone, including this book, telling you a practice always applies.** That sentence is the diagnostic, and it does not have exceptions for authors you like.
+- **A saying offered as the end of a discussion.** The useful follow-up is not *I disagree* but *how wide is that meant to be, and who decided?*
+- **"That's just how it's done here."** Sometimes a real Idiom with reasons behind it (Ch. 21), sometimes a wide reading nobody has revisited. One question separates them.
+- **An appeal to who said it.** The credibility is usually genuine and answers a question nobody asked: it suggests the original observation was sound, and says nothing about whether the sentence you received still contains it.
+- **Anyone, including this book, saying a practice always applies.**
 
-The question that does the work: **what did this cost the person who first said it, and would they say it here?**
+The question that does the work: **what did the person who first said this take it to cover?**
 
-If the advice has a source you can reach, go and read what they said around it. The conditions are frequently still there, three lines further down, in the same talk.
+If the source can be reached, go and look. The scope is often still there, in the forty seconds after the sentence, in the talk nobody re-watched.
+
+---
+
+**Next:** chapter 16 is the first of the three cases, where object orientation's advice about where behaviour belongs meets the Direction Rule, and produces dependency graphs that point both ways.

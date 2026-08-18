@@ -167,7 +167,7 @@ Contents: one invoice described twice, accurately, as a Transaction Script and a
 
 ## Part IV — Methodologies versus principles
 
-### 15. How a principle becomes a movement
+### 15. How a principle loses its scope
 `15_principle-to-movement.md`
 
 The mechanism, stated once, so the case studies can be short.
@@ -258,6 +258,10 @@ The field guide, and the closing.
 
 Contents: receiving a blog post; receiving a code review comment; receiving a book; receiving a colleague's strong opinion; receiving your own past decisions; **receiving generated code** — the sixth case, and the one the others rehearse for, where the artifact states no decisions at all because every branch was taken silently; the questions that do the work — *what forces does this assume? at what scale? what does it rule out? where does the author say it stops?*
 The final answer to "is this load-bearing" as a repeatable procedure rather than a judgement call.
+
+Also the **folk remedy** — the author's term, held back from chapter 15 because that chapter's evidence ends in repair rather than entrenchment.
+A folk remedy is advice applied far outside the context it was made for, which stays misapplied because nobody rebuilds its scope; *drink two litres of water a day* is the pattern.
+By 23 the Part IV case studies have supplied endpoints that earn the term, so this is where it belongs — and the receiving question it generates is *how wide is this advice, and who decided that?*
 
 *Where the claim doesn't apply:* when you don't have time to analyse and must simply pick the conventional answer — which is usually the correct move, and knowing that is part of the skill.
 

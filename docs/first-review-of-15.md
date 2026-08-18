@@ -2,7 +2,7 @@ claude I checked the primary source for chapter 15, Pike's talk at Gopherfest.
 
 #I' m pasting below important timestamps and my comments:
 
-https://youtu.be/PAAkCSZUG1c 
+https://youtu.be/PAAkCSZUG1c
 "but they carry a lot of information... so if you see this thing on the board, I know what happens if I have this position because I can create a Co and It may or may not be a good thing"
 
 - Definitely he is not talking about proverbs in the usual sense. That just happens to be the name of the Japanese "go game" book with "proverbs" in the title but the author meant something very specific on that book with the word "proverb" and Pike chases the same meaning.
@@ -15,7 +15,7 @@ important failure on your part: The example - context he gives for "don't commun
 
 In the beginning of the chapter you say: "Channels orchestrate; mutexes serialize.
 
-**The condition was published beside the proverb, by the same person, on the same afternoon.**" 
+**The condition was published beside the proverb, by the same person, on the same afternoon.**"
 
 You ignored the conditions of the "don't communicate ...." proverb, then you assumed that another proverb Pike presents: "channels orchestrate; mutexes serialize" is a condition of the "don't communicate" which is not, it's just another proverb with other conditions.
 
@@ -41,7 +41,7 @@ https://youtu.be/PAAkCSZUG1c?t=970
 "errors are values"
 This is an interesting one as Pike says "beginners struggle with why do I have to type  iferr != nil all the time"
 Then tells about a dev complaining about this: "he just wasn't writing programs, he was writing code, they're not the same. ... he wasn't thinking about errors as values and programming to good effects"
-This again show's me why a proverbs target audience is not beginners if we agree that a beginner in any language is still in the stage of writing code. 
+This again show's me why a proverbs target audience is not beginners if we agree that a beginner in any language is still in the stage of writing code.
 
 ---
 
@@ -65,17 +65,17 @@ https://youtu.be/PAAkCSZUG1c?t=1320
 #my comments follow
 
 Those "proverbs" I actually short "titles, slogans" to remember advice ranging from applies most of the time to applies for a very specific context.
-I'm gonna guess that the chapter's claim for the mechanism could be: Principle becomes a movement because the context get's lost in the transmission over time, and a principle without it's conditions sounds like general advice. 
+I'm gonna guess that the chapter's claim for the mechanism could be: Principle becomes a movement because the context get's lost in the transmission over time, and a principle without it's conditions sounds like general advice.
 
 Very important failure of the chapter: Title is "How a Principle Becomes a Movement", Nothing on it shows a concrete example of that process. Which principle stated on the chapter became a movement? How? What's the name of the movement? How do we prove that it originated from that principle?
 
 Maybe the title should be: "How a Principle Becomes a Folk Remedy"
 Folk Remedy: An advice applied to a much wider context then it was conceived for and often results in negative outcomes.
-Ex: "drink at least 2 litres of water a day". 
+Ex: "drink at least 2 litres of water a day".
 Does this apply for everybody? How is this anymore useful than drinking water when you are thirsty?
 What if I'm a sedentary small person working in an office and drinking lots of coffee, should I force myself to finish 2 litre additional water everyday. (This sounds absurd but there are many people who do exactly this because they believe in the folk remedy.)
 
-Pike's mistake is saying that the proverbs are helpful for the beginners. The original go game book says the proverbs are for intermediate players. I agree with the game book. It could be that Pike's concept of beginner is different than ours if he is grading the skills relative to his skills. My understanding is that most beginners deal with basic issues like: "What the heck is a channel? How do I try and catch exceptions on Go..." When they see the proverb "Channels orchestrate; mutexes serialize" even if they tried to reach for the context around it they wouldn't be able to grasp the meaning yet. 
+Pike's mistake is saying that the proverbs are helpful for the beginners. The original go game book says the proverbs are for intermediate players. I agree with the game book. It could be that Pike's concept of beginner is different than ours if he is grading the skills relative to his skills. My understanding is that most beginners deal with basic issues like: "What the heck is a channel? How do I try and catch exceptions on Go..." When they see the proverb "Channels orchestrate; mutexes serialize" even if they tried to reach for the context around it they wouldn't be able to grasp the meaning yet.
 
 And maybe some part of the mechanism is that a beginner, trying to find his way around those "proverbs" or more generally similar "slogans", interprets it in a more generalized way. As the years pass it becomes a habit and a belief packaged as a principle. And then those habits and beliefs that are share by many people sometimes become a movement. By then, it's too late to detect this, show the provenance and the evolution and undo the damage completely.
 
@@ -85,7 +85,7 @@ We should add something in claude.md to prevent this failure mode happening agai
 
 ---
 
-#Foreword and a sample "proverb" from the book Pike refers as inspiration "Go Proverbs Illustrated": 
+#Foreword and a sample "proverb" from the book Pike refers as inspiration "Go Proverbs Illustrated":
 
 Anyone who has played the old game of “proverbs” will
 remember such sayings as “Even a stone will soften a bit

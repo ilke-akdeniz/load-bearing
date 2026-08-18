@@ -243,6 +243,23 @@ Two things follow, and the second is the reason the rule is worth the trouble.
 
 When the source genuinely cannot be reached — paywalled, offline, out of print — say so in the chapter's review notes and keep the claim to what is uncontroversially attributed, rather than explaining a mechanism from inference.
 
+**Read the primary source in full, and never splice inference into it.**
+Chapter 15 got the Pike material from a third-party transcript, read in excerpts, and then failed in a way excerpt-reading makes almost inevitable.
+
+Pike's talk lists *Don't communicate by sharing memory* and, two items later, *Channels orchestrate; mutexes serialize*.
+The draft asserted that the second is the **condition** for the first — "the condition was published beside the proverb, by the same person, on the same afternoon."
+He never says that. They are two proverbs, each with its own explanation, and the relationship between them was the draft's inference presented as Pike's structure.
+The author caught it by watching the talk.
+
+Four rules follow, and the third is the one that would have caught this.
+
+- **Read the whole thing, not the passages that answer your question.** This is the rule, and it is about partiality rather than about medium. Excerpts fetched to confirm a thesis return what was asked for; the context that would have disproved it sits in the parts nobody requested. A full verbatim transcript read end to end is a good source. The same transcript read in four keyword searches is how chapter 15 went wrong.
+- **Rank what you have, and say which you used.** The author's own writing, then a full recording or transcript of them speaking, then someone else's account of it. Name the one you actually read when the chapter quotes it.
+- **Never silently combine an author's words with your own inference and present the result as theirs.** Quoting two real sentences and asserting a relationship between them produces a claim the author never made, out of material that is entirely genuine. Where a connection is the book's, say so in the sentence.
+- **Surface what the author must check.** End the response that ships a chapter with the primary sources under the heading **Must be read by the author before this chapter is marked draft**, with direct links and timestamps where they exist.
+
+If the primary source cannot be reached at all: say so, propose alternatives, and **stop** rather than drafting the claim from inference and flagging it afterwards.
+
 **Provenance, stated in prose.**
 Before writing a claim whose standing could be mistaken, decide which it is: standard and citable, genuinely disputed, or this book's own.
 Then **write that into the sentence** — there is no tagging notation.

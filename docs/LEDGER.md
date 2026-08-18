@@ -165,13 +165,17 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Verdict nouns are legitimate for Laws | 14 | SQL injection carries its verdict correctly because the condition attached is *always*; *premature optimization* does not, because whether it is premature is a latency-budget question | cite 14 |
 | A term's cell is not fixed | 14 | *Monolith* crossed the verdict axis and back while never leaving the top row — the tests measure a term in a community at a time | cite 14 |
 | Compression is what strips the condition | 14 | The terms that travel furthest compress best, and compression is the operation that leaves conditions behind (Ch. 10 owns the compression test) | cite 14 |
-| Principle→movement mechanism | 15 | Observation true under conditions, compressed to be teachable, community teaches the name, conditions were never in the name | "the four steps (Ch. 15)" |
-| Compression selects against conditions | 15 | What travels is selected for being short and memorable; a condition is longer, breaks the rhythm, and is useless to anyone not in the situation — so the loss is structural rather than careless | "compression strips it (Ch. 15)" |
-| Pike published the condition beside the proverb | 15 | *Channels orchestrate; mutexes serialize* is the third item in the talk that produced *don't communicate by sharing memory*, and he said in it that sometimes the exact opposite is right | cite 15 |
-| Credibility gives no protection | 15 | The filter runs downstream of the author, so a source with Unix and Plan 9 behind it produced cargo cults inside a decade | cite 15 |
-| The test that survives | 15 | Does the idea arrive with the conditions under which it is wrong — a sorting instrument, not an acceptance test | "the conditions test (Ch. 15)" |
-| Unconditional advice loses nothing | 15 | gofmt compresses perfectly because there is no situation in which one consistent format is wrong; 14's boundary in a different costume | cite 15 |
-| The book runs its own mechanism | 15 | Twenty-three chapters plus a named method is step 2 with the author as originator; the two non-negotiable conditions are stated where they are hard to skip | cite 15 |
+| Scope is not fixed by compression | 15 | A compressed principle does not fix the extent of its own key words; a reader without the author's context supplies it, and the widest reading is the only one available | "the scope does not travel (Ch. 15)" |
+| A proverb is a pointer, not a container | 15 | Segoe's form is opaque by design — Pike reads two out and says don't worry whether you understand them; the phrase indexes the teaching rather than replacing it | cite 15 |
+| Board proverbs are predictive | 15 | They say what will happen and decline to say whether you want it; several of Pike's took imperative mood instead, and the change was unremarked | cite 15 |
+| What proverb one actually means | 15 | Pike's own gloss: pass the address over a channel, and if you do not keep the pointer you no longer have access — ownership transfer, not a preference for channels | "the forty seconds (Ch. 15)" |
+| Designed to be spoken, not published | 15 | *I think you know them already… ideas you might use to explain to somebody* — the speaker carries the scope, the sentence is the handle, and Pike predicted the wiki that would carry the handle alone | cite 15 |
+| The reader resolves outward | 15 | *Sharing memory* has no fixed extent, so a reader resolved it to any memory two goroutines can reach; self-reported, and the code that prompted it is race-clean | cite 15 |
+| Scope gets rebuilt by hand | 15 | `MutexOrChannel`'s table reconstructs Pike's gloss; commenters reconstruct it again; a meta-proverb gets improvised — the repair Sensei's Library institutionalised as a category | cite 15 |
+| Scope lives inside or around | 15 | Either in the sentence, or in machinery around the collection; where it is in neither, the reader supplies it | "inside or around (Ch. 15)" |
+| Some sentences cannot lose scope | 15 | A proverb whose grammatical subject is a named package has nowhere to drift to — structural, not a claim that those are never misapplied | "check the subject (Ch. 15)" |
+| Unconditional advice loses nothing | 15 | gofmt travelled intact because there is no situation in which one consistent format is wrong; 14's boundary in a different costume | cite 15 |
+| The book runs its own mechanism | 15 | Twenty-three chapters plus a named method, with the author as source; the two non-negotiable extents are stated where they are hard to skip | cite 15 |
 | Mocks assert about mocks | 17 | A mocked test passes when the real constraint has been deleted | cite 17 |
 | Layered packages force exports | 18 | A directory wall requires publishing the helpers it was meant to hide | cite 18 |
 | Plurality vs sequential replacement | 18 | Two implementations live at once is what an interface is for; replacing one engine with another forever is not, and only the first is a Force — see `docs/speculative-abstraction.md` | "plurality, not replacement (Ch. 18)" |
@@ -181,7 +185,7 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Domain inversions | 20 | Each domain's dominant force inverts some standard advice | cite 20 |
 | Corpus monoculture | 02 | A model has one training distribution and cannot acquire a second, so 02's prescribed cure is unavailable to it | cite 02; argument in `docs/ai-material.md` |
 | The generator cannot see your Forces | 03 | Forces are facts about your situation; a model has the prompt, so the groundwork is skipped by construction | cite 03; argument in `docs/ai-material.md` |
-| The conditions were never derived | 15 | For generated design the answer to 15's test is not that conditions were forgotten but that none were formed | "no derivation (Ch. 15)"; argument in `docs/ai-material.md` |
+| The scope was never set | 15 | For generated design nobody ever fixed an extent, so there is no author to ask and no talk to re-watch | "no scope was set (Ch. 15)"; argument in `docs/ai-material.md` |
 | Grilling | 19 | An interview that surfaces each decision, with a recommendation, before anything is written; the human supplies the Force that settles it | "grilling (Ch. 19)"; text, provenance and limits in `docs/ai-material.md` |
 | Grilling's limit | 19 | It surfaces decisions the model recognizes as decisions, so it is weakest where the corpus is most uniform | cite 19; argument in `docs/ai-material.md` |
 | Silent defaults | 23 | Generated code states no decisions at all — a taken branch leaves no mark, so review cannot catch what it never suspected | "silent default (Ch. 23)"; argument in `docs/ai-material.md` |
@@ -262,7 +266,8 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | The 80h vs 988h remaining scenario | 09 | Same team, same hire, opposite answers; break-even sits at the ramp-up length |
 | Invoice, named twice | 14 | One file, two accurate descriptions — one a shape, one a conviction |
 | Invoice rules at three scopes | 14 | Value on the type, whole-object in the operation, cross-row in the schema, with sqlite refusing the duplicate |
-| Mutex vs channel counter, measured | 15 | 14 lines against 34, and 145 ns against 355 — what a proverb costs when its condition did not travel |
+| ParallelMap into a shared slice | 15 | The code a reader thought the proverb forbade; race-clean, because each goroutine writes one index |
+| Pike's nineteen, split by grammatical subject | 15 | Named packages against ways of working — the control inside one talk |
 | Bidirectional Order↔Customer | 16 | OOP producing cycles |
 | Deleted constraint, passing mock test | 17 | Mocks assert about mocks |
 | Store split into a package | 18 | Layered packages force exports |
