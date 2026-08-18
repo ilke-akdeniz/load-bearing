@@ -2894,3 +2894,34 @@ When the author first offered this source, the draft was asked for a one-word an
 The TOC entry for 15 carries both instances.
 The boundary line saying the scope was rebuilt twice now says three times, the third being the source himself.
 The chapter runs 282 lines.
+
+---
+
+## 73. The damage follows from the reading, not from the advice
+
+**Date.** 2026-08-18
+
+**Context.**
+The author rewrote the closing paragraph of chapter 15's retrospective section to end on the mechanism — *the underlying mechanism is the same: a principle loses its scope and causes long-term harm.*
+
+The draft replaced it with a version that restated the two preceding subsections and added dates. The author's verdict was that this "runs around the crucial matter and produces word salad", being a summary of what the reader had just read, and that the crucial information was to pinpoint the mechanism.
+
+**Correct on both counts, and the draft was wrong for a specific reason worth recording.**
+It had blocked *causes harm* as an unsupported causal claim. But the caution it was applying had been earned in a different section — the one where the Go project's wiki attributes channel over-use to enthusiasm rather than to the proverb. In *this* section Pike asserts the link himself: the engineers doing the banning cited Ousterhout, and the concurrency confusion probably drove some programmers away. The causation is in the source, and the draft was guarding against a problem that is not there.
+
+**Decision.**
+The author's sentence, with the step it skipped restored, and one addition.
+
+> But the mechanism is the same, and that is the whole of it: a principle arrives without its scope, the reader takes the widest reading available, and the damage follows from the reading rather than from the advice.
+
+The middle clause is the chapter's actual claim and connects this section back to the reader in the forum thread.
+
+The final clause is the one that earns the word *harm*. **If the damage follows from the reading rather than from the advice, the chapter can say harm without asserting the advice caused it** — which is the distinction the rest of the chapter is careful about, and which the evidence supports directly: Pike says Ousterhout's complaint about pthreads was legitimate and the error was generalizing, and that the concurrency feature was right and the explanation wrong.
+
+**A register check that produced a smaller change.**
+The author proposed opening the turn with *However*. The turn is needed — after two sentences of *this is not evidence of*, a reader can begin parsing the next one as a third limitation. But a survey found **zero** uses of *However* as a sentence opener across fourteen drafted chapters, against nine of *But*. The connector is now *But*, which does the same work in the register the book already keeps.
+
+*Long-term* was dropped. The years are already in the section above, and an adjective is weaker than dates the reader has.
+
+**Consequence.**
+`LEDGER.md` gains a row for the reading-versus-advice distinction, since it is what licenses the word *harm* anywhere in Part IV.
