@@ -12,9 +12,9 @@ Part IV is three case studies, and this chapter is the mechanism they share, sta
 
 ### The form Pike borrowed, and what it was for
 
-In November 2015 Rob Pike gave a talk at Gopherfest that produced the Go proverbs. He opens by naming his source: a book translated from Japanese about fifty years earlier, called *Go Proverbs Illustrated* — Kensaku Segoe's — and the slide behind him shows it.
+In November 2015 Rob Pike gave a talk at Gopherfest that produced the Go proverbs. He opens by naming his source: a book about the Japanese board game go, published fifty years earlier, called *Go Proverbs Illustrated*. The author is Kensaku Segoe and the slide behind Pike shows it.
 
-He reads out two of Segoe's, about board positions, and then says this about whether the audience is following:
+He reads out two of Segoe's proverbs, and then says this about whether the audience is following:
 
 > don't worry whether you understand that or not
 
@@ -28,7 +28,7 @@ That last clause is the point. The proverb tells you the consequence; whether yo
 
 > Don't communicate by sharing memory, share memory by communicating.
 
-Pike introduces it as something that already exists — *there is already one proverb you all know* — so he is glossing rather than coining, which makes the gloss more interesting rather than less: this is the language's designer saying what the sentence is taken to mean. He spends about forty seconds on what it takes to read that sentence, and the content is narrow. You pass the address of a data structure over a channel. And then the part that does the work:
+Pike introduces it as something that already exists — *there is already one proverb you all know* — so he is glossing rather than coining, which makes the gloss more interesting rather than less: this is the language's designer saying what the sentence is taken to mean. He spends about forty seconds on what it takes to read that sentence, and the scope is narrow. You pass the address of a data structure over a channel. And then the part that does the work:
 
 > when you send that object over a channel if you don't keep the pointer then you don't have access to it anymore
 
@@ -80,9 +80,9 @@ The code is fine. What is interesting is the reading that made it look wrong, wh
 
 > I thought the proverb related to not even having the possibility of sharing memory, not that you shouldn't intentionally share memory
 
-**There is the mechanism, self-reported.** And it is more specific than channel over-use. The phrase *sharing memory* has no fixed extent in the sentence containing it. Does writing to your own index in a shared slice count? Pike's forty seconds answer no — the proverb is about handing off a pointer and losing access to it. The eleven words alone do not answer it, and the reader resolved it outward, to any memory two goroutines can both reach.
+**There is the mechanism, self-reported.** And it is more specific than channel over-use. The phrase *sharing memory* has no fixed extent in the proverb containing it. Does writing to your own index in a shared slice count? Pike's forty seconds answer no — the proverb is about handing off a pointer and losing access to it. The eleven words alone do not answer it, and the reader resolved it outward, to any memory two goroutines can both reach.
 
-The same post asks a second question worth as much: is the proverb about maintainability and safety, or is there some other reason for it? **They cannot tell what kind of claim it is.** That is chapter 02's subject arriving in the wild. Sorting the proverb into one of the five kinds is what tells you how much authority it has — a Law binds regardless, a Principle holds only under certain Forces, an Idiom is local — and the compressed form gives you nothing to sort it with.
+The same post asks a second question worth as much: is the proverb about maintainability and safety, or is there some other reason for it? **They cannot tell what kind of claim the proverb is.** That is chapter 02's subject arriving in the wild. Sorting the proverb into one of the five kinds is what tells you how much authority it has — a Law binds regardless, a Principle holds only under certain Forces, an Idiom is local — and the compressed form gives you nothing to sort it with.
 
 ### The scope gets rebuilt by hand, more than once
 
@@ -124,7 +124,7 @@ This is a structural claim rather than an empirical one. It says the left column
 
 So the test gets sharper, and becomes something you can check rather than hope for. **Look at the grammatical subject.** If it names a package, a file format, a specific operation, the situation arrived with the proverb. If it names a style of programming, it did not, and reconstructing it is your job.
 
-**On what these sources are worth**, because they are not equal. Pike's talk is primary. The Go project's wiki page is an official artifact and the strongest evidence that the misreading was real enough to be worth correcting — though note that it attributes the over-use to enthusiasm rather than to the proverb, and this chapter does not claim the proverb caused it. The forum thread is community anecdote: one instance, dated, and useful only because the over-application is self-reported rather than attributed by somebody else. It shows the confusion exists and what shape it takes. It establishes nothing about how often, and nothing here claims otherwise.
+**On what these sources are worth**, because they are not equal. Pike's talk is primary. The Go project's wiki page is an official artifact and the strongest evidence that the misreading was real enough to be worth correcting — though note that it attributes the over-use to enthusiasm rather than to the proverb, and this chapter does not claim the proverb caused it. The Reddit thread is community anecdote: one instance, dated, and useful only because the over-application is self-reported rather than attributed by somebody else. It shows the confusion exists and what shape it takes. It establishes nothing about how often, and nothing here claims otherwise.
 
 ---
 
@@ -169,7 +169,7 @@ Where that does not happen — where the wide reading hardens and nobody writes 
 
 ## What the claim costs
 
-**Recovering a scope is slow, and usually nobody wrote it down.** Pike's is recoverable because the talk was recorded. For most advice the context is a mailing list that no longer resolves, or a conversation. At that point you are reconstructing rather than reading, which is how a plausible mechanism gets attached to somebody else's words — this chapter's first draft did exactly that, asserting a relationship between two of Pike's proverbs that he never claimed.
+**Recovering a scope is slow, and usually nobody wrote it down.** Pike's is recoverable because the talk was recorded. For most advice the context is a mailing list that no longer resolves, or a conversation. At that point you are reconstructing rather than reading, which is how a plausible mechanism gets attached to somebody else's words.
 
 **The test rejects nearly everything.** Almost no advice states its own extent, because the extent was compressed out before it reached you. *Does this say how wide it is* discards most of what is true along with what is not. It sorts. It does not accept or reject.
 
