@@ -182,7 +182,7 @@ Then the scope rebuilt by hand three times — the Go project's own wiki page re
 The finding the go-game collections supply: **scope lives inside the principle or in an apparatus around the collection it belongs to, and where it is in neither the reader reconstructs it — or fails to.**
 Which exposes a control inside Pike's own list — four proverbs take a named package as their grammatical subject and have nowhere to drift to, so the test becomes checkable rather than hopeful.
 
-*Where the claim doesn't apply:* advice with no scope to lose, where gofmt travelled intact; the domain gap between a fixed board game and software, which explains the lag without excusing it; and the fact that this chapter ends in repair rather than entrenchment, which is why the endpoint term belongs to 23.
+*Where the claim doesn't apply:* a named situation is only a **proxy** for the conditions and can fit badly in either direction — syscall and cgo are two proverbs for one condition, so a third platform-specific case has none, and the test therefore measures whether you were given something checkable rather than whether the extent is right; advice with no scope to lose, where gofmt travelled intact; the domain gap between a fixed board game and software, which explains the lag without excusing it; and the fact that this chapter ends in repair rather than entrenchment, which is why the endpoint term belongs to 23.
 
 ### 16. OOP versus the Direction Rule
 `16_oop-vs-direction.md`

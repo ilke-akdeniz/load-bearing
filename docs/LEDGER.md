@@ -175,6 +175,8 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Scope gets rebuilt by hand | 15 | `MutexOrChannel`'s table reconstructs Pike's gloss; commenters reconstruct it again; a meta-proverb gets improvised — the repair Sensei's Library institutionalised as a category | cite 15 |
 | Scope lives inside or around | 15 | Either in the sentence, or in machinery around the collection; where it is in neither, the reader supplies it | "inside or around (Ch. 15)" |
 | The property is in the wording, not the genre | 15 | *One reason to change* and *don't repeat yourself* were never written to be memorable and fail the test anyway; *money* and *cgo* pass it — so the finding is not about proverbs | "past proverbs (Ch. 15)" |
+| A named situation is a proxy | 15 | Naming a situation gives *a* scope, not necessarily the right one — syscall and cgo are two proverbs for one condition, so a third platform-specific case has none | "the proxy fits badly (Ch. 15)" |
+| The test measures checkability, not fit | 15 | Passing it means the principle handed you something to compare your case against, not that it handed you the correct extent | cite 15 |
 | Some sentences cannot lose scope | 15 | A proverb whose grammatical subject is a named package has nowhere to drift to — structural, not a claim that those are never misapplied | "check the subject (Ch. 15)" |
 | Unconditional advice loses nothing | 15 | gofmt travelled intact because there is no situation in which one consistent format is wrong; 14's boundary in a different costume | cite 15 |
 | Mocks assert about mocks | 17 | A mocked test passes when the real constraint has been deleted | cite 17 |

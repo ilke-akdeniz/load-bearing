@@ -2734,3 +2734,36 @@ Chapter 15 says *scope* because it tracks **what the wording carries** rather th
 **Consequence.**
 `LEDGER.md` gains a row for the relationship, so a later chapter reaching for either word knows it is picking a view rather than a synonym.
 This closes the terminology work opened by decision 66.
+
+---
+
+## 68. A named situation is a proxy, and chapter 15's test is weaker than it read
+
+**Date.** 2026-08-18
+
+**Context.**
+After the *scope* versus *conditions* definition landed, the author pushed on it:
+
+> What if the wording names a situation but that doesn't imply the conditions the advice requires. Is that possible, basically a scope without a condition. Or is it a scope with the wrong conditions.
+
+It is possible, and the chapter's own evidence proves it — which the draft had not noticed while building the test on that evidence.
+
+**The finding, from Pike's list.**
+Two of the nineteen are the same instruction with a different noun: *syscall must always be guarded with build tags*, and *cgo must always be guarded with build tags*. Introducing the second he says it is for exactly the same reason as the first.
+
+One condition — the code is platform-specific — and **two proverbs, because he was naming situations and the condition covered more than one of them.**
+
+So a named situation is a **proxy** for the conditions, chosen for cheapness and recognizability rather than for fit, and it can miss in either direction. Narrower than the conditions, and the advice under-applies: a third platform-specific thing that is neither syscall nor cgo has no proverb, and somebody following both faithfully ships it unguarded having misread nothing. Wider, and it over-applies mildly: *don't store money in a float* covers a dashboard total that is never summed or reconciled, where the condition does not hold.
+
+**What this does to the claim, which is less than it first appears.**
+The claim says a principle carries its scope when it names a situation. That survives — it carries **a** scope. What it never guaranteed, and what the draft had let readers assume, is that the scope matches where the advice is true.
+
+So the test measures **checkability, not correctness**. With *guard cgo with build tags* you can ask what your case has in common with cgo and get an answer. With *clear is better than clever* there is nothing to compare against, because no situation was named. That difference is real and is what the chapter is about; the chapter now says so instead of implying more.
+
+**Why it belongs in the boundary section rather than being fixed.**
+This is a limit on the chapter's sharpest tool, discovered from the same source that produced the tool. Stating it is the book's own rule — no chapter ships without a real counter-example — applied to a test rather than to a claim.
+
+**Consequence.**
+`LEDGER.md` gains two rows, one for the proxy and one for what the test actually measures.
+Chapter 15's TOC boundary line now leads with the proxy limit.
+The chapter runs 240 lines.

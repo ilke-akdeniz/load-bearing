@@ -183,6 +183,27 @@ Some advice is unconditional, and then nothing is missing from the compressed fo
 
 *Gofmt's style is no one's favorite, yet gofmt is everyone's favorite* is on the same list of nineteen, and it became a norm — mandatory automatic formatting, no configuration — without incident. There is no situation in which one consistent format is wrong, so a reader who receives only the proverb has received all of it. Chapter 14 reached this boundary from the other side: a compressed statement is safe exactly when its condition is *always*. Chapter 22 is the general case.
 
+### A named situation is a proxy, and proxies fit badly
+
+The test above asks whether a principle names the situation it applies to. It does not ask whether that situation is the right one, and those come apart.
+
+A named situation is a **proxy** for the conditions — cheaper to state, easier to recognize, and chosen for both of those rather than for fit. Pike's own list shows the seam. Two of the nineteen are the same instruction with a different noun in front:
+
+```text
+ Syscall must always be guarded with build tags
+ Cgo must always be guarded with build tags
+```
+
+Introducing the second, he says it is for exactly the same reason as the first. One condition — the code is platform-specific — and two proverbs, because he was naming situations and the condition covered more than one of them.
+
+**So the proxy can be narrower than the conditions**, and then the advice under-applies. A third platform-specific thing that is neither syscall nor cgo has no proverb, and somebody who follows both faithfully still ships it unguarded, having misread nothing.
+
+It can also be wider. *Don't store money in a float* names money; the condition is that an exact decimal representation is authoritative and errors accumulate. A rough total on a dashboard, never summed and never reconciled, is inside the named situation and outside the condition. That direction is the milder failure, because obeying the proverb there costs almost nothing.
+
+**Which makes the chapter's test weaker than it reads, and worth restating honestly.** Passing it means the principle handed you something checkable, not that it handed you the right extent. With *guard cgo with build tags* you can ask what your case has in common with cgo and get an answer. With *clear is better than clever* there is nothing to compare against, because no situation was named at all.
+
+That is still a real difference, and it is the one the chapter is about. A proxy you can test beats an extent nobody stated.
+
 ### The domains are not alike, and it explains the lag
 
 Board go is one rule set, fixed for centuries, with a single objective and a bounded space. Software has domains that share almost nothing, tools that turn over in a decade, and no settled agreement about what counts as better.
