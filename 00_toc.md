@@ -189,6 +189,11 @@ Which exposes a control inside Pike's own list — four proverbs take a named pa
 
 The first case study, and the one with the most code.
 
+**Chapter 15's mechanism, running on:** *behaviour belongs with the data it operates on.*
+The term with no fixed extent is **belongs with**.
+The wide reading gives every entity methods that reach other entities, which produces object webs and then cycles.
+The narrow reading already exists in this book — chapter 14's *placed by scope*, where what decides the location is how much data you must see to tell whether a rule holds.
+
 Contents: bidirectional associations in domain models; how inheritance creates dependencies that point both ways in practice; "tell, don't ask" pushing toward object webs; ORMs materializing cyclic graphs; what cycles cost concretely — serialization, test setup, comprehension.
 The alternative demonstrated: flat structures with explicit identifiers, and what you give up by choosing it.
 
@@ -199,6 +204,10 @@ The alternative demonstrated: flat structures with explicit identifiers, and wha
 
 The second case study, kept fair.
 
+**Chapter 15's mechanism, running on two principles:** *write the test first*, and *mock your dependencies.*
+The terms with no fixed extent are what **first** buys, and what counts as a **dependency**.
+The wide readings are that the ordering ritual causes good design, and that anything you did not write gets mocked.
+
 Contents: generated tests that pass without reaching the condition they name, and mutation as the only check that catches them (FlowCore's decision 37: five toothless tests in one iteration); what the empirical literature actually shows about test-first, where the controlled studies disagree with each other and most of them measure test-first against no tests rather than against test-after; the difference between "tests help" and "this ordering ritual helps"; **mocks assert that your code calls your mocks** — the argument, with a test that passes while the constraint it claims to verify has been deleted; how the mocking convention generates interface-per-class, which generates the DI container; what the testing pyramid assumes about where your logic lives, and what happens when your logic lives in a schema instead.
 
 *Where the claim doesn't apply:* systems where the dependency genuinely cannot be run in a test — payment gateways, hardware, third-party APIs — and the honest version of test doubles for those.
@@ -207,6 +216,12 @@ Contents: generated tests that pass without reaching the condition they name, an
 `18_clean-architecture-vs-language.md`
 
 The third case study: what happens when a structural idea is expressed as directories.
+
+**Chapter 15's mechanism, running on:** *depend on abstractions, not concretions*, and *the database is a detail.*
+The terms with no fixed extent are **abstraction** and **detail**.
+The wide reading gives an interface at every boundary and a directory per layer.
+The narrow reading is chapter 05's — put what changes least at the bottom, which an interface is not automatically.
+The argument is worked in `docs/speculative-abstraction.md`; read it before drafting.
 
 Contents: **layered packages force exports** — splitting a store into its own package requires making its helpers public, so the wall meant to hide them is what exposes them; the mapping tax of one entity type per layer; interfaces with one implementation; the `internal/` manoeuvre and what it's actually for; why the same architecture in Go, C#, and Python produces three different file layouts and only one of them needs the ceremony.
 

@@ -2632,3 +2632,41 @@ Decision 61's line saying the chapter names its own first draft in the costs sec
 The third review changed the description of Segoe's book to *published fifty years earlier*. Pike's words are that it *"was translated about 50 years ago from Japanese into English"*, and the Japanese original is older than that. Restored to *translated into English about fifty years earlier*, which keeps the author's disambiguation — that this is go the board game rather than the language — and their split of an overstuffed sentence.
 
 The rest of both reviews stands: *scope* for *content* where the chapter's own key term applies; *proverb* for *sentence* in a place the vocabulary sweep missed; *the Reddit thread* for *the forum thread*; and *shows the book's cover* for the ambiguous *shows it*.
+
+---
+
+## 65. Bridging chapter 15 from proverbs to principles, and making 16–18 read as instances
+
+**Date.** 2026-08-17
+
+**Context.**
+The author raised a structural worry before drafting 16:
+
+> I'm slightly worried that we need to find a way to generalize Pike's "go proverbs losing the scope" to "principles losing the scope." That looks very plausible but do we have a plan for it.
+
+Stated sharply: **chapter 15's title and claim say *principle*, and every piece of its evidence is a *proverb*** — a genre built on purpose to be short and memorable, which a reader can fairly call a special case.
+
+Checking turned up a second gap the author had not asked about. Chapters 16, 17, and 18 *are* the generalization, but nothing in their TOC entries said so; read cold they were three independent critiques. So chapter 15's opening line — *this chapter is the mechanism they share* — was a promise the rest of Part IV did not keep.
+
+**Decision, gap one.**
+A short section in 15 runs the chapter's structural test on advice nobody wrote to be memorable.
+
+This is safe where a harm example would not have been, and the distinction is the one the last three reviews were about. Asking whether a principle names the situation it applies to is a question about **wording**. It needs no history, no author to interview, and no claim about what anyone did with it — the same kind of claim as the `syscall` versus *clear is better than clever* split already in the chapter.
+
+*A class should have one reason to change* and *don't repeat yourself* were not compressed for memorability and fail the test anyway, because *responsibility* and *repeat* have no fixed extent. *Don't store money in a float* and *guard cgo with build tags* pass, because *money* and *cgo* name situations.
+
+So **the property belongs to the wording rather than to the genre.** Being built for memorability makes omission more likely, since the situation is the longest part and the first to go. It is not what causes it.
+
+**Decision, gap two.**
+Each of 16, 17, and 18 gains a block naming the principle, the term with no fixed extent, and the wide reading:
+
+- **16** — *behaviour belongs with the data it operates on*; **belongs with**; every entity gets methods reaching other entities, producing object webs and cycles. The narrow reading is chapter 14's *placed by scope*.
+- **17** — *write the test first* and *mock your dependencies*; what **first** buys, and what counts as a **dependency**; the ordering ritual causes good design, and anything you did not write gets mocked.
+- **18** — *depend on abstractions* and *the database is a detail*; **abstraction** and **detail**; an interface at every boundary and a directory per layer. The narrow reading is chapter 05's, and `docs/speculative-abstraction.md` holds the argument.
+
+**Why this was worth doing before drafting 16 rather than after.**
+Without it, 16 gets written as a standalone critique of object orientation and has to be retrofitted into Part IV's structure later. With it, each drafting session starts with a spine rather than a topic — and the three chapters stop being three complaints.
+
+**Consequence.**
+`LEDGER.md` gains a row for the wording-not-genre finding.
+Chapter 15 runs 214 lines.

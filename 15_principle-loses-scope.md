@@ -124,6 +124,32 @@ This is a structural claim rather than an empirical one. It says the left column
 
 So the test gets sharper, and becomes something you can check rather than hope for. **Look at the grammatical subject.** If it names a package, a file format, a specific operation, the situation arrived with the proverb. If it names a style of programming, it did not, and reconstructing it is your job.
 
+### Past proverbs, to principles nobody wrote to be memorable
+
+Everything above is a proverb, and a proverb is a special case — short and poetic on purpose, because Pike said those were his criteria. So the obvious objection is that the finding belongs to the genre rather than to advice in general.
+
+It does not, and the test settles it without leaving the page. Asking whether a principle names the situation it applies to is a question about its wording. It needs no history, no author to interview, and no claim about what anyone did with it.
+
+Run it on advice nobody compressed for memorability:
+
+```text
+ principle                      situation?   term with no fixed extent
+ ----------------------------   ----------   -------------------------
+ one reason to change           no           responsibility
+ don't repeat yourself          no           repeat
+ depend on abstractions         no           abstraction
+ prefer composition over        no           how strongly, prefer
+   inheritance
+ don't store money in a float   yes, money   —
+ guard cgo with build tags      yes, cgo     —
+```
+
+The top four are not proverbs. Nobody wrote *a class should have one reason to change* to scan, and it does not. It fails the test anyway, and for the same reason the Go proverb did: *responsibility* has no fixed extent, so two people who agree with the principle can disagree about every class in the codebase and neither is misreading it.
+
+The bottom two are not proverbs either, and they pass. *Money* and *cgo* name situations. There is nowhere to resolve them outward to.
+
+**So the property belongs to the wording, not to the genre.** Being built for memorability makes it more likely that the situation gets left out, because a situation is the longest part and the first to go. It is not what causes the omission. Chapters 16, 17, and 18 are three principles from the second column, each traced to what its wide reading produced.
+
 **On what these sources are worth**, because they are not equal. Pike's talk is primary. The Go project's wiki page is an official artifact and the strongest evidence that the misreading was real enough to be worth correcting — though note that it attributes the over-use to enthusiasm rather than to the proverb, and this chapter does not claim the proverb caused it. The Reddit thread is community anecdote: one instance, dated, and useful only because the over-application is self-reported rather than attributed by somebody else. It shows the confusion exists and what shape it takes. It establishes nothing about how often, and nothing here claims otherwise.
 
 ---
