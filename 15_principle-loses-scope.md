@@ -84,7 +84,7 @@ The code is fine. What is interesting is the reading that made it look wrong, wh
 
 > I thought the proverb related to not even having the possibility of sharing memory, not that you shouldn't intentionally share memory
 
-**There is the mechanism, self-reported.** And it is more specific than channel over-use. The phrase *sharing memory* has no fixed scope in the proverb containing it. Does writing to your own index in a shared slice count? Pike's forty seconds answer no — the proverb is about handing off a pointer and losing access to it. The eleven words alone do not answer it, and the reader resolved it outward, to any memory two goroutines can both reach.
+**There is the mechanism, self-reported.** And it is more specific than channel over-use. The proverb never says what counts as sharing memory. Does writing to your own index in a shared slice count? Pike's forty seconds answer no — the proverb is about handing off a pointer and losing access to it. The eleven words alone do not answer it, and the reader resolved it outward, to any memory two goroutines can both reach.
 
 The same post asks a second question worth as much: is the proverb about maintainability and safety, or is there some other reason for it? **They cannot tell what kind of claim the proverb is.** That is chapter 02's subject arriving in the wild. Sorting the proverb into one of the five kinds is what tells you how much authority it has — a Law binds regardless, a Principle holds only under certain Forces, an Idiom is local — and the compressed form gives you nothing to sort it with.
 
@@ -137,18 +137,21 @@ It does not, and the test settles it without leaving the page. Asking whether a 
 Run it on advice nobody compressed for memorability:
 
 ```text
- principle                      situation?   term with no fixed scope
- ----------------------------   ----------   -------------------------
- one reason to change           no           responsibility
- don't repeat yourself          no           repeat
- depend on abstractions         no           abstraction
- prefer composition over        no           how strongly, prefer
+ principle                      situation named   what you must ask
+ ----------------------------   ---------------   ------------------
+ single responsibility          —                 one responsibility of
+                                                  what? a method, a
+                                                  class, a service?
+ don't repeat yourself          —                 repeat what, and is
+                                                  twice a repetition?
+ depend on abstractions         —                 which dependencies?
+ prefer composition over        —                 prefer how strongly?
    inheritance
- don't store money in a float   yes, money   —
- guard cgo with build tags      yes, cgo     —
+ don't store money in a float   a money value     —
+ guard cgo with build tags      a file using cgo  —
 ```
 
-The top four are not proverbs. Nobody wrote *a class should have one reason to change* to scan, and it does not. It fails the test anyway, and for the same reason the Go proverb did: *responsibility* has no fixed scope, so two people who agree with the principle can disagree about every class in the codebase and neither is misreading it.
+The top four are not proverbs. Nobody wrote the single responsibility principle to scan, and it does not. They fail the test anyway, and for the reason the Go proverb did: none of them says which situation it is about, so before you can apply one you have to answer a question it never asked. Two engineers who both accept the single responsibility principle can disagree about every class in the codebase and neither is misreading it — they answered *of what?* differently, and the principle does not arbitrate.
 
 The bottom two are not proverbs either, and they pass. *Money* and *cgo* name situations. There is nowhere to resolve them outward to.
 
@@ -160,7 +163,7 @@ The bottom two are not proverbs either, and they pass. *Money* and *cgo* name si
 
 ## Why the claim holds
 
-Compression fixes words. It does not fix their scope.
+Compression fixes the wording. It does not fix the scope.
 
 *Sharing memory* is two words in Pike's sentence and about a paragraph in his explanation of it. The sentence survives repetition; the paragraph does not. So what circulates is a term whose boundary was set somewhere the reader cannot see — and the reader still has to act, so they resolve it. With no context to narrow it, the widest reading is the only one available. That is why the error has a direction. Nobody reads a proverb too narrowly.
 

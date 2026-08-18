@@ -2800,3 +2800,33 @@ That earns its place because it explains something neither chapter had accounted
 **Consequence.**
 `LEDGER.md` gains a row for the actionable-half finding, so a later chapter meeting the same shape has somewhere to point.
 The overlap is now a relationship the book states rather than a duplication a reader notices.
+
+---
+
+## 70. The bridge table was mixing two levels, and one column was incoherent
+
+**Date.** 2026-08-18
+
+**Context.**
+The author could not follow chapter 15's table generalising the test past proverbs, and gave two reasons.
+
+The first was a plain error. Column one read *one reason to change* and column three read *responsibility* — a word not present in the row it was labelling. The statement of the principle was in one cell and the name of the principle was being drawn on for the other.
+
+The second was the real problem:
+
+> your "term with no fixed scope" column doesn't make sense to me. A principle has a scope or not, any term in it having a scope is meaningless here.
+
+**Correct, and the confusion was the draft's throughout.**
+There are two levels — a principle's scope, meaning which situations it applies to, and a term's extent, meaning which things a word covers. The chapter's claim is about the first. The table's third column was about the second, and the prose slid between them without noticing.
+
+**Decision.**
+The author's replacement shape, which fixes it by changing what the column is for: **principle / situation named / what you must ask.** The third column is now a question about the principle rather than a property of a word inside it, which keeps everything at one level and is actionable — *one responsibility of what, a method, a class, a service?*
+
+The paragraph after the table was rewritten to match: the top four fail not because a word inside them is fuzzy but because none of them says which situation it is about, so applying one means answering a question it never asked. Two engineers who both accept the single responsibility principle can disagree about every class in the codebase, having answered *of what?* differently.
+
+**Two more instances of the same slip, found by sweeping for it.**
+*The phrase sharing memory has no fixed scope in the proverb containing it* is now *the proverb never says what counts as sharing memory* — same fact, stated about the principle.
+*Compression fixes words. It does not fix their scope* is now *compression fixes the wording. It does not fix the scope.*
+
+**Consequence.**
+`LEDGER.md`'s row for the bridge section is reworded, since it described the finding in the term-level vocabulary that has now been retired from the chapter.
