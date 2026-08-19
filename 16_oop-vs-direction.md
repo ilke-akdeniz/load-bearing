@@ -203,9 +203,9 @@ boolean isGold() {
 }
 ```
 
-Nothing justifies taking `isGold` off the customer and putting it in a `MembershipService` in this situation. That option exists but it puts the rule to a place where a caller can bypass it. Usually the simpler placement is chosen instinctively by the developer. [claude my edit is basically the recognition that "nobody takes" is misleading. Many people take and do that, repeatedly.]
+Nothing justifies taking `isGold` off the customer and putting it in a `MembershipService` here. That option exists, but it puts the rule where a caller can bypass it. Usually the simpler placement is the one the developer reaches for instinctively.
 
-Contrast this with `order.discount()` method from the earlier example. It reads both Order and Tier entities and the placement needs a new field inside the `Customer` entity. But the same developer instinct kicks off here because the conditions look very similar on the surface. 
+Contrast the `order.discount()` method from the earlier example. It reads both an `Order` and a `Customer`, and placing it on `Order` requires `Order` to hold a `Customer` field. But the same developer instinct kicks in here, because the conditions look very similar on the surface.
 
 A third placement was available throughout — a method taking an order and a customer, holding neither — and it is the one almost nobody reaches for, because it is the only one of the three that has to be justified.
 
