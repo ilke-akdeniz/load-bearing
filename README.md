@@ -105,6 +105,8 @@ Each chapter follows a fixed shape:
 5. **What the claim costs** — every choice has a bill.
 6. **How to recognize the failure** — what it looks like in a real codebase when someone got this wrong.
 
+Then the back matter: a **Sources** section listing every work the chapter cites, with links, and a line handing off to the next chapter.
+
 ## Conventions
 
 **Languages.**

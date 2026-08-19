@@ -124,6 +124,13 @@ Each chapter follows this shape:
 5. **What the claim costs** — every choice has a bill.
 6. **How to recognize the failure** — what it looks like in a real codebase when someone got this wrong.
 
+Then the back matter, after the argument ends: a `## Sources` section, and the `**Next:**` line handing off to the following chapter.
+
+**Sources lists every work the chapter cites, and nothing else.**
+Bare entries — author, title, venue, date, link — in order of first appearance in the chapter, with every link verified rather than recalled.
+It is not a further-reading list: a work the chapter does not cite does not go in, and a work it does cite is not annotated with what the chapter took from it.
+Provenance stays in the prose where the claim is made, so the section adds no footnote markers and changes no sentence.
+
 ### The claim sentence
 
 The claim may assert **only what the chapter goes on to demonstrate**, and the standing bias is toward asserting more.
