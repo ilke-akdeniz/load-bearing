@@ -2964,3 +2964,138 @@ The talk was checked against what is already shipped and contradicts none of it.
 `CLAUDE.md` names the document as the third of its kind and says when to read it.
 `00_toc.md` gains three rows in *Pending revisits* and a block in chapter 21's entry.
 `LEDGER.md` gains two rows for 21, since those concepts are definite enough to be owned before the chapter exists.
+
+---
+
+## 75. Every chapter carries its own Sources section
+
+**Date.** 2026-08-18
+
+**Context.**
+The drafted chapters cite roughly twenty works by name and year — Parnas, Conway, Fowler, Norvig, Pike, Ousterhout, the Gang of Four — and quote several of them directly, across about fifty-five blockquote lines.
+They contained no external links at all: the only three URLs anywhere in the book pointed at FlowCore and at the book's own repository.
+The author raised the gap and asked whether a references section was needed.
+
+**Options.**
+A back-of-book references appendix, derived at publication from an internal record; a list at the end of each chapter file; an internal record only, with nothing reader-facing.
+
+**Decision.**
+A `## Sources` section at the end of every chapter, in the back matter above the `**Next:**` line.
+
+**The draft's recommendation did not survive, and the author's argument was the medium.**
+The draft proposed `docs/SOURCES.md` — an internal record of what was cited and which form of each source was actually consulted — with a reader-facing appendix generated later, at publication.
+The author's objection: this is a free online book whose chapters are separate files, and the README links readers straight into 03, 06, 07, and 10.
+A reader arriving at chapter 07 from one of those links has no reason to know a references file exists elsewhere in the repository.
+The sources belong where the reading happens.
+
+That also absorbed the one job the internal record was for.
+`CLAUDE.md` requires ranking the available sources and naming the one actually read — a rule that exists because chapter 15's Pike material came from a third-party transcript read in excerpts.
+Recording that in the chapter rather than in a private file matches how the book already handles its claims about itself.
+
+**Why it is not an academic apparatus.**
+`CLAUDE.md` states that provenance is written into the sentence and that there is no tagging notation.
+The section is a lookup table, not a footnote system: no superscripts, no numbered markers, and no existing sentence altered.
+*Parnas, 1972* stays where it is and also appears in the list.
+
+**Consequence.**
+Chapter 15 was done first as the prototype, every link verified against the author's local source archive or fetched live.
+`Sources` is now in the chapter rubric in `CLAUDE.md` and `README.md`, placed as back matter rather than as a seventh section, because it is not a step in the argument — so chapters 01 and 16–23 are drafted with it.
+Chapters 02–14 are retrofitted in the final sweep, decision 77.
+
+---
+
+## 76. Sources entries are bare, and links do not open in new tabs
+
+**Date.** 2026-08-18
+
+**Context.**
+Chapter 15's first Sources section annotated each entry with what the chapter had taken from it — which quotations came from the recording, which part of a large wiki page was used.
+The author then asked whether the links could be made to open in a new tab.
+
+**Decision.**
+Bare entries: author, title, venue, date, link, and nothing else.
+No new-tab behaviour.
+
+**Why bare.**
+The annotations restated what the chapter's prose already says.
+The register rules exclude any sentence that would survive being deleted, and every note failed that test once the chapter above it had been read.
+Two survived because they are citation data rather than commentary, and each prevents a reader thinking they have found an error: Ousterhout's slide deck is dated September 1995 while the talk is USENIX January 1996, and the *Wei Qi Shi Jue* is published in English under a different title.
+
+**Why no new tabs.**
+It is not possible where the book is actually read.
+GitHub's sanitiser allows exactly one attribute on an anchor, `href`; `target` is stripped, and the request to support it in GitHub Flavored Markdown is still open.
+Raw HTML anchors would replace clean Markdown in the source for no effect at all.
+
+It would also be the wrong choice in a future HTML build, where a template could apply it.
+WCAG places unannounced new windows under 3.2.5 *Change on Request*; the back button stops working, and screen reader and keyboard users are moved without being told.
+Readers already have the choice through modifier-click, so setting `target` removes a decision rather than adding a capability.
+The argument for new tabs is weakest exactly where these links sit — at the end of a chapter the reader has finished.
+
+**Consequence.**
+The format is recorded in the chapter rubric, so the annotations are not reintroduced by a later drafting session.
+If an HTML edition is built, the useful template work is a stable anchor on the `Sources` heading, not link targets.
+The bare-entry format is the author's call; the sanitiser and accessibility reasoning is the draft's, in answer to the author's question.
+
+---
+
+## 77. The final sweep is recorded as four slices, not as a list of rules
+
+**Date.** 2026-08-18
+
+**Context.**
+`CLAUDE.md` changed 33 times between 3 and 17 August, while the fourteen drafted chapters were being written, so a chapter drafted early was held to fewer rules than one drafted late.
+Three documents hold material owed to chapters, and `00_toc.md` carries an owed table.
+The author planned a final pass over every chapter once all of them reach **draft**, and asked whether the references retrofit should run now as a separate sweep.
+
+**Decision.**
+No standalone references sweep.
+The final sweep is recorded in `CLAUDE.md` as a four-slice task — pending material, rules, Sources, reconciliation — triggered when the last chapter reaches draft, begun only on the author's confirmation, with review between slices.
+
+**Why references fold in.**
+Building a Sources list means identifying every source a chapter cites and confirming what each one is, which is step one of the primary-source rule the sweep has to apply anyway.
+Run separately, the expensive half is done twice.
+Decision 74 had already settled the general form of this: record now, apply when the chapter is next open.
+
+**A rule map was proposed and rejected.**
+The draft offered `docs/late-rules.md`, mapping each rule to the chapters that predate it.
+The author's objection settled it: the map would go stale the next time a rule was added, so it could not be useful.
+It would also have been a third copy of what `CLAUDE.md` and git already hold, which is the duplication the survey rule exists to catch.
+
+**What replaced it is derivation.**
+Slice 2 says to check each chapter against the rules that postdate it, so a rule added later is covered without anyone editing the sweep.
+One derived fact was kept, because it is about how to read git rather than a list that can rot: a `CLAUDE.md` commit that also touched many chapters was applied retroactively, and one that touched a single chapter was applied only there.
+Running that query showed the two 14 August commits touching eleven and twelve chapters were real sweeps, and that the residue is roughly five prose-affecting rules concentrated in the earliest chapters — not 33 rules across fourteen chapters.
+
+**Consequence.**
+The slice order is stated as load-bearing, because each slice inspects what the one before it produced, with a note that content added during a slice has not been through the slices already finished.
+The shape of the record is the author's; the slice contents and their ordering are the draft's.
+
+---
+
+## 78. Material documents move to `docs/pending/`, and `CLAUDE.md` points at the folder
+
+**Date.** 2026-08-18
+
+**Context.**
+Slice 1 of the final sweep named `ai-material.md`, `speculative-abstraction.md`, and `pike-retrospective.md` individually, and `CLAUDE.md` described each with the list of chapters it was owed to.
+
+**Decision.**
+The three documents move to `docs/pending/`.
+`CLAUDE.md` refers to the folder in both places that used to name them — the drafting instruction and slice 1 — and names no files.
+
+**Why.**
+The author's reason: a document can then be added or renamed without editing `CLAUDE.md`, and the sweep still functions.
+It is the same derivation principle as slice 2, applied to material rather than to rules.
+
+The per-file chapter lists went for the same reason, and one of them was already wrong.
+`CLAUDE.md` said to read `ai-material.md` before drafting 02, 03, 15, 17, 19, 21, or 23; chapters 02, 03, and 15 had all reached draft, and nobody had updated the line.
+Each document tracks its own chapters in the table it already carries.
+
+**Two calls made in the draft.**
+The folder is `docs/pending/` rather than a root-level `pending/`, because `CLAUDE.md`'s own file convention puts chapters at the repo root and working documents in `docs/`.
+A document leaves the folder for `docs/` when every piece in it has landed, rather than being deleted, because six `LEDGER.md` rows cite these arguments as provenance.
+
+**Consequence.**
+Seventeen paths updated across `CLAUDE.md`, `00_toc.md`, `LEDGER.md`, and cross-references inside the moved documents.
+`DECISIONS.md` keeps the old paths: it is the historical record, and an entry written on 12 August should say where the file was on 12 August.
+Slice 4 reconciles ledger rows, so it is where a path gets fixed when a document leaves the folder.
