@@ -188,6 +188,12 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Generic walkers assume a tree | 16 | Serialization, structural equality, hashing and deep copy are written by somebody else and all assume every node is reached once — which is why the cost arrives from outside, late | "what walks this graph (Ch. 16)" |
 | The advice with no recording | 16 | Unlike Pike's proverb there is no talk to re-watch, so the scope cannot be recovered — 15's expensive case, worked | cite 16 |
 | Mocks assert about mocks | 17 | A mocked test passes when the real constraint has been deleted | cite 17 |
+| A test fails only for reasons it can reach | 17 | Every double removes a region of the failure set deliberately; the instruction cannot say whether the rule under test lived in the removed region | "the reasons it can reach (Ch. 17)" |
+| A dependency you must double is one you cannot run | 17 | The narrow reading of *dependency* — costs money, needs hardware, belongs to someone else — against the wide one, anything the unit does not compute | "cannot run, not have not run (Ch. 17)" |
+| A double encodes only known constraints | 17 | A fake is written by the same author as the real rule and agrees with it by construction, so it cannot disagree with a schema that is wrong | cite 17 |
+| Mutation is the only mechanical check | 17 | Coverage says a line executed, not that an assertion could fail; breaking the code deliberately is what answers the actual question | "break it and see (Ch. 17)" |
+| Sequencing dropped out of the model | 17 | Fucci et al. decomposed TDD into granularity, uniformity, sequencing and refactoring effort; the test-first fraction explained neither quality nor productivity, while short steady cycles did | "the ordering is not the part (Ch. 17)" |
+| The paper states its own conditions | 17 | Test-last is not thereby preferred, the result holds *given* an iterative granular uniform process, and long-term test-first benefits were not measured — 15's mechanism running on a peer-reviewed finding | cite 17 |
 | Layered packages force exports | 18 | A directory wall requires publishing the helpers it was meant to hide | cite 18 |
 | Plurality vs sequential replacement | 18 | Two implementations live at once is what an interface is for; replacing one engine with another forever is not, and only the first is a Force — see `docs/pending/speculative-abstraction.md` | "plurality, not replacement (Ch. 18)" |
 | Insurance that cannot pay out | 18 | An abstraction bought against a future swap is shaped by the engine it was written against, sits in the code layer while the migration is a data problem, and costs the features you already run | "the premium is paid daily (Ch. 18)" |
@@ -286,7 +292,9 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | The same pair flat, Go | 16 | `CustomerID uuid.UUID` instead of `*Customer`: `json.Marshal` refuses the first and encodes the second |
 | FlowCore decision 3, pointer wiring rejected | 16 | The identifier trade priced both ways: `json.Marshal`, `reflect.DeepEqual` and offline construction bought; a query per route and cross-definition integrity moved to composite FKs, paid |
 | `Money.plus` with a currency check | 16 | The boundary — a rule reading one entity, where the advice is right and moving it out would remove the enforcement |
-| Deleted constraint, passing mock test | 17 | Mocks assert about mocks |
+| Deleted constraint, passing mock test | 17 | `unique` dropped from the schema: the database-backed test fails, the mocked one still passes |
+| FlowCore decision 37's toothless fixture | 17 | One status for both terminal actions, so the assertion could not fail; found by mutation, the fifth in one iteration |
+| Fucci et al.'s four dimensions | 17 | GRA, UNI, SEQ, REF and which survived model selection |
 | Store split into a package | 18 | Layered packages force exports |
 
 ## Deliberate repetition
