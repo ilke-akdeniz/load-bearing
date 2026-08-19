@@ -151,11 +151,11 @@ The discount rule now needs a home. It reads a customer and an order, so it goes
 
 FlowCore is a Go workflow library whose definitions are trees: a definition holds steps, and each step holds the actions that leave it. An action has to say which step comes next, which is this chapter's modelling question in a different domain.
 
-Its decision log lists the pointer version as s design option — `Action{NextStep: dir}`, wiring each action straight to the step object it routes to — and rejects it:
+Its decision log lists the pointer version — `Action{NextStep: dir}`, wiring each action straight to the step object it routes to — as its option D, and rejects it:
 
-> Poisons everything downstream — a cyclic struct can't be JSON-serialized by a client admin page, read-back has to rehydrate pointers, and test assertions loop.
+> D poisons everything downstream — a cyclic struct can't be JSON-serialized by a client admin page, read-back has to rehydrate pointers, and test assertions loop.
 
-Those are three of this chapter's costs, recorded spontaneously for a specific situation.
+Those are three of this chapter's costs, recorded for one concrete decision rather than as an illustration of anything.
 
 What FlowCore shipped instead holds an identifier:
 
@@ -247,10 +247,7 @@ The same holds for a state machine over a single aggregate. If the legal transit
 
 Two types that hold each other and are never separated, never serialized, never compared, and never deep-copied pay none of the costs in this chapter. A parser's node types are the standard example — mutually recursive by nature, and nobody calls it a defect.
 
-**The exemption is narrower than it sounds, and the reason is the word *never*.** A parser's nodes qualify because nothing outside the compiler ever encodes them — the graph is unreachable by structural position, not by luck. That is a property you can check.
-
-[claude I suggest the removal of paragraph below, the paragraphs you added after this sentence: "The question that does the work:" explain the same thing and the placement of this idea there is better in my opinion. If you agree, remove paragraph below and maybe salvage useful parts that look good on the other part and put them there.]
-*Nothing has walked it yet* is not the same property, and it is the one usually being claimed. Serialization, equality, hashing and deep copy are treated as routine work rather than as design decisions. Any developer can add an endpoint that returns the entity as JSON, or put it in a hash set, in an afternoon, without a review that would surface the back-pointer. So in any program that outlives a script, the honest answer to *will anything ever walk this generically* is yes, and the exemption does not hold.
+**The exemption is narrower than it sounds, and the reason is the word *never*.** A parser's nodes qualify because nothing outside the compiler ever encodes them — the graph is unreachable by structural position, not by luck. That is a property you can check, and it is not the same as *nothing has walked it yet* — which is the property usually being claimed.
 
 ---
 
@@ -300,4 +297,4 @@ So the useful reading of the answer is not *what walks it now* but *whether the 
 
 ---
 
-**Next:** chapter 17 turns to testing, where *test behaviour, not implementation* meets the mock that asserts about itself. [claude I removed the last part of the sentence, it looks more striking and simple to me like this.]
+**Next:** chapter 17 turns to testing, where *test behaviour, not implementation* meets the mock that asserts about itself.
