@@ -284,6 +284,7 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | Pike's nineteen, split by grammatical subject | 15 | Named packages against ways of working — the control inside one talk |
 | Bidirectional Order↔Customer, Java | 16 | Two rules, each placed correctly, leaving an edge each way; `HashSet.add` then throws `StackOverflowError` |
 | The same pair flat, Go | 16 | `CustomerID uuid.UUID` instead of `*Customer`: `json.Marshal` refuses the first and encodes the second |
+| FlowCore decision 3, pointer wiring rejected | 16 | The identifier trade priced both ways: `json.Marshal`, `reflect.DeepEqual` and offline construction bought; a query per route and cross-definition integrity moved to composite FKs, paid |
 | `Money.plus` with a currency check | 16 | The boundary — a rule reading one entity, where the advice is right and moving it out would remove the enforcement |
 | Deleted constraint, passing mock test | 17 | Mocks assert about mocks |
 | Store split into a package | 18 | Layered packages force exports |

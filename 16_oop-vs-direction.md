@@ -2,7 +2,7 @@
 
 ## The claim
 
-**"Behaviour belongs with the data it operates on" does not say where to place the behaviour goes when it needs two entities. Placing it on the entity it reads from leaves a reference pointing each way, and a value graph with a cycle in it breaks serialization, equality, and copying — costs that arrive whether or not the two are ever changed apart.**
+**"Behaviour belongs with the data it operates on" does not say where to place behaviour that needs two entities. Placing each rule on the entity it reads from leaves a reference pointing each way, and a value graph with a cycle in it breaks serialization, equality, and copying — costs that arrive whether or not the two are ever changed apart.**
 
 This is the first of Part IV's three cases, and it runs chapter 15's mechanism on a specific piece of advice. The term carrying no fixed extent is *belongs with*.
 
@@ -93,7 +93,7 @@ Exception in thread "main" java.lang.StackOverflowError
 
 `Objects.hash(name, tier, orders)` on the customer hashes each order, which hashes its customer, which hashes its orders. The recursion is in the data, so every operation that walks the graph inherits it. The same happens to a generated `equals`, a generated `toString`, and any deep copy.
 
-**This is a different cost from the one chapter 05 prices.** That chapter's test for whether a cycle matters is *will these ever be understood, tested, or changed apart* — and it concedes that two types which never operate separately, pay nothing, because they were one unit before the cycle existed. `Customer` and `Order` may well be such a pair. The stack overflow above does not care. It arrives on the first call, in code nobody wrote, and no answer about future change makes it go away.
+**This is a different cost from the one chapter 05 prices.** That chapter's test for whether a cycle matters is *will these ever be understood, tested, or changed apart* — and it concedes that two types which never operate separately pay nothing, because they were one unit before the cycle existed. `Customer` and `Order` may well be such a pair. The stack overflow above does not care. It arrives on the first call, in code nobody wrote, and no answer about future change makes it go away.
 
 ### The cost is not confined to one language
 
@@ -115,17 +115,9 @@ Go's `&` takes the address of a value, so `*Order` is a reference to an order ra
 
 Three languages, three unrelated implementations, and none of them can encode the graph. The reason is not a gap in any of the libraries. A tree serializes because every node is reached once; a cyclic graph has no such traversal, so a format built on nesting has nothing to emit.
 
-### The same shape, refused, with the reasoning recorded
-
-FlowCore had this decision in front of it and wrote down the rejection. Its workflow definitions contain steps, and steps contain actions that point at the next step. Option D in its decision log is the pointer wiring — `Action{NextStep: dir}` — which makes the definition a cyclic graph in memory. [claude without a code example showing the cylcic version and current version in Flowcore's contex, this paragraph's point is just left to the imagination of the reader. Also, reader would like to see what flowcore achieved with that code at what cost: the trade-off. If adding those would be a repetion of what's laid out on "The narrow reading, and what it looks like" section below you decide on what to do. Maybe this becomes another example after that sections or you can just remove this section.] The entry's own words:
-
-> D poisons everything downstream — a cyclic struct can't be JSON-serialized by a client admin page, read-back has to rehydrate pointers, and test assertions loop.
-
-Three costs, and none of them is about future change. **Serialization** is the failure above. **Read-back has to rehydrate pointers** means the thing loaded from the database is not the thing that was written until something walks the graph and reattaches the references, which is code that exists only to restore a shape the database cannot hold. **Test assertions loop** is the equality problem: comparing two definitions follows the back-pointers and does not terminate.
-
 ### The narrow reading, and what it looks like
 
-The other reading of *belongs with* is already in Chapter 14: "place the rule where it can see all the data it needs". The location follows from how much you must be looking at before you can tell whether the rule holds. Under that reading, a rule needing a customer and an order belongs at a scope that can see both, and that scope is neither entity.
+The other reading of *belongs with* is already in chapter 14, where behaviour is not absent but **placed**, and what decides the placement is **what the rule must see** — how much data you have to be looking at before you can tell whether the rule holds. Under that reading, a rule needing a customer and an order belongs at a scope that can see both, and that scope is neither entity.
 
 What the entities hold instead is an identifier:
 
@@ -149,9 +141,50 @@ type FlatOrder struct {
 flat:    <nil>, 187 bytes
 ```
 
-Replacing a reference with an identifier is one of the four ways chapter 05 lists for turning a cycle into a line, and it is the one that costs a lookup rather than an interface. What is bought here is not smaller change cost — it is that the value is a tree again, so encoding, comparing, and copying work the way the language's own tools expect.
+Chapter 05 lists four ways to remove a cycle. This is one of them: replace the reference with an identifier. The price is a lookup — somewhere there must now be code that takes a `CustomerID` and fetches the customer.
 
-The discount rule then lives wherever both values are in hand. That is usually the service or use-case layer, which had to load them both anyway. [two paragraphs before this tag are very dense, packed with abstract concepts and metaphors: "cyle into a line, lookup rather than interface, values is a tree, bought chane cost, discount..." Rewrite those with a more direct, clear language and don't try to make many claims on short paragraphs. Dont' force the reader to decipher your points.]
+What that buys is not a lower cost of change. It is that these two are ordinary values again. Neither holds the other, so nothing walks in a circle, and the encoder that refused the first pair accepts this one.
+
+The discount rule now needs a home. It reads a customer and an order, so it goes wherever both are already in hand — usually the service that loaded them.
+
+### The same choice in a real system, with the trade-off recorded
+
+FlowCore is a Go workflow library whose definitions are trees: a definition holds steps, and each step holds the actions that leave it. An action has to say which step comes next, which is this chapter's modelling question in a different domain.
+
+Its decision log lists the pointer version as option D — `Action{NextStep: dir}`, wiring each action straight to the step object it routes to — and rejects it:
+
+> D poisons everything downstream — a cyclic struct can't be JSON-serialized by a client admin page, read-back has to rehydrate pointers, and test assertions loop.
+
+Those are three of this chapter's costs, recorded when the decision was made rather than reconstructed for it. What shipped instead holds an identifier:
+
+```go
+type ActionDefinition struct {
+	ID                   uuid.UUID
+	WorkflowDefinitionID uuid.UUID
+	StepDefinitionID     uuid.UUID
+	Name                 string
+	// NextStepDefinitionID routes to another step in the same definition. Nil
+	// when the action is terminal.
+	NextStepDefinitionID *uuid.UUID
+	// … one further field, for actions that end the run rather than route
+}
+```
+
+`*uuid.UUID` is a pointer to an identifier, not to a step — Go has no nullable value type, so a pointer is how the language spells *optional*, and nil here means the action ends the run.
+
+**What it bought.** A client can build a whole definition in memory with no database open, hand it to `Create`, and get one back. `json.Marshal` works on it. Two definitions can be compared in a test with `reflect.DeepEqual`, which is the assertion that would have looped.
+
+**What it cost.** Following a route is now a query rather than a field access:
+
+```go
+nextStep, err := getStep(ctx, q, *action.NextStepID)
+```
+
+Where the pointer version would have written `action.NextStep`, the engine makes a database round trip.
+
+The second cost is larger. A pointer cannot name a step that does not exist; an identifier can. Nothing in the type above stops `NextStepDefinitionID` naming a step belonging to a different workflow definition, and FlowCore spends its decision 4 recovering what the pointer would have made unsayable — composite foreign keys that check the pair *(definition, step)* rather than the step alone, plus a denormalized column for them to match on.
+
+So the identifier is not free and was not chosen because it is tidier. It moves a guarantee out of the type system and into the schema, and the reason that trade is worth making is the list of three costs above.
 
 ---
 
@@ -159,7 +192,21 @@ The discount rule then lives wherever both values are in hand. That is usually t
 
 The sentence names a relation and not a scope. *Belongs with* asserts that behaviour and data should be together; it says nothing about what to do when the behaviour needs two data. Chapter 15's finding applies without modification: where a principle does not name the situation it applies to, the reader resolves it, and with no context to narrow the reading, the widest one is the only one available. Here the widest reading of *belongs with* is *on the entity, reaching whatever it needs* — which licenses a field pointing at the other entity every time a rule spans a pair.
 
-The direction of the error is set by the same asymmetry. Nobody resolves *belongs with* too narrowly and puts a single-entity rule three layers away. The reading that adds edges is the one available by default. [claude maybe small code example or diagram or table demonstrating this direction: "probably nobody would do this: Order Customer..."]
+The direction of the error is set by the same asymmetry. Both readings are available, and only one of them is ever taken:
+
+```text
+ the rule reads          the wide reading      the narrow reading
+ ---------------------   -------------------   -------------------
+ the order's own lines   Order.total()         OrderTotalService
+                         ← everyone            ← nobody
+ the order and the       Order.discount(),     a scope holding both
+   customer's tier         holding a Customer
+                         ← everyone            ← almost nobody
+```
+
+The bottom-left cell is this chapter's subject. The top-right cell is the mistake nobody makes: no one takes a rule that reads only an order's own lines and moves it to a service that must be handed them. That version has to be argued for, and the argument is chapter 05's — the rule ends up somewhere a caller can skip it.
+
+So the pressure runs one way. The reading that adds an edge is the one that needs no justification, and it is the one a reviewer has no reason to question, because on each rule taken alone it is correct.
 
 Two properties of object languages let this run unchecked.
 
@@ -198,10 +245,9 @@ The same holds for a state machine over a single aggregate. If the legal transit
 
 Two types that hold each other and are never separated, never serialized, never compared, and never deep-copied pay none of the costs in this chapter. A parser's node types are the standard example — mutually recursive by nature, and nobody calls it a defect.
 
-The test is mechanical rather than a matter of taste. **Does anything walk this graph generically?** Serialization, structural equality, hashing, deep copy, and a debugger's object inspector all do. If the answer is no today, the cycle is free today [claude something is off here, you say "never separated, never..." and then the test is "if the answer is no today". Test doesn't match the claim. ], and chapter 05's question about whether the two will ever be understood apart is the one that decides whether it stays free.
+**The exemption is narrower than it sounds, and the reason is the word *never*.** A parser's nodes qualify because nothing outside the compiler ever encodes them — the graph is unreachable by structural position, not by luck. That is a property you can check.
 
-The reason the answer is so often yes is that generic walkers arrive late and from outside. Nobody adds a back-pointer while planning to expose an admin page, and the admin page is written by somebody else a year later.
-[clause this paragraph need a more clear beginning. Is the answer to the mechanical test or to the chapter 05's question, and what's the importance of the answer being so often yes?]
+*Nothing has walked it yet* is not the same property, and it is the one usually being claimed. Serialization, equality, hashing and deep copy are treated as routine work rather than as design decisions. Any developer can add an endpoint that returns the entity as JSON, or put it in a hash set, in an afternoon, without a review that would surface the back-pointer. So in any program that outlives a script, the honest answer to *will anything ever walk this generically* is yes, and the exemption does not hold.
 
 ---
 
@@ -233,9 +279,13 @@ The reason the answer is so often yes is that generic walkers arrive late and fr
 - **"It's an anemic domain model"** used against flat structures with identifiers. Chapter 14 has the answer: the term carries an antecedent about wasted mapping cost that the speaker has to establish before the word means anything.
 - **"The ORM handles it."** It materializes the cycle rather than removing it, and the costs above are then paid inside the framework's rules instead of yours.
 
-The question that does the work: **what walks this graph that nobody on this team wrote?** [claude my wording: what tool we don't own will walk our object graph][claude "does the work" what work? Why we would ask this question and what the answer would indicate? For example: Json serializer walks it or equality walks it. So what? Also the answer for this question would most typically be: "nothing walks right now, but in any program that is not a one-off script, those walks can be introduced at any moment by any dev. They are treated as trivial coding drudgery.]
+The question that does the work: **what tool we do not own will walk this object graph?**
 
-Serialization, equality, hashing, and copying are all written by somebody else, and all of them assume a tree. A back-pointer is a promise to that code that it will never be asked to walk in a circle, made by people who will not be in the room when it is. [claude my reading is that one more sentence is needed here, you state a context and then leave it in the air, what's the lesson, conclusion?]
+It has to be asked in the future tense, because asked in the present it almost always answers *nothing yet*, and that answer is worthless. Serialization, equality, hashing and copying are all written by somebody else, and every one of them assumes each node is reached once. A back-pointer is a promise to that code that it will never be asked to walk in a circle.
+
+The person who makes that promise is rarely the person who breaks it. Adding a JSON endpoint or putting an entity in a set is treated as routine work, done without a design discussion by someone who has no reason to know what the graph looks like.
+
+So the useful reading of the answer is not *what walks it now* but *whether the graph sits anywhere such a tool can reach*. Where it does, the back-pointer has a cost that has not been paid yet, and paying it later means either a flattening layer at the boundary or a field excluded from equality with a comment explaining why.
 
 ---
 
