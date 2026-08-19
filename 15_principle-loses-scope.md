@@ -46,7 +46,7 @@ Near the end of the talk, Pike guesses what will become of the idea of "Go Prove
 
 > maybe this will turn into something that the community maintains on the wiki or maybe when you leave tonight this will be the end of the idea I don't know
 
-It became the wiki. There is now a canonical page of the nineteen proverbs, credited to that talk, carrying the nineteen sentences and nothing else. Not the forty seconds on what the first one means. Not *don't worry whether you understand that or not*. And not this, from two minutes earlier:
+The idea survived, though not on the wiki. There is now a canonical list of the nineteen proverbs, credited to that talk, carrying the sentences and nothing else. Not the forty seconds on what the first one means. Not *don't worry whether you understand that or not*. And not this, from two minutes earlier:
 
 > I don't think of these things that you guys need to know I think you know them already but think about them as ideas that you might use to explain to somebody
 
@@ -122,7 +122,7 @@ And one reply reaches for a **meta-proverb** to bound the proverb, along the lin
 
 None of that apparatus in the game wiki was designed in, and the oldest collection did without it in a different way. The Tang-dynasty *Wei Qi Shi Jue* is ten rules of four Chinese characters each, and most of them spend part of that budget on the situation they apply to — *when in danger, sacrifice*; *against strong positions, play safely*; *take care of oneself when attacking*. The scope is inside the principle rather than around the collection.
 
-Which is the more useful way to put the whole progression. **Scope lives either inside the principle or in an apparatus around the collection it belongs to, and where it is in neither, the reader reconstructs it — or fails to.** Segoe's book puts it in worked game diagrams beside each phrase. The game wiki puts it in categories, provenance marks, and a warning to evaluate before applying. The list of nineteen on the go language wiki has none of the three.
+Which is the more useful way to put the whole progression. **Scope lives either inside the principle or in an apparatus around the collection it belongs to, and where it is in neither, the reader reconstructs it — or fails to.** Segoe's book puts it in worked game diagrams beside each phrase. The game wiki puts it in categories, provenance marks, and a warning to evaluate before applying. The list of nineteen for the language has none of the three.
 
 ### The same list contains proverbs this cannot happen to
 
@@ -290,6 +290,7 @@ If the source can be reached, go and look. The scope is often still there, in th
 - Rob Pike, *Concurrency Is Not Parallelism* — Heroku Waza, January 2012. [Video and slides](https://go.dev/blog/waza-talk).
 - *Go Wiki: Use a sync.Mutex or a channel?* — [go.dev/wiki/MutexOrChannel](https://go.dev/wiki/MutexOrChannel). The newcomer-mistake line and the channel-versus-mutex table.
 - *Go Proverbs* at Sensei's Library — [senseis.xmp.net/?GoProverbs](https://senseis.xmp.net/?GoProverbs). The categories, the italics marking proverbs devised by amateurs, and the *Meta Proverbs* group.
+- *Wei Qi Shi Jue* — the Tang-dynasty ten rules, as *The Ten Golden Rules of Go* at [senseis.xmp.net/?TheTenGoldenRulesList](https://senseis.xmp.net/?TheTenGoldenRulesList).
 
 ---
 
