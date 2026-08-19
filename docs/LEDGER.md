@@ -183,6 +183,10 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | The test measures checkability, not fit | 15 | Passing it means the principle handed you something to compare your case against, not that it handed you the correct extent | cite 15 |
 | Some sentences cannot lose scope | 15 | A proverb whose grammatical subject is a named package has nowhere to drift to — structural, not a claim that those are never misapplied | "check the subject (Ch. 15)" |
 | Unconditional advice loses nothing | 15 | gofmt travelled intact because there is no situation in which one consistent format is wrong; 14's boundary in a different costume | cite 15 |
+| *Belongs with* names no scope | 16 | *Behaviour belongs with the data it operates on* does not say which entity owns a rule that reads two, so each rule goes to the entity it reads from and the references point both ways | "the sentence does not choose (Ch. 16)" |
+| A value cycle is not a type cycle | 16 | Two classes referencing each other may cost nothing; a constructed graph with a back-pointer breaks serialization, equality, hashing and copying on the first call | "the value graph (Ch. 16)" |
+| Generic walkers assume a tree | 16 | Serialization, structural equality, hashing and deep copy are written by somebody else and all assume every node is reached once — which is why the cost arrives from outside, late | "what walks this graph (Ch. 16)" |
+| The advice with no recording | 16 | Unlike Pike's proverb there is no talk to re-watch, so the scope cannot be recovered — 15's expensive case, worked | cite 16 |
 | Mocks assert about mocks | 17 | A mocked test passes when the real constraint has been deleted | cite 17 |
 | Layered packages force exports | 18 | A directory wall requires publishing the helpers it was meant to hide | cite 18 |
 | Plurality vs sequential replacement | 18 | Two implementations live at once is what an interface is for; replacing one engine with another forever is not, and only the first is a Force — see `docs/pending/speculative-abstraction.md` | "plurality, not replacement (Ch. 18)" |
@@ -278,7 +282,9 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | ParallelMap into a shared slice | 15 | The code a reader thought the proverb forbade; race-clean, because each goroutine writes one index |
 | Pike's GopherConAU retrospective, 2023 | 15 | Two admissions of missing scope — Ousterhout's, and his own team's on concurrency |
 | Pike's nineteen, split by grammatical subject | 15 | Named packages against ways of working — the control inside one talk |
-| Bidirectional Order↔Customer | 16 | OOP producing cycles |
+| Bidirectional Order↔Customer, Java | 16 | Two rules, each placed correctly, leaving an edge each way; `HashSet.add` then throws `StackOverflowError` |
+| The same pair flat, Go | 16 | `CustomerID uuid.UUID` instead of `*Customer`: `json.Marshal` refuses the first and encodes the second |
+| `Money.plus` with a currency check | 16 | The boundary — a rule reading one entity, where the advice is right and moving it out would remove the enforcement |
 | Deleted constraint, passing mock test | 17 | Mocks assert about mocks |
 | Store split into a package | 18 | Layered packages force exports |
 

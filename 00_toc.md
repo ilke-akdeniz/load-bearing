@@ -317,7 +317,7 @@ Two are not negotiable: chapter 02's classification model is a lens rather than 
 | 13 | `13_missing-language-features.md` | **draft** |
 | 14 | `14_smuggled-verdicts.md` | **draft** |
 | 15 | `15_principle-loses-scope.md` | **draft** |
-| 16 | `16_oop-vs-direction.md` | not started |
+| 16 | `16_oop-vs-direction.md` | **in progress** |
 | 17 | `17_tdd-and-mocks.md` | not started |
 | 18 | `18_clean-architecture-vs-language.md` | not started |
 | 19 | `19_force-map-method.md` | not started |
