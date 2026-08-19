@@ -2,7 +2,7 @@
 
 ## The claim
 
-**"Behaviour belongs with the data it operates on" does not say where a rule goes when it needs two entities. Placing each rule on the entity it reads from leaves a reference pointing each way, and a value graph with a cycle in it breaks serialization, equality, and copying — costs that arrive whether or not the two are ever changed apart.**
+**"Behaviour belongs with the data it operates on" does not say where to place the behaviour goes when it needs two entities. Placing it on the entity it reads from leaves a reference pointing each way, and a value graph with a cycle in it breaks serialization, equality, and copying — costs that arrive whether or not the two are ever changed apart.**
 
 This is the first of Part IV's three cases, and it runs chapter 15's mechanism on a specific piece of advice. The term carrying no fixed extent is *belongs with*.
 
@@ -20,7 +20,7 @@ So the reader is left with the words, and the words underdetermine one thing: **
 
 ### A rule that needs two entities
 
-An order's discount depends on the customer's loyalty tier and on the order's own total. Neither entity holds enough to decide alone.
+An order discount depends on the customer loyalty tier and on the order total. Neither entity holds enough data to dictate the placement alone.
 
 Read *belongs with* from the order's side — the rule is about this order's discount — and the method goes on `Order`:
 
@@ -93,7 +93,7 @@ Exception in thread "main" java.lang.StackOverflowError
 
 `Objects.hash(name, tier, orders)` on the customer hashes each order, which hashes its customer, which hashes its orders. The recursion is in the data, so every operation that walks the graph inherits it. The same happens to a generated `equals`, a generated `toString`, and any deep copy.
 
-**This is a different cost from the one chapter 05 prices.** That chapter's test for whether a cycle matters is *will these ever be understood, tested, or changed apart* — and it concedes that two types which never separate pay nothing, because they were one unit before the cycle existed. `Customer` and `Order` may well be such a pair. The stack overflow above does not care. It arrives on the first call, in code nobody wrote, and no answer about future change makes it go away.
+**This is a different cost from the one chapter 05 prices.** That chapter's test for whether a cycle matters is *will these ever be understood, tested, or changed apart* — and it concedes that two types which never operate separately, pay nothing, because they were one unit before the cycle existed. `Customer` and `Order` may well be such a pair. The stack overflow above does not care. It arrives on the first call, in code nobody wrote, and no answer about future change makes it go away.
 
 ### The cost is not confined to one language
 
@@ -117,7 +117,7 @@ Three languages, three unrelated implementations, and none of them can encode th
 
 ### The same shape, refused, with the reasoning recorded
 
-FlowCore had this decision in front of it and wrote down the rejection. Its workflow definitions contain steps, and steps contain actions that point at the next step. Option D in its decision log is the pointer wiring — `Action{NextStep: dir}` — which makes the definition a cyclic graph in memory. The entry's own words:
+FlowCore had this decision in front of it and wrote down the rejection. Its workflow definitions contain steps, and steps contain actions that point at the next step. Option D in its decision log is the pointer wiring — `Action{NextStep: dir}` — which makes the definition a cyclic graph in memory. [claude without a code example showing the cylcic version and current version in Flowcore's contex, this paragraph's point is just left to the imagination of the reader. Also, reader would like to see what flowcore achieved with that code at what cost: the trade-off. If adding those would be a repetion of what's laid out on "The narrow reading, and what it looks like" section below you decide on what to do. Maybe this becomes another example after that sections or you can just remove this section.] The entry's own words:
 
 > D poisons everything downstream — a cyclic struct can't be JSON-serialized by a client admin page, read-back has to rehydrate pointers, and test assertions loop.
 
@@ -125,7 +125,7 @@ Three costs, and none of them is about future change. **Serialization** is the f
 
 ### The narrow reading, and what it looks like
 
-The other reading of *belongs with* is already in this book. Chapter 14 puts a rule where the data it must see can be seen — the location follows from how much you must be looking at before you can tell whether the rule holds. Under that reading, a rule needing a customer and an order belongs at a scope that can see both, and that scope is neither entity.
+The other reading of *belongs with* is already in Chapter 14: "place the rule where it can see all the data it needs". The location follows from how much you must be looking at before you can tell whether the rule holds. Under that reading, a rule needing a customer and an order belongs at a scope that can see both, and that scope is neither entity.
 
 What the entities hold instead is an identifier:
 
@@ -151,7 +151,7 @@ flat:    <nil>, 187 bytes
 
 Replacing a reference with an identifier is one of the four ways chapter 05 lists for turning a cycle into a line, and it is the one that costs a lookup rather than an interface. What is bought here is not smaller change cost — it is that the value is a tree again, so encoding, comparing, and copying work the way the language's own tools expect.
 
-The discount rule then lives wherever both values are in hand. That is usually the service or use-case layer, which had to load them both anyway.
+The discount rule then lives wherever both values are in hand. That is usually the service or use-case layer, which had to load them both anyway. [two paragraphs before this tag are very dense, packed with abstract concepts and metaphors: "cyle into a line, lookup rather than interface, values is a tree, bought chane cost, discount..." Rewrite those with a more direct, clear language and don't try to make many claims on short paragraphs. Dont' force the reader to decipher your points.]
 
 ---
 
@@ -159,7 +159,7 @@ The discount rule then lives wherever both values are in hand. That is usually t
 
 The sentence names a relation and not a scope. *Belongs with* asserts that behaviour and data should be together; it says nothing about what to do when the behaviour needs two data. Chapter 15's finding applies without modification: where a principle does not name the situation it applies to, the reader resolves it, and with no context to narrow the reading, the widest one is the only one available. Here the widest reading of *belongs with* is *on the entity, reaching whatever it needs* — which licenses a field pointing at the other entity every time a rule spans a pair.
 
-The direction of the error is set by the same asymmetry. Nobody resolves *belongs with* too narrowly and puts a single-entity rule three layers away. The reading that adds edges is the one available by default.
+The direction of the error is set by the same asymmetry. Nobody resolves *belongs with* too narrowly and puts a single-entity rule three layers away. The reading that adds edges is the one available by default. [claude maybe small code example or diagram or table demonstrating this direction: "probably nobody would do this: Order Customer..."]
 
 Two properties of object languages let this run unchecked.
 
@@ -198,9 +198,10 @@ The same holds for a state machine over a single aggregate. If the legal transit
 
 Two types that hold each other and are never separated, never serialized, never compared, and never deep-copied pay none of the costs in this chapter. A parser's node types are the standard example — mutually recursive by nature, and nobody calls it a defect.
 
-The test is mechanical rather than a matter of taste. **Does anything walk this graph generically?** Serialization, structural equality, hashing, deep copy, and a debugger's object inspector all do. If the answer is no today, the cycle is free today, and chapter 05's question about whether the two will ever be understood apart is the one that decides whether it stays free.
+The test is mechanical rather than a matter of taste. **Does anything walk this graph generically?** Serialization, structural equality, hashing, deep copy, and a debugger's object inspector all do. If the answer is no today, the cycle is free today [claude something is off here, you say "never separated, never..." and then the test is "if the answer is no today". Test doesn't match the claim. ], and chapter 05's question about whether the two will ever be understood apart is the one that decides whether it stays free.
 
 The reason the answer is so often yes is that generic walkers arrive late and from outside. Nobody adds a back-pointer while planning to expose an admin page, and the admin page is written by somebody else a year later.
+[clause this paragraph need a more clear beginning. Is the answer to the mechanical test or to the chapter 05's question, and what's the importance of the answer being so often yes?]
 
 ---
 
@@ -232,9 +233,9 @@ The reason the answer is so often yes is that generic walkers arrive late and fr
 - **"It's an anemic domain model"** used against flat structures with identifiers. Chapter 14 has the answer: the term carries an antecedent about wasted mapping cost that the speaker has to establish before the word means anything.
 - **"The ORM handles it."** It materializes the cycle rather than removing it, and the costs above are then paid inside the framework's rules instead of yours.
 
-The question that does the work: **what walks this graph that nobody on this team wrote?**
+The question that does the work: **what walks this graph that nobody on this team wrote?** [claude my wording: what tool we don't own will walk our object graph][claude "does the work" what work? Why we would ask this question and what the answer would indicate? For example: Json serializer walks it or equality walks it. So what? Also the answer for this question would most typically be: "nothing walks right now, but in any program that is not a one-off script, those walks can be introduced at any moment by any dev. They are treated as trivial coding drudgery.]
 
-Serialization, equality, hashing, and copying are all written by somebody else, and all of them assume a tree. A back-pointer is a promise to that code that it will never be asked to walk in a circle, made by people who will not be in the room when it is.
+Serialization, equality, hashing, and copying are all written by somebody else, and all of them assume a tree. A back-pointer is a promise to that code that it will never be asked to walk in a circle, made by people who will not be in the room when it is. [claude my reading is that one more sentence is needed here, you state a context and then leave it in the air, what's the lesson, conclusion?]
 
 ---
 
