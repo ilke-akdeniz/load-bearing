@@ -206,6 +206,8 @@ The direction of the error is set by the same asymmetry. Both readings are avail
                          ← everyone            ← almost nobody
 ```
 
+[claude this section has issues. "the order's own lines" What lines? No previous code example shows "lines" as far as I can see. I'm guessing that the lines are "order lines" then of course the order owns that. The second rows rule is incomplete, I guess you meant "the order and the customer owns order lines", but then what about "tier"? I'm not sure. Either show the full code and explain the wide narrow readings there or use a table that matches previous examples but this is not ok as it is now. Also, if you keep the table remove "everyone, nobody" text from it, you aready explain that in the prose and they look weird on the table.]
+
 The bottom-left cell is this chapter's subject. The top-right cell is the mistake nobody makes: no one takes a rule that reads only an order's own lines and moves it to a service that must be handed them. That version has to be argued for, and the argument is chapter 05's — the rule ends up somewhere a caller can skip it.
 
 So the pressure runs one way. The reading that adds an edge is the one that needs no justification, and it is the one a reviewer has no reason to question, because on each rule taken alone it is correct.
