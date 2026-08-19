@@ -281,16 +281,16 @@ If the source can be reached, go and look. The scope is often still there, in th
 
 ## Sources
 
-- Rob Pike, *Go Proverbs* — Gopherfest SV, 18 November 2015. [Video](https://www.youtube.com/watch?v=PAAkCSZUG1c). Every quotation of Pike in the demonstration is from this recording.
-- Kensaku Segoe, *Go Proverbs Illustrated* — 1960, the book Pike names as his source. [Internet Archive](https://archive.org/details/goproverbsillust0000unse); the foreword quoted here opens the book.
-- *Go Proverbs* — [go-proverbs.github.io](https://go-proverbs.github.io/), the list of nineteen, credited to the 2015 talk.
+- Rob Pike, *Go Proverbs* — Gopherfest SV, 18 November 2015. [Video](https://www.youtube.com/watch?v=PAAkCSZUG1c).
+- Kensaku Segoe, *Go Proverbs Illustrated* — 1960. [Internet Archive](https://archive.org/details/goproverbsillust0000unse).
+- *Go Proverbs* — [go-proverbs.github.io](https://go-proverbs.github.io/).
 - *Don't communicate by sharing memory, share memory by communicating* — r/golang, December 2023. [Thread](https://www.reddit.com/r/golang/comments/18selrz/dont_communicate_by_sharing_memory_share_memory/).
-- Rob Pike, *What We Got Right, What We Got Wrong* — closing talk, GopherConAU, 10 November 2023. [Text and slides](https://commandcenter.blogspot.com/2024/01/what-we-got-right-what-we-got-wrong.html), published on his own site.
-- John Ousterhout, *Why Threads Are A Bad Idea (for most purposes)* — invited talk, USENIX Annual Technical Conference, January 1996. [Slides](https://web.stanford.edu/~ouster/cgi-bin/papers/threads.pdf), dated September 1995.
+- Rob Pike, *What We Got Right, What We Got Wrong* — GopherConAU, 10 November 2023. [Text and slides](https://commandcenter.blogspot.com/2024/01/what-we-got-right-what-we-got-wrong.html).
+- John Ousterhout, *Why Threads Are A Bad Idea (for most purposes)* — USENIX Annual Technical Conference, January 1996. [Slides](https://web.stanford.edu/~ouster/cgi-bin/papers/threads.pdf) dated September 1995.
 - Rob Pike, *Concurrency Is Not Parallelism* — Heroku Waza, January 2012. [Video and slides](https://go.dev/blog/waza-talk).
-- *Go Wiki: Use a sync.Mutex or a channel?* — [go.dev/wiki/MutexOrChannel](https://go.dev/wiki/MutexOrChannel). The newcomer-mistake line and the channel-versus-mutex table.
-- *Go Proverbs* at Sensei's Library — [senseis.xmp.net/?GoProverbs](https://senseis.xmp.net/?GoProverbs). The categories, the italics marking proverbs devised by amateurs, and the *Meta Proverbs* group.
-- *Wei Qi Shi Jue* — the Tang-dynasty ten rules, as *The Ten Golden Rules of Go* at [senseis.xmp.net/?TheTenGoldenRulesList](https://senseis.xmp.net/?TheTenGoldenRulesList).
+- *Go Wiki: Use a sync.Mutex or a channel?* — [go.dev/wiki/MutexOrChannel](https://go.dev/wiki/MutexOrChannel).
+- *Go Proverbs* at Sensei's Library — [senseis.xmp.net/?GoProverbs](https://senseis.xmp.net/?GoProverbs).
+- *Wei Qi Shi Jue*, *The Ten Golden Rules of Go* — [senseis.xmp.net/?TheTenGoldenRulesList](https://senseis.xmp.net/?TheTenGoldenRulesList).
 
 ---
 
