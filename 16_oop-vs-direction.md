@@ -194,21 +194,18 @@ So the identifier is not free and was not chosen because it is tidier. It moves 
 
 The sentence names a relation and not a scope. *Belongs with* asserts that behaviour and data should be together; it says nothing about what to do when the behaviour needs two data. Chapter 15's finding applies without modification: where a principle does not name the situation it applies to, the reader resolves it, and with no context to narrow the reading, the widest one is the only one available. Here the widest reading of *belongs with* is *on the entity, reaching whatever it needs* — which licenses a field pointing at the other entity every time a rule spans a pair.
 
-The direction of the error is set by the same asymmetry. Both readings are available, and only one of them is ever taken:
+The direction of the error is set by the same asymmetry. Both readings are available for every rule, and which one gets taken tracks how many entities the rule reads.
 
-```text
- the rule reads          the wide reading      the narrow reading
- ---------------------   -------------------   -------------------
- the order's own lines   Order.total()         OrderTotalService
-                         ← everyone            ← nobody
- the order and the       Order.discount(),     a scope holding both
-   customer's tier         holding a Customer
-                         ← everyone            ← almost nobody
+```java
+// Reads one entity. It stays on Customer and nobody argues about it.
+boolean isGold() {
+    return tier.equals("gold");
+}
 ```
 
-[claude this section has issues. "the order's own lines" What lines? No previous code example shows "lines" as far as I can see. I'm guessing that the lines are "order lines" then of course the order owns that. The second rows rule is incomplete, I guess you meant "the order and the customer owns order lines", but then what about "tier"? I'm not sure. Either show the full code and explain the wide narrow readings there or use a table that matches previous examples but this is not ok as it is now. Also, if you keep the table remove "everyone, nobody" text from it, you aready explain that in the prose and they look weird on the table.]
+Nobody takes `isGold` off the customer and puts it in a `MembershipService` that has to be handed one. That placement exists, and arguing for it means arguing the rule is better off somewhere a caller can bypass it — which is chapter 05's enforcement argument running against you.
 
-The bottom-left cell is this chapter's subject. The top-right cell is the mistake nobody makes: no one takes a rule that reads only an order's own lines and moves it to a service that must be handed them. That version has to be argued for, and the argument is chapter 05's — the rule ends up somewhere a caller can skip it.
+`discount` reads two entities, and the same instinct places it the same way. What differs is that this time the placement needs a `Customer` field to work, and that field is the edge. A third placement was available throughout — a method taking an order and a customer, holding neither — and it is the one almost nobody reaches for, because it is the only one of the three that has to be justified.
 
 So the pressure runs one way. The reading that adds an edge is the one that needs no justification, and it is the one a reviewer has no reason to question, because on each rule taken alone it is correct.
 
