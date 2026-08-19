@@ -188,17 +188,17 @@ Which exposes a control inside Pike's own list — four proverbs take a named pa
 ### 16. OOP versus the Direction Rule
 `16_oop-vs-direction.md`
 
-The first case study, and the one with the most code.
+The first case study.
 
 **Chapter 15's mechanism, running on:** *behaviour belongs with the data it operates on.*
-The term with no fixed extent is **belongs with**.
-The wide reading gives every entity methods that reach other entities, which produces object webs and then cycles.
-The narrow reading already exists in this book — chapter 14's *placed by what the rule must see*, where the location follows from how much data you must be looking at before you can tell whether a rule holds.
+The term with no fixed extent is **belongs with**, and unlike Pike's proverb there is no recording to recover a scope from — this is 15's expensive case, where the context was never written down.
+The wide reading puts each rule on the entity whose data it reads, which is right for each rule taken alone and leaves a reference pointing each way.
+The narrow reading already exists in this book — chapter 14's *what the rule must see*, where the location follows from how much data you must be looking at before you can tell whether a rule holds.
 
-Contents: bidirectional associations in domain models; how inheritance creates dependencies that point both ways in practice; "tell, don't ask" pushing toward object webs; ORMs materializing cyclic graphs; what cycles cost concretely — serialization, test setup, comprehension.
-The alternative demonstrated: flat structures with explicit identifiers, and what you give up by choosing it.
+Contents: two rules over a customer and an order, each placed correctly, closing the cycle between them; the distinction the chapter turns on, between two classes that reference each other and a constructed value graph carrying a back-pointer; `HashSet.add` throwing `StackOverflowError`, with `json.Marshal`, `json.dumps` and a generated `equals` all refusing the same shape; a table showing that the opposite misreading is one nobody makes, so the pressure runs one way.
+The alternative demonstrated: identifiers instead of references, and FlowCore's decision 3 priced both ways — offline construction and working serialization bought, a query per route and cross-definition integrity moved into composite foreign keys, paid.
 
-*Where the claim doesn't apply:* domains with genuinely rich single-entity invariants, where behaviour on the object is the right answer and this chapter's advice would produce anaemia for real.
+*Where the claim doesn't apply:* rules that read one entity, where the currency check belongs on the money value and moving it out puts it where a caller can skip it; and cycles nothing ever walks generically, where the exemption is structural unreachability rather than nothing having walked it yet.
 
 ### 17. TDD, mocks, and what testing actually buys
 `17_tdd-and-mocks.md`
@@ -317,7 +317,7 @@ Two are not negotiable: chapter 02's classification model is a lens rather than 
 | 13 | `13_missing-language-features.md` | **draft** |
 | 14 | `14_smuggled-verdicts.md` | **draft** |
 | 15 | `15_principle-loses-scope.md` | **draft** |
-| 16 | `16_oop-vs-direction.md` | **in progress** |
+| 16 | `16_oop-vs-direction.md` | **draft** |
 | 17 | `17_tdd-and-mocks.md` | not started |
 | 18 | `18_clean-architecture-vs-language.md` | not started |
 | 19 | `19_force-map-method.md` | not started |
