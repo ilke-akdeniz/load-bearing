@@ -222,7 +222,7 @@ The third case study: what happens when a structural idea is expressed as direct
 The terms with no fixed extent are **abstraction** and **detail**.
 The wide reading gives an interface at every boundary and a directory per layer.
 The narrow reading is chapter 05's — put what changes least at the bottom, which an interface is not automatically.
-The argument is worked in `docs/speculative-abstraction.md`; read it before drafting.
+The argument is worked in `docs/pending/speculative-abstraction.md`; read it before drafting.
 
 Contents: **layered packages force exports** — splitting a store into its own package requires making its helpers public, so the wall meant to hide them is what exposes them; the mapping tax of one entity type per layer; interfaces with one implementation; the `internal/` manoeuvre and what it's actually for; why the same architecture in Go, C#, and Python produces three different file layouts and only one of them needs the ceremony.
 
@@ -259,7 +259,7 @@ Each domain: which forces dominate, which standard advice inverts, and the code 
 
 Idioms, taken seriously rather than dismissed.
 
-**Two cases from Pike's 2023 retrospective**, worked in `docs/pike-retrospective.md`: interfaces **coloured their own designers' thinking** for more than a decade, which is an Idiom bounding what the people best placed to see past it could imagine; and the early compiler written in C against every expectation of the language community, a declared deviation with its reason stated and its expiry recognised.
+**Two cases from Pike's 2023 retrospective**, worked in `docs/pending/pike-retrospective.md`: interfaces **coloured their own designers' thinking** for more than a decade, which is an Idiom bounding what the people best placed to see past it could imagine; and the early compiler written in C against every expectation of the language community, a declared deviation with its reason stated and its expiry recognised.
 
 Contents: why Go grew free functions and C# grew containers, traced to language features rather than culture; an Idiom whose precondition failed because the reader stopped being the author (FlowCore's decision 18: short Go names, generated idiomatically, deviated from deliberately); why Python skipped DI except where per-request lifetime is real; the case *for* obeying local idiom even when you can argue against it — reviewability, hiring, the cost of being interesting; when to deviate, and how to pay for it (declare it, document the reason, keep it narrow).
 
@@ -329,7 +329,7 @@ Two are not negotiable: chapter 02's classification model is a lens rather than 
 ### AI material
 
 Chapters 02, 03, 15, 17, 19, 21 and 23 each owe a piece of this, noted in their contents lines above.
-The worked argument — findings, FlowCore evidence, the grilling text with its provenance, and the traps — is in **`docs/ai-material.md`**.
+The worked argument — findings, FlowCore evidence, the grilling text with its provenance, and the traps — is in **`docs/pending/ai-material.md`**.
 Read that rather than re-deriving it, so the seven mentions agree with each other.
 
 ### Pending revisits
@@ -340,11 +340,11 @@ Chapters already at **draft** that are owed an addition. Listed here because a d
 |---|---|---|
 | 02 | corpus monoculture as a new instance of *monoculture makes Idioms look like physics* | chapter 23 exists, so the mention can point at the synthesis |
 | 03 | the generator cannot see your Forces; the team-size Force at its limit — no continuity, unbounded volume | as above |
-| 02 | Pike on arguments about language features being opinion argued with certainty — a witness for *tone does not vary with authority*, in `docs/pike-retrospective.md` | next time 02 is open |
+| 02 | Pike on arguments about language features being opinion argued with certainty — a witness for *tone does not vary with authority*, in `docs/pending/pike-retrospective.md` | next time 02 is open |
 | 09 | Pike pricing Go's compatibility promise: it costs, and it blocks feature-itis — the constraint adopted deliberately rather than suffered | next time 09 is open |
 | 13 | possibly the async/await aside and *coloured functions*; check the fit before using it, it may belong to 20 or nowhere | next time 13 is open |
 
-The worked argument is in `docs/ai-material.md`; decision 24 records what was decided and why.
+The worked argument is in `docs/pending/ai-material.md`; decision 24 records what was decided and why.
 
 **Build order.** The original plan was 02, then 05, then 13. What happened instead was 02, 05, 03, 04 — Part I first, then the foundations in order — and the reason to continue that way is that the drafted chapters have accumulated debts to specific unwritten ones.
 

@@ -1,6 +1,6 @@
 # Speculative Abstraction: Source Material
 
-Working document, in the shape of `docs/ai-material.md`.
+Working document, in the shape of `docs/pending/ai-material.md`.
 The argument is worked here once so that the chapters that owe a piece of it agree with each other.
 
 **Owed to:** chapter 18 (primary), chapter 20's line-of-business section (one line), chapter 17 (the testing objection).

@@ -74,14 +74,12 @@ Most of it has already been worked through and corrected by the author, so **rea
 - **`~/s/flowcore/docs/code-map.md`** — how the library fits together; useful for picking an example that is genuinely representative.
 - **`~/s/flowcore`** — the code itself. Prefer quoting real lines over inventing illustrative ones.
 
-`docs/ai-material.md` is the same kind of document, held inside this repo: the worked argument for material owed to seven chapters, with the FlowCore evidence and the provenance already gathered.
-Read it before drafting 02, 03, 15, 17, 19, 21, or 23.
+**`docs/pending/` holds the same kind of document inside this repo.**
+Each file is a worked argument with its evidence and provenance already gathered, and a table saying which chapter is owed which piece.
 
-`docs/speculative-abstraction.md` is the second: the argument that an abstraction bought as insurance against a future change usually cannot pay out, because it was shaped by the thing it was insuring against.
-Read it before drafting 17, 18, or 20.
-
-`docs/pike-retrospective.md` is the third: Rob Pike's 2023 GopherConAU talk on what the Go project got right and wrong, with the passages sorted by which chapter is owed them.
-Chapter 15 has taken its share. Read it before drafting 21, and before reopening 02, 09, or 13.
+Before drafting a chapter, or reopening one, check the folder for material owed to it.
+Each file names its own chapters and tracks what has been routed, so the folder is the list and this file does not repeat it.
+A document leaves `docs/pending/` for `docs/` once every piece in it has landed; it is not deleted, because the ledger cites these arguments as provenance.
 
 Public repo: <https://github.com/ilke-akdeniz/flowcore>.
 
@@ -338,7 +336,7 @@ These are read as diffs, not as prose, so sentence-level granularity is worth mo
 ## Files
 
 - Chapters at the repo root: `NN_slug.md`, matching the TOC in `00_toc.md`.
-- Working documents in `docs/`.
+- Working documents in `docs/`, and in `docs/pending/` while they still owe material to a chapter.
 - `tools/check-drift.py` — the mechanical consistency checks. Run it before committing.
 - `00_toc.md` carries the status table — update it when a chapter's status changes. The README is the landing page and should stay short.
 
@@ -454,7 +452,7 @@ When every chapter is at draft, ask for confirmation rather than beginning, and 
 The order is load-bearing — every slice inspects what the one before it produced.
 Work one chapter at a time inside a slice, commit per chapter, and stop for the author to review and amend before the next slice starts.
 
-1. **Pending material.** `docs/ai-material.md`, `docs/speculative-abstraction.md`, `docs/pike-retrospective.md`, and the owed table in `00_toc.md` each name the chapters they are owed to. Route every piece to its chapter, or record that it no longer fits and why.
+1. **Pending material.** Every document in `docs/pending/`, plus the owed table in `00_toc.md`, names the chapters it is owed to. Route every piece to its chapter, or record that it no longer fits and why.
 2. **Rules.** Check each chapter against the rules in this file that postdate it. `git log CLAUDE.md` against the chapter's own history gives the candidates; a commit that changed this file *and* many chapters at once was already applied retroactively, and one that changed a single chapter was applied only there.
 3. **Sources.** Every chapter that lacks a `## Sources` section gets one, with links verified rather than recalled. Slice 2 has just identified and checked the citations, which is most of the work.
 4. **Reconciliation.** TOC entries against what each chapter now says, ledger rows against what each chapter now owns, then `tools/check-drift.py`.
