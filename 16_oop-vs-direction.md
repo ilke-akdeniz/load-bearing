@@ -203,9 +203,11 @@ boolean isGold() {
 }
 ```
 
-Nobody takes `isGold` off the customer and puts it in a `MembershipService` that has to be handed one. That placement exists, and arguing for it means arguing the rule is better off somewhere a caller can bypass it — which is chapter 05's enforcement argument running against you.
+Nothing justifies taking `isGold` off the customer and putting it in a `MembershipService` in this situation. That option exists but it puts the rule to a place where a caller can bypass it. Usually the simpler placement is chosen instinctively by the developer. [claude my edit is basically the recognition that "nobody takes" is misleading. Many people take and do that, repeatedly.]
 
-`discount` reads two entities, and the same instinct places it the same way. What differs is that this time the placement needs a `Customer` field to work, and that field is the edge. A third placement was available throughout — a method taking an order and a customer, holding neither — and it is the one almost nobody reaches for, because it is the only one of the three that has to be justified.
+Contrast this with `order.discount()` method from the earlier example. It reads both Order and Tier entities and the placement needs a new field inside the `Customer` entity. But the same developer instinct kicks off here because the conditions look very similar on the surface. 
+
+A third placement was available throughout — a method taking an order and a customer, holding neither — and it is the one almost nobody reaches for, because it is the only one of the three that has to be justified.
 
 So the pressure runs one way. The reading that adds an edge is the one that needs no justification, and it is the one a reviewer has no reason to question, because on each rule taken alone it is correct.
 
