@@ -435,6 +435,26 @@ So when a word is found doing the wrong job, **grep every use of it before calli
 
 The cross-chapter version is the same rule at larger scale. *Scope* had acquired three incompatible meanings across chapters 13, 14, and 15, two of them bold definitions in adjacent chapters, before anyone counted. One survey found it; a lot of careful reading had not. `tools/check-drift.py` catches structural drift and cannot catch this, so the survey has to be run by hand when a term is in question.
 
+### The final sweep
+
+Rules and material accumulated while the book was written, so a chapter drafted early was held to fewer rules than one drafted late.
+The correction is a single pass over the whole book, run once, after the last chapter reaches **draft**.
+
+**It is the author's to start.**
+When every chapter is at draft, ask for confirmation rather than beginning, and do not run it early because a chapter looks finished.
+
+**Four slices, in this order, each followed by review.**
+The order is load-bearing — every slice inspects what the one before it produced.
+Work one chapter at a time inside a slice, commit per chapter, and stop for the author to review and amend before the next slice starts.
+
+1. **Pending material.** `docs/ai-material.md`, `docs/speculative-abstraction.md`, `docs/pike-retrospective.md`, and the owed table in `00_toc.md` each name the chapters they are owed to. Route every piece to its chapter, or record that it no longer fits and why.
+2. **Rules.** Check each chapter against the rules in this file that postdate it. `git log CLAUDE.md` against the chapter's own history gives the candidates; a commit that changed this file *and* many chapters at once was already applied retroactively, and one that changed a single chapter was applied only there.
+3. **Sources.** Every chapter that lacks a `## Sources` section gets one, with links verified rather than recalled. Slice 2 has just identified and checked the citations, which is most of the work.
+4. **Reconciliation.** TOC entries against what each chapter now says, ledger rows against what each chapter now owns, then `tools/check-drift.py`.
+
+**Content added during a slice has not been through the slices already finished.**
+A passage routed in slice 1 still needs reading against the rules; an author amendment in slice 3 may carry a source nobody listed.
+
 ## Git
 
 **Commit. Never push.**
