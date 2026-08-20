@@ -202,7 +202,9 @@ Fucci, Erdogmus, Turhan, Oivo, and Juristo went at it differently. Rather than s
 
 They scored two outcomes: how much of a supplied acceptance suite the finished code passed, and how quickly those assertions were earned. Then they asked which of the four predicted either.
 
-**Sequencing predicted neither.** Cycle length, cycle evenness, and refactoring all mattered; the test-first share did not, for quality or for speed. Short cycles helped — quality improves by about 14% as the typical cycle falls from around 50 minutes to around 8 — and even cycles helped.
+**Sequencing predicted neither.** Cycle length, cycle evenness, and refactoring survived the analysis; the test-first share did not, for quality or for speed. Quality improves by about 14% as the typical cycle falls from around 50 minutes to around 8.
+
+The authors are careful about how much weight that carries, and the chapter should be too. Short cycles and even ones *"go hand in hand, meaning these two characteristics together make a difference. In isolation, they may not be as effective"* — two of the four factor-outcome pairings have coefficients too weak to stand alone. And there is a floor: cutting cycles below the *"often suggested values of five to ten minutes results in little improvement."*
 
 Their own conclusion puts it better than a summary could. The secret of TDD, they write, *"might not be centered on its test-first nature, but rather on its ability to encourage developers to consistently take fine-grained steps, what Kent Beck calls baby steps, provided that they keep writing tests."*
 
@@ -210,7 +212,7 @@ And the corollary they draw is the sharpest sentence in the paper: writing tests
 
 Not *the order is irrelevant*. **Two practices are interchangeable once matched on step size — and both of them include writing the tests.**
 
-This travels as *TDD doesn't work* or *the order doesn't matter*. Four things sit beside it in the paper, three of them in that closing passage.
+This travels as *TDD doesn't work* or *the order doesn't matter*. Five things sit beside it in the paper, three of them in that closing passage.
 
 **The tests are not the variable.** Every process measured here wrote tests. The comparison is test-first against test-last, never against not testing, and the conclusion says so in the clause that is easiest to drop: *provided that they keep writing tests*.
 
@@ -219,6 +221,8 @@ This travels as *TDD doesn't work* or *the order doesn't matter*. Four things si
 **Finding nothing is not finding against.** They looked for a link between the order and the outcomes and got none in either direction. Had writing tests first been actively harmful, more of it would have gone with worse results, and it did not.
 
 **They measured hours, not careers.** The gains may be *"small or uncertain in the short term,"* and a test-first dynamic *"may provide long-term advantages not addressed by or detected in our study"* — they name three: working out what the requirements actually are, forcing design decisions into the open, and getting more tests written at all.
+
+**The cadence it speaks to is under an hour.** Observed cycle lengths ran from about one minute to forty-nine, median four and a half. Whatever is true of a team working in day-long or week-long increments, this study did not see it and does not claim to.
 
 Two limits of the design, which they also state: it is a single-group study with no control group, and two of the three tasks were artificial rather than representative of professional work. They also report that earlier work — Rafique and Mišić among others — had already speculated that granularity was the thing doing the work, and say these findings support it, so this is not a lone result.
 
