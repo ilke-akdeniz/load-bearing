@@ -204,21 +204,25 @@ They scored two outcomes: how much of a supplied acceptance suite the finished c
 
 **Sequencing predicted neither.** Cycle length, cycle evenness, and refactoring all mattered; the test-first share did not, for quality or for speed. Short cycles helped — quality improves by about 14% as the typical cycle falls from around 50 minutes to around 8 — and even cycles helped.
 
-Their own summary of the practical upshot:
+Their own conclusion puts it better than a summary could. The secret of TDD, they write, *"might not be centered on its test-first nature, but rather on its ability to encourage developers to consistently take fine-grained steps, what Kent Beck calls baby steps, provided that they keep writing tests."*
 
-> We think that this aspect should be emphasised over religiously focusing on leading each production cycle with unit tests.
+And the corollary they draw is the sharpest sentence in the paper: writing tests last and writing them first *"could be substitutes and equally effective provided that they are performed at the same level of granularity and uniformity."*
 
-This travels as *TDD doesn't work* or *the order doesn't matter*. Three things sit beside it in the same paper, mostly in the same paragraph.
+Not *the order is irrelevant*. **Two practices are interchangeable once matched on step size — and both of them include writing the tests.**
 
-**Finding nothing is not finding against.** They looked for a link between the order and the outcomes and got none in either direction. Had writing tests first been actively harmful, more of it would have gone with worse results, and it did not. Their sentence: the absence of sequencing *"does not imply that a strictly develop-then-test (test-last) strategy should be preferred."*
+This travels as *TDD doesn't work* or *the order doesn't matter*. Four things sit beside it in the paper, three of them in that closing passage.
 
-**The result carries a condition.** The order may not matter *"so long as the process is iterative, granular, and uniform"* — short steps, of roughly even length, one after another. That is not a description of every team that stops writing tests first.
+**The tests are not the variable.** Every process measured here wrote tests. The comparison is test-first against test-last, never against not testing, and the conclusion says so in the clause that is easiest to drop: *provided that they keep writing tests*.
 
-**They measured hours, not careers.** *"A test-first dynamic may provide long-term advantages not addressed by or detected in our study,"* and they name three: working out what the requirements actually are, forcing design decisions into the open, and getting more tests written at all.
+**The result carries a condition.** Substitutable *"at the same level of granularity and uniformity"* — short steps, of roughly even length, one after another. A team that abandons the ritual and returns to hour-long cycles has changed the thing that mattered rather than the thing that didn't.
 
-Two limits of the design, which they also state: it is a single-group study with no control group, and two of the three tasks were artificial rather than representative of professional work.
+**Finding nothing is not finding against.** They looked for a link between the order and the outcomes and got none in either direction. Had writing tests first been actively harmful, more of it would have gone with worse results, and it did not.
 
-**Read those and the finding is narrower and more useful than either slogan.** The order is not where the measured benefit came from. The benefit came from small steady steps — and that is a claim about teams already taking small steady steps. A team that drops the ritual and returns to hour-long cycles is not the team this was measured on.
+**They measured hours, not careers.** The gains may be *"small or uncertain in the short term,"* and a test-first dynamic *"may provide long-term advantages not addressed by or detected in our study"* — they name three: working out what the requirements actually are, forcing design decisions into the open, and getting more tests written at all.
+
+Two limits of the design, which they also state: it is a single-group study with no control group, and two of the three tasks were artificial rather than representative of professional work. They also report that earlier work — Rafique and Mišić among others — had already speculated that granularity was the thing doing the work, and say these findings support it, so this is not a lone result.
+
+**Read those and the finding is narrower, and more useful, than either slogan.** It does not say the ritual is worthless. It says the ritual's value is in what it makes you do — small steps, evenly sized, with tests — and that you can have that without the ritual, if you actually do it. Which is a harder instruction than either *always write the test first* or *test-first is a myth*, and the only one of the three that tells you what to change on Monday.
 
 This is chapter 15's mechanism — a principle losing its scope — running on a peer-reviewed paper rather than a proverb. The conditions were published beside the finding, by the same authors, in the same section. What travelled was the finding.
 
