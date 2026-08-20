@@ -242,6 +242,10 @@ Which does not make the ritual useless, and the paper says so. It relocates the 
 
 **The shared shape** is that both slogans name an action and leave out what the action is for. *Mock your dependencies* is an instruction about a technique with no statement of which failures it is meant to preserve. *Write the test first* is an instruction about an order with no statement of which benefit the order produces. In both cases the missing part is the only thing that would let you tell whether your situation qualifies.
 
+**The two are also not independent, and the connection is this book's rather than the paper's.** What is taught is not an ordering but a loop, run at minutes: write a failing test, make it pass, refactor, repeat. The median cycle in the study was about eight minutes, and short cycles are the part the evidence credits. A suite you run every eight minutes has to answer in seconds, and a suite that answers in seconds does not start a database — *the tests must be fast* being the standard justification for replacing one with a double.
+
+So the ingredient that works is also the ingredient that produces the pressure to mock. The granularity carrying the measured benefit is the same granularity that pushes the database out of the test, and pushing the database out of the test is what produced a test that passes with the constraint deleted. The two principles in this chapter arrive together and are defended together because one of them generates the other.
+
 ---
 
 ## Where the claim doesn't apply
@@ -277,6 +281,14 @@ That is a legitimate use of a mock and it is not what this chapter argues agains
 **Parallelism gets harder.** Two tests sharing a real database contend on state in a way two tests sharing nothing do not, so isolation becomes a design problem rather than a default.
 
 **Mutation testing is expensive.** Catching a test that cannot fail means running the whole suite once for every deliberate break, which for a large suite is hours. It is worth it for load-bearing code and it is not worth it everywhere, which means somebody has to decide where — and that decision has no rule to hand.
+
+Those are the costs of the first principle. The second has its own, and the paper does not price them, because pricing a practice is not what a controlled study is for.
+
+**Writing the test first couples the test to a structure being designed as you write it.** The test names an interface before that interface has settled, so it encodes the shape as well as the behaviour. Structural change then costs test change in proportion: add a field and you touch every test that constructs the object, split a class and its tests split with it. This follows from the method rather than being a failure of it — the tests are fine-grained because the loop is, and fine-grained tests attach to the shape of the thing they test.
+
+**The loop is hard to run, and the study shows how hard.** Across all 82 sessions — both arms, test-first and test-last — the highest share of test-first cycles anyone reached was 87.5%, so no session in the study was run purely test-first, and the authors describe the upper quarter as writing test-first *"approximately half of the time."* The third step fares worse: subjects refactored about a third of the time and a quarter of them refactored in under a tenth of their cycles, which the authors call unsurprising because it is what happens in real projects. These were professionals given ten hours of training for it — a five-hour hands-on tutorial on unit testing with JUnit, and five hours on applying TDD — then working observed, on tasks chosen for the purpose. Whatever the discipline costs, it is enough that it is mostly not performed as described.
+
+**Dropping the ritual means producing its by-product some other way.** On this evidence the loop's value is that it forces small even steps, and it does that whether or not the person following it believes in the reason — which is what a ritual is for. A team that abandons it has to supply the same cadence deliberately, and nothing will tell them when they have stopped. That is the cost the study cannot measure, because it watched sessions rather than quarters.
 
 ---
 
