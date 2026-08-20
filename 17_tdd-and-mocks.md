@@ -2,7 +2,7 @@
 
 ## The claim
 
-**Neither *write the test first* nor *mock your dependencies* says what it buys. Under the wide reading of each, a mocked dependency puts the rule you meant to test beyond the test's reach, and the benefit credited to writing tests first turns out, when measured, to come from working in small steady steps rather than from the order.**
+**Neither *write the test first* nor *mock your dependencies* says what it buys. Under the wide reading of each, a mocked dependency puts the rule you meant to test beyond the test's reach, and the benefit credited to writing tests first turns out, when measured, to come from working in small steady steps rather than from the test-then-code order.**
 
 This is Part IV's second case, and it is kept fair. Tests are worth writing, the two principles below are worth following in most situations, and neither of those is in dispute here. The terms with no fixed extent are what writing the test **first** buys, and what counts as a **dependency**.
 
