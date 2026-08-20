@@ -2,13 +2,31 @@
 
 ## The claim
 
-**Neither *write the test first* nor *mock your dependencies* says what it buys. Under the wide reading of each, a mocked dependency puts the rule you meant to test beyond the test's reach, and the benefit credited to writing tests first turns out, when measured, to come from working in small steady steps rather than from the test-then-code order.**
+**Neither *write the test first* nor *mock your dependencies* is the settled advice it sounds like. The first names benefits that its own literature does not claim the ordering produces — and measured separately, the ordering produced none. The second is one of two named schools, and applying it to a dependency you control is what leaves a test passing after the constraint it is named for has been deleted.**
 
-This is Part IV's second case, and it is kept fair. Tests are worth writing, the two principles below are worth following in most situations, and neither of those is in dispute here. The terms with no fixed extent are what writing the test **first** buys, and what counts as a **dependency**.
+This is Part IV's second case, and it is kept fair. Tests are worth writing and both practices are worth following in most situations; neither is in dispute here. What is in dispute is that either sentence travels as a settled default when the literature it comes from records a stated purpose for one and an open disagreement about the other.
 
 ---
 
 ## The demonstration
+
+### What the two sentences actually are
+
+Both arrive in code review as though they were consensus. Neither is.
+
+**Writing the test first has a stated purpose, and it is not that the order improves the code.** Fowler's definition gives two benefits: self-testing code, and that *"thinking about the test first forces us to think about the interface to the code first."* Beck's own recent minimal statement of the loop says what it is for in terms of confidence — that everything which used to work still works, that the new behaviour works, that the system is ready for the next change. Neither claims the sequence itself makes the resulting code better, which is the claim that travels and the one the measurement later in this chapter could not find.
+
+**Mocking is not a default at all. It is one side of a disagreement with names.** Fowler set them out in 2007 and they have been the vocabulary since:
+
+> The classical TDD style is to use real objects if possible and a double if it's awkward to use the real thing. […] A mockist TDD practitioner, however, will always use a mock for any object with interesting behavior.
+
+He also says which side he is on, and why:
+
+> I don't see any compelling benefits for mockist TDD, and am concerned about the consequences of coupling tests to implementation.
+
+So *mock your dependencies* is the mockist default stated as if it were the only one. The position this chapter argues for — use the real thing where you can run it — is the classical default, and it has been named in the literature for nearly two decades.
+
+That reframes what follows. The failure demonstrated below is not what happens when someone follows the consensus. It is what happens when one school's default is applied to a dependency that both Fowler and later writers say should be left real.
 
 ### What a mocked test is about
 
@@ -119,6 +137,8 @@ That is the general form. **A test double — a mock, a stub, or a hand-written 
 ### The test that never reaches its condition
 
 The mocked test above at least asserts something. The more common failure is a test that cannot fail at all, and reading it will not tell you.
+
+Beck lists it among the ways to get TDD wrong — writing tests without assertions for the sake of coverage, and deleting assertions to make a test pass — so this is a known failure rather than a discovery. What follows is what it looks like when nobody deleted anything.
 
 Registration leaves an account `pending` until the address is verified, at which point it becomes `active`. Here is the test, and the fixture it runs against:
 
@@ -246,7 +266,7 @@ Which does not make the ritual useless, and the paper says so. It relocates the 
 
 **The shared shape** is that both slogans name an action and leave out what the action is for. *Mock your dependencies* is an instruction about a technique with no statement of which failures it is meant to preserve. *Write the test first* is an instruction about an order with no statement of which benefit the order produces. In both cases the missing part is the only thing that would let you tell whether your situation qualifies.
 
-**The two are not independent — they arrive as one practice.** What is taught is not an ordering but a loop, run at minutes: write a failing test, make it pass, refactor, repeat. Keeping that loop turning needs a suite that answers in seconds, so *replace the slow dependency with a double* is taught in the same lesson as *write the test first*, and always has been. The median cycle in the study was about eight minutes, and short cycles are the part the evidence credits.
+**The two are not independent — they arrive as one practice.** What is taught is not an ordering but a loop, run at minutes: write a failing test, make it pass, refactor, repeat. Keeping that loop turning needs a suite that answers in seconds, and *replace the slow dependency with a double* is what usually follows. Worth noting that it does not follow in the canon: Beck's own statement of the loop mentions no mocking, no isolation requirement and no speed requirement anywhere. The bundling is in the teaching rather than in the definition. The median cycle in the study was about eight minutes, and short cycles are the part the evidence credits.
 
 So the ingredient that works is also the ingredient that produces the pressure to mock. The granularity carrying the measured benefit is the same granularity that pushes the database out of the test, and pushing the database out of the test is what produced a test that passes with the constraint deleted.
 
@@ -267,6 +287,12 @@ What changes is what the double is allowed to claim. A test using one is a test 
 - **Write down the assumption where it will be read.** A double encoding *this returns 402 when the card is declined* is a claim about somebody else's API, and it should say so.
 
 The distinction that survives: mock what you cannot run, not what would merely be inconvenient to run.
+
+Vladimir Khorikov states a sharper version of the same line, and it is worth having because it says *why* rather than *which*. He splits out-of-process dependencies into **managed** — ones you control, such as your own database — and **unmanaged** — ones other systems also reach, such as an SMTP server. Use real instances of the first; replace only the second. The reason:
+
+> Communications with managed dependencies are implementation details; communications with unmanaged dependencies are part of your system's observable behavior.
+
+That subsumes the mailer case above. Sending the welcome email is visible outside your system, so asserting that it happened is asserting about behaviour. Whether registration inserted a row is not visible outside your system — the visible thing is that a second registration is refused, which is what the database-backed test checks and the mocked one did not.
 
 ### A mock asserting a call, where the call is the behaviour
 
@@ -323,6 +349,10 @@ The wider version is worth asking before a release: **if this behaviour is broke
 
 - Davide Fucci, Hakan Erdogmus, Burak Turhan, Markku Oivo, Natalia Juristo, *A Dissection of the Test-Driven Development Process: Does It Really Matter to Test-First or to Test-Last?* — IEEE Transactions on Software Engineering, 2017. [arXiv preprint](https://arxiv.org/abs/1611.05994), [IEEE](https://ieeexplore.ieee.org/document/7592412/).
 - FlowCore, `docs/decisions.md`, decisions 4, 9, and 37 — [github.com/ilke-akdeniz/flowcore](https://github.com/ilke-akdeniz/flowcore).
+- Martin Fowler, *Mocks Aren't Stubs*, 2007 — [martinfowler.com/articles/mocksArentStubs.html](https://martinfowler.com/articles/mocksArentStubs.html).
+- Martin Fowler, *TestDrivenDevelopment* — [martinfowler.com/bliki/TestDrivenDevelopment.html](https://martinfowler.com/bliki/TestDrivenDevelopment.html).
+- Kent Beck, *Canon TDD*, 2023 — [newsletter.kentbeck.com/p/canon-tdd](https://newsletter.kentbeck.com/p/canon-tdd).
+- Vladimir Khorikov, *When to Mock* — [enterprisecraftsmanship.com/posts/when-to-mock](https://enterprisecraftsmanship.com/posts/when-to-mock/).
 - Python, `unittest.mock` — [docs.python.org/3/library/unittest.mock.html](https://docs.python.org/3/library/unittest.mock.html).
 
 ---

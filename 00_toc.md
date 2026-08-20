@@ -205,9 +205,9 @@ The alternative demonstrated: identifiers instead of references, and FlowCore's 
 
 The second case study, kept fair.
 
-**Chapter 15's mechanism, running on two principles:** *write the test first*, and *mock your dependencies.*
-The terms with no fixed extent are what **first** buys, and what counts as a **dependency**.
-The wide readings are that the ordering ritual causes good design, and that anything you did not write gets mocked.
+**Chapter 15's mechanism, running on two principles:** *write the test first*, and *mock your dependencies* — neither of which is the settled default it travels as.
+Fowler's definition names what test-first buys and does not claim the sequence improves the code; Beck's canon states the loop and mentions no mocking, no isolation and no speed requirement at all.
+*Mock your dependencies* is the mockist half of a disagreement Fowler named in 2007 and came down against, so the position this chapter argues is the classical one, which has had a name for two decades.
 
 Contents: **mocks assert that your code calls your mocks** — a registration service whose uniqueness rule is a schema constraint, the constraint then deleted, and only the database-backed test failing; a fixture that creates the account already in the state the test asserts, so gutting the method under test changes nothing, with FlowCore's decision 37 as the same shape in a real system; and the ordering, taken from Fucci et al. read in full — sequencing predicted neither quality nor speed, and the paper's own conditions are the part that does not travel, including *provided that they keep writing tests* and a cycle defined as the interval between green bars.
 The two principles are not separate: the loop runs at minutes, so the suite must answer in seconds, so the database leaves the test — which is where the test that cannot fail comes from.
@@ -338,7 +338,7 @@ Two are not negotiable: chapter 02's classification model is a lens rather than 
 | 14 | `14_smuggled-verdicts.md` | **draft** |
 | 15 | `15_principle-loses-scope.md` | **draft** |
 | 16 | `16_oop-vs-direction.md` | **in progress** |
-| 17 | `17_tdd-and-mocks.md` | **draft** |
+| 17 | `17_tdd-and-mocks.md` | **in progress** |
 | 18 | `18_clean-architecture-vs-language.md` | **in progress** |
 | 19 | `19_abstraction-as-insurance.md` | **draft** |
 | 20 | `20_force-map-method.md` | not started |
