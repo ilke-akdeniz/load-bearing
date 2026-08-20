@@ -191,36 +191,36 @@ The weakness was noticed at the time and written down instead of fixed. The entr
 
 The other principle is about order, and here there is real evidence, which makes it a better case than an argument.
 
-Fucci, Erdogmus, Turhan, Oivo, and Juristo instrumented the question directly rather than comparing two groups of people. Thirty-nine professional developers — averaging 7.3 years of Java experience — worked through programming tasks in an IDE recording every action, producing 82 usable data points. Instead of asking *did the TDD group do better*, they decomposed what the developers actually did into four measurable dimensions:
+Fucci, Erdogmus, Turhan, Oivo, and Juristo went at it differently. Rather than split people into a TDD group and a control group, they recorded what developers actually did. Thirty-nine professional developers — averaging 7.3 years of Java experience — worked through programming tasks in an IDE recording every action, producing 82 usable data points. Instead of asking *did the TDD group do better*, they broke the work itself into four things they could measure:
 
 ```text
- GRA  granularity        median cycle duration in minutes
- UNI  uniformity         median absolute deviation of cycle duration
- SEQ  sequencing         percentage of cycles that were test-first
- REF  refactoring        prevalence of refactoring activity
+ granularity   how long one cycle usually was
+ uniformity    how much the cycle length varied
+ sequencing    what share of cycles put the test first
+ refactoring   how much of the work was refactoring
 ```
 
-Then they asked which of the four explain the variation in external quality and in productivity.
+They scored two outcomes: how much of a supplied acceptance suite the finished code passed, and how quickly those assertions were earned. Then they asked which of the four predicted either.
 
-**Sequencing dropped out of both models.** Granularity, uniformity, and refactoring effort survived; the test-first fraction did not, for quality or for productivity. Shorter cycles helped — the improvement reaches about 14% as median cycle length falls from around 50 minutes to around 8 — and steadier cycles helped.
+**Sequencing predicted neither.** Cycle length, cycle evenness, and refactoring all mattered; the test-first share did not, for quality or for speed. Short cycles helped — quality improves by about 14% as the typical cycle falls from around 50 minutes to around 8 — and even cycles helped.
 
 Their own summary of the practical upshot:
 
 > We think that this aspect should be emphasised over religiously focusing on leading each production cycle with unit tests.
 
-This travels as *TDD doesn't work* or *the order doesn't matter*. Here is what is in the same paper, and mostly in the same paragraph:
+This travels as *TDD doesn't work* or *the order doesn't matter*. Three things sit beside it in the same paper, mostly in the same paragraph.
 
-> The absence of sequencing as an influential dimension does not imply that a strictly develop-then-test (test-last) strategy should be preferred over a test-first strategy: this advice would require a negative (statistically significant) coefficient, which the models did not produce.
+**Finding nothing is not finding against.** They looked for a link between the order and the outcomes and got none in either direction. Had writing tests first been actively harmful, more of it would have gone with worse results, and it did not. Their sentence: the absence of sequencing *"does not imply that a strictly develop-then-test (test-last) strategy should be preferred."*
 
-> Our results simply state that the order in which unit tests and production code are written may not be as important as commonly thought so long as the process is iterative, granular, and uniform.
+**The result carries a condition.** The order may not matter *"so long as the process is iterative, granular, and uniform"* — short steps, of roughly even length, one after another. That is not a description of every team that stops writing tests first.
 
-> A test-first dynamic may provide long-term advantages not addressed by or detected in our study.
+**They measured hours, not careers.** *"A test-first dynamic may provide long-term advantages not addressed by or detected in our study,"* and they name three: working out what the requirements actually are, forcing design decisions into the open, and getting more tests written at all.
 
-They name three of those advantages they did not measure: resolving requirements uncertainty, formalizing design decisions, and encouraging writing more tests. And they state two limits of the design: it is a single-group study with no control group, and two of the three tasks were artificial rather than representative of professional work.
+Two limits of the design, which they also state: it is a single-group study with no control group, and two of the three tasks were artificial rather than representative of professional work.
 
-**Read the conditions and the finding is narrower and more useful than either slogan.** It does not say the ordering is worthless. It says the ordering is not where the measured benefit came from, that the benefit came from small steady steps, and that this holds *given* a process which is already iterative, granular, and uniform. A team that drops the ritual and goes back to hour-long cycles no longer has such a process, so the finding does not cover them.
+**Read those and the finding is narrower and more useful than either slogan.** The order is not where the measured benefit came from. The benefit came from small steady steps — and that is a claim about teams already taking small steady steps. A team that drops the ritual and returns to hour-long cycles is not the team this was measured on.
 
-Chapter 15's "principle loses scope" mechanism, running on a peer-reviewed paper rather than a proverb. The conditions were published beside the finding, by the same authors, in the same section. What travelled was the finding.
+This is chapter 15's mechanism — a principle losing its scope — running on a peer-reviewed paper rather than a proverb. The conditions were published beside the finding, by the same authors, in the same section. What travelled was the finding.
 
 ---
 
