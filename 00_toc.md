@@ -209,7 +209,11 @@ The second case study, kept fair.
 The terms with no fixed extent are what **first** buys, and what counts as a **dependency**.
 The wide readings are that the ordering ritual causes good design, and that anything you did not write gets mocked.
 
-Contents: generated tests that pass without reaching the condition they name, and mutation as the only check that catches them (FlowCore's decision 37: five toothless tests in one iteration); what the empirical literature actually shows about test-first, where the controlled studies disagree with each other and most of them measure test-first against no tests rather than against test-after; the difference between "tests help" and "this ordering ritual helps"; **mocks assert that your code calls your mocks** — the argument, with a test that passes while the constraint it claims to verify has been deleted; how the mocking convention generates interface-per-class, which generates the DI container; what the testing pyramid assumes about where your logic lives, and what happens when your logic lives in a schema instead.
+Contents: **mocks assert that your code calls your mocks** — a registration service whose uniqueness rule is a schema constraint, the constraint then deleted, and only the database-backed test failing; a fixture that creates the account already in the state the test asserts, so gutting the method under test changes nothing, with FlowCore's decision 37 as the same shape in a real system; and the ordering, taken from Fucci et al. read in full — sequencing predicted neither quality nor speed, and the paper's own conditions are the part that does not travel, including *provided that they keep writing tests* and a cycle defined as the interval between green bars.
+The two principles are not separate: the loop runs at minutes, so the suite must answer in seconds, so the database leaves the test — which is where the test that cannot fail comes from.
+Costs are priced for both halves, the ordering's from the study's own adherence numbers: no session ran purely test-first, after ten hours of training.
+
+Not covered, and moved: the wider empirical literature, since the meta-analyses are paywalled and were not read; interface-per-class and the DI container, which belong with chapter 18.
 
 *Where the claim doesn't apply:* systems where the dependency genuinely cannot be run in a test — payment gateways, hardware, third-party APIs — and the honest version of test doubles for those.
 
@@ -318,7 +322,7 @@ Two are not negotiable: chapter 02's classification model is a lens rather than 
 | 14 | `14_smuggled-verdicts.md` | **draft** |
 | 15 | `15_principle-loses-scope.md` | **draft** |
 | 16 | `16_oop-vs-direction.md` | **draft** |
-| 17 | `17_tdd-and-mocks.md` | **in progress** |
+| 17 | `17_tdd-and-mocks.md` | **draft** |
 | 18 | `18_clean-architecture-vs-language.md` | not started |
 | 19 | `19_force-map-method.md` | not started |
 | 20 | `20_six-domains.md` | not started |
