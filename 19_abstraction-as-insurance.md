@@ -3,6 +3,7 @@
 ## The claim
 
 **"Depend on abstractions, not concretions" does not say what the abstraction is insulating you from. Bought as insurance against a future database change, the interface cannot pay out when that change arrives — it was shaped by the database it was insuring against — and it charges a premium every day in features of the engine you are actually running.**
+[claude after reading this claim again, the statement "does not say what the abstraction is insulating you from" bugged me. We are treating "Depend on abstractions, not concretions" as a slogan or go proverb with no scope attached, but I believe this one has known reacheaable scopes. I'm still behind the "abstraction as insurance" idea but maybe we should also look at the scope - shapes of "Depend on abstractions, not concretions". That could give better material for current or other chapters. I reached the following wikipedia page while doing that: https://en.wikipedia.org/wiki/Dependency_inversion_principle   Take a look at that page and tell me what you think, it could also be worthwhile to explore the material referenced in the wikipedia page in a BFS style.]
 
 This is Part IV's fourth case, and the one that survives the reply that usually ends the argument: *but what if we do need it.* Assume you do need it. The claim is that the policy is void, not that the event never happens.
 
