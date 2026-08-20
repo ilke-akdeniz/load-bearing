@@ -323,7 +323,7 @@ Two are not negotiable: chapter 02's classification model is a lens rather than 
 | 15 | `15_principle-loses-scope.md` | **draft** |
 | 16 | `16_oop-vs-direction.md` | **draft** |
 | 17 | `17_tdd-and-mocks.md` | **draft** |
-| 18 | `18_clean-architecture-vs-language.md` | not started |
+| 18 | `18_clean-architecture-vs-language.md` | **in progress** |
 | 19 | `19_force-map-method.md` | not started |
 | 20 | `20_six-domains.md` | not started |
 | 21 | `21_idioms.md` | not started |

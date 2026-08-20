@@ -199,7 +199,10 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | The two principles arrive as one practice | 17 | The loop runs at minutes, so the suite must answer in seconds, so the database leaves the test — the granularity carrying the measured benefit is the same granularity that produces the pressure to mock. Standard TDD teaching, not this book's observation | "the loop forces the mock (Ch. 17)" |
 | The practice as performed is not the practice as described | 17 | No session in the study ran purely test-first — 87.5% was the maximum, the upper quarter managed about half, and a quarter of subjects refactored in under a tenth of their cycles | "mostly not done as described (Ch. 17)" |
 | Test-first couples tests to structure | 17 | The test names an interface before it has settled, so it encodes shape as well as behaviour, and structural change costs test change in proportion | cite 17 |
-| Layered packages force exports | 18 | A directory wall requires publishing the helpers it was meant to hide | cite 18 |
+| Layered packages force exports | 18 | A directory wall requires publishing the helpers it was meant to hide — verified: `undefined: store.scanOrder`, then `go doc` listing the exported helper | cite 18 |
+| The same layout costs three amounts | 18 | A directory is a visibility boundary in Go, nothing in C# until assemblies split, and nothing enforced in Python — so *a folder per layer* has a price the instruction never names | "the layout's price varies (Ch. 18)" |
+| Abstraction and detail are relational | 18 | Both words need a second half the slogans omit — an abstraction *of* what, a detail *relative to* which decision | cite 18 |
+| The visible artifact beats the invisible benefit | 18 | A folder tree and an interface count can be shown in review; whether the system could change engines cannot be tested until the day it must | cite 18 |
 | Plurality vs sequential replacement | 18 | Two implementations live at once is what an interface is for; replacing one engine with another forever is not, and only the first is a Force — see `docs/pending/speculative-abstraction.md` | "plurality, not replacement (Ch. 18)" |
 | Insurance that cannot pay out | 18 | An abstraction bought against a future swap is shaped by the engine it was written against, sits in the code layer while the migration is a data problem, and costs the features you already run | "the premium is paid daily (Ch. 18)" |
 | Injection is not abstraction | 18 | Passing a dependency in and hiding it behind an interface are two decisions; 05 argues for the first, and only the second is the speculative one | cite 18 |
@@ -301,7 +304,8 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | A fixture that starts at the asserted state | 17 | Account created `active`, so the verification test is satisfied before `verify` runs; gutting the method leaves it passing, and one word in the fixture restores the failure |
 | FlowCore decision 37, as corroboration | 17 | The same shape in a real system — one status for both terminal actions, caught by mutation, the fifth in one iteration, with a comment above it recording the weakness |
 | Fucci et al.'s four dimensions | 17 | GRA, UNI, SEQ, REF and which survived model selection |
-| Store split into a package | 18 | Layered packages force exports |
+| Store split into a package | 18 | One package with a private `scanOrder`, then split: `undefined: store.scanOrder`, exported to compile, and published by `go doc` |
+| `NewOrders(*sql.DB)` against `NewOrders(Repository)` | 18 | Injection and abstraction as two separable decisions, with 05 arguing only for the first |
 
 ## Deliberate repetition
 
