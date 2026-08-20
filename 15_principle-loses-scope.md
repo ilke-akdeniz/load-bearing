@@ -8,7 +8,7 @@
 
 **Scope is the same boundary seen from the other side: the situations the advice reaches.** State the conditions and you have given the scope; name the situation and you have given it too. This chapter says *scope* rather than *conditions* because it tracks what the wording carries rather than what the advice requires — and a principle can carry that boundary either way. *Don't store money in a float* names a situation and states no condition, and it passes the test below regardless.
 
-Part IV is three case studies, and this chapter is the mechanism they share, stated once.
+Part IV is four case studies, and this chapter is the mechanism they share, stated once.
 
 ---
 
@@ -173,7 +173,7 @@ The top four are not proverbs. Nobody wrote the single responsibility principle 
 
 The bottom two are not proverbs either, and they pass. *Money* and *cgo* name situations. There is nowhere to resolve them outward to.
 
-**So the property belongs to the wording, not to the genre.** Being built for memorability makes it more likely that the situation gets left out, because a situation is the longest part and the first to go. It is not what causes the omission. Chapters 16, 17, and 18 are three principles from the second column, each traced to what its wide reading produced.
+**So the property belongs to the wording, not to the genre.** Being built for memorability makes it more likely that the situation gets left out, because a situation is the longest part and the first to go. It is not what causes the omission. Chapters 16 through 19 are four principles from the second column, each traced to what its wide reading produced.
 
 **On what these sources are worth**, because they are not equal. Pike's talk is primary. The Go project's wiki page is an official artifact and the strongest evidence that the misreading was real enough to be worth correcting — though note that it attributes the over-use to enthusiasm rather than to the proverb, and this chapter does not claim the proverb caused it. The Reddit thread is community anecdote: one instance, dated, and useful only because the over-application is self-reported rather than attributed by somebody else. It shows the confusion exists and what shape it takes. It establishes nothing about how often, and nothing here claims otherwise.
 
@@ -241,13 +241,17 @@ So a proverb about the board can accumulate a stable scope, while a proverb abou
 
 This chapter ends in repair, which is why it does not claim that a principle stripped of its scope stays that way. The scope was rebuilt three times here: officially, in a wiki page with a table; informally, by strangers answering a question; and by the source himself, in a talk given to supply a distinction he had left out.
 
-Where that does not happen — where the wide reading hardens and nobody writes the page — you get what chapter 24 calls a folk remedy. Chapters 16, 17, and 18 are three cases that travelled further than this one did.
+Where that does not happen — where the wide reading hardens and nobody writes the page — you get what chapter 24 calls a folk remedy. Chapters 16 through 19 are four cases that travelled further than this one did.
 
 ---
 
 ## What the claim costs
 
-**Recovering a scope is slow, and usually nobody wrote it down.** Pike's is recoverable because the talk was recorded. For most advice the context is a mailing list that no longer resolves, or a conversation. At that point you are reconstructing rather than reading, which is how a plausible mechanism gets attached to somebody else's words.
+**Recovering a scope is slow, and whether it can be recovered at all depends on who said it.** Where the advice came from a conversation, a code review, or a mailing list that no longer resolves, there is nothing to go back to. You are then reconstructing rather than reading, which is how a plausible mechanism gets attached to somebody else's words.
+
+At the other end of the range the opposite holds, and it is worth stating because it cuts against the paragraph above. The four principles Part IV works through are all famous, and for every one of them the scope is in print and findable in minutes — an introduction, two articles, a paper, a blog post. **Prominence is what makes advice travel and also what makes its scope recoverable, and only the first of the two gets used.**
+
+**Which moves the failure, and this is the part worth keeping.** If the conditions were merely lost, the answer would be better record-keeping. They were not lost. In four cases out of four they were published, by the author, often in the same document as the advice, and the compressed version travelled anyway. So the thing that fails is not preservation but retrieval — and retrieval fails for a reason that has nothing to do with effort. The compressed version is complete enough to act on. Nobody interrupts an action they can already take in order to check whether they should be taking it.
 
 **The test rejects nearly everything.** Almost no advice states its own scope, because the scope was compressed out before it reached you. *Does this say how wide it is* discards most of what is true along with what is not. It sorts. It does not accept or reject.
 
@@ -294,4 +298,4 @@ If the source can be reached, go and look. The scope is often still there, in th
 
 ---
 
-**Next:** chapter 16 is the first of the three cases, where object orientation's advice about where behaviour belongs meets the Direction Rule, and produces dependency graphs that point both ways.
+**Next:** chapter 16 is the first of the four cases, where object orientation's advice about where behaviour belongs meets the Direction Rule, and produces dependency graphs that point both ways.
