@@ -222,11 +222,10 @@ Not covered, and moved: the wider empirical literature, since the meta-analyses 
 
 The third case study: what happens when a structural idea is expressed as directories.
 
-**Chapter 15's mechanism, running on:** *depend on abstractions, not concretions*, and *the database is a detail.*
-The terms with no fixed extent are **abstraction** and **detail**.
-The wide reading gives an interface at every boundary and a directory per layer.
-The narrow reading is chapter 05's — put what changes least at the bottom, which an interface is not automatically.
-The argument is worked in `docs/pending/speculative-abstraction.md`; read it before drafting.
+**Chapter 15's mechanism, running on:** *the database is a detail*, where the scope was written down and did not travel.
+Martin separates the data model, which he calls architecturally significant, from the database system, which he calls a mechanism whose choice can wait — *the data is significant, the database is a detail*.
+The term with no fixed extent is **database**: a product to him, everything about persistence to everyone else, so the folk version hears *your schema is a low-level mechanism* and builds a wall up front, which the 2012 post it descends from says not to do.
+The narrow reading of the structural half is chapter 05's — a layer is a rule about call direction, and a directory is neither necessary nor sufficient for it.
 
 Contents: **layered packages force exports** — splitting a store into its own package requires making its helpers public, so the wall meant to hide them is what exposes them; the mapping tax of one entity type per layer; interfaces with one implementation; the `internal/` manoeuvre and what it's actually for; why the same architecture in Go, C#, and Python produces three different file layouts and only one of them needs the ceremony.
 
@@ -340,7 +339,7 @@ Two are not negotiable: chapter 02's classification model is a lens rather than 
 | 15 | `15_principle-loses-scope.md` | **draft** |
 | 16 | `16_oop-vs-direction.md` | **in progress** |
 | 17 | `17_tdd-and-mocks.md` | **draft** |
-| 18 | `18_clean-architecture-vs-language.md` | **draft** |
+| 18 | `18_clean-architecture-vs-language.md` | **in progress** |
 | 19 | `19_abstraction-as-insurance.md` | **draft** |
 | 20 | `20_force-map-method.md` | not started |
 | 21 | `21_six-domains.md` | not started |

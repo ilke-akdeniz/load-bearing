@@ -2,13 +2,37 @@
 
 ## The claim
 
-**"The database is a detail" does not say what to do about it. Read as an instruction to put persistence behind a directory wall, that costs nothing in Python, nothing in C# until assemblies split, and in Go it publishes the helpers the wall was drawn to hide — then charges a mapping layer for every entity the two sides can no longer share.**
+**"The database is a detail" separates two things: the data model, which its author calls architecturally significant, and the database system, which he calls a mechanism whose choice can be deferred. Read instead as an instruction to put persistence behind a directory wall, it collapses that distinction — and the wall costs nothing in Python, nothing in C# until assemblies split, and in Go publishes the helpers it was drawn to hide, then charges a mapping layer for every entity the two sides can no longer share.**
 
-This is Part IV's third case. The term with no fixed extent is **detail**, and the wide reading turns a rule about which way dependencies point into a rule about where files go.
+This is Part IV's third case, and like the two after it, the scope was written down. The term with no fixed extent is not *detail* but **database** — a word that means a product to the person who wrote the sentence and everything about persistence to the person repeating it.
 
 ---
 
 ## The demonstration
+
+### What the sentence actually separates
+
+The phrase is Robert Martin's, and both places he sets it out say something narrower than it travels as.
+
+The 2012 post that named the position is about *timing*. Its argument is that use cases belong at the centre and the storage technology does not, and the instruction that follows is a scheduling one:
+
+> Databases and frameworks are details! You don't have to decide upon them up front.
+
+He is explicit about when the decision does arrive — *"once you've got all the use cases and business rules figured out, written, and tested"* — and about the failure he is guarding against, which is deciding too early: *"If you get the database involved early, then it will warp your design."*
+
+The book chapter is about *what counts as the database*, and this is the part that matters here. Martin separates the data model from the database system, and assigns them opposite standings:
+
+> The structure you give to the data within your application is highly significant to the architecture of your system.
+
+against the database system as *"a utility that provides access to the data"* and *"a low-level detail — a mechanism."* He is not dismissive of the relational model, which he calls elegant and robust. The chapter's summary line is the separation itself:
+
+> The data is significant. The database is a detail.
+
+**So the sentence carries a distinction and a deferral, and neither survives the trip.** *Detail* means a mechanism whose selection can wait, not a thing to be hidden. And *database* means the product — Oracle, Postgres, the process listening on a port — while the schema, the constraints, the shape of the rows are the data model, which the same author calls significant.
+
+The folk reading collapses both. It hears *database* as everything to do with persistence, including the schema, and hears *detail* as *hide it*. What it then produces is a wall built up front, which is the one thing the 2012 post says not to do, in defence of something its author never said was a detail.
+
+The rest of this chapter is what that wall costs in the language you happen to be using — a bill that is no part of Martin's argument, and that varies by a factor nobody in the discussion names.
 
 ### The wall publishes what it was meant to hide
 
@@ -113,7 +137,9 @@ So *put each layer in its own folder* is an instruction whose price runs from no
 
 ## Why the claim holds
 
-*Detail* is a relational word with the relation left out. Something is a detail *relative to* some decision, and the slogan never says which. With nothing to narrow it, the widest reading is the only one available, and the widest reading of *the database is a detail* is that persistence should be invisible from everywhere — which sounds like a statement about visibility and gets implemented as a statement about file paths.
+**The word that slipped is *database*, and it slipped because ordinary usage is wider than the source's.** Martin uses it for the product. Everyone else uses it for the product, the schema, the queries, the migrations, and the rows — *the database* is where you look things up and also the thing your constraints live in. A reader who applies the ordinary meaning to his sentence gets *your schema is a low-level mechanism*, which he spent the chapter denying.
+
+Then *detail* follows it. In the source a detail is something whose choice can be postponed; in the folk version it is something to be concealed. Those are not the same instruction, and only one of them tells you to build anything.
 
 Chapter 05 already separates the two ideas that get merged here: a layer is a constraint on which way dependencies point, and a directory is neither necessary nor sufficient for it. What this chapter adds is the price of confusing them, and in Go the price has a compiler message attached.
 
@@ -174,7 +200,7 @@ That is a real cost and it grows with the number of people who could do the reac
 **In a conversation:**
 
 - **"Persistence should be its own package."** The question that separates the two cases: what becomes public if we do that, and what will we have to map?
-- **"The database is a detail."** A detail relative to which decision? Most systems keep their constraints in the schema (Ch. 17), and those are not details in any sense that licenses hiding them.
+- **"The database is a detail."** Worth answering with the rest of the sentence it came from: *the data is significant.* Most systems keep their constraints in the schema (Ch. 17), which is the data model, which the same source calls architecturally significant.
 - **"That's just how you structure a project."** Followed usefully by: in which language was that structure invented, and what did a directory mean there?
 - **"We'll put it in `internal/`."** Fine, and worth asking what it is being hidden from — a client, or another package you created a moment ago.
 
@@ -188,6 +214,8 @@ In Go, for a single module, the honest answer is often nothing, and the split is
 
 - Go, exported identifiers — [go.dev/ref/spec#Exported_identifiers](https://go.dev/ref/spec#Exported_identifiers); `internal` packages — [go.dev/doc/go1.4#internalpackages](https://go.dev/doc/go1.4#internalpackages).
 - C#, access modifiers — [learn.microsoft.com/dotnet/csharp/language-reference/keywords/access-modifiers](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/access-modifiers).
+- Robert C. Martin, *NODB*, 15 May 2012 — [blog.cleancoder.com](https://blog.cleancoder.com/uncle-bob/2012/05/15/NODB.html).
+- Robert C. Martin, *Clean Architecture*, chapter 30, *The Database Is a Detail* — read from a [public copy of the chapter text](https://github.com/stride83/Clean-Architecture-zh-1/blob/master/docs/ch30.md) rather than the book.
 - FlowCore, `docs/decisions.md`, decision 1 — [github.com/ilke-akdeniz/flowcore](https://github.com/ilke-akdeniz/flowcore).
 
 ---
