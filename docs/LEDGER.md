@@ -201,11 +201,13 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Test-first couples tests to structure | 17 | The test names an interface before it has settled, so it encodes shape as well as behaviour, and structural change costs test change in proportion | cite 17 |
 | Layered packages force exports | 18 | A directory wall requires publishing the helpers it was meant to hide — verified: `undefined: store.scanOrder`, then `go doc` listing the exported helper | cite 18 |
 | The same layout costs three amounts | 18 | A directory is a visibility boundary in Go, nothing in C# until assemblies split, and nothing enforced in Python — so *a folder per layer* has a price the instruction never names | "the layout's price varies (Ch. 18)" |
-| Abstraction and detail are relational | 18 | Both words need a second half the slogans omit — an abstraction *of* what, a detail *relative to* which decision | cite 18 |
-| The visible artifact beats the invisible benefit | 18 | A folder tree and an interface count can be shown in review; whether the system could change engines cannot be tested until the day it must | cite 18 |
-| Plurality vs sequential replacement | 18 | Two implementations live at once is what an interface is for; replacing one engine with another forever is not, and only the first is a Force — see `docs/pending/speculative-abstraction.md` | "plurality, not replacement (Ch. 18)" |
-| Insurance that cannot pay out | 18 | An abstraction bought against a future swap is shaped by the engine it was written against, sits in the code layer while the migration is a data problem, and costs the features you already run | "the premium is paid daily (Ch. 18)" |
-| Injection is not abstraction | 18 | Passing a dependency in and hiding it behind an interface are two decisions; 05 argues for the first, and only the second is the speculative one | cite 18 |
+| *Detail* is relational | 18 | A detail *relative to* which decision — the slogan omits the second half, so the widest reading makes persistence invisible from everywhere and gets implemented as a file path | cite 18 |
+| Drawing is not enforcing | 18 | A folder tree is the architecture as drawn and can be checked by looking; whether anything is hidden depends on what the language attaches to a directory, which the diagram does not show | "drawn, not enforced (Ch. 18)" |
+| `internal/` gives back what a split took | 18 | Lowercase already hides a type from clients; `internal/` solves the narrower problem of hiding a package from sibling packages, so reaching for it marks a wall drawn where the language charges | "what internal/ is for (Ch. 18)" |
+| The mapping tax | 18 | Two packages cannot share an entity type without one owning the other's API, so each keeps its own and something converts — charged per field, per entity, per boundary, and where drift lives | "the mapping tax (Ch. 18)" |
+| Plurality vs sequential replacement | pending | Two implementations live at once is what an interface is for; replacing one engine with another forever is not, and only the first is a Force — see `docs/pending/speculative-abstraction.md` | "plurality, not replacement (Ch. 18)" |
+| Insurance that cannot pay out | pending | An abstraction bought against a future swap is shaped by the engine it was written against, sits in the code layer while the migration is a data problem, and costs the features you already run | "the premium is paid daily (Ch. 18)" |
+| Injection is not abstraction | pending | Passing a dependency in and hiding it behind an interface are two decisions; 05 argues for the first, and only the second is the speculative one | cite 18 |
 | Force-map method | 19 | Read forces, derive principles, check idioms — in that order | cite 19 |
 | An Idiom bounds its own designers | 21 | Pike: interfaces coloured the team's thinking for more than a decade, so every proposed polymorphism had to be reconciled with them — the cost is not thoughtless obedience, it is what the convention makes unimaginable | "the Idiom bounded them (Ch. 21)"; argument in `docs/pending/pike-retrospective.md` |
 | A deviation, declared and dated | 21 | The early Go compiler in C: reason stated, offence taken, and the reason later expired and the deviation reversed | cite 21 |
@@ -305,7 +307,7 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | FlowCore decision 37, as corroboration | 17 | The same shape in a real system — one status for both terminal actions, caught by mutation, the fifth in one iteration, with a comment above it recording the weakness |
 | Fucci et al.'s four dimensions | 17 | GRA, UNI, SEQ, REF and which survived model selection |
 | Store split into a package | 18 | One package with a private `scanOrder`, then split: `undefined: store.scanOrder`, exported to compile, and published by `go doc` |
-| `NewOrders(*sql.DB)` against `NewOrders(Repository)` | 18 | Injection and abstraction as two separable decisions, with 05 arguing only for the first |
+| `NewOrders(*sql.DB)` against `NewOrders(Repository)` | pending | Injection and abstraction as two separable decisions, with 05 arguing only for the first |
 
 ## Deliberate repetition
 

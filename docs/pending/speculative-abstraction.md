@@ -119,8 +119,13 @@ The claim here is about interfaces justified by a future substitution, not about
 | The LOB inversion, one line | 20 | *The schema outlives the code* already promised there |
 | The testing case | 17 | 18 cites it; 17 owns it |
 
-**Open question for the author.**
+**Open question for the author — now urgent, and still open.**
 Chapter 18's stated subject is a structural idea expressed as directories, which is file layout.
 This argument is about speculative abstraction, which is adjacent but not the same thing.
 Either 18's scope widens by a paragraph in the TOC, or this wants a different home.
 The alternative is chapter 20, where it fits the domain but would unbalance a chapter that gives each domain a short treatment.
+
+**2026-08-20.** The draft answered this itself and folded the argument into chapter 18. The author rejected it on review: the two arguments share a villain and not a mechanism, and the join was an *and* in the claim sentence.
+The test that settles it is language-dependence — 18's material changes with the language, this argument is identical in every language — so it cannot live in a chapter called *versus the language*.
+Chapter 18 has been rewritten to its own TOC scope and nothing here has been consumed.
+The draft's recommendation is a chapter of its own in Part IV, running *depend on abstractions, not concretions*; **the destination is the author's, and this material stays here until they set it.**
