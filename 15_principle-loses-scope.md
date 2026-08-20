@@ -208,7 +208,7 @@ Which gives the test worth keeping: **does this advice say how wide it is?**
 
 Some advice is unconditional, and then nothing is missing from the compressed form.
 
-*Gofmt's style is no one's favorite, yet gofmt is everyone's favorite* is on the same list of nineteen, and it became a norm — mandatory automatic formatting, no configuration — without incident. There is no situation in which one consistent format is wrong, so a reader who receives only the proverb has received all of it. Chapter 14 reached this boundary from the other side: a compressed statement is safe exactly when its condition is *always*. Chapter 22 is the general case.
+*Gofmt's style is no one's favorite, yet gofmt is everyone's favorite* is on the same list of nineteen, and it became a norm — mandatory automatic formatting, no configuration — without incident. There is no situation in which one consistent format is wrong, so a reader who receives only the proverb has received all of it. Chapter 14 reached this boundary from the other side: a compressed statement is safe exactly when its condition is *always*. Chapter 23 is the general case.
 
 ### A named situation is a proxy, and proxies fit badly
 
@@ -241,7 +241,7 @@ So a proverb about the board can accumulate a stable scope, while a proverb abou
 
 This chapter ends in repair, which is why it does not claim that a principle stripped of its scope stays that way. The scope was rebuilt three times here: officially, in a wiki page with a table; informally, by strangers answering a question; and by the source himself, in a talk given to supply a distinction he had left out.
 
-Where that does not happen — where the wide reading hardens and nobody writes the page — you get what chapter 23 calls a folk remedy. Chapters 16, 17, and 18 are three cases that travelled further than this one did.
+Where that does not happen — where the wide reading hardens and nobody writes the page — you get what chapter 24 calls a folk remedy. Chapters 16, 17, and 18 are three cases that travelled further than this one did.
 
 ---
 
@@ -269,7 +269,7 @@ Where that does not happen — where the wide reading hardens and nobody writes 
 **In a conversation:**
 
 - **A saying offered as the end of a discussion.** The useful follow-up is not *I disagree* but *how would we apply that here, concretely, and what would it improve?* — which is answerable from the code in front of you, where a dispute about the saying is not.
-- **"That's just how it's done here."** Sometimes a real Idiom with reasons behind it (Ch. 21), sometimes a wide reading nobody has revisited. One question separates them.
+- **"That's just how it's done here."** Sometimes a real Idiom with reasons behind it (Ch. 22), sometimes a wide reading nobody has revisited. One question separates them.
 - **An appeal to who said it.** The credibility is usually genuine and answers a question nobody asked: it suggests the original observation was sound, and says nothing about whether the version that reached you still contains it.
 - **Anyone, including this book, saying a practice always applies.**
 

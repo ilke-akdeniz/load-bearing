@@ -258,7 +258,7 @@ Nothing about the claim changed. The Force did: *someone is trying*. Treat secur
 
 **Arguing about the classification is itself the failure.** The model is a thinking aid, not a taxonomy to litigate. Two people debating whether something is a Principle or an Idiom have already extracted the value — they have agreed it is not a Law — and everything after that is the sort of dispute this book exists to end, not to relocate.
 
-**Classifying is not deciding.** The model tells you what kind of claim you are holding. It does not tell you what to do about it. Recognizing something as an Idiom is not permission to ignore it — chapter 21 argues that following local convention is usually correct even when you can out-argue it, because reviewability and shared expectations are worth more than being interesting. The model narrows the question; it does not answer it.
+**Classifying is not deciding.** The model tells you what kind of claim you are holding. It does not tell you what to do about it. Recognizing something as an Idiom is not permission to ignore it — chapter 22 argues that following local convention is usually correct even when you can out-argue it, because reviewability and shared expectations are worth more than being interesting. The model narrows the question; it does not answer it.
 
 **The model needs comparative experience it cannot supply.** This is the real limit, and it is uncomfortable.
 

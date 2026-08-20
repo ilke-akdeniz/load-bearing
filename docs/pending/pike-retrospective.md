@@ -42,24 +42,24 @@ Chapter 09 owns *once published, it is forever* and the add-only rule.
 What this supplies is the other half — somebody who paid the cost deliberately, saying what it bought.
 The chapter currently argues the constraint; this is a case of the constraint being adopted on purpose as a feature, which is a different and more useful thing than a warning.
 
-### Chapter 21 — an Idiom that limited the people who invented it
+### Chapter 22 — an Idiom that limited the people who invented it
 
 The strongest piece in the talk for this book, and it is not about Go's users.
 
 On why generics took Go more than a decade: he says that although he would not change a thing about how interfaces worked, **they colored the team's thinking in ways it took more than a decade to correct**.
 Interfaces were the bedrock, so every proposed form of polymorphism had to be reconciled with them, and finding a way through took several aborted implementations and outside help from type theorists.
 
-Chapter 21 takes Idioms seriously rather than dismissing them.
+Chapter 22 takes Idioms seriously rather than dismissing them.
 This is an Idiom's designers reporting that the Idiom bounded what they could imagine — which is a cost the chapter should be able to name without reaching for a community that got it wrong.
 It also inverts the usual telling: the failure is not that people obeyed the convention thoughtlessly, but that the convention shaped the thinking of the people best placed to see past it.
 
-### Chapter 21 — a deviation from Idiom, defended by Forces
+### Chapter 22 — a deviation from Idiom, defended by Forces
 
 The early Go compiler was written in C rather than self-hosted or built on LLVM, against what the language community expected.
 His account of why is Forces reasoning without the vocabulary: bootstrapping needs an existing language; writing a compiler in the language you are designing tends to produce a language that is good for writing compilers; and the C compiler they already had made segmented stacks cheap to add where a toolkit would have made it infeasible.
 Then the line that matters: unorthodox as it was, it helped them move fast, some people were offended, and **it was the right one for us at the time**.
 
-Chapter 21's contents already promise *when to deviate, and how to pay for it — declare it, document the reason, keep it narrow*.
+Chapter 22's contents already promise *when to deviate, and how to pay for it — declare it, document the reason, keep it narrow*.
 This is a worked instance with all three, including the later translation of the compiler to Go once the reason had expired.
 Pair it with FlowCore's decision 18, which is the same shape at a much smaller scale.
 
@@ -69,7 +69,7 @@ The aside on async/await: it is easier for implementers to build or retrofit, an
 
 This is adjacent to chapter 13 rather than in it.
 Chapter 13 is about patterns that dissolve when the language has the feature; this is about a feature that creates work the programmer must then carry, which is closer to an inverse.
-Do not force it. If it fits anywhere it may be chapter 20's distributed-services section, or nowhere.
+Do not force it. If it fits anywhere it may be chapter 21's distributed-services section, or nowhere.
 
 ### Chapter 05 — background rather than evidence
 
@@ -86,8 +86,8 @@ Useful as context if the chapter ever wants a case where dependency cost drove t
 | Ousterhout's ban; the concurrency admission | 15 | a section | **done** |
 | Confidence does not track the kind of claim | 02 | a paragraph | owed, chapter at draft |
 | Compatibility priced by the person who paid it | 09 | a passage | owed, chapter at draft |
-| Interfaces coloured their own designers' thinking | 21 | a section | owed, chapter not started |
-| The compiler in C, as a declared deviation | 21 | a passage | owed, chapter not started |
+| Interfaces coloured their own designers' thinking | 22 | a section | owed, chapter not started |
+| The compiler in C, as a declared deviation | 22 | a passage | owed, chapter not started |
 | async/await and coloured functions | 13 or 20 | uncertain | check the fit first |
 | The 45-minute build | 05 | background | probably not needed |
 

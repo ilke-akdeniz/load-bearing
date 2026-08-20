@@ -208,16 +208,16 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Plurality vs sequential replacement | pending | Two implementations live at once is what an interface is for; replacing one engine with another forever is not, and only the first is a Force — see `docs/pending/speculative-abstraction.md` | "plurality, not replacement (Ch. 18)" |
 | Insurance that cannot pay out | pending | An abstraction bought against a future swap is shaped by the engine it was written against, sits in the code layer while the migration is a data problem, and costs the features you already run | "the premium is paid daily (Ch. 18)" |
 | Injection is not abstraction | pending | Passing a dependency in and hiding it behind an interface are two decisions; 05 argues for the first, and only the second is the speculative one | cite 18 |
-| Force-map method | 19 | Read forces, derive principles, check idioms — in that order | cite 19 |
-| An Idiom bounds its own designers | 21 | Pike: interfaces coloured the team's thinking for more than a decade, so every proposed polymorphism had to be reconciled with them — the cost is not thoughtless obedience, it is what the convention makes unimaginable | "the Idiom bounded them (Ch. 21)"; argument in `docs/pending/pike-retrospective.md` |
-| A deviation, declared and dated | 21 | The early Go compiler in C: reason stated, offence taken, and the reason later expired and the deviation reversed | cite 21 |
-| Domain inversions | 20 | Each domain's dominant force inverts some standard advice | cite 20 |
+| Force-map method | 20 | Read forces, derive principles, check idioms — in that order | cite 20 |
+| An Idiom bounds its own designers | 22 | Pike: interfaces coloured the team's thinking for more than a decade, so every proposed polymorphism had to be reconciled with them — the cost is not thoughtless obedience, it is what the convention makes unimaginable | "the Idiom bounded them (Ch. 22)"; argument in `docs/pending/pike-retrospective.md` |
+| A deviation, declared and dated | 22 | The early Go compiler in C: reason stated, offence taken, and the reason later expired and the deviation reversed | cite 22 |
+| Domain inversions | 21 | Each domain's dominant force inverts some standard advice | cite 21 |
 | Corpus monoculture | 02 | A model has one training distribution and cannot acquire a second, so 02's prescribed cure is unavailable to it | cite 02; argument in `docs/pending/ai-material.md` |
 | The generator cannot see your Forces | 03 | Forces are facts about your situation; a model has the prompt, so the groundwork is skipped by construction | cite 03; argument in `docs/pending/ai-material.md` |
 | The scope was never set | 15 | For generated design nobody ever fixed an extent, so there is no author to ask and no talk to re-watch | "no scope was set (Ch. 15)"; argument in `docs/pending/ai-material.md` |
-| Grilling | 19 | An interview that surfaces each decision, with a recommendation, before anything is written; the human supplies the Force that settles it | "grilling (Ch. 19)"; text, provenance and limits in `docs/pending/ai-material.md` |
-| Grilling's limit | 19 | It surfaces decisions the model recognizes as decisions, so it is weakest where the corpus is most uniform | cite 19; argument in `docs/pending/ai-material.md` |
-| Silent defaults | 23 | Generated code states no decisions at all — a taken branch leaves no mark, so review cannot catch what it never suspected | "silent default (Ch. 23)"; argument in `docs/pending/ai-material.md` |
+| Grilling | 20 | An interview that surfaces each decision, with a recommendation, before anything is written; the human supplies the Force that settles it | "grilling (Ch. 20)"; text, provenance and limits in `docs/pending/ai-material.md` |
+| Grilling's limit | 20 | It surfaces decisions the model recognizes as decisions, so it is weakest where the corpus is most uniform | cite 20; argument in `docs/pending/ai-material.md` |
+| Silent defaults | 24 | Generated code states no decisions at all — a taken branch leaves no mark, so review cannot catch what it never suspected | "silent default (Ch. 24)"; argument in `docs/pending/ai-material.md` |
 
 ## Code examples
 

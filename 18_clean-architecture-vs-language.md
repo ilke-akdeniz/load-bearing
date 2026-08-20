@@ -192,4 +192,4 @@ In Go, for a single module, the honest answer is often nothing, and the split is
 
 ---
 
-**Next:** Part V turns from diagnosis to method — chapter 19 sets out how to read the Forces in front of you, derive the Principles they support, and check the Idioms of the language you are writing in, in that order.
+**Next:** chapter 19 takes the other half of the doctrine — the interface at the boundary, bought against a database swap that has not been scheduled, and shaped by the database it was meant to insure you against.

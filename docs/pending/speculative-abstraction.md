@@ -3,7 +3,7 @@
 Working document, in the shape of `docs/pending/ai-material.md`.
 The argument is worked here once so that the chapters that owe a piece of it agree with each other.
 
-**Owed to:** chapter 18 (primary), chapter 20's line-of-business section (one line), chapter 17 (the testing objection).
+**Owed to:** chapter 18 (primary), chapter 21's line-of-business section (one line), chapter 17 (the testing objection).
 Read this before drafting any of them.
 
 **Origin.** The author's, from experience in line-of-business software: decades of building machinery to permit a database swap that never happened.
@@ -116,14 +116,14 @@ The claim here is about interfaces justified by a future substitution, not about
 | Injection is not abstraction | 18 | Must be stated, or chapter 05 refutes the claim |
 | The four mechanisms | 18 | Each cites 05, 09, or 03 rather than re-deriving |
 | The rollback alternatives | 18 | Cites 12 for strangler fig |
-| The LOB inversion, one line | 20 | *The schema outlives the code* already promised there |
+| The LOB inversion, one line | 21 | *The schema outlives the code* already promised there |
 | The testing case | 17 | 18 cites it; 17 owns it |
 
 **Open question for the author — now urgent, and still open.**
 Chapter 18's stated subject is a structural idea expressed as directories, which is file layout.
 This argument is about speculative abstraction, which is adjacent but not the same thing.
 Either 18's scope widens by a paragraph in the TOC, or this wants a different home.
-The alternative is chapter 20, where it fits the domain but would unbalance a chapter that gives each domain a short treatment.
+The alternative is chapter 21, where it fits the domain but would unbalance a chapter that gives each domain a short treatment.
 
 **2026-08-20.** The draft answered this itself and folded the argument into chapter 18. The author rejected it on review: the two arguments share a villain and not a mechanism, and the join was an *and* in the claim sentence.
 The test that settles it is language-dependence — 18's material changes with the language, this argument is identical in every language — so it cannot live in a chapter called *versus the language*.

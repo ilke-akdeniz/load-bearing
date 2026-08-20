@@ -476,7 +476,7 @@ That is the reversibility question again, and it is the only one that still work
 
 **A written force-map goes stale, and a stale one is worse than none**, because it looks authoritative and nobody re-derives what a document already answers. Date them, and treat an undated one as unsigned.
 
-**This chapter does not resolve conflicts.** Low latency pulls against durability. A small team pulls against a large blast radius. Naming both does not tell you which wins, and the honest answer is that trade-offs are decided rather than computed. Chapter 19 works through what to do when Forces point in opposite directions.
+**This chapter does not resolve conflicts.** Low latency pulls against durability. A small team pulls against a large blast radius. Naming both does not tell you which wins, and the honest answer is that trade-offs are decided rather than computed. Chapter 20 works through what to do when Forces point in opposite directions.
 
 ---
 

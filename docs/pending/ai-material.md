@@ -71,7 +71,7 @@ Rules that survived in a comment or a review habit must move into types, constra
 
 ---
 
-## Grilling — chapter 19
+## Grilling — chapter 20
 
 A skill the author runs by default in FlowCore sessions.
 It is an **interview conducted before generation**, not a review technique.
@@ -139,7 +139,7 @@ State it as reasoning, not as a finding.
 Lead with this rather than with the book's own decision log.
 FlowCore's log is about schemas, concurrency, and naming, with consequences; this book's log is about prose, and readers will discount a book that proves its method works by citing itself.
 
-### Decision 18 — an Idiom whose precondition failed (chapter 21)
+### Decision 18 — an Idiom whose precondition failed (chapter 22)
 
 Its context line:
 
@@ -152,7 +152,7 @@ What broke was the Idiom's precondition, which decision 18 states exactly: the c
 That holds when you write the code.
 It does not hold when you review generated code in volume, having authored none of it.
 
-So the Force that changed is **the reader is no longer the author**, and the result is a documented, deliberately narrow deviation — which is chapter 21's prescription (declare it, document the reason, keep it narrow) carried out in full, for an AI-shaped reason.
+So the Force that changed is **the reader is no longer the author**, and the result is a documented, deliberately narrow deviation — which is chapter 22's prescription (declare it, document the reason, keep it narrow) carried out in full, for an AI-shaped reason.
 
 ### Decision 37 — generated tests that never reach their condition (chapter 17)
 
@@ -218,8 +218,8 @@ This was an author correction to the draft, recorded in decision 24: the draft h
 | Cannot see your Forces; team-size Force at its limit | 03 | a passage in the relevant Force sections |
 | The conditions were never derived | 15 | a paragraph applying 15's own test |
 | Generated tests that never reach their condition | 17 | a passage, with FlowCore decision 37 |
-| Grilling, in full | 19 | a section — the method with a generator in the loop |
-| An Idiom whose precondition failed | 21 | a passage, with FlowCore decision 18 |
-| Silent defaults; receiving generated code | 23 | a section — the sixth receiving case, and the synthesis |
+| Grilling, in full | 20 | a section — the method with a generator in the loop |
+| An Idiom whose precondition failed | 22 | a passage, with FlowCore decision 18 |
+| Silent defaults; receiving generated code | 24 | a section — the sixth receiving case, and the synthesis |
 
 Chapters 02 and 03 are already at **draft**; see *Pending revisits* in `00_toc.md`.

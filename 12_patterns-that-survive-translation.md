@@ -522,7 +522,7 @@ Confusing the Forces, goals, and problem shapes in play is one way people end up
 
 Knowing the Force narrows the field; it rarely closes it. *Writers collide* gives you optimistic locking, pessimistic locking, single-writer partitioning, and a serializable transaction, and choosing between them needs the Force's **intensity** — chapter 03's dial — plus what you are willing to pay.
 
-This chapter sorts. It does not decide. Chapter 19 is the one that turns a set of Forces into a design.
+This chapter sorts. It does not decide. Chapter 20 is the one that turns a set of Forces into a design.
 
 ### The listed entries are not endorsements
 

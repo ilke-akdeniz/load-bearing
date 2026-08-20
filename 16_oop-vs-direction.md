@@ -258,7 +258,7 @@ Two types that hold each other and are never separated, never serialized, never 
 
 **Every traversal becomes explicit work.** With references, `customer.orders` is free at the call site. With identifiers, somebody must fetch the orders for a customer, and the code that does it has to exist, be tested, and be called in the right order. Chapter 12's N+1 problem is what happens when this is done carelessly.
 
-**The rule's location stops being obvious.** On an entity, a rule has one plausible home and everybody finds it. At a service that sees both entities, there are several plausible homes, and without a stated method for choosing — which chapter 19 owns — the placement becomes a matter of local habit.
+**The rule's location stops being obvious.** On an entity, a rule has one plausible home and everybody finds it. At a service that sees both entities, there are several plausible homes, and without a stated method for choosing — which chapter 20 owns — the placement becomes a matter of local habit.
 
 **Flat structures read as procedural, and that carries a social cost.** A team fluent in object modelling will recognize the shape as the one chapter 14 defends against a verdict noun, and the argument has to be made again on every review. The technical answer is settled and the vocabulary is not.
 
