@@ -3099,3 +3099,43 @@ A document leaves the folder for `docs/` when every piece in it has landed, rath
 Seventeen paths updated across `CLAUDE.md`, `00_toc.md`, `LEDGER.md`, and cross-references inside the moved documents.
 `DECISIONS.md` keeps the old paths: it is the historical record, and an entry written on 12 August should say where the file was on 12 August.
 Slice 4 reconciles ledger rows, so it is where a path gets fixed when a document leaves the folder.
+
+---
+
+## 79. A source's register is not the book's
+
+**Date.** 2026-08-19
+
+**Context.**
+Chapter 17 takes its ordering argument from Fucci et al., read in full.
+The draft that came back from that reading carried three stacked block quotes in the paper's own prose, including *"this advice would require a negative (statistically significant) coefficient, which the models did not produce."*
+It also carried the paper's `GRA / UNI / SEQ / REF` abbreviations, each used once, and used *external quality* and *productivity* as if they were plain English rather than the paper's operationalized measures.
+
+**The author's objection.**
+The sentence could not be read in plain terms, and the style was not the book's.
+Raised as two separate worries — that the quotation itself was impenetrable, and that importing that register anywhere in the chapter was inconsistent with the book's tone.
+
+**Decision.**
+Paraphrase the findings into the book's voice, keeping short exact fragments where the chapter needs to show the source said it.
+Record the general rule in `CLAUDE.md`, after the primary-source rules, since it is what to do once the source has been read.
+
+**Why this is a distinct failure from the one already recorded.**
+Decision 71's rule — read the primary source in full, never splice inference into it — is about **attribution**: your reasoning presented as theirs.
+This is about **register**: their prose presented as the chapter.
+The two pull in opposite directions if either is taken alone, which is why the new rule states explicitly that it does not loosen the quotation requirements: quoted words stay exact, and a paraphrase must read as the book's own sentence.
+Both are satisfied by keeping the two visibly separate on the page.
+
+**What the rule says.**
+Say what was measured, not what it was called — an operationalized term is a definition wearing a name.
+Leave the source's abbreviations in the source; they earn their place in a document that repeats them a hundred times, not in a chapter that uses them twice.
+Paraphrase for meaning, quote for provenance, and prefer a short fragment over a long block.
+The symptom named for future review is a paragraph the reader must decode rather than follow, in a chapter that was going fine until the citation arrived.
+
+**The sweep was scoped before it was proposed.**
+The author asked whether earlier chapters need the same pass.
+A survey found the problem contained: one block quote over 200 characters in the whole book — Conway's, in chapter 09, which the chapter's argument turns on and which is his own plain wording — and three hits for statistics vocabulary, all of them ordinary usage (*control group* describing a study's limits, *correlate* in its everyday sense).
+So no standalone sweep. Chapter 08 had already been through a jargon pass in August, and anything not visible to this survey is covered by the final sweep's slice 2 (decision 77), which checks each chapter against the rules that postdate it — a set this rule now joins.
+
+**Consequence.**
+The chapter 17 section reads as three plain statements with short quoted fragments attached, and states the study's outcomes as what they measured rather than as their names.
+`CLAUDE.md` gains the rule; no chapter is reopened for it now.

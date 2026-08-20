@@ -268,6 +268,25 @@ Four rules follow, and the third is the one that would have caught this.
 
 If the primary source cannot be reached at all: say so, propose alternatives, and **stop** rather than drafting the claim from inference and flagging it afterwards.
 
+**A source's register is not the book's.**
+Reading the primary source is the rule above; writing in its voice is a separate failure, and the better the source the likelier it is.
+
+A paper, a specification, or a standards document states its finding in the vocabulary of its method — coefficients and models, the outcome names it defined on page four, the abbreviations it needs because it refers to them a hundred times.
+That vocabulary exists so other specialists can check the work.
+It is not what the finding says, and a chapter that carries it across has swapped its own reader for the source's.
+
+Chapter 17 shipped a draft with three stacked block quotes, one of them containing *"this advice would require a negative (statistically significant) coefficient, which the models did not produce."*
+What that sentence means is *they looked for a link in either direction and found none — had test-first been harmful, more of it would have gone with worse results.*
+Same content, and only the second version is usable by this book's reader.
+The same draft carried the paper's `GRA / UNI / SEQ / REF` abbreviations, used once each, and gave *external quality* as though it were plain English rather than *how much of a supplied acceptance suite the code passed*.
+
+- **Say what was measured, not what it was called.** An operationalized term is a definition wearing a name. Give the definition and drop the name.
+- **Leave the source's abbreviations in the source.** They earn their place in a document that uses them a hundred times, not in a chapter that uses them twice.
+- **Paraphrase for meaning, quote for provenance.** State the finding in the book's voice, then quote the short fragment that proves the source said it. A long quotation usually does neither job well.
+- **This does not loosen the quotation rules.** Quoted words stay exact, and a paraphrase reads as the book's own sentence. The rule above stops your inference being attributed to the source; this one stops the source's voice being imported into the book. Both are satisfied by keeping the two visibly separate on the page.
+
+The symptom to watch for is a paragraph a reader has to decode rather than follow, in a chapter that was going fine until the citation arrived.
+
 **Provenance, stated in prose.**
 Before writing a claim whose standing could be mistaken, decide which it is: standard and citable, genuinely disputed, or this book's own.
 Then **write that into the sentence** — there is no tagging notation.
