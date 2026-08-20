@@ -3139,3 +3139,50 @@ So no standalone sweep. Chapter 08 had already been through a jargon pass in Aug
 **Consequence.**
 The chapter 17 section reads as three plain statements with short quoted fragments attached, and states the study's outcomes as what they measured rather than as their names.
 `CLAUDE.md` gains the rule; no chapter is reopened for it now.
+
+---
+
+## 80. Speculative abstraction gets chapter 19; 19–23 renumber to 20–24
+
+**Date.** 2026-08-20
+
+**Context.**
+`docs/pending/speculative-abstraction.md` had carried an open question since it was written: chapter 18's subject is a structural idea expressed as directories, this argument is about abstraction bought as insurance, and the two are adjacent without being the same.
+It marked the resolution as the author's call.
+Drafting 18, the draft answered the question itself and folded both into one chapter, joined by an *and* in the claim sentence.
+
+**The author rejected it on review**, on the grounds that the two ideas are not tied by anything and that binding two claims with *and* and hoping is a failure the book has seen before.
+
+**What settled it.**
+Language-dependence. Everything in 18 — the export bill, `internal/`, the mapping tax, the three-language table — changes with the language. The insurance argument is identical in every language, being about time and data.
+A chapter titled *versus the language* cannot rest half its length on an argument in which the language never appears.
+
+Two further confirmations the draft had missed. 18's own contents line in `00_toc.md` already scoped it correctly — exports, mapping tax, the `internal/` manoeuvre, three layouts — a complete chapter with no abstraction material in it. And FlowCore's decision 1 supplied the two items the first draft skipped, so the material was available and unused.
+
+**Decision.**
+A new chapter 19, *Abstraction as insurance*, running *depend on abstractions, not concretions*.
+Part IV becomes five chapters; 19–23 renumber to 20–24; the book is twenty-four chapters.
+
+**On which slogan moved.**
+The author's recommendation was to take *the database is a detail* out of 18.
+The draft argued the reverse and the author accepted: *the database is a detail* is what puts persistence in its own ring, so it is the layout slogan and stays in 18; *depend on abstractions* is what produces the interface, so it goes to 19.
+
+**The umbrella alternative, considered and declined.**
+The author offered a pattern worth keeping for later: a chapter can carry two claims under one umbrella idea, both supporting it.
+It was the wrong tool here because the two claims share a villain rather than a mechanism, so the umbrella would have to be something like *the doctrine's artifacts transfer and its benefits do not* — too general to be checkable, which the claim-sentence rule already forbids.
+Worth noting that the draft had written a version of that sentence into 18's *Why the claim holds*, where it read as a good line rather than as a claim doing work.
+
+**The renumbering.**
+Twenty-nine references across twelve files, swept descending so the ranges never collide, and restricted to chapter-context forms — `chapter NN`, `Ch. NN`, `cite NN`, TOC headings, bare table cells, filenames, `belongs to NN`, `(→ NN)`.
+A numeric sweep would have corrupted *16 of 23 patterns* in chapter 13, *a team of 20* in chapter 09, and `Trace.java:19` in 13. Every changed line was reviewed.
+
+`docs/DECISIONS.md` is deliberately **not** renumbered, on the same reasoning as decision 78's file paths: an entry written when 19 was the force-map method should say 19. This entry is the key for reading the earlier ones.
+
+**Consequence.**
+`README.md`'s count and status line, and the count words in `tools/check-drift.py`, move to twenty-four.
+`docs/pending/speculative-abstraction.md` records the question as settled and now owes only one line, to chapter 21.
+
+**The pattern worth recording, because it is the second instance.**
+A working document said *this is the author's call*, the draft formed a view and shipped the view instead of the question.
+Chapter 17 had the same shape when the draft decided a paper's conditions were its to summarize.
+Flagging rather than resolving is the cheaper error in both directions, and the draft has twice taken the expensive one.

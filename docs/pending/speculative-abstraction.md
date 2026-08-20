@@ -3,8 +3,8 @@
 Working document, in the shape of `docs/pending/ai-material.md`.
 The argument is worked here once so that the chapters that owe a piece of it agree with each other.
 
-**Owed to:** chapter 18 (primary), chapter 21's line-of-business section (one line), chapter 17 (the testing objection).
-Read this before drafting any of them.
+**Owed to:** chapter 21's line-of-business section (one line). That is all that remains.
+The main argument landed in chapter 19, which was created for it; the testing objection is chapter 17's and it answered it.
 
 **Origin.** The author's, from experience in line-of-business software: decades of building machinery to permit a database swap that never happened.
 The refinements below marked as the draft's are corrections made when the claim was tested against chapters the book has already shipped.
@@ -109,23 +109,21 @@ The claim here is about interfaces justified by a future substitution, not about
 
 ## Where each piece lands
 
-| Piece | Chapter | Note |
+| Piece | Chapter | Status |
 |---|---|---|
-| The full worked argument | 18 | Needs 18's contents line in `00_toc.md` extended — the author's call |
-| Plurality vs sequential replacement | 18 | The definitional distinction; everything else follows from it |
-| Injection is not abstraction | 18 | Must be stated, or chapter 05 refutes the claim |
-| The four mechanisms | 18 | Each cites 05, 09, or 03 rather than re-deriving |
-| The rollback alternatives | 18 | Cites 12 for strangler fig |
-| The LOB inversion, one line | 21 | *The schema outlives the code* already promised there |
-| The testing case | 17 | 18 cites it; 17 owns it |
+| The full worked argument | 19 | **done** — chapter created for it |
+| Plurality vs sequential replacement | 19 | **done** — named as the book's own vocabulary |
+| Injection is not abstraction | 19 | **done** |
+| The four mechanisms | 19 | **done** — each cites 05, 09 or 03 |
+| The rollback alternatives | 19 | **done** — cites 12 for strangler fig |
+| The testing case | 17 | **done** — 17 owns it, 19 cites it |
+| The LOB inversion, one line | 21 | owed, chapter not started |
 
-**Open question for the author — now urgent, and still open.**
-Chapter 18's stated subject is a structural idea expressed as directories, which is file layout.
-This argument is about speculative abstraction, which is adjacent but not the same thing.
-Either 18's scope widens by a paragraph in the TOC, or this wants a different home.
-The alternative is chapter 21, where it fits the domain but would unbalance a chapter that gives each domain a short treatment.
+**The open question is settled.**
+It asked whether chapter 18's scope should widen to hold this argument, or whether it wanted a different home.
 
-**2026-08-20.** The draft answered this itself and folded the argument into chapter 18. The author rejected it on review: the two arguments share a villain and not a mechanism, and the join was an *and* in the claim sentence.
-The test that settles it is language-dependence — 18's material changes with the language, this argument is identical in every language — so it cannot live in a chapter called *versus the language*.
-Chapter 18 has been rewritten to its own TOC scope and nothing here has been consumed.
-The draft's recommendation is a chapter of its own in Part IV, running *depend on abstractions, not concretions*; **the destination is the author's, and this material stays here until they set it.**
+The draft answered it unilaterally and folded the argument into 18. The author rejected that on review: the two share a villain and not a mechanism, and the join was an *and* in the claim sentence.
+What settled it is language-dependence — 18's material changes with the language, this argument is identical in every language, so it cannot live in a chapter called *versus the language*.
+The author's decision was a new chapter. Chapter 19, *Abstraction as insurance*, was created for it and chapters 19 through 23 renumbered to 20 through 24.
+
+This file stays here only for the one line owed to chapter 21.
