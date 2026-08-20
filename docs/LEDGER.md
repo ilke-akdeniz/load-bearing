@@ -192,6 +192,7 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | A dependency you must double is one you cannot run | 17 | The narrow reading of *dependency* — costs money, needs hardware, belongs to someone else — against the wide one, anything the unit does not compute | "cannot run, not have not run (Ch. 17)" |
 | A double encodes only known constraints | 17 | A fake is written by the same author as the real rule and agrees with it by construction, so it cannot disagree with a schema that is wrong | cite 17 |
 | Mutation is the only mechanical check | 17 | Coverage says a line executed, not that an assertion could fail; breaking the code deliberately is what answers the actual question | "break it and see (Ch. 17)" |
+| Ask it at release scope too | 17 | *If this broke in production tomorrow, could we say the cause is not ours because these tests would have caught it* — reaches the dependencies faked below production and the fixture data tidier than anything real | cite 17 |
 | Sequencing dropped out of the model | 17 | Fucci et al. decomposed TDD into granularity, uniformity, sequencing and refactoring effort; the test-first fraction explained neither quality nor productivity, while short steady cycles did | "the ordering is not the part (Ch. 17)" |
 | The paper states its own conditions | 17 | Test-last is not thereby preferred, the result holds *given* an iterative granular uniform process, and long-term test-first benefits were not measured — 15's mechanism running on a peer-reviewed finding | cite 17 |
 | Layered packages force exports | 18 | A directory wall requires publishing the helpers it was meant to hide | cite 18 |
@@ -293,7 +294,8 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | FlowCore decision 3, pointer wiring rejected | 16 | The identifier trade priced both ways: `json.Marshal`, `reflect.DeepEqual` and offline construction bought; a query per route and cross-definition integrity moved to composite FKs, paid |
 | `Money.plus` with a currency check | 16 | The boundary — a rule reading one entity, where the advice is right and moving it out would remove the enforcement |
 | Deleted constraint, passing mock test | 17 | `unique` dropped from the schema: the database-backed test fails, the mocked one still passes |
-| FlowCore decision 37's toothless fixture | 17 | One status for both terminal actions, so the assertion could not fail; found by mutation, the fifth in one iteration |
+| A fixture that starts at the asserted state | 17 | Account created `active`, so the verification test is satisfied before `verify` runs; gutting the method leaves it passing, and one word in the fixture restores the failure |
+| FlowCore decision 37, as corroboration | 17 | The same shape in a real system — one status for both terminal actions, caught by mutation, the fifth in one iteration, with a comment above it recording the weakness |
 | Fucci et al.'s four dimensions | 17 | GRA, UNI, SEQ, REF and which survived model selection |
 | Store split into a package | 18 | Layered packages force exports |
 

@@ -2,7 +2,7 @@
 
 ## The claim
 
-**Neither *write the test first* nor *mock your dependencies* says what it buys. Under the wide reading of each, a mocked dependency removes test coverage for essential parts of the system, and writing tests before code has no proven benefits vs writing the code first.**
+**Neither *write the test first* nor *mock your dependencies* says what it buys. Under the wide reading of each, a mocked dependency puts the rule you meant to test beyond the test's reach, and the benefit credited to writing tests first turns out, when measured, to come from working in small steady steps rather than from the order.**
 
 This is Part IV's second case, and it is kept fair. Tests are worth writing, the two principles below are worth following in most situations, and neither of those is in dispute here. The terms with no fixed extent are what writing the test **first** buys, and what counts as a **dependency**.
 
@@ -37,11 +37,17 @@ class Registration:
             raise DuplicateEmail(email)
 ```
 
-Here is the test a "reasonable" engineer writes for that, with the repository mocked so the suite does not need a database:
+Here is the test a reasonable engineer writes for that, with the repository mocked so the suite does not need a database:
 
 ```python
 def test_with_a_mocked_repository(self):
+    # Mock(spec=...) is a stand-in object carrying the same method names as
+    # AccountRepository, and none of its behaviour. Nothing here reaches a
+    # database.
     accounts = Mock(spec=AccountRepository)
+    # side_effect scripts successive calls: the first insert returns None,
+    # the second raises. This line is the test author deciding, by hand,
+    # that a second insert of the same address fails.
     accounts.insert.side_effect = [
         None,
         sqlite3.IntegrityError("UNIQUE constraint failed: account.email"),
@@ -54,7 +60,23 @@ def test_with_a_mocked_repository(self):
         registration.register("ada@example.com")
 ```
 
-Nothing about it is lazy. It names the behaviour, it exercises the real `Registration`, it asserts a real exception type. It passes. [claude does the code sample above use a python Mock - test library? I don't get what's going on in the example as I'm not familiar with testing and mocks on python. Maybe consider adding comments explaining lines, or tell it on the prose here, like: .side_effect adds ... then register raises ... no matter what? Or does the mock mimick sqlite constraints?]
+The mock does not mimic SQLite's constraint. It has no idea a constraint exists. The `IntegrityError` is written into the test.
+
+Nothing about it is lazy. It names the behaviour, it exercises the real `Registration`, it asserts a real exception type. It passes.
+
+Beside it, the same behaviour tested against a real database:
+
+```python
+def test_against_the_database(self):
+    registration = Registration(AccountRepository(a_database()))
+
+    registration.register("ada@example.com")
+
+    with self.assertRaises(DuplicateEmail):
+        registration.register("ada@example.com")
+```
+
+Both pass. So far the two look interchangeable, and the mocked one is faster.
 
 Now delete the constraint it is named after from the real database. One word out of the schema:
 
@@ -67,7 +89,7 @@ create table account (
 """
 ```
 
-The database will now happily store the same email twice. Running both tests: [claude what both tests, there is only on test no? Did you forget to add the "good" test example without mocked dependency?]
+The database will now happily store the same email twice. Running both tests:
 
 ```text
 FAIL: test_against_the_database (DuplicateEmailIsRejected.test_against_the_database)
@@ -80,8 +102,7 @@ FAILED (failures=1)
 
 One failure, not two. **`test_with_a_mocked_repository` still passes**, and it will keep passing for as long as the line `accounts.insert.side_effect = [...]` is in it.
 
-The reason is not subtle once stated. That line is where the `IntegrityError` comes from. The test asserts that `Registration` converts an `IntegrityError` into a `DuplicateEmail`, which is true and which is roughly four lines of the system. Whether an `IntegrityError` ever arrives is a fact about the schema, and the mock supplied it by hand.
-[claude instead of this paragraph, I would try to be more direct as what's happening is not very complicated if I read it correctly. Ex: "Mocking the database means your tests don't cover anything that happens in it, and the duplicate rule if enforced in db. This test is only covers whatever exists after the db call on the register method". claude maybe add some lowkey asserts on the test code to demonstrate that: "assert account is pending for email validation..."]
+Mocking the database means nothing that happens inside the database is covered. The duplicate rule is enforced in the database. So the mocked test covers only what happens after the insert returns — four lines, in which `Registration` turns an `IntegrityError` into a `DuplicateEmail`. That much is true, and it stays true whether or not any database anywhere would ever raise one.
 
 **A test can only fail for a reason it can reach.** Mocking a dependency removes the reasons that live inside it. What is left is a test of the seam.
 
@@ -93,35 +114,78 @@ The two readings differ on exactly one thing, and it is the thing this chapter i
 
 FlowCore takes the narrow reading and states it as a rule: its tests run against a real Postgres, not a fake. The reason is visible in its schema. Its decision 4 pushes same-definition integrity into composite foreign keys, and decision 9 puts uniqueness — scoped, case-insensitive, length-capped — into constraints. A fake repository would be a second implementation of every one of those rules, written by the same person who wrote the first, agreeing with it by construction, and unable to disagree with the schema when the schema is wrong.
 
-That is the general form. **A mock can only duplicate the constraints its author already knows about.** The constraints worth testing are the ones somebody will get wrong and the drift between the real constraint and it's testing copy will be costly.
+That is the general form. **A test double — a mock, a stub, or a hand-written fake — can only encode the constraints its author already knows about.** The constraints worth testing are the ones somebody will get wrong, and the drift between the real constraint and its stand-in is what costs you.
 
 ### The test that never reaches its condition
-[claude this section is not ok. Consider adding code examples or using a simpler no-flowcore example demonstrating the same idea. Nobody will understand what's really going on here without spending half an hour on the flowcore repo.]
-The mocked test above at least asserts something. The more common failure is a test that reaches nothing at all, and it is hard to see by reading.
 
-FlowCore's decision 37 records one, caught late. A workflow fixture declared a single status, `"in progress"`, and pointed both of its terminal actions at it. So a run reported `"in progress"` before finishing and `"in progress"` after finishing, and the assertion checking the terminal status could not tell a correctly stamped status from one that was never written.
+The mocked test above at least asserts something. The more common failure is a test that cannot fail at all, and reading it will not tell you.
 
-It was found by mutation — breaking the code deliberately to see whether anything notices:
+Registration leaves an account `pending` until the address is verified, at which point it becomes `active`. Here is the test, and the fixture it runs against:
 
-> Established by mutation rather than by inspection: `completeWorkflow` was changed to stamp `completed_at` but never the status columns, and **the entire suite passed**.
+```python
+STARTING_STATUS = "active"   # the fixture's choice
 
-Nothing anywhere covered terminal-status stamping. After the fixture was given three distinct statuses, the same mutation fails properly: `terminal status = "in progress", want "rejected"`.
 
-Two things in that entry are worth more than the fix.
+def an_account(email):
+    connection = sqlite3.connect(":memory:")
+    connection.execute(SCHEMA)
+    connection.execute(
+        "insert into account (email, status) values (?, ?)", (email, STARTING_STATUS)
+    )
+    connection.commit()
+    return connection
 
-The first is the count. It says this was **the fifth toothless or invalid test in one iteration**, and that the first mutation used to investigate it was itself invalid — it broke SQL parameter type inference rather than the behaviour, so its failure proved nothing until casts were added. Even the check needed checking.
 
-The second is what the code said about itself. A comment sat directly above the weak fixture:
+class VerificationActivatesTheAccount(unittest.TestCase):
+    def test_status_is_active_after_verifying(self):
+        accounts = AccountRepository(an_account("ada@example.com"))
+        registration = Registration(accounts)
+
+        registration.verify("ada@example.com")
+
+        self.assertEqual(accounts.status_of("ada@example.com"), "active")
+```
+
+It passes. It uses a real database, no mock anywhere, and it asserts on state it read back rather than on a call it made — which is everything this chapter has recommended so far.
+
+It also cannot fail. The fixture creates the account already `active`, so the assertion is satisfied before `verify` is called. Gut the method entirely:
+
+```python
+def verify(self, email):
+    pass
+```
+
+```text
+Ran 1 test in 0.000s
+
+OK
+```
+
+That is a **mutation**: break the code deliberately and see whether any test notices. This one did not. Change the fixture's one word to `"pending"` and run the same broken code:
+
+```text
+AssertionError: 'pending' != 'active'
+- pending
++ active
+
+FAILED (failures=1)
+```
+
+The test was always this weak. Nothing in the passing run said so, and neither would coverage — the line ran, which is all coverage measures.
+
+**This is not a hypothetical shape.** FlowCore hit it, in a workflow fixture that declared one status and pointed both of its terminal actions at it, so a run reported the same status before and after finishing. It was caught the same way: `completeWorkflow` was changed to stamp `completed_at` and never the status columns, and **the entire suite passed**. Its decision 37 records two things worth more than the fix.
+
+The first is the count — it was **the fifth toothless test in one iteration**, meaning the fifth that asserted nothing, and the first mutation used to investigate it was itself broken, so its failure proved nothing until it was repaired. Even the check needed checking.
+
+The second is that the code had said so. A comment sat directly above the weak fixture:
 
 ```go
 // twoStepDefinition's terminal action ends in its only status
 ```
 
-The weakness had been noticed at the time and written down instead of fixed. The entry's own verdict:
+The weakness was noticed at the time and written down instead of fixed. The entry's own verdict:
 
 > A comment explaining why an assertion is weak is not a substitute for an assertion that is not.
-
-**The recurring shape is a test that never reaches the condition it names**, and neither reading it nor counting it detects that. Coverage reports the line was executed, not that the assertion could have failed. Mutation is the check that answers the actual question, which is whether this test can fail at all.
 
 ### What the ordering was measured to buy
 
@@ -138,7 +202,7 @@ Fucci, Erdogmus, Turhan, Oivo, and Juristo instrumented the question directly ra
 
 Then they asked which of the four explain the variation in external quality and in productivity.
 
-**Sequencing dropped out of both models.** Granularity, uniformity, and refactoring effort survived; the test-first fraction did not, for quality or for productivity. Shorter cycles helped — the improvement reaches about 14% as median cycle length falls from around 50 minutes to around 8 — and steadier cycles helped. Refactoring effort, counter-intuitively, was *negatively* associated with external quality. [claude previous sentence says what exactly? Grammar ans style is so weird and it reads like the middle of a random statistics book.]
+**Sequencing dropped out of both models.** Granularity, uniformity, and refactoring effort survived; the test-first fraction did not, for quality or for productivity. Shorter cycles helped — the improvement reaches about 14% as median cycle length falls from around 50 minutes to around 8 — and steadier cycles helped.
 
 Their own summary of the practical upshot:
 
@@ -154,7 +218,7 @@ This travels as *TDD doesn't work* or *the order doesn't matter*. Here is what i
 
 They name three of those advantages they did not measure: resolving requirements uncertainty, formalizing design decisions, and encouraging writing more tests. And they state two limits of the design: it is a single-group study with no control group, and two of the three tasks were artificial rather than representative of professional work.
 
-**Read the conditions and the finding is narrower and more useful than either slogan.** It does not say the ordering is worthless. It says the ordering is not where the measured benefit came from, that the benefit came from small steady steps, and that this holds *given* a process which is already iterative, granular, and uniform — which is a condition a team that has abandoned the ritual may no longer meet. [claude which is what?]
+**Read the conditions and the finding is narrower and more useful than either slogan.** It does not say the ordering is worthless. It says the ordering is not where the measured benefit came from, that the benefit came from small steady steps, and that this holds *given* a process which is already iterative, granular, and uniform. A team that drops the ritual and goes back to hour-long cycles no longer has such a process, so the finding does not cover them.
 
 Chapter 15's "principle loses scope" mechanism, running on a peer-reviewed paper rather than a proverb. The conditions were published beside the finding, by the same authors, in the same section. What travelled was the finding.
 
@@ -190,7 +254,7 @@ What changes is what the double is allowed to claim. A test using one is a test 
 - **Run a contract test against the real dependency on a schedule**, separately from the unit suite. It is slow and it is flaky and it is the only thing that will tell you when they changed the response shape.
 - **Write down the assumption where it will be read.** A double encoding *this returns 402 when the card is declined* is a claim about somebody else's API, and it should say so.
 
-The distinction that survives: mock what you cannot run, not what you have not got around to running.[claude what "you have not got around to running" means? Try to simplify.]
+The distinction that survives: mock what you cannot run, not what would merely be inconvenient to run.
 
 ### A mock asserting a call, where the call is the behaviour
 
@@ -208,10 +272,8 @@ That is a legitimate use of a mock and it is not what this chapter argues agains
 
 **Parallelism gets harder.** Two tests sharing a real database contend on state in a way two tests sharing nothing do not, so isolation becomes a design problem rather than a default.
 
-**Mutation testing is expensive.** The check that catches a toothless test means running the suite once per mutant [claude tooothless test? mutant?], which for a large suite is hours. It is worth it for load-bearing code and it is not worth it everywhere, which means somebody has to decide where — and that decision has no rule to hand.
+**Mutation testing is expensive.** Catching a test that cannot fail means running the whole suite once for every deliberate break, which for a large suite is hours. It is worth it for load-bearing code and it is not worth it everywhere, which means somebody has to decide where — and that decision has no rule to hand.
 
-**Naming the ordering finding is socially expensive.** *Test-first is not where the measured benefit came from* is a sentence that ends discussions badly, particularly when the person hearing it stops at the first half. The finding is only useful stated with its conditions, and the conditions are the part that does not fit in a code review comment.
-[claude what previous paragraph essentially mean? Is it something like: "be diplomatic, don't say the truth about TDD directly in real life"? If so maybe just delete this because that applies to most claims in this book and should be common - sense, obvious.]
 ---
 
 ## How to recognize the failure
@@ -231,10 +293,11 @@ That is a legitimate use of a mock and it is not what this chapter argues agains
 - **"TDD is proven"** and **"studies show TDD doesn't work"**, which are the same failure. Both are a finding with its conditions removed, and the conditions in this case are one paragraph long and freely available.
 - **"We have 90% coverage."** A number that measures execution, offered as though it measured verification.
 
-The question that does the work: **if the behaviour this test is named after were deleted, would this test fail?**
-[claude the test above is ok but still something feels off. How do you delete a bahavior what does that conretely mean? Removal of the feature from code? Bug in the code that removes-alters the bevaior?] [ claude alsi this wider test or at least idea could be valuable: "if a behaviour this suite tested is not functioning on production, how confidently we can say the root cause can't be in our system, the tests would catch that before the release?" I like this general statement because it also illustrates dependencies, datas that are mocked on dev - qa environments vs real dependencies and data biting on production.]
+The question that does the work: **if this behaviour broke, would this test fail?**
 
-It is answerable today, by hand, on the tests you care most about, and it takes about a minute each. Most of the value of mutation testing is available without the tooling, because the tests that matter are few and you already know which they are.
+Broken the way code actually breaks, not deleted in the abstract: someone drops the constraint in a migration, someone returns early, someone updates the wrong column. Pick the likeliest one, make that change, run the test, put it back. It takes about a minute, and most of the value of mutation testing is available without the tooling, because the tests that matter are few and you already know which they are.
+
+The wider version is worth asking before a release: **if this behaviour is broken in production tomorrow, can we say the cause is not in our code, because these tests would have caught it?** That one reaches what the narrow question misses — the dependency that is faked in every environment below production, the fixture data that is tidier than anything real. The honest answer is usually more specific, and less comfortable, than a coverage number.
 
 ---
 

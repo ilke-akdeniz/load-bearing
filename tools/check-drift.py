@@ -148,7 +148,14 @@ for path in sorted(ROOT.glob("*.md")) + sorted(ROOT.glob("docs/*.md")) + [ROOT /
     for i in fences[0::2]:
         if lines[i].strip() == "```":
             fail("markdown", f"{rel}:{i+1}: code fence with no language tag")
+    # Prose rule only: a formatter puts two blank lines between Python
+    # top-level definitions, and fenced code goes in exactly as produced.
+    in_fence = False
     for i in range(1, len(lines)):
+        if lines[i].startswith("```"):
+            in_fence = not in_fence
+        if in_fence:
+            continue
         if lines[i] == "" and lines[i - 1] == "":
             fail("markdown", f"{rel}:{i+1}: two blank lines in a row")
     for i, l in enumerate(lines, 1):
