@@ -2,9 +2,9 @@
 
 ## The claim
 
-**"Behaviour belongs with the data it operates on" does not say where to place behaviour that needs two entities. Placing each rule on the entity it reads from leaves a reference pointing each way, and a value graph with a cycle in it breaks serialization, equality, and copying — costs that arrive whether or not the two are ever changed apart.**
+**"Behaviour belongs with the data it operates on" compresses heuristics that carry a test and a cost. The test is cohesion, and a rule reading two entities fails it. The cost, named where the move was formalized, is a dependency from the provider back to the client — and once there is one of those pointing each way, the value graph breaks serialization, equality and copying, whether or not the two are ever changed apart.**
 
-This is the first of Part IV's three cases, and it runs chapter 15's mechanism on a specific piece of advice. The term carrying no fixed extent is *belongs with*.
+This is the first of Part IV's cases. It runs chapter 15's mechanism on advice whose scope was written down: the instruction travelled and the tradeoff beside it did not.
 
 ---
 
@@ -14,9 +14,25 @@ This is the first of Part IV's three cases, and it runs chapter 15's mechanism o
 
 *Behaviour belongs with the data it operates on.* It is a Principle: good advice given certain Forces, and the Forces are real ones. A rule that lives next to the data it reads can be enforced rather than merely documented, and a caller who cannot reach the data cannot get the rule wrong.
 
-It also has no author. Chapter 15's proverb had a recording, so the forty seconds of scope Pike gave it could be recovered by watching the talk. This sentence has no talk. It arrives in code review, in a style guide, in the first chapter of a book about objects, and there is nothing to go back to — which is the case chapter 15 named as the expensive one, where the context was a conversation and the scope cannot be reconstructed because nobody wrote it down.
+It arrives in code review with no source attached, but it has one. Two, in fact, and both say more than the sentence does.
 
-So the reader is left with the words, and the words underdetermine one thing: **which** data. When a rule reads one entity, *belongs with* has one answer. When it reads two, it has two, and the sentence does not choose.
+Arthur Riel's *Object-Oriented Design Heuristics* has it as heuristic 2.9 — *"Keep related data and behavior in one place"* — and the qualifier is doing work the compressed version drops. Not *the* data: **related** data. He supplies a way to check relatedness at 4.6:
+
+> Most of the methods defined on a class should be using most of the data members most of the time.
+
+That is a cohesion test, and it is the same shape as the stability test chapter 19 finds under *depend on abstractions*: a criterion the compressed form leaves behind. A class whose methods each reach past it for half of what they need does not pass, however faithfully each method was placed.
+
+The second source is sharper, because it names this chapter's exact case. *Object-Oriented Reengineering Patterns* formalizes the move as a pattern, **Move Behavior Close to Data**, with the problem stated as *"How do you transform a class from being a mere data container into a real service provider?"* and the solution as moving behaviour to *"the container of the data on which it operates."*
+
+Then, in its tradeoffs, under Cons, in one sentence:
+
+> If the moved behavior also accesses client data, turning these accesses into parameters will make the interface of the provider more complex and introduce explicit dependencies from the provider to the client.
+
+**That is a rule reading two entities, and the consequence named.** Not a warning about cycles — a dependency from the provider back to the client is exactly one edge, and one edge is not a cycle. But the direction is stated, in the source, as a cost of following the pattern.
+
+So the reader is not missing a scope nobody wrote. They are missing a Cons list. What the compressed sentence carries is the instruction; what it leaves behind is the test that says when the instruction applies and the cost of applying it anyway.
+
+Which leaves one thing genuinely open, and it is what the rest of this chapter is about. The sources name a dependency in one direction. They do not follow it to what happens when a codebase has several such rules and they resolve to different sides.
 
 ### A rule that needs two entities
 
@@ -192,7 +208,11 @@ So the identifier is not free and was not chosen because it is tidier. It moves 
 
 ## Why the claim holds
 
-The sentence names a relation and not a scope. *Belongs with* asserts that behaviour and data should be together; it says nothing about what to do when the behaviour needs two data. Chapter 15's finding applies without modification: where a principle does not name the situation it applies to, the reader resolves it, and with no context to narrow the reading, the widest one is the only one available. Here the widest reading of *belongs with* is *on the entity, reaching whatever it needs* — which licenses a field pointing at the other entity every time a rule spans a pair.
+The five words that travel are the instruction. What stayed behind is a test and a cost, and neither survives compression for the same reason: the instruction can be followed one method at a time, while the test and the cost are properties of the class as a whole.
+
+*Keep related data and behavior in one place* is checkable only if you can say what *related* means, and Riel's answer — most methods using most fields most of the time — is a measurement over every method at once. No individual placement decision can fail it. Likewise the cost: one rule reaching for a second entity introduces one dependency, which is the tradeoff the pattern names and accepts. It takes two such rules, resolved to opposite sides, before anything is wrong, and nobody makes both decisions in the same sitting.
+
+So the compressed form is not merely shorter. It is the part of the advice that can be applied locally, separated from the parts that can only be evaluated globally.
 
 The direction of the error is set by the same asymmetry. Both readings are available for every rule, and which one gets taken tracks how many entities the rule reads.
 
@@ -292,6 +312,8 @@ So the useful reading of the answer is not *what walks it now* but *whether the 
 
 ## Sources
 
+- Serge Demeyer, Stéphane Ducasse, Oscar Nierstrasz, *Object-Oriented Reengineering Patterns* — *Move Behavior Close to Data*, [eng.libretexts.org](https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_and_Computation_Fundamentals/Book%3A_Object-Oriented_Reengineering_Patterns_(Demeyer_Ducasse_and_Nierstrasz)/09%3A_Redistribute_Responsibilities/9.02%3A_Move_Behavior_Close_to_Data).
+- Arthur J. Riel, *Object-Oriented Design Heuristics*, Addison-Wesley, 1996 — heuristics 2.9, 3.3 and 4.6, quoted from a [circulated list of the sixty](https://homepages.ecs.vuw.ac.nz/~elvis/db/misc/rules.html) rather than from the book, which was not reached.
 - FlowCore, `docs/decisions.md`, decision 3 — [github.com/ilke-akdeniz/flowcore](https://github.com/ilke-akdeniz/flowcore).
 - *Objects.hash* and *HashSet* — [docs.oracle.com/en/java/javase/26/docs/api](https://docs.oracle.com/en/java/javase/26/docs/api/).
 - Go, `encoding/json` — [pkg.go.dev/encoding/json](https://pkg.go.dev/encoding/json).

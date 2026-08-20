@@ -191,7 +191,7 @@ Which exposes a control inside Pike's own list — four proverbs take a named pa
 The first case study.
 
 **Chapter 15's mechanism, running on:** *behaviour belongs with the data it operates on.*
-The term with no fixed extent is **belongs with**, and unlike Pike's proverb there is no recording to recover a scope from — this is 15's expensive case, where the context was never written down.
+The scope was written down and did not travel. Riel's heuristic 2.9 says *related* data and behaviour, with a cohesion test at 4.6; *Object-Oriented Reengineering Patterns* formalizes the move and names this chapter's case in its Cons — behaviour that also reaches client data introduces explicit dependencies from provider back to client.
 The wide reading puts each rule on the entity whose data it reads, which is right for each rule taken alone and leaves a reference pointing each way.
 The narrow reading already exists in this book — chapter 14's *what the rule must see*, where the location follows from how much data you must be looking at before you can tell whether a rule holds.
 
@@ -338,7 +338,7 @@ Two are not negotiable: chapter 02's classification model is a lens rather than 
 | 13 | `13_missing-language-features.md` | **draft** |
 | 14 | `14_smuggled-verdicts.md` | **draft** |
 | 15 | `15_principle-loses-scope.md` | **draft** |
-| 16 | `16_oop-vs-direction.md` | **draft** |
+| 16 | `16_oop-vs-direction.md` | **in progress** |
 | 17 | `17_tdd-and-mocks.md` | **draft** |
 | 18 | `18_clean-architecture-vs-language.md` | **draft** |
 | 19 | `19_abstraction-as-insurance.md` | **draft** |
