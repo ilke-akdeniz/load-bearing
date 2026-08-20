@@ -34,7 +34,7 @@ Two things follow, and they are the difference between the two claims:
 
 The second is a real constraint, most systems do not satisfy it, and Part three works through one that doesn't.
 
-Claim three is where the physical boundary arrives, and it varies by ecosystem in a way worth noticing. In Java and C# it was usually separate projects, assemblies, or shipped libraries; elsewhere it shows up as top-level directories or packages. The mechanism is the same whichever form it takes, and chapter 18 works through what that boundary costs.
+Claim three is where the physical boundary arrives, and it varies by ecosystem in a way worth noticing. In Java and C# it was usually separate projects, assemblies, or shipped libraries; elsewhere it shows up as top-level directories or packages. What each of those forms actually enforces is not the same, and chapter 18 works through what each one buys and charges.
 
 Most real architecture damage is a violation of the first. Most harm done by *architecture advocacy* comes from the third, applied to a program whose graph does not have the shape claim two describes — which then generates pass-through classes and mapping code to fill out the ranks.
 

@@ -415,7 +415,7 @@ These two questions yield three cases:
 
 **1) The decision does not expire, so defer it.** Nothing accumulates while you wait, so the option is worth exactly as much next year. A performance index is the clean example — adding one later is routine work, and the data was never an obstacle, because the rows are not *wrong*, they are merely unindexed.
 
-FlowCore — a Go workflow library backed by Postgres, and this book's running example — records a design decision of this shape. Go's convention for hiding a package from outside consumers is to place it under a directory named `internal/`, which the compiler enforces. The library was written as a single flat package instead, and the decision log says why the wall was not built up front:
+FlowCore — a Go workflow library backed by Postgres, and this book's running example — records a design decision of this shape. Go's way to stop a whole package being imported from outside its own module is to place it under a directory named `internal/`, which the compiler enforces. The library was written as a single flat package instead, and the decision log says why the wall was not built up front:
 
 > `internal/` can be introduced later if a second package genuinely needs to share machinery.
 

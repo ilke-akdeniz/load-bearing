@@ -54,7 +54,7 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Cycle detection is granularity-bound | 05 | Each toolchain checks the boundaries it happens to have; the damage exists at all of them | cite 05 |
 | "Layered" is three claims | 05 | Acyclicity (Law) + the line shape (Principle) + the folder taxonomy (Idiom), under one name | "the three claims (Ch. 05)" |
 | Layering as ranks | 05 | Strict layering assigns every part a rank and forbids reaching past the one beneath it | one clause, cite 05 |
-| Layer ≠ directory | 05 | A layer is a rule about call direction; a folder is neither necessary nor sufficient for it | cite 05; 18 owns what folders *cost* |
+| Layer ≠ directory | 05 | A layer is a rule about call direction; a folder is neither necessary nor sufficient for it | cite 05; 18 owns what folders *cost*, and no chapter may say the physical forms enforce the same thing — 18's claim is that they do not |
 | Cost of change scales with dependents | 05 | Change cost is proportional to fan-in, and is paid on every change | cite 05 |
 | Stability, not indirection | 05 | "Depend on abstractions" means put what changes least at the bottom; an interface is not automatically that | cite 05 |
 | Internal vs external dependent count | 05 | Inside the repo `grep` gives you the number; once published it is unknown and growing | cite 05 |
