@@ -2,16 +2,49 @@
 
 ## The claim
 
-**"Depend on abstractions, not concretions" does not say what the abstraction is insulating you from. Bought as insurance against a future database change, the interface cannot pay out when that change arrives — it was shaped by the database it was insuring against — and it charges a premium every day in features of the engine you are actually running.**
-[claude after reading this claim again, the statement "does not say what the abstraction is insulating you from" bugged me. We are treating "Depend on abstractions, not concretions" as a slogan or go proverb with no scope attached, but I believe this one has known reacheaable scopes. I'm still behind the "abstraction as insurance" idea but maybe we should also look at the scope - shapes of "Depend on abstractions, not concretions". That could give better material for current or other chapters. I reached the following wikipedia page while doing that: https://en.wikipedia.org/wiki/Dependency_inversion_principle   Take a look at that page and tell me what you think, it could also be worthwhile to explore the material referenced in the wikipedia page in a BFS style.]
+**"Depend on abstractions, not concretions" states its own test, and the test is stability rather than abstractness. An interface with one implementation fails it — nothing depends on the interface but its single caller, and it is not independent of the engine, because it encodes one. Bought instead as insurance against a database change that has not been scheduled, it cannot pay out when that change arrives, and it charges a premium every day in features of the engine you are running.**
 
-This is Part IV's fourth case, and the one that survives the reply that usually ends the argument: *but what if we do need it.* Assume you do need it. The claim is that the policy is void, not that the event never happens.
+This is Part IV's fourth case, and it differs from the three before it. Chapter 15's mechanism usually runs on advice whose scope was never written down. Here it was written down, in the paper that introduced the idea, and the folk version kept the shape while replacing the reason.
+
+The chapter also survives the reply that ends most versions of this argument: *but what if we do need it.* Assume you do. The claim is that the policy is void, not that the event never happens.
 
 It is also not YAGNI. That says you paid for something you did not need. This says you paid, the event occurred, and the cover did not apply.
 
 ---
 
 ## The demonstration
+
+### What the principle actually says
+
+The sentence comes from Robert Martin, and the earliest full statement of the reasoning is his 1994 paper *OO Design Quality Metrics: An Analysis of Dependencies*. It is worth reading because almost none of it is about substituting implementations.
+
+His example is a program that copies characters from a keyboard to a printer. `Copy` calls `ReadKeyboard` and `WritePrinter`, and the complaint is not that the printer might be replaced. It is that `Copy` cannot be reused:
+
+> It is the "Copy" module that encapsulates a very interesting policy that we would like to reuse.
+
+Introducing abstract `Reader` and `Writer` classes lets `Copy` drive any device. So the purpose is **reuse of high-level policy**, and the thing being escaped is a dependency that pins policy to one mechanism.
+
+Then he gives the criterion, and it is not *use an interface*:
+
+> a "Good Dependency" is a dependency upon something that is very stable. The more stable the target of the dependency, the more "Good" the dependency is.
+
+An interface is a means. Stability is the test — which is chapter 05's reading of this same sentence, arrived at there from the mechanism and confirmed here by the source.
+
+**And his argument for why `Reader` and `Writer` are stable is the part that decides this chapter.** He gives two reasons. They depend on nothing, so nothing can ripple up into them. And:
+
+> the more varieties of "Reader" and "Writer" exist, the more dependents these classes have. The more dependents they have, the harder it is to make changes to them.
+
+Stability, in the source, comes from having many implementations. It is produced by plurality rather than assumed in its absence.
+
+Now apply that test to a repository interface written against one database, for a swap nobody has scheduled. It has one implementation, so it gains no stability from dependents. And it is not independent of anything — as the next sections show, it encodes the engine it was written over. It fails the principle's test on both counts while carrying its name.
+
+**The paper also states a limit, in its last paragraph**, and this is the part that did not travel:
+
+> It is certainly possible that the standard chosen in this paper is appropriate only for certain applications and is not appropriate for others.
+
+> Thus, I would deeply regret it if anybody suddenly decided that all their designs must unconditionally be conformant to "The Martin Metrics".
+
+That is a scope statement written down by the author in the original paper. Chapter 15's case was a scope given aloud once, in a talk, and lost because nobody re-watched it. This one has been in print since 1994.
 
 ### Two implementations at once, or one after another
 
@@ -22,7 +55,7 @@ Almost every repository interface is justified by the same sentence: *we might n
 
 *We need to support two databases* is the first. *We might need to switch databases* is the second, and it is the one that gets said in the meeting.
 
-**This distinction is the book's own and not standard vocabulary**, so it will not be found under these names elsewhere. Everything below concerns the second case. The two are easy to conflate because the code they produce is identical — the same interface, the same constructor, the same dependency arrow — and only the run-time behaviour differs, which nobody looks at.
+Martin's example is the first. Keyboard and printer and disk file are readers and writers that exist at the same time, and the whole argument for `Copy` turns on being able to drive any of them. **The names for the two cases are this book's and are not standard vocabulary**, but the distinction is in the source; what the folk version dropped is that only one of the two produces the stability the principle asks for. Everything below concerns the second case. The two are easy to conflate because the code they produce is identical — the same interface, the same constructor, the same dependency arrow — and only the run-time behaviour differs, which nobody looks at.
 
 ### Injection is not abstraction
 
@@ -118,11 +151,13 @@ That is chapter 03's reversibility rule doing its work: this is cheap to do at m
 
 ## Why the claim holds
 
-*Abstraction* is a relational word with the relation left out. You abstract *over* a set of things that vary — and the slogan never says which set. With nothing to narrow it, the widest reading is available: abstract over everything that might ever vary, which includes a database nobody has chosen and features nobody has enumerated.
+**What was dropped is not the scope but the criterion.** The five words that travel — *depend on abstractions, not concretions* — name the technique and omit the test the technique was supposed to pass. Read alone they are an instruction to introduce an interface. Read with the paper they are an instruction to depend on something stable, of which an interface is one way and not a guarantee.
 
-Chapter 05's version of the same advice is narrower and checkable: put what changes least at the bottom. An interface is not automatically the thing that changes least. A repository interface over an evolving schema changes every time the schema does, and now changes in two files rather than one.
+That is chapter 05's reading, which arrives at the same place from the mechanism: put what changes least at the bottom, and an interface is not automatically the thing that changes least. A repository interface over an evolving schema changes every time the schema does, and now changes in two files rather than one.
 
-**The mechanism that makes this hard to see is that the cost and the benefit arrive at different times, and only one of them ever arrives.** The premium is paid continuously, in small amounts, by people who do not know they are paying it — a query not written, a feature not used, a mapping function maintained. The payout is a single event, in the future, that mostly does not occur; and on the rare occasion it does, the payout fails for reasons that are only visible at that moment.
+The compressed form survives because the technique is checkable and the criterion is not. Whether a file contains an interface can be seen in review. Whether that interface is stable is a claim about the future, which nobody can settle at the moment the decision is made — so the half that can be enforced is the half that gets enforced.
+
+**The second mechanism is that the cost and the benefit arrive at different times, and only one of them ever arrives.** The premium is paid continuously, in small amounts, by people who do not know they are paying it — a query not written, a feature not used, a mapping function maintained. The payout is a single event, in the future, that mostly does not occur; and on the rare occasion it does, the payout fails for reasons that are only visible at that moment.
 
 So the practice is never disconfirmed by experience. A team that abstracted and never migrated concludes the insurance was cheap. A team that abstracted and did migrate concludes the migration was hard, which it was, and rarely audits how much of the difficulty the abstraction removed.
 
@@ -194,6 +229,7 @@ Answer it by listing the steps — schema translation, data copy, verification, 
 - SQLite, unsupported SQL — [sqlite.org/omitted.html](https://www.sqlite.org/omitted.html); upsert support — [sqlite.org/lang_upsert.html](https://www.sqlite.org/lang_upsert.html).
 - PostgreSQL, `SELECT … FOR UPDATE` — [postgresql.org/docs/current/sql-select.html#SQL-FOR-UPDATE-SHARE](https://www.postgresql.org/docs/current/sql-select.html#SQL-FOR-UPDATE-SHARE).
 - Go, `database/sql` — [pkg.go.dev/database/sql](https://pkg.go.dev/database/sql).
+- Robert C. Martin, *OO Design Quality Metrics: An Analysis of Dependencies*, October 1994 — [PDF](https://linux.ime.usp.br/~joaomm/mac499/arquivos/referencias/oodmetrics.pdf).
 
 ---
 
