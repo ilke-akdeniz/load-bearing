@@ -1,3 +1,4 @@
+[claude Placing "depend on abstractions" and "database is a detail" idea unders chapter 18 didn't work. They are different ideas, not much ties both together and "the database is a detail" does not fit chapter's 18's main idea. I recommend taking the "database is a detail" out of chapter 18 and putting it into somewhere else, new chapter or existing chapter, but only if it fits to an existing chapter. I don't want the same mistake to happen again, artifically binding two claims with "and" and hoping that it works out. Don't blindly follow my recommendations, understand them but use your own judgment as well. Also a new alternative you can consider, if an idea-claim is good and it fits in a chapter with already claim in it, you can consider having two claim in the chapter. Ex: "Chapter A title: Umbrealla Idea - Claim - Category.  Claim A, Claim B both claims supporting the Umbrella"]
 # Clean Architecture Versus the Language
 
 ## The claim
