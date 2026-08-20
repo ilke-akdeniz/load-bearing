@@ -1,3 +1,20 @@
+**All four briefs are consumed.** 2026-08-20.
+
+| Chapter | What the source turned out to say | Landed |
+|---|---|---|
+| 16 | Riel's 2.9 means one key abstraction split in two, which excludes a rule over two entities; his introduction calls all sixty *warning bells* and was written to avoid the fate of *goto considered harmful* | `9e82683` |
+| 17 | *Mock your dependencies* is the mockist half of a disagreement Fowler named in 2007 and came down against; Beck's canon mentions no mocking, isolation or speed at all | `3d04d4c` |
+| 18 | Martin separates the data model (*significant*) from the database system (*a detail*), and the 2012 post is about deferring the choice, not hiding it | `dd98ff4` |
+| 19 | DIP's test is stability, and stability comes from having many implementations — done before this document | `5a0a324` |
+
+Four for four: the scope was written down every time, and what travelled was the instruction.
+Chapter 15's cost section now carries the consequence — the failure is retrieval rather than preservation.
+Part IV framing was considered and skipped, at the author's direction.
+
+This file can be deleted, or kept as the record of where the sources were found.
+
+---
+
 We already did this resarch and updated the chapter 19.
 
 I did a sweep of older chapters and found this. Some parts of the claude tags is repetitive but you will get the idea.

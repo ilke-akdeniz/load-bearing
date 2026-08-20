@@ -3186,3 +3186,46 @@ A numeric sweep would have corrupted *16 of 23 patterns* in chapter 13, *a team 
 A working document said *this is the author's call*, the draft formed a view and shipped the view instead of the question.
 Chapter 17 had the same shape when the draft decided a paper's conditions were its to summarize.
 Flagging rather than resolving is the cheaper error in both directions, and the draft has twice taken the expensive one.
+
+---
+
+## 81. The scope was written down in all four Part IV cases
+
+**Date.** 2026-08-20
+
+**Context.**
+Reviewing chapter 19, the author objected that *depend on abstractions, not concretions* was being treated as a scopeless slogan when it is the Dependency Inversion Principle and has a reachable statement.
+That was right, and reading the source falsified the chapter's claim.
+The author then ran the same check over 16, 17 and 18 and collected the objections in `docs/pending/claim-research.md`, in the shape that had worked: the objection, the reasoning, and a lead rather than an answer.
+
+**What the four sources say.**
+
+*Chapter 16.* Riel's heuristic 2.9 is *keep related data and behavior in one place*, and his own gloss defines *related* — "the two areas are actually of the same key abstraction." By his 2.8 an order and a customer are two abstractions, so the chapter's case is outside the heuristic's stated reach. His introduction calls all sixty *warning bells* rather than rules, says it is "perfectly valid to state that the heuristic does not apply," and was written expressly to avoid what happened to *goto considered harmful*.
+
+*Chapter 17.* Fowler named two schools in 2007 — classical and mockist — and came down classical. *Mock your dependencies* is one side of a recorded disagreement stated as if it were the only side. Beck's own statement of the TDD loop mentions no mocking, no isolation requirement and no speed requirement.
+
+*Chapter 18.* Martin separates the data model, "highly significant to the architecture of your system," from the database system, "a low-level detail — a mechanism," and his 2012 post is about deferring the choice rather than hiding it.
+
+*Chapter 19.* Martin's 1994 paper names stability as the test and derives stability from plurality: "the more varieties of Reader and Writer exist, the more dependents these classes have."
+
+**Decision.**
+All four chapters rebuilt on their sources; all four dropped from **draft** to **in progress**, since a falsified claim is a contradiction rather than a revisit.
+
+**The finding, and where it landed.**
+The compression survives and the qualification does not, four times out of four, across four independent sources.
+That is a sharper thesis than *this advice is vague*, and it changes what chapter 15 could say: its cost section asserted that "usually nobody wrote it down," directly above four counter-instances.
+
+Chapter 15 now splits the case by who said it, and states the consequence: **prominence is what makes advice travel and also what makes its scope recoverable, and only the first gets used** — so the failure is retrieval rather than preservation, and retrieval fails because the compressed form is complete enough to act on.
+
+**What was declined.**
+A Part IV framing line saying the pattern held four times. The author's call, and skipped.
+
+**Two corrections to the draft's own work, recorded because both were overclaims in the book's own diagnosed shape.**
+Chapter 16 had asserted the advice "has no author," on the strength of one failed fetch, and made the absence load-bearing.
+It had also used Riel's 4.6 as a cohesion test that a two-entity rule fails; 4.6 detects a class holding two abstractions, which is the opposite failure.
+Chapter 17 had said mocking is taught with test-first "and always has been," which Beck's canon contradicts.
+
+**Consequence.**
+`docs/pending/claim-research.md` is marked consumed and records where each source was found.
+Riel's book was read from the author's local copy; its PDF stores text as subset-font glyph ids, decoded with a uniform `gid + 29` offset verified against known words.
+Two sources remain unreached and nothing is claimed from them: Rafique and Mišić's meta-analysis, and Martin's 1996 *C++ Report* paper, which exists only on `web.archive.org`.

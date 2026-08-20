@@ -340,7 +340,7 @@ Two are not negotiable: chapter 02's classification model is a lens rather than 
 | 16 | `16_oop-vs-direction.md` | **in progress** |
 | 17 | `17_tdd-and-mocks.md` | **in progress** |
 | 18 | `18_clean-architecture-vs-language.md` | **in progress** |
-| 19 | `19_abstraction-as-insurance.md` | **draft** |
+| 19 | `19_abstraction-as-insurance.md` | **in progress** |
 | 20 | `20_force-map-method.md` | not started |
 | 21 | `21_six-domains.md` | not started |
 | 22 | `22_idioms.md` | not started |
@@ -364,6 +364,7 @@ Chapters already at **draft** that are owed an addition. Listed here because a d
 | 02 | Pike on arguments about language features being opinion argued with certainty — a witness for *tone does not vary with authority*, in `docs/pending/pike-retrospective.md` | next time 02 is open |
 | 09 | Pike pricing Go's compatibility promise: it costs, and it blocks feature-itis — the constraint adopted deliberately rather than suffered | next time 09 is open |
 | 13 | possibly the async/await aside and *coloured functions*; check the fit before using it, it may belong to 20 or nowhere | next time 13 is open |
+| 15 | re-read after the Part IV research pass: the cost section gained *prominence cuts both ways* and *retrieval, not preservation*, and four stale "three cases" counts were fixed | the author's next pass over Part IV |
 
 The worked argument is in `docs/pending/ai-material.md`; decision 24 records what was decided and why.
 
