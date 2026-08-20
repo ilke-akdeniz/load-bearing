@@ -222,7 +222,7 @@ This travels as *TDD doesn't work* or *the order doesn't matter*. Five things si
 
 **They measured hours, not careers.** The gains may be *"small or uncertain in the short term,"* and a test-first dynamic *"may provide long-term advantages not addressed by or detected in our study"* — they name three: working out what the requirements actually are, forcing design decisions into the open, and getting more tests written at all.
 
-**The cadence it speaks to is under an hour.** Observed cycle lengths ran from about one minute to forty-nine, median four and a half. Whatever is true of a team working in day-long or week-long increments, this study did not see it and does not claim to.
+**The cycle it measures is a code change, not a decision.** A cycle here is *"delimited by the successful execution of a regression test suite (the green bar in JUnit),"* and the observed lengths ran from about one minute to forty-nine, median four and a half. So the finding is about how often code comes back green. Applying it to how often anything else should happen — how often you settle an interface, size a queue, choose a storage model — takes a word that was pinned to one unit and resolves it outward to a scope nobody measured. Nobody designs a video pipeline in eight-minute increments, and nothing in this paper says they should.
 
 Two limits of the design, which they also state: it is a single-group study with no control group, and two of the three tasks were artificial rather than representative of professional work. They also report that earlier work — Rafique and Mišić among others — had already speculated that granularity was the thing doing the work, and say these findings support it, so this is not a lone result.
 
