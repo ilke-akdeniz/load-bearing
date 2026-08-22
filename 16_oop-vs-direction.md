@@ -10,11 +10,24 @@ This is the first of Part IV's four cases. Chapter 15 made the claim; these four
 
 ---
 
+[claude section ordering from here is wrong in my opinion. This is my suggestion:
+## Wide Reading
+"Basically "What the wide reading produces sections" with current sub-sections except the last two: "The narrow reading, the same choice"
+
 ## What the source said
 
-It arrives in code review with no source attached. It has one, and the source is more careful than the sentence.
+## Narrow Reading
+### The narrow reading, and what it looks like (claude you find a better subtitle for this)
+### The same choice in a real system, with the trade-off recorded
 
-Arthur Riel's *Object-Oriented Design Heuristics* (1996) has it as heuristic 2.9 — *"Keep related data and behavior in one place"* — and **related** is not decoration. His own gloss says what it means:
+Then other sections can follow.
+
+The reason I prefer this ordering is that wide reading is the most important part and is understandable without other sections. "What the source said" is not like that, it's not obvious why it's important and it's harder to understand what the source is saying without seing the issue and the code first.
+]
+
+## What the source said 
+
+The source is Arthur Riel's *Object-Oriented Design Heuristics* (1996), heuristic 2.9 : *"Keep related data and behavior in one place"* **Related** is not decoration. His own gloss says what it means:
 
 > The two areas are actually of the same key abstraction and therefore should have been captured in the same class.
 
@@ -32,7 +45,7 @@ A second source names this chapter's case directly. *Object-Oriented Reengineeri
 
 > If the moved behavior also accesses client data, turning these accesses into parameters will make the interface of the provider more complex and introduce explicit dependencies from the provider to the client.
 
-**That is a rule reading two entities, with the consequence named.** Not a warning about cycles — a dependency from the provider back to the client is one edge, and one edge is not a cycle. But the direction is stated, in the source, as a known cost.
+**That is a rule reading two entities, with the consequence named.** Not a warning about cycles — a dependency from the provider back to the client is one edge, and one edge is not a cycle. But the direction is stated, in the source, as a known cost. [claude I'm not able to follow this second source, maybe we should remove it, to me it looks like it's diluting the point we made about what Riel really said.]
 
 So the reader is not missing a scope nobody wrote. They are missing a qualifier, an exclusion, and a Cons list. What the rest of this chapter adds is where the excluded case actually leads, which neither source follows: several such rules, resolving to different sides.
 
