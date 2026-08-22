@@ -1,32 +1,18 @@
 # TDD, Mocks, and What Testing Actually Buys
 
-## The claim
+## The advice
 
-**Neither *write the test first* nor *mock your dependencies* is the settled advice it sounds like. The first names benefits that its own literature does not claim the ordering produces — and measured separately, the ordering produced none. The second is one of two named schools, and applying it to a dependency you control is what leaves a test passing after the constraint it is named for has been deleted.** [claude another long unfocused claim, that is like a loosy summary of the chapter. This chapter reads fine overall, try to create a real claim here. Also you are trying to glue to claims with neither nor, don't do that.]
+> **Write the test first.**
+>
+> **Mock your dependencies.**
 
-This is Part IV's second case, and it is kept fair. Tests are worth writing and both practices are worth following in most situations; neither is in dispute here. What is in dispute is that either sentence travels as a settled default when the literature it comes from records a stated purpose for one and an open disagreement about the other.
+Two sentences, and they arrive together. This chapter is Part IV's second case and it is kept fair: tests are worth writing, and both practices are worth following in most situations. What is examined is that each travels as a settled default when the literature behind it records a stated purpose for one and an open disagreement about the other.
 
 ---
 
-## The demonstration
+## What the wide reading produces
 
-### What the two sentences actually are
-
-Both arrive in code review as though they were consensus. Neither is.
-
-**Writing the test first has a stated purpose, and it is not that the order improves the code.** Fowler's definition gives two benefits: self-testing code, and that *"thinking about the test first forces us to think about the interface to the code first."* Beck's own recent minimal statement of the loop says what it is for in terms of confidence — that everything which used to work still works, that the new behaviour works, that the system is ready for the next change. Neither claims the sequence itself makes the resulting code better, which is the claim that travels and the one the measurement later in this chapter could not find.
-
-**Mocking is not a default at all. It is one side of a disagreement with names.** Fowler set them out in 2007 and they have been the vocabulary since:
-
-> The classical TDD style is to use real objects if possible and a double if it's awkward to use the real thing. […] A mockist TDD practitioner, however, will always use a mock for any object with interesting behavior.
-
-He also says which side he is on, and why:
-
-> I don't see any compelling benefits for mockist TDD, and am concerned about the consequences of coupling tests to implementation.
-
-So *mock your dependencies* is the mockist default stated as if it were the only one. The position this chapter argues for — use the real thing where you can run it — is the classical default, and it has been named in the literature for nearly two decades.
-
-That reframes what follows. The failure demonstrated below is not what happens when someone follows the consensus. It is what happens when one school's default is applied to a dependency that both Fowler and later writers say should be left real.
+Take both sentences at face value. Write the test first, and replace what it depends on.
 
 ### What a mocked test is about
 
@@ -124,16 +110,6 @@ Mocking the database means nothing that happens inside the database is covered. 
 
 **A test can only fail for a reason it can reach.** Mocking a dependency removes the reasons that live inside it. What is left is a test of the seam.
 
-### What counts as a dependency
-
-*Mock your dependencies* does not say what a dependency is. Under the widest reading — anything your unit does not itself compute — the database is a dependency, the clock is a dependency, the file system is a dependency, and so is the other class you wrote last Tuesday. Under a narrow reading, a dependency you must replace is one you **cannot run**: it costs money per call, it needs hardware you do not have, or it belongs to somebody else.
-
-The two readings differ on exactly one thing, and it is the thing this chapter is about: whether the rule you care about lives inside the dependency or outside it.
-
-FlowCore takes the narrow reading and states it as a rule: its tests run against a real Postgres, not a fake. The reason is visible in its schema. Its decision 4 pushes same-definition integrity into composite foreign keys, and decision 9 puts uniqueness — scoped, case-insensitive, length-capped — into constraints. A fake repository would be a second implementation of every one of those rules, written by the same person who wrote the first, agreeing with it by construction, and unable to disagree with the schema when the schema is wrong.
-
-That is the general form. **A test double — a mock, a stub, or a hand-written fake — can only encode the constraints its author already knows about.** The constraints worth testing are the ones somebody will get wrong, and the drift between the real constraint and its stand-in is what costs you.
-
 ### The test that never reaches its condition
 
 The mocked test above at least asserts something. The more common failure is a test that cannot fail at all, and reading it will not tell you.
@@ -207,9 +183,31 @@ The weakness was noticed at the time and written down instead of fixed. The entr
 
 > A comment explaining why an assertion is weak is not a substitute for an assertion that is not.
 
-### What the ordering was measured to buy
+---
 
-The other principle is about order, and here there is real evidence, which makes it a better case than an argument.
+## What the sources said
+
+Both of those failures come from following the two sentences literally. Both sentences arrive in code review as though they were consensus, and neither is.
+
+**Writing the test first has a stated purpose, and it is not that the order improves the code.** Fowler's definition gives two benefits: self-testing code, and that *"thinking about the test first forces us to think about the interface to the code first."* Beck's own recent minimal statement of the loop says what it is for in terms of confidence — that everything which used to work still works, that the new behaviour works, that the system is ready for the next change. Neither claims the sequence itself makes the resulting code better. That is the claim that travels, and the next section is what happened when somebody measured it.
+
+**Mocking is not a default at all. It is one side of a disagreement with names.** Fowler set them out in 2007 and they have been the vocabulary since:
+
+> The classical TDD style is to use real objects if possible and a double if it's awkward to use the real thing. […] A mockist TDD practitioner, however, will always use a mock for any object with interesting behavior.
+
+He also says which side he is on, and why:
+
+> I don't see any compelling benefits for mockist TDD, and am concerned about the consequences of coupling tests to implementation.
+
+So *mock your dependencies* is the mockist default stated as if it were the only one. The position this chapter argues for — use the real thing where you can run it — is the classical default, and it has had a name for nearly two decades.
+
+Which reframes the registration test above. It is not what happens when someone follows the consensus. It is what happens when one school's default is applied to a dependency that both Fowler and later writers say should be left real.
+
+---
+
+## What the ordering was measured to buy
+
+That is the first sentence's stated purpose. The order itself has been measured, separately from everything bundled with it, which makes this a better case than an argument.
 
 Fucci, Erdogmus, Turhan, Oivo, and Juristo went at it differently. Rather than split people into a TDD group and a control group, they recorded what developers actually did. Thirty-nine professional developers — averaging 7.3 years of Java experience — worked through programming tasks in an IDE recording every action, producing 82 usable data points. Instead of asking *did the TDD group do better*, they broke the work itself into four things they could measure:
 
@@ -252,7 +250,17 @@ This is chapter 15's mechanism — a principle losing its scope — running on a
 
 ---
 
-## Why the claim holds
+## What the narrow reading looks like
+
+*Mock your dependencies* does not say what a dependency is. Under the widest reading — anything your unit does not itself compute — the database is a dependency, the clock is a dependency, the file system is a dependency, and so is the other class you wrote last Tuesday. Under a narrow reading, a dependency you must replace is one you **cannot run**: it costs money per call, it needs hardware you do not have, or it belongs to somebody else.
+
+The two readings differ on exactly one thing, and it is the thing this chapter is about: whether the rule you care about lives inside the dependency or outside it.
+
+FlowCore takes the narrow reading and states it as a rule: its tests run against a real Postgres, not a fake. The reason is visible in its schema. Its decision 4 pushes same-definition integrity into composite foreign keys, and decision 9 puts uniqueness — scoped, case-insensitive, length-capped — into constraints. A fake repository would be a second implementation of every one of those rules, written by the same person who wrote the first, agreeing with it by construction, and unable to disagree with the schema when the schema is wrong.
+
+That is the general form. **A test double — a mock, a stub, or a hand-written fake — can only encode the constraints its author already knows about.** The constraints worth testing are the ones somebody will get wrong, and the drift between the real constraint and its stand-in is what costs you.
+
+## Why it is the reading that gets taken
 
 Both principles compress a *mechanism* into an *instruction*, and the mechanism is where the condition lives.
 
@@ -272,7 +280,9 @@ So the ingredient that works is also the ingredient that produces the pressure t
 
 ---
 
-## Where the claim doesn't apply
+## Where the wide reading is right
+
+Two situations sit outside everything above, and in both the compressed sentence gives the right answer.
 
 ### A dependency you genuinely cannot run
 
@@ -302,7 +312,7 @@ That is a legitimate use of a mock and it is not what this chapter argues agains
 
 ---
 
-## What the claim costs
+## What the alternative costs
 
 **Real dependencies make the suite slower and more fragile.** A test that starts a database is orders of magnitude slower than one that does not, and chapter 08's arithmetic applies to test suites like anything else. Once the suite is slow enough to skip, it stops being run, and a test nobody runs is worth less than a weak one.
 
@@ -320,7 +330,7 @@ Those are the costs of the first principle. The second has its own, and the pape
 
 ---
 
-## How to recognize the failure
+## How to recognize it
 
 **In a codebase:**
 

@@ -216,7 +216,7 @@ Costs are priced for both halves, the ordering's from the study's own adherence 
 
 Not covered, and moved: the wider empirical literature, since the meta-analyses are paywalled and were not read; interface-per-class and the DI container, which belong with chapter 18.
 
-*Where the claim doesn't apply:* systems where the dependency genuinely cannot be run in a test — payment gateways, hardware, third-party APIs — and the honest version of test doubles for those.
+*Where the wide reading is right:* dependencies that genuinely cannot be run in a test — payment gateways, hardware, third-party APIs — and the honest version of doubles for those; and a mock asserting a call where the call is the observable behaviour.
 
 ### 18. Clean Architecture versus the language
 `18_clean-architecture-vs-language.md`
