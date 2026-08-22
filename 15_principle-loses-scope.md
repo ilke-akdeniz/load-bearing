@@ -247,11 +247,9 @@ Where that does not happen — where the wide reading hardens and nobody writes 
 
 ## What the claim costs
 
-**Recovering a scope is slow, and whether it can be recovered at all depends on who said it.** Where the advice came from a conversation, a code review, or a mailing list that no longer resolves, there is nothing to go back to. You are then reconstructing rather than reading, which is how a plausible mechanism gets attached to somebody else's words.
+**Recovering a scope is slow, and sometimes there is nothing to recover.** Where the advice came from a conversation, a code review, or a mailing list that no longer resolves, no amount of looking will produce the conditions. You are reconstructing rather than reading, which is how a plausible mechanism gets attached to somebody else's words.
 
-At the other end of the range the opposite holds, and it is worth stating because it cuts against the paragraph above. The four principles Part IV works through are all famous, and for every one of them the scope is in print and findable in minutes — an introduction, two articles, a paper, a blog post. **Prominence is what makes advice travel and also what makes its scope recoverable, and only the first of the two gets used.**
-
-**Which moves the failure, and this is the part worth keeping.** If the conditions were merely lost, the answer would be better record-keeping. They were not lost. In four cases out of four they were published, by the author, often in the same document as the advice, and the compressed version travelled anyway. So the thing that fails is not preservation but retrieval — and retrieval fails for a reason that has nothing to do with effort. The compressed version is complete enough to act on. Nobody interrupts an action they can already take in order to check whether they should be taking it.
+**Having the source does not fix it.** Each of the four principles in the chapters that follow has one — in print, by the author, findable in minutes — and the compressed version travelled anyway. The reason is not that checking is hard. It is that the compressed version arrives complete enough to act on, so nothing prompts the check. Nobody stops to verify advice that has already told them what to do.
 
 **The test rejects nearly everything.** Almost no advice states its own scope, because the scope was compressed out before it reached you. *Does this say how wide it is* discards most of what is true along with what is not. It sorts. It does not accept or reject.
 

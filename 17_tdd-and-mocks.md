@@ -2,7 +2,7 @@
 
 ## The claim
 
-**Neither *write the test first* nor *mock your dependencies* is the settled advice it sounds like. The first names benefits that its own literature does not claim the ordering produces — and measured separately, the ordering produced none. The second is one of two named schools, and applying it to a dependency you control is what leaves a test passing after the constraint it is named for has been deleted.**
+**Neither *write the test first* nor *mock your dependencies* is the settled advice it sounds like. The first names benefits that its own literature does not claim the ordering produces — and measured separately, the ordering produced none. The second is one of two named schools, and applying it to a dependency you control is what leaves a test passing after the constraint it is named for has been deleted.** [claude another long unfocused claim, that is like a loosy summary of the chapter. This chapter reads fine overall, try to create a real claim here. Also you are trying to glue to claims with neither nor, don't do that.]
 
 This is Part IV's second case, and it is kept fair. Tests are worth writing and both practices are worth following in most situations; neither is in dispute here. What is in dispute is that either sentence travels as a settled default when the literature it comes from records a stated purpose for one and an open disagreement about the other.
 

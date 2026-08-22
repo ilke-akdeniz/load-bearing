@@ -2,7 +2,7 @@
 
 ## The claim
 
-**"Behaviour belongs with the data it operates on" drops two qualifications its source states. The heuristic is to keep *related* data and behaviour together, where related means one key abstraction — and a rule reading two entities is not that. Placing each such rule on the entity it reads from leaves a reference pointing each way, after which the value graph breaks serialization, equality and copying, whether or not the two are ever changed apart.**
+**"Behaviour belongs with the data it operates on" drops two qualifications its source states. The heuristic is to keep *related* data and behaviour together, where related means one key abstraction — and a rule reading two entities is not that. Placing each such rule on the entity it reads from leaves a reference pointing each way, after which the value graph breaks serialization, equality and copying, whether or not the two are ever changed apart.** [claude this is not a claim, this is a paragraph summarizing the chapter in a very loosy way. Try to generate a proper claim for the chapter, then reassess the chapter as a whole, it needs a rework as a whole in my opinion. ]
 
 This is the first of Part IV's cases. It runs chapter 15's mechanism on advice whose scope was not merely written down but written down as a warning against exactly this.
 
