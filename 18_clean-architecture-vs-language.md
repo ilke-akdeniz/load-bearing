@@ -1,38 +1,16 @@
 # Clean Architecture Versus the Language
 
-## The claim
+## The advice
 
-**"The database is a detail" separates two things: the data model, which its author calls architecturally significant, and the database system, which he calls a mechanism whose choice can be deferred. Read instead as an instruction to put persistence behind a directory wall, it collapses that distinction — and the wall costs nothing in Python, nothing in C# until assemblies split, and in Go publishes the helpers it was drawn to hide, then charges a mapping layer for every entity the two sides can no longer share.**
+> **The database is a detail.**
 
-This is Part IV's third case, and like the two after it, the scope was written down. The term with no fixed extent is not *detail* but **database** — a word that means a product to the person who wrote the sentence and everything about persistence to the person repeating it.
+This is Part IV's third case. The sentence is Robert Martin's, it is one of the most repeated lines in the architecture literature, and what it does in practice is put persistence behind a directory wall.
 
 ---
 
-## The demonstration
+## What the wide reading produces
 
-### What the sentence actually separates
-
-The phrase is Robert Martin's, and both places he sets it out say something narrower than it travels as.
-
-The 2012 post that named the position is about *timing*. Its argument is that use cases belong at the centre and the storage technology does not, and the instruction that follows is a scheduling one:
-
-> Databases and frameworks are details! You don't have to decide upon them up front.
-
-He is explicit about when the decision does arrive — *"once you've got all the use cases and business rules figured out, written, and tested"* — and about the failure he is guarding against, which is deciding too early: *"If you get the database involved early, then it will warp your design."*
-
-The book chapter is about *what counts as the database*, and this is the part that matters here. Martin separates the data model from the database system, and assigns them opposite standings:
-
-> The structure you give to the data within your application is highly significant to the architecture of your system.
-
-against the database system as *"a utility that provides access to the data"* and *"a low-level detail — a mechanism."* He is not dismissive of the relational model, which he calls elegant and robust. The chapter's summary line is the separation itself:
-
-> The data is significant. The database is a detail.
-
-**So the sentence carries a distinction and a deferral, and neither survives the trip.** *Detail* means a mechanism whose selection can wait, not a thing to be hidden. And *database* means the product — Oracle, Postgres, the process listening on a port — while the schema, the constraints, the shape of the rows are the data model, which the same author calls significant.
-
-The folk reading collapses both. It hears *database* as everything to do with persistence, including the schema, and hears *detail* as *hide it*. What it then produces is a wall built up front, which is the one thing the 2012 post says not to do, in defence of something its author never said was a detail.
-
-The rest of this chapter is what that wall costs in the language you happen to be using — a bill that is no part of Martin's argument, and that varies by a factor nobody in the discussion names.
+Take it as an instruction about where code goes, which is how it is usually taken, and build the wall.
 
 ### The wall publishes what it was meant to hide
 
@@ -133,11 +111,37 @@ In C#, folders carry no access meaning at all. `internal` is scoped to the assem
 
 So *put each layer in its own folder* is an instruction whose price runs from nothing to a published API and a mapping layer, decided entirely by a language the instruction never names. That is chapter 13's finding in a different domain — advice that is really a claim about a pair, the design and the language, delivered as though it were a claim about the design.
 
+Which raises the question the next section answers: how much of that was ever in the advice.
+
 ---
 
-## Why the claim holds
+## What the source said
 
-**The word that slipped is *database*, and it slipped because ordinary usage is wider than the source's.** Martin uses it for the product. Everyone else uses it for the product, the schema, the queries, the migrations, and the rows — *the database* is where you look things up and also the thing your constraints live in. A reader who applies the ordinary meaning to his sentence gets *your schema is a low-level mechanism*, which he spent the chapter denying.
+None of that bill is anywhere in the advice. Both places Martin sets the sentence out say something narrower than it travels as, and neither is about where files go.
+
+The 2012 post that named the position is about *timing*. Its argument is that use cases belong at the centre and the storage technology does not, and the instruction that follows is a scheduling one:
+
+> Databases and frameworks are details! You don't have to decide upon them up front.
+
+He is explicit about when the decision does arrive — *"once you've got all the use cases and business rules figured out, written, and tested"* — and about the failure he is guarding against, which is deciding too early: *"If you get the database involved early, then it will warp your design."*
+
+The book chapter is about *what counts as the database*, and this is the part that matters here. Martin separates the data model from the database system, and assigns them opposite standings:
+
+> The structure you give to the data within your application is highly significant to the architecture of your system.
+
+against the database system as *"a utility that provides access to the data"* and *"a low-level detail — a mechanism."* He is not dismissive of the relational model, which he calls elegant and robust. The chapter's summary line is the separation itself:
+
+> The data is significant. The database is a detail.
+
+**So the sentence carries a distinction and a deferral, and neither survives the trip.** *Detail* means a mechanism whose selection can wait, not a thing to be hidden. And *database* means the product — Oracle, Postgres, the process listening on a port — while the schema, the constraints, the shape of the rows are the data model, which the same author calls significant.
+
+The folk reading collapses both. It hears *database* as everything to do with persistence, including the schema, and hears *detail* as *hide it*. What it then produces is a wall built up front, which is the one thing the 2012 post says not to do, in defence of something its author never said was a detail.
+
+So the export, the mapping layer and the three-way price above are no part of Martin's argument. They are the bill for a reading of it — one that neither of his two statements supports, and that charges a different amount in every language the diagram gets drawn in.
+
+## Why the wide reading gets taken
+
+**The word that slipped is *database*, and it slipped because ordinary usage is wider than the source's.** Martin uses it for the product — the process listening on a port, the thing you choose between. Everyone else uses it for the product, the schema, the queries, the migrations, and the rows — *the database* is where you look things up and also the thing your constraints live in. A reader who applies the ordinary meaning to his sentence gets *your schema is a low-level mechanism*, which he spent the chapter denying.
 
 Then *detail* follows it. In the source a detail is something whose choice can be postponed; in the folk version it is something to be concealed. Those are not the same instruction, and only one of them tells you to build anything.
 
@@ -149,7 +153,9 @@ And the failure runs one way. Nobody splits a package and discovers they have ac
 
 ---
 
-## Where the claim doesn't apply
+## Where the wide reading is right
+
+Three situations sit outside the argument above, and in each the wall is worth what it charges — or charges nothing.
 
 ### A compiler-enforced boundary across a large team
 
@@ -173,7 +179,7 @@ In Python the entire argument evaporates, because nothing was being enforced in 
 
 ---
 
-## What the claim costs
+## What taking the alternative costs
 
 **One package gets big.** FlowCore's answer moves the discipline from the compiler to the author, and says so:
 
@@ -187,7 +193,7 @@ That is a real cost and it grows with the number of people who could do the reac
 
 ---
 
-## How to recognize the failure
+## How to recognize it
 
 **In a codebase:**
 

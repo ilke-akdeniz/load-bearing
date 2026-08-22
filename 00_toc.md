@@ -230,7 +230,7 @@ The narrow reading of the structural half is chapter 05's — a layer is a rule 
 
 Contents: **layered packages force exports** — splitting a store into its own package requires making its helpers public, so the wall meant to hide them is what exposes them; the mapping tax of one entity type per layer; interfaces with one implementation; the `internal/` manoeuvre and what it's actually for; why the same architecture in Go, C#, and Python produces three different file layouts and only one of them needs the ceremony.
 
-*Where the claim doesn't apply:* large teams and multi-module builds, where a compiler-enforced import boundary buys something a convention cannot.
+*Where the wide reading is right:* large teams and multi-module builds, where a compiler-enforced import boundary buys something a convention cannot; walls drawn to break a cycle or publish an API rather than to hide; and languages that charge nothing for the layout.
 
 ### 19. Abstraction as insurance
 
