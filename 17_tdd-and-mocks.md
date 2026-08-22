@@ -207,11 +207,11 @@ So the ingredient that works is also the ingredient that produces the pressure t
 
 ### Same mechanism, in a shape that escapes the instructions in both directions
 
-This is the subtle "the test that never reaches its condition." case.
+This is the subtle version of a test that never reaches the condition it names.
 
-Previous mocked test example at least asserted something. This one asserts nothing about a specific business rule, although the test case looks good until you dig in.
+The mocked test at least asserted something. This one asserts nothing about the behaviour it is named for, and it looks correct until you read the fixture.
 
-The rule is that the registration leaves an account `pending` until the address is verified. Verfication makes it `active`. Here is the test, and the fixture it runs against:
+The rule under test is that registration leaves an account `pending` until the address is verified, and verification makes it `active`. Here is the test, and the fixture it runs against:
 
 ```python
 STARTING_STATUS = "active"   # the fixture's choice
@@ -283,7 +283,9 @@ def test_status_is_active_after_verifying(self):
 
 The starting status is now whatever registration actually produces, and the test fails the moment `verify` stops working — `AssertionError: 'pending' != 'active'` — with no fixture value that anyone chose, and so none that can go stale against the code.
 
-This could look like a rookie mistake, or an artificial example we created for the book: "Why would anyone set manually the result they assert, at the beginning of the test?". But the shape is not hypothetical if you consider the evolution of the test case over time. When `an_account` was written the need was a status to insert and the one an account usually has was picked. There was no assertions related to status at that time so the choice seemed harmles. Later status assertion appeared and it needed an account and an_account function provided that. Neither decision is wrong on its own, nothing connects them in an obvious way. FlowCore hit it, in a workflow fixture that declared one status and pointed both of its terminal actions at it, so a run reported the same status before and after finishing. It was caught the same way: `completeWorkflow` was changed to stamp `completed_at` and never the status columns, and **the entire suite passed**. Its decision 37 records two things worth more than the fix.
+This could look like a rookie mistake, or an example built for the book — *why would anyone set the result they assert at the start of the test?* It stops looking artificial once you consider how a test file arrives in this state. When `an_account` was written, the need was a status to insert, and the one an account usually has was picked; nothing asserted on status then, so the choice was harmless. The status assertion came later, needed an account, and `an_account` provided one. Neither decision is wrong on its own, and nothing obvious connects them.
+
+**And it is not hypothetical.** FlowCore hit it, in a workflow fixture that declared one status and pointed both of its terminal actions at it, so a run reported the same status before and after finishing. It was caught the same way: `completeWorkflow` was changed to stamp `completed_at` and never the status columns, and **the entire suite passed**. Its decision 37 records two things worth more than the fix.
 
 The first is the count — it was **the fifth toothless test in one iteration**, meaning the fifth that asserted nothing, and the first mutation used to investigate it was itself broken, so its failure proved nothing until it was repaired. Even the check needed checking.
 
