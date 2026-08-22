@@ -196,7 +196,7 @@ The chapter shows the wide reading first and the source after it, so the exclusi
 The wide reading puts each rule on the entity whose data it reads, which is right for each rule taken alone and leaves a reference pointing each way.
 The narrow reading already exists in this book — chapter 14's *what the rule must see*, where the location follows from how much data you must be looking at before you can tell whether a rule holds.
 
-Contents: two rules over a customer and an order, each placed correctly, closing the cycle between them; the distinction the chapter turns on, between two classes that reference each other and a constructed value graph carrying a back-pointer; `HashSet.add` throwing `StackOverflowError`, with `json.Marshal`, `json.dumps` and a generated `equals` all refusing the same shape; and `isGold` as the control — a one-entity rule nobody moves off its entity, which is what makes the pressure one-way.
+Contents: two rules over a customer and an order, each placed correctly, closing the cycle between them; the distinction the chapter turns on, between two classes that reference each other and a constructed value graph carrying a back-pointer; `HashSet.add` throwing `StackOverflowError`, with `json.Marshal`, `json.dumps` and a generated `equals` all refusing the same shape; and `isGold` as the control — a one-entity rule that does get moved into a service, often, but never by reading this sentence, which is what makes the pressure one-way.
 The alternative demonstrated: identifiers instead of references, and FlowCore's decision 3 priced both ways — offline construction and working serialization bought, a query per route and cross-definition integrity moved into composite foreign keys, paid.
 
 *Where the wide reading is right:* rules that read one entity, where the currency check belongs on the money value and moving it out puts it where a caller can skip it; and cycles nothing ever walks generically, where the exemption is structural unreachability rather than nothing having walked it yet.
@@ -210,11 +210,11 @@ The second case study, kept fair.
 Fowler's definition names what test-first buys and does not claim the sequence improves the code; Beck's canon states the loop and mentions no mocking, no isolation and no speed requirement at all.
 *Mock your dependencies* is the mockist half of a disagreement Fowler named in 2007 and came down against, so the position this chapter argues is the classical one, which has had a name for two decades.
 
-Contents: **mocks assert that your code calls your mocks** — a registration service whose uniqueness rule is a schema constraint, the constraint then deleted, and only the database-backed test failing; a fixture that creates the account already in the state the test asserts, so gutting the method under test changes nothing, with FlowCore's decision 37 as the same shape in a real system; and the ordering, taken from Fucci et al. read in full — sequencing predicted neither quality nor speed, and the paper's own conditions are the part that does not travel, including *provided that they keep writing tests* and a cycle defined as the interval between green bars.
+Contents: **mocks assert that your code calls your mocks** — a registration service whose uniqueness rule is a schema constraint, the constraint then deleted, and only the database-backed test failing; a fixture that fabricates its precondition instead of establishing it — writing a row that resembles an account, in the state the assertion expects — so gutting the method under test changes nothing, with FlowCore's decision 37 as the same shape in a real system; and the ordering, taken from Fucci et al. read in full — sequencing predicted neither quality nor speed, and the paper's own conditions are the part that does not travel, including *provided that they keep writing tests* and a cycle defined as the interval between green bars.
 The two principles are not separate: the loop runs at minutes, so the suite must answer in seconds, so the database leaves the test — which is where the test that cannot fail comes from.
 Costs are priced for both halves, the ordering's from the study's own adherence numbers: no session ran purely test-first, after ten hours of training.
 
-Not covered, and moved: the wider empirical literature, since the meta-analyses are paywalled and were not read; interface-per-class and the DI container, which belong with chapter 18.
+Not covered: the wider empirical literature, since the meta-analyses are paywalled and were not read; and interface-per-class and the DI container, which no chapter currently owns — chapter 18 reaches the testing half of it and no further.
 
 *Where the wide reading is right:* dependencies that genuinely cannot be run in a test — payment gateways, hardware, third-party APIs — and the honest version of doubles for those; and a mock asserting a call where the call is the observable behaviour.
 
@@ -222,9 +222,9 @@ Not covered, and moved: the wider empirical literature, since the meta-analyses 
 
 `18_abstraction-as-insurance.md`
 
-The fourth case study, and the one that survives *but what if we do need it*.
+The third case study, and the one that survives *but what if we do need it*.
 
-**Chapter 15's mechanism, running on:** *depend on abstractions, not concretions* — and running differently, because here the scope was written down.
+**Chapter 15's mechanism, running on:** *depend on abstractions, not concretions.*
 Martin's 1994 paper names the test as **stability**, and gives plurality as the reason an abstraction is stable: the more implementations depend on it, the harder it is to change.
 The five words that travel keep the technique and drop the test, so an interface with one implementation carries the principle's name while failing it.
 The chapter shows the wide reading first and the source after it, so the stability test arrives as a correction to an interface the reader has already watched fail.
@@ -325,9 +325,9 @@ Two are not negotiable: chapter 02's classification model is a lens rather than 
 | 13 | `13_missing-language-features.md` | **draft** |
 | 14 | `14_smuggled-verdicts.md` | **draft** |
 | 15 | `15_principle-loses-scope.md` | **draft** |
-| 16 | `16_behaviour-placement.md` | **in progress** |
-| 17 | `17_tdd-and-mocks.md` | **in progress** |
-| 18 | `18_abstraction-as-insurance.md` | **in progress** |
+| 16 | `16_behaviour-placement.md` | **draft** |
+| 17 | `17_tdd-and-mocks.md` | **draft** |
+| 18 | `18_abstraction-as-insurance.md` | **draft** |
 | 19 | `19_force-map-method.md` | not started |
 | 20 | `20_six-domains.md` | not started |
 | 21 | `21_idioms.md` | not started |
@@ -351,7 +351,6 @@ Chapters already at **draft** that are owed an addition. Listed here because a d
 | 02 | Pike on arguments about language features being opinion argued with certainty — a witness for *tone does not vary with authority*, in `docs/pending/pike-retrospective.md` | next time 02 is open |
 | 09 | Pike pricing Go's compatibility promise: it costs, and it blocks feature-itis — the constraint adopted deliberately rather than suffered | next time 09 is open |
 | 13 | possibly the async/await aside and *coloured functions*; check the fit before using it, it may belong to 20 or nowhere | next time 13 is open |
-| 15 | re-read after the Part IV research pass: the cost section gained *prominence cuts both ways* and *retrieval, not preservation*, and four stale "three cases" counts were fixed | the author's next pass over Part IV |
 
 The worked argument is in `docs/pending/ai-material.md`; decision 24 records what was decided and why.
 
