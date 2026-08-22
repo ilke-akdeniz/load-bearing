@@ -3227,6 +3227,7 @@ Chapter 17 had said mocking is taught with test-first "and always has been," whi
 
 **Consequence.**
 `docs/pending/claim-research.md` is marked consumed and records where each source was found.
+**2026-08-22:** deleted, once all four outcomes were verified in the chapters and every source had a line in a chapter's own Sources section. Decision 83 records the fourth brief's outcome, which was that its chapter went.
 Riel's book was read from the author's local copy; its PDF stores text as subset-font glyph ids, decoded with a uniform `gid + 29` offset verified against known words.
 Two sources remain unreached and nothing is claimed from them: Rafique and Mišić's meta-analysis, and Martin's 1996 *C++ Report* paper, which exists only on `web.archive.org`.
 

@@ -116,14 +116,14 @@ The claim here is about interfaces justified by a future substitution, not about
 | Injection is not abstraction | 18 | **done** |
 | The four mechanisms | 18 | **done** — each cites 05, 09 or 03 |
 | The rollback alternatives | 18 | **done** — cites 12 for strangler fig |
-| The testing case | 17 | **done** — 17 owns it, 19 cites it |
+| The testing case | 17 | **done** — 17 owns it, 18 cites it |
 | The LOB inversion, one line | 20 | owed, chapter not started |
 
 **The open question is settled.**
-It asked whether chapter 18's scope should widen to hold this argument, or whether it wanted a different home.
+It asked whether the scope of *Clean Architecture versus the language* should widen to hold this argument, or whether it wanted a different home.
 
-The draft answered it unilaterally and folded the argument into 18. The author rejected that on review: the two share a villain and not a mechanism, and the join was an *and* in the claim sentence.
-What settled it is language-dependence — 18's material changes with the language, this argument is identical in every language, so it cannot live in a chapter called *versus the language*.
-The author's decision was a new chapter. Chapter 18, *Abstraction as insurance*, was created for it and chapters 18 through 23 renumbered to 20 through 24.
+The draft answered it unilaterally and folded the argument into that chapter. The author rejected that on review: the two share a villain and not a mechanism, and the join was an *and* in the claim sentence.
+What settled it is language-dependence — that chapter's material changes with the language, this argument is identical in every language, so it could not live in a chapter called *versus the language*.
+The author's decision was a new chapter, which is now chapter 18, *Abstraction as insurance*. The chapter that prompted the question was itself cut later, at decision 83, and everything after it moved up one — so the chapter numbers in this file's history are not the ones in the current table of contents.
 
-This file stays here only for the one line owed to chapter 20.
+This file stays here only for the one line owed to chapter 20, *Six domains, six inversions*.
