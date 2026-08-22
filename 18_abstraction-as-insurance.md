@@ -6,7 +6,7 @@
 
 This is Part IV's third case, and it survives the reply that ends most versions of this argument: *but what if we do need it.* Assume you do. What follows is that the policy is void, not that the event never happens.
 
-It is also not YAGNI. That says you paid for something you did not need. This says you paid, the event occurred, and the cover did not apply.
+It is also not YAGNI. That says you paid for something you did not need. This says you paid, the event occurred, and the cover did not apply. [-- these two paragraphs are not ok, a reader who didn't read the chapter yet would simply say "huh"? Replace this more gentle, introductory, transitional info, even one clear, meaningful sentence could be ok.]
 
 ---
 
@@ -14,7 +14,7 @@ It is also not YAGNI. That says you paid for something you did not need. This sa
 
 Take the sentence as an instruction to put an interface between your code and anything it depends on, which is how it is usually taken, and point it at the database.
 
-### Injection is not abstraction
+### Injection is not abstraction per se
 
 One thing has to be separated out first, or chapter 05 refutes this chapter in a sentence.
 
@@ -30,7 +30,7 @@ func NewOrders(database *sql.DB) *Orders     // injected, concrete
 func NewOrders(database Repository) *Orders  // injected, abstract
 ```
 
-The first is fully injected. The composition root chooses the database, the component reaches for nothing, and the wiring is explicit. What the second adds is the interface — and only that addition is what follows.
+The first is fully injected. The composition root chooses the database, the component reaches for nothing, and the wiring is explicit but notice that abstraction is not involved in theis process. What the second adds is the interface abstraction — and only that addition is the subject of this chapter.
 
 ### The interface is shaped by the engine it was written against
 
@@ -153,7 +153,7 @@ Everything demonstrated earlier in this chapter is the second case. The two are 
 
 ## Why the wide reading gets taken
 
-**What was dropped is not the scope but the criterion.** The five words that travel — *depend on abstractions, not concretions* — name the technique and omit the test the technique was supposed to pass. Read alone they are an instruction to introduce an interface. Read with the paper they are an instruction to depend on something stable, of which an interface is one way and not a guarantee.
+**What was dropped is not the scope but the criterion.** The five words that travel — *depend on abstractions, not concretions* — name the technique and omit the test the technique was supposed to pass. Read alone they are an instruction to introduce an interface on every seam. Read with the paper, they are an instruction to depend on something stable, of which an interface is one way and not a guarantee.
 
 That is chapter 05's reading, which arrives at the same place from the mechanism: put what changes least at the bottom, and an interface is not automatically the thing that changes least. A repository interface over an evolving schema changes every time the schema does, and now changes in two files rather than one.
 
