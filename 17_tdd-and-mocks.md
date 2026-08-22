@@ -205,7 +205,7 @@ Which does not make the ritual useless, and the paper says so. It relocates the 
 
 So the ingredient that works is also the ingredient that produces the pressure to mock. The granularity carrying the measured benefit is the same granularity that pushes the database out of the test, and pushing the database out of the test is what produced a test that passes with the constraint deleted.
 
-### Same mechanism, in a shape that escapes the instructions in ever direction
+### Same mechanism, in a shape that escapes the instructions in both directions
 
 This is the subtle "the test that never reaches its condition." case.
 
@@ -283,7 +283,7 @@ def test_status_is_active_after_verifying(self):
 
 The starting status is now whatever registration actually produces, and the test fails the moment `verify` stops working — `AssertionError: 'pending' != 'active'` — with no fixture value that anyone chose, and so none that can go stale against the code.
 
-**This is not a hypothetical shape.** FlowCore hit it, in a workflow fixture that declared one status and pointed both of its terminal actions at it, so a run reported the same status before and after finishing. It was caught the same way: `completeWorkflow` was changed to stamp `completed_at` and never the status columns, and **the entire suite passed**. Its decision 37 records two things worth more than the fix.
+This could look like a rookie mistake, or an artificial example we created for the book: "Why would anyone set manually the result they assert, at the beginning of the test?". But the shape is not hypothetical if you consider the evolution of the test case over time. When `an_account` was written the need was a status to insert and the one an account usually has was picked. There was no assertions related to status at that time so the choice seemed harmles. Later status assertion appeared and it needed an account and an_account function provided that. Neither decision is wrong on its own, nothing connects them in an obvious way. FlowCore hit it, in a workflow fixture that declared one status and pointed both of its terminal actions at it, so a run reported the same status before and after finishing. It was caught the same way: `completeWorkflow` was changed to stamp `completed_at` and never the status columns, and **the entire suite passed**. Its decision 37 records two things worth more than the fix.
 
 The first is the count — it was **the fifth toothless test in one iteration**, meaning the fifth that asserted nothing, and the first mutation used to investigate it was itself broken, so its failure proved nothing until it was repaired. Even the check needed checking.
 
