@@ -191,7 +191,8 @@ Which exposes a control inside Pike's own list — four proverbs take a named pa
 The first case study.
 
 **Chapter 15's mechanism, running on:** *behaviour belongs with the data it operates on.*
-The scope was written down and did not travel. Riel's heuristic 2.9 says *related* data and behaviour, and glosses it as one key abstraction split across two places — which excludes a rule reading two entities, since 2.8 makes those two abstractions. His introduction adds that all sixty are *warning bells*, that it is *perfectly valid to state that the heuristic does not apply*, and that they conflict; he wrote it to avoid what happened to *goto considered harmful*. *Object-Oriented Reengineering Patterns* then names this chapter's case in its Cons — behaviour that also reaches client data introduces explicit dependencies from provider back to client.
+The scope was written down and did not travel. Riel's heuristic 2.9 says *related* data and behaviour, and glosses it as one key abstraction split across two places — which excludes a rule reading two entities, since 2.8 makes those two abstractions. His introduction adds that all sixty are *warning bells*, that it is *perfectly valid to state that the heuristic does not apply*, and that they conflict; he wrote it to avoid what happened to *goto considered harmful*.
+The chapter shows the wide reading first and the source after it, so the exclusion arrives as a correction to something the reader has already watched go wrong.
 The wide reading puts each rule on the entity whose data it reads, which is right for each rule taken alone and leaves a reference pointing each way.
 The narrow reading already exists in this book — chapter 14's *what the rule must see*, where the location follows from how much data you must be looking at before you can tell whether a rule holds.
 

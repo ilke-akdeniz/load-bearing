@@ -10,48 +10,9 @@ This is the first of Part IV's four cases. Chapter 15 made the claim; these four
 
 ---
 
-[claude section ordering from here is wrong in my opinion. This is my suggestion:
-## Wide Reading
-"Basically "What the wide reading produces sections" with current sub-sections except the last two: "The narrow reading, the same choice"
-
-## What the source said
-
-## Narrow Reading
-### The narrow reading, and what it looks like (claude you find a better subtitle for this)
-### The same choice in a real system, with the trade-off recorded
-
-Then other sections can follow.
-
-The reason I prefer this ordering is that wide reading is the most important part and is understandable without other sections. "What the source said" is not like that, it's not obvious why it's important and it's harder to understand what the source is saying without seing the issue and the code first.
-]
-
-## What the source said 
-
-The source is Arthur Riel's *Object-Oriented Design Heuristics* (1996), heuristic 2.9 : *"Keep related data and behavior in one place"* **Related** is not decoration. His own gloss says what it means:
-
-> The two areas are actually of the same key abstraction and therefore should have been captured in the same class.
-
-So the heuristic addresses one abstraction that got split across two places. It is repair advice for a decomposition that went wrong. A discount that reads an order's total and a customer's tier is not one key abstraction split in two; by Riel's own heuristic 2.8 — *a class should capture one and only one key abstraction* — an order and a customer are two of them. **The case this chapter is about is outside 2.9's stated reach.**
-
-And there is a second qualification, applying to all sixty. Riel opens the book by naming the failure he is trying to avoid, which is what happened to *goto considered harmful* — he describes the resulting decades of rebuttal papers — and then:
-
-> I refer to these 60 guidelines as "heuristics," or rules of thumb. They are not hard and fast rules that must be followed under penalty of heresy. Instead, they should be thought of as a series of warning bells that will ring when violated.
-
-> It is perfectly valid to state that the heuristic does not apply in a given example for one reason or another. In fact, in many cases, two heuristics will be at odds with one another in a particular area of an object-oriented design. The developer is required to decide which heuristic plays the more important role.
-
-That is an author who saw this coming, said so in his introduction, and was compressed anyway into a five-word imperative that reaches cases he excluded.
-
-A second source names this chapter's case directly. *Object-Oriented Reengineering Patterns* formalizes the move as a pattern, **Move Behavior Close to Data**, with the problem *"How do you transform a class from being a mere data container into a real service provider?"* and the solution as moving behaviour to *"the container of the data on which it operates."* Then, in its tradeoffs, under Cons:
-
-> If the moved behavior also accesses client data, turning these accesses into parameters will make the interface of the provider more complex and introduce explicit dependencies from the provider to the client.
-
-**That is a rule reading two entities, with the consequence named.** Not a warning about cycles — a dependency from the provider back to the client is one edge, and one edge is not a cycle. But the direction is stated, in the source, as a known cost. [claude I'm not able to follow this second source, maybe we should remove it, to me it looks like it's diluting the point we made about what Riel really said.]
-
-So the reader is not missing a scope nobody wrote. They are missing a qualifier, an exclusion, and a Cons list. What the rest of this chapter adds is where the excluded case actually leads, which neither source follows: several such rules, resolving to different sides.
-
----
-
 ## What the wide reading produces
+
+Take the sentence at face value — put each rule on the entity whose data it is about — and follow it twice.
 
 ### A rule that needs two entities
 
@@ -150,7 +111,33 @@ Go's `&` takes the address of a value, so `*Order` is a reference to an order ra
 
 Three languages, three unrelated implementations, and none of them can encode the graph. The reason is not a gap in any of the libraries. A tree serializes because every node is reached once; a cyclic graph has no such traversal, so a format built on nesting has nothing to emit.
 
-### The narrow reading, and what it looks like
+## What the source said
+
+None of that is an argument against the advice. It is what happens when the advice is read as five words, which is how it arrives in code review. It has a source, and the source excludes this case.
+
+Arthur Riel's *Object-Oriented Design Heuristics* (1996) has it as heuristic 2.9: *"Keep related data and behavior in one place."* **Related** is not decoration. His own gloss says what it means:
+
+> The two areas are actually of the same key abstraction and therefore should have been captured in the same class.
+
+So the heuristic addresses one abstraction that got split across two places. It is repair advice for a decomposition that went wrong. A discount that reads an order's total and a customer's tier is not one key abstraction split in two; by Riel's own heuristic 2.8 — *a class should capture one and only one key abstraction* — an order and a customer are two of them. **The case this chapter is about is outside 2.9's stated reach.**
+
+And there is a second qualification, applying to all sixty. Riel opens the book by naming the failure he is trying to avoid, which is what happened to *goto considered harmful* — he describes the resulting decades of rebuttal papers — and then:
+
+> I refer to these 60 guidelines as "heuristics," or rules of thumb. They are not hard and fast rules that must be followed under penalty of heresy. Instead, they should be thought of as a series of warning bells that will ring when violated.
+
+> It is perfectly valid to state that the heuristic does not apply in a given example for one reason or another. In fact, in many cases, two heuristics will be at odds with one another in a particular area of an object-oriented design. The developer is required to decide which heuristic plays the more important role.
+
+That is an author who saw this coming, said so in his introduction, and was compressed anyway into a five-word imperative that reaches cases he excluded.
+
+So the reader is not missing a scope nobody wrote down. They are missing a qualifier that the source defines, and a standing instruction not to treat any of it as a rule.
+
+What the compressed sentence gives you is an instruction. What it leaves behind is the thing that says when the instruction applies — and the discount rule, which is what a reader would most want it applied to, is a case its author put outside it.
+
+---
+
+## What the narrow reading looks like
+
+### Identifiers instead of references
 
 The other reading of *belongs with* is already in chapter 14, where behaviour is not absent but **placed**, and what decides the placement is **what the rule must see** — how much data you have to be looking at before you can tell whether the rule holds. Under that reading, a rule needing a customer and an order belongs at a scope that can see both, and that scope is neither entity.
 
@@ -227,11 +214,13 @@ So the identifier is not free and was not chosen because it is tidier. It moves 
 
 ## Why it is the reading that gets taken
 
-The five words that travel are the instruction. What stayed behind is a test and a cost, and neither survives compression for the same reason: the instruction can be followed one method at a time, while the test and the cost are properties of the class as a whole.
+The five words that travel are the instruction. What stayed behind is the qualifier, and it did not survive for a reason worth naming: the instruction can be followed one method at a time, and the qualifier cannot be checked that way.
 
-*Keep related data and behavior in one place* is checkable only if you can say what *related* means, and Riel's answer — one key abstraction, split — is a judgement about the model rather than about the line in front of you. Likewise the cost: one rule reaching for a second entity introduces one dependency, which is the tradeoff the pattern names and accepts. It takes two such rules, resolved to opposite sides, before anything is wrong, and nobody makes both decisions in the same sitting.
+*Keep related data and behavior in one place* is only checkable if you can say what *related* means, and Riel's answer — one key abstraction that got split — is a judgement about the model as a whole rather than about the line in front of you. Nothing you can see while writing `discount()` tells you whether an order and a customer are one abstraction or two.
 
-So the compressed form is not merely shorter. It is the part of the advice that can be applied locally, separated from the parts that can only be evaluated globally.
+The damage has the same shape. One rule reaching for a second entity is one edge, and one edge is nothing. It takes two such rules resolved to opposite sides before anything breaks, and nobody makes both decisions in the same sitting — or, usually, in the same year.
+
+So the compressed form is not merely shorter. It is the part of the advice that can be applied locally, separated from the part that can only be judged globally.
 
 The direction of the error is set by the same asymmetry. Both readings are available for every rule, and which one gets taken tracks how many entities the rule reads.
 
@@ -333,7 +322,6 @@ So the useful reading of the answer is not *what walks it now* but *whether the 
 
 ## Sources
 
-- Serge Demeyer, Stéphane Ducasse, Oscar Nierstrasz, *Object-Oriented Reengineering Patterns* — *Move Behavior Close to Data*, [eng.libretexts.org](https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_and_Computation_Fundamentals/Book%3A_Object-Oriented_Reengineering_Patterns_(Demeyer_Ducasse_and_Nierstrasz)/09%3A_Redistribute_Responsibilities/9.02%3A_Move_Behavior_Close_to_Data).
 - Arthur J. Riel, *Object-Oriented Design Heuristics*, Addison-Wesley, 1996 — the introduction, and heuristics 2.8 and 2.9.
 - FlowCore, `docs/decisions.md`, decision 3 — [github.com/ilke-akdeniz/flowcore](https://github.com/ilke-akdeniz/flowcore).
 - *Objects.hash* and *HashSet* — [docs.oracle.com/en/java/javase/26/docs/api](https://docs.oracle.com/en/java/javase/26/docs/api/).
