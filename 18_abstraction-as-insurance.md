@@ -4,9 +4,7 @@
 
 > **Depend on abstractions, not concretions.**
 
-This is Part IV's third case, and it survives the reply that ends most versions of this argument: *but what if we do need it.* Assume you do. What follows is that the policy is void, not that the event never happens.
-
-It is also not YAGNI. That says you paid for something you did not need. This says you paid, the event occurred, and the cover did not apply. [-- these two paragraphs are not ok, a reader who didn't read the chapter yet would simply say "huh"? Replace this more gentle, introductory, transitional info, even one clear, meaningful sentence could be ok.]
+This is Part IV's third case. In practice the sentence produces an interface between your code and the things it depends on, and the one it is most often pointed at is the database.
 
 ---
 
@@ -14,7 +12,7 @@ It is also not YAGNI. That says you paid for something you did not need. This sa
 
 Take the sentence as an instruction to put an interface between your code and anything it depends on, which is how it is usually taken, and point it at the database.
 
-### Injection is not abstraction per se
+### Injection is not abstraction
 
 One thing has to be separated out first, or chapter 05 refutes this chapter in a sentence.
 
@@ -30,7 +28,7 @@ func NewOrders(database *sql.DB) *Orders     // injected, concrete
 func NewOrders(database Repository) *Orders  // injected, abstract
 ```
 
-The first is fully injected. The composition root chooses the database, the component reaches for nothing, and the wiring is explicit but notice that abstraction is not involved in theis process. What the second adds is the interface abstraction — and only that addition is the subject of this chapter.
+The first is fully injected: the composition root chooses the database, the component reaches for nothing, and the wiring is explicit. No abstraction is involved anywhere in that. What the second adds is the interface — and only that addition is the subject of this chapter.
 
 ### The interface is shaped by the engine it was written against
 
@@ -162,6 +160,8 @@ The compressed form survives because the technique is checkable and the criterio
 **The second mechanism is that the cost and the benefit arrive at different times, and only one of them ever arrives.** The premium is paid continuously, in small amounts, by people who do not know they are paying it — a query not written, a feature not used, a mapping function maintained. The payout is a single event, in the future, that mostly does not occur; and on the rare occasion it does, the payout fails for reasons that are only visible at that moment.
 
 So the practice is never disconfirmed by experience. A team that abstracted and never migrated concludes the insurance was cheap. A team that abstracted and did migrate concludes the migration was hard, which it was, and rarely audits how much of the difficulty the abstraction removed.
+
+**Which is what separates this from YAGNI**, and the difference is worth stating because the two arguments get answered the same way and only one of the answers works. *You aren't gonna need it* says you paid for something that never happened, and the reply — *but what if we do need it* — is a good one, because sometimes you do. The argument here concedes that reply entirely. Assume the swap comes. The premium was still paid daily, the interface was still shaped by the engine it was insuring against, and the migration is still a data problem sitting in a slower layer than the abstraction. You paid, the event occurred, and the cover did not apply.
 
 ---
 
