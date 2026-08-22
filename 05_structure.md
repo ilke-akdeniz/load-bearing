@@ -34,7 +34,7 @@ Two things follow, and they are the difference between the two claims:
 
 The second is a real constraint, most systems do not satisfy it, and Part three works through one that doesn't.
 
-Claim three is where the physical boundary arrives, and it varies by ecosystem in a way worth noticing. In Java and C# it was usually separate projects, assemblies, or shipped libraries; elsewhere it shows up as top-level directories or packages. What each of those forms actually enforces is not the same, and chapter 18 works through what each one buys and charges.
+Claim three is where the physical boundary arrives, and it varies by ecosystem in a way worth noticing. In Java and C# it was usually separate projects, assemblies, or shipped libraries; elsewhere it shows up as top-level directories or packages. What each of those forms actually enforces is not the same — a directory is a package in Go, carries no access meaning in C# until assemblies split, and enforces nothing in Python — and chapter 21 works through why ecosystems diverge like this.
 
 Most real architecture damage is a violation of the first. Most harm done by *architecture advocacy* comes from the third, applied to a program whose graph does not have the shape claim two describes — which then generates pass-through classes and mapping code to fill out the ranks.
 
@@ -308,7 +308,7 @@ Two things follow, and they are the point of the example.
 
 **The layering is real and checkable.** Ask whether the lower piece compiles without the upper one: delete `catalog.go`, and `insertStepDefinition` still builds — it needs `querier`, `StepDefinition`, and `mapInsertErr`, none of which live in the service. Delete the store, and `Catalog.Create` does not build. That asymmetry *is* the layering.
 
-**None of it is expressed as directories.** The boundary that matters — who may open a transaction — is a method that is not on an interface. A folder could not have enforced it, and would have introduced a different problem instead (Ch. 18 works through what package walls cost).
+**None of it is expressed as directories.** The boundary that matters — who may open a transaction — is a method that is not on an interface. A folder could not have enforced it, and would have introduced a different problem instead: two representations of every entity and a mapping layer between them.
 
 So: **layer ≠ directory.** A layer is a rule about which direction calls may go. Nothing about that rule requires, implies, or is helped by a file hierarchy.
 
@@ -617,7 +617,7 @@ Be exact about what was traded away. In the class version the field layout is pr
 
 That is a genuine loss, accepted deliberately. You gave up the ability to change the representation quietly, and what you bought is the speed that comes from every system agreeing on it.
 
-The Force is the memory hierarchy. Where it dominates, "hide the representation" inverts: hiding it is precisely what you must not do. Chapter 21 works through the rest of that domain's inversions.
+The Force is the memory hierarchy. Where it dominates, "hide the representation" inverts: hiding it is precisely what you must not do. Chapter 20 works through the rest of that domain's inversions.
 
 Note carefully what has *not* inverted. The ECS dependency graph is still acyclic — systems depend on component arrays, and the arrays depend on nothing. The Law holds untouched while the Principle turns over completely, which is the difference chapter 02 draws, seen in the wild.
 
@@ -867,7 +867,7 @@ The second is right when the code has years ahead of it. On a migration script t
 
 ### Enforced boundaries cost more than unenforced ones
 
-Expressing the graph in the type system, as `querier` does, is nearly free. Expressing it as package or assembly walls forces exports and mapping code — a real bill, worth paying at some team sizes and not at others (Ch. 18).
+Expressing the graph in the type system, as `querier` does, is nearly free. Expressing it as package or assembly walls forces exports and mapping code — a real bill, worth paying at some team sizes and not at others.
 
 ### Everything starts looking like a layer
 

@@ -233,4 +233,4 @@ Answer it by listing the steps — schema translation, data copy, verification, 
 
 ---
 
-**Next:** Part V turns from diagnosis to method — chapter 20 sets out how to read the Forces in front of you, derive the Principles they support, and check the Idioms of the language you are writing in, in that order.
+**Next:** Part V turns from diagnosis to method — chapter 19 sets out how to read the Forces in front of you, derive the Principles they support, and check the Idioms of the language you are writing in, in that order.

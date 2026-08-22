@@ -386,7 +386,4 @@ The wider version is worth asking before a release: **if this behaviour is broke
 
 ---
 
-**Next:** the remaining two cases come from the same doctrine and split along the language.
-
-- **Chapter 18** — a structural idea that arrives as a directory layout, and costs a different amount in every language it is applied to.
-- **Chapter 19** — an abstraction bought as insurance, shaped by the thing it was insuring against.
+**Next:** chapter 18 takes the last of the cases — an abstraction bought as insurance against a change that has not been scheduled, and shaped by the thing it was insuring against.

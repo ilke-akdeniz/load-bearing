@@ -8,7 +8,7 @@
 
 **Scope is the same boundary seen from the other side: the situations the advice reaches.** State the conditions and you have given the scope; name the situation and you have given it too. This chapter says *scope* rather than *conditions* because it tracks what the wording carries rather than what the advice requires — and a principle can carry that boundary either way. *Don't store money in a float* names a situation and states no condition, and it passes the test below regardless.
 
-Part IV is four case studies, and this chapter is the mechanism they share, stated once.
+Part IV is three case studies, and this chapter is the mechanism they share, stated once.
 
 ---
 
@@ -173,7 +173,7 @@ The top four are not proverbs. Nobody wrote the single responsibility principle 
 
 The bottom two are not proverbs either, and they pass. *Money* and *cgo* name situations. There is nowhere to resolve them outward to.
 
-**So the property belongs to the wording, not to the genre.** Being built for memorability makes it more likely that the situation gets left out, because a situation is the longest part and the first to go. It is not what causes the omission. Chapters 16 through 19 are four principles from the second column, each traced to what its wide reading produced.
+**So the property belongs to the wording, not to the genre.** Being built for memorability makes it more likely that the situation gets left out, because a situation is the longest part and the first to go. It is not what causes the omission. Chapters 16, 17 and 18 are three principles from the second column, each traced to what its wide reading produced.
 
 **On what these sources are worth**, because they are not equal. Pike's talk is primary. The Go project's wiki page is an official artifact and the strongest evidence that the misreading was real enough to be worth correcting — though note that it attributes the over-use to enthusiasm rather than to the proverb, and this chapter does not claim the proverb caused it. The Reddit thread is community anecdote: one instance, dated, and useful only because the over-application is self-reported rather than attributed by somebody else. It shows the confusion exists and what shape it takes. It establishes nothing about how often, and nothing here claims otherwise.
 
@@ -208,7 +208,7 @@ Which gives the test worth keeping: **does this advice say how wide it is?**
 
 Some advice is unconditional, and then nothing is missing from the compressed form.
 
-*Gofmt's style is no one's favorite, yet gofmt is everyone's favorite* is on the same list of nineteen, and it became a norm — mandatory automatic formatting, no configuration — without incident. There is no situation in which one consistent format is wrong, so a reader who receives only the proverb has received all of it. Chapter 14 reached this boundary from the other side: a compressed statement is safe exactly when its condition is *always*. Chapter 23 is the general case.
+*Gofmt's style is no one's favorite, yet gofmt is everyone's favorite* is on the same list of nineteen, and it became a norm — mandatory automatic formatting, no configuration — without incident. There is no situation in which one consistent format is wrong, so a reader who receives only the proverb has received all of it. Chapter 14 reached this boundary from the other side: a compressed statement is safe exactly when its condition is *always*. Chapter 22 is the general case.
 
 ### A named situation is a proxy, and proxies fit badly
 
@@ -241,7 +241,7 @@ So a proverb about the board can accumulate a stable scope, while a proverb abou
 
 This chapter ends in repair, which is why it does not claim that a principle stripped of its scope stays that way. The scope was rebuilt three times here: officially, in a wiki page with a table; informally, by strangers answering a question; and by the source himself, in a talk given to supply a distinction he had left out.
 
-Where that does not happen — where the wide reading hardens and nobody writes the page — you get what chapter 24 calls a folk remedy. Chapters 16 through 19 are four cases that travelled further than this one did.
+Where that does not happen — where the wide reading hardens and nobody writes the page — you get what chapter 23 calls a folk remedy. Chapters 16, 17 and 18 are three cases that travelled further than this one did.
 
 ---
 
@@ -249,7 +249,7 @@ Where that does not happen — where the wide reading hardens and nobody writes 
 
 **Recovering a scope is slow, and sometimes there is nothing to recover.** Where the advice came from a conversation, a code review, or a mailing list that no longer resolves, no amount of looking will produce the conditions. You are reconstructing rather than reading, which is how a plausible mechanism gets attached to somebody else's words.
 
-**Having the source does not fix it.** Each of the four principles in the chapters that follow has one — in print, by the author, findable in minutes — and the compressed version travelled anyway. The reason is not that checking is hard. It is that the compressed version arrives complete enough to act on, so nothing prompts the check. Nobody stops to verify advice that has already told them what to do.
+**Having the source does not fix it.** Each of the three principles in the chapters that follow has one — in print, by the author, findable in minutes — and the compressed version travelled anyway. The reason is not that checking is hard. It is that the compressed version arrives complete enough to act on, so nothing prompts the check. Nobody stops to verify advice that has already told them what to do.
 
 **The test rejects nearly everything.** Almost no advice states its own scope, because the scope was compressed out before it reached you. *Does this say how wide it is* discards most of what is true along with what is not. It sorts. It does not accept or reject.
 
@@ -271,7 +271,7 @@ Where that does not happen — where the wide reading hardens and nobody writes 
 **In a conversation:**
 
 - **A saying offered as the end of a discussion.** The useful follow-up is not *I disagree* but *how would we apply that here, concretely, and what would it improve?* — which is answerable from the code in front of you, where a dispute about the saying is not.
-- **"That's just how it's done here."** Sometimes a real Idiom with reasons behind it (Ch. 22), sometimes a wide reading nobody has revisited. One question separates them.
+- **"That's just how it's done here."** Sometimes a real Idiom with reasons behind it (Ch. 21), sometimes a wide reading nobody has revisited. One question separates them.
 - **An appeal to who said it.** The credibility is usually genuine and answers a question nobody asked: it suggests the original observation was sound, and says nothing about whether the version that reached you still contains it.
 - **Anyone, including this book, saying a practice always applies.**
 
@@ -296,4 +296,4 @@ If the source can be reached, go and look. The scope is often still there, in th
 
 ---
 
-**Next:** chapter 16 is the first of the four cases, where object orientation's advice about where behaviour belongs meets the Direction Rule, and produces dependency graphs that point both ways.
+**Next:** chapter 16 is the first of the three cases, where object orientation's advice about where behaviour belongs meets the Direction Rule, and produces dependency graphs that point both ways.

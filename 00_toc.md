@@ -183,7 +183,7 @@ Then the same mechanism twice more in Pike's 2023 GopherConAU retrospective: Ous
 The finding the go-game collections supply: **scope lives inside the principle or in an apparatus around the collection it belongs to, and where it is in neither the reader reconstructs it — or fails to.**
 Which exposes a control inside Pike's own list — four proverbs take a named package as their grammatical subject and have nowhere to drift to, so the test becomes checkable rather than hopeful.
 
-*Where the claim doesn't apply:* a named situation is only a **proxy** for the conditions and can fit badly in either direction — syscall and cgo are two proverbs for one condition, so a third platform-specific case has none, and the test therefore measures whether you were given something checkable rather than whether the extent is right; advice with no scope to lose, where gofmt travelled intact; the domain gap between a fixed board game and software, which explains the lag without excusing it; and the fact that this chapter ends in repair rather than entrenchment, which is why the endpoint term belongs to 24.
+*Where the claim doesn't apply:* a named situation is only a **proxy** for the conditions and can fit badly in either direction — syscall and cgo are two proverbs for one condition, so a third platform-specific case has none, and the test therefore measures whether you were given something checkable rather than whether the extent is right; advice with no scope to lose, where gofmt travelled intact; the domain gap between a fixed board game and software, which explains the lag without excusing it; and the fact that this chapter ends in repair rather than entrenchment, which is why the endpoint term belongs to 23.
 
 ### 16. OOP versus the Direction Rule
 `16_oop-vs-direction.md`
@@ -218,23 +218,9 @@ Not covered, and moved: the wider empirical literature, since the meta-analyses 
 
 *Where the wide reading is right:* dependencies that genuinely cannot be run in a test — payment gateways, hardware, third-party APIs — and the honest version of doubles for those; and a mock asserting a call where the call is the observable behaviour.
 
-### 18. Clean Architecture versus the language
-`18_clean-architecture-vs-language.md`
+### 18. Abstraction as insurance
 
-The third case study: what happens when a structural idea is expressed as directories.
-
-**Chapter 15's mechanism, running on:** *the database is a detail*, where the scope was written down and did not travel.
-Martin separates the data model, which he calls architecturally significant, from the database system, which he calls a mechanism whose choice can wait — *the data is significant, the database is a detail*.
-The term with no fixed extent is **database**: a product to him, everything about persistence to everyone else, so the folk version hears *your schema is a low-level mechanism* and builds a wall up front, which the 2012 post it descends from says not to do.
-The narrow reading of the structural half is chapter 05's — a layer is a rule about call direction, and a directory is neither necessary nor sufficient for it.
-
-Contents: **layered packages force exports** — splitting a store into its own package requires making its helpers public, so the wall meant to hide them is what exposes them; the mapping tax of one entity type per layer; interfaces with one implementation; the `internal/` manoeuvre and what it's actually for; why the same architecture in Go, C#, and Python produces three different file layouts and only one of them needs the ceremony.
-
-*Where the wide reading is right:* large teams and multi-module builds, where a compiler-enforced import boundary buys something a convention cannot; walls drawn to break a cycle or publish an API rather than to hide; and languages that charge nothing for the layout.
-
-### 19. Abstraction as insurance
-
-`19_abstraction-as-insurance.md`
+`18_abstraction-as-insurance.md`
 
 The fourth case study, and the one that survives *but what if we do need it*.
 
@@ -251,8 +237,8 @@ Also the paper's own last paragraph, in print since 1994 and still lost: the sta
 
 ## Part V — Contextual programming
 
-### 20. The force-map method
-`20_force-map-method.md`
+### 19. The force-map method
+`19_force-map-method.md`
 
 The practical procedure the whole book has been building toward.
 
@@ -260,8 +246,8 @@ Contents: read the forces, derive the principles, then check the idioms — in t
 
 *Where the claim doesn't apply:* situations where the conventional answer is good enough and the analysis costs more than the decision is worth.
 
-### 21. Six domains, six inversions
-`21_six-domains.md`
+### 20. Six domains, six inversions
+`20_six-domains.md`
 
 The longest chapter, and the payoff.
 Each domain: which forces dominate, which standard advice inverts, and the code that shows it.
@@ -275,8 +261,8 @@ Each domain: which forces dominate, which standard advice inverts, and the code 
 
 *Where the claim doesn't apply:* systems that straddle two domains, which is most interesting systems — and how to decide which forces win at each boundary.
 
-### 22. Idioms: why ecosystems diverge
-`22_idioms.md`
+### 21. Idioms: why ecosystems diverge
+`21_idioms.md`
 
 Idioms, taken seriously rather than dismissed.
 
@@ -286,8 +272,8 @@ Contents: why Go grew free functions and C# grew containers, traced to language 
 
 *Where the claim doesn't apply:* idioms that encode a genuine mistake, and how to tell those from idioms you merely dislike.
 
-### 23. Style: the level where being right doesn't matter
-`23_style.md`
+### 22. Style: the level where being right doesn't matter
+`22_style.md`
 
 Short chapter, deliberately.
 
@@ -295,8 +281,8 @@ Contents: naming, formatting, file layout, comment density; why consistency beat
 
 *Where the claim doesn't apply:* nothing, really — which makes this the one chapter whose counter-example section argues that its own subject barely matters.
 
-### 24. Reading advice at the right level
-`24_reading-advice.md`
+### 23. Reading advice at the right level
+`23_reading-advice.md`
 
 The field guide, and the closing.
 
@@ -340,13 +326,12 @@ Two are not negotiable: chapter 02's classification model is a lens rather than 
 | 15 | `15_principle-loses-scope.md` | **draft** |
 | 16 | `16_oop-vs-direction.md` | **in progress** |
 | 17 | `17_tdd-and-mocks.md` | **in progress** |
-| 18 | `18_clean-architecture-vs-language.md` | **in progress** |
-| 19 | `19_abstraction-as-insurance.md` | **in progress** |
-| 20 | `20_force-map-method.md` | not started |
-| 21 | `21_six-domains.md` | not started |
-| 22 | `22_idioms.md` | not started |
-| 23 | `23_style.md` | not started |
-| 24 | `24_reading-advice.md` | not started |
+| 18 | `18_abstraction-as-insurance.md` | **in progress** |
+| 19 | `19_force-map-method.md` | not started |
+| 20 | `20_six-domains.md` | not started |
+| 21 | `21_idioms.md` | not started |
+| 22 | `22_style.md` | not started |
+| 23 | `23_reading-advice.md` | not started |
 
 ### AI material
 
@@ -360,7 +345,7 @@ Chapters already at **draft** that are owed an addition. Listed here because a d
 
 | Chapter | Owed | Do it when |
 |---|---|---|
-| 02 | corpus monoculture as a new instance of *monoculture makes Idioms look like physics* | chapter 24 exists, so the mention can point at the synthesis |
+| 02 | corpus monoculture as a new instance of *monoculture makes Idioms look like physics* | chapter 23 exists, so the mention can point at the synthesis |
 | 03 | the generator cannot see your Forces; the team-size Force at its limit — no continuity, unbounded volume | as above |
 | 02 | Pike on arguments about language features being opinion argued with certainty — a witness for *tone does not vary with authority*, in `docs/pending/pike-retrospective.md` | next time 02 is open |
 | 09 | Pike pricing Go's compatibility promise: it costs, and it blocks feature-itis — the constraint adopted deliberately rather than suffered | next time 09 is open |

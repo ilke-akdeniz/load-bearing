@@ -3,8 +3,8 @@
 Working document, in the shape of `docs/pending/ai-material.md`.
 The argument is worked here once so that the chapters that owe a piece of it agree with each other.
 
-**Owed to:** chapter 21's line-of-business section (one line). That is all that remains.
-The main argument landed in chapter 19, which was created for it; the testing objection is chapter 17's and it answered it.
+**Owed to:** chapter 20's line-of-business section (one line). That is all that remains.
+The main argument landed in chapter 18, which was created for it; the testing objection is chapter 17's and it answered it.
 
 **Origin.** The author's, from experience in line-of-business software: decades of building machinery to permit a database swap that never happened.
 The refinements below marked as the draft's are corrections made when the claim was tested against chapters the book has already shipped.
@@ -101,7 +101,7 @@ It is still probably the wrong tool — see the rollback section — but the obj
 **The testing case, which is the strongest legitimate one and belongs to chapter 17.**
 Postgres in production and a fake in tests *is* simultaneous plurality, and it is the honest reason most of these interfaces exist.
 This document does not resolve it; chapter 17 does, and its position — test against the real database — is what makes the rest of this argument survive.
-**Chapter 18 must not pre-empt that argument**, and should cite 17 rather than restating it.
+**The chapter carrying this argument must not pre-empt that**, and should cite 17 rather than restating it.
 
 **Not every one-implementation interface is speculative.**
 Chapter 05 owns the legitimate uses: narrowing what a consumer can reach, breaking a cycle, declaring a seam the consumer owns.
@@ -111,19 +111,19 @@ The claim here is about interfaces justified by a future substitution, not about
 
 | Piece | Chapter | Status |
 |---|---|---|
-| The full worked argument | 19 | **done** — chapter created for it |
-| Plurality vs sequential replacement | 19 | **done** — named as the book's own vocabulary |
-| Injection is not abstraction | 19 | **done** |
-| The four mechanisms | 19 | **done** — each cites 05, 09 or 03 |
-| The rollback alternatives | 19 | **done** — cites 12 for strangler fig |
+| The full worked argument | 18 | **done** — chapter created for it |
+| Plurality vs sequential replacement | 18 | **done** — named as the book's own vocabulary |
+| Injection is not abstraction | 18 | **done** |
+| The four mechanisms | 18 | **done** — each cites 05, 09 or 03 |
+| The rollback alternatives | 18 | **done** — cites 12 for strangler fig |
 | The testing case | 17 | **done** — 17 owns it, 19 cites it |
-| The LOB inversion, one line | 21 | owed, chapter not started |
+| The LOB inversion, one line | 20 | owed, chapter not started |
 
 **The open question is settled.**
 It asked whether chapter 18's scope should widen to hold this argument, or whether it wanted a different home.
 
 The draft answered it unilaterally and folded the argument into 18. The author rejected that on review: the two share a villain and not a mechanism, and the join was an *and* in the claim sentence.
 What settled it is language-dependence — 18's material changes with the language, this argument is identical in every language, so it cannot live in a chapter called *versus the language*.
-The author's decision was a new chapter. Chapter 19, *Abstraction as insurance*, was created for it and chapters 19 through 23 renumbered to 20 through 24.
+The author's decision was a new chapter. Chapter 18, *Abstraction as insurance*, was created for it and chapters 18 through 23 renumbered to 20 through 24.
 
-This file stays here only for the one line owed to chapter 21.
+This file stays here only for the one line owed to chapter 20.

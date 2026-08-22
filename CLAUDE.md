@@ -68,7 +68,7 @@ Material outside this repo that the book draws on.
 Most of it has already been worked through and corrected by the author, so **read it rather than re-deriving the argument** — re-derivation produces subtly different claims, and the book cannot afford to contradict itself between chapters.
 
 - **`~/c/TechIter/01/coding-style-architecture.md`** — roughly 3,700 lines analysing FlowCore's structure, written and reviewed in dialogue with the author.
-  Directly feeds several chapters: layering and the direction rule, DAG-versus-line shapes, when layering fails (→ 05, 18); placement-by-scope with worked rules (→ 20); Adapter at class scale versus system scale (→ 11); layered packages forcing exports (→ 18); dependency injection across Go, C#, Python, and Node (→ Part V); error taxonomies, params structs, and testing against a real database.
+  Directly feeds several chapters: layering and the direction rule, DAG-versus-line shapes, when layering fails (→ 05, 18); placement-by-scope with worked rules (→ 19); Adapter at class scale versus system scale (→ 11); layered packages forcing exports (→ 18); dependency injection across Go, C#, Python, and Node (→ Part V); error taxonomies, params structs, and testing against a real database.
   It also contains the author's positions on pattern culture and methodology, which Part IV should stay consistent with.
 - **`~/s/flowcore/docs/decisions.md`** — 38 design decisions in Context / Options / Decision / Why / Consequence form. The source of most FlowCore examples, and the model for this book's own decision log.
 - **`~/s/flowcore/docs/code-map.md`** — how the library fits together; useful for picking an example that is genuinely representative.
@@ -131,9 +131,9 @@ Provenance stays in the prose where the claim is made, so the section adds no fo
 
 ### Part IV takes a different shape
 
-Chapters 16 through 19 are case studies. Chapter 15 makes the claim; they are four instances of it, and they do not each get a claim of their own.
+Chapters 16, 17 and 18 are case studies. Chapter 15 makes the claim; they are three instances of it, and they do not each get a claim of their own.
 
-Forcing the rubric on them produced four manufactured claim sentences — each one two assertions welded with *and* or *neither/nor*, half reporting what a source said and half stating the chapter's technical finding. The author rejected all four. **A chapter whose job is to be evidence for another chapter's claim does not need a claim; it needs the case laid out.**
+Forcing the rubric on them produced manufactured claim sentences — each one two assertions welded with *and* or *neither/nor*, half reporting what a source said and half stating the chapter's technical finding. The author rejected all four. **A chapter whose job is to be evidence for another chapter's claim does not need a claim; it needs the case laid out.**
 
 So a Part IV case uses this shape instead:
 
@@ -155,7 +155,7 @@ The bias has a specific shape: claiming *sufficiency* where only *necessity* was
 Two drafts of chapter 03's claim failed this, in the same direction:
 
 - *"Evaluating the Forces is most of the work of choosing well"* — unquantifiable, and not what the chapter demonstrates.
-- *"…is where the design is actually decided"* — contradicted by the book itself in three places: chapter 02's *classifying is not deciding*, chapter 03's own concession that conflicting Forces are decided rather than computed, and chapter 22's case for obeying an Idiom you can out-argue.
+- *"…is where the design is actually decided"* — contradicted by the book itself in three places: chapter 02's *classifying is not deciding*, chapter 03's own concession that conflicting Forces are decided rather than computed, and chapter 21's case for obeying an Idiom you can out-argue.
 
 What survived was *"…is the groundwork"* — a prerequisite claim, necessary and explicitly not sufficient, provable from the seven cases the chapter works through.
 

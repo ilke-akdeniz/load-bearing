@@ -3264,3 +3264,38 @@ Length was never the problem. The manufactured claim was.
 **Consequence.**
 Chapter 16 is reworked first as the prototype, for review before 17, 18 and 19 follow.
 Chapter 15's line *"Part IV is four case studies, and this chapter is the mechanism they share, stated once"* stops being descriptive and becomes the thing that licenses the different shape.
+
+---
+
+## 83. *The database is a detail* is cut, and with it chapter 18
+
+**Date.** 2026-08-22
+
+**Context.**
+Chapter 18 ran chapter 15's mechanism on *the database is a detail*, and demonstrated the cost with a Go package split that publishes the helpers it was drawn to hide.
+Reworking it into the Part IV case-study shape did not fix it, and the author called the result a failure: two unrelated things bundled under a common theme.
+
+**The decisive argument, which is the draft's and is stronger than "uninteresting".**
+Every other Part IV case shows damage that follows from the *reading*. This one does not.
+The export bill is a property of Go's package semantics, paid identically whatever the motive for the split — and the chapter's own boundary section conceded it: *"Splitting a package to break a dependency cycle is chapter 05's third option, and it works — the cycle is gone whatever the export cost."*
+So the demonstration was never a demonstration of the advice. It was a Go fact welded to a Martin sentence, which is the third time in Part IV the draft bound a real finding to advice it does not follow from.
+
+**The author's argument for cutting the database material entirely**, which the draft had wanted to salvage into chapter 17.
+*Clean Architecture*'s chapter 30 is titled *The Database Is a Detail* and opens: *"From an architectural point of view, the database is a non-entity — it is a detail that does not rise to the level of an architectural element. Its relationship to the architecture of a software system is rather like the relationship of a doorknob to the architecture of your home."*
+The distinction the draft found — data model significant, database system a mechanism — comes later in the same chapter.
+That is not a scope stated plainly and lost in transmission. It is a chapter that opens on a maximal claim and qualifies it in its own pages, and untangling that is the original author's responsibility rather than this book's.
+
+It would also have contaminated the pattern. Riel's *related*, Fowler's two schools and Martin's stability criterion are clean transmission losses; authorial overreach-then-hedge is a different phenomenon, and mixing it in makes Part IV mushier rather than broader.
+
+**Decision.**
+Chapter 18 is deleted. Part IV is 15 plus three cases: OOP and the direction rule, TDD and mocks, abstraction as insurance.
+Chapters 19–24 renumber to 18–23; the book returns to twenty-three chapters.
+
+**What was salvaged, and what was not.**
+`docs/pending/layout-and-language.md` holds the Go compile error, the `go doc` output, the `internal/` reasoning, the mapping tax and the three-language table, owed to chapter 21 as one section. A directory means a package in Go, nothing in C# until assemblies split, and nothing enforced in Python — which is an idiom finding, and *why ecosystems diverge* is the chapter for it.
+The database material is not salvaged anywhere.
+
+**Consequence.**
+Chapter 05 loses three cross-references to a chapter that no longer exists; two of its sentences already stated the finding in full, so only the pointers went.
+Five ledger rows move to 21 and three are deleted.
+`CLAUDE.md`'s Part IV shape, chapter 15's case counts in four places, chapter 16's opening, the README count and the drift checker's count words all follow.
