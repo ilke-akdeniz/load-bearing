@@ -447,7 +447,7 @@ Recording a jointly reached answer as the draft's, because the draft wrote it do
 A chapter is finished by alternating commits, and **both sides commit**, so that each party's contribution stays visible in the history.
 
 1. **Claude writes and commits.** One commit per pass.
-2. **The author reviews in the file itself.** Two kinds of change arrive together: direct edits to the prose, and notes to Claude written inline as `[claude …]` tags — questions, objections, requests, or a decision to apply.
+2. **The author reviews in the file itself.** Two kinds of change arrive together: direct edits to the prose, and notes to Claude written inline as `[-- …]` tags — questions, objections, requests, or a decision to apply.
 3. **The author commits, and says so.**
 4. **Claude reviews that commit, acts on all of it, and commits again.**
 5. **Repeat** until the author says the chapter is done.
@@ -463,7 +463,7 @@ Reversing this order could yield unwanted results, and tags sometimes explain a 
 - **Review every direct edit on the merits, not only for grammar.** Ask whether it made the chapter better, and say so either way. Two failures a spellcheck cannot see: an edit that restates a concept another chapter *owns*, in different words, which is the drift `docs/LEDGER.md` exists to prevent; and an edit that weakens a claim while reading more smoothly. Check terms the ledger assigns elsewhere against their canonical wording.
 - **Proofread every direct edit** — grammar, and the book's own rules. A review edit is as subject to the register and the no-decoration rules as anything Claude wrote. Note that automated checks skip fenced code, so comments inside samples need reading by eye.
 - **Disagree when there is a reason to.** A tag is not always an instruction; some are questions and some are wrong. Say so, give the reason, propose the alternative. The author repeating it settles it.
-- **Act on every `[claude …]` tag**, and delete it once addressed. A tag left in the file is unfinished work, and a chapter is not ready while any remain.
+- **Act on every `[-- …]` tag**, and delete it once addressed. A tag left in the file is unfinished work, and a chapter is not ready while any remain. Grep for `[--` before reporting a pass complete; a tag can sit inside a sentence rather than on its own line, and one has been missed that way.
 - **Report what changed and why**, including anything found that was not asked about.
 
 **A wording problem found in one place is a survey, not a fix.**
