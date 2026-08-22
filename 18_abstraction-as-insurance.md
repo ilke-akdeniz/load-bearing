@@ -1,65 +1,22 @@
 # Abstraction as Insurance
 
-## The claim
+## The advice
 
-**"Depend on abstractions, not concretions" states its own test, and the test is stability rather than abstractness. An interface with one implementation fails it — nothing depends on the interface but its single caller, and it is not independent of the engine, because it encodes one. Bought instead as insurance against a database change that has not been scheduled, it cannot pay out when that change arrives, and it charges a premium every day in features of the engine you are running.**
+> **Depend on abstractions, not concretions.**
 
-This is Part IV's fourth case, and it differs from the three before it. Chapter 15's mechanism usually runs on advice whose scope was never written down. Here it was written down, in the paper that introduced the idea, and the folk version kept the shape while replacing the reason.
-
-The chapter also survives the reply that ends most versions of this argument: *but what if we do need it.* Assume you do. The claim is that the policy is void, not that the event never happens.
+This is Part IV's third case, and it survives the reply that ends most versions of this argument: *but what if we do need it.* Assume you do. What follows is that the policy is void, not that the event never happens.
 
 It is also not YAGNI. That says you paid for something you did not need. This says you paid, the event occurred, and the cover did not apply.
 
 ---
 
-## The demonstration
+## What the wide reading produces
 
-### What the principle actually says
-
-The sentence comes from Robert Martin, and the earliest full statement of the reasoning is his 1994 paper *OO Design Quality Metrics: An Analysis of Dependencies*. It is worth reading because almost none of it is about substituting implementations.
-
-His example is a program that copies characters from a keyboard to a printer. `Copy` calls `ReadKeyboard` and `WritePrinter`, and the complaint is not that the printer might be replaced. It is that `Copy` cannot be reused:
-
-> It is the "Copy" module that encapsulates a very interesting policy that we would like to reuse.
-
-Introducing abstract `Reader` and `Writer` classes lets `Copy` drive any device. So the purpose is **reuse of high-level policy**, and the thing being escaped is a dependency that pins policy to one mechanism.
-
-Then he gives the criterion, and it is not *use an interface*:
-
-> a "Good Dependency" is a dependency upon something that is very stable. The more stable the target of the dependency, the more "Good" the dependency is.
-
-An interface is a means. Stability is the test — which is chapter 05's reading of this same sentence, arrived at there from the mechanism and confirmed here by the source.
-
-**And his argument for why `Reader` and `Writer` are stable is the part that decides this chapter.** He gives two reasons. They depend on nothing, so nothing can ripple up into them. And:
-
-> the more varieties of "Reader" and "Writer" exist, the more dependents these classes have. The more dependents they have, the harder it is to make changes to them.
-
-Stability, in the source, comes from having many implementations. It is produced by plurality rather than assumed in its absence.
-
-Now apply that test to a repository interface written against one database, for a swap nobody has scheduled. It has one implementation, so it gains no stability from dependents. And it is not independent of anything — as the next sections show, it encodes the engine it was written over. It fails the principle's test on both counts while carrying its name.
-
-**The paper also states a limit, in its last paragraph**, and this is the part that did not travel:
-
-> It is certainly possible that the standard chosen in this paper is appropriate only for certain applications and is not appropriate for others.
-
-> Thus, I would deeply regret it if anybody suddenly decided that all their designs must unconditionally be conformant to "The Martin Metrics".
-
-That is a scope statement written down by the author in the original paper. Chapter 15's case was a scope given aloud once, in a talk, and lost because nobody re-watched it. This one has been in print since 1994.
-
-### Two implementations at once, or one after another
-
-Almost every repository interface is justified by the same sentence: *we might need to switch databases.* That sentence covers two different situations, and the machinery is only earned by one of them.
-
-- **Simultaneous plurality.** Two implementations exist at the same time and something chooses between them while the program runs. Tenant A on Oracle, tenant B on SQL Server. A vendor shipping on-premises software onto whatever the customer already has. Here the interface is *exercised* — both implementations load, and dispatch is a real decision the program makes.
-- **Sequential replacement.** SQL Server today, Postgres from next March, forever after. At every instant there is exactly one implementation. The interface is never exercised as an interface. It is a shape the code is held in, not a choice anything makes.
-
-*We need to support two databases* is the first. *We might need to switch databases* is the second, and it is the one that gets said in the meeting.
-
-Martin's example is the first. Keyboard and printer and disk file are readers and writers that exist at the same time, and the whole argument for `Copy` turns on being able to drive any of them. **The names for the two cases are this book's and are not standard vocabulary**, but the distinction is in the source; what the folk version dropped is that only one of the two produces the stability the principle asks for. Everything below concerns the second case. The two are easy to conflate because the code they produce is identical — the same interface, the same constructor, the same dependency arrow — and only the run-time behaviour differs, which nobody looks at.
+Take the sentence as an instruction to put an interface between your code and anything it depends on, which is how it is usually taken, and point it at the database.
 
 ### Injection is not abstraction
 
-Before going further: a distinction without which chapter 05 refutes this chapter in one sentence.
+One thing has to be separated out first, or chapter 05 refutes this chapter in a sentence.
 
 Two decisions travel under one word, and they are separable:
 
@@ -149,7 +106,52 @@ That is chapter 03's reversibility rule doing its work: this is cheap to do at m
 
 ---
 
-## Why the claim holds
+## What the source said
+
+None of that bill is in the advice, and neither is the reason the interface was bought. The sentence comes from Robert Martin, and the earliest full statement of the reasoning is his 1994 paper *OO Design Quality Metrics: An Analysis of Dependencies*. It is worth reading because almost none of it is about substituting implementations.
+
+His example is a program that copies characters from a keyboard to a printer. `Copy` calls `ReadKeyboard` and `WritePrinter`, and the complaint is not that the printer might be replaced. It is that `Copy` cannot be reused:
+
+> It is the "Copy" module that encapsulates a very interesting policy that we would like to reuse.
+
+Introducing abstract `Reader` and `Writer` classes lets `Copy` drive any device. So the purpose is **reuse of high-level policy**, and the thing being escaped is a dependency that pins policy to one mechanism.
+
+Then he gives the criterion, and it is not *use an interface*:
+
+> a "Good Dependency" is a dependency upon something that is very stable. The more stable the target of the dependency, the more "Good" the dependency is.
+
+An interface is a means. Stability is the test — which is chapter 05's reading of this same sentence, arrived at there from the mechanism and confirmed here by the source.
+
+**And his argument for why `Reader` and `Writer` are stable is the part that decides this chapter.** He gives two reasons. They depend on nothing, so nothing can ripple up into them. And:
+
+> the more varieties of "Reader" and "Writer" exist, the more dependents these classes have. The more dependents they have, the harder it is to make changes to them.
+
+Stability, in the source, comes from having many implementations. It is produced by plurality rather than assumed in its absence.
+
+Now apply that test to a repository interface written against one database, for a swap nobody has scheduled. It has one implementation, so it gains no stability from dependents. And it is not independent of anything — as the next sections show, it encodes the engine it was written over. It fails the principle's test on both counts while carrying its name.
+
+**The paper also states a limit, in its last paragraph**, and this is the part that did not travel:
+
+> It is certainly possible that the standard chosen in this paper is appropriate only for certain applications and is not appropriate for others.
+
+> Thus, I would deeply regret it if anybody suddenly decided that all their designs must unconditionally be conformant to "The Martin Metrics".
+
+That is a scope statement written down by the author in the original paper. Chapter 15's case was a scope given aloud once, in a talk, and lost because nobody re-watched it. This one has been in print since 1994.
+
+### Two implementations at once, or one after another
+
+Almost every repository interface is justified by the same sentence: *we might need to switch databases.* That sentence covers two different situations, and the machinery is only earned by one of them.
+
+- **Simultaneous plurality.** Two implementations exist at the same time and something chooses between them while the program runs. Tenant A on Oracle, tenant B on SQL Server. A vendor shipping on-premises software onto whatever the customer already has. Here the interface is *exercised* — both implementations load, and dispatch is a real decision the program makes.
+- **Sequential replacement.** SQL Server today, Postgres from next March, forever after. At every instant there is exactly one implementation. The interface is never exercised as an interface. It is a shape the code is held in, not a choice anything makes.
+
+*We need to support two databases* is the first. *We might need to switch databases* is the second, and it is the one that gets said in the meeting.
+
+Martin's example is the first. Keyboard and printer and disk file are readers and writers that exist at the same time, and the whole argument for `Copy` turns on being able to drive any of them. **The names for the two cases are this book's and are not standard vocabulary**, but the distinction is in the source; what the folk version dropped is that only one of the two produces the stability the principle asks for.
+
+Everything demonstrated earlier in this chapter is the second case. The two are easy to conflate because the code they produce is identical — the same interface, the same constructor, the same dependency arrow — and only the run-time behaviour differs, which nobody looks at.
+
+## Why the wide reading gets taken
 
 **What was dropped is not the scope but the criterion.** The five words that travel — *depend on abstractions, not concretions* — name the technique and omit the test the technique was supposed to pass. Read alone they are an instruction to introduce an interface. Read with the paper they are an instruction to depend on something stable, of which an interface is one way and not a guarantee.
 
@@ -163,7 +165,9 @@ So the practice is never disconfirmed by experience. A team that abstracted and 
 
 ---
 
-## Where the claim doesn't apply
+## Where the wide reading is right
+
+Four situations sit outside the argument above, and in each the interface earns what it costs — or is bought for a reason this chapter never disputes.
 
 ### Portability is a contract term
 
@@ -189,7 +193,7 @@ The claim is about interfaces justified by a future substitution, not about inte
 
 ---
 
-## What the claim costs
+## What taking the alternative costs
 
 **A library name appears in signatures that are not about that library.** `func NewOrders(database *sql.DB)` puts `database/sql` in the constructor of something that is about orders, and every component doing the same makes the dependency visible everywhere. That is the honest bill, and chapter 05's question prices it: how many things break when it changes.
 
@@ -201,7 +205,7 @@ The claim is about interfaces justified by a future substitution, not about inte
 
 ---
 
-## How to recognize the failure
+## How to recognize it
 
 **In a codebase:**
 

@@ -227,13 +227,14 @@ The fourth case study, and the one that survives *but what if we do need it*.
 **Chapter 15's mechanism, running on:** *depend on abstractions, not concretions* — and running differently, because here the scope was written down.
 Martin's 1994 paper names the test as **stability**, and gives plurality as the reason an abstraction is stable: the more implementations depend on it, the harder it is to change.
 The five words that travel keep the technique and drop the test, so an interface with one implementation carries the principle's name while failing it.
-The argument is worked in `docs/pending/speculative-abstraction.md`; read it before drafting.
+The chapter shows the wide reading first and the source after it, so the stability test arrives as a correction to an interface the reader has already watched fail.
+The argument is worked in `docs/pending/speculative-abstraction.md`.
 
 Contents: the distinction everything rests on — **simultaneous plurality** (two implementations loaded at once, something dispatching between them) against **sequential replacement** (one engine, then another, forever), where only the first is a Force and the second is what people mean; **injection is not abstraction**, stated because chapter 05 otherwise refutes the claim in a sentence; four reasons the insurance cannot pay out, each leaning on a Law the book already owns; and the rollback objection answered with what actually does the job — replication, comparison, per-tenant cutover, a window where both engines run.
 
 Also the paper's own last paragraph, in print since 1994 and still lost: the standard may suit only certain applications, and its author would regret unconditional conformance.
 
-*Where the claim doesn't apply:* portability sold as a contract term, which is plurality and load-bearing; a funded and dated migration, where the objection changes from *this will never happen* to *this is not how to do it*; and the testing case, which chapter 17 owns and answers.
+*Where the wide reading is right:* portability sold as a contract term, which is plurality and load-bearing; a funded and dated migration, where the objection changes from *this will never happen* to *this is not how to do it*; the testing case, which chapter 17 owns and answers; and the one-implementation interfaces chapter 05 defends for reasons that survive deleting the word *later*.
 
 ## Part V — Contextual programming
 
