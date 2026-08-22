@@ -140,9 +140,9 @@ So a Part IV case uses this shape instead:
 1. **The advice** — the sentence as it actually travels, and what it is for. The chapter opens on it.
 2. **What the source said** — the scope, quoted from the primary source.
 3. **What the wide reading produces** — the demonstration, in code, and where the chapter's own finding lands.
-4. **Why it is the reading that gets taken** — the mechanism.
+4. **Why the wide reading gets taken** — the mechanism.
 5. **Where the wide reading is right** — the mandatory counter-example, framed as *when following the compressed version is correct* rather than as an exception to a claim the chapter never made.
-6. **What the alternative costs** — the bill for doing it the other way.
+6. **What it costs** — split into *following the advice* and *taking the alternative* where both have a bill, since mixing the two in one list is what made chapter 17's costs section unreadable.
 7. **How to recognize it**
 
 The counter-example rule is unchanged and still mandatory; only its framing moves. Everything before Part IV keeps the general rubric, because those chapters do make claims of their own.

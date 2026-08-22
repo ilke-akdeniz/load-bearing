@@ -212,7 +212,7 @@ So the identifier is not free and was not chosen because it is tidier. It moves 
 
 ---
 
-## Why it is the reading that gets taken
+## Why the wide reading gets taken
 
 The five words that travel are the instruction. What stayed behind is the qualifier, and it did not survive for a reason worth naming: the instruction can be followed one method at a time, and the qualifier cannot be checked that way.
 

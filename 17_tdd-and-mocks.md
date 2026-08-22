@@ -121,7 +121,6 @@ Registration leaves an account `pending` until the address is verified, at which
 ```python
 STARTING_STATUS = "active"   # the fixture's choice
 
-
 def an_account(email):
     connection = sqlite3.connect(":memory:")
     connection.execute(SCHEMA)
@@ -130,7 +129,6 @@ def an_account(email):
     )
     connection.commit()
     return connection
-
 
 class VerificationActivatesTheAccount(unittest.TestCase):
     def test_status_is_active_after_verifying(self):
@@ -142,11 +140,11 @@ class VerificationActivatesTheAccount(unittest.TestCase):
         self.assertEqual(accounts.status_of("ada@example.com"), "active")
 ```
 
-[claude this example is probably ok, but I have trouble pinpointing what was the "bad practice here". Clarifying that could offer more insight. What was mocked or what was there a first written test here? Something related to STARTING_STATUS? Or is this example a very close but different failure shape?]
+Nothing is mocked here and nothing turns on the order it was written in. It is a third route to the same place, and worth having because it is the one that survives every rule this chapter has given so far.
 
 It passes. It uses a real database, no mock anywhere, and it asserts on state it read back rather than on a call it made — which is everything this chapter has recommended so far.
 
-It also cannot fail. The fixture creates the account already `active`, so the assertion is satisfied before `verify` is called. Gut the method entirely:
+It also cannot fail. The fixture creates the account already `active`, so the assertion is satisfied before `verify` is called — and notice how ordinary the mistake is. Whoever wrote `an_account` needed a status to insert and picked the one an account usually has. Whoever wrote the assertion needed the status verification produces and picked the same word. Neither decision is wrong on its own, nothing connects them, and the two were probably made minutes apart by the same person. Gut the method entirely:
 
 ```python
 def verify(self, email):
@@ -203,12 +201,15 @@ He also says which side he is on, and why:
 
 So *mock your dependencies* is the mockist default stated as if it were the only one. The position this chapter argues for — use the real thing where you can run it — is the classical default, and it has had a name for nearly two decades.
 
-Which reframes the registration test above. It is not what happens when someone follows the consensus. It is what happens when one school's "mock by default" approach is applied to a dependency that should not be mocked according to Fowler and later writers.
+Which reframes the registration test above. It is not what happens when someone follows the consensus. It is what happens when one school's *mock by default* approach is applied to a dependency that Fowler and later writers say should be left real.
+
 ---
 
-## A Dissection of the Test-Driven Development Process: Does It Really Matter to Test-First or to Test-Last?
+## What the ordering was measured to buy
 
-A study with the exact title above has measured the effedts of testing first vs last. Rather than split people into a TDD group and a control group, they recorded what developers actually did. Thirty-nine professional developers — averaging 7.3 years of Java experience — worked through programming tasks in an IDE recording every action, producing 82 usable data points. Instead of asking *did the TDD group do better*, they broke the work itself into four things they could measure:
+The ordering has been measured on its own, separately from everything bundled with it, by a study whose title is the question: *A Dissection of the Test-Driven Development Process: Does It Really Matter to Test-First or to Test-Last?*
+
+Fucci, Erdogmus, Turhan, Oivo and Juristo went at it differently. Rather than split people into a TDD group and a control group, they recorded what developers actually did. Thirty-nine professional developers — averaging 7.3 years of Java experience — worked through programming tasks in an IDE recording every action, producing 82 usable data points. Instead of asking *did the TDD group do better*, they broke the work itself into four things they could measure:
 
 ```text
  granularity   how long one cycle usually was
@@ -229,7 +230,7 @@ And the corollary they draw is the sharpest sentence in the paper: writing tests
 
 Not *the order is irrelevant*. **Two practices are interchangeable once matched on step size — and both of them include writing the tests.**
 
-This study travels as *TDD doesn't work* or *the order doesn't matter*. But five things that forbids those conclusions sit beside it in the paper, three of them in that closing passage.
+It travels as *TDD doesn't work* or *the order doesn't matter*. Five things in the paper forbid both readings, three of them in that same closing passage.
 
 **The tests are not the variable.** Every process measured here wrote tests. The comparison is test-first against test-last, never against not testing, and the conclusion says so in the clause that is easiest to drop: *provided that they keep writing tests*.
 
@@ -301,8 +302,6 @@ Vladimir Khorikov states a sharper version of the same line, and it is worth hav
 
 > Communications with managed dependencies are implementation details; communications with unmanaged dependencies are part of your system's observable behavior.
 
-That subsumes the mailer case above. Sending the welcome email is visible outside your system, so asserting that it happened is asserting about behaviour. Whether registration inserted a row is not visible outside your system — the visible thing is that a second registration is refused, which is what the database-backed test checks and the mocked one did not. [claude this paragraph is confusing. "Sending the welcome email", I don't think code samples have that case. This looks like an obscure expantion on an example that was not provided. Also, it drags this section, I would just delete this paragraph.]
-
 ### A mock asserting a call, where the call is the behaviour
 
 Sometimes the effect under test *is* that a particular call was made. Registration should send a welcome email; the test asserts the mailer was invoked with the right address. There is no state to inspect afterwards, and the call is the whole of the requirement.
@@ -311,7 +310,15 @@ That is a legitimate use of a mock and it is not what this chapter argues agains
 
 ---
 
-## What the alternative costs
+## What it costs
+
+### Following the advice
+
+**Writing the test first couples the test to a structure being designed as you write it.** The test names an interface before that interface has settled, so it encodes the shape as well as the behaviour. Structural change then costs test change in proportion: add a field and you touch every test that constructs the object, split a class and its tests split with it. This follows from the method rather than being a failure of it — the tests are fine-grained because the loop is, and fine-grained tests attach to the shape of the thing they test.
+
+**The loop is hard to run, and the study shows how hard.** Across all 82 sessions — both arms, test-first and test-last — the highest share of test-first cycles anyone reached was 87.5%, so no session in the study was run purely test-first, and the authors describe the upper quarter as writing test-first *"approximately half of the time."* The third step fares worse: subjects refactored about a third of the time and a quarter of them refactored in under a tenth of their cycles, which the authors call unsurprising because it is what happens in real projects. These were professionals given ten hours of training for it — a five-hour hands-on tutorial on unit testing with JUnit, and five hours on applying TDD — then working observed, on tasks chosen for the purpose. Whatever the discipline costs, it is enough that it is mostly not performed as described.
+
+### Taking the alternative
 
 **Real dependencies make the suite slower and more fragile.** A test that starts a database is orders of magnitude slower than one that does not, and chapter 08's arithmetic applies to test suites like anything else. Once the suite is slow enough to skip, it stops being run, and a test nobody runs is worth less than a weak one.
 
@@ -320,13 +327,6 @@ That is a legitimate use of a mock and it is not what this chapter argues agains
 **Parallelism gets harder.** Two tests sharing a real database contend on state in a way two tests sharing nothing do not, so isolation becomes a design problem rather than a default.
 
 **Mutation testing is expensive.** Catching a test that cannot fail means running the whole suite once for every deliberate break, which for a large suite is hours. It is worth it for load-bearing code and it is not worth it everywhere, which means somebody has to decide where — and that decision has no rule to hand.
-
-Those are the costs of the first principle. The second has its own, and the paper does not price them, because pricing a practice is not what a controlled study is for.
-
-**Writing the test first couples the test to a structure being designed as you write it.** The test names an interface before that interface has settled, so it encodes the shape as well as the behaviour. Structural change then costs test change in proportion: add a field and you touch every test that constructs the object, split a class and its tests split with it. This follows from the method rather than being a failure of it — the tests are fine-grained because the loop is, and fine-grained tests attach to the shape of the thing they test.
-
-**The loop is hard to run, and the study shows how hard.** Across all 82 sessions — both arms, test-first and test-last — the highest share of test-first cycles anyone reached was 87.5%, so no session in the study was run purely test-first, and the authors describe the upper quarter as writing test-first *"approximately half of the time."* The third step fares worse: subjects refactored about a third of the time and a quarter of them refactored in under a tenth of their cycles, which the authors call unsurprising because it is what happens in real projects. These were professionals given ten hours of training for it — a five-hour hands-on tutorial on unit testing with JUnit, and five hours on applying TDD — then working observed, on tasks chosen for the purpose. Whatever the discipline costs, it is enough that it is mostly not performed as described.
-[claude these two last paragraphs are cons of test first - mock by default, the previous ones are cons of the alternative. It seems like these two paragraphs need a different home.]
 
 ---
 
@@ -367,7 +367,7 @@ The wider version is worth asking before a release: **if this behaviour is broke
 
 ---
 
-**Next:** chapter 18 takes the following cases: 
+**Next:** the remaining two cases come from the same doctrine and split along the language.
 
-- A structural idea that arrives as a directory layout and an interface at every boundary.
-- An abstraction bought as insurance turns out to be shaped by the thing it was insuring against.
+- **Chapter 18** — a structural idea that arrives as a directory layout, and costs a different amount in every language it is applied to.
+- **Chapter 19** — an abstraction bought as insurance, shaped by the thing it was insuring against.
