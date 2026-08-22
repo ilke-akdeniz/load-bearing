@@ -185,8 +185,8 @@ Which exposes a control inside Pike's own list — four proverbs take a named pa
 
 *Where the claim doesn't apply:* a named situation is only a **proxy** for the conditions and can fit badly in either direction — syscall and cgo are two proverbs for one condition, so a third platform-specific case has none, and the test therefore measures whether you were given something checkable rather than whether the extent is right; advice with no scope to lose, where gofmt travelled intact; the domain gap between a fixed board game and software, which explains the lag without excusing it; and the fact that this chapter ends in repair rather than entrenchment, which is why the endpoint term belongs to 23.
 
-### 16. OOP versus the Direction Rule
-`16_oop-vs-direction.md`
+### 16. Behaviour placement and OOP
+`16_behaviour-placement.md`
 
 The first case study.
 
@@ -325,7 +325,7 @@ Two are not negotiable: chapter 02's classification model is a lens rather than 
 | 13 | `13_missing-language-features.md` | **draft** |
 | 14 | `14_smuggled-verdicts.md` | **draft** |
 | 15 | `15_principle-loses-scope.md` | **draft** |
-| 16 | `16_oop-vs-direction.md` | **in progress** |
+| 16 | `16_behaviour-placement.md` | **in progress** |
 | 17 | `17_tdd-and-mocks.md` | **in progress** |
 | 18 | `18_abstraction-as-insurance.md` | **in progress** |
 | 19 | `19_force-map-method.md` | not started |

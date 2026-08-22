@@ -296,4 +296,4 @@ If the source can be reached, go and look. The scope is often still there, in th
 
 ---
 
-**Next:** chapter 16 is the first of the three cases, where object orientation's advice about where behaviour belongs meets the Direction Rule, and produces dependency graphs that point both ways.
+**Next:** chapter 16 is the first of the three cases — object orientation's advice about where behaviour belongs, and the references that appear in both directions once two rules are placed by it.
