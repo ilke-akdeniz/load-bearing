@@ -1,5 +1,5 @@
 # OOP Versus the Direction Rule
-
+[-- chapter title doesn't feel right. "Direction rule" is not clearly defined - labeled in the chapter. I would not change the chapter content for the title, content looks fine. My title recommendation: "Behaviour Placement and OOP"  ]
 ## The advice
 
 > **Behaviour belongs with the data it operates on.**
