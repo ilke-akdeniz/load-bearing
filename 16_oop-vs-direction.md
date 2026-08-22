@@ -131,7 +131,7 @@ That is an author who saw this coming, said so in his introduction, and was comp
 
 So the reader is not missing a scope nobody wrote down. They are missing a qualifier that the source defines, and a standing instruction not to treat any of it as a rule.
 
-What the compressed sentence gives you is an instruction. What it leaves behind is the thing that says when the instruction applies — [claude the rest of this sentence looks weird and redundant, just delete the rest] and the discount rule, which is what a reader would most want it applied to, is a case its author put outside it.
+What the compressed sentence gives you is an instruction. What it leaves behind is the thing that says when the instruction applies.
 
 ---
 
