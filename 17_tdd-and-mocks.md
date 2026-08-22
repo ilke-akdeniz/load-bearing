@@ -110,79 +110,6 @@ Mocking the database means nothing that happens inside the database is covered. 
 
 **A test can only fail for a reason it can reach.** Mocking a dependency removes the reasons that live inside it. What is left is a test of the seam.
 
-### The test that never reaches its condition
-
-The mocked test above at least asserts something. The more common failure is a test that cannot fail at all, and reading it will not tell you.
-
-Beck lists it among the ways to get TDD wrong — writing tests without assertions for the sake of coverage, and deleting assertions to make a test pass — so this is a known failure rather than a discovery. What follows is what it looks like when nobody deleted anything.
-
-Registration leaves an account `pending` until the address is verified, at which point it becomes `active`. Here is the test, and the fixture it runs against:
-
-```python
-STARTING_STATUS = "active"   # the fixture's choice
-
-def an_account(email):
-    connection = sqlite3.connect(":memory:")
-    connection.execute(SCHEMA)
-    connection.execute(
-        "insert into account (email, status) values (?, ?)", (email, STARTING_STATUS)
-    )
-    connection.commit()
-    return connection
-
-class VerificationActivatesTheAccount(unittest.TestCase):
-    def test_status_is_active_after_verifying(self):
-        accounts = AccountRepository(an_account("ada@example.com"))
-        registration = Registration(accounts)
-
-        registration.verify("ada@example.com")
-
-        self.assertEqual(accounts.status_of("ada@example.com"), "active")
-```
-
-Nothing is mocked here and nothing turns on the order it was written in. It is a third route to the same place, and worth having because it is the one that survives every rule this chapter has given so far.
-
-It passes. It uses a real database, no mock anywhere, and it asserts on state it read back rather than on a call it made — which is everything this chapter has recommended so far.
-
-It also cannot fail. The fixture creates the account already `active`, so the assertion is satisfied before `verify` is called — and notice how ordinary the mistake is. Whoever wrote `an_account` needed a status to insert and picked the one an account usually has. Whoever wrote the assertion needed the status verification produces and picked the same word. Neither decision is wrong on its own, nothing connects them, and the two were probably made minutes apart by the same person. Gut the method entirely:
-
-```python
-def verify(self, email):
-    pass
-```
-
-```text
-Ran 1 test in 0.000s
-
-OK
-```
-
-That is a **mutation**: break the code deliberately and see whether any test notices. This one did not. Change the fixture's one word to `"pending"` and run the same broken code:
-
-```text
-AssertionError: 'pending' != 'active'
-- pending
-+ active
-
-FAILED (failures=1)
-```
-
-The test was always this weak. Nothing in the passing run said so, and neither would coverage — the line ran, which is all coverage measures.
-
-**This is not a hypothetical shape.** FlowCore hit it, in a workflow fixture that declared one status and pointed both of its terminal actions at it, so a run reported the same status before and after finishing. It was caught the same way: `completeWorkflow` was changed to stamp `completed_at` and never the status columns, and **the entire suite passed**. Its decision 37 records two things worth more than the fix.
-
-The first is the count — it was **the fifth toothless test in one iteration**, meaning the fifth that asserted nothing, and the first mutation used to investigate it was itself broken, so its failure proved nothing until it was repaired. Even the check needed checking.
-
-The second is that the code had said so. A comment sat directly above the weak fixture:
-
-```go
-// twoStepDefinition's terminal action ends in its only status
-```
-
-The weakness was noticed at the time and written down instead of fixed. The entry's own verdict:
-
-> A comment explaining why an assertion is weak is not a substitute for an assertion that is not.
-
 ---
 
 ## What the sources said
@@ -209,7 +136,7 @@ Which reframes the registration test above. It is not what happens when someone 
 
 The ordering has been measured on its own, separately from everything bundled with it, by a study whose title is the question: *A Dissection of the Test-Driven Development Process: Does It Really Matter to Test-First or to Test-Last?*
 
-Fucci, Erdogmus, Turhan, Oivo and Juristo went at it differently. Rather than split people into a TDD group and a control group, they recorded what developers actually did. Thirty-nine professional developers — averaging 7.3 years of Java experience — worked through programming tasks in an IDE recording every action, producing 82 usable data points. Instead of asking *did the TDD group do better*, they broke the work itself into four things they could measure:
+In the study Fucci, Erdogmus, Turhan, Oivo and Juristo went at it differently. Rather than split people into a TDD group and a control group, they recorded what developers actually did. Thirty-nine professional developers — averaging 7.3 years of Java experience — worked through programming tasks in an IDE recording every action, producing 82 usable data points. Instead of asking *did the TDD group do better*, they broke the work itself into four things they could measure:
 
 ```text
  granularity   how long one cycle usually was
@@ -278,6 +205,79 @@ Which does not make the ritual useless, and the paper says so. It relocates the 
 
 So the ingredient that works is also the ingredient that produces the pressure to mock. The granularity carrying the measured benefit is the same granularity that pushes the database out of the test, and pushing the database out of the test is what produced a test that passes with the constraint deleted.
 
+### Same mechanism, in a shape that escapes the instructions in ever direction 
+
+This is the subtle "the test that never reaches its condition." case.
+
+Previous mocked test example at least asserted something. This one asserts nothing about a specific business rule, although the test case looks good until you dig in. 
+
+The rule is that the registration leaves an account `pending` until the address is verified. Verfication makes it `active`. Here is the test, and the fixture it runs against:
+
+```python
+STARTING_STATUS = "active"   # the fixture's choice
+
+def an_account(email):
+    connection = sqlite3.connect(":memory:")
+    connection.execute(SCHEMA)
+    connection.execute(
+        "insert into account (email, status) values (?, ?)", (email, STARTING_STATUS)
+    )
+    connection.commit()
+    return connection
+
+class VerificationActivatesTheAccount(unittest.TestCase):
+    def test_status_is_active_after_verifying(self):
+        accounts = AccountRepository(an_account("ada@example.com"))
+        registration = Registration(accounts)
+
+        registration.verify("ada@example.com")
+
+        self.assertEqual(accounts.status_of("ada@example.com"), "active")
+```
+
+Nothing is mocked here and nothing turns on the order it was written in. It is a third route to the same place, and worth having because it is the one that survives every rule [claude rule is used as business, domain rule dominantly in this chaper, this "rule" here means "instruction" or "advice" in my opinion] this chapter has given so far.
+
+It passes. It uses a real database, no mock anywhere, and it asserts on state it read back rather than on a call it made — which is everything this chapter has recommended so far. [claude there is an important clarification - disctinction to make here: "it asserts on state it read back". I don't think it does that for STARTING_STATUS. It just "mocks" a STARTING_STATUS when in fact the correct approach is maybe to construct the account properly, let the thing under test populate the STARTING_STATUS and use that proper value.]
+
+It also cannot fail. The fixture creates the account already `active`, so the assertion is satisfied before `verify` is called — and notice how ordinary the mistake is. Whoever wrote `an_account` needed a status to insert and picked the one an account usually has. Whoever wrote the assertion needed the status verification produces and picked the same word. Neither decision is wrong on its own, nothing connects them, and the two were probably made minutes apart by the same person. Gut the method entirely:
+
+```python
+def verify(self, email):
+    pass
+```
+
+```text
+Ran 1 test in 0.000s
+
+OK
+```
+
+That is a **mutation**: break the code deliberately and see whether any test notices. This one did not. Change the fixture's one word to `"pending"` and run the same broken code:
+
+```text
+AssertionError: 'pending' != 'active'
+- pending
++ active
+
+FAILED (failures=1)
+```
+
+The test was always this weak. Nothing in the passing run said so, and neither would coverage — the line ran, which is all coverage measures.
+
+**This is not a hypothetical shape.** FlowCore hit it, in a workflow fixture that declared one status and pointed both of its terminal actions at it, so a run reported the same status before and after finishing. It was caught the same way: `completeWorkflow` was changed to stamp `completed_at` and never the status columns, and **the entire suite passed**. Its decision 37 records two things worth more than the fix.
+
+The first is the count — it was **the fifth toothless test in one iteration**, meaning the fifth that asserted nothing, and the first mutation used to investigate it was itself broken, so its failure proved nothing until it was repaired. Even the check needed checking.
+
+The second is that the code had said so. A comment sat directly above the weak fixture:
+
+```go
+// twoStepDefinition's terminal action ends in its only status
+```
+
+The weakness was noticed at the time and written down instead of fixed. The entry's own verdict:
+
+> A comment explaining why an assertion is weak is not a substitute for an assertion that is not.
+
 ---
 
 ## Where the wide reading is right
@@ -310,15 +310,13 @@ That is a legitimate use of a mock and it is not what this chapter argues agains
 
 ---
 
-## What it costs
-
-### Following the advice
+## What following the advice costs
 
 **Writing the test first couples the test to a structure being designed as you write it.** The test names an interface before that interface has settled, so it encodes the shape as well as the behaviour. Structural change then costs test change in proportion: add a field and you touch every test that constructs the object, split a class and its tests split with it. This follows from the method rather than being a failure of it — the tests are fine-grained because the loop is, and fine-grained tests attach to the shape of the thing they test.
 
 **The loop is hard to run, and the study shows how hard.** Across all 82 sessions — both arms, test-first and test-last — the highest share of test-first cycles anyone reached was 87.5%, so no session in the study was run purely test-first, and the authors describe the upper quarter as writing test-first *"approximately half of the time."* The third step fares worse: subjects refactored about a third of the time and a quarter of them refactored in under a tenth of their cycles, which the authors call unsurprising because it is what happens in real projects. These were professionals given ten hours of training for it — a five-hour hands-on tutorial on unit testing with JUnit, and five hours on applying TDD — then working observed, on tasks chosen for the purpose. Whatever the discipline costs, it is enough that it is mostly not performed as described.
 
-### Taking the alternative
+## What taking the alternative costs
 
 **Real dependencies make the suite slower and more fragile.** A test that starts a database is orders of magnitude slower than one that does not, and chapter 08's arithmetic applies to test suites like anything else. Once the suite is slow enough to skip, it stops being run, and a test nobody runs is worth less than a weak one.
 
