@@ -136,7 +136,7 @@ Which reframes the registration test above. It is not what happens when someone 
 
 The ordering has been measured on its own, separately from everything bundled with it, by a study whose title is the question: *A Dissection of the Test-Driven Development Process: Does It Really Matter to Test-First or to Test-Last?*
 
-In the study Fucci, Erdogmus, Turhan, Oivo and Juristo went at it differently. Rather than split people into a TDD group and a control group, they recorded what developers actually did. Thirty-nine professional developers — averaging 7.3 years of Java experience — worked through programming tasks in an IDE recording every action, producing 82 usable data points. Instead of asking *did the TDD group do better*, they broke the work itself into four things they could measure:
+In it, Fucci, Erdogmus, Turhan, Oivo and Juristo went at it differently. Rather than split people into a TDD group and a control group, they recorded what developers actually did. Thirty-nine professional developers — averaging 7.3 years of Java experience — worked through programming tasks in an IDE recording every action, producing 82 usable data points. Instead of asking *did the TDD group do better*, they broke the work itself into four things they could measure:
 
 ```text
  granularity   how long one cycle usually was
@@ -205,11 +205,11 @@ Which does not make the ritual useless, and the paper says so. It relocates the 
 
 So the ingredient that works is also the ingredient that produces the pressure to mock. The granularity carrying the measured benefit is the same granularity that pushes the database out of the test, and pushing the database out of the test is what produced a test that passes with the constraint deleted.
 
-### Same mechanism, in a shape that escapes the instructions in ever direction 
+### Same mechanism, in a shape that escapes the instructions in ever direction
 
 This is the subtle "the test that never reaches its condition." case.
 
-Previous mocked test example at least asserted something. This one asserts nothing about a specific business rule, although the test case looks good until you dig in. 
+Previous mocked test example at least asserted something. This one asserts nothing about a specific business rule, although the test case looks good until you dig in.
 
 The rule is that the registration leaves an account `pending` until the address is verified. Verfication makes it `active`. Here is the test, and the fixture it runs against:
 
@@ -235,11 +235,15 @@ class VerificationActivatesTheAccount(unittest.TestCase):
         self.assertEqual(accounts.status_of("ada@example.com"), "active")
 ```
 
-Nothing is mocked here and nothing turns on the order it was written in. It is a third route to the same place, and worth having because it is the one that survives every rule [claude rule is used as business, domain rule dominantly in this chaper, this "rule" here means "instruction" or "advice" in my opinion] this chapter has given so far.
+Nothing is mocked here and nothing turns on the order it was written in. It is a third route to the same place, and worth having because it survives every instruction this chapter has given so far.
 
-It passes. It uses a real database, no mock anywhere, and it asserts on state it read back rather than on a call it made — which is everything this chapter has recommended so far. [claude there is an important clarification - disctinction to make here: "it asserts on state it read back". I don't think it does that for STARTING_STATUS. It just "mocks" a STARTING_STATUS when in fact the correct approach is maybe to construct the account properly, let the thing under test populate the STARTING_STATUS and use that proper value.]
+It passes. It uses a real database, no mock anywhere, and it asserts on state read back afterwards rather than on a call it made.
 
-It also cannot fail. The fixture creates the account already `active`, so the assertion is satisfied before `verify` is called — and notice how ordinary the mistake is. Whoever wrote `an_account` needed a status to insert and picked the one an account usually has. Whoever wrote the assertion needed the status verification produces and picked the same word. Neither decision is wrong on its own, nothing connects them, and the two were probably made minutes apart by the same person. Gut the method entirely:
+It also cannot fail, and the reason is in the fixture. `an_account` does not create an account; it writes a row that resembles one, with a status chosen by hand. **The precondition was fabricated rather than established** — and the value fabricated happens to be the value the assertion expects, so `verify` has nothing left to do.
+
+That is this chapter's own subject arriving where nobody invited it. The fixture is standing in for the part of the system that produces a new account, and standing in for it is what removes the reason this test could fail. There is no `Mock` object anywhere; the substitution is a hand-written `insert`.
+
+Gut the method entirely:
 
 ```python
 def verify(self, email):
@@ -263,6 +267,21 @@ FAILED (failures=1)
 ```
 
 The test was always this weak. Nothing in the passing run said so, and neither would coverage — the line ran, which is all coverage measures.
+
+Changing that one word makes the test work, but it is the smaller fix. The larger one is to stop writing the row by hand and let the system make the account:
+
+```python
+def test_status_is_active_after_verifying(self):
+    accounts = AccountRepository(a_database())
+    registration = Registration(accounts)
+    registration.register("ada@example.com")
+
+    registration.verify("ada@example.com")
+
+    self.assertEqual(accounts.status_of("ada@example.com"), "active")
+```
+
+The starting status is now whatever registration actually produces, and the test fails the moment `verify` stops working — `AssertionError: 'pending' != 'active'` — with no fixture value that anyone chose, and so none that can go stale against the code.
 
 **This is not a hypothetical shape.** FlowCore hit it, in a workflow fixture that declared one status and pointed both of its terminal actions at it, so a run reported the same status before and after finishing. It was caught the same way: `completeWorkflow` was changed to stamp `completed_at` and never the status columns, and **the entire suite passed**. Its decision 37 records two things worth more than the fix.
 
