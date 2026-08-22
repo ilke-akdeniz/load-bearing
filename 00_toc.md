@@ -198,7 +198,7 @@ The narrow reading already exists in this book — chapter 14's *what the rule m
 Contents: two rules over a customer and an order, each placed correctly, closing the cycle between them; the distinction the chapter turns on, between two classes that reference each other and a constructed value graph carrying a back-pointer; `HashSet.add` throwing `StackOverflowError`, with `json.Marshal`, `json.dumps` and a generated `equals` all refusing the same shape; and `isGold` as the control — a one-entity rule nobody moves off its entity, which is what makes the pressure one-way.
 The alternative demonstrated: identifiers instead of references, and FlowCore's decision 3 priced both ways — offline construction and working serialization bought, a query per route and cross-definition integrity moved into composite foreign keys, paid.
 
-*Where the claim doesn't apply:* rules that read one entity, where the currency check belongs on the money value and moving it out puts it where a caller can skip it; and cycles nothing ever walks generically, where the exemption is structural unreachability rather than nothing having walked it yet.
+*Where the wide reading is right:* rules that read one entity, where the currency check belongs on the money value and moving it out puts it where a caller can skip it; and cycles nothing ever walks generically, where the exemption is structural unreachability rather than nothing having walked it yet.
 
 ### 17. TDD, mocks, and what testing actually buys
 `17_tdd-and-mocks.md`

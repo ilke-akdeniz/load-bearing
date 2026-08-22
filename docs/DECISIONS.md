@@ -3229,3 +3229,38 @@ Chapter 17 had said mocking is taught with test-first "and always has been," whi
 `docs/pending/claim-research.md` is marked consumed and records where each source was found.
 Riel's book was read from the author's local copy; its PDF stores text as subset-font glyph ids, decoded with a uniform `gid + 29` offset verified against known words.
 Two sources remain unreached and nothing is claimed from them: Rafique and Mišić's meta-analysis, and Martin's 1996 *C++ Report* paper, which exists only on `web.archive.org`.
+
+---
+
+## 82. Part IV cases are not claim chapters
+
+**Date.** 2026-08-22
+
+**Context.**
+Chapter 15 states a mechanism and chapters 16 through 19 were planned as case studies of it — "the mechanism, stated once, so the case studies can be short."
+They were drafted in the general rubric anyway, opening on a bolded claim sentence like every other chapter.
+
+**The author's diagnosis, after a full re-read of 15–19.**
+The four claim sentences are not claims. They are loose summaries, and forcing the rubric is what produced them.
+
+Checking it against the four confirmed a sharper version. Each of those chapters carries two different kinds of content:
+
+- **A particular** — this piece of advice had a stated scope, here it is, here is what travelled instead. That is *evidence for chapter 15's claim*, not a claim.
+- **A general** — a value graph with a cycle breaks generic walkers; a test can only fail for reasons it can reach; a directory costs whatever the language ties to it; an abstraction's stability comes from having dependents.
+
+The single `## The claim` slot forced the two together, and every one of the four came out as two assertions joined by a connective: 16's *"drops two qualifications … **and** placing each such rule leaves a reference pointing each way"*; 17's *"**Neither** X **nor** Y …"*.
+That is the same welding the author rejected in chapter 18 at decision 80, which was treated then as one chapter's mistake. It was systemic and the draft did not see it.
+
+**Decision.**
+A stated Part IV shape, recorded in `CLAUDE.md`, replacing the claim rubric for chapters 16–19 only: the advice, what the source said, what the wide reading produces, why it is the reading that gets taken, where the wide reading is right, what the alternative costs, how to recognize it.
+
+The mandatory counter-example survives unchanged; only its framing moves, from *where this claim doesn't apply* to *when following the compressed version is correct*. Chapters before Part IV keep the general rubric, because they do make claims of their own.
+
+**Consolidation, considered and declined.**
+The author left the call to the draft. The test applied was what would be lost: the verified `StackOverflowError` and `json.Marshal` cycle error, Fucci read in full with its five conditions, the `undefined: store.scanOrder` compile error and the three-language table, SQLite refusing `for update`, and FlowCore's decisions 1, 3 and 37.
+That evidence is spread roughly evenly across the four, and a merged chapter keeps the narrative while dropping the demonstrations — which inverts the book's rule that the code should be the argument.
+Length was never the problem. The manufactured claim was.
+
+**Consequence.**
+Chapter 16 is reworked first as the prototype, for review before 17, 18 and 19 follow.
+Chapter 15's line *"Part IV is four case studies, and this chapter is the mechanism they share, stated once"* stops being descriptive and becomes the thing that licenses the different shape.

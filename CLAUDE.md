@@ -129,6 +129,24 @@ Bare entries — author, title, venue, date, link — in order of first appearan
 It is not a further-reading list: a work the chapter does not cite does not go in, and a work it does cite is not annotated with what the chapter took from it.
 Provenance stays in the prose where the claim is made, so the section adds no footnote markers and changes no sentence.
 
+### Part IV takes a different shape
+
+Chapters 16 through 19 are case studies. Chapter 15 makes the claim; they are four instances of it, and they do not each get a claim of their own.
+
+Forcing the rubric on them produced four manufactured claim sentences — each one two assertions welded with *and* or *neither/nor*, half reporting what a source said and half stating the chapter's technical finding. The author rejected all four. **A chapter whose job is to be evidence for another chapter's claim does not need a claim; it needs the case laid out.**
+
+So a Part IV case uses this shape instead:
+
+1. **The advice** — the sentence as it actually travels, and what it is for. The chapter opens on it.
+2. **What the source said** — the scope, quoted from the primary source.
+3. **What the wide reading produces** — the demonstration, in code, and where the chapter's own finding lands.
+4. **Why it is the reading that gets taken** — the mechanism.
+5. **Where the wide reading is right** — the mandatory counter-example, framed as *when following the compressed version is correct* rather than as an exception to a claim the chapter never made.
+6. **What the alternative costs** — the bill for doing it the other way.
+7. **How to recognize it**
+
+The counter-example rule is unchanged and still mandatory; only its framing moves. Everything before Part IV keeps the general rubric, because those chapters do make claims of their own.
+
 ### The claim sentence
 
 The claim may assert **only what the chapter goes on to demonstrate**, and the standing bias is toward asserting more.

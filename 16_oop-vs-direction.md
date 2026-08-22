@@ -1,20 +1,18 @@
 # OOP Versus the Direction Rule
 
-## The claim
+## The advice
 
-**"Behaviour belongs with the data it operates on" drops two qualifications its source states. The heuristic is to keep *related* data and behaviour together, where related means one key abstraction — and a rule reading two entities is not that. Placing each such rule on the entity it reads from leaves a reference pointing each way, after which the value graph breaks serialization, equality and copying, whether or not the two are ever changed apart.** [claude this is not a claim, this is a paragraph summarizing the chapter in a very loosy way. Try to generate a proper claim for the chapter, then reassess the chapter as a whole, it needs a rework as a whole in my opinion. ]
+> **Behaviour belongs with the data it operates on.**
 
-This is the first of Part IV's cases. It runs chapter 15's mechanism on advice whose scope was not merely written down but written down as a warning against exactly this.
+It is a Principle, and the Forces behind it are real. A rule that lives next to the data it reads can be enforced rather than merely documented, and a caller who cannot reach the data cannot get the rule wrong.
+
+This is the first of Part IV's four cases. Chapter 15 made the claim; these four are what it looks like happening, and this one is the case where the author of the advice saw the compression coming and wrote against it in his introduction.
 
 ---
 
-## The demonstration
+## What the source said
 
-### The advice, and what it is
-
-*Behaviour belongs with the data it operates on.* It is a Principle: good advice given certain Forces, and the Forces are real ones. A rule that lives next to the data it reads can be enforced rather than merely documented, and a caller who cannot reach the data cannot get the rule wrong.
-
-It arrives in code review with no source attached, but it has one, and the source is more careful than the sentence.
+It arrives in code review with no source attached. It has one, and the source is more careful than the sentence.
 
 Arthur Riel's *Object-Oriented Design Heuristics* (1996) has it as heuristic 2.9 — *"Keep related data and behavior in one place"* — and **related** is not decoration. His own gloss says what it means:
 
@@ -37,6 +35,10 @@ A second source names this chapter's case directly. *Object-Oriented Reengineeri
 **That is a rule reading two entities, with the consequence named.** Not a warning about cycles — a dependency from the provider back to the client is one edge, and one edge is not a cycle. But the direction is stated, in the source, as a known cost.
 
 So the reader is not missing a scope nobody wrote. They are missing a qualifier, an exclusion, and a Cons list. What the rest of this chapter adds is where the excluded case actually leads, which neither source follows: several such rules, resolving to different sides.
+
+---
+
+## What the wide reading produces
 
 ### A rule that needs two entities
 
@@ -210,7 +212,7 @@ So the identifier is not free and was not chosen because it is tidier. It moves 
 
 ---
 
-## Why the claim holds
+## Why it is the reading that gets taken
 
 The five words that travel are the instruction. What stayed behind is a test and a cost, and neither survives compression for the same reason: the instruction can be followed one method at a time, while the test and the cost are properties of the class as a whole.
 
@@ -245,11 +247,13 @@ Which is why the failure arrives as a stack overflow in a set insertion rather t
 
 ---
 
-## Where the claim doesn't apply
+## Where the wide reading is right
+
+Everything above is about rules that read two entities. Two situations sit outside that, and in both the compressed sentence gives the right answer with no qualification needed.
 
 ### A rule that never leaves one entity
 
-The claim is about rules that need two entities. Where a rule needs one, the advice is right and this chapter's caution produces the failure chapter 14 describes: the rule is moved away from the only data it reads, for no gain.
+Where a rule needs one entity, the advice is right as stated, and this chapter's caution produces the failure chapter 14 describes: the rule is moved away from the only data it reads, for no gain.
 
 A money value is the clean case. Adding two amounts requires checking that the currencies match, and everything that check reads is inside the value:
 
@@ -272,11 +276,11 @@ The same holds for a state machine over a single aggregate. If the legal transit
 
 Two types that hold each other and are never separated, never serialized, never compared, and never deep-copied pay none of the costs in this chapter. A parser's node types are the standard example — mutually recursive by nature, and nobody calls it a defect.
 
-**The exemption is narrower than it sounds, and the reason is the word *never*.** A parser's nodes qualify because nothing outside the compiler ever encodes them — the graph is unreachable by structural position, not by luck. That is a property you can check, and it is not the same as *nothing has walked it yet* — which is the property usually being claimed.
+**That exemption is narrower than it sounds, and the reason is the word *never*.** A parser's nodes qualify because nothing outside the compiler ever encodes them — the graph is unreachable by structural position, not by luck. That is a property you can check, and it is not the same as *nothing has walked it yet* — which is the property usually being claimed.
 
 ---
 
-## What the claim costs
+## What the alternative costs
 
 **Identifiers move errors from compile time to run time.** `order.customer.tier` cannot be null-dereferenced in a language that checks it; `customerID` can point at a customer that no longer exists, and only a lookup finds out. What was a type error becomes a missing row.
 
@@ -288,7 +292,7 @@ Two types that hold each other and are never separated, never serialized, never 
 
 ---
 
-## How to recognize the failure
+## How to recognize it
 
 **In a codebase:**
 
