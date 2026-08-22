@@ -218,7 +218,7 @@ This was an author correction to the draft, recorded in decision 24: the draft h
 | Cannot see your Forces; team-size Force at its limit | 03 | a passage in the relevant Force sections |
 | The conditions were never derived | 15 | a paragraph applying 15's own test |
 | Generated tests that never reach their condition | 17 | a passage, with FlowCore decision 37 |
-| Grilling, in full | 19 | a section — the method with a generator in the loop |
+| Grilling, in full | 19 | **done** — a section, with the frozen text, the provenance, the two versions' disagreement and the limit |
 | An Idiom whose precondition failed | 21 | a passage, with FlowCore decision 18 |
 | Silent defaults; receiving generated code | 23 | a section — the sixth receiving case, and the synthesis |
 
