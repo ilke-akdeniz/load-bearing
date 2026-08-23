@@ -118,6 +118,12 @@ The *deferred* line is a decision, not a gap. Completion-path locking is not mis
 
 And *revisit if* is what makes the map outlive the decision. Forces move on their own clock, and a codebase does not announce it when they do. This line converts that into something a person can search for.
 
+**None of which is a new artifact.** Chapter 12 lists the architecture decision record among the patterns that answer team size and turnover — the reasoning written down while it was fresh, for the people who were not in the room. A force map is what an ADR's first section already asks for, and the original template says so in the book's own vocabulary. Michael Nygard's, from 2011: the Context section *"describes the forces at play, including technological, political, social, and project local."*
+
+His reason for the practice is this chapter's argument in different words. Without the rationale, whoever arrives later is left either accepting decisions that may no longer apply, or reversing them without knowing what they cost.
+
+So what the map adds is two lines. **Forced against chosen** — an ADR's Context can carry it and usually does not, because describing the forces and saying which of them left no alternative are separate sentences, and only the second one tells you what is safe to touch. And **revisit if**, which is not Nygard's Status. Status is set after a decision has been superseded; *revisit if* is written before, and names the thing to watch for. One records what happened. The other is a trigger.
+
 ### What the map records
 Generalising from that: the output is not a design. It is a record of which decisions were forced and which were chosen, and that distinction is the one thing you cannot reconstruct from the code afterwards.
 
@@ -199,7 +205,11 @@ And note who supplied them. In both cases the human, because both are facts abou
 
 The alternative is not that these two decisions go unmade. Generated code would have carried both — a column default and a call to a v4 constructor — taken by whatever is most common, with nothing in the file showing that anything was chosen. Chapter 23 takes that case in full.
 
-The narrower point here is the one worth keeping: **grilling does not produce better answers. It produces answers somebody can disagree with.** [-- I think maybe it's worthile to point that decisions.md is also an important part if this grilling process. Ai agent logs every important  decisions and to decisions.md and that's what makes the disagreement, later adjustment to changing forces possible. Not sure about this but is it also a good idea to explore briefly how this is similar to ADR's?]
+The narrower point here is the one worth keeping: **grilling does not produce better answers. It produces answers somebody can disagree with.**
+
+And disagreeing with them later requires that they were written down. The interview produces a sequence of decisions with the reasoning attached, and the reasoning is the perishable half: an hour afterwards the code is still there and the override is not. So the last step of the loop is that each settled decision goes into the log — which is the artifact from earlier in this chapter, and the reason FlowCore's decision 12 was available to be mapped months after anyone made it.
+
+That closes the circuit, and it is worth seeing as one thing rather than three. The interview surfaces the decision, the log records what settled it, and a standing instructions file promotes the answers that keep recurring into constraints so the same question stops being asked. Chapter 23 works through what that loop is for; here it is enough that grilling without the second step is a conversation, not a record.
 
 The upstream text has since changed in a way worth one line: it asks a round of questions at once where the frozen version asks one at a time. That is throughput against how much the reader has to hold in working memory, which is a force with a value, so neither version is a regression.
 
@@ -287,7 +297,8 @@ Ask it of your own decisions and it produces the force map as a by-product. Ask 
 
 - Matt Pocock, *skills* — [github.com/mattpocock/skills](https://github.com/mattpocock/skills), `skills/productivity/grilling/SKILL.md`. The text quoted here is an earlier version, frozen; upstream has since changed.
 - Jason Ku, on using the technique during development — [youtube.com/watch?v=ikGhv9kKFdU](https://www.youtube.com/watch?v=ikGhv9kKFdU&t=356s).
-- FlowCore, `docs/decisions.md` — [github.com/ilke-akdeniz/flowcore](https://github.com/ilke-akdeniz/flowcore).
+- Michael Nygard, *Documenting Architecture Decisions*, 15 November 2011 — [cognitect.com/blog/2011/11/15/documenting-architecture-decisions](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions).
+- FlowCore, `docs/decisions.md`, decision 12 — [github.com/ilke-akdeniz/flowcore](https://github.com/ilke-akdeniz/flowcore).
 
 ---
 
