@@ -511,6 +511,11 @@ After making changes:
 One commit per pass, so the history alternates cleanly between Claude's work and the author's review.
 Never amend or rebase the author's commits — the point of the history is that both sides of the exchange stay readable.
 
+**Rename a file in its own commit, and edit it in the next one.**
+Git matches a renamed file to its original by similarity, and gives up below fifty percent.
+Chapter 20's rename shipped alongside its edits and came out at forty-three, so `git show` reported a deleted file and a new one and the review diff was unreadable at exactly the moment somebody wanted to read it.
+This has come up three times — chapters 11, 16 and 20 — and the fix costs one extra commit.
+
 Keep the message short: a subject line, and a body only when the change needs a reason rather than a description.
 Where a change reverses something, or was made against a request, say so in the body.
 The history is part of the book's authorship record, alongside `docs/DECISIONS.md`.
