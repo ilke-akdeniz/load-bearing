@@ -71,6 +71,8 @@ This is adjacent to chapter 13 rather than in it.
 Chapter 13 is about patterns that dissolve when the language has the feature; this is about a feature that creates work the programmer must then carry, which is closer to an inverse.
 Do not force it. If it fits anywhere it may be chapter 20's distributed-services section, or nowhere.
 
+**2026-08-23: nowhere, on the evidence of chapter 20 being drafted.** Coloured functions is an observation about what a language feature costs its users, not about a domain's force profile, and 20's distributed section is almost entirely chapter 07's material cited. Forcing it in would have been a fifth thing in a section that adds one. Leaving it recorded here in case chapter 21 or 23 wants it.
+
 ### Chapter 05 — background rather than evidence
 
 The origin story: the problems the project set out to address were controlling dependencies, working with large teams and changing personnel, maintainability, testing, and multicore.

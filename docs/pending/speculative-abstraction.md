@@ -117,7 +117,7 @@ The claim here is about interfaces justified by a future substitution, not about
 | The four mechanisms | 18 | **done** — each cites 05, 09 or 03 |
 | The rollback alternatives | 18 | **done** — cites 12 for strangler fig |
 | The testing case | 17 | **done** — 17 owns it, 18 cites it |
-| The LOB inversion, one line | 20 | owed, chapter not started |
+| The LOB inversion, one line | 20 | **done** — the abstraction sits in the fast layer, the thing it insures in the slow one |
 
 **The open question is settled.**
 It asked whether the scope of *Clean Architecture versus the language* should widen to hold this argument, or whether it wanted a different home.
