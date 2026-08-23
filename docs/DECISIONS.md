@@ -3300,3 +3300,32 @@ The database material is not salvaged anywhere.
 Chapter 05 loses three cross-references to a chapter that no longer exists; two of its sentences already stated the finding in full, so only the pointers went.
 Five ledger rows move to 21 and three are deleted.
 `CLAUDE.md`'s Part IV shape, chapter 15's case counts in four places, chapter 16's opening, the README count and the drift checker's count words all follow.
+
+---
+
+## 84. Chapters and reviews are worked by interview
+
+**Date.** 2026-08-23
+
+**Context.**
+Chapter 19 documents grilling — an interview conducted before generation, in which each decision is put to the human with a recommended answer, one at a time. Until now it was material the book described rather than a way the book was made.
+The author ran chapter 20's first review that way instead of tagging and waiting, and then asked for it to become standing practice for both drafting and review.
+
+**Decision.**
+`CLAUDE.md` gains a *Grilling* section under *How we work*, with the procedure stated as Claude's behaviour rather than as a prompt, and pointers to it from the drafting rule and from step one of the review cycle.
+
+**What the chapter 20 session added to the technique as documented.**
+Three things, all learned by doing it and none of them in the original prompt.
+
+**Order the questions by dependency.** Terminology had to be question one, because the title, every section heading, the TOC entry, three ledger rows and two cross-references inherited from it. Asked later, it would have been asked twice.
+
+**Look up the blast radius before asking.** Counting *domain* across the book — 71 uses, only three outside chapter 20 in that chapter's sense — turned a matter of taste into an easy decision, and it was Claude's job to find that rather than the author's to weigh it.
+
+**Surface what the author did not tag.** Two items came out of that session unprompted: the file needed renaming because its slug carried the removed word, and the Sources section listed a work the chapter never cited.
+
+**The limit, stated because the book states it.**
+Grilling is slow by design, and chapter 19 records that as one of its costs.
+A review that is three typos is applied rather than interviewed, and the test written into `CLAUDE.md` is whether any item would change what the other items should be. Where nothing depends on anything there is no tree to walk.
+
+**Consequence.**
+The review cycle's shape is unchanged — the author still reviews in the file, still commits, and Claude still commits one pass at a time. What changes is that between their commit and Claude's there is now a conversation, and the work is applied in one go at the end of it rather than tag by tag.

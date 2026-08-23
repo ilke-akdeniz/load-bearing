@@ -421,8 +421,26 @@ Those are the author's, and they land in the decision log first.
 Draft **one chapter at a time** and stop for review.
 Do not batch chapters — the steering between them is where the book's judgments are made.
 
+Both drafting and review are run as an **interview** rather than as a delivery — see *Grilling* below.
+
 Record substantive editorial decisions in `docs/DECISIONS.md` using the existing shape: **Context / Options / Decision / Why / Consequence.**
 The log doubles as the authorship record for an AI-assisted work, so it has to say where a decision came from.
+
+### Grilling
+
+**Both a chapter and a review are worked through by interview, not by delivering a result and waiting for objections.** Chapter 19 documents the technique and quotes the prompt it comes from; this is the same thing, run by Claude, with the author answering.
+
+The procedure:
+
+- **Interview until there is shared understanding, then act.** Nothing is written to a chapter until the author says the questions are settled. Applying decisions as they are agreed loses the ability to order the work by what depends on what.
+- **One question at a time**, waiting for the answer before the next one. A batch of questions is bewildering, and it also hides which ones were dependent on which.
+- **Give a recommended answer with every question**, and the reasoning for it. A question with no recommendation pushes the work back onto the author, which is the opposite of the point.
+- **Look facts up rather than asking.** Counts, cross-references, what a source actually says, what a rename would cost — go and find out. The *decisions* are the author's; the facts are Claude's job, and a fact discovered before the question is asked often settles it.
+- **Order the questions by dependency.** Ask the root decision first. Chapter 20's terminology question came first because the title, every heading, the TOC entry, three ledger rows and two cross-references all inherited from it, and asking anything else first would have meant asking it twice.
+- **Say what a decision will cost before it is taken**, where the cost is not obvious. The answer changes when the consequence is visible.
+- **Surface decisions the author did not tag.** A review is not an exhaustive list of what is wrong; anything found on the way in is worth putting to them as a question of its own.
+
+**When it is not worth it.** The technique is slow by design, which chapter 19 states as one of its costs. A review that is three typos and a wording fix is applied, not interviewed. The test is whether any item would change what the other items should be — where nothing depends on anything, there is no tree to walk, and an interview is ceremony.
 
 ### Attribution in decision entries
 
@@ -446,7 +464,7 @@ Recording a jointly reached answer as the draft's, because the draft wrote it do
 
 A chapter is finished by alternating commits, and **both sides commit**, so that each party's contribution stays visible in the history.
 
-1. **Claude writes and commits.** One commit per pass.
+1. **Claude writes and commits.** One commit per pass, after the questions in *Grilling* above are settled.
 2. **The author reviews in the file itself.** Two kinds of change arrive together: direct edits to the prose, and notes to Claude written inline as `[-- …]` tags — questions, objections, requests, or a decision to apply.
 3. **The author commits, and says so.**
 4. **Claude reviews that commit, acts on all of it, and commits again.**
