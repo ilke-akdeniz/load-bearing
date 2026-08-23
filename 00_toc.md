@@ -257,8 +257,8 @@ Also: detecting an inherited principle by asking what would have to be true for 
 `20_six-profiles.md`
 
 The longest chapter, and the payoff.
-Each force profile: which force is at an extreme, which standard advice inverts, and what it becomes instead.
-*Domain* keeps its ordinary meaning — what the software is about. **Force profile** is this book's term for the reading, and the chapter's claim is that the two are independent axes.
+Each force profile: which force sits outside its ordinary range, which standard advice inverts, and what it becomes instead.
+*Domain* keeps its ordinary meaning — what the software is about. **Force profile** is this book's term for the reading of every force bearing on a system, at least one of them outside its ordinary range; the chapter's claim is that the two are independent axes, and that the domain name on its own predicts nothing.
 
 - **Line-of-business / data-durable** — the schema outlives the code; invariants belong in the database; the ORM question.
 - **Games and simulations** — cache locality outranks encapsulation; ECS; data-oriented layout; why "a class per entity" loses to arrays.
@@ -267,7 +267,7 @@ Each force profile: which force is at an extreme, which standard advice inverts,
 - **UI frameworks and libraries** — inversion of control is the product; your code is the leaf; the framework calls you.
 - **Distributed services** — no shared transaction, so idempotency and retries replace atomicity; the entire consistency toolkit changes shape.
 
-*Where the claim doesn't apply:* systems that straddle two profiles, which is most interesting systems, and where the seam goes; a profile you are visiting rather than living in; and the ordinary case, where no force is at an extreme — which is most software, and which the chapter treats as a finding with four consequences rather than a disappointment.
+*Where the claim doesn't apply:* systems that straddle two profiles, which is most interesting systems, and where the seam goes; a profile you are visiting rather than living in; and the ordinary case, where every force sits in its ordinary range — which is most software, and which the chapter treats as a finding with four consequences rather than a disappointment.
 
 ### 21. Idioms: why ecosystems diverge
 `21_idioms.md`

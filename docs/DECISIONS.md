@@ -3329,3 +3329,62 @@ A review that is three typos is applied rather than interviewed, and the test wr
 
 **Consequence.**
 The review cycle's shape is unchanged — the author still reviews in the file, still commits, and Claude still commits one pass at a time. What changes is that between their commit and Claude's there is now a conversation, and the work is applied in one go at the end of it rather than tag by tag.
+
+## 85. Chapter 20: *extreme* was a private synonym for a term chapter 03 owns
+
+**Context.**
+Chapter 20's second review raised four things, and the first one governed the rest.
+The chapter defined a force profile as a reading "with at least one force pinned at an extreme," and used *extreme* ten times as its threshold word.
+
+**The author rejected it on meaning:** *extreme* evokes rareness, and the threshold is not at 99% — a force tipped to 70% is enough.
+They proposed *significant intensity* instead, and said they believed *intensity* had been used in an earlier chapter.
+
+It had, and more heavily than the suggestion assumed.
+Chapter 03 defines it at line 11 — *"Intensity means **how hard the Force presses on the design**, which is not always the same as how large the number is… Read the pressure, not the number"* — uses it thirteen times, and chapter 12 leans on it to choose between patterns answering the same Force.
+So the author's objection was already the book's stated position, and *extreme* was not merely evocative: it was chapter 20 inventing a private synonym for a term another chapter owns, which is the drift `docs/LEDGER.md` exists to prevent.
+
+**Options for the threshold word.**
+*Significant intensity*, the author's proposal.
+*High intensity*.
+No adjective at all.
+
+**Decision, reached jointly.**
+The draft argued against *significant* — an evaluative adjective is a judgment about the reading rather than a position on chapter 03's dial, which the register rules exclude — and proposed instead a sentence chapter 20 already contained.
+Line 142 read *"A profile is where one force leaves the ordinary range and stays there."*
+That answers the rareness objection directly, needs no new vocabulary, and pairs with the chapter's own boundary section on the ordinary case, so the two now share wording.
+The definition is: **the reading of every force bearing on a system, with at least one at an intensity outside the ordinary range, and staying there.**
+
+Neither party arrived with this.
+The author had the objection and a word; the draft had the survey showing the word was owned elsewhere; the answer was a sentence already in the file that nobody had noticed was the definition.
+
+**The plural, and where it went.**
+The author had edited the claim to *"which advices holds"*, reasoning that a profile is not a single force and that many pieces of advice follow from one.
+*Advices* is not English and the verb did not agree, so the claim reverted to *advice*, which as a mass noun already refers to many.
+The reasoning survives in the definition, which is a better home for it: it is a fact about profiles rather than about grammar.
+
+**Three further corrections in the same review.**
+
+**The business does tell you.**
+The chapter's central demonstration — two sales systems with opposite concurrency readings — ended *"Nothing about knowing the business tells you that."*
+The author rejected it: the business said so literally, in the sentence describing several people working the same proposal at overlapping stages.
+They were right, and the chapter already contradicted itself about it — its *Why the claim holds* section says the reading *"comes from someone who knows how ports buy security systems."*
+The missing distinction is between the domain as a label and the domain as detail: both systems are "sales software" and share a vocabulary, and what separates them is a fact about how the work is done, which is business knowledge.
+The paragraph now concedes it and takes the sharper point, that the reading is available from the business but not in answer to the question usually put to it — *what are the things called* gets the same reply from both companies, *who touches a proposal, and when* gets opposite ones.
+This converts *"you have to read the forces"*, an instruction with no method, into a question that can be asked.
+
+**The table said `profile` over a column of domain names.**
+The author noticed that the six labels — line-of-business, games, embedded, compilers, UI frameworks, distributed — are domains, in a chapter whose claim is that domain and profile are different axes.
+The draft recommended fixing both column headers rather than one, so the left column is demoted rather than left ambiguous, and against the thorough version of the fix.
+Renaming the six profiles by their forces — *durable-schema*, *frame-budget*, *hard-deadline* — is more honest and was rejected: it makes the chapter navigable only by a reader who can already read force profiles, which is the skill the chapter exists to teach.
+Someone who works on embedded systems finds their section by the word *embedded*.
+A sentence under the table now says the left column is where a profile is commonly met rather than what it is, and that the two sales systems share a domain and would not share a row.
+
+**A misattribution the review did not tag.**
+Chapter 20 said the UI-framework force sits *"at the value chapter 03 names as the extreme."*
+Chapter 03 names no such value; it gives control of the callers three intensities, the third being *"you can neither see nor change them."*
+Fixed to name the actual position.
+
+**Consequence.**
+Ten uses of *extreme* in chapter 20, one heading, two TOC lines, and four ledger rows changed, including chapter 03's own row, whose canonical citation was *"read the value"* and is now *"read the intensity"* to match the chapter's bolded term.
+Chapter 19 is at draft and was touched once, in its handoff line, where *"each one's dominant force"* was singular against a definition that permits several — games pins the frame budget and the memory hierarchy, embedded pins the deadline and the absence of a heap.
+Its force-map cell reading `extreme` was left alone: there the word is ordinary English about one reading, in a row that also carries `none`, `real` and `unknown`, and chapter 20 giving up the word as vocabulary does not oblige the book to give up the adjective.

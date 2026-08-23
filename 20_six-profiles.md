@@ -2,12 +2,11 @@
 
 ## The claim
 
-**What decides which advices holds is not the domain but the force profile.**
-[-- I like short version of the claim better. More direct, more clear. An important change I made for you to consider, I added the advice plural. My reasoning is that the profile is not necessarrily a single force, it's an overview of all important forces on the system, and many advices can spun from that, not just one.]
+**What decides which advice holds is not the domain but the force profile.**
 
-*Domain* keeps its ordinary meaning throughout this chapter and the rest of the book: what the software is about. Payroll, ledgers, air traffic, imaging. 
+*Domain* keeps its ordinary meaning throughout this chapter and the rest of the book: what the software is about. Payroll, ledgers, air traffic, imaging.
 
-**Force profile** is this book's term and is not standard vocabulary; it names the reading of prominent forces on the system.
+**Force profile** is this book's term and is not standard vocabulary. It names the reading of every force bearing on a system — and what makes a reading a *profile* is that at least one of those forces sits at an intensity outside the ordinary range (Ch. 03), and stays there.
 
 Chapter 19 gave the method for one decision. This chapter runs it at the scale of whole systems, six times, and the finding is that the answers cluster.
 
@@ -16,35 +15,35 @@ Chapter 19 gave the method for one decision. This chapter runs it at the scale o
 ## The demonstration
 
 ### Domain and force profile are two different axes
-[-- if with subject you meant domain, I would rather keep the domain and not introduce subject]
+
 A flight simulator, a video encoder and a high-frequency trading loop share almost nothing anyone would call a domain. They share a force profile: a fixed latency budget measured in milliseconds, inside which the memory hierarchy decides what is possible. And they share its inversions — all three end up with layouts nobody may hide and allocation moved out of the loop.
 
 That is one direction. **The other direction matters more, because it is the one that catches people.**
 
 Consider two systems in the same business. One company sells high-end pizza ovens to restaurants: a salesperson writes a proposal, one person to a proposal, and nobody else touches it. Another company sells and installs security systems for marine ports: several salespeople, technicians and advisors work the same proposal, and often the same line items, at overlapping stages.
 
-Both are sales software. Both would be described by the same domain expert in the same vocabulary — proposal, line item, discount, approval. And the concurrency reading is not close: one has a single writer and no contention worth naming, the other has a rule spanning rows that several people are editing at once, which is chapter 06's territory in full. Nothing about knowing the business tells you that. [-- preceding is simply wrong. Literally the business told you that: "we have several people doing this and this in these stages..." I guess this can change the rest of the chapter so consider this tag carefully.] You have to read the forces.
+Both are sales software. Ask a domain expert to describe either one and the vocabulary comes back identical — proposal, line item, discount, approval. And the concurrency reading is not close: one has a single writer and no contention worth naming, the other has a rule spanning rows that several people are editing at once, which is chapter 06's territory in full. The business does tell you which. It just does not answer the question people usually put to it. *What are the things called* gets the same reply from both companies; *who touches a proposal, and when* gets opposite ones.
 
-So subject and profile vary independently. Unrelated subjects can share a profile; one subject can contain opposite profiles. **Which is why this chapter is organised the second way**: the profile is what predicts the inversion, and the subject is what tells you almost nothing about it.
+So domain and force profile vary independently. Unrelated domains can share a profile; one domain can contain opposite profiles. The six sections below are organised by profile, with the domain kept as the place you are most likely to meet it: the profile is what predicts the inversion, and the domain name on its own predicts almost nothing.
 
-Six profiles follow. Each has one force at an extreme, and each inverts something the mainstream states without qualification.
-
-[-- this table needs to change, The labels on the profile don't describe a profile, they look like domain categiroes - labeld to me. Maybe the second row can be renamed toe "force profile"]
+Six profiles follow. Each has at least one force outside its ordinary range, and each inverts something the mainstream states without qualification.
 
 ```text
- profile           the force at an extreme
- ----------------  ---------------------------------------------
- line-of-business  durability: the data outlives every rewrite
- games and sims    latency: a fixed frame, and the cache decides
- embedded          latency again, but a missed deadline is the
-                   bug, and there is no allocator
- compilers         change shape: one type touched by everything
- UI frameworks     control of callers: you are not the caller
- distributed       concurrency across machines, so no shared
-                   transaction exists at all
+ where you meet it   the force profile
+ ------------------  --------------------------------------------
+ line-of-business    durability: the data outlives every rewrite
+ games and sims      latency: a fixed frame, and the cache decides
+ embedded            latency again, but a missed deadline is the
+                     bug, and there is no allocator
+ compilers           change shape: one type touched by everything
+ UI frameworks       control of callers: you are not the caller
+ distributed         concurrency across machines, so no shared
+                     transaction exists at all
 ```
 
-**Most of what follows is worked elsewhere in this book**, because the individual findings belong to the chapters that established them. What this chapter adds is the observation that they are not scattered. They cluster, one cluster per force at its limit.
+The left column is where each profile is commonly met, not what the profile is. The two sales systems above share a domain and would not share a row.
+
+**Most of what follows is worked elsewhere in this book**, because the individual findings belong to the chapters that established them. What this chapter adds is the observation that they are not scattered. They cluster, one cluster per force that leaves its ordinary range.
 
 ### Line-of-business: the schema outlives the code
 
@@ -107,7 +106,7 @@ What this profile adds is that the property generalises: **a type depended on by
 
 ### UI frameworks: you are not the caller
 
-The force is control of the callers, at the value chapter 03 names as the extreme — and pointed the other way. As a framework author you cannot see your callers. As a framework *user* you are the callee, and the flow of control belongs to somebody else.
+The force is control of the callers, at the third of the three intensities chapter 03 gives it: you can neither see your callers nor change them. And it applies from both ends. As a framework author you cannot see your callers. As a framework *user* you are the callee, and the flow of control belongs to somebody else.
 
 **What inverts: your code should own the flow.** Structured programming, layering, most architectural advice, and every diagram with an arrow pointing downward assume your `main` is at the top. Under a framework it is not. The framework's loop calls your component, decides when to call it again, decides what happens between calls, and may discard and rebuild your state without asking.
 
@@ -121,7 +120,7 @@ The force is concurrency across machines, and chapter 07 owns this profile end t
 
 The profile-level observation is what happens to the toolkit as a whole. Nothing here weakens by a little. A transaction becomes a saga with visible compensations. A foreign key becomes an eventual reconciliation. A unique constraint becomes an idempotency key generated by the client before the first attempt. A rollback becomes a compensating business operation a customer can see.
 
-**Which is the signature of a profile, and the reason this chapter groups by force rather than by subject.** One force at an extreme does not overturn one piece of advice. It overturns the whole family that depended on it, because they all depended on the same thing — and here the thing is that a set of writes either all happen or none do.
+**Which is the signature of a profile, and the reason this chapter groups by force rather than by domain.** A force outside its ordinary range does not overturn one piece of advice. It overturns the whole family that depended on it, because they all depended on the same thing — and here the thing is that a set of writes either all happen or none do.
 
 ### What the six have in common
 
@@ -139,7 +138,7 @@ In every case the pattern is identical, and it is chapter 02's distinction seen 
 
 A Principle is advice that is good given certain forces (Ch. 02). Its condition is a force at a range of values, usually unstated because in most software that force sits in an ordinary range and the condition is quietly satisfied.
 
-A profile is where one force leaves the ordinary range and stays there. So the condition fails not occasionally but structurally, for every system with that reading, all the time — which is why the failures cluster rather than scatter, and why the same six or seven pieces of advice come up every time practitioners from two profiles argue.
+A profile is where at least one force leaves that ordinary range and stays there. So the condition fails not occasionally but structurally, for every system with that reading, all the time — which is why the failures cluster rather than scatter, and why the same six or seven pieces of advice come up every time practitioners from two profiles argue.
 
 **And it is why the arguments are so unproductive.** Two people disagreeing about whether to put logic in the database are not disagreeing about databases. One of them works where the schema outlives four rewrites of the application, and the other works where the application outlives the storage it happens to be using this year. Both are right, both are giving advice that has worked every time they have applied it, and neither has said the force out loud. Chapter 03 identifies this as the general shape of unresolvable design arguments. What a profile adds is that the two readings are not merely different but stably different — they will be just as far apart on the next question, and on the one after that, so the two will never converge by talking about code.
 
@@ -149,7 +148,7 @@ The practical consequence is an asymmetry between the two axes, and it is worth 
 
 So when a person arrives from a domain you do not share, they are carrying conclusions that were correct where they came from. What is worth extracting is not the conclusion but the reading it came from — a question they can nearly always answer, and are nearly never asked.
 
-**And the two are more tangled than either side tends to admit.** The sales example above is the point: the pizza-oven system and the port-security system have the same domain and opposite concurrency readings, so the profile could not be derived from the business — but it could not be derived without knowing the business either. Nobody reads *several people edit the same line items at overlapping stages* off an architecture diagram. It comes from someone who knows how ports buy security systems.
+**And the two are more tangled than either side tends to admit.** Profile knowledge is what transfers, but it is not what supplies a reading in the first place. Nobody reads *several people edit the same line items at overlapping stages* off an architecture diagram; it comes from someone who knows how ports buy security systems.
 
 ---
 
@@ -165,20 +164,20 @@ The mistake is choosing one profile and applying it throughout. A game that trea
 
 **What to do is a boundary question, and the boundary is a real one: it goes where the force profile changes.** That is the same seam chapter 05 draws for dependency direction and chapter 09 draws for rate of change, arriving from a third direction. Concretely:
 
-- **Name the two profiles.** Write down which force is extreme on each side. If you cannot, there is one profile and the question is moot.
+- **Name the two profiles.** Write down which force is outside its ordinary range on each side. If you cannot, there is one profile and the question is moot.
 - **Put the seam where the data crosses**, not where the code is organized. In the game, the seam is the point where component arrays become rows — and that point should be a small, explicit, boring piece of code that both sides understand, rather than a leak of either discipline into the other.
 - **Let each side keep its own rules.** The frame loop does not get to use the inventory's transactional habits, and the inventory does not get to be lock-free because it lives in a game.
 - **Expect the seam to be where the bugs are**, because it is the only place where two sets of assumptions meet, and each side is written by someone for whom the other side's rules look wrong.
 
-### The ordinary case, where no force is at an extreme
+### The ordinary case, where every force sits in its ordinary range
 
 Most software is here, and it is the largest boundary on the claim. Nothing is pinned, every condition the mainstream advice depends on is quietly satisfied, and that advice is simply correct. None of the six inversions applies.
 
 That is a finding about your system rather than a disappointment, and four things follow from it.
 
-**It licenses the conventional answer.** Following the mainstream because you checked and nothing is extreme is a different act from following it because it is what people do — the first can be defended and revisited, the second cannot. Converting the second into the first is most of what this book is for.
+**It licenses the conventional answer.** Following the mainstream because you checked and every force sits in its ordinary range is a different act from following it because it is what people do — the first can be defended and revisited, the second cannot. Converting the second into the first is most of what this book is for.
 
-**Most systems have one path that leaves the ordinary case**, and it is rarely the whole system. The nightly report that outgrew memory, the table nobody can migrate any more, the one integration you do not control. Recognising the shape of a force going extreme is what lets you notice the crossing, and the crossing is where the interesting bugs are.
+**Most systems have one path that leaves the ordinary case**, and it is rarely the whole system. The nightly report that outgrew memory, the table nobody can migrate any more, the one integration you do not control. Recognising the shape of a force leaving its ordinary range is what lets you notice the crossing, and the crossing is where the interesting bugs are.
 
 **Most advice you meet was written from inside a profile.** Knowing the six lets you discount it correctly — *that is the distributed profile talking and I have no network*, *that is the frame budget talking and I have no budget*. Advice arrives without its profile stated for the same reason it arrives without its scope stated (Ch. 15).
 
@@ -220,9 +219,9 @@ Six is not a complete enumeration and nothing in the argument requires it to be.
 - **"Premature optimization."** True almost everywhere and false where the budget is fixed in advance. The question is whether there is a *later* in which to optimize.
 - **Someone senior giving advice that is obviously wrong here.** The most likely explanation is not that they are wrong. It is that they are right somewhere else and have not been asked which force they are reading.
 
-The question that does the work: **which force is at an extreme here, and what does it hold still?**
+The question that does the work: **which force here is outside its ordinary range, and what does it hold still?**
 
-Every inversion in this chapter is that question answered. If nothing is at an extreme, you are in the ordinary case, the mainstream advice applies, and the interesting thing about your system is somewhere other than its architecture.
+Every inversion in this chapter is that question answered. If every force sits in its ordinary range, you are in the ordinary case, the mainstream advice applies, and the interesting thing about your system is somewhere other than its architecture.
 
 ---
 
