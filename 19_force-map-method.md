@@ -70,7 +70,7 @@ Every difference above traces to a cell in the table, which means each one can b
 
 The table above is a comparison, not a map. Here is a map: one decision, from a real system, written the way the method produces it.
 
-FlowCore is a Go workflow library backed by Postgres. A workflow definition is a four-level tree — definition, statuses, steps, actions — and the decision is what happens when a client asks for one.
+FlowCore is a Go workflow library backed by Postgres. [-- flowcore definition not needed here. I remember we already used flowcore without reminding what it is manytimes before this chapter.] A workflow definition is a four-level tree — definition, statuses, steps, actions — and the decision is what happens when a client fetches a workflow defitinion.
 
 ```text
  decision    Get returns the whole definition tree, assembled from four
@@ -125,8 +125,6 @@ A forced decision has a force behind it — *this is a version column because tw
 
 Which answers something chapter 03 raises and leaves open. Forces move on their own clock, and nobody revisits a design when they do, because nothing signals it. A map is what makes the revisit possible: it says *this assumed two writers*, so when the second writer goes away there is a sentence to search for.
 
-[The name of the chapter is "Force-map method", this section is "what the map records", there are some sentences about what the map does and why it's useful, ok but where is the map!? Show me an actual, detailed, force-map so that I can believe you... Not something like the summary table above but a force-map, used for one example system for one or mupltiplr design problems, using the ideas of this chapter, showcasing how to do it, and what the map offers. And it better be as close to real-world situations as possible, otherwise this becomes the same as the caricature situations attached to design problems: makes sense when you read it but you never encounter that shape in real world. If you have a goode force-map example, you can expand on that on the remainder of the chapter to illustrate the existing ideas.]
-
 ### How to notice a principle whose forces are absent
 
 Most principles in a codebase were not derived there. They arrived with a framework, a previous employer, or a book, and the question is whether the situation they answer is your situation.
@@ -155,13 +153,11 @@ What the map does is make the decision smaller. Five moves, roughly in the order
 
 The method's honest limit is here. It does not resolve conflicts. It converts them from arguments about taste into a stated trade with named quantities, and then somebody decides.
 
-### Grilling: the method with a generator in the loop
-
-This section is about writing software with an AI coding assistant, and about one instruction you can give it. Everything before this point stands without it; skip ahead if that is not how you work.
+### Grilling: a method for AI assisted development
 
 The procedure above assumes you can name the forces before the design exists. Usually you cannot — not because you are careless, but because you do not yet know which decisions are about to be made, so you do not know which facts about your situation are about to matter.
 
-One technique inverts the flow, and it is worth stating in full because it is the method's shape with the roles swapped. Instead of supplying forces up front, you have the decisions surfaced one at a time and supply the fact that settles each one as it arrives. The instruction, quoted as the author of this book uses it:
+One technique inverts the flow, and it is worth stating in full because it is the method's shape with the roles swapped. Instead of supplying forces up front, you have the decisions surfaced one at a time and supply the fact that settles each one as it arrives. The prompt, quoted as the author of this book uses it:
 
 > Interview me relentlessly about every aspect of this until we reach a shared understanding. Walk down each branch of the decision tree, resolving dependencies between decisions one-by-one. For each question, provide your recommended answer.
 >
@@ -193,9 +189,9 @@ The recommendation attached to each question is where the value is, and it takes
   scatters inserts across the index.
 ```
 
-Both recommendations were sensible and both were overridden, and the reason is the same each time: the recommendation is drawn from what is most common, which means it is the majority ecosystem's convention arriving as a default — an Idiom (Ch. 02), delivered in the voice of an answer. Overriding it is a local force beating a convention.
+Both recommendations were sensible and both were overridden, and the reason is the same each time: the recommendation is drawn from what is most common, which means it is the majority ecosystem's convention arriving as a default — an Idiom (Ch. 02), delivered in the voice of an answer. Overriding it is a local force beating a convention. [-- briefy tell what were those forces and who read them if the information is available.]
 
-That is only possible because the convention was made visible as a *choice*. Generated code contains both of those decisions too. It contains them as a column default and a call to a v4 constructor, with nothing to mark that anything was decided, and no one reading it later has a question to ask.
+That is only possible because the convention was made visible as a *choice*. Generated code contains both of those decisions too. It contains them as a column default and a call to a v4 constructor, with nothing to mark that anything was decided, and no one reading it later has a question to ask. [-- "with nothing..." Huh? I'm also not following this paragraph in general. First sentence is captain obvious. Second and third are like, "ok I get it but what's your point?" ]
 
 The upstream text has since changed in a way worth one line: it asks a round of questions at once where the frozen version asks one at a time. That is throughput against how much the reader has to hold in working memory, which is a force with a value, so neither version is a regression.
 
