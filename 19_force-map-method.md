@@ -2,7 +2,7 @@
 
 ## The claim
 
-**Design advice can be checked with the sequence of forces, principles, idioms. Following a principle when the forces it depends on are missing and following and idiom when the principles it serves are not needed are design failures.**
+**Design advice is checked in one sequence: forces, then principles, then idioms. A principle followed where its forces are absent, and an idiom followed where its principles are not needed, are the two ways a design goes wrong while every decision in it still looks correct.**
 
 Everything before this chapter was diagnosis. This is the procedure, and it is short enough to state in three lines before the rest of the chapter argues about it.
 
@@ -12,7 +12,7 @@ Everything before this chapter was diagnosis. This is the procedure, and it is s
 
 ### The three steps of force-mapping
 
-**One: read the forces.** Not the requirements — the forces. Chapter 03 names seven and gives each a question: how many at once apply in your situation and do they touch the same state; how long what this writes outlives the code; what happens when it is wrong and who finds out; how often it changes and how many places change with it; how many person must agree and how many will still be here; what the latency budget is and what fraction one mechanism costs; whether you can change every call site and would know if you broke one.
+**One: read the forces.** Not the requirements — the forces. Chapter 03 names seven and gives each a question: how many run at once and do they touch the same state; how long what this writes outlives the code that wrote it; what happens when it is wrong and who finds out; how often it changes and how many places change with it; how many people must agree and how many will still be here; what the latency budget is and what fraction one mechanism costs; whether you can change every call site and would know if you broke one.
 
 Answers are values, not verdicts. *Concurrency: two writers, same row, twice a second.* Not *concurrency is important.*
 
@@ -20,11 +20,21 @@ Answers are values, not verdicts. *Concurrency: two writers, same row, twice a s
 
 **Three: check the idioms last.** An idiom is a local convention. Once you know which principles you need, the question about any convention becomes answerable: does this serve the principle, is it neutral, or does it work against it? Before you know that, the same convention is just what people do here.
 
-This specific sequence of steps is the whole of the method. Following the same steps in any other is not permitted.
+The sequence is the whole of the method. The same three steps in a different order do not fail loudly — they produce an answer that looks the same and cannot be checked, which is what the rest of this chapter is about.
+
+### Reading a force is not measuring one
+
+Chapter 03 calls forces facts about your situation, and the word invites a picture that is wrong: an instrument, a reading, a number. Some are like that. Row counts, request rates, latency budgets, the number of people with commit access, how many clients you cannot contact — these are countable, and where they are countable a disagreement is settled by going and counting.
+
+Most are not. *What happens when this is wrong and who finds out* requires knowing what the system is for and who is downstream of it. *How often does this change and how many places change with it* requires a history somebody has to remember or reconstruct. Both are judgements, and two competent people can read them differently.
+
+And a third thing decides more than either: **which facts count as forces depends on the decision in front of you.** The same system has different force readings for different questions. Concurrency is the dominant force for one decision in a codebase and entirely inert for the next one, twenty lines away.
+
+So step one is not instrument work, and this is where the expertise the last section of this chapter charges for actually goes. What the method claims is narrower than measurement and is still worth something: **a force is the kind of thing that has an answer.** Two people disagreeing about whether callers can be changed are disagreeing about a fact, and can go and find out. Two people disagreeing about whether a repository is good architecture are not, and cannot. Moving an argument from the second kind to the first does not win it. It makes it winnable.
 
 ### Four systems, read cold
 
-Here are four systems described by the forces that apply to each. We know nothing about their architecture or stack. [-- we know nothing is not true, we expand later: the script is a one-off data migration...]
+Here are four systems, given only as force readings. Nothing about their architecture, their stack or their teams appears in the table, and nothing needs to.
 
 ```text
  force              script    ledger    library   simulator
@@ -46,25 +56,76 @@ Nothing in that table is a design decision. Every cell is a fact somebody could 
 
 Now run advice the book has already graded across all four, and watch it change value.
 
-**Make illegal states unrepresentable** (Ch. 12). For the ledger this is worth a type and a constructor per rule: durability is decades, so a bad row outlives every engineer who could explain it, and blast radius is money. For the script it is waste — the invalid state cannot outlive an afternoon, and the re-run is the recovery. Same technique, opposite verdicts, and the force that moved was durability.
+**Make illegal states unrepresentable** (Ch. 12). For the ledger this is worth a type and a constructor per rule: durability is decades, so a bad row outlives every engineer who could explain it, and being wrong costs money. For the script it is waste — an invalid state cannot outlive the afternoon, and the re-run is the recovery. The force that moved is durability.
 
-**Hide the representation** (Ch. 05). For the library this is the central obligation: control of callers is *none*, so anything observable becomes a commitment you cannot withdraw. For the simulator it inverts — the memory layout is the design, and hiding it costs the frame budget, which is the case chapter 05 works through as an entity-component system.  Force that apply is the latency budget, and it moved far enough to flip a Principle rather than to weaken it.
+**Hide the representation** (Ch. 05). For the library this is the central obligation: control of callers is *none*, so anything observable becomes a commitment you cannot withdraw. For the simulator it inverts — the memory layout *is* the design, and hiding it costs the frame budget, which is the entity-component case chapter 05 works through. The force that moved is the latency budget, and it moved far enough to flip a Principle rather than weaken it.
 
-**Write the decision down** — a log entry with the options that lost. For the ledger, yes: change is add-only and the people who made the decision will be gone before the schema is. For the script, no. The decision does not outlive the week, and the log is a cost with no reader.
+**Compatibility is add-only** (Ch. 09). For the library this binds absolutely: you cannot deploy other people's software, so a removed field is a permanent break in code you will never see. For the ledger and the script it does not bind at all, because you control every caller and can change them in the same commit. The force that moved is control of the callers, and note that it did not weaken the rule anywhere — it removed it, and a rule that does not apply is not a rule you get partial credit for following.
 
-**A version column on writes** (Ch. 06). For the ledger it follows from the forces alone: two writers, one row, a rule that spans the read and the write. For the script, concurrency is *none*, so the Law is inert (Ch. 02) — not overruled, not risked, simply not engaged.
-[3 out of 4 of these verdicts is a battle between ledger and script, that is not ok, more variety is needed to make a point.]
+**One writer, no coordination** (Ch. 06). For the simulator this is the design: each system owns its arrays, nothing else writes them, and the coordination cost falls to zero — which is the only way the frame budget survives extreme concurrency. For the ledger it is unavailable. Many clients write the same rows and none of them can be made to stop, so the concurrency has to be paid for rather than removed. Same force at a similar value, opposite answers, because what differs is whether you control who writes.
 
-Four systems, four different sets of correct advice, and no disagreement anywhere. Every difference traces to a cell in the table. [-- what's the idea of this sentence? "No disagreement anywhere", what does that even mean? Maybe just delete this sentence.]
+Every difference above traces to a cell in the table, which means each one can be checked instead of argued.
+
+### A map, for one real decision
+
+The table above is a comparison, not a map. Here is a map: one decision, from a real system, written the way the method produces it.
+
+FlowCore is a Go workflow library backed by Postgres. A workflow definition is a four-level tree — definition, statuses, steps, actions — and the decision is what happens when a client asks for one.
+
+```text
+ decision    Get returns the whole definition tree, assembled from four
+             queries run inside a repeatable-read transaction
+
+ forces      concurrency    definitions are edited while being read
+             blast radius   a torn read is a definition that never
+                            existed: steps from before an edit,
+                            actions from after
+             latency        four round trips, against one join whose
+                            fan-out is 15 rows to dedupe
+             durability     schema; outlives the code that reads it
+             callers        a library, so they are strangers
+
+ licensed    atomicity: a reader sees the whole tree or none of it
+             -> deep Get, because a shallow one hands back the
+                partial view the invariant exists to ban
+             -> snapshot isolation, because four separate queries on
+                the pool can straddle a concurrent edit
+
+ idioms      "just use a join"      rejected: 5 steps x 3 actions
+ checked                            fans out to 15 rows to dedupe,
+                                    and left joins for empty sets
+                                    get fiddly
+             "defer concurrency     rejected: this is not concurrency
+              work until later"     work, it is this read's own
+                                    correctness condition
+
+ forced      the transaction, by concurrency and blast radius together
+ chosen      four queries over one join; a join satisfies the same
+             principle, so this one is legibility and can go back
+ deferred    completion-path locking, until that path is written
+
+ revisit if  definitions stop being editable while readable, or the
+             tree stops fitting in four queries
+```
+
+Every line above is in FlowCore's decision log already, in prose. The map is the same information in the order the method produces it, and the three lines near the bottom are the ones nothing else in a codebase records.
+
+**Forced, chosen, deferred is the distinction that does the work.** The code shows a transaction. It does not show that the transaction was forced — that concurrency and blast radius together left no other option — and someone reading it later cannot tell whether removing it would be a cleanup or a data-loss bug. The log says which, in its own words: the wrapper is taken now *"because it's this read's own correctness condition."*
+
+The *chosen* line is the one people skip, and it is the most useful. Four queries against one join is a legibility call; a join would satisfy atomicity equally well. Writing that down means the next person can revisit the query shape without re-opening the question of whether the read has to be atomic. Without it, both look like the same kind of decision, so touching either feels equally risky and nobody touches anything.
+
+The *deferred* line is a decision, not a gap. Completion-path locking is not missing; it is scheduled against a trigger, and the entry says so — the justification "is kept local to Get; it's not precedent for building other concurrency machinery this slice." A deferred decision with a stated trigger is chapter 03's reversibility rule leaving a mark.
+
+And *revisit if* is what makes the map outlive the decision. Forces move on their own clock, and a codebase does not announce it when they do. This line converts that into something a person can search for.
 
 ### What the map records
-The output is not a design. It is a record of which decisions were forced and which were chosen — and that distinction is the thing you cannot reconstruct later.
+Generalising from that: the output is not a design. It is a record of which decisions were forced and which were chosen, and that distinction is the one thing you cannot reconstruct from the code afterwards.
 
-A forced decision has a force behind it: *this is a version column because two writers touch one row.* A chosen decision does not: *this is a version column because that is what we do.* Both produce the same code. Only the first can be revisited when the force changes, because only the first says what would have to change.
+A forced decision has a force behind it — *this is a version column because two writers touch one row.* A chosen decision does not — *this is a version column because that is what we do.* Both produce identical code. Only the first says what would have to change for it to stop being right.
 
-Which answers a question chapter 03 raises and leaves open — forces move on their own clock, and nobody revisits the design when they do. A force map is what makes that revisit possible: it says *this decision assumed two writers*, so when the second writer disappears, there is something to search for.
+Which answers something chapter 03 raises and leaves open. Forces move on their own clock, and nobody revisits a design when they do, because nothing signals it. A map is what makes the revisit possible: it says *this assumed two writers*, so when the second writer goes away there is a sentence to search for.
 
-[The name of the chapter is "Force-map method", this section is "what the map records", there are some sentences about what the map does and why it's useful, ok but where is the map!? Show me an actual, detailed, force-map so that I can believe you... Not something like the summary table above but a force-map, used for one example system for one or mupltiplr design problems, using the ideas of this chapter, showcasing how to do it, and what the map offers. And it better be as close to real-world situations as possible, otherwise this becomes the same as the caricature situations attached to design problems: makes sense when you read it but you never encounter that shape in real world. If you have a goode force-map example, you can expand on that on the remainder of the chapter to illustrate the existing ideas.] 
+[The name of the chapter is "Force-map method", this section is "what the map records", there are some sentences about what the map does and why it's useful, ok but where is the map!? Show me an actual, detailed, force-map so that I can believe you... Not something like the summary table above but a force-map, used for one example system for one or mupltiplr design problems, using the ideas of this chapter, showcasing how to do it, and what the map offers. And it better be as close to real-world situations as possible, otherwise this becomes the same as the caricature situations attached to design problems: makes sense when you read it but you never encounter that shape in real world. If you have a goode force-map example, you can expand on that on the remainder of the chapter to illustrate the existing ideas.]
 
 ### How to notice a principle whose forces are absent
 
@@ -90,13 +151,13 @@ What the map does is make the decision smaller. Five moves, roughly in the order
 
 **Bound the loss instead of estimating the odds.** When you cannot say which force wins, you can usually say what it costs to be wrong in each direction. Pick the branch whose wrong case is survivable. Chapter 03 draws the line this sits on — a risk with no instrument is bounded rather than estimated harder.
 
-**Then escalate, and say what you are escalating.** A genuine conflict between latency and durability is a business decision wearing technical clothes. Handing it up is correct, and the map is what makes the hand-off usable: *we can have four nines or sub-ten-millisecond writes, not both, and here is what each costs.* [-- small clarification needed, maybe different wording, I don't get this: "we can have four nines or sub-ten-millisecond writes"] That sentence is answerable by someone who does not write code. *Which is more important, speed or reliability* is not.
+**Then escalate, and say what you are escalating.** A genuine conflict between latency and durability is a business decision wearing technical clothes. Handing it up is correct, and the map is what makes the hand-off usable: *we can acknowledge a write in under ten milliseconds, or we can guarantee it survives a machine dying, and we cannot do both on the same write — here is what each one costs.* That sentence is answerable by someone who does not write code. *Which is more important, speed or reliability* is not.
 
 The method's honest limit is here. It does not resolve conflicts. It converts them from arguments about taste into a stated trade with named quantities, and then somebody decides.
 
 ### Grilling: the method with a generator in the loop
 
-[slight problem with this section: This is about using a skills file while doing ai assisted development or while letting AI generate the code to be more clear. But that is never communicated and for the reader it's hard to understand what's going on here: "grilling, generator, loop... What!?"]
+This section is about writing software with an AI coding assistant, and about one instruction you can give it. Everything before this point stands without it; skip ahead if that is not how you work.
 
 The procedure above assumes you can name the forces before the design exists. Usually you cannot — not because you are careless, but because you do not yet know which decisions are about to be made, so you do not know which facts about your situation are about to matter.
 
@@ -114,9 +175,29 @@ The technique is not this book's. It comes from Matt Pocock's skills repository,
 
 **The split between fact and decision is the load-bearing line.** Facts get looked up; decisions get put to the human. That is the force-map method's step one and step two, separated and given owners — and the separation is what makes the output auditable, because every decision arrives with a recommendation you either took or overrode.
 
-Which is where the value is, and it is not obvious. [-- empty filler sentence, maybe remove it] The recommendation comes from the corpus, so it is the majority ecosystem's convention arriving as a default. Overriding it is a local force beating a corpus convention — and that is only possible because the convention was made visible as a *choice* rather than delivered as code. A generated file contains the same decision, unmarked. [-- which recommendation, what corpus? Maybe a small example can shed light on all these: A prompt, first grilling question, human choose default, then another one, human overrides, decisions logged..]
+The recommendation attached to each question is where the value is, and it takes an example to see why. Two questions from the start of a real library, with the answers that were actually given:
 
-**The two versions if the grilling skill file disagree on a real point, and it is a force question rather than an improvement.** The frozen text says *asking multiple questions at once is bewildering* and asks one at a time. The current upstream version organizes questions into rounds over a frontier of decisions whose prerequisites are settled, and asks a whole round at once. The trade is throughput against how much the human has to hold in working memory. Which wins depends on how many decisions are in flight and how much context each carries, which is a force with a value, and neither version is a regression. [-- Does this paragraph really add much value to this chapter? I'm not sure, it looks like this can be remove to me.]
+```text
+> Should ids be generated by the application or by the database?
+  Recommended: the database, via a column default. One less thing
+  for a client to get wrong.
+
+< The application. A client assembles a whole definition offline
+  and hands it over in one call, so the ids have to exist before
+  any of it reaches Postgres.
+
+> Then UUIDv4 or UUIDv7?
+  Recommended: v4. It is the common default.
+
+< v7. These are primary keys on a table that only grows, and v4
+  scatters inserts across the index.
+```
+
+Both recommendations were sensible and both were overridden, and the reason is the same each time: the recommendation is drawn from what is most common, which means it is the majority ecosystem's convention arriving as a default — an Idiom (Ch. 02), delivered in the voice of an answer. Overriding it is a local force beating a convention.
+
+That is only possible because the convention was made visible as a *choice*. Generated code contains both of those decisions too. It contains them as a column default and a call to a v4 constructor, with nothing to mark that anything was decided, and no one reading it later has a question to ask.
+
+The upstream text has since changed in a way worth one line: it asks a round of questions at once where the frozen version asks one at a time. That is throughput against how much the reader has to hold in working memory, which is a force with a value, so neither version is a regression.
 
 **The limit, and it is severe.** Grilling surfaces the decisions the model recognizes *as* decisions, and that set comes from the same corpus. A question settled uniformly across the training data does not present itself as a branch point at all — it is simply how things are done.
 
@@ -134,7 +215,11 @@ So the dependency runs one way: idioms depend on principles, principles depend o
 
 **Read in the other direction, nothing falsifies.** Start from *we use repositories here* and there is no subsequent step at which the repository could turn out to be wrong. You can derive a principle that justifies it and then find forces that support the principle, and the whole chain will be internally consistent and unfalsifiable, because it was assembled from the answer backwards. That is not a failure of rigour. It is what working backwards from a conclusion produces every time, in any field.
 
-Which is also why the method's output is a record rather than a design. Two teams can run it on the same system and reach different designs, because step two under-determines the result and conflicts get decided rather than computed [-- maybe this part: "because step two...and conflict get decided rather than computed" is key to my previous tag bit it's too compressed and I don't understand it wholly]. What they cannot do is disagree about the forces without one of them being wrong about a fact — and that is a smaller and much more tractable argument than the one they would otherwise be having.
+Which is also why the method's output is a record rather than a design. Two teams can run it on the same system and end up with different designs. There are two reasons, and both are honest.
+
+Step two does not determine one answer. A set of forces licenses a set of principles, and more than one design can satisfy the same set — four queries or one join, as above. And where forces conflict, the method converts the conflict into a stated trade and hands it to somebody, who decides. Neither of those is a defect being excused; they are what the method claims, which is less than a procedure that outputs a design.
+
+What the two teams cannot do is disagree about the forces without one of them being wrong about a fact. That is a smaller argument than the one they would otherwise be having, and unlike the other one, it ends.
 
 ---
 
@@ -160,11 +245,9 @@ Sometimes the platform, the contract, or the existing schema leaves one thing yo
 
 ## What the claim costs
 
-**It requires the expertise it appears to replace.** This is the condition to state most harshly, because the method reads like a substitute for experience and is the opposite. Deriving *idempotency follows from at-least-once delivery* requires already knowing what at-least-once delivery implies. Reading a latency budget as a force requires knowing what a mechanism costs. The method organizes knowledge you have; it does not supply knowledge you lack, and a force map produced by someone who cannot price the options is a confident-looking document with the wrong cells filled in.
+**It requires the expertise it appears to replace.** This is the condition to state most harshly, because the method reads like a substitute for experience and is the opposite. Most of that expertise goes into step one, for the reason given earlier: reading a force is a judgement about which facts matter to the decision in front of you, not a measurement. Deriving *idempotency follows from at-least-once delivery* requires already knowing what at-least-once delivery implies. Reading a latency budget as a force requires knowing what a mechanism costs. The method organizes knowledge you have; it does not supply knowledge you lack, and a force map produced by someone who cannot price the options is a confident-looking document with the wrong cells filled in.
 
 The same holds for the countermeasure in the previous section. Overriding a generator's recommendation is only possible for someone who can tell that the recommendation is a convention rather than a consequence — which scales with depth in that specific domain, and is the opposite of what people usually want from these tools.
-
-[-- I wrote this tag first on an earlier place, before reading the two paragraphs above. I think these paragraphs answered my questions that follow. I'm still gonna paste it here because maybe some of my interpretation is valuable:  deep question, not trying to criticise but I'm genuinely curious: If forces are facts why the first step is "read the forces" and we said this: "Facts get looked up; decisions get put to the human. That is the force-map method's step one and step two, separated and given owners". My point is that "force" and "facts" sound like physics, you take an instrument and measure them and they are either there or not. Obviously they are not like that in the sense we used on our book, something requires human judgment, perception, even group decisions. Can we uncover and explain that clearly?]
 
 **It costs real time per decision, and pays only under specific forces.** FlowCore carries thirty-eight recorded decisions for roughly five thousand lines. That ratio is justified by durability: those are schema decisions that outlive the code. On a script with a known death date the same ratio is waste, and saying so is not a hedge — it is the method applied to itself.
 
