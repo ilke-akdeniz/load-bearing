@@ -2,9 +2,12 @@
 
 ## The claim
 
-**What decides which advice holds is not the domain but the force profile: the reading of chapter 03's forces, with at least one of them pinned at an extreme. The two are independent, so the same domain can contain opposite profiles and the same profile can span unrelated domains — and it is the profile that predicts which advice inverts.**
+**What decides which advices holds is not the domain but the force profile.**
+[-- I like short version of the claim better. More direct, more clear. An important change I made for you to consider, I added the advice plural. My reasoning is that the profile is not necessarrily a single force, it's an overview of all important forces on the system, and many advices can spun from that, not just one.]
 
-*Domain* keeps its ordinary meaning throughout this chapter and the rest of the book: what the software is about. Payroll, ledgers, air traffic, imaging. **Force profile** is this book's term and is not standard vocabulary; it names the reading, not the subject.
+*Domain* keeps its ordinary meaning throughout this chapter and the rest of the book: what the software is about. Payroll, ledgers, air traffic, imaging. 
+
+**Force profile** is this book's term and is not standard vocabulary; it names the reading of prominent forces on the system.
 
 Chapter 19 gave the method for one decision. This chapter runs it at the scale of whole systems, six times, and the finding is that the answers cluster.
 
@@ -12,19 +15,21 @@ Chapter 19 gave the method for one decision. This chapter runs it at the scale o
 
 ## The demonstration
 
-### Subject and profile are two different axes
-
-A flight simulator, a video encoder and a high-frequency trading loop share almost nothing anyone would call a subject. They share a profile: a fixed budget measured in milliseconds, inside which the memory hierarchy decides what is possible. And they share its inversions — all three end up with layouts nobody may hide and allocation moved out of the loop.
+### Domain and force profile are two different axes
+[-- if with subject you meant domain, I would rather keep the domain and not introduce subject]
+A flight simulator, a video encoder and a high-frequency trading loop share almost nothing anyone would call a domain. They share a force profile: a fixed latency budget measured in milliseconds, inside which the memory hierarchy decides what is possible. And they share its inversions — all three end up with layouts nobody may hide and allocation moved out of the loop.
 
 That is one direction. **The other direction matters more, because it is the one that catches people.**
 
-Consider two systems in the same business. One company sells high-end pizza ovens to restaurants: a salesperson writes a proposal, one person to a proposal, and nobody else touches it. Another sells and installs security systems for marine ports: several salespeople, technicians and advisors work the same proposal, and often the same line items, at overlapping stages.
+Consider two systems in the same business. One company sells high-end pizza ovens to restaurants: a salesperson writes a proposal, one person to a proposal, and nobody else touches it. Another company sells and installs security systems for marine ports: several salespeople, technicians and advisors work the same proposal, and often the same line items, at overlapping stages.
 
-Both are sales software. Both would be described by the same domain expert in the same vocabulary — proposal, line item, discount, approval. And the concurrency reading is not close: one has a single writer and no contention worth naming, the other has a rule spanning rows that several people are editing at once, which is chapter 06's territory in full. Nothing about knowing the business tells you that. You have to read the forces.
+Both are sales software. Both would be described by the same domain expert in the same vocabulary — proposal, line item, discount, approval. And the concurrency reading is not close: one has a single writer and no contention worth naming, the other has a rule spanning rows that several people are editing at once, which is chapter 06's territory in full. Nothing about knowing the business tells you that. [-- preceding is simply wrong. Literally the business told you that: "we have several people doing this and this in these stages..." I guess this can change the rest of the chapter so consider this tag carefully.] You have to read the forces.
 
 So subject and profile vary independently. Unrelated subjects can share a profile; one subject can contain opposite profiles. **Which is why this chapter is organised the second way**: the profile is what predicts the inversion, and the subject is what tells you almost nothing about it.
 
 Six profiles follow. Each has one force at an extreme, and each inverts something the mainstream states without qualification.
+
+[-- this table needs to change, The labels on the profile don't describe a profile, they look like domain categiroes - labeld to me. Maybe the second row can be renamed toe "force profile"]
 
 ```text
  profile           the force at an extreme
