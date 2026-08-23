@@ -241,11 +241,17 @@ Also the paper's own last paragraph, in print since 1994 and still lost: the sta
 ### 19. The force-map method
 `19_force-map-method.md`
 
-The practical procedure the whole book has been building toward.
+The practical procedure the whole book has been building toward, and the one thing about it that is checkable.
 
-Contents: read the forces, derive the principles, then check the idioms — in that order, never the reverse; **grilling** as this method run with a generator in the loop — the interview that surfaces each decision before code exists, quoted in full, with its provenance and the limit that it is weakest where the training corpus is most uniform; a worked force-map for four systems from scratch; how to notice you have inherited a principle whose forces are absent; what to do when forces conflict.
+**The claim:** design advice is verified in one sequence — forces, then principles, then idioms. A principle followed where its forces are absent, and an idiom followed where its principles are not needed, are the two ways a design goes wrong while every decision in it still looks correct.
+Read in that direction each step takes an input from the one before and every claim has a falsifier. Read backwards from a convention, the chain comes out consistent and unfalsifiable, because it was assembled from the answer.
 
-*Where the claim doesn't apply:* situations where the conventional answer is good enough and the analysis costs more than the decision is worth.
+Contents: the three steps, and then why step one is not instrument work — some forces are countable, most are judgements, and which facts count as forces depends on the decision in front of you, so all the method claims is that a force is the kind of thing that has an answer. Four systems given only as force readings — a migration script, a ledger, a published library, a real-time loop — with four pieces of the book's own advice run across them and changing verdict, every difference tracing to a cell.
+Then the map itself, worked on FlowCore's decision 12: forces with values, the principle they license, two idioms checked and rejected, and the three lines nothing else records — **forced, chosen, deferred** — plus the trigger that would reopen it. Chapter 12 owns the architecture decision record; what this adds to Nygard's template is forced-against-chosen and a trigger written before rather than a status marked after.
+Also: detecting an inherited principle by asking what would have to be true for it to be unnecessary; five moves for conflicting forces, ending in escalation with quantities named, which is chapter 03's debt discharged; and **grilling** under AI-assisted development — the frozen prompt in full, its provenance, a worked exchange where two corpus defaults are overridden by facts only the human has, and the limit that it surfaces contested choices and conceals settled ones.
+
+*Where the claim doesn't apply:* the conventional answer is good enough and the analysis costs more than the decision; the forces are not knowable yet, so reading them is guessing with a table attached; and a decision with one live option, where mapping is theatre.
+*What it costs:* it requires the expertise it appears to replace, most of which goes into step one.
 
 ### 20. Six domains, six inversions
 `20_six-domains.md`
@@ -328,7 +334,7 @@ Two are not negotiable: chapter 02's classification model is a lens rather than 
 | 16 | `16_behaviour-placement.md` | **draft** |
 | 17 | `17_tdd-and-mocks.md` | **draft** |
 | 18 | `18_abstraction-as-insurance.md` | **draft** |
-| 19 | `19_force-map-method.md` | **in progress** |
+| 19 | `19_force-map-method.md` | **draft** |
 | 20 | `20_six-domains.md` | not started |
 | 21 | `21_idioms.md` | not started |
 | 22 | `22_style.md` | not started |
