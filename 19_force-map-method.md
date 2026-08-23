@@ -70,7 +70,7 @@ Every difference above traces to a cell in the table, which means each one can b
 
 The table above is a comparison, not a map. Here is a map: one decision, from a real system, written the way the method produces it.
 
-FlowCore is a Go workflow library backed by Postgres. [-- flowcore definition not needed here. I remember we already used flowcore without reminding what it is manytimes before this chapter.] A workflow definition is a four-level tree — definition, statuses, steps, actions — and the decision is what happens when a client fetches a workflow defitinion.
+A FlowCore workflow definition is a four-level tree — definition, statuses, steps, actions — and the decision is what happens when a client fetches one.
 
 ```text
  decision    Get returns the whole definition tree, assembled from four
@@ -153,7 +153,7 @@ What the map does is make the decision smaller. Five moves, roughly in the order
 
 The method's honest limit is here. It does not resolve conflicts. It converts them from arguments about taste into a stated trade with named quantities, and then somebody decides.
 
-### Grilling: a method for AI assisted development
+### Grilling: the method under AI-assisted development
 
 The procedure above assumes you can name the forces before the design exists. Usually you cannot — not because you are careless, but because you do not yet know which decisions are about to be made, so you do not know which facts about your situation are about to matter.
 
@@ -189,9 +189,17 @@ The recommendation attached to each question is where the value is, and it takes
   scatters inserts across the index.
 ```
 
-Both recommendations were sensible and both were overridden, and the reason is the same each time: the recommendation is drawn from what is most common, which means it is the majority ecosystem's convention arriving as a default — an Idiom (Ch. 02), delivered in the voice of an answer. Overriding it is a local force beating a convention. [-- briefy tell what were those forces and who read them if the information is available.]
+Both recommendations were sensible, both were overridden, and the same kind of thing did the overriding each time: a fact about this library that is not in any corpus.
 
-That is only possible because the convention was made visible as a *choice*. Generated code contains both of those decisions too. It contains them as a column default and a call to a v4 constructor, with nothing to mark that anything was decided, and no one reading it later has a question to ask. [-- "with nothing..." Huh? I'm also not following this paragraph in general. First sentence is captain obvious. Second and third are like, "ok I get it but what's your point?" ]
+The first is about how the library is used — a client builds a whole definition in memory before any part of it exists, so ids cannot come from a column default without splitting the call. The second is a latency-budget reading at volume: these are primary keys on a table that only grows, and v4 scatters inserts across the index.
+
+Only the second is one of chapter 03's seven. **The seven are the forces that recur often enough to be worth naming, not a closed list**, and a situation will sometimes hand you a fact that settles a question without appearing on it. What makes both of them forces is the property from earlier in this chapter rather than membership of a list: each is checkable, and each says what would have to change for the answer to change.
+
+And note who supplied them. In both cases the human, because both are facts about this situation — which is the one thing a recommendation drawn from what is common cannot contain. The recommendation is the majority ecosystem's convention arriving in the voice of an answer, which is an Idiom (Ch. 02) with its locality stripped off.
+
+The alternative is not that these two decisions go unmade. Generated code would have carried both — a column default and a call to a v4 constructor — taken by whatever is most common, with nothing in the file showing that anything was chosen. Chapter 23 takes that case in full.
+
+The narrower point here is the one worth keeping: **the interview does not produce better answers. It produces answers somebody can disagree with.**
 
 The upstream text has since changed in a way worth one line: it asks a round of questions at once where the frozen version asks one at a time. That is throughput against how much the reader has to hold in working memory, which is a force with a value, so neither version is a regression.
 
