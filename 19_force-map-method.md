@@ -199,7 +199,7 @@ And note who supplied them. In both cases the human, because both are facts abou
 
 The alternative is not that these two decisions go unmade. Generated code would have carried both — a column default and a call to a v4 constructor — taken by whatever is most common, with nothing in the file showing that anything was chosen. Chapter 23 takes that case in full.
 
-The narrower point here is the one worth keeping: **the interview does not produce better answers. It produces answers somebody can disagree with.**
+The narrower point here is the one worth keeping: **grilling does not produce better answers. It produces answers somebody can disagree with.** [-- I think maybe it's worthile to point that decisions.md is also an important part if this grilling process. Ai agent logs every important  decisions and to decisions.md and that's what makes the disagreement, later adjustment to changing forces possible. Not sure about this but is it also a good idea to explore briefly how this is similar to ADR's?]
 
 The upstream text has since changed in a way worth one line: it asks a round of questions at once where the frozen version asks one at a time. That is throughput against how much the reader has to hold in working memory, which is a force with a value, so neither version is a regression.
 
