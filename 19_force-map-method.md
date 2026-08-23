@@ -302,4 +302,4 @@ Ask it of your own decisions and it produces the force map as a by-product. Ask 
 
 ---
 
-**Next:** chapter 20 runs the method across six domains and finds that each one's dominant force inverts a piece of standard advice — not weakens it, inverts it, so that the thing to do is the opposite of what the advice says.
+**Next:** chapter 20 runs the method across six force profiles and finds that each one's dominant force inverts a piece of standard advice — not weakens it, inverts it, so that the thing to do is the opposite of what the advice says.

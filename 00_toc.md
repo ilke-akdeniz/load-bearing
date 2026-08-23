@@ -253,11 +253,12 @@ Also: detecting an inherited principle by asking what would have to be true for 
 *Where the claim doesn't apply:* the conventional answer is good enough and the analysis costs more than the decision; the forces are not knowable yet, so reading them is guessing with a table attached; and a decision with one live option, where mapping is theatre.
 *What it costs:* it requires the expertise it appears to replace, most of which goes into step one.
 
-### 20. Six domains, six inversions
-`20_six-domains.md`
+### 20. Six profiles, six inversions
+`20_six-profiles.md`
 
 The longest chapter, and the payoff.
-Each domain: which forces dominate, which standard advice inverts, and the code that shows it.
+Each force profile: which force is at an extreme, which standard advice inverts, and what it becomes instead.
+*Domain* keeps its ordinary meaning — what the software is about. **Force profile** is this book's term for the reading, and the chapter's claim is that the two are independent axes.
 
 - **Line-of-business / data-durable** — the schema outlives the code; invariants belong in the database; the ORM question.
 - **Games and simulations** — cache locality outranks encapsulation; ECS; data-oriented layout; why "a class per entity" loses to arrays.
@@ -266,7 +267,7 @@ Each domain: which forces dominate, which standard advice inverts, and the code 
 - **UI frameworks and libraries** — inversion of control is the product; your code is the leaf; the framework calls you.
 - **Distributed services** — no shared transaction, so idempotency and retries replace atomicity; the entire consistency toolkit changes shape.
 
-*Where the claim doesn't apply:* systems that straddle two domains, which is most interesting systems — and how to decide which forces win at each boundary.
+*Where the claim doesn't apply:* systems that straddle two profiles, which is most interesting systems, and where the seam goes; a profile you are visiting rather than living in; and the ordinary case, where no force is at an extreme — which is most software, and which the chapter treats as a finding with four consequences rather than a disappointment.
 
 ### 21. Idioms: why ecosystems diverge
 `21_idioms.md`
@@ -335,7 +336,7 @@ Two are not negotiable: chapter 02's classification model is a lens rather than 
 | 17 | `17_tdd-and-mocks.md` | **draft** |
 | 18 | `18_abstraction-as-insurance.md` | **draft** |
 | 19 | `19_force-map-method.md` | **draft** |
-| 20 | `20_six-domains.md` | **in progress** |
+| 20 | `20_six-profiles.md` | **in progress** |
 | 21 | `21_idioms.md` | not started |
 | 22 | `22_style.md` | not started |
 | 23 | `23_reading-advice.md` | not started |

@@ -1,8 +1,10 @@
-# Six Domains, Six Inversions
+# Six Profiles, Six Inversions
 
 ## The claim
 
-**A domain is not a subject area. It is a recurring profile of forces, with at least one of them pinned at an extreme — and that is why advice which is sound in one domain inverts in another, and why the inversion is predictable from the domain profile rather than something you discover by being burned.** [-- I get what you mean here but then our wording is problematic. If we use the word domain to denote something that not what the word means in general, we should choose another word. "Recurring profile of fo5ces, domain profile..." This get's messy. This is worthy of a discussion.]
+**What decides which advice holds is not the domain but the force profile: the reading of chapter 03's forces, with at least one of them pinned at an extreme. The two are independent, so the same domain can contain opposite profiles and the same profile can span unrelated domains — and it is the profile that predicts which advice inverts.**
+
+*Domain* keeps its ordinary meaning throughout this chapter and the rest of the book: what the software is about. Payroll, ledgers, air traffic, imaging. **Force profile** is this book's term and is not standard vocabulary; it names the reading, not the subject.
 
 Chapter 19 gave the method for one decision. This chapter runs it at the scale of whole systems, six times, and the finding is that the answers cluster.
 
@@ -10,16 +12,22 @@ Chapter 19 gave the method for one decision. This chapter runs it at the scale o
 
 ## The demonstration
 
-### What makes a domain
+### Subject and profile are two different axes
 
-*Games* is not a domain because games are a kind of software. It is a domain because a game has a fixed frame budget measured in milliseconds, and inside that budget the memory hierarchy decides what is possible. A flight simulator, a video encoder and a high-frequency trading loop share that profile and share its inversions, while sharing nothing anyone would call a subject.
+A flight simulator, a video encoder and a high-frequency trading loop share almost nothing anyone would call a subject. They share a profile: a fixed budget measured in milliseconds, inside which the memory hierarchy decides what is possible. And they share its inversions — all three end up with layouts nobody may hide and allocation moved out of the loop.
 
-So the test for whether something is a domain in this sense is not what the software is about. It is whether two systems from unrelated industries, put side by side, turn out to face the same overturned advice. Where they do, what they have in common is a force reading rather than a topic.
+That is one direction. **The other direction matters more, because it is the one that catches people.**
+
+Consider two systems in the same business. One company sells high-end pizza ovens to restaurants: a salesperson writes a proposal, one person to a proposal, and nobody else touches it. Another sells and installs security systems for marine ports: several salespeople, technicians and advisors work the same proposal, and often the same line items, at overlapping stages.
+
+Both are sales software. Both would be described by the same domain expert in the same vocabulary — proposal, line item, discount, approval. And the concurrency reading is not close: one has a single writer and no contention worth naming, the other has a rule spanning rows that several people are editing at once, which is chapter 06's territory in full. Nothing about knowing the business tells you that. You have to read the forces.
+
+So subject and profile vary independently. Unrelated subjects can share a profile; one subject can contain opposite profiles. **Which is why this chapter is organised the second way**: the profile is what predicts the inversion, and the subject is what tells you almost nothing about it.
 
 Six profiles follow. Each has one force at an extreme, and each inverts something the mainstream states without qualification.
 
 ```text
- domain            the force at an extreme
+ profile           the force at an extreme
  ----------------  ---------------------------------------------
  line-of-business  durability: the data outlives every rewrite
  games and sims    latency: a fixed frame, and the cache decides
@@ -39,26 +47,33 @@ The force is durability. A payroll system's tables will be read by software nobo
 
 **What inverts: keep business rules out of the database.** In most software this is sound — logic in the schema is hard to test, hard to version, invisible to the debugger. Here it turns over, because a rule enforced only in application code is a rule that holds until the next application. Chapter 14 works the placement, and chapter 17 shows what a constraint catches that a test double cannot.
 
-**And a second one: the database is an implementation detail you can abstract away.** Chapter 18 takes this apart in full. The domain-level version is shorter: the abstraction sits in the layer that changes fastest, and the thing it claims to insure sits in the layer that changes slowest, so the insurance is filed against the wrong asset.
+**And a second one: the database is an implementation detail you can abstract away.** Chapter 18 takes this apart in full. The profile-level version is shorter: the abstraction sits in the layer that changes fastest, and the thing it claims to insure sits in the layer that changes slowest, so the insurance is filed against the wrong asset.
 
-The ORM question follows from the same force and is worth stating plainly, because it is usually argued as taste. An ORM is a productivity trade whose bill comes due at exactly the point where this domain's force bites: the generated query, the migration, the constraint the mapping cannot express. It is not that ORMs are wrong here. It is that this is the domain where you will be reading the SQL they generate, so choosing one on the basis that you will not have to is choosing on a claim the domain disproves. [-- "so choosing..." part is not clear, rewrite]
+The ORM question follows from the same force and is worth stating plainly, because it is usually argued as taste. An ORM is a productivity trade whose bill comes due at exactly the point where this profile's force bites: the generated query, the migration, the constraint the mapping cannot express. It is not that ORMs are wrong here.
 
-### Games and simulations: the layout is the interface 
-[-- what layout, what interface? I get that you don't want to repeat what's worked elsewhere on the book, but even I who read every chapter repeatedly have trouble understanding this and the following to points. I do in the end if I force myself but that's not ideal for a reader who reads each chapter only once at best. You have to be at least more specific and clear with these three in the title and add a summarizing, clarifying sentence for the advice. Ex (giving you the idea, you don't have to take it word by word): Memory layout is the abstraction.... Allocate objects when...]
+It is that an ORM chosen because it means you will not have to write SQL is chosen on a promise this profile breaks. You will read the SQL it generates — on the day a query is slow, a migration is wrong, or a constraint cannot be expressed through the mapping. That is an argument against one particular reason for picking one, not against the tool.
 
-The forces are the frame budget and the memory hierarchy, and chapter 05 works this domain's central inversion — hide the representation turns over, because in an entity-component system the array layout *is* the contract that a dozen systems agree on. Chapter 08 owns the arithmetic underneath it.
+### Games and simulations: the memory layout is the interface
+
+The forces are the frame budget and the memory hierarchy, and chapter 05 works this profile's central inversion. *Hide the representation* turns over: in an entity-component system the order and grouping of fields in memory is what a dozen systems index directly, so it is the contract rather than a private detail, and changing it means changing all of them. Chapter 08 owns the arithmetic underneath it.
 
 Two further inversions belong here rather than there.
 
-**Allocate when you need it** inverts. Outside this domain, allocating in a loop is a performance question you resolve if profiling says so. Inside a frame, an allocation is a latency event with a distribution rather than a cost — the allocator is fine until the collector runs, and the collector runs when it likes. So the pattern is to allocate everything before the loop starts and never again, which reads as premature optimization and is nothing of the kind. The budget is fixed in advance; there is no *later* in which to optimize.
+**What inverts: allocate when you need it, and optimize later if profiling says so.** Here it becomes: allocate everything before the loop starts, and never again inside it.
 
-**Prefer correctness to determinism** [-- first time I see this in this book unless I missed something. And it sounds very interesting. Maybe you should expand this on some other chapter. Anyway I don't understand fully this example here, maybe you should specify the exact meaning of correctness with 1-2 sentences. For me right now the big question is how come correctness and determinism don't go hand in hand and how does the trade-off work? So a good simulations is deterministic, then is it not correct? What does that mean? "Flight simulator with a plane that crashes the same way under the same conditions, but the flight control physics are totally off so it's not even usable? Can't be like that..." Maybe those should be expanded on the other chapter and a summary here is good then, you decide.] inverts too, and this one surprises people from outside. A simulation that produces a slightly different result on two machines is not slightly wrong; it is unusable for replay, for lockstep multiplayer, and for reproducing a bug report. Floating-point associativity, iteration order over a hash map, and anything threaded become correctness concerns rather than performance ones. Chapter 06's ordering material is the mechanism; what is unusual here is which side of the trade is non-negotiable.
+Outside this profile, allocating in a loop is a performance question you resolve when a profiler points at it. Inside a frame it is a latency event with a distribution rather than a cost — the allocator is cheap until the collector runs, and the collector runs when it likes, which is a spike you cannot schedule around. So the pools are built up front. That reads as premature optimization and is nothing of the kind: the budget was fixed before anyone wrote a line, so there is no *later* in which to optimize.
+
+**What inverts: use the most accurate and fastest method available.** Here it becomes: use the reproducible one, and pay for it in accuracy and speed.
+
+The mainstream treats reproducibility as a testing convenience. In a simulation it is part of the specification, because a replay that drifts is not a replay and a bug report you cannot reproduce is not a bug report. What costs reproducibility is precisely the better routes: a parallel reduction sums in a different order than a sequential one, fused multiply-add is more accurate and changes the result, an adaptive timestep is better physics than a fixed one, and iterating a hash map is fine until the order leaks into the simulation. So the deterministic version is often slightly less accurate per step and slower, on purpose. The divergence you are avoiding is tiny — and tiny is fatal, because it compounds over a few thousand frames into two machines watching different games. Chapter 06's ordering material is the mechanism; what is unusual here is which side of the trade is non-negotiable.
 
 ### Embedded and real-time: no allocator, no second chance
 
 The force is a deadline that is part of the specification rather than a target, on hardware with a fixed memory budget and often no heap at all.
 
-**Exceptions inverts.** In most software, error codes are the weaker option — easy to ignore, noisy at every call site, and chapter 12 catalogues the alternatives. In hard real-time, unwinding has an execution time nobody can bound in advance, and a path whose worst case cannot be computed cannot be certified. So the code looks like this, and the ugliness is the point:
+**What inverts: prefer exceptions to error codes.** Here it becomes: return a status from every call, and check it at every call site.
+
+In most software, error codes are the weaker option — easy to ignore, noisy everywhere, and chapter 12 catalogues the alternatives. In hard real-time, unwinding has an execution time nobody can bound in advance, and a path whose worst case cannot be computed cannot be certified. So the code looks like this, and the noise is the point:
 
 ```c
 /* No allocation, no unwinding, and every failure path visible
@@ -71,7 +86,9 @@ status_t read_sample(sensor_t *sensor, uint16_t *out) {
 }
 ```
 
-**Allocate dynamically** inverts, harder than in games: there is frequently no allocator to call, and static buffers sized at compile time are the whole strategy. **And dependency injection stops meaning anything**, because there is one sensor, one radio, one clock, and the composition root chapter 05 argues for has exactly one composition to root. Injecting it buys the ability to substitute something that does not exist.
+**What inverts: allocate what you need at run time.** Here it becomes: size every buffer at compile time, because there is frequently no allocator to call at all. This is the games inversion taken further — there the heap exists and you avoid it, here it may not exist.
+
+**And what inverts quietly: inject your dependencies.** Here it becomes: construct them, once, in place. There is one sensor, one radio, one clock, and the composition root chapter 05 argues for has exactly one composition to root. Injection buys the ability to substitute something that does not exist, and the seam costs a pointer indirection on a deadline you are already fighting.
 
 ### Compilers and language tooling: one type touched by everything
 
@@ -81,7 +98,7 @@ The force is the shape of change. A compiler's abstract syntax tree — the tree
 
 The reason is chapter 05's, applied to a shape it already names: the dependency graph is a pipeline, not a stack of layers, and the AST is at the bottom of it — depended on by many, depending on nothing. That is the *stable* position, which is what "depend on abstractions" was pointing at all along (Ch. 18). An AST is concrete, has no interface, and is one of the most stable types in the system. Chapter 05 makes the same point about a parser's mutually recursive node types being nobody's idea of a violation.
 
-What this domain adds is that the property generalises: **a type depended on by everything is a problem exactly when it also depends on things.** Fan-in alone is not the smell. Fan-in with fan-out is.
+What this profile adds is that the property generalises: **a type depended on by everything is a problem exactly when it also depends on things.** Fan-in alone is not the smell. Fan-in with fan-out is.
 
 ### UI frameworks: you are not the caller
 
@@ -89,17 +106,17 @@ The force is control of the callers, at the value chapter 03 names as the extrem
 
 **What inverts: your code should own the flow.** Structured programming, layering, most architectural advice, and every diagram with an arrow pointing downward assume your `main` is at the top. Under a framework it is not. The framework's loop calls your component, decides when to call it again, decides what happens between calls, and may discard and rebuild your state without asking.
 
-Chapter 05 owns the mechanism — the call goes up while the dependency goes down, and that is inversion of control done properly. What belongs here is that in this domain it is not a technique you apply. **It is the product.** A framework whose control you kept would be a library, and the distinction between the two words is exactly this.
+Chapter 05 owns the mechanism — the call goes up while the dependency goes down, and that is inversion of control done properly. What belongs here is that under this profile it is not a technique you apply. **It is the product.** A framework whose control you kept would be a library, and the distinction between the two words is exactly this.
 
-Which has a practical consequence worth more than the definition: the framework's lifecycle is a Force, not a convention. Fighting it — holding state outside it, calling into it from your own loop, treating its callbacks as an inconvenient API over the thing you really wanted — is the single most common way applications in this domain become unmaintainable, and it is always defended in the language of good architecture.
+Which has a practical consequence worth more than the definition: the framework's lifecycle is a Force, not a convention. Fighting it — holding state outside it, calling into it from your own loop, treating its callbacks as an inconvenient API over the thing you really wanted — is the single most common way applications under this profile become unmaintainable, and it is always defended in the language of good architecture.
 
 ### Distributed services: atomicity is gone, so everything downstream changes
 
-The force is concurrency across machines, and chapter 07 owns this domain end to end: you cannot tell a slow peer from a dead one, exactly-once delivery is impossible, so at-least-once plus idempotency is the shape everything takes, and two systems cannot share a transaction.
+The force is concurrency across machines, and chapter 07 owns this profile end to end: you cannot tell a slow peer from a dead one, exactly-once delivery is impossible, so at-least-once plus idempotency is the shape everything takes, and two systems cannot share a transaction.
 
-The domain-level observation is what happens to the toolkit as a whole. Nothing here weakens by a little. A transaction becomes a saga with visible compensations. A foreign key becomes an eventual reconciliation. A unique constraint becomes an idempotency key generated by the client before the first attempt. A rollback becomes a compensating business operation a customer can see.
+The profile-level observation is what happens to the toolkit as a whole. Nothing here weakens by a little. A transaction becomes a saga with visible compensations. A foreign key becomes an eventual reconciliation. A unique constraint becomes an idempotency key generated by the client before the first attempt. A rollback becomes a compensating business operation a customer can see.
 
-**Which is the signature of a domain, and the reason this chapter groups by force rather than by topic.** One force at an extreme does not overturn one piece of advice. It overturns the whole family that depended on it, because they all depended on the same thing — and here the thing is that a set of writes either all happen or none do.
+**Which is the signature of a profile, and the reason this chapter groups by force rather than by subject.** One force at an extreme does not overturn one piece of advice. It overturns the whole family that depended on it, because they all depended on the same thing — and here the thing is that a set of writes either all happen or none do.
 
 ### What the six have in common
 
@@ -109,7 +126,7 @@ In every case the pattern is identical, and it is chapter 02's distinction seen 
 
 **A Principle turns over.** Hide the representation, keep rules out of the database, own your flow, avoid god objects — each is good advice with a condition, and each condition fails in exactly one of these profiles.
 
-**And the failure is predictable.** Not one of the six inversions is a surprise once the force reading is in front of you. That is the whole claim: you do not need to have worked in a domain to know which advice it overturns, if you know which force it pins.
+**And the failure is predictable.** Not one of the six inversions is a surprise once the force reading is in front of you. That is the whole claim: you do not need to have worked under a profile to know which advice it overturns, if you know which force it pins.
 
 ---
 
@@ -117,42 +134,54 @@ In every case the pattern is identical, and it is chapter 02's distinction seen 
 
 A Principle is advice that is good given certain forces (Ch. 02). Its condition is a force at a range of values, usually unstated because in most software that force sits in an ordinary range and the condition is quietly satisfied.
 
-A domain is where one force leaves the ordinary range and stays there. So the condition fails not occasionally but structurally, for every system in the domain, all the time — which is why the failures cluster rather than scatter, and why the same six or seven pieces of advice come up every time practitioners from two domains argue.
+A profile is where one force leaves the ordinary range and stays there. So the condition fails not occasionally but structurally, for every system with that reading, all the time — which is why the failures cluster rather than scatter, and why the same six or seven pieces of advice come up every time practitioners from two profiles argue.
 
-**And it is why the arguments are so unproductive.** Two people disagreeing about whether to put logic in the database are not disagreeing about databases. One of them works where the schema outlives four rewrites of the application, and the other works where the application outlives the storage it happens to be using this year. Both are right, both are giving advice that has worked every time they have applied it, and neither has said the force out loud. Chapter 03 identifies this as the general shape of unresolvable design arguments; a domain is the case where the two people's force readings differ so far apart that they will never converge by talking about the code.
+**And it is why the arguments are so unproductive.** Two people disagreeing about whether to put logic in the database are not disagreeing about databases. One of them works where the schema outlives four rewrites of the application, and the other works where the application outlives the storage it happens to be using this year. Both are right, both are giving advice that has worked every time they have applied it, and neither has said the force out loud. Chapter 03 identifies this as the general shape of unresolvable design arguments. What a profile adds is that the two readings are not merely different but stably different — they will be just as far apart on the next question, and on the one after that, so the two will never converge by talking about code.
 
-The practical consequence is that **domain experience transfers as a force reading, not as a set of rules.** Someone arriving from a domain you do not share is carrying conclusions that were correct where they came from. What is worth extracting from them is not the conclusion but the reading it was derived from, which is a question they can usually answer and are almost never asked. [-- My stream if ideas. Business domain, maybe call it real-world domain. Because business brings the images of finance sales etc but there are business rules for rocket mission control software as well. So "real-world domain" is maybe the better term. How the process goes without the involvement of software in focus? Ex: Ledger software. Real-world domain is mature and easily observable. Ledgers have existed since centuries, you can see old legers from Venetian merchants. The rules are there and clear: legder entries, reversals... 
+The practical consequence is an asymmetry between the two axes, and it is worth stating because it decides what to ask a new colleague.
 
-Compare this with flight simulator. What's the real-world domain, without the similator software? There was no mechanical simulators as far as I know. Was that a combination of sitting inside the cockpit on the ground, exploring controls then progressive flights where you tried different scenarios in a safe way? "Pretend left rudder is not working, fly the plane without touching it." Anyway, regardless of this obvious pre-software history, there are always truths, rules, intricacies that hold regardless of software. Ex: "A goal of simulator is to practice emergency procedures in a safe environment but that environment should not "feel" safe. It should as threatening as the real world situation is so that the exercise is useful." 
+**Profile knowledge transfers. Domain knowledge does not.** Someone who has worked where the frame budget dominates can find their way in an unfamiliar business with the same profile, because what they carry is a set of readings and the moves that follow from them. Someone who knows a business deeply carries something far less portable — which is why there are lawyers who do maritime and lawyers who do civil, and surgeons who do hands and surgeons who do brains, and why nobody finds that odd.
 
-So "real world domain" is the root of every design. Without that, there is no need for the software and the design. Then there is this "force profile" we call domain in this book which needs another name. I'll go with force profile, if you find some better label do it. 
+So when a person arrives from a domain you do not share, they are carrying conclusions that were correct where they came from. What is worth extracting is not the conclusion but the reading it came from — a question they can nearly always answer, and are nearly never asked.
 
-Force profile looks purely technical but it's more tangled with "real world domain" than most people realize. Ex: concurrency in a sales software. The force of concurrency could be very different on this two situations: A company that sells high end pizza ovens to restaurants. One sales person, creates one sales proposal for each prospect. A company that sells and installs security solutions for large marine ports. Multiple sales persons, technicians, advisors dealing with the same proporal even same line items in multiple stages at the same time.
-
-Regarding software design, if you know what to do for a "force profile" you can find your way relatively easily on another "real world domain" that has similar "force profile". That's not the case with "real world domain" knowledge. By their nature, those are very situational, that is the reason we have lawyers that are experts on maritime law, vs civil law or hand surgeons vs brain surgeons.]
+**And the two are more tangled than either side tends to admit.** The sales example above is the point: the pizza-oven system and the port-security system have the same domain and opposite concurrency readings, so the profile could not be derived from the business — but it could not be derived without knowing the business either. Nobody reads *several people edit the same line items at overlapping stages* off an architecture diagram. It comes from someone who knows how ports buy security systems.
 
 ---
 
 ## Where the claim doesn't apply
 
-### Most interesting systems straddle two domains
+### Most interesting systems straddle two profiles
 
 This is the common case rather than the exception, and it is where the chapter's neat six-way split stops being useful.
 
-A game with a persistent inventory is two domains in one repository. The frame loop is games — arrays, no allocation, determinism. The inventory is line-of-business — it outlives the client build, it is worth money to the player, and a torn write is a support ticket. A trading system is real-time on one path and durable-audit on another. A browser is a UI framework hosting a compiler.
+A game with a persistent inventory is two profiles in one repository. The frame loop is games — arrays, no allocation, determinism. The inventory is line-of-business — it outlives the client build, it is worth money to the player, and a torn write is a support ticket. A trading system is real-time on one path and durable-audit on another. A browser is a UI framework hosting a compiler.
 
 The mistake is choosing one profile and applying it throughout. A game that treats its save file with frame-loop discipline loses inventories; an inventory service that treats the frame loop with LOB discipline misses frames.
 
 **What to do is a boundary question, and the boundary is a real one: it goes where the force profile changes.** That is the same seam chapter 05 draws for dependency direction and chapter 09 draws for rate of change, arriving from a third direction. Concretely:
 
-- **Name the two profiles.** Write down which force is extreme on each side. If you cannot, there is one domain and the question is moot.
+- **Name the two profiles.** Write down which force is extreme on each side. If you cannot, there is one profile and the question is moot.
 - **Put the seam where the data crosses**, not where the code is organized. In the game, the seam is the point where component arrays become rows — and that point should be a small, explicit, boring piece of code that both sides understand, rather than a leak of either discipline into the other.
 - **Let each side keep its own rules.** The frame loop does not get to use the inventory's transactional habits, and the inventory does not get to be lock-free because it lives in a game.
 - **Expect the seam to be where the bugs are**, because it is the only place where two sets of assumptions meet, and each side is written by someone for whom the other side's rules look wrong.
 
-### A domain you are visiting rather than living in
+### The ordinary case, where no force is at an extreme
 
-Reading this chapter and concluding you now understand embedded development is the failure it is easiest to commit. The force readings above are real and they are also the first page. What they let you do is ask better questions and stop offering advice from your own domain as though it were general. What they do not do is substitute for the thing chapter 19 charges for, which is knowing what the options cost.
+Most software is here, and it is the largest boundary on the claim. Nothing is pinned, every condition the mainstream advice depends on is quietly satisfied, and that advice is simply correct. None of the six inversions applies.
+
+That is a finding about your system rather than a disappointment, and four things follow from it.
+
+**It licenses the conventional answer.** Following the mainstream because you checked and nothing is extreme is a different act from following it because it is what people do — the first can be defended and revisited, the second cannot. Converting the second into the first is most of what this book is for.
+
+**Most systems have one path that leaves the ordinary case**, and it is rarely the whole system. The nightly report that outgrew memory, the table nobody can migrate any more, the one integration you do not control. Recognising the shape of a force going extreme is what lets you notice the crossing, and the crossing is where the interesting bugs are.
+
+**Most advice you meet was written from inside a profile.** Knowing the six lets you discount it correctly — *that is the distributed profile talking and I have no network*, *that is the frame budget talking and I have no budget*. Advice arrives without its profile stated for the same reason it arrives without its scope stated (Ch. 15).
+
+**And it explains the senior person whose advice is obviously wrong here.** Usually they are right somewhere else and nobody has asked which reading they are carrying.
+
+### A profile you are visiting rather than living in
+
+Reading this chapter and concluding you now understand embedded development is the failure it is easiest to commit. The readings above are real and they are also the first page. What they let you do is ask better questions and stop offering advice from your own profile as though it were general. What they do not do is substitute for the thing chapter 19 charges for, which is knowing what the options cost.
 
 ### Domains that are not on this list
 
@@ -162,14 +191,11 @@ Six is not a complete enumeration and nothing in the argument requires it to be.
 
 ## What the claim costs
 
-**Domain knowledge does not transfer, and this is worse news than it sounds.** If the inversions cluster by force profile, then moving domains means your accumulated judgement is partly wrong in a way that feels exactly like being right. Nothing in the experience of having been correct for ten years tells you which of your conclusions travelled.
+**Moving between profiles costs you judgement you do not know you are losing.** If the inversions cluster by profile, then arriving under a new one means part of your accumulated judgement is wrong in a way that feels exactly like being right. Nothing in the experience of having been correct for ten years tells you which of your conclusions travelled and which were local.
 
-**"It's a different domain" becomes an excuse.** The claim is falsifiable and the excuse is not. The check is to name the force and its value: *the schema outlives the code, so the rule goes in the schema* can be argued with, and *we do things differently in fintech* cannot. Any use of the domain frame that does not name a force is chapter 15's mechanism, running on this chapter.
+**"It's a different profile" becomes an excuse.** The claim is falsifiable and the excuse is not. The check is to name the force and its value: *the schema outlives the code, so the rule goes in the schema* can be argued with, and *we do things differently in fintech* cannot. Any use of the domain frame that does not name a force is chapter 15's mechanism, running on this chapter.
 
 **Six labels invite a lookup table.** The point is the derivation, not the list — and a reader who takes the six as categories to sort systems into has taken the conclusion and left the method, which is precisely what this book spends Part IV describing.
-
-**And most software is in none of these profiles.** The ordinary case is a system where no force is at an extreme, every condition is quietly satisfied, and the mainstream advice is simply correct. This chapter is about the edges; a reader who concludes that their CRUD application is secretly six domains in a trenchcoat has misread it.
-[-- welp! Are you saying that I wasted my time with this book :) I guess not but then you need to explain why knowing this chapter is useful. I geninely believe it is still useful when you are on the ordinary case most of the time. Of course you shouldn't go on full analyze mode for your ordinary case but there still should be something available and valuable. ]
 
 ---
 
@@ -178,7 +204,7 @@ Six is not a complete enumeration and nothing in the argument requires it to be.
 **In a codebase:**
 
 - **Advice applied uniformly across a seam.** One allocation discipline, one error-handling convention, one testing strategy across both sides of a boundary where the force profile changes. Somebody chose a house style over a force reading.
-- **A translation layer whose only job is to make one side look like the other.** Frequently the seam done wrong: rather than a small explicit crossing, one domain's shapes are dressed up as the other's throughout.
+- **A translation layer whose only job is to make one side look like the other.** Frequently the seam done wrong: rather than a small explicit crossing, one profile's shapes are dressed up as the other's throughout.
 - **Fighting the framework.** State held outside the lifecycle, effects run in the wrong phase, the framework's calls treated as an API to work around. Almost always defended as separation of concerns.
 - **A god object that only has fan-in.** Before breaking it up, check whether it depends on anything. If it does not, it may be an AST.
 
@@ -195,10 +221,4 @@ Every inversion in this chapter is that question answered. If nothing is at an e
 
 ---
 
-## Sources
-
-- FlowCore, `docs/decisions.md` — [github.com/ilke-akdeniz/flowcore](https://github.com/ilke-akdeniz/flowcore).
-
----
-
-**Next:** chapter 21 turns from domains to ecosystems — why two languages solving the same problem settle on conventions that contradict each other, and what an idiom is actually worth once you can see where it came from.
+**Next:** chapter 21 turns from profiles to ecosystems — why two languages solving the same problem settle on conventions that contradict each other, and what an idiom is actually worth once you can see where it came from.
