@@ -23,6 +23,7 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Classification test | 02 | Five questions that place a claim in one of the five kinds | "run the test (Ch. 02)" |
 | Why the kinds get confused | 02 | Tone doesn't vary with authority; advocacy compresses; monoculture makes Idioms feel universal | one clause, cite 02 |
 | Law inert vs Principle wrong | 02 | A Force decides whether a Law *binds*; it decides whether a Principle is *right* | one clause, cite 02 |
+| *Force* is a borrowed word | 02 | Named element of a pattern description, from Alexander. There it is a field describing the tensions one pattern resolves; here it is a property of your situation read before any pattern is in view, and a kind of claim rather than a template slot | "the word is the pattern literature's (Ch. 02)" |
 | Forces as inputs | 03 | Forces are properties of the situation, not advice | "the Force is X (Ch. 03)" |
 | A Force is a dial, not a switch | 03 | Forces have values; the design changes several times across the range, each answer discarding the last | "read the value (Ch. 03)" |
 | The seven Forces | 03 | Concurrency, durability of the medium, blast radius, change frequency and shape, team size and turnover, latency budget, control of callers | name the Force, cite 03 |

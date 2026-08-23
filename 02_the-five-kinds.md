@@ -4,7 +4,7 @@
 
 **Every claim you meet about software is one of five kinds, and the kind determines how much authority it has** — not the confidence of the person saying it, not their track record, not how widely it is repeated.
 
-This premise, and the model attached to it, are this book's own. You will not find these five names used this way elsewhere, so expect nothing when you search for them — what you should find, if the model is any good, is that the distinctions it draws were already familiar and only unnamed.
+This premise, and the model attached to it, are this book's own. You will not find these five names used together this way elsewhere — with one exception, noted where that kind is defined below, because *Force* turns out to have a literature of its own. What you should find, if the model is any good, is that the distinctions it draws were already familiar and mostly unnamed.
 
 Both are assumed by the rest of the book rather than proved by this one, and that is worth saying, because every other chapter makes a claim and then demonstrates it. This chapter cannot, in two different ways. That the kind determines authority is true by construction, since the kinds are *defined* by their authority — there is nothing left to show. That every claim falls into one of the five is an exhaustiveness claim, and it is not exhaustive: a fact about one program, an evaluative remark, a sociological observation about the industry are all claims about software that fit nowhere here.
 
@@ -33,6 +33,10 @@ You do not get to disagree with a Law. You only get to be in a situation where i
 A **property of your situation**: is there concurrency, does the data outlive the code, how large is the blast radius of a bug, do you control the callers, how often does this change.
 
 Forces are not recommendations, and they are not negotiable by argument. They are facts about where you are standing. Most unresolvable architecture disagreements are two people holding different Forces in mind while arguing about Principles. (Chapter 03 is entirely about them.)
+
+**This word is borrowed, and it is the one of the five you can go and look up.** In the software pattern literature *Forces* is a named element of a pattern description, sitting alongside Problem, Context and Solution: the constraints and tensions the pattern has to resolve, and how they conflict with each other. The idea is Christopher Alexander's, whose formulation is that a pattern states a relationship between a context, a system of forces arising in that context, and a configuration that lets those forces resolve themselves.
+
+Two things differ here, and together they are why the word does a different job in this book. There, forces live *inside* a pattern's write-up and describe the tension that one pattern resolves; here they are properties of your situation, read before any pattern is in view. And there they are a field in a template; here a Force is one of the kinds of claim — which is what lets it decide whether a Law binds and whether a Principle inverts.
 
 ### Principle
 
@@ -302,6 +306,12 @@ Until then, follow the local convention — not because it is a good proxy for c
 - Two people making increasingly detailed arguments while disagreeing about a Force neither has stated.
 
 That last one is the most expensive and the easiest to fix. When an architecture argument will not converge, stop arguing about the Principle and ask what each side believes about the situation. The disagreement is usually one rung down from where it is being conducted.
+
+---
+
+## Sources
+
+- Brad Appleton, *Patterns and Software: Essential Concepts and Terminology* — [bradapp.com/docs/patterns-intro.html](https://www.bradapp.com/docs/patterns-intro.html). The account of the pattern form, and of *Forces* as one of its elements, is from here. Alexander's formulation is given as that paper reports it; *The Timeless Way of Building* was not consulted.
 
 ---
 
