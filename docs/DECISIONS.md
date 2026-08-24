@@ -3388,3 +3388,63 @@ Fixed to name the actual position.
 Ten uses of *extreme* in chapter 20, one heading, two TOC lines, and four ledger rows changed, including chapter 03's own row, whose canonical citation was *"read the value"* and is now *"read the intensity"* to match the chapter's bolded term.
 Chapter 19 is at draft and was touched once, in its handoff line, where *"each one's dominant force"* was singular against a definition that permits several — games pins the frame budget and the memory hierarchy, embedded pins the deadline and the absence of a heap.
 Its force-map cell reading `extreme` was left alone: there the word is ordinary English about one reading, in a row that also carries `none`, `real` and `unknown`, and chapter 20 giving up the word as vocabulary does not oblige the book to give up the adjective.
+
+## 86. One idea, seven places: the repetition the ledger had no row for
+
+**Context.**
+Chapter 20's third review objected to a paragraph explaining that two people arguing about whether logic belongs in the database are really disagreeing about forces.
+The author's note: *"this 'two people arguing both are right' theme was used maybe 5 times in the book with near identical idea… You need to do something about this problem. It's ok to edit older chapters."*
+
+**The survey, and a false start.**
+The first pass was run case-sensitively and missed every instance that begins a sentence, which produced a count of five and a plan built on it.
+Re-run properly, the idea appears seven times: chapter 02 twice, chapter 03 twice, chapter 19 twice, chapter 20 once.
+The correction was reported before the second decision was taken rather than after, and the three sites already agreed were the right three.
+
+**The cause is a ledger defect, as `CLAUDE.md` predicts.**
+No row in `docs/LEDGER.md` owned the concept.
+With no owner, four chapters each re-established it, and — this is what made it invisible — each one politely cited the others while doing so.
+Chapter 03 cited 02, chapter 19 cited 03, chapter 20 cited 03.
+A citation reads like deference to an owner, so nothing looked wrong at any single site.
+
+**Decision.**
+Chapter 03 owns the mechanism, since it is the Forces chapter and states it at line 393.
+Chapter 02 keeps one sentence and its handoff, which is exactly what the anti-repetition protocol allows.
+Four sites were cut:
+
+**03:504** said it a third time, thirty pages after 393, before delivering its remedy.
+The restatement goes; the remedy stays.
+
+**19:288** recapped chapter 03's finding in two sentences with a citation attached, and carried a remedy nearly identical to 03's.
+Reduced to the trigger plus chapter 19's own remedy, which is the force map rather than 03's advice.
+
+**20:143** spent four sentences rebuilding 03's case to reach one clause of new material.
+That clause is genuinely chapter 20's and was kept: **an ordinary force disagreement ends when somebody measures, and a profile disagreement does not**, because each side is reading a force that will not move in their own system.
+So 20 now owns the stability and nothing else.
+
+**20:221** duplicated 20:185 — the senior person who is right somewhere else — thirty-six lines apart, inside one chapter.
+Replaced.
+
+**Two ledger rows added**, which is the actual fix: one assigning the mechanism to 03, one recording that 20 owns only the non-resolution.
+
+**Four passages that look like the theme and are not**, left alone: chapter 05's folder-structure pair are confusing an Idiom for a Law, chapter 11's two engineers are picturing different scopes of one word, chapter 19:33's pair is about which arguments are winnable at all, and chapter 02:263 is about litigating the classification.
+
+**Three further items in the same review.**
+
+**A loaded word.**
+The author asked what *framework* meant in a recognition bullet and whether *tech stack* was intended.
+It was not: chapter 20 defines the term in its own UI-framework section — a framework calls you, a library is what you call — but the bullet did not recall that, so the loaded reading was available.
+Retitled *Fighting the lifecycle*, with the distinction restated in the clause.
+
+**A bullet that named no failure.**
+*"A god object that only has fan-in… if it does not, it may be an AST"* asked the reader to supply the failure themselves.
+Now concrete: five named consumers each get a narrowed view of the syntax tree and adapter code to convert back, so a change touches the tree and five translations of it.
+
+**The conversation list was chapter 03's list.**
+The author asked for the bullets to be tied to force profiles.
+Doing it revealed why they needed it: *"That's not how it's done"* was already chapter 03's opening bullet in the same kind of section, and the senior-person bullet was chapter 20's own line repeated.
+Naming a profile in each is what makes the list chapter 20's — the database bullet is line-of-business, premature optimization is frame-budget and hard-deadline, *"we're not Google"* is the distributed profile — and two bullets that could not be tied were replaced.
+
+**One direct edit reverted.**
+The review restructured the claim section's two definitions into a list under *"To make the claim precise two terms need to be settled:"*.
+The list is an improvement and was kept; the lead-in is announce-then-deliver, which `CLAUDE.md`'s cadence rule names explicitly and which commit `052d09d` cut from chapter 15's opener.
+The edit had also dropped that *domain* keeps its meaning book-wide rather than only in this chapter, which is what stops a reader treating it as local jargon; restored.

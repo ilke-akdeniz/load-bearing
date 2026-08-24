@@ -285,7 +285,7 @@ The same holds for the countermeasure in the previous section. Overriding a gene
 - **"That's the standard approach."** True and irrelevant until someone says which force it answers. The useful reply names one: *standard where the callers are strangers — are ours?*
 - **"We might need to scale."** *Scale* is not a force; chapter 03 splits it into steady load, bursts and data volume, which have different designs. The question is which one, at what number.
 - **"Let's keep it flexible."** Flexible against what? Flexibility is bought against a specific change, and a change nobody can name is not one you can prepare for (Ch. 18).
-- **Two people arguing about a design for more than ten minutes.** Chapter 03's finding is that they are almost never disagreeing about the answer; they are holding different values for the same force and have not said so. Stopping to write the forces on a whiteboard ends more of these arguments than continuing them does.
+- **Two people arguing about a design for more than ten minutes.** Write the forces down instead. It ends more of these arguments than continuing them does, for the reason chapter 03 gives.
 
 The question that does the work: **which fact about our situation would have to change for this to be the wrong choice?**
 

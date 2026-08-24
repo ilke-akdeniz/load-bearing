@@ -501,7 +501,7 @@ That is the reversibility question again, and it is the only one that still work
 - **A design defended by a Force nobody has measured in a year.** Team size, traffic, and client count all move without a commit.
 - **"Just in case"** doing the work that a measurement should be doing.
 
-Chapter 02 already showed the sharpest version of this as a symptom of the model being misused: two people making increasingly detailed arguments while disagreeing about a Force neither has stated. The remedy is small and almost never applied — stop arguing about the Principle and ask each side what they believe about the situation.
+The remedy in each case is the same, and it is almost never applied — stop arguing about the Principle and ask each side what they believe about the situation.
 
 ---
 

@@ -4,9 +4,7 @@
 
 **What decides which advice holds is not the domain but the force profile.**
 
-To make the claim precise two terms need to be settled:  
-
-- *Domain* means what the software is about. Payroll, ledgers, air traffic, imaging. 
+- *Domain* means what the software is about — payroll, ledgers, air traffic, imaging. It keeps that ordinary meaning here and everywhere else in the book.
 
 - **Force profile** is the reading of every force bearing on a system — and what makes a reading a *profile* is that at least one of those forces sits at an intensity outside the ordinary range (Ch. 03), and stays there. Unlike domain, force profile is this book's term and is not standard vocabulary.
 
@@ -142,7 +140,7 @@ A Principle is advice that is good given certain forces (Ch. 02). Its condition 
 
 A profile is where at least one force leaves that ordinary range and stays there. So the condition fails not occasionally but structurally, for every system with that reading, all the time — which is why the failures cluster rather than scatter, and why the same six or seven pieces of advice come up every time practitioners from two profiles argue.
 
-**And it is why the arguments are so unproductive.** Two people disagreeing about whether to put logic in the database are not disagreeing about databases. One of them works where the schema outlives four rewrites of the application, and the other works where the application outlives the storage it happens to be using this year. Both are right, both are giving advice that has worked every time they have applied it, and neither has said the force out loud. Chapter 03 identifies this as the general shape of unresolvable design arguments. What a profile adds is that the two readings are not merely different but stably different — they will be just as far apart on the next question, and on the one after that, so the two will never converge by talking about code. [-- this "two people arguing both are right" theme was used maybe 5 times in the book with near identical idea. Search the book for "two people" and see what I mean. You need to do something about this problem. It's ok to edit older chapters in addition to this chapter for fixing this.]
+**And it is why these particular arguments do not end.** Two people disagreeing about whether business logic belongs in the database are disagreeing about forces rather than about databases, which is chapter 03's general finding. What a profile adds is that this one does not resolve. An ordinary force disagreement ends when somebody measures: the row count is what it is, and one side turns out to have been wrong about it. Here each side is reading a force that will not move in their own system — the schema really does outlive four rewrites where one of them works, and the application really does outlive its storage where the other works — so they will be just as far apart on the next question, and on the one after that.
 
 The practical consequence is an asymmetry between the two axes, and it is worth stating because it decides what to ask a new colleague.
 
@@ -211,16 +209,15 @@ Six is not a complete enumeration and nothing in the argument requires it to be.
 
 - **Advice applied uniformly across a seam.** One allocation discipline, one error-handling convention, one testing strategy across both sides of a boundary where the force profile changes. Somebody chose a house style over a force reading.
 - **A translation layer whose only job is to make one side look like the other.** Frequently the seam done wrong: rather than a small explicit crossing, one profile's shapes are dressed up as the other's throughout.
-- **Fighting the framework.** State held outside the lifecycle, effects run in the wrong phase, the framework's calls treated as an API to work around. Almost always defended as separation of concerns. [-- what does framework mean here? That's a very loaded term. Did you mean tech stack?]
-- **A god object that only has fan-in.** Before breaking it up, check whether it depends on anything. If it does not, it may be an AST. [-- explain this more concretely, what's the failure here. Also these last two failures need to be tied to a failure about the force profiles.]
+- **Fighting the lifecycle.** The framework calls you — that is what makes it a framework rather than a library — so its lifecycle is the shape of the profile. The failure is state held outside that lifecycle, effects run in the wrong phase, and its calls treated as an API to work around: the profile resisted rather than read. Almost always defended as separation of concerns.
+- **A type everything depends on, being broken up because everything depends on it.** In the compiler profile that shape is correct, and the split makes it worse: the type checker, the optimizer, the code generator, the formatter and the language server each get a narrowed view of the syntax tree and adapter code to convert back, so a change to the tree now touches the tree and five translations of it. Check the other direction before splitting. Fan-in with no fan-out is the stable position (Ch. 18), and a type sitting there is load-bearing rather than overgrown.
 
 **In a conversation:**
 
-- **"That's not how it's done."** The reply that moves things forward is not *why not* but *where have you seen it done, and what was true there?*
-- **"We need to be pragmatic about the database."** Ask what outlives what. The answer decides it, and it is a fact rather than a preference.
-- **"Premature optimization."** True almost everywhere and false where the budget is fixed in advance. The question is whether there is a *later* in which to optimize.
-- **Someone senior giving advice that is obviously wrong here.** The most likely explanation is not that they are wrong. It is that they are right somewhere else and have not been asked which force they are reading.
-[-- these points need to be tied to force profiles]
+- **"That's over-engineered" and "that's reckless," about one design.** Two profiles in one room. Neither sentence is about the code; each is a reading of what a failure costs, and because both readings are stable the exchange has nowhere to go. Ask each side what happens when this is wrong and who finds out.
+- **"We need to be pragmatic about the database."** Ask what outlives what. Under the line-of-business profile the schema does, which settles it, and it is a fact rather than a preference.
+- **"Premature optimization."** True in the ordinary case, false under the frame-budget and hard-deadline profiles, where the budget was fixed before anyone wrote a line. The question is whether there is a *later* in which to optimize.
+- **"We're not Google."** Usually correct, and it is a claim about profiles rather than about modesty: it says the distributed profile's forces are not yours. Worth agreeing with out loud and then checking, because one path in the system often is.
 
 The question that does the work: **which force here is outside its ordinary range, and what does it hold still?**
 
