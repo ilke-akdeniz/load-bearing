@@ -3644,3 +3644,31 @@ So the objection is not that the reader has never seen the form. It is that they
 **The same inconsistency in chapter 03, surfaced and then fixed on the author's instruction.**
 *What changes with the Force* appears six times in chapter 03. Line 121 differed from the other five twice over: it stood alone, and it bolded the answer as well as the label, where the others bold only *What changes with the Force:* and leave the answer in plain text.
 Both are now matched to the majority form. Chapter 03 is at draft, and the change is formatting with no word altered.
+
+## 92. A discharged pending document is deleted, and why the draft moved one instead
+
+**Context.**
+Chapter 21 reached draft, discharging `docs/pending/layout-and-language.md` entirely.
+The draft moved it to `docs/`. The author's correction: **`docs/pending/` is a task list, and a finished task leaves nothing behind.**
+
+**Why the draft moved it, which is the part worth recording.**
+`CLAUDE.md` said so, in terms:
+
+> A document leaves `docs/pending/` for `docs/` once every piece in it has landed; it is not deleted, **because the ledger cites these arguments as provenance.**
+
+That reason is a condition, and the draft had already tested it.
+Before moving the file it grepped for every citation of it, found exactly one — in `00_toc.md`, in an entry it was about to rewrite — and removed it.
+It then recorded the result in its own reasoning as *nothing cites it, but `CLAUDE.md` says these docs are kept as provenance regardless*, and moved the file.
+
+So the failure is not that the rule was misread.
+**The rule's condition was checked, found false, and the rule followed anyway** — on the strength of the instruction while the reason for the instruction had already been disproved for this document.
+It is the distinction chapter 21 had just been written about, running backwards: the chapter's claim is that naming the condition is what separates deviating from ignoring, and here the condition was named, shown not to hold, and obeyed.
+
+**The reason was not spurious in general.**
+Seven ledger rows do cite pending documents — `ai-material.md` and `speculative-abstraction.md` — so the provenance concern is real for those.
+It simply was not true of this one, which is what a condition is for.
+
+**Decision.**
+The document is deleted.
+`CLAUDE.md`'s rule now says delete rather than move, with the reason stated positively: the argument lives in the chapter and the reasoning lives in this log, so a discharged working document is duplication.
+It also says the ledger pointer goes with the document, which closes the gap the old reason was gesturing at — a row citing `docs/pending/x.md` is a pointer for a drafting session that has now happened, and it is spent once the chapter carries the argument.

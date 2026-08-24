@@ -79,7 +79,7 @@ Each file is a worked argument with its evidence and provenance already gathered
 
 Before drafting a chapter, or reopening one, check the folder for material owed to it.
 Each file names its own chapters and tracks what has been routed, so the folder is the list and this file does not repeat it.
-A document leaves `docs/pending/` for `docs/` once every piece in it has landed; it is not deleted, because the ledger cites these arguments as provenance.
+**Delete a document once every piece in it has landed.** `docs/pending/` is a task list, and a finished task leaves nothing behind: the argument now lives in the chapter, and the reasoning behind it lives in `docs/DECISIONS.md`. Where a ledger row points at the document as the argument's home, that pointer is spent too and goes with it.
 
 Public repo: <https://github.com/ilke-akdeniz/flowcore>.
 
