@@ -3616,3 +3616,30 @@ One deviation, flagged rather than silent: *acts on the Idiom but they ignore th
 The register rules are for prose that has no other problem.
 Applied to a passage whose structure was doing argumentative work, the tidying pass optimised the sentences and lost the shape — and produced an error in the list while it was at it.
 Standalone bolded sentences were checked before restoring the author's: there are twenty-six in the book, so that form was never the defect.
+
+## 91. A standalone bolded sentence is a signal, so it cannot be used for an ordinary topic sentence
+
+**Context.**
+The author's chapter 02 edit put a blank line after its bolded sentence, leaving it standing alone, and then proposed removing it: *"it's a formatting that doesn't exist elsewhere on the book so it can trip the reader as well."*
+
+**The premise is wrong and the conclusion is right, which is why the survey was worth running.**
+The form exists seventy-three times. Counted by what follows the bolded line: forty-eight introduce a list, five introduce a code block, and twenty introduce prose.
+
+The twenty prose cases are what matter, and they are not a general licence:
+
+- **Thirteen are chapter claim sentences** — line 5 of every chapter that has one, which the rubric mandates.
+- **Five are chapter 05's enumerated markers** — *First, the small part*, *Option B*, *Four — replace a reference with an identifier*.
+- **One is chapter 03 line 121**, and it is an outlier inside its own device: *What changes with the Force* appears six times in that chapter and the other five are inline.
+- **One was chapter 02 line 53.**
+
+Against that, the inline form — a bolded lead-in continuing on its own line — is used **349 times**.
+
+**Decision.**
+Merged, as the author asked.
+
+**Why the real reason is stronger than the stated one.**
+The standalone form is not merely rare; in this book it *signals*. A reader who has met thirteen chapter claims and five enumerated options has learned that a bolded sentence alone on a line announces either the chapter's claim or a labelled branch of an argument. Chapter 02's line was neither — it was the topic sentence of the paragraph directly beneath it, which is exactly the job the inline lead-in does 349 times.
+So the objection is not that the reader has never seen the form. It is that they have, and it means something else.
+
+**Surfaced, not acted on.**
+Chapter 03 line 121 is the same inconsistency at one site: a device that is inline five times out of six, standalone once, apparently because that instance's sentence is long. Chapter 03 is at draft and this was not tagged, so it is recorded here rather than changed.
