@@ -22,7 +22,12 @@ And he is explicit that much of what people argue about is not the kind of thing
 ## Already used
 
 **Chapter 15** takes the concurrency section: Ousterhout's *threads are bad*, whose situation was pthreads in a particular kind of program and which Google banned company-wide anyway; and Pike's own admission that the concurrency use cases were server software, that the team should have said so, and that the confusion between concurrency and parallelism probably drove some programmers away.
-See decisions 72 and 73. Nothing else from the talk is in the book yet.
+See decisions 72 and 73.
+
+**Chapter 21** takes both pieces owed to it: interfaces colouring their designers' thinking, as the boundary on 21's claim, and the early compiler in C as the worked deviation.
+The full talk was read end to end for that drafting rather than these excerpts, and it supplied one thing this file had missed — Ian Taylor pushed the team to face the generics problem *from early on*, and Pike ties the difficulty to interfaces being the bedrock of Go programming.
+That detail is what makes the interfaces case a boundary rather than an anecdote: the alternative was named early, from inside, and the convention held for a decade anyway.
+One further line was noticed and left for chapter 02, which already owes it a paragraph: Pike lists *using upper case for export* alongside *where the newlines go* as perennial arguments, which is 02's point that tone does not vary with authority.
 
 ## Material owed to other chapters
 
@@ -88,8 +93,8 @@ Useful as context if the chapter ever wants a case where dependency cost drove t
 | Ousterhout's ban; the concurrency admission | 15 | a section | **done** |
 | Confidence does not track the kind of claim | 02 | a paragraph | owed, chapter at draft |
 | Compatibility priced by the person who paid it | 09 | a passage | owed, chapter at draft |
-| Interfaces coloured their own designers' thinking | 21 | a section | owed, chapter not started |
-| The compiler in C, as a declared deviation | 21 | a passage | owed, chapter not started |
+| Interfaces coloured their own designers' thinking | 21 | a section | **done** |
+| The compiler in C, as a declared deviation | 21 | a passage | **done** |
 | async/await and coloured functions | 13 or 20 | uncertain | check the fit first |
 | The 45-minute build | 05 | background | probably not needed |
 

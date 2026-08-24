@@ -347,7 +347,7 @@ Two are not negotiable: chapter 02's classification model is a lens rather than 
 | 18 | `18_abstraction-as-insurance.md` | **draft** |
 | 19 | `19_force-map-method.md` | **draft** |
 | 20 | `20_six-profiles.md` | **draft** |
-| 21 | `21_idioms.md` | not started |
+| 21 | `21_idioms.md` | **in progress** |
 | 22 | `22_style.md` | not started |
 | 23 | `23_reading-advice.md` | not started |
 

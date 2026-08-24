@@ -3448,3 +3448,77 @@ Naming a profile in each is what makes the list chapter 20's — the database bu
 The review restructured the claim section's two definitions into a list under *"To make the claim precise two terms need to be settled:"*.
 The list is an improvement and was kept; the lead-in is announce-then-deliver, which `CLAUDE.md`'s cadence rule names explicitly and which commit `052d09d` cut from chapter 15's opener.
 The edit had also dropped that *domain* keeps its meaning book-wide rather than only in this chapter, which is what stops a reader treating it as local jargon; restored.
+
+## 87. The Idiom/Style line is mechanical, and chapter 21's claim is about conditions
+
+**Context.**
+Chapter 21 was drafted through a grilling session — four questions, each answered before the next was asked, nothing written until the author closed the interview.
+This entry records the exchange rather than only the outcome, at the author's request: *"grilling is like interactive reviewing so remember to log all my input and important decisions."*
+
+**Question 1 — the claim.**
+The draft offered three candidates: divergence, obedience, and a third it recommended, that an Idiom grows from **a language feature you can name**.
+
+The author asked how FlowCore's decision 18 was related to it.
+
+It was not, and the question exposed two faults.
+The draft had described the decision from memory and got it wrong — it gave this book's decision 49's reasoning, a reader who sees a sample once, where FlowCore 18's is a maintainer returning after a context switch, for whom decoding an abbreviation never amortizes.
+`CLAUDE.md` already says the two were adopted on different grounds, and the draft collapsed them.
+
+The larger fault was in the claim.
+Go's short-name convention traces to no language feature — there is nothing in Go that makes `def` cheaper than `definition` — and Pike's compiler-in-C deviates from a community expectation rather than from a feature.
+Two of the three pieces of evidence did not fit the claim they were offered for.
+
+**Decision, reached jointly.**
+Widen the thing that must be nameable from a language feature to **a condition about your surroundings** — the language, the tooling, or who will read the code.
+That keeps the Idiom distinct from the Principle by where the condition is looked up: a Principle's is a fact about your system, an Idiom's is a fact about your situation in an ecosystem.
+Neither party arrived with this; the author had the objection, the draft had the survey showing the evidence did not fit.
+
+**Question 2 — where the short-name material belongs.**
+The draft proposed keeping it in 21 on the test *if deviating from it required a written reason, it was never Style.*
+
+The author rejected it with two counters, both correct.
+The scope-length argument behind Go's short names is not Go-specific, so it cannot explain why only Go adopted the convention.
+And most Style has a stated reason from some authority if you dig — PEP 8 and gofmt both give reasons for pure formatting — so *has a stated reason* does not discriminate.
+
+**The author's replacement, which is now the book's rule.**
+
+> It's style if your choice doesn't change the execution of code. It's an idiom when the execution changes even when the behavior is the same, ex: DI.
+
+The draft checked it against chapter 02's twenty-claim table and it sorts all six Idiom/Style rows correctly with no judgement call, which the draft's test could not do.
+
+**One refinement from the draft, accepted.**
+*Execution* alone mis-sorts the layout material: splitting a Go package changes what compiles rather than what runs, and under a strict reading that would make it Style and cost chapter 21 its strongest demonstration.
+So the test is whether **the compiler or the runtime** acts on the choice, while the program behaves the same either way.
+
+**Consequences.**
+Short names are Style and move to chapter 22, and 02's table gains the row, because it is the case where intuition fails — Go-specific and still Style.
+Chapter 02's question 4 was catching short names before question 5 could sort them, so ecosystem-specificity is now stated as a consequence of the answer rather than as the test.
+
+And the rule turned up better material than it cost.
+**The line falls in a different place in each language**, and the two places it moves are exactly the two things everyone files under Style: Go makes an identifier's case an access modifier, and Python makes indentation syntax.
+Chapter 21 owns that; 02 owns the test.
+
+**Question 3 — the chapter's evidence was all Go.**
+The layout material, the capitalization finding and both Pike passages are Go, in a chapter arguing that you cannot see an ecosystem from inside it.
+The draft proposed running the *same* package split in Python rather than tabling it, and the author took the shape as drawn.
+Both halves were executed: Go refuses to compile, Python reaches the underscore-prefixed helper across the boundary and runs.
+C# is given as mechanism without output, since the toolchain is not available here.
+
+**Question 4 — the claim sentence.**
+Adopted: *an Idiom rests on a condition about your surroundings rather than about your problem, and naming that condition is what separates deviating from an Idiom from merely ignoring one.*
+
+The draft offered a stronger alternative — *defensible **exactly when** you can name the condition* — and argued against its own suggestion, because *exactly when* claims sufficiency and the chapter's counter-example disproves it.
+That is the standing bias `CLAUDE.md` records — claiming sufficiency where only necessity was shown, which cost chapter 03 two drafts of its claim — caught this time before shipping rather than in review.
+
+**What reading the primary source in full supplied.**
+The Pike talk was read end to end rather than from the excerpts in `docs/pending/pike-retrospective.md`, and it contained something that file had missed.
+Ian Taylor pushed the team to face the generics problem "from early on", and Pike ties the difficulty directly to the convention's standing — it was hard "given the presence of interfaces as the bedrock of Go programming".
+That is what makes the interfaces case a boundary rather than an anecdote: the alternative was named early, from inside, by someone who was right, and the convention held for a decade regardless.
+
+**One claim cut for want of evidence.**
+The draft asserted that `defer file.Close()` returns success on a truncated report, and could only produce that by closing the handle mid-function — harness-shaped code that no caller writes.
+The demonstration was dropped rather than dressed up.
+The chapter now shows `Close`'s signature, which is structural and needs no run, and states the mechanism: on a network filesystem the failed write surfaces at close and nowhere earlier.
+
+**Also fixed.**
+Four ledger rows owned by 21 still cited "Ch. 18" after the renumbering that cut the old chapter 18, and `docs/pending/layout-and-language.md` carried the same fossil in its own body.
