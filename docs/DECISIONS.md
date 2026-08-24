@@ -3694,3 +3694,52 @@ A log that is silently updated to match the present cannot be used as evidence a
 
 **One near-miss worth recording.**
 `10_what-a-pattern-is-for.md` contains `` `pending/` `` twice, in the passage about provisional names — a holding-pen folder in a hypothetical codebase, nothing to do with this repository's layout. A path-wide sweep would have renamed it and broken the example. It was checked before the sweep ran, not after.
+
+## 94. Chapter 22's claim, and two examples the author rejected
+
+**Context.**
+Chapter 22 drafted through a grilling. Recorded per the rule added in decision 88.
+
+**The claim, reached over three rounds.**
+The draft proposed *the only reliable end is to take the choice away from the people having it*.
+The author rejected the register — too dramatic — and proposed *only a resort to authority can end it*.
+
+The draft objected on a specific ground rather than a general one: **authority is a defined term in this book.** Chapter 02's own claim is that the kind of a claim *"determines how much authority it has"*, the four advice kinds *"form a ladder of authority"*, Style *"has no authority at all"*, chapter 04 has a section on where a claim's authority comes from, and 02 lists citing an authority rather than a mechanism as a failure symptom. So the sentence would have read as: Style has no authority, and what ends a Style argument is authority.
+
+The draft's replacement, *the choice is made once for everyone*, the author rejected in turn — *"wishy-washy… evokes the images of endless style convention meetings"* — which was correct, since it reads as consensus where the point is decisiveness.
+
+The author's next version supplied what the draft had been circling: **a person who can enforce a style decides to act.**
+The draft objected to a fourth thing, its own habit: *somebody who can make it stick* was periphrasis where a plain noun would do. The author's phrasing is plainer and was kept.
+
+**Settled:** *A Style discussion has no fact that would settle it, so it ends only when a person who can enforce a style decides to act — and everything before that produces nothing.*
+
+*Wastes resources* became *produces nothing*, which is the chapter's finding rather than a complaint about cost: if there is no fact to find, the discussion cannot have found one.
+
+**Two examples the author rejected, and why the second rejection was the sharper one.**
+
+**Hungarian notation.** The author supplied Joel Spolsky's *Making Wrong Code Look Wrong* after the draft found the URL unreachable, and the draft read it in full. It contains the boundary in the source's own words — `us` and `s` for unsafe and HTML-encoded strings, *"both of type string… the compiler won't help you"* — and the Apps-versus-Systems split, where the useful version encodes what the compiler cannot know and the version that spread encodes what it already does.
+
+The author read the draft's summary and cut it: *"very messy, hard to understand, hard to think about the meaning related to chapter."*
+That is the right call and the reaction is the evidence for it. Landing one boundary would have cost Simonyi's paper, a misread word, two variants and Microsoft's documentation history, in a chapter the plan says should be short, for a reader who has only met the ridiculed version. One passage survives — Spolsky's six days arguing about brace style — which needs no exposition and is worth more than a complaint would be, since he spends the rest of the essay arguing that some naming conventions matter enormously.
+
+**The trailing comma across two languages.** The draft then proposed: in Python the trailing comma looks like Style but has a fact behind it, the diff being three lines instead of one; in Go, omitting it is a syntax error.
+
+The author: *"I think you cheated on this."* The two halves were in two different languages, which makes it chapter 21's finding — the line moves by language — wearing a boundary's clothes.
+They specified the shape instead: **one language, two options that both appear available, you pick the second, and the second was never a real option.**
+
+That produced the boundary the chapter uses. The same trailing comma, inside Python: in a list it is Style and both forms build the identical object; in a one-element tuple it *is* the tuple, so `(order_id)` is an integer with brackets round it. Verified against `sqlite3`, which answers `ProgrammingError: parameters are of unsupported type`. The demonstration and the boundary now turn on the same token, so the chapter bounds itself without introducing a second subject.
+
+**A test that failed, and what it changed.**
+The draft expected two differently-formatted Go files to compile to identical binaries, and intended to use that as proof that no fact exists in the program.
+They differ, and stripping debug information does not fix it: Go embeds a table mapping instruction addresses to source lines, which survives `-w -s`.
+
+**That vindicates the author's narrowing in decision 89.** They had insisted the Idiom/Style test hold constant *what the program produces when it succeeds* rather than something looser. Had it said *the machine cannot tell the difference*, this chapter's own demonstration would have disproved it in four commands.
+The chapter now states the caveat rather than hiding it.
+
+**Two categories cut from the plan.**
+The TOC promised naming, formatting, file layout and comment density. File layout's interesting half is chapter 21's — a directory costs what the language ties to it — leaving *which folder*, and there is no material for comment density.
+Cut, with the author's agreement, on the grounds that the entry says *short, deliberately* and filling a plan line by inventing material is how that stops being true.
+
+**Verification.**
+`gofmt` is available and its output is quoted from a run. Black and Prettier are not installed, so they are given as mechanism with no output claimed.
+The naming demonstration turns on a verified silence: `gofmt` reports nothing about `a` versus `amounts`, which is why naming arguments outlive formatting ones.

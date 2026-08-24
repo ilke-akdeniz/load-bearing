@@ -357,7 +357,7 @@ Two are not negotiable: chapter 02's classification model is a lens rather than 
 | 19 | `19_force-map-method.md` | **draft** |
 | 20 | `20_six-profiles.md` | **draft** |
 | 21 | `21_idioms.md` | **draft** |
-| 22 | `22_style.md` | not started |
+| 22 | `22_style.md` | **in progress** |
 | 23 | `23_reading-advice.md` | not started |
 
 ### AI material
