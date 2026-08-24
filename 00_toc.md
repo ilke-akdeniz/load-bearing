@@ -280,12 +280,22 @@ And an asymmetry worth stating because it decides what to ask someone arriving f
 `21_idioms.md`
 
 Idioms, taken seriously rather than dismissed.
+The claim: **an Idiom rests on a condition about your surroundings rather than about your problem, and naming that condition is what separates deviating from an Idiom from merely ignoring one.**
+A Principle's condition is a fact about your system, looked up by measuring it; an Idiom's is a fact about the language, the tooling, or who will read the code.
+The condition framing is this book's own rather than standard vocabulary.
 
-**Two cases from Pike's 2023 retrospective**, worked in `docs/pending/pike-retrospective.md`: interfaces **coloured their own designers' thinking** for more than a decade, which is an Idiom bounding what the people best placed to see past it could imagine; and the early compiler written in C against every expectation of the language community, a declared deviation with its reason stated and its expiry recognised.
+The demonstration runs the same package split in two languages, both executed.
+Go refuses to compile, and the only fix publishes the helper the split was meant to hide; Python reaches that helper across the boundary and runs, because a leading underscore is a request no machine enforces.
+C# is given as mechanism rather than output, the toolchain being unavailable.
+Then two more: where the Idiom/Style line falls in each language, since Go makes an identifier's case an access modifier and Python makes indentation syntax, so the two things everyone files under Style are structural there; and one decision under three sets of conditions, which is the explanation for a demonstration chapter 02 already owns.
 
-Contents: why Go grew free functions and C# grew containers, traced to language features rather than culture — chapter 02 owns that demonstration, so this is the explanation; where the Idiom/Style line falls in each language, since Go's capitalization is visibility and Python's indentation is syntax, so a choice that is arbitrary elsewhere is structural there; a directory costing what the language ties to it, worked in `docs/pending/layout-and-language.md`; why Python skipped DI except where per-request lifetime is real; the case *for* obeying local idiom even when you can argue against it — reviewability, hiring, the cost of being interesting; when to deviate, and how to pay for it (declare it, document the reason, keep it narrow).
+Why it holds: the condition does not travel, so an Idiom carried across arrives with nothing to check it against.
+Obedience is the default because it rests on a condition too — *other people will read this and expect the convention* is a fact about your surroundings of the same kind as the rest, so winning the argument about whether the convention is good does not touch it.
+The worked deviation is Pike's early Go compiler in C: conditions named, kept to one component, declared in public, offence taken, and the reason later expiring so that the deviation was reversed at Go 1.5.
 
-*Where the claim doesn't apply:* idioms that encode a genuine mistake, and how to tell those from idioms you merely dislike.
+*Where the claim doesn't apply:* naming the condition is necessary and not sufficient, which Pike's interfaces show — Ian Taylor pushed the problem from early on, from inside, and the convention held for more than a decade anyway; and an Idiom can be a bad inference from a true condition, which `defer file.Close()` shows by discarding an error that *cleanup belongs next to acquisition* never implied throwing away.
+
+*What it costs:* most of the time the answer is obey, and the work of naming the condition returns nothing visible; *I can name the condition* becomes the licence chapter 20 records one level up; and deviations are individually cheap and collectively expensive.
 
 ### 22. Style: the level where being right doesn't matter
 `22_style.md`
@@ -347,7 +357,7 @@ Two are not negotiable: chapter 02's classification model is a lens rather than 
 | 18 | `18_abstraction-as-insurance.md` | **draft** |
 | 19 | `19_force-map-method.md` | **draft** |
 | 20 | `20_six-profiles.md` | **draft** |
-| 21 | `21_idioms.md` | **in progress** |
+| 21 | `21_idioms.md` | **draft** |
 | 22 | `22_style.md` | not started |
 | 23 | `23_reading-advice.md` | not started |
 
