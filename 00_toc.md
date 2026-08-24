@@ -300,13 +300,24 @@ The worked deviation is Pike's early Go compiler in C: conditions named, kept to
 `22_style.md`
 
 Short chapter, deliberately.
+The claim: **a Style discussion has no fact that would settle it, so it ends only when a person who can enforce a style decides to act — and everything before that produces nothing.**
+*Produces nothing* is meant literally rather than as a complaint about waste — a Force argument can end in a measurement everybody then has, and a Style argument has nothing to deposit.
 
-Contents: naming, formatting, file layout, comment density; why consistency beats correctness here; why style arguments consume energy disproportionate to their stakes; the one case where style becomes substance — when a naming convention encodes a real distinction the type system can't.
-Also Go's short-name convention, which chapter 02's mechanical test sorts here rather than to Idiom because nothing but a reader can see it.
-FlowCore's decision 18 and this book's decision 49 both deviate from it, for two different failed assumptions — a maintainer returning after a context switch, for whom decoding never amortizes, and a reader who sees a sample once and never returns.
-Both wrote the reason down, which is this chapter's own oddity: where being right does not matter, being seen to have chosen still does.
+The demonstration is one function, formatted two ways and named two ways.
+Both formattings print the same thing; `gofmt` reports and rewrites one of them; and Rob Pike supplies the history, since Robert Griesemer insisted on writing it from the very beginning and the time saved by not arguing over spaces and newlines paid for the difficulty of automating it.
+Then the same function renamed, where `gofmt` says nothing at all — which is why naming arguments outlive formatting ones, no tool being able to pick a domain noun.
+FlowCore's decision 18 and this book's decision 49 deviate from Go's short-name convention for two different failed assumptions: a maintainer returning after a context switch, for whom decoding never amortizes, and a reader who sees a sample once.
+Neither could be automated, so both were written down, which is the chapter's oddity — where being right about the choice is unavailable, but recording the reasons for it still matters.
 
-*Where the claim doesn't apply:* nothing, really — which makes this the one chapter whose counter-example section argues that its own subject barely matters.
+Why it holds: every other kind has something that ends an argument about it, a Law by mechanical consequence, a Principle by a Force with a value, an Idiom by a machine that acts on the choice.
+Style has none, because two spellings of one program are the same program, so the argument has no terminating condition and stops when somebody decides rather than when somebody is shown to be right.
+
+*Where the claim doesn't apply:* two cases where one of the two apparent options was never an option.
+A trailing comma is Style in a Python list and *is* the tuple in a one-element tuple, so `(order_id)` passes an integer and the driver rejects it.
+And a function renamed to `G(p []int) int` compiles, vets clean and satisfies `gofmt`, but `G` is not a third name for the thing — it names nothing, so it was never an alternative.
+The rule covering both: before treating something as Style, check that both options do the job you are choosing between two ways of doing.
+
+*What it costs:* the claim licenses deciding without thinking, which is nearly the point and fails when the second half, holding to it, is dropped; enforcing late rewrites files nobody edited and puts whoever ran the formatter on every `git blame`; and *it's only style* is available to close a real question before anyone has checked.
 
 ### 23. Reading advice at the right level
 `23_reading-advice.md`
@@ -357,7 +368,7 @@ Two are not negotiable: chapter 02's classification model is a lens rather than 
 | 19 | `19_force-map-method.md` | **draft** |
 | 20 | `20_six-profiles.md` | **draft** |
 | 21 | `21_idioms.md` | **draft** |
-| 22 | `22_style.md` | **in progress** |
+| 22 | `22_style.md` | **draft** |
 | 23 | `23_reading-advice.md` | not started |
 
 ### AI material
