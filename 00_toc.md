@@ -259,15 +259,22 @@ Also: detecting an inherited principle by asking what would have to be true for 
 The longest chapter, and the payoff.
 Each force profile: which force sits outside its ordinary range, which standard advice inverts, and what it becomes instead.
 *Domain* keeps its ordinary meaning — what the software is about. **Force profile** is this book's term for the reading of every force bearing on a system, at least one of them outside its ordinary range; the chapter's claim is that the two are independent axes, and that the domain name on its own predicts nothing.
+The demonstration runs both directions: three unrelated domains sharing one profile, and two sales systems — pizza ovens and marine-port security — with the same domain and opposite concurrency readings.
+The business supplies that reading, though not in answer to the question usually put to it.
 
-- **Line-of-business / data-durable** — the schema outlives the code; invariants belong in the database; the ORM question.
-- **Games and simulations** — cache locality outranks encapsulation; ECS; data-oriented layout; why "a class per entity" loses to arrays.
-- **Embedded and real-time** — no allocation, no exceptions, static everything; determinism over throughput; DI is meaningless when there is one of everything.
-- **Compilers and language tooling** — pipelines rather than layers; a shared AST that everything touches, and why that isn't a violation.
-- **UI frameworks and libraries** — inversion of control is the product; your code is the leaf; the framework calls you.
-- **Distributed services** — no shared transaction, so idempotency and retries replace atomicity; the entire consistency toolkit changes shape.
+- **Line-of-business / data-durable** — durability, so *keep business rules out of the database* inverts because a rule enforced only in application code holds until the next application, *the database is a detail* inverts with it (Ch. 18), and the ORM question is argued from the force rather than from taste.
+- **Games and simulations** — chapter 05 owns the entity-component inversion, so this section takes the two it does not: allocate before the loop rather than when a profiler says so, and buy reproducibility with accuracy and speed.
+- **Embedded and real-time** — exceptions become status codes because unwinding has no worst case anyone can certify, buffers are sized at compile time because there may be no allocator, and dependency injection inverts since there is one sensor, one radio, one clock.
+- **Compilers and language tooling** — *nothing should be depended on by everything* inverts for the syntax tree, and the finding that generalises out of it is that fan-in alone is not the smell — fan-in with fan-out is.
+- **UI frameworks and libraries** — inversion of control is not a technique applied here but the product, since a framework whose control you kept would be a library, and its lifecycle is therefore a Force rather than a convention.
+- **Distributed services** — chapter 07 owns the mechanism, and what this adds is that nothing weakens by a little: transactions become sagas, foreign keys become reconciliations, rollbacks become compensating operations a customer can see.
 
-*Where the claim doesn't apply:* systems that straddle two profiles, which is most interesting systems, and where the seam goes; a profile you are visiting rather than living in; and the ordinary case, where every force sits in its ordinary range — which is most software, and which the chapter treats as a finding with four consequences rather than a disappointment.
+Then what the six have in common, which is chapter 02's distinction at scale: a Law holds throughout, a Principle turns over, and the inversion is predictable from the force reading alone.
+And an asymmetry worth stating because it decides what to ask someone arriving from a domain you do not share — profile knowledge transfers, domain knowledge does not.
+
+*Where the claim doesn't apply:* systems that straddle two profiles, which is most interesting systems, and where the seam goes; the ordinary case, where every force sits in its ordinary range — which is most software, and which the chapter treats as a finding with four consequences rather than a disappointment; a profile you are visiting rather than living in; and the domains not on the list, six being no enumeration.
+
+*What it costs:* moving between profiles costs judgement you do not know you are losing; *it's a different profile* becomes an unfalsifiable excuse unless it names a force and its value; and six labels invite a lookup table when the point was the derivation.
 
 ### 21. Idioms: why ecosystems diverge
 `21_idioms.md`
@@ -336,7 +343,7 @@ Two are not negotiable: chapter 02's classification model is a lens rather than 
 | 17 | `17_tdd-and-mocks.md` | **draft** |
 | 18 | `18_abstraction-as-insurance.md` | **draft** |
 | 19 | `19_force-map-method.md` | **draft** |
-| 20 | `20_six-profiles.md` | **in progress** |
+| 20 | `20_six-profiles.md` | **draft** |
 | 21 | `21_idioms.md` | not started |
 | 22 | `22_style.md` | not started |
 | 23 | `23_reading-advice.md` | not started |
