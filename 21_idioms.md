@@ -44,7 +44,7 @@ direct := store.scanOrder(8, "closed")
 ./service.go:9:18: undefined: store.scanOrder
 ```
 
-A Go package boundary *is* the visibility boundary, so the only way to compile that line is to rename the helper `ScanOrder`. That works. It also changes what the package tells the world about itself: [-- search for "package boundary" in the  book, this is the third mention of the same "package boundary - internal flowcore example" situaion. Gauge if this becomes repetitive.]
+A Go package boundary *is* the visibility boundary, so the only way to compile that line is to rename the helper `ScanOrder`. That works. It also changes what the package tells the world about itself:
 
 ```text
 package store // import "shop/store"
@@ -99,9 +99,9 @@ C# lands in a third place, and the reason is worth stating because it looks like
 
 *Put each layer in its own folder* is one instruction whose price runs from nothing to a published API, decided by a language the instruction never names.
 
-The usual reply is that Go has a mechanism for this, and it does: a package under `internal/` cannot be imported from outside its module. FlowCore considered exactly that placement and rejected it, and the reasoning is the useful part — in Go, privacy comes from identifier case rather than from a directory, so a lower-case type in the root package is already exactly as unreachable to a client as one under `internal/`. What `internal/` solves is narrower: hiding a package when several packages must call each other by exported name. **It is not the tool you use to get privacy. It is the tool you use to get some of it back after a split has taken it away.** Reaching for it is a signal that the wall was drawn where the language charges.
+The usual reply is that Go has a mechanism for this, and it does — the `internal/` directory, whose rule chapter 03 gives while putting the same FlowCore decision to a different use. FlowCore considered exactly that placement and rejected it, and the reasoning is the useful part — in Go, privacy comes from identifier case rather than from a directory, so a lower-case type in the root package is already exactly as unreachable to a client as one under `internal/`. What `internal/` solves is narrower: hiding a package when several packages must call each other by exported name. **It is not the tool you use to get privacy. It is the tool you use to get some of it back after a split has taken it away.** Reaching for it is a signal that the wall was drawn where the language charges.
 
-The export is the visible cost and the smaller one. Once `store` and the service are separate packages, an entity type has to live somewhere. If it lives in `store`, the service's public API returns types owned by persistence, which is the coupling the split was meant to remove. If each side owns its own, there are two of them and something converts between them. FlowCore's decision names this as its reason for keeping one package: splitting would force two representations of each entity and a mapping layer between them, which is the duplication the split was supposed to prevent. The charge is per field, per entity, per boundary, and it is invisible in review because every individual mapping function is trivial. It is also where drift lives — add a column, and nothing fails to compile until you reach the second definition.
+The export is the visible cost and the smaller one. Chapter 05 prices enforced boundaries in a sentence — walls force exports and mapping code, worth paying at some team sizes and not others — and this is the second half of that bill, itemised. Once `store` and the service are separate packages, an entity type has to live somewhere. If it lives in `store`, the service's public API returns types owned by persistence, which is the coupling the split was meant to remove. If each side owns its own, there are two of them and something converts between them. FlowCore's decision names this as its reason for keeping one package: splitting would force two representations of each entity and a mapping layer between them, which is the duplication the split was supposed to prevent. The charge is per field, per entity, per boundary, and it is invisible in review because every individual mapping function is trivial. It is also where drift lives — add a column, and nothing fails to compile until you reach the second definition.
 
 ### Where the line between Idiom and Style falls
 
@@ -128,7 +128,7 @@ Pike, listing the things about Go that people have argued over for years, puts "
 
 Chapter 02 shows the demonstration already — a Go `main` that wires its dependencies by hand is unremarkable, and the same shape in C# gets sent back in review. Neither version is more correct. What chapter 02 does not do is say why the two ecosystems ended up on opposite sides, and the answer is a condition each of them can name.
 
-**In Go you own `main`.** Nothing constructs your handlers but your own code, so wiring by hand is available, and a container would be resolving dependencies that the compiler could have checked. The condition that would make a container pay — something else builds your objects — is absent.
+**In Go you own `main`.** Nothing constructs your handlers but your own code, so wiring by hand is available. The condition that would make a container pay — something else builds your objects — is absent.
 
 **In C# it is usually present.** The web framework instantiates your controllers, which means it must supply their constructor arguments, so the container is not an addition to the framework but the mechanism by which the framework can call you at all. Chapter 20 owns the general form of this: under a framework you are the callee, and its lifecycle is a Force rather than a convention.
 

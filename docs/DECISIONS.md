@@ -3542,3 +3542,54 @@ By the fourth question the first exchange is easy to reconstruct wrongly and eas
 
 **Consequence.**
 Decision 87 is the worked shape for the format — questions in dependency order, the author's objections quoted, and the two places the draft's recommendation did not survive marked as such.
+
+## 89. What "behaves the same" means, and one duplication the ledger did not catch
+
+**Context.**
+The first review of chapters 21 and 02, worked as a grilling after a false start.
+The draft applied the whole review directly and committed it; the author asked whether grilling had been used, and it had not.
+The commit was discarded before it was pushed and the review restarted as an interview.
+
+**Why it was skipped, recorded because it is the fourth instance of one pattern.**
+The draft published its survey result before enumerating what the result permitted, and once a finding is stated the action reads as its consequence rather than as a choice with branches.
+The draft had even named the fork in its own reasoning — *whether to keep 21's `internal/` and mapping-tax passages at all* — and then answered it, which is the behaviour decisions 80 and 81 already record.
+
+The draft proposed adding a rule to `CLAUDE.md` about it.
+**The author declined, and was right.** Grilling's fourth bullet already says the decisions are the author's and the facts are Claude's; the failure was of an existing rule rather than a missing one, and two prior entries recording the same pattern had not prevented it, so a third restatement is weak evidence. `CLAUDE.md` is loaded every session and the marginal rule costs attention whether or not it fires.
+
+**The author's correction to the Idiom/Style test.**
+Decision 87 settled the test as: the compiler or the runtime acts on an Idiom, *while the program behaves the same either way*.
+Reviewing chapter 02 the author rewrote the passage and caught that the last clause was doing unexamined work.
+A container plainly does change behaviour — a missing registration fails at run time where a missing constructor argument fails at compile time — so as written the test's own worked example contradicted it.
+
+Their fix names which behaviour is held constant and what that excludes:
+
+> By "visible behaviour" we specifically mean what the software produces on success mode. Notice that this narrow definition excludes many areas: failure modes, developer experience, maintainability…
+
+Kept in full, in the book's register.
+The narrowness is what makes the test usable, and the excluded list is exactly what people reach for when arguing that a convention is more than a convention.
+Checked against chapter 02's table: the narrowing still sorts all four Idiom rows and all three Style rows with no judgement call.
+
+Substance is the author's and unaltered. The draft corrected register and grammar — a bold lead-in standing alone as its own paragraph against the markdown conventions, *"Let's take a look at"* which appears nowhere else in the book, first-person plural used to define a term, and four slips — and merged the two parallel paragraphs into one, because they described the options rather than contrasting them.
+
+**Question 1: the package-boundary material.**
+The author asked for chapter 21's passage to be *gauged* for repetition rather than assumed repetitive.
+
+The survey says the three sites do different jobs, which is the division `docs/pending/layout-and-language.md` planned.
+It also found a real duplication the ledger had not caught: chapter 03 already glosses what `internal/` is, and 21 explained it again from scratch, because **no row recorded 03's use.** Decision 86's shape exactly.
+
+Three options were put: cite and keep, cut both elaborations, or move the mapping tax to chapter 05.
+**The author chose cite-and-keep.**
+
+The draft's earlier private reasoning had been that the mapping tax weakens that option, since the same bill is charged in Go, C# and Java and so demonstrates no divergence.
+Laying the options out disproved it: **the tax is only ever charged where the language forces a wall.** Python's split produces no second type and C# pays nothing until assemblies split. The tax is downstream of the language's decision, which is the chapter's subject.
+That argument only appeared because the options had to be written down for someone else, which is the case for the interview and not for the draft's judgement.
+
+**Question 2: an overlap created by the review itself.**
+The author's new chapter 02 passage and chapter 21 both observed that a container moves a wiring mistake past the compiler.
+Chapter 21 was written before the edit existed, so neither cited the other.
+**The author chose to keep it in 02 and drop it from 21**, on the draft's recommendation: in 02 the fact is the evidence that a compiler acts on the choice, which is the test itself; in 21 it was a bonus clause riding along beside the actual argument, which is about who constructs your objects.
+
+**Consequence.**
+A ledger row assigns the `internal/` gloss to 03. Chapter 21 cites 03 for the mechanism and 05 for the general bill, and keeps its two contributions — what the directory is for, and the itemised mapping tax.
+The row for the mechanical test now carries the narrowed definition.

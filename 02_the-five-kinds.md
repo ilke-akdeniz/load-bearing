@@ -50,15 +50,11 @@ An **ecosystem convention**. Locally correct, non-transferable, and usually trac
 
 An Idiom is not arbitrary — there is normally a real reason it grew where it did. But the reason is local, so the conclusion is local.
 
-**What separates an Idiom from a Style is mechanical: the compiler or the runtime acts on the Idiom but they ignore the Style** 
+**What separates an Idiom from a Style is mechanical: the compiler or the runtime acts on an Idiom, and neither of them can see a Style.**
 
-The visible behaviour of software doesn't change because of an idiom choice. By "visible behaviour" we specifically mean what the software produces on success mode. Notice that this narrow definition excludes many areas: failure modes, developer experience, maintainability...   
+What stays the same is the visible behaviour — what the program produces when it succeeds. That is a narrow test on purpose, and a great deal falls outside it: failure modes, the work of setting the thing up, and how much of the wiring a compiler can check are all free to differ.
 
-Let's take a look at two DI idioms to see the changes: containers vs manual construction. 
-
-With manual construction, the compiler won't let you wire the dependencies incorrectly. Setting up the dependencies is a simple known steps for the developers.
-
-With containers, the dependencies are resolved on runtime. The ergonomics for setting up the dependencies is very different then the manual construction. And if you wire the containers improperly, compiler won't help, errors will surface on runtime.
+Dependency injection shows both halves. Wired by hand, the dependencies are constructor arguments, so getting one wrong is a type error and the program does not build. Through a container they are resolved at run time from a registration list, so the same mistake compiles and surfaces on the first request that needs the missing service. Two programs that are both correct serve identical responses; the one that is wrong fails at a different time and with a different amount of help.
 
 ### Style
 
