@@ -3522,3 +3522,23 @@ The chapter now shows `Close`'s signature, which is structural and needs no run,
 
 **Also fixed.**
 Four ledger rows owned by 21 still cited "Ch. 18" after the renumbering that cut the old chapter 18, and `docs/pending/layout-and-language.md` carried the same fossil in its own body.
+
+## 88. Grilling sessions are logged, not just their outcomes
+
+**Context.**
+`CLAUDE.md` gained a *Grilling* section in decision 84 describing how the interview is run, and said nothing about recording it.
+Decision 87 was written because the author asked for it in the moment — *"grilling is like interactive reviewing so remember to log all my input and important decisions"* — not because any rule required it.
+
+**Decision.**
+Two bullets added to the procedure: log the exchange rather than only its conclusion, and keep a running note while the interview is in progress.
+
+**Why.**
+Grilling is the format that generates the most attributable material and loses it the fastest.
+In the chapter 21 session the author rejected the draft's proposed test and supplied a replacement, the draft's own recommendation lost twice, and one question was settled by a fact discovered while answering it.
+An entry recording only the result — *the Idiom/Style line is mechanical* — would read as though the draft had worked it out, which is the failure the attribution rules already name as the more damaging of the two.
+
+The running note is the operational half.
+By the fourth question the first exchange is easy to reconstruct wrongly and easy to reconstruct confidently, and the author's own words are consistently sharper than the paraphrase: *most of the things you will categorize as style will also have reasons stated by an authority if you dig deep enough* is the sentence that killed the draft's test, and a summary written later would have softened it.
+
+**Consequence.**
+Decision 87 is the worked shape for the format — questions in dependency order, the author's objections quoted, and the two places the draft's recommendation did not survive marked as such.
