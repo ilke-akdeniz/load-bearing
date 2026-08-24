@@ -74,12 +74,12 @@ Most of it has already been worked through and corrected by the author, so **rea
 - **`~/s/flowcore/docs/code-map.md`** — how the library fits together; useful for picking an example that is genuinely representative.
 - **`~/s/flowcore`** — the code itself. Prefer quoting real lines over inventing illustrative ones.
 
-**`docs/pending/` holds the same kind of document inside this repo.**
+**`docs/pending-tasks/` holds the same kind of document inside this repo.**
 Each file is a worked argument with its evidence and provenance already gathered, and a table saying which chapter is owed which piece.
 
 Before drafting a chapter, or reopening one, check the folder for material owed to it.
 Each file names its own chapters and tracks what has been routed, so the folder is the list and this file does not repeat it.
-**Delete a document once every piece in it has landed.** `docs/pending/` is a task list, and a finished task leaves nothing behind: the argument now lives in the chapter, and the reasoning behind it lives in `docs/DECISIONS.md`. Where a ledger row points at the document as the argument's home, that pointer is spent too and goes with it.
+**Delete a document once every piece in it has landed.** `docs/pending-tasks/` is a task list, and a finished task leaves nothing behind: the argument now lives in the chapter, and the reasoning behind it lives in `docs/DECISIONS.md`. Where a ledger row points at the document as the argument's home, that pointer is spent too and goes with it.
 
 Public repo: <https://github.com/ilke-akdeniz/flowcore>.
 
@@ -373,7 +373,7 @@ These are read as diffs, not as prose, so sentence-level granularity is worth mo
 ## Files
 
 - Chapters at the repo root: `NN_slug.md`, matching the TOC in `00_toc.md`.
-- Working documents in `docs/`, and in `docs/pending/` while they still owe material to a chapter.
+- Working documents in `docs/`, and in `docs/pending-tasks/` while they still owe material to a chapter.
 - `tools/check-drift.py` — the mechanical consistency checks. Run it before committing.
 - `00_toc.md` carries the status table — update it when a chapter's status changes. The README is the landing page and should stay short.
 
@@ -509,7 +509,7 @@ When every chapter is at draft, ask for confirmation rather than beginning, and 
 The order is load-bearing — every slice inspects what the one before it produced.
 Work one chapter at a time inside a slice, commit per chapter, and stop for the author to review and amend before the next slice starts.
 
-1. **Pending material.** Every document in `docs/pending/`, plus the owed table in `00_toc.md`, names the chapters it is owed to. Route every piece to its chapter, or record that it no longer fits and why.
+1. **Pending material.** Every document in `docs/pending-tasks/`, plus the owed table in `00_toc.md`, names the chapters it is owed to. Route every piece to its chapter, or record that it no longer fits and why.
 2. **Rules.** Check each chapter against the rules in this file that postdate it. `git log CLAUDE.md` against the chapter's own history gives the candidates; a commit that changed this file *and* many chapters at once was already applied retroactively, and one that changed a single chapter was applied only there.
 3. **Sources.** Every chapter that lacks a `## Sources` section gets one, with links verified rather than recalled. Slice 2 has just identified and checked the citations, which is most of the work.
 4. **Reconciliation.** TOC entries against what each chapter now says, ledger rows against what each chapter now owns, then `tools/check-drift.py`.

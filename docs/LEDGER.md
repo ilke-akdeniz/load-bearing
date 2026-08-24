@@ -250,14 +250,14 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | For a framework, inversion of control is the product | 20 | Not a technique applied — a framework whose control you kept would be a library, and its lifecycle is a Force rather than a convention | "the lifecycle is a Force (Ch. 20)" |
 | The seam goes where the profile changes | 20 | Straddling systems are the common case; the boundary belongs where the data crosses, each side keeps its own rules, and the seam is where the bugs are | "where the profile changes (Ch. 20)" |
 | Profile knowledge transfers, domain knowledge does not | 20 | Readings and the moves that follow port to an unfamiliar business with the same profile; business knowledge is situational, which is why maritime and civil are different lawyers. Someone arriving carries conclusions — ask for the reading instead | "which transfers (Ch. 20)" |
-| Corpus monoculture | 02 | A model has one training distribution and cannot acquire a second, so 02's prescribed cure is unavailable to it | cite 02; argument in `docs/pending/ai-material.md` |
-| The generator cannot see your Forces | 03 | Forces are facts about your situation; a model has the prompt, so the groundwork is skipped by construction | cite 03; argument in `docs/pending/ai-material.md` |
-| The scope was never set | 15 | For generated design nobody ever fixed an extent, so there is no author to ask and no talk to re-watch | "no scope was set (Ch. 15)"; argument in `docs/pending/ai-material.md` |
+| Corpus monoculture | 02 | A model has one training distribution and cannot acquire a second, so 02's prescribed cure is unavailable to it | cite 02; argument in `docs/pending-tasks/ai-material.md` |
+| The generator cannot see your Forces | 03 | Forces are facts about your situation; a model has the prompt, so the groundwork is skipped by construction | cite 03; argument in `docs/pending-tasks/ai-material.md` |
+| The scope was never set | 15 | For generated design nobody ever fixed an extent, so there is no author to ask and no talk to re-watch | "no scope was set (Ch. 15)"; argument in `docs/pending-tasks/ai-material.md` |
 | The interview does not improve the answer | 19 | It makes the answer disagreeable-with. The same two decisions exist in generated code as a column default and a v4 constructor, taken by whatever is most common and unmarked; 23 owns that case | "answers somebody can disagree with (Ch. 19)" |
 | Fact and decision have different owners | 19 | Grilling's load-bearing line: facts get looked up, decisions get put to the human — steps one and two of the method, separated and given owners, which is what makes the output auditable | "fact or decision (Ch. 19)" |
-| Grilling | 19 | An interview that surfaces each decision, with a recommendation, before anything is written; the human supplies the Force that settles it | "grilling (Ch. 19)"; text, provenance and limits in `docs/pending/ai-material.md` |
-| Grilling's limit | 19 | It surfaces decisions the model recognizes as decisions, so it is weakest where the corpus is most uniform | cite 19; argument in `docs/pending/ai-material.md` |
-| Silent defaults | 23 | Generated code states no decisions at all — a taken branch leaves no mark, so review cannot catch what it never suspected | "silent default (Ch. 23)"; argument in `docs/pending/ai-material.md` |
+| Grilling | 19 | An interview that surfaces each decision, with a recommendation, before anything is written; the human supplies the Force that settles it | "grilling (Ch. 19)"; text, provenance and limits in `docs/pending-tasks/ai-material.md` |
+| Grilling's limit | 19 | It surfaces decisions the model recognizes as decisions, so it is weakest where the corpus is most uniform | cite 19; argument in `docs/pending-tasks/ai-material.md` |
+| Silent defaults | 23 | Generated code states no decisions at all — a taken branch leaves no mark, so review cannot catch what it never suspected | "silent default (Ch. 23)"; argument in `docs/pending-tasks/ai-material.md` |
 
 ## Code examples
 

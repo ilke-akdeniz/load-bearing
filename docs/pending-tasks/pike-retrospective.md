@@ -1,6 +1,6 @@
 # Pike's 2023 Retrospective: Source Material
 
-Working document, in the shape of `docs/pending/ai-material.md`.
+Working document, in the shape of `docs/pending-tasks/ai-material.md`.
 The passages are gathered here once so that the chapters owed them agree with each other.
 
 **Source.** Rob Pike, *What We Got Right, What We Got Wrong* — closing talk at GopherConAU, Sydney, 10 November 2023, published as text with slides on his own site.
@@ -107,7 +107,7 @@ Three reasons.
 
 Applying material to four finished chapters at once means four review cycles running in parallel, which is the batching the project avoids everywhere else.
 Material of this kind is strongest when the chapter is live, because the argument can be shaped around it — chapter 15's use of this source worked for that reason, and a quotation bolted onto a finished chapter is the decoration the register rules exclude.
-And the precedent already exists and worked: `docs/pending/ai-material.md` holds material owed to 02 and 03 in exactly this way.
+And the precedent already exists and worked: `docs/pending-tasks/ai-material.md` holds material owed to 02 and 03 in exactly this way.
 
 **The test that would override this: a revisit can wait, a contradiction cannot.**
 The talk was checked against what is already shipped and contradicts none of it.

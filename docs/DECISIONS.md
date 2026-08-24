@@ -3672,3 +3672,25 @@ It simply was not true of this one, which is what a condition is for.
 The document is deleted.
 `CLAUDE.md`'s rule now says delete rather than move, with the reason stated positively: the argument lives in the chapter and the reasoning lives in this log, so a discharged working document is duplication.
 It also says the ledger pointer goes with the document, which closes the gap the old reason was gesturing at — a row citing `docs/pending/x.md` is a pointer for a drafting session that has now happened, and it is spent once the chapter carries the argument.
+
+## 93. `docs/pending/` becomes `docs/pending-tasks/`
+
+**Context.**
+Decision 92 established that the folder is a task list and a discharged document is deleted.
+The name did not say that: *pending* describes the documents, and what the author wanted named is the work.
+
+**Decision.**
+The folder is `docs/pending-tasks/`.
+`docs/pending/speculative-abstraction.md` was deleted in the same pass — every row of its own table read **done**, and the last piece owed, the line-of-business inversion for chapter 20, is present at `20_six-profiles.md:54`. Its header still claimed one line outstanding, contradicting its table. The single ledger pointer to it and the TOC line sending readers to it went with it.
+
+Two documents remain: `ai-material.md`, owed to chapter 23, and `pike-retrospective.md`, owed to 02, 09 and possibly 13.
+
+**What was updated, and what deliberately was not.**
+Fifteen live references were changed — four in `CLAUDE.md`, six ledger rows, three in `00_toc.md`, two inside `pike-retrospective.md`.
+
+**`docs/DECISIONS.md` was left alone**, and its fifteen occurrences of the old path stand.
+This log records what was decided at the time, so rewriting the path inside decision 78 — titled *Material documents move to `docs/pending/`* — would make the entry describe a decision nobody took. Decision 92 quotes the superseded `CLAUDE.md` rule verbatim for the same reason.
+A log that is silently updated to match the present cannot be used as evidence about the past, which is the job the README gives this file.
+
+**One near-miss worth recording.**
+`10_what-a-pattern-is-for.md` contains `` `pending/` `` twice, in the passage about provisional names — a holding-pen folder in a hypothetical codebase, nothing to do with this repository's layout. A path-wide sweep would have renamed it and broken the example. It was checked before the sweep ran, not after.
