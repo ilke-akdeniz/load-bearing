@@ -50,7 +50,15 @@ An **ecosystem convention**. Locally correct, non-transferable, and usually trac
 
 An Idiom is not arbitrary — there is normally a real reason it grew where it did. But the reason is local, so the conclusion is local.
 
-**What separates an Idiom from a Style is mechanical: the compiler or the runtime acts on the choice, and the program behaves the same either way.** A container resolves dependencies at run time where manual construction does not; an interface introduces dispatch. Nothing about what the program does has changed, and the machine is doing something different.
+**What separates an Idiom from a Style is mechanical: the compiler or the runtime acts on the Idiom but they ignore the Style** 
+
+The visible behaviour of software doesn't change because of an idiom choice. By "visible behaviour" we specifically mean what the software produces on success mode. Notice that this narrow definition excludes many areas: failure modes, developer experience, maintainability...   
+
+Let's take a look at two DI idioms to see the changes: containers vs manual construction. 
+
+With manual construction, the compiler won't let you wire the dependencies incorrectly. Setting up the dependencies is a simple known steps for the developers.
+
+With containers, the dependencies are resolved on runtime. The ergonomics for setting up the dependencies is very different then the manual construction. And if you wire the containers improperly, compiler won't help, errors will surface on runtime.
 
 ### Style
 

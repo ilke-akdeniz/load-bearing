@@ -44,7 +44,7 @@ direct := store.scanOrder(8, "closed")
 ./service.go:9:18: undefined: store.scanOrder
 ```
 
-A Go package boundary *is* the visibility boundary, so the only way to compile that line is to rename the helper `ScanOrder`. That works. It also changes what the package tells the world about itself:
+A Go package boundary *is* the visibility boundary, so the only way to compile that line is to rename the helper `ScanOrder`. That works. It also changes what the package tells the world about itself: [-- search for "package boundary" in the  book, this is the third mention of the same "package boundary - internal flowcore example" situaion. Gauge if this becomes repetitive.]
 
 ```text
 package store // import "shop/store"
