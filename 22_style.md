@@ -4,9 +4,9 @@
 
 **A Style discussion has no fact that would settle it, so it ends only when a person who can enforce a style decides to act — and everything before that produces nothing.**
 
-Chapter 02 puts Style at the bottom of the ladder and gives the test that puts things there: the compiler or the runtime acts on an Idiom, and ignores a Style. What is held constant is narrow — what the program produces when it succeeds — and this chapter is about the decisions that fall entirely inside that gap.
+Chapter 02 puts Style at the bottom of the ladder and gives the test that puts things there: the compiler or the runtime acts on an Idiom, and ignores a Style.  [-- consider removeing the following sentence, confusing and doesn't add much.] What is held constant is narrow — what the program produces when it succeeds — and this chapter is about the decisions that fall entirely inside that gap.
 
-The claim is not that Style does not matter. Consistency is worth having, and chapter 02 says so. The claim is about how a Style disagreement ends, and the answer is unlike every other kind of disagreement in this book.
+The claim is not that Style does not matter. Consistency is worth having, and chapter 02 says so. The claim is about how a Style disagreement ends, and the answer is unlike every other kind of disagreement in this book. [-- I would remove this paragraph. "The claim is not that Style does not matter" => I think the claim is more or less exacty that, you are confusing the consistency of style with the choice of style. ]
 
 ---
 
@@ -38,7 +38,7 @@ func Total( amounts []int ) int {
 
 Both print `1745` on the same input. That is the whole of what the machine has to say about the difference.
 
-One caveat, because it cuts against the obvious way to state this. The two do **not** compile to identical binaries: Go writes a table mapping instruction addresses back to source lines, and moving a statement to a different line changes it. So the artifacts differ while the behaviour does not, which is exactly why chapter 02's test is about what a working program produces rather than about whether the machine can tell.
+One caveat, because it cuts against the obvious way to state this. The two do **not** compile to identical binaries: Go writes a table mapping instruction addresses back to source lines, and moving a statement to a different line changes it. So the artifacts differ while the behaviour does not, which is exactly why chapter 02's test is about what a working program produces rather than about whether the machine can tell. [-- you misunderstood the points made on chapter 02. Let me clarify it for you, then you decide what to do with that information: That test was only formulated for idioms and not styles. This is the correct picture: Compiler and runtime ignores style, your identical binaries in go point is useless hair splitting, not worthy of mention and rebuttal in my opinion. Compiler and runtime don't ignore idioms. But what separates idioms from regular statements is that a change in a regular statement would usually change the behavior of the software in success mode. Ex: "i++ instead of i--". An idiom never changes any behaviour that happens in success mode but it changes other things mentioned on chapter 02. Now I'm slightly worried that you were confused on these. If that was because of laziness that's fine but if not a reader could be confused in similar manner so it could be worthy of clarfying these on chapter 02 as well.]
 
 ### So the choice belongs to whoever makes it first
 
@@ -66,7 +66,7 @@ Nobody on a Go team argues about this, and the reason is not that Go programmers
 
 Rob Pike, looking back at Go's first fourteen years, gives the history and is explicit about who did it: before Robert Griesemer wrote `gofmt` — *"which, by the way, he insisted on doing from the very beginning"* — automated formatters were poor and therefore mostly unused. Pike's assessment of the trade is the claim of this chapter, made by someone who paid for it: **"The time saved by not arguing over spaces and newlines is worth all the time spent defining a standard format and writing this rather difficult piece of code to automate it."** He adds that today essentially every language worth using has a standard formatter.
 
-That is one person, with the standing to make it stick, acting early. The result was not that Go settled the brace question correctly — there is no correct answer — but that Go stopped paying for it. Python's Black and JavaScript's Prettier are the same move made later in two more ecosystems; neither toolchain is installed here, so this is their mechanism rather than a run.
+That is one person, with the standing to make it stick, acting early. The result was not that Go settled the brace question correctly — there is no correct answer — but that Go stopped paying for it. Python's Black and JavaScript's Prettier are the same move made later.
 
 ### The same question, with nothing to end it
 
@@ -84,11 +84,25 @@ func Total(a []int) int {
 
 Same output. And `gofmt` reports nothing, because a formatter has no opinion about whether the parameter is called `amounts` or `a`.
 
-**That silence is the reason naming arguments outlive formatting arguments.** Which word you choose is arbitrary in the way any word is arbitrary — Italian and Mongolian give the same table entirely different names and both work — so there is nothing for a tool to compute. The enforcement has to come from a person, repeatedly, for as long as people are still writing code.
+**That silence is the reason naming arguments outlive formatting arguments.** Which word you choose is arbitrary in the way any word is arbitrary — Italian and Mongolian give the same table entirely different names and both work — so there is nothing for a tool to compute. The enforcement has to come from a person, repeatedly, for as long as people are still writing code. [-- this example is very valuable because it could point a disctintion we are missing if we move it to the extrem. Let's say the naming in the example are like this, it's the same function that does the Total the same way, one joker dev rewrote it like this and changed the references, everything compiles:
+
+```go
+// since naming is just a convention, there should be no harm in this right ;)
+func G(p []int) int {
+	z := 0
+	for _, y := range p {
+		z += y
+	}
+	return z
+}
+```
+
+Now this naming is definitely wrong. I don't think anybody will defend this, but we should explain how this doesn't invalidate our claim, in a consistent way.
+]
 
 Two decisions in this book's own history show what that costs. FlowCore deviates from Go's short-name convention, on the grounds that abbreviations like `def` and `mgr` must be decoded rather than read, and that the decoding **does not get cheaper with familiarity** the way the convention assumes. This book deviates from the same convention for a different reason: its reader meets a sample once and never returns to it, so a truncated domain noun is one more thing to decode in a language most of them do not write.
 
-Neither could be automated, so both were written down instead. Which is this chapter's oddity in one line: **where being right does not matter, being seen to have chosen still does.** A short name with a recorded reason behind it and a short name with nothing behind it are identical on the screen, and the second is indistinguishable from not having noticed.
+Neither could be automated, so both were written down instead. Which is this chapter's oddity in one line: **where being right does not matter, being seen to have chosen still does.** [-- maybe more precise version of preceding is : "where being right about a choice is not possible but the reasons for the choice matter."] A short name with a recorded reason behind it and a short name with nothing behind it are identical on the screen, and the second is indistinguishable from not having noticed.
 
 ---
 
