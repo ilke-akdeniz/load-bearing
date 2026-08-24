@@ -3641,5 +3641,6 @@ Merged, as the author asked.
 The standalone form is not merely rare; in this book it *signals*. A reader who has met thirteen chapter claims and five enumerated options has learned that a bolded sentence alone on a line announces either the chapter's claim or a labelled branch of an argument. Chapter 02's line was neither — it was the topic sentence of the paragraph directly beneath it, which is exactly the job the inline lead-in does 349 times.
 So the objection is not that the reader has never seen the form. It is that they have, and it means something else.
 
-**Surfaced, not acted on.**
-Chapter 03 line 121 is the same inconsistency at one site: a device that is inline five times out of six, standalone once, apparently because that instance's sentence is long. Chapter 03 is at draft and this was not tagged, so it is recorded here rather than changed.
+**The same inconsistency in chapter 03, surfaced and then fixed on the author's instruction.**
+*What changes with the Force* appears six times in chapter 03. Line 121 differed from the other five twice over: it stood alone, and it bolded the answer as well as the label, where the others bold only *What changes with the Force:* and leave the answer in plain text.
+Both are now matched to the majority form. Chapter 03 is at draft, and the change is formatting with no word altered.

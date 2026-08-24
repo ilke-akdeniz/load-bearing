@@ -118,9 +118,7 @@ Now every read site handles a null, forever, including the ones written by peopl
 
 Notice that the mistake is not detectable later. Both migrations succeed, both applications work, and the difference only appears the day someone asks how many customers tipped nothing — by which point the answer is unrecoverable.
 
-**What changes with the Force: whether a mistake is correctable, and therefore how much care the decision is worth.**
-
-That is the general form, and the tip column is one instance of it. Two others follow from the same reading.
+**What changes with the Force:** whether a mistake is correctable, and therefore how much care the decision is worth. That is the general form, and the tip column is one instance of it. Two others follow from the same reading.
 
 **Where an invariant should be enforced.** If the rows outlive every version of the code that writes them, then a rule enforced only in application code is a rule that holds for as long as one code path remembers it. A constraint in the schema holds for the `psql` session at 2am, the data-fix script, the bulk import, and the admin tool written next year by someone who has never read your service layer. The durability of the medium is the reason that argument is not merely a preference (Ch. 06 owns the class of invariants application code *cannot* enforce at all).
 
