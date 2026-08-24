@@ -4,9 +4,7 @@
 
 **A Style discussion has no fact that would settle it, so it ends only when a person who can enforce a style decides to act — and everything before that produces nothing.**
 
-Chapter 02 puts Style at the bottom of the ladder and gives the test that puts things there: the compiler or the runtime acts on an Idiom, and ignores a Style.  [-- consider removeing the following sentence, confusing and doesn't add much.] What is held constant is narrow — what the program produces when it succeeds — and this chapter is about the decisions that fall entirely inside that gap.
-
-The claim is not that Style does not matter. Consistency is worth having, and chapter 02 says so. The claim is about how a Style disagreement ends, and the answer is unlike every other kind of disagreement in this book. [-- I would remove this paragraph. "The claim is not that Style does not matter" => I think the claim is more or less exacty that, you are confusing the consistency of style with the choice of style. ]
+Chapter 02 puts Style at the bottom of the ladder and gives the test that puts things there: the compiler or the runtime acts on an Idiom, and ignores a Style.
 
 ---
 
@@ -37,8 +35,6 @@ func Total( amounts []int ) int {
 ```
 
 Both print `1745` on the same input. That is the whole of what the machine has to say about the difference.
-
-One caveat, because it cuts against the obvious way to state this. The two do **not** compile to identical binaries: Go writes a table mapping instruction addresses back to source lines, and moving a statement to a different line changes it. So the artifacts differ while the behaviour does not, which is exactly why chapter 02's test is about what a working program produces rather than about whether the machine can tell. [-- you misunderstood the points made on chapter 02. Let me clarify it for you, then you decide what to do with that information: That test was only formulated for idioms and not styles. This is the correct picture: Compiler and runtime ignores style, your identical binaries in go point is useless hair splitting, not worthy of mention and rebuttal in my opinion. Compiler and runtime don't ignore idioms. But what separates idioms from regular statements is that a change in a regular statement would usually change the behavior of the software in success mode. Ex: "i++ instead of i--". An idiom never changes any behaviour that happens in success mode but it changes other things mentioned on chapter 02. Now I'm slightly worried that you were confused on these. If that was because of laziness that's fine but if not a reader could be confused in similar manner so it could be worthy of clarfying these on chapter 02 as well.]
 
 ### So the choice belongs to whoever makes it first
 
@@ -84,25 +80,10 @@ func Total(a []int) int {
 
 Same output. And `gofmt` reports nothing, because a formatter has no opinion about whether the parameter is called `amounts` or `a`.
 
-**That silence is the reason naming arguments outlive formatting arguments.** Which word you choose is arbitrary in the way any word is arbitrary — Italian and Mongolian give the same table entirely different names and both work — so there is nothing for a tool to compute. The enforcement has to come from a person, repeatedly, for as long as people are still writing code. [-- this example is very valuable because it could point a disctintion we are missing if we move it to the extrem. Let's say the naming in the example are like this, it's the same function that does the Total the same way, one joker dev rewrote it like this and changed the references, everything compiles:
-
-```go
-// since naming is just a convention, there should be no harm in this right ;)
-func G(p []int) int {
-	z := 0
-	for _, y := range p {
-		z += y
-	}
-	return z
-}
-```
-
-Now this naming is definitely wrong. I don't think anybody will defend this, but we should explain how this doesn't invalidate our claim, in a consistent way.
-]
-
+**That silence is the reason naming arguments outlive formatting arguments.** Which word you choose is arbitrary in the way any word is arbitrary — Italian and Mongolian give the same table entirely different names and both work — so there is nothing for a tool to compute. The enforcement has to come from a person, repeatedly, for as long as people are still writing code. There is a floor under this, and the boundary section works out where it is.
 Two decisions in this book's own history show what that costs. FlowCore deviates from Go's short-name convention, on the grounds that abbreviations like `def` and `mgr` must be decoded rather than read, and that the decoding **does not get cheaper with familiarity** the way the convention assumes. This book deviates from the same convention for a different reason: its reader meets a sample once and never returns to it, so a truncated domain noun is one more thing to decode in a language most of them do not write.
 
-Neither could be automated, so both were written down instead. Which is this chapter's oddity in one line: **where being right does not matter, being seen to have chosen still does.** [-- maybe more precise version of preceding is : "where being right about a choice is not possible but the reasons for the choice matter."] A short name with a recorded reason behind it and a short name with nothing behind it are identical on the screen, and the second is indistinguishable from not having noticed.
+Neither could be automated, so both were written down instead. Which is this chapter's oddity in one line: **where being right about the choice is unavailable, but recording the reasons for it still matters.** A short name with a recorded reason behind it and a short name with nothing behind it are identical on the screen, and the second is indistinguishable from not having noticed.
 
 ---
 
@@ -128,7 +109,7 @@ Which is why the only variable is how early somebody ends it, and why the ending
 
 ## Where the claim doesn't apply
 
-### The question that was never a Style question
+### The option that was never on the menu
 
 The claim assumes you have two spellings of one thing. Sometimes you have one spelling of two things, and it looks identical on the page.
 
@@ -155,7 +136,27 @@ without          -> ProgrammingError: parameters are of unsupported type
 
 **There were never two options here.** The question presented as a Style question — a comma, a matter of house preference, the same token the formatter had an opinion about two paragraphs ago — and one of the two apparent choices did not exist. No amount of deciding, enforcing, or agreeing would have helped, because the disagreement was with Python rather than with a colleague.
 
-This is the general shape of the boundary and it is worth stating plainly: **before treating something as Style, check that both options produce the same program.** If they do not, the thing is not Style and the discussion has a fact in it after all — which means it can be settled, and settling it is worth the time.
+### A name that does not name
+
+The same trap with no machine to catch it. Here is the invoice total again, rewritten by somebody making a point:
+
+```go
+func G(p []int) int {
+	z := 0
+	for _, y := range p {
+		z += y
+	}
+	return z
+}
+```
+
+It compiles, `go vet` is silent, `gofmt` approves it, and it prints `1745`. Every machine test in this chapter says it is the same program, and it is — so this looks like a Style choice by the definition, but it is not.
+
+The resolution is similar to the tuple's. `Total` and `Sum` are different names for the same function and nothing separates them; that is the Style question and it has no answer. `G` is not a third name for the same function. It names nothing, so it is not an alternative to the others — it is the choice not to name the thing.
+
+And that question has evidence behind it, which is what settles it. Show a colleague `func Total(amounts []int) int` and ask what it returns; they answer. Show them `func G(p []int) int`; they cannot. The experiment has an outcome, so the question can be settled, so by this chapter's own account it was never Style.
+
+Which gives the rule covering both cases: **before treating something as Style, check that both options do the job you are choosing between two ways of doing.** For the tuple that job is passing a sequence of parameters, and the driver says which option fails. For the name it is saying what the thing is, and a reader says. Where one option does not do the job there is a fact, the discussion can end on it, and the time is not wasted.
 
 Chapter 21 gives the systematic version of the same trap: the line between Style and Idiom is drawn in a different place by each language, so a decision that is arbitrary in one is structural in another.
 

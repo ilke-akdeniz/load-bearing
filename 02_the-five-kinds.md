@@ -203,7 +203,7 @@ Five questions, in order. Stop at the first that answers.
 
 **4. Does the compiler or the runtime act on the choice, while the program behaves the same either way?** → **Idiom**. It will usually also be specific to a language or ecosystem, and competent engineers elsewhere will often do the opposite — but that is a consequence of the answer rather than the test, because plenty of Style is local too.
 
-**5. Can neither of them tell which way you chose?** → **Style**.
+**5. Does neither of them act on the choice?** → **Style**.
 
 ---
 

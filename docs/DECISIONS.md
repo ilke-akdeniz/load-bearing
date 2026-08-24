@@ -3743,3 +3743,52 @@ Cut, with the author's agreement, on the grounds that the entry says *short, del
 **Verification.**
 `gofmt` is available and its output is quoted from a run. Black and Prettier are not installed, so they are given as mechanism with no output claimed.
 The naming demonstration turns on a verified silence: `gofmt` reports nothing about `a` versus `amounts`, which is why naming arguments outlive formatting ones.
+
+## 95. Chapter 22 review 01: a caveat written to defend the test against a fact that was never about it
+
+**Context.**
+First review of chapter 22, worked as a grilling. Six items, presented at once by the draft and corrected by the author — *"we are settling one question at a time"* — then taken in order.
+
+**The largest item: a misreading of chapter 02, and where it actually came from.**
+The draft had written a paragraph noting that two differently-formatted Go files do not compile to identical binaries, because Go's line table records source positions, and offering that as the reason 02's test is about behaviour rather than about what the machine can see.
+
+The author's verdict: *"your identical binaries in go point is useless hair splitting, not worthy of mention and rebuttal."*
+Correct. The paragraph defends the test against a fact that was never about the test — the compiler recording a line number is not the compiler acting on a formatting choice — and the draft had gone and measured artifacts because it read *ignores* as *produces an identical artifact*.
+
+The author asked whether the confusion warranted clarifying chapter 02 as well.
+Checking that produced a better answer than either party had. **Chapter 02's test already carries the distinction:** question 4 reads *"while the program behaves the same either way"*, which excludes an ordinary code change such as `i++` against `i--`. No paragraph was needed.
+
+**But the check found the actual defect, one question further down.**
+Question 5 read *"Can neither of them tell which way you chose?"*
+A compiler **can** tell — it parses the file and records positions — and that technically-true answer is the loose thread the draft pulled. It now reads *"Does neither of them act on the choice?"*, matching question 4's phrasing one line above.
+One word, and it closes the gap rather than papering over it. The definition paragraph keeps the author's *ignores a Style*, where the contrast with *acts on an Idiom* makes the meaning plain.
+
+**The claim was being hedged against an objection it should have accepted.**
+The draft's opening said *"The claim is not that Style does not matter. Consistency is worth having."*
+The author: *"I think the claim is more or less exactly that, you are confusing the consistency of style with the choice of style."*
+Right, and the hedge was defending against *so style doesn't matter?* by pointing at consistency, which is a different question. The chapter now opens on the claim and one sentence of orientation.
+
+**The joker-developer case, which is the author's and is the chapter's second boundary.**
+The author supplied a rewrite of the demonstration function using `G`, `p`, `z` and `y`, noted that it compiles, and asked how that does not invalidate the claim — *"in a consistent way."*
+
+Verified: it compiles, `go vet` is silent, `gofmt` approves it, and it prints `1745`. Every machine test in the chapter says it is the same program.
+
+The resolution: `Total` and `Sum` are two names for one function and nothing separates them, which is the Style question and has no answer. `G` is not a third name — it names nothing, so it is not an alternative to the others but the choice not to name the thing. And the question has evidence behind it: show a colleague `func Total(amounts []int) int` and ask what it returns and they answer; show them `func G(p []int) int` and they cannot.
+
+**That exposed a defect in the boundary section's rule.**
+It read *"check that both options produce the same program"* — and `G` **does** produce the same program, so the rule did not cover the case being added under it.
+Generalised to: **check that both options do the job you are choosing between two ways of doing.** For the tuple that job is passing a sequence of parameters and the driver says which option fails; for the name it is saying what the thing is and a reader says.
+
+The author also corrected the draft's framing of the case. The draft wrote that `G` *is* Style by the definition *and* indefensible, which sets up a contradiction the section then has to argue its way out of. The author's version — *looks like a Style choice by the definition, but it is not* — dissolves it and matches the tuple, where one of two apparent options also turned out not to exist.
+
+**The closing line, settled over three rounds.**
+Draft: *where being right does not matter, being seen to have chosen still does.*
+Author: *not possible* rather than *does not matter*, since correctness is unavailable rather than unimportant. Correct, and the draft's version said the weaker thing.
+The draft objected that *the reasons for the choice matter* could be read as *some reasons are better than others*, reopening the correctness the first half closes.
+The author's answer supplied the fix rather than dodging it — **recording** the reasons is what matters, not the reasons — and made the case for keeping the harder sentence: *"the leading 'this chapter's oddity' signals the mind bending statement that comes… I would rather keep the mind-bending and more correct one then softening it for fear of misunderstanding."*
+
+Settled: *where being right about the choice is unavailable, but recording the reasons for it still matters.*
+Which, as the author noted, is also why a decision log for Style choices is worth keeping.
+
+**One direct edit accepted without change.**
+The author deleted the draft's note that Black and Prettier were not installed. The chapter claims no output from either, so the caveat was defensive noise.
