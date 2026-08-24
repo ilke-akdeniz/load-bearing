@@ -283,7 +283,7 @@ Idioms, taken seriously rather than dismissed.
 
 **Two cases from Pike's 2023 retrospective**, worked in `docs/pending/pike-retrospective.md`: interfaces **coloured their own designers' thinking** for more than a decade, which is an Idiom bounding what the people best placed to see past it could imagine; and the early compiler written in C against every expectation of the language community, a declared deviation with its reason stated and its expiry recognised.
 
-Contents: why Go grew free functions and C# grew containers, traced to language features rather than culture; an Idiom whose precondition failed because the reader stopped being the author (FlowCore's decision 18: short Go names, generated idiomatically, deviated from deliberately); why Python skipped DI except where per-request lifetime is real; the case *for* obeying local idiom even when you can argue against it — reviewability, hiring, the cost of being interesting; when to deviate, and how to pay for it (declare it, document the reason, keep it narrow).
+Contents: why Go grew free functions and C# grew containers, traced to language features rather than culture — chapter 02 owns that demonstration, so this is the explanation; where the Idiom/Style line falls in each language, since Go's capitalization is visibility and Python's indentation is syntax, so a choice that is arbitrary elsewhere is structural there; a directory costing what the language ties to it, worked in `docs/pending/layout-and-language.md`; why Python skipped DI except where per-request lifetime is real; the case *for* obeying local idiom even when you can argue against it — reviewability, hiring, the cost of being interesting; when to deviate, and how to pay for it (declare it, document the reason, keep it narrow).
 
 *Where the claim doesn't apply:* idioms that encode a genuine mistake, and how to tell those from idioms you merely dislike.
 
@@ -293,6 +293,9 @@ Contents: why Go grew free functions and C# grew containers, traced to language 
 Short chapter, deliberately.
 
 Contents: naming, formatting, file layout, comment density; why consistency beats correctness here; why style arguments consume energy disproportionate to their stakes; the one case where style becomes substance — when a naming convention encodes a real distinction the type system can't.
+Also Go's short-name convention, which chapter 02's mechanical test sorts here rather than to Idiom because nothing but a reader can see it.
+FlowCore's decision 18 and this book's decision 49 both deviate from it, for two different failed assumptions — a maintainer returning after a context switch, for whom decoding never amortizes, and a reader who sees a sample once and never returns.
+Both wrote the reason down, which is this chapter's own oddity: where being right does not matter, being seen to have chosen still does.
 
 *Where the claim doesn't apply:* nothing, really — which makes this the one chapter whose counter-example section argues that its own subject barely matters.
 

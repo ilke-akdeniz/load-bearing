@@ -6,7 +6,7 @@ Working document, in the shape of the others in this folder.
 
 **Origin.** This was a chapter — *Clean Architecture versus the language*, numbered 18 at the time and since cut, with everything after it moved up one. Do not read that number as the current chapter 18. Decision 83 records why: the chapter ran on *the database is a detail*, and the demonstration below does not follow from that advice. The export bill is a property of Go's package semantics and is paid identically whatever the motive for the split — which the chapter's own boundary section conceded.
 
-**What survives, and why it belongs to 20.** A directory means a different thing in each ecosystem, so the same layout instruction costs a different amount in each. That is not an architecture finding wearing a language costume; it is the reverse, and *why ecosystems diverge* is the chapter for it.
+**What survives, and why it belongs to 21.** A directory means a different thing in each ecosystem, so the same layout instruction costs a different amount in each. That is not an architecture finding wearing a language costume; it is the reverse, and *why ecosystems diverge* is the chapter for it.
 
 **Everything here has been run.** The Go compile error and the `go doc` output are real. Nothing needs re-verifying, though re-running before publication would be cheap.
 

@@ -50,11 +50,15 @@ An **ecosystem convention**. Locally correct, non-transferable, and usually trac
 
 An Idiom is not arbitrary — there is normally a real reason it grew where it did. But the reason is local, so the conclusion is local.
 
+**What separates an Idiom from a Style is mechanical: the compiler or the runtime acts on the choice, and the program behaves the same either way.** A container resolves dependencies at run time where manual construction does not; an interface introduces dispatch. Nothing about what the program does has changed, and the machine is doing something different.
+
 ### Style
 
 Naming, formatting, file layout. **Arbitrary, but worth being consistent about.**
 
-Style has no authority at all, and the correct response to a Style argument is to pick one and stop discussing it.
+Neither the compiler nor the runtime can tell which way you chose. Style has no authority at all, and the correct response to a Style argument is to pick one and stop discussing it.
+
+**Where that line falls is decided by the language, not by the category the choice appears to belong to.** Go makes an identifier's case its visibility and Python makes indentation syntax, so a naming or formatting decision that is arbitrary everywhere else is structural there. Chapter 21 works out what that costs; chapter 22 takes what is left, which is most of it.
 
 ---
 
@@ -195,13 +199,13 @@ Five questions, in order. Stop at the first that answers.
 
 **3. Can it become *wrong* advice if circumstances change?** → **Principle**. Follow-up worth asking every time: can I state those circumstances? If not, I do not yet understand the advice well enough to apply it.
 
-**4. Is it specific to a language or ecosystem — would competent engineers elsewhere do the opposite?** → **Idiom**.
+**4. Does the compiler or the runtime act on the choice, while the program behaves the same either way?** → **Idiom**. It will usually also be specific to a language or ecosystem, and competent engineers elsewhere will often do the opposite — but that is a consequence of the answer rather than the test, because plenty of Style is local too.
 
-**5. Does it affect only how the code reads, with no consequence for correctness or structure?** → **Style**.
+**5. Can neither of them tell which way you chose?** → **Style**.
 
 ---
 
-## Twenty claims, classified
+## Twenty-one claims, classified
 
 | Claim | Kind | Note |
 |---|---|---|
@@ -223,6 +227,7 @@ Five questions, in order. Stop at the first that answers.
 | "Every repository gets an interface" | **Idiom** | C#/Java; Ch. 17 for why |
 | "Accept interfaces, return structs" | **Idiom** | Go |
 | "Exceptions are for exceptional cases" | **Idiom** | Go and Python disagree at the root |
+| "Short local names" | **Style** | Go-specific, and still Style — nothing sees it; Ch. 22 |
 | "Prefer `var` / avoid `var`" | **Style** | pick one, stop talking |
 | "Tabs vs spaces" | **Style** | genuinely arbitrary |
 
