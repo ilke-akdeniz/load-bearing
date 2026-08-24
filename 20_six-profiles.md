@@ -4,11 +4,13 @@
 
 **What decides which advice holds is not the domain but the force profile.**
 
-*Domain* keeps its ordinary meaning throughout this chapter and the rest of the book: what the software is about. Payroll, ledgers, air traffic, imaging.
+To make the claim precise two terms need to be settled:  
 
-**Force profile** is this book's term and is not standard vocabulary. It names the reading of every force bearing on a system — and what makes a reading a *profile* is that at least one of those forces sits at an intensity outside the ordinary range (Ch. 03), and stays there.
+- *Domain* means what the software is about. Payroll, ledgers, air traffic, imaging. 
 
-Chapter 19 gave the method for one decision. This chapter runs it at the scale of whole systems, six times, and the finding is that the answers cluster.
+- **Force profile** is the reading of every force bearing on a system — and what makes a reading a *profile* is that at least one of those forces sits at an intensity outside the ordinary range (Ch. 03), and stays there. Unlike domain, force profile is this book's term and is not standard vocabulary.
+
+Chapter 19 gave the force-map method for one decision. This chapter runs it at the scale of whole systems, six times, and the finding is that the answers cluster.
 
 ---
 
@@ -16,7 +18,7 @@ Chapter 19 gave the method for one decision. This chapter runs it at the scale o
 
 ### Domain and force profile are two different axes
 
-A flight simulator, a video encoder and a high-frequency trading loop share almost nothing anyone would call a domain. They share a force profile: a fixed latency budget measured in milliseconds, inside which the memory hierarchy decides what is possible. And they share its inversions — all three end up with layouts nobody may hide and allocation moved out of the loop.
+A flight simulator, a video encoder and a high-frequency trading loop share almost nothing anyone would call a domain. They share a force profile: a fixed latency budget measured in milliseconds, inside which the memory hierarchy decides what is possible. And they share its inversions — all three end up with memory layouts nobody may hide and allocation moved out of the loop.
 
 That is one direction. **The other direction matters more, because it is the one that catches people.**
 
@@ -140,7 +142,7 @@ A Principle is advice that is good given certain forces (Ch. 02). Its condition 
 
 A profile is where at least one force leaves that ordinary range and stays there. So the condition fails not occasionally but structurally, for every system with that reading, all the time — which is why the failures cluster rather than scatter, and why the same six or seven pieces of advice come up every time practitioners from two profiles argue.
 
-**And it is why the arguments are so unproductive.** Two people disagreeing about whether to put logic in the database are not disagreeing about databases. One of them works where the schema outlives four rewrites of the application, and the other works where the application outlives the storage it happens to be using this year. Both are right, both are giving advice that has worked every time they have applied it, and neither has said the force out loud. Chapter 03 identifies this as the general shape of unresolvable design arguments. What a profile adds is that the two readings are not merely different but stably different — they will be just as far apart on the next question, and on the one after that, so the two will never converge by talking about code.
+**And it is why the arguments are so unproductive.** Two people disagreeing about whether to put logic in the database are not disagreeing about databases. One of them works where the schema outlives four rewrites of the application, and the other works where the application outlives the storage it happens to be using this year. Both are right, both are giving advice that has worked every time they have applied it, and neither has said the force out loud. Chapter 03 identifies this as the general shape of unresolvable design arguments. What a profile adds is that the two readings are not merely different but stably different — they will be just as far apart on the next question, and on the one after that, so the two will never converge by talking about code. [-- this "two people arguing both are right" theme was used maybe 5 times in the book with near identical idea. Search the book for "two people" and see what I mean. You need to do something about this problem. It's ok to edit older chapters in addition to this chapter for fixing this.]
 
 The practical consequence is an asymmetry between the two axes, and it is worth stating because it decides what to ask a new colleague.
 
@@ -209,8 +211,8 @@ Six is not a complete enumeration and nothing in the argument requires it to be.
 
 - **Advice applied uniformly across a seam.** One allocation discipline, one error-handling convention, one testing strategy across both sides of a boundary where the force profile changes. Somebody chose a house style over a force reading.
 - **A translation layer whose only job is to make one side look like the other.** Frequently the seam done wrong: rather than a small explicit crossing, one profile's shapes are dressed up as the other's throughout.
-- **Fighting the framework.** State held outside the lifecycle, effects run in the wrong phase, the framework's calls treated as an API to work around. Almost always defended as separation of concerns.
-- **A god object that only has fan-in.** Before breaking it up, check whether it depends on anything. If it does not, it may be an AST.
+- **Fighting the framework.** State held outside the lifecycle, effects run in the wrong phase, the framework's calls treated as an API to work around. Almost always defended as separation of concerns. [-- what does framework mean here? That's a very loaded term. Did you mean tech stack?]
+- **A god object that only has fan-in.** Before breaking it up, check whether it depends on anything. If it does not, it may be an AST. [-- explain this more concretely, what's the failure here. Also these last two failures need to be tied to a failure about the force profiles.]
 
 **In a conversation:**
 
@@ -218,6 +220,7 @@ Six is not a complete enumeration and nothing in the argument requires it to be.
 - **"We need to be pragmatic about the database."** Ask what outlives what. The answer decides it, and it is a fact rather than a preference.
 - **"Premature optimization."** True almost everywhere and false where the budget is fixed in advance. The question is whether there is a *later* in which to optimize.
 - **Someone senior giving advice that is obviously wrong here.** The most likely explanation is not that they are wrong. It is that they are right somewhere else and have not been asked which force they are reading.
+[-- these points need to be tied to force profiles]
 
 The question that does the work: **which force here is outside its ordinary range, and what does it hold still?**
 
