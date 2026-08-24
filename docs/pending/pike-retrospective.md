@@ -1,6 +1,6 @@
 # Pike's 2023 Retrospective: Source Material
 
-Working document, in the shape of `docs/pending/ai-material.md` and `docs/pending/speculative-abstraction.md`.
+Working document, in the shape of `docs/pending/ai-material.md`.
 The passages are gathered here once so that the chapters owed them agree with each other.
 
 **Source.** Rob Pike, *What We Got Right, What We Got Wrong* — closing talk at GopherConAU, Sydney, 10 November 2023, published as text with slides on his own site.

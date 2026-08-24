@@ -228,7 +228,6 @@ The third case study, and the one that survives *but what if we do need it*.
 Martin's 1994 paper names the test as **stability**, and gives plurality as the reason an abstraction is stable: the more implementations depend on it, the harder it is to change.
 The five words that travel keep the technique and drop the test, so an interface with one implementation carries the principle's name while failing it.
 The chapter shows the wide reading first and the source after it, so the stability test arrives as a correction to an interface the reader has already watched fail.
-The argument is worked in `docs/pending/speculative-abstraction.md`.
 
 Contents: the distinction everything rests on — **simultaneous plurality** (two implementations loaded at once, something dispatching between them) against **sequential replacement** (one engine, then another, forever), where only the first is a Force and the second is what people mean; **injection is not abstraction**, stated because chapter 05 otherwise refutes the claim in a sentence; four reasons the insurance cannot pay out, each leaning on a Law the book already owns; and the rollback objection answered with what actually does the job — replication, comparison, per-tenant cutover, a window where both engines run.
 
