@@ -3593,3 +3593,26 @@ Chapter 21 was written before the edit existed, so neither cited the other.
 **Consequence.**
 A ledger row assigns the `internal/` gloss to 03. Chapter 21 cites 03 for the mechanism and 05 for the general bill, and keeps its two contributions — what the directory is for, and the itemised mapping tax.
 The row for the mechanical test now carries the narrowed definition.
+
+## 90. The rewrite lost the point of the edit it was tidying
+
+**Context.**
+Decision 89 kept the author's narrowing of the Idiom/Style test and rewrote it into the book's register.
+The author read the result and rejected it: *"my version of the previous paragraph reads much better then current one. I think if you compare the two again you will agree with me."*
+
+**On comparison, correct, and for two reasons — one of which is not a matter of taste.**
+
+**The definition was demoted into an aside.** The author's version gives it a sentence of its own: state the invariant, define the term, name the exclusions. The rewrite folded the definition into an em-dash clause. Pinning down what *behaves the same* means was the entire point of the edit being tidied, and the tidying buried it — the sentence that flags a term is being fixed deserves to be a sentence.
+
+**And one of the rewrite's exclusions was wrong.** It listed "how much of the wiring a compiler can check" among the things free to differ. That is not an excluded consideration; it is the classification criterion. A compiler acting on the choice is exactly what makes something an Idiom, so the list named the test as one of the things the test ignores.
+
+**Decision.**
+The author's structure and list are restored — three sentences, one job each, and *failure modes, developer experience, maintainability*.
+Only the defects are corrected: a missing full stop on the bolded sentence, *on success mode*, first-person plural used to define a term, *Notice that* as filler, a trailing ellipsis, and a subject that changed number mid-clause.
+
+One deviation, flagged rather than silent: *acts on the Idiom but they ignore the Style* becomes *acts on an Idiom, and ignores a Style*, which fixes the number agreement and makes the two verbs parallel.
+
+**The pattern worth recording.**
+The register rules are for prose that has no other problem.
+Applied to a passage whose structure was doing argumentative work, the tidying pass optimised the sentences and lost the shape — and produced an error in the list while it was at it.
+Standalone bolded sentences were checked before restoring the author's: there are twenty-six in the book, so that form was never the defect.

@@ -50,9 +50,9 @@ An **ecosystem convention**. Locally correct, non-transferable, and usually trac
 
 An Idiom is not arbitrary — there is normally a real reason it grew where it did. But the reason is local, so the conclusion is local.
 
-**What separates an Idiom from a Style is mechanical: the compiler or the runtime acts on an Idiom, and neither of them can see a Style.**
+**What separates an Idiom from a Style is mechanical: the compiler or the runtime acts on an Idiom, and ignores a Style.**
 
-What stays the same is the visible behaviour — what the program produces when it succeeds. That is a narrow test on purpose, and a great deal falls outside it: failure modes, the work of setting the thing up, and how much of the wiring a compiler can check are all free to differ. [-- my version of the previous paragraph reads much better then current one. I think if you compare the two again you will agree with me. Start reading from the title above not from the paragraph. The paragraph below is ok.]
+The visible behaviour of the software does not change because of an Idiom. *Visible behaviour* means what the program produces when it succeeds. That is a narrow definition on purpose, and it leaves out a great deal: failure modes, developer experience, maintainability.
 
 Dependency injection shows both halves. Wired by hand, the dependencies are constructor arguments, so getting one wrong is a type error and the program does not build. Through a container they are resolved at run time from a registration list, so the same mistake compiles and surfaces on the first request that needs the missing service. Two programs that are both correct serve identical responses; the one that is wrong fails at a different time and with a different amount of help.
 
