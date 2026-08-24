@@ -1,8 +1,12 @@
 # A Directory Costs What the Language Ties to It
 
-Working document, in the shape of the others in this folder.
+Working document, kept as provenance now that it is discharged.
 
-**Owed to:** chapter 21, *Idioms: why ecosystems diverge*. One section, not a chapter.
+**Landed in** chapter 21, *Idioms: why ecosystems diverge*, which reached draft on 24 August 2026.
+Every piece below is in the chapter: the export bill, `internal/`, the mapping tax, and the three-language table.
+Two things changed on the way in.
+The Go compile error and `go doc` output were re-run rather than trusted, and the same split was written and run in Python as well, so the section now carries a paired experiment — Go refuses to compile, Python reaches the underscore-prefixed helper across the boundary and runs — instead of proving one language and tabling the others.
+Chapter 21 also cites chapter 03 for what `internal/` is and chapter 05 for the general boundary bill, rather than re-deriving either; see decision 89.
 
 **Origin.** This was a chapter — *Clean Architecture versus the language*, numbered 18 at the time and since cut, with everything after it moved up one. Do not read that number as the current chapter 18. Decision 83 records why: the chapter ran on *the database is a detail*, and the demonstration below does not follow from that advice. The export bill is a property of Go's package semantics and is paid identically whatever the motive for the split — which the chapter's own boundary section conceded.
 
