@@ -217,7 +217,7 @@ Six is not a complete enumeration and nothing in the argument requires it to be.
 - **"That's over-engineered" and "that's reckless," about one design.** Two profiles in one room. Neither sentence is about the code; each is a reading of what a failure costs, and because both readings are stable the exchange has nowhere to go. Ask each side what happens when this is wrong and who finds out.
 - **"We need to be pragmatic about the database."** Ask what outlives what. Under the line-of-business profile the schema does, which settles it, and it is a fact rather than a preference.
 - **"Premature optimization."** True in the ordinary case, false under the frame-budget and hard-deadline profiles, where the budget was fixed before anyone wrote a line. The question is whether there is a *later* in which to optimize.
-- **"We're not Google."** Usually correct, and it is a claim about profiles rather than about modesty: it says the distributed profile's forces are not yours. Worth agreeing with out loud and then checking, because one path in the system often is. [-- "agreeing with out loud and then checking" If you are agreeing out loud why are you checking? "because one path in the system often is." Often is what? Google?]
+- **"We're not Google."** Usually correct, and it is a claim about profiles rather than about modesty: it says the distributed profile's forces are not yours. What to watch is what the sentence gets used to close. It can be true of the system and false of the one path that crosses a network you do not own.
 
 The question that does the work: **which force here is outside its ordinary range, and what does it hold still?**
 
