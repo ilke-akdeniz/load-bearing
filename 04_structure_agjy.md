@@ -930,6 +930,8 @@ The question that catches real damage is not *does this match the diagram?* It i
 
 The first question generates folders. The second finds the cycle.
 
+[Chapter 05](05_time_mdbn.md) does for concurrency what this chapter did for structure — turns "be careful with shared state" into a rule you can check, starting with the fact that check-then-act is not atomic.
+
 ---
 
-**Next:** [chapter 05](05_time_mdbn.md) does for concurrency what this chapter did for structure — turns "be careful with shared state" into a rule you can check, starting with the fact that check-then-act is not atomic.
+[← Ch. 03](03_grading-a-law_q5c6.md)  ·  [Contents](00_toc.md)  ·  [Ch. 05 →](05_time_mdbn.md)

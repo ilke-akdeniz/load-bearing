@@ -323,6 +323,8 @@ The question that does the work: **which shape am I on?**
 
 A ceiling means stop buying hardware and shrink the serial part. A reversal means stop adding workers and find what they share. A queue cliff means buy headroom rather than speed. A step means look at the layout. A floor means move the data or stop waiting for it.
 
+[Chapter 08](08_change_rjf9.md) moves to the timescale where the arithmetic is measured in years rather than milliseconds — how systems change, how the shape of an organization ends up in its software, and why a published interface is a decision you do not get to take back.
+
 ---
 
-**Next:** [chapter 08](08_change_rjf9.md) moves to the timescale where the arithmetic is measured in years rather than milliseconds — how systems change, how the shape of an organization ends up in its software, and why a published interface is a decision you do not get to take back.
+[← Ch. 06](06_distribution_49yh.md)  ·  [Contents](00_toc.md)  ·  [Ch. 08 →](08_change_rjf9.md)

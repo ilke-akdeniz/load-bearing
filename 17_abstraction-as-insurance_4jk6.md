@@ -226,6 +226,8 @@ The question that does the work: **if the swap happened next quarter, which of i
 
 Answer it by listing the steps — schema translation, data copy, verification, cutover, rollback, retuning — and marking the ones the abstraction touches. The usual answer is the call sites, which were never the expensive part, and the usual reaction to seeing the list is more useful than any argument in this chapter.
 
+Part V turns from diagnosis to method — [chapter 18](18_force-map-method_r37x.md) sets out how to read the Forces in front of you, derive the Principles they support, and check the Idioms of the language you are writing in, in that order.
+
 ---
 
 ## Sources
@@ -237,4 +239,4 @@ Answer it by listing the steps — schema translation, data copy, verification, 
 
 ---
 
-**Next:** Part V turns from diagnosis to method — [chapter 18](18_force-map-method_r37x.md) sets out how to read the Forces in front of you, derive the Principles they support, and check the Idioms of the language you are writing in, in that order.
+[← Ch. 16](16_tdd-and-mocks_u8eu.md)  ·  [Contents](00_toc.md)  ·  [Ch. 18 →](18_force-map-method_r37x.md)

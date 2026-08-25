@@ -223,6 +223,8 @@ The question that does the work: **which force here is outside its ordinary rang
 
 Every inversion in this chapter is that question answered. If every force sits in its ordinary range, you are in the ordinary case, the mainstream advice applies, and the interesting thing about your system is somewhere other than its architecture.
 
+[Chapter 20](20_idioms_7nkn.md) turns from profiles to ecosystems — why two languages solving the same problem settle on conventions that contradict each other, and what an idiom is actually worth once you can see where it came from.
+
 ---
 
-**Next:** [chapter 20](20_idioms_7nkn.md) turns from profiles to ecosystems — why two languages solving the same problem settle on conventions that contradict each other, and what an idiom is actually worth once you can see where it came from.
+[← Ch. 18](18_force-map-method_r37x.md)  ·  [Contents](00_toc.md)  ·  [Ch. 20 →](20_idioms_7nkn.md)

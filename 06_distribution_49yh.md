@@ -319,6 +319,8 @@ The question that does the work: **what does this code do when the reply never c
 
 Every distributed defect in the list above is an answer to that question that nobody wrote down. If the honest answer is *it retries and the work happens twice*, you need an idempotency key. If it is *it gives up and the work happened anyway*, you need reconciliation. And if the answer is *the reply always comes, we're in one process*, then none of this is yours and you should stop reading.
 
+[Chapter 07](07_scale_637f.md) turns from what is impossible to what is merely expensive — the arithmetic of queues, parallelism, and the memory hierarchy, where the numbers beat the intuition by several orders of magnitude.
+
 ---
 
-**Next:** [chapter 07](07_scale_637f.md) turns from what is impossible to what is merely expensive — the arithmetic of queues, parallelism, and the memory hierarchy, where the numbers beat the intuition by several orders of magnitude.
+[← Ch. 05](05_time_mdbn.md)  ·  [Contents](00_toc.md)  ·  [Ch. 07 →](07_scale_637f.md)

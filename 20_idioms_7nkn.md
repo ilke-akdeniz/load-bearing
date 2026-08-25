@@ -269,6 +269,8 @@ The question that does the work: **what is true about my surroundings that made 
 
 If the answer names a language feature, a tool, or a person who will read the code, you have something to check. If nothing comes back, you have not found an Idiom — you have found a habit, and you are about to argue with it as though it could answer.
 
+[Chapter 21](21_style_9rng.md) takes the level below this one — the decisions no compiler and no runtime can see, where being right is worth less than being consistent, and where the arguments are fiercest for exactly that reason.
+
 ---
 
 ## Sources
@@ -281,4 +283,4 @@ FlowCore decision log, decision 1, "Single root package, not `internal/`". <http
 
 ---
 
-**Next:** [chapter 21](21_style_9rng.md) takes the level below this one — the decisions no compiler and no runtime can see, where being right is worth less than being consistent, and where the arguments are fiercest for exactly that reason.
+[← Ch. 19](19_six-profiles_dnkz.md)  ·  [Contents](00_toc.md)  ·  [Ch. 21 →](21_style_9rng.md)

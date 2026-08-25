@@ -372,6 +372,8 @@ Broken the way code actually breaks, not deleted in the abstract: someone drops 
 
 The wider version is worth asking before a release: **if this behaviour is broken in production tomorrow, can we say the cause is not in our code, because these tests would have caught it?** That one reaches what the narrow question misses — the dependency that is faked in every environment below production, the fixture data that is tidier than anything real. The honest answer is usually more specific, and less comfortable, than a coverage number.
 
+[Chapter 17](17_abstraction-as-insurance_4jk6.md) takes the last of the cases — an abstraction bought as insurance against a change that has not been scheduled, and shaped by the thing it was insuring against.
+
 ---
 
 ## Sources
@@ -386,4 +388,4 @@ The wider version is worth asking before a release: **if this behaviour is broke
 
 ---
 
-**Next:** [chapter 17](17_abstraction-as-insurance_4jk6.md) takes the last of the cases — an abstraction bought as insurance against a change that has not been scheduled, and shaped by the thing it was insuring against.
+[← Ch. 15](15_behaviour-placement_z47a.md)  ·  [Contents](00_toc.md)  ·  [Ch. 17 →](17_abstraction-as-insurance_4jk6.md)

@@ -279,6 +279,8 @@ The question that does the work: **what did the person who said this go on to sa
 
 If the source can be reached, go and look. The scope is often still there, in the forty seconds after the sentence, in the talk nobody re-watched.
 
+[Chapter 15](15_behaviour-placement_z47a.md) is the first of the three cases — object orientation's advice about where behaviour belongs, and the references that appear in both directions once two rules are placed by it.
+
 ---
 
 ## Sources
@@ -296,4 +298,4 @@ If the source can be reached, go and look. The scope is often still there, in th
 
 ---
 
-**Next:** [chapter 15](15_behaviour-placement_z47a.md) is the first of the three cases — object orientation's advice about where behaviour belongs, and the references that appear in both directions once two rules are placed by it.
+[← Ch. 13](13_smuggled-verdicts_8y69.md)  ·  [Contents](00_toc.md)  ·  [Ch. 15 →](15_behaviour-placement_z47a.md)

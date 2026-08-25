@@ -54,17 +54,22 @@ for _f in chapter_files:
 
 parts = [(n, l.split("—", 1)[1].strip())
          for n, l in enumerate(toc_lines, 1) if l.startswith("## Part ")]
-entries = [(n, m.group(1), m.group(2).strip())
+# The contents page holds one line per chapter and nothing that is not
+# derivable from the chapter itself, so the whole of it can be verified.
+entries = [(n, m.group(1), m.group(2).strip(), m.group(3))
            for n, l in enumerate(toc_lines, 1)
-           if (m := re.match(r"^### (\d\d)\.\s*(.+)$", l))]
-status = dict(re.findall(r"^\| (\d\d) \| `([^`]+)` \|", toc, re.M))
-status_state = dict(re.findall(r"^\| (\d\d) \| `[^`]+` \| (.+?) \|", toc, re.M))
+           if (m := re.match(r"^- (\d\d)\. \[([^\]]+)\]\(([^)]+)\)$", l))]
+toc_file = {num: target for _, num, _, target in entries}
+
+statusdoc = read("docs/STATUS.md")
+status = dict(re.findall(r"^\| (\d\d) \| `([^`]+)` \|", statusdoc, re.M))
+status_state = dict(re.findall(r"^\| (\d\d) \| `[^`]+` \| (.+?) \|", statusdoc, re.M))
 
 
 # 1. A part title must not collide with a chapter title.
 checked += 1
 for pn, part in parts:
-    for cn, num, title in entries:
+    for cn, num, title, _ in entries:
         a, b = part.lower().rstrip("."), title.lower().rstrip(".")
         if a == b or a in b or b in a:
             fail("part/chapter collision",
@@ -72,33 +77,44 @@ for pn, part in parts:
 
 # 2. Every chapter file has a TOC entry, and every entry has a file.
 checked += 1
-entry_files = {num: status.get(num) for _, num, _ in entries}
-for num, fname in entry_files.items():
-    if fname is None:
-        fail("toc/status", f"ch {num} has a TOC entry but no row in the status table")
+entry_files = toc_file
+listed = [num for _, num, _, _ in entries]
+if listed != sorted(listed):
+    fail("toc", "00_toc.md lists chapters out of numerical order")
+for num in listed:
+    if listed.count(num) > 1:
+        fail("toc", f"ch {num} is listed more than once in 00_toc.md")
+        break
 for fname in chapter_files:
     num = fname[:2]
-    if num not in entry_files:
-        fail("toc/status", f"{fname} exists but has no TOC entry")
-    elif entry_files[num] != fname:
-        fail("toc/status", f"ch {num}: status table says `{entry_files[num]}`, file is `{fname}`")
+    if num not in toc_file:
+        fail("toc", f"{fname} exists but is not listed in 00_toc.md")
+    elif toc_file[num] != fname:
+        fail("toc", f"ch {num}: 00_toc.md links `{toc_file[num]}`, file is `{fname}`")
+for num, target in toc_file.items():
+    if target not in chapter_files:
+        fail("toc", f"00_toc.md lists `{target}`, which is not a chapter file")
+    if num not in status:
+        fail("status", f"ch {num} is in the contents page but has no row in docs/STATUS.md")
+for num, fname in status.items():
+    if fname not in chapter_files and status_state.get(num, "").replace("*", "").strip() != "not started":
+        fail("status", f"docs/STATUS.md names `{fname}` for ch {num}, which is not a chapter file")
 
 # 3. A chapter's H1 must match its TOC title (case-insensitively).
 checked += 1
-for _, num, title in entries:
-    fname = status.get(num)
-    if not fname or not (ROOT / fname).exists():
+for _, num, title, fname in entries:
+    if not (ROOT / fname).exists():
         continue
     h1 = read(fname).split("\n", 1)[0].lstrip("# ").strip()
-    if h1.lower().replace(":", "") != title.lower().replace(":", ""):
-        fail("h1 vs toc", f"ch {num}: H1 '{h1}' != TOC '{title}'")
+    if h1 != title:
+        fail("h1 vs toc", f"ch {num}: H1 '{h1}' != contents page '{title}'")
 
 # 4. Status must be one of the four defined states, and match whether a file exists.
 checked += 1
 for num, state in status_state.items():
     clean = state.replace("*", "").strip()
     if clean not in {"not started", "in progress", "draft", "ready"}:
-        fail("status", f"ch {num}: unknown status '{clean}'")
+        fail("status", f"docs/STATUS.md ch {num}: unknown status '{clean}'")
     exists = status.get(num) in chapter_files
     if clean == "not started" and exists:
         fail("status", f"ch {num}: marked 'not started' but the file exists")
@@ -122,7 +138,8 @@ for fname in chapter_files + ["00_toc.md", "README.md", "CLAUDE.md"]:
 #     DECISIONS.md is the historical record and is exempt.
 checked += 1
 live_docs = chapter_files + ["00_toc.md", "README.md", "CLAUDE.md", "AGENTS.md",
-                             "docs/LEDGER.md", "docs/ABOUT.md",
+                             "docs/LEDGER.md", "docs/ABOUT.md", "docs/STATUS.md",
+                             "docs/pending-tasks/index.md",
                              "docs/pending-tasks/ai-material.md",
                              "docs/pending-tasks/pike-retrospective.md"]
 REF_PATTERNS = [
@@ -187,14 +204,14 @@ for fname in live_docs:
 #     with themselves: the status table's number against its filename, and the
 #     revisits table's number against its "next time NN is open".
 checked += 1
-for n, line in enumerate(toc_lines, 1):
+for n, line in enumerate(statusdoc.split("\n"), 1):
     row = re.match(r"^\| (\d\d) \| `(\d\d)_[a-z0-9-]+_([a-z0-9]{4})\.md` \|", line)
     if row and row.group(1) != row.group(2):
-        fail("toc table", f"00_toc.md:{n} status row says chapter {row.group(1)} "
-                          f"but names file {row.group(2)}_...")
+        fail("status table", f"docs/STATUS.md:{n} row says chapter {row.group(1)} "
+                             f"but names file {row.group(2)}_...")
     if row and ids.get(row.group(3)) != row.group(1):
-        fail("toc table", f"00_toc.md:{n} status row for chapter {row.group(1)} "
-                          f"names id '{row.group(3)}', which is not that chapter")
+        fail("status table", f"docs/STATUS.md:{n} row for chapter {row.group(1)} "
+                             f"names id '{row.group(3)}', which is not that chapter")
     row = re.match(r"^\| (\d\d) \| (?!`).*next time (\d\d) is open", line)
     if row and row.group(1) != row.group(2):
         fail("toc table", f"00_toc.md:{n} revisits row is for chapter {row.group(1)} "
@@ -219,6 +236,21 @@ for fname in live_docs:
             fail("bare ref", f"{fname}:{n} writes '{m.group(0)}' as plain text; "
                              f"a cross-reference must be a link carrying the id")
 
+# 5g. Every chapter ends with the navigation row naming its true neighbours.
+#     Derived from the file order, so a renumbering or an inserted chapter
+#     cannot leave a row pointing at the wrong place.
+checked += 1
+for i, fname in enumerate(chapter_files):
+    prev = ("[← Introduction](README.md)" if i == 0
+            else f"[← Ch. {chapter_files[i-1][:2]}]({chapter_files[i-1]})")
+    slots = [prev, "[Contents](00_toc.md)"]
+    if i + 1 < len(chapter_files):
+        slots.append(f"[Ch. {chapter_files[i+1][:2]} →]({chapter_files[i+1]})")
+    want = "  ·  ".join(slots)
+    got = read(fname).rstrip("\n").split("\n")[-1]
+    if got != want:
+        fail("nav", f"{fname} ends with\n      {got}\n    expected\n      {want}")
+
 # 6. Terminology that a past sweep retired. DECISIONS.md is the historical
 #    record and is deliberately exempt.
 checked += 1
@@ -234,7 +266,7 @@ for path in sorted(ROOT.glob("*.md")) + sorted(ROOT.glob("docs/*.md")) + [ROOT /
 # 7. Counts asserted in more than one file must agree.
 checked += 1
 n_chapters = len(entries)
-for fname in ["00_toc.md", "README.md"]:
+for fname in ["00_toc.md", "README.md", "CLAUDE.md", "docs/ABOUT.md"]:
     text = read(fname)
     for stated in re.findall(r"(\w+[- ]\w+|\w+) chapters", text):
         words = {"twenty-two": 22, "twenty two": 22, "22": 22}

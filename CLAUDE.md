@@ -56,7 +56,8 @@ Always name the kinds — Law, Force, Principle, Idiom, Style.
 Read these before writing anything.
 
 - `README.md` — premise, the model, the chapter rubric, conventions, license. The landing page.
-- `00_toc.md` — the full 23-chapter TOC with per-chapter summaries and stated boundaries, plus the drafting status table.
+- `00_toc.md` — the contents page: twenty-two chapters in five parts, each a number, a title and a link, and nothing else.
+- `docs/STATUS.md` — which chapter is at which status. Update it when a status changes.
 - `docs/LEDGER.md` — **concept and example ownership.** Which chapter owns which idea. Non-optional; see the protocol below.
 - `docs/DECISIONS.md` — editorial decisions, with reasoning and the options that lost. Consult before reversing anything.
 
@@ -122,7 +123,9 @@ Each chapter follows this shape:
 5. **What the claim costs** — every choice has a bill.
 6. **How to recognize the failure** — what it looks like in a real codebase when someone got this wrong.
 
-Then the back matter, after the argument ends: a `## Sources` section, and the `**Next:**` line handing off to the following chapter.
+The argument's last paragraph hands off to the next chapter — what it takes up and why it follows this one — written as prose, with no label.
+Then the back matter, after a `---`: a `## Sources` section, and last the navigation row, `[← Ch. NN](…)  ·  [Contents](00_toc.md)  ·  [Ch. NN →](…)`.
+The first chapter's back link is the introduction; the last chapter has no next slot.
 
 **Sources lists every work the chapter cites, and nothing else.**
 Bare entries — author, title, venue, date, link — in order of first appearance in the chapter, with every link verified rather than recalled.
@@ -374,24 +377,17 @@ These are read as diffs, not as prose, so sentence-level granularity is worth mo
 
 ## Files
 
-- Chapters at the repo root: `NN_slug.md`, matching the TOC in `00_toc.md`.
+- Chapters at the repo root: `NN_slug_ID.md`, listed in `00_toc.md`.
 - Working documents in `docs/`, and in `docs/pending-tasks/` while they still owe material to a chapter.
 - `tools/check-drift.py` — the mechanical consistency checks. Run it before committing.
-- `00_toc.md` carries the status table — update it when a chapter's status changes. The README is the landing page and should stay short.
+- `docs/STATUS.md` carries the status table — update it when a chapter's status changes. The README is the book's introduction, and `00_toc.md` is the contents page; neither carries working material.
 
-### Keeping the TOC honest
+### Global drift
 
-The TOC drifts in two ways, and they need different handling.
+The TOC once carried a prose summary of every chapter, and those summaries described their chapters wrongly whenever a chapter changed during review — [chapter 12](12_missing-language-features_esqm.md)'s said *"Decorator is function composition"* after the chapter had measured that and found it false.
+**The fix was to delete the class of error rather than to police it.** The contents page now holds only what can be derived from the chapters themselves — number, title, link — so `tools/check-drift.py` verifies the whole of it and a wrong entry is a failing check rather than something a reader has to notice.
 
-**Local drift** — an entry describing its own chapter wrongly, because the chapter changed during review.
-[Chapter 12](12_missing-language-features_esqm.md)'s entry said *"Decorator is function composition"* after the chapter had measured that and found it false.
-This needs judgment, so **update a chapter's entry when it moves to draft**, while what changed is still fresh.
-Folding it into the status change costs a minute; finding it later means re-reading the chapter to reconstruct a conclusion nobody remembers reaching.
-
-Entries for chapters that do not exist yet are a different thing again: they are the plan a drafting session reads, not a description.
-A stale one produces a wrong chapter rather than a wrong paragraph, so update those when a decision changes them.
-
-**Global drift** — two things that must differ don't, a retired term survives in one place, a count disagrees across files.
+What remains is global drift — two things that must differ don't, a retired term survives in one place, a count disagrees across files.
 No per-chapter review catches these, because no single chapter is wrong.
 Part I was called "The five kinds" while [chapter 01](01_the-five-kinds_cjx4.md) was called "The five kinds of claim" — neither wrong alone, and the collision was *created* by the sweep that fixed the terminology.
 This is what `tools/check-drift.py` is for. Run it rather than looking for these by eye.
@@ -495,7 +491,7 @@ Three times while finishing [chapter 14](14_principle-loses-scope_b86v.md), a si
 - *Extent* was a private synonym for *scope*, used **ten** times for the same thing inside one chapter.
 - A table column confused a principle's scope with a term's extent. The same slip was in two further paragraphs.
 
-So when a word is found doing the wrong job, **grep every use of it before calling it fixed** — and not only in the chapter. `docs/LEDGER.md` and `00_toc.md` carry the same vocabulary, go stale silently, and were wrong in each of these cases.
+So when a word is found doing the wrong job, **grep every use of it before calling it fixed** — and not only in the chapter. `docs/LEDGER.md` carries the same vocabulary, goes stale silently, and was wrong in each of these cases. A chapter's title is the other place, and it now travels: the contents page copies it and `tools/check-drift.py` requires the two to match, so renaming a chapter is one edit and a failing check rather than a search.
 
 The cross-chapter version is the same rule at larger scale. *Scope* had acquired three incompatible meanings across [chapters 11](11_patterns-that-survive-translation_us2k.md), 13, and 14, two of them bold definitions in adjacent chapters, before anyone counted. One survey found it; a lot of careful reading had not. `tools/check-drift.py` catches structural drift and cannot catch this, so the survey has to be run by hand when a term is in question.
 
@@ -511,10 +507,10 @@ When every chapter is at draft, ask for confirmation rather than beginning, and 
 The order is load-bearing — every slice inspects what the one before it produced.
 Work one chapter at a time inside a slice, commit per chapter, and stop for the author to review and amend before the next slice starts.
 
-1. **Pending material.** Every document in `docs/pending-tasks/`, plus the owed table in `00_toc.md`, names the chapters it is owed to. Route every piece to its chapter, or record that it no longer fits and why.
+1. **Pending material.** Every document in `docs/pending-tasks/`, and `docs/pending-tasks/index.md` in particular, names the chapters it is owed to. Route every piece to its chapter, or record that it no longer fits and why.
 2. **Rules.** Check each chapter against the rules in this file that postdate it. `git log CLAUDE.md` against the chapter's own history gives the candidates; a commit that changed this file *and* many chapters at once was already applied retroactively, and one that changed a single chapter was applied only there.
 3. **Sources.** Every chapter that lacks a `## Sources` section gets one, with links verified rather than recalled. Slice 2 has just identified and checked the citations, which is most of the work.
-4. **Reconciliation.** TOC entries against what each chapter now says, ledger rows against what each chapter now owns, then `tools/check-drift.py`.
+4. **Reconciliation.** Ledger rows against what each chapter now owns, then `tools/check-drift.py`.
 
 **Content added during a slice has not been through the slices already finished.**
 A passage routed in slice 1 still needs reading against the rules; an author amendment in slice 3 may carry a source nobody listed.

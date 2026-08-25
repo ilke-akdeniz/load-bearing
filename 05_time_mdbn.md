@@ -421,6 +421,8 @@ The question that does the work: **what could have changed between the moment I 
 
 If the answer is *nothing, because nothing else writes here*, the Law is inert and you are done. If it is *anything at all*, you do not have a check — you have a guess with good manners.
 
+[Chapter 06](06_distribution_49yh.md) takes the same problem across machines, where coordination stops being expensive and starts being impossible — and works through what has been proved unachievable, along with the engineering that exists because of it.
+
 ---
 
-**Next:** [chapter 06](06_distribution_49yh.md) takes the same problem across machines, where coordination stops being expensive and starts being impossible — and works through what has been proved unachievable, along with the engineering that exists because of it.
+[← Ch. 04](04_structure_agjy.md)  ·  [Contents](00_toc.md)  ·  [Ch. 06 →](06_distribution_49yh.md)

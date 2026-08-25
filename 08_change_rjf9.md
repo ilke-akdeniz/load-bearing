@@ -304,6 +304,8 @@ The question that does the work: **how long am I going to live with this, and wh
 
 A day and nobody — do whatever is quickest. A decade and strangers — that is the other end of the range, and it is worth an afternoon of argument now, because there will not be a second chance to have it cheaply.
 
+Part III turns from laws to patterns, starting with the question the whole part depends on — [what a pattern is actually for](09_what-a-pattern-is-for_3xzc.md), and the two tests that separate a pattern name carrying real information from one that only sounds like it does.
+
 ---
 
-**Next:** Part III turns from laws to patterns, starting with the question the whole part depends on — what a pattern is actually for, and the two tests that separate a pattern name carrying real information from one that only sounds like it does.
+[← Ch. 07](07_scale_637f.md)  ·  [Contents](00_toc.md)  ·  [Ch. 09 →](09_what-a-pattern-is-for_3xzc.md)

@@ -269,6 +269,8 @@ Two questions do the work, and they are the two axes.
 
 **What would have to be true for this to be fine, and does the term let me say it?** If you can state the condition, you have a claim and can argue with it. If the word forbids the sentence, you have been handed a conclusion.
 
+[Chapter 14](14_principle-loses-scope_b86v.md) opens Part IV with the mechanism behind this one — why the fragment that survives repetition is always the part telling you what to do, and never the part telling you when.
+
 ---
 
-**Next:** [chapter 14](14_principle-loses-scope_b86v.md) opens Part IV with the mechanism behind this one — why the fragment that survives repetition is always the part telling you what to do, and never the part telling you when.
+[← Ch. 12](12_missing-language-features_esqm.md)  ·  [Contents](00_toc.md)  ·  [Ch. 14 →](14_principle-loses-scope_b86v.md)

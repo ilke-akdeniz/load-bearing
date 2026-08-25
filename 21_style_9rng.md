@@ -192,6 +192,8 @@ The question that does the work: **do these two versions produce the same progra
 
 If they do, nothing further can be learned by discussing it, and the only useful act is for somebody to choose. If they do not, this was never a Style question, and the time spent settling it will produce something.
 
+[Chapter 22](22_never-written-down_at4r.md) closes the book by putting the five kinds to work on the thing you actually meet — a blog post, a review comment, a colleague's strong opinion, and code a machine wrote that states no decisions at all.
+
 ---
 
 ## Sources
@@ -204,4 +206,4 @@ FlowCore decision log, decision 18, "Full-word identifiers over Go's short-name 
 
 ---
 
-**Next:** [chapter 22](22_never-written-down_at4r.md) closes the book by putting the five kinds to work on the thing you actually meet — a blog post, a review comment, a colleague's strong opinion, and code a machine wrote that states no decisions at all.
+[← Ch. 20](20_idioms_7nkn.md)  ·  [Contents](00_toc.md)  ·  [Ch. 22 →](22_never-written-down_at4r.md)

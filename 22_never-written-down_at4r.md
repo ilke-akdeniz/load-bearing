@@ -290,3 +290,7 @@ Jason Ku, on using the technique during development. <https://www.youtube.com/wa
 FlowCore, `docs/decisions.md`, decisions 12 and 18. <https://github.com/ilke-akdeniz/flowcore>
 
 FlowCore, `CLAUDE.md` — the iteration scope, and the identifier rule's reference to the log. <https://github.com/ilke-akdeniz/flowcore>
+
+---
+
+[← Ch. 21](21_style_9rng.md)  ·  [Contents](00_toc.md)

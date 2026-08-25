@@ -252,6 +252,8 @@ A theorem answers *nothing, given its assumptions* — and then you go and read 
 
 Anything that cannot answer at all was never a Law.
 
+[Chapter 04](04_structure_agjy.md) takes the first family of Laws in detail — dependency direction and information hiding — and separates the part that is genuinely load-bearing from the two conventions travelling under the same name.
+
 ---
 
-**Next:** [chapter 04](04_structure_agjy.md) takes the first family of Laws in detail — dependency direction and information hiding — and separates the part that is genuinely load-bearing from the two conventions travelling under the same name.
+[← Ch. 02](02_forces_f4m5.md)  ·  [Contents](00_toc.md)  ·  [Ch. 04 →](04_structure_agjy.md)

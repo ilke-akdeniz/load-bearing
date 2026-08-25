@@ -4267,3 +4267,61 @@ Removing one chapter's identifier fails the run in four places at once, includin
 The identifiers make a reference survive renumbering.
 They do nothing about a reference that was wrong when it was written, and no check can, since a citation to the wrong existing chapter is well-formed in every mechanical sense.
 That remains a reading job.
+
+## 108. The contents page is reduced to what can be derived, and chapters get navigation
+
+**Context.**
+Deferred twice while the identifiers landed.
+The author's complaint was concrete: there is no way to move between chapters, and `00_toc.md` had become something other than a table of contents.
+
+**The author's reframing, which replaced the draft's first question.**
+The draft opened by asking whether `00_toc.md` should keep its annotated entries with a compact list added at the head.
+
+> Prepare a proper toc for the reader, compact as a toc, has only the information a proper toc can have.
+> Not this toc and that and also this…
+
+That is a rejection of the draft's option rather than a choice between the ones offered — fusing two audiences in one file is what produced the problem, and the proposal fused three.
+The author then set the test that decided everything after it:
+
+> Does the reader need the material? Do we need the material?
+> If the answers are no, we should simply discard those; there is no point maintaining a material that can be derived easily when needed and which is barely used.
+
+**What the facts said when the test was applied.**
+Where a TOC entry carried a claim it was a **verbatim copy** of the chapter's own claim sentence, and the rest summarised the chapter's mandatory boundary section.
+The entries' working purpose is stated in `CLAUDE.md` — for chapters that do not exist yet they are *"the plan a drafting session reads"* — and **all twenty-two chapters are at draft**, so that purpose is spent.
+Of 211 lines of entry prose, exactly one sentence was not derivable: [chapter 16](../16_tdd-and-mocks_u8eu.md)'s note that the meta-analyses are paywalled and unread, and that interface-per-class and the dependency-injection container are owned by no chapter.
+It was rescued to `docs/pending-tasks/index.md`; the rest was discarded.
+
+Two further sections failed the same test and were not part of the original question.
+*Build order* and *Forward references currently outstanding* both describe a book with unwritten chapters — naming [chapter 05](../05_time_mdbn.md) as "the most owed and the most immediate" and [chapter 01](../01_the-five-kinds_cjx4.md) as easier to write "once the rest exists."
+The author confirmed both go.
+
+**Decision.**
+`00_toc.md` holds a part heading and one line per chapter — number, title, link — and nothing else.
+Permanent project state moves to `docs/STATUS.md`; genuinely pending work moves to `docs/pending-tasks/index.md`, which is deleted when spent like every other file in that folder.
+The draft raised the lifetime clash — a status table never "lands" — and the author took the split rather than widening the folder's contract.
+
+**Why a bare contents page is the strong option, and it is not brevity.**
+Every field on it is derivable from the chapters: the number from the filename, the title from the H1, the order from both.
+So `tools/check-drift.py` verifies the whole of it, and a wrong entry became a failing check instead of something a reader has to notice.
+The annotated version could not be checked by anything, which is why [chapter 12](../12_missing-language-features_esqm.md)'s entry sat asserting *"Decorator is function composition"* after the chapter had measured that and found it false.
+**The class of error was deleted rather than policed**, and `CLAUDE.md`'s *Keeping the TOC honest* section was rewritten to say so, its local-drift half no longer describing anything that can happen.
+
+**Navigation, and the draft's recommendation that did not survive.**
+The `**Next:**` label goes; the handoff paragraph it introduced moves up to close the argument, before `## Sources`, on the grounds that the handoff is authorial prose and Sources is apparatus.
+A navigation row goes last, after the sources.
+
+The draft recommended putting chapter titles in that row, arguing they tell a reader where they are going.
+**The author chose numbers only** — `[← Ch. 19] · [Contents] · [Ch. 21 →]` — and the choice is the better one for a reason the draft had not connected: keeping the handoff paragraph means the chapter already says what comes next and why, so a title in the row restates it.
+The two decisions were taken separately and only fit together in retrospect.
+
+**Found on the way through, none of it asked about.**
+[Chapter 08](../08_change_rjf9.md)'s handoff pointed at Part III with **no link at all** — the book's one dead end — and now links [chapter 09](../09_what-a-pattern-is-for_3xzc.md).
+Nineteen handoffs opened with a lower-case *"[chapter NN]"*, correct after a bold label and wrong once they became the paragraph's first word.
+`CLAUDE.md` described *"the full 23-chapter TOC"*; the count check ran over `00_toc.md` and `README.md` only, so it never saw it, and now covers `CLAUDE.md` and `docs/ABOUT.md` too.
+The README promised a contents page "with a summary and a stated boundary for every chapter", which stopped being true in the same commit.
+
+**Consequence.**
+`tools/check-drift.py` reaches sixteen checks.
+The contents page is verified line by line against the chapters, and every chapter's navigation row is regenerated from the file order, so an inserted or renumbered chapter cannot leave a row pointing anywhere wrong.
+Both were confirmed by deliberately breaking them.

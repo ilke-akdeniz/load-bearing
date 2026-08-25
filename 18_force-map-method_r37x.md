@@ -235,6 +235,8 @@ The question that does the work: **which fact about our situation would have to 
 
 Ask it of your own decisions and it produces the force map as a by-product. Ask it of advice arriving from outside and it is the same question [chapter 14](14_principle-loses-scope_b86v.md) ends on, pointed at the present rather than at a source. If there is no answer — if no fact about the situation could make the choice wrong — then what you are holding is not a design decision, and finding out which of the five kinds it actually is takes one pass through [chapter 01](01_the-five-kinds_cjx4.md).
 
+[Chapter 19](19_six-profiles_dnkz.md) runs the method across six force profiles and finds that the forces each one pins invert a piece of standard advice — not weaken it, invert it, so that the thing to do is the opposite of what the advice says.
+
 ---
 
 ## Sources
@@ -244,4 +246,4 @@ Ask it of your own decisions and it produces the force map as a by-product. Ask 
 
 ---
 
-**Next:** [chapter 19](19_six-profiles_dnkz.md) runs the method across six force profiles and finds that the forces each one pins invert a piece of standard advice — not weaken it, invert it, so that the thing to do is the opposite of what the advice says.
+[← Ch. 17](17_abstraction-as-insurance_4jk6.md)  ·  [Contents](00_toc.md)  ·  [Ch. 19 →](19_six-profiles_dnkz.md)

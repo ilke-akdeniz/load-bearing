@@ -203,6 +203,8 @@ The question that does the work: **what does this name let me stop wondering abo
 
 If the answer is a description you no longer have to write, the name compresses. If it is a set of implementations you no longer have to check, the name constrains. If it is neither, you have been told the author had a word for it.
 
+[Chapter 10](10_patterns-that-cross_r8dw.md) takes the pattern vocabulary the two tests just filtered and shows that the answer changes once the thing on the other side stops being yours to edit — the same name that costs nothing between your own files can be a permanent obligation across a boundary you do not own.
+
 ---
 
-**Next:** [chapter 10](10_patterns-that-cross_r8dw.md) takes the pattern vocabulary the two tests just filtered and shows that the answer changes once the thing on the other side stops being yours to edit — the same name that costs nothing between your own files can be a permanent obligation across a boundary you do not own.
+[← Ch. 08](08_change_rjf9.md)  ·  [Contents](00_toc.md)  ·  [Ch. 10 →](10_patterns-that-cross_r8dw.md)

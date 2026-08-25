@@ -94,7 +94,8 @@ The decision log is there so that claim can be checked rather than taken on trus
 
 ## Contents
 
-The full table of contents, with a summary and a stated boundary for every chapter, is in **[`00_toc.md`](00_toc.md)**.
+All twenty-two chapters, in five parts, are listed in **[`00_toc.md`](00_toc.md)**.
+Each chapter states its own claim and where that claim stops, so the contents page lists them and leaves the arguing to them.
 
 How the book is put together — the chapter rubric, the language conventions, the running example, the license and how to cite it — is in **[`docs/ABOUT.md`](docs/ABOUT.md)**.
 

@@ -466,6 +466,8 @@ The same reading applies in reverse to advice you receive. A blog post recommend
 
 And *language* here does not have to mean a different one. Visitor changed status between two releases of Java, so the version you compile with is part of the answer — a design document naming Java and not naming the version has answered half the question.
 
+[Chapter 13](13_smuggled-verdicts_8y69.md) turns from names that describe a shape to names that arrive with a verdict already attached — vocabulary like *anemic domain model*, where accepting the word means accepting the conclusion, and the argument was over before anyone noticed it had started.
+
 ---
 
-**Next:** [chapter 13](13_smuggled-verdicts_8y69.md) turns from names that describe a shape to names that arrive with a verdict already attached — vocabulary like *anemic domain model*, where accepting the word means accepting the conclusion, and the argument was over before anyone noticed it had started.
+[← Ch. 11](11_patterns-that-survive-translation_us2k.md)  ·  [Contents](00_toc.md)  ·  [Ch. 13 →](13_smuggled-verdicts_8y69.md)

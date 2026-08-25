@@ -318,6 +318,8 @@ The person who makes that promise is rarely the person who breaks it. Adding a J
 
 So the useful reading of the answer is not *what walks it now* but *whether the graph sits anywhere such a tool can reach*. Where it does, the back-pointer has a cost that has not been paid yet, and paying it later means either a flattening layer at the boundary or a field excluded from equality with a comment explaining why.
 
+[Chapter 16](16_tdd-and-mocks_u8eu.md) turns to testing, where *test behaviour, not implementation* meets the mock that asserts about itself.
+
 ---
 
 ## Sources
@@ -329,4 +331,4 @@ So the useful reading of the answer is not *what walks it now* but *whether the 
 
 ---
 
-**Next:** [chapter 16](16_tdd-and-mocks_u8eu.md) turns to testing, where *test behaviour, not implementation* meets the mock that asserts about itself.
+[← Ch. 14](14_principle-loses-scope_b86v.md)  ·  [Contents](00_toc.md)  ·  [Ch. 16 →](16_tdd-and-mocks_u8eu.md)
