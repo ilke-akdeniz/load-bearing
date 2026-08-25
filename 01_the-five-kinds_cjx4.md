@@ -314,7 +314,7 @@ Until then, follow the local convention — not because it is a good proxy for c
 
 That last one is the most expensive and the easiest to fix. When an architecture argument will not converge, stop arguing about the Principle and ask what each side believes about the situation. The disagreement is usually one rung down from where it is being conducted.
 
-[Chapter 02](02_forces_f4m5.md) takes Forces seriously — the properties of a situation that decide which Laws bind and which Principles hold, and why naming them is most of the work.
+[Chapter 02](02_forces_f4m5.md) takes Forces seriously — the properties of a situation that decide which Laws bind and which Principles hold, and why naming one is not the same act as evaluating it.
 
 ---
 

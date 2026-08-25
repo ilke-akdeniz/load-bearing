@@ -306,7 +306,7 @@ The question that does the work: **can I change the other side?**
 
 If yes, you are choosing between options, and following the pattern is rarely the cheapest option. If no, you are not choosing — you are pricing a constraint, and the pattern is what the price looks like.
 
-[Chapter 11](11_patterns-that-survive-translation_us2k.md) works through the patterns that survive translation between languages — the ones describing a real shape rather than a workaround, grouped by what they are about, each with the Force that makes it worth its cost.
+[Chapter 11](11_patterns-that-survive-translation_us2k.md) works through the patterns that survive translation between languages — the ones describing a real shape rather than a workaround, grouped by the Force each one answers rather than by shape, so you can find a pattern without already knowing its name.
 
 ---
 

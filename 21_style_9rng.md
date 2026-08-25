@@ -192,7 +192,7 @@ The question that does the work: **do these two versions produce the same progra
 
 If they do, nothing further can be learned by discussing it, and the only useful act is for somebody to choose. If they do not, this was never a Style question, and the time spent settling it will produce something.
 
-[Chapter 22](22_never-written-down_at4r.md) closes the book by putting the five kinds to work on the thing you actually meet — a blog post, a review comment, a colleague's strong opinion, and code a machine wrote that states no decisions at all.
+[Chapter 22](22_never-written-down_at4r.md) closes the book on the case the rest of it assumed away — where there is no claim to place at all, because the decision was taken and never written down, and the author was a machine that remembers nothing between sessions.
 
 ---
 

@@ -4325,3 +4325,35 @@ The README promised a contents page "with a summary and a stated boundary for ev
 `tools/check-drift.py` reaches sixteen checks.
 The contents page is verified line by line against the chapters, and every chapter's navigation row is regenerated from the file order, so an inserted or renumbered chapter cannot leave a row pointing anywhere wrong.
 Both were confirmed by deliberately breaking them.
+
+## 109. Four of the twenty-one handoff sentences had drifted
+
+**Context.**
+Decision 108 kept the handoff paragraphs, against the option of deleting them, on the grounds that they paraphrase a neighbour rather than copy it and so do not rot the way the contents-page entries did.
+The author then asked for them to be checked, having spotted one.
+There were four.
+
+**What had drifted.**
+[Chapter 01](../01_the-five-kinds_cjx4.md) promised that [chapter 02](../02_forces_f4m5.md) shows "why naming them is most of the work."
+That is a claim this log records as **rejected** — *"Evaluating the Forces is most of the work of choosing well"* was ruled unquantifiable and not what the chapter demonstrates, and *the groundwork* replaced it.
+Worse, it credits *naming*, which [chapter 02](../02_forces_f4m5.md) gives as the failure mode: *"Naming a Force, without evaluating it, licenses machinery."*
+The handoff was selling the chapter on the argument the chapter exists to refuse.
+
+[Chapter 10](../10_patterns-that-cross_r8dw.md) said [chapter 11](../11_patterns-that-survive-translation_us2k.md) groups patterns "by what they are about."
+That is the organization [chapter 11](../11_patterns-that-survive-translation_us2k.md) rejects: *"Catalogues are organized by shape, so they let you look up what you already know the name of. Grouping by Force lets you find the name from the problem."*
+
+[Chapter 12](../12_missing-language-features_esqm.md) ended on "the argument was over before anyone noticed it had started," dropping the qualifier that is half of [chapter 13](../13_smuggled-verdicts_8y69.md)'s claim — how much you concede depends on whether the word also names something you can check.
+
+[Chapter 21](../21_style_9rng.md) described [chapter 22](../22_never-written-down_at4r.md) as putting the five kinds to work on "a blog post, a review comment, a colleague's strong opinion."
+[Chapter 22](../22_never-written-down_at4r.md) says those are what *every chapter before it* worked on, and that it takes the case where **there is no assertion at all**.
+This one is a survivor of the cut synthesis chapter, describing a chapter that no longer exists.
+
+**Why they drifted, which decision 108 got wrong.**
+The argument for keeping them was that a paraphrase does not rot like a copy.
+That is false in the direction that matters: a copy drifts *visibly*, because the two strings stop matching and a check can say so, while a paraphrase drifts **silently** and stays fluent.
+Three of these four read perfectly well and were wrong about the chapter next door.
+
+**Consequence.**
+No mechanical check is possible here — the failure is semantic and the handoffs are prose by design.
+What is possible is a rule about when to read them: **a handoff describes its neighbour, so changing a chapter's claim means checking the handoff that points at it.**
+Two of these four are traceable to exactly that — [chapter 02](../02_forces_f4m5.md)'s claim was rewritten and [chapter 22](../22_never-written-down_at4r.md) replaced a different chapter, and in both cases the sentence pointing at them was left alone.
