@@ -145,7 +145,7 @@ And disagreeing with them later requires that they were written down. The interv
 
 That closes the circuit, and it is worth seeing as one thing rather than three. The interview surfaces the decision, the log records what settled it, and a standing instructions file promotes the answers that keep recurring into constraints so the same question stops being asked. Grilling without that second step is a conversation rather than a record, and a conversation is exactly what does not survive the session.
 
-**What that promotion is worth depends on what the entry contains.** FlowCore's rule about identifier names ends with a pointer rather than a restatement — *"Reasoning and worked examples: `docs/decisions.md`, decision 18"* — and the same file says the log is authoritative where the two disagree. So an unfamiliar case is decided by going back to the reasoning instead of guessing at the rule's edge.
+**What that promotion is worth depends on what the entry contains.** [-- what promotion?] FlowCore's rule about identifier names ends with a pointer rather than a restatement — *"Reasoning and worked examples: `docs/decisions.md`, decision 18"* — and the same file says the log is authoritative where the two disagree. So an unfamiliar case is decided by going back to the reasoning instead of guessing at the rule's edge. [-- needs more clarification, is the rule an entry on CLAUDE.md? File => Claude.md ? log => decision.md? pointer is confusing => reference to a decision log ] 
 
 That is what a record buys beyond recovery, and it generalises past this one project. **An entry is reusable exactly to the extent that it records why rather than what.** *Full-word identifiers everywhere* transfers nothing to a codebase with different readers; *abbreviations must be decoded rather than read, and the decoding does not get cheaper with familiarity* can be checked against those readers and kept or dropped on the evidence. A conclusion does not travel. A conclusion with its condition attached does, and arrives somewhere it can be argued with — which is chapter 15's mechanism running forwards for once, instead of a scope being lost in transmission.
 
@@ -155,9 +155,9 @@ The upstream text has since changed in a way worth one line: it asks a round of 
 
 Which means the technique surfaces contested choices and conceals settled ones, and settled-in-the-corpus is the class most likely to be wrong outside the ecosystem it came from. This follows from chapter 02's mechanism rather than from any measurement, and it should be read as reasoning rather than as a finding.
 
-**And a second limit, which is easier to walk into: the interview only reaches decisions at the granularity you asked at.** Ask for a whole application and you get an interview about a whole application. The questions are real, the answers are yours, the record is genuine — and the decisions that only exist inside the fourth piece of it were never on the table, because at the scale of the request they had not been separated out yet.
+**And a second limit, which is easier to walk into: the interview only reaches decisions at the granularity you asked at.** Ask for a whole application and you get an interview about a whole application. The questions are real, the answers are yours, the record is genuine. However, the decisions that could only surface in an interview focused on "failure handling" were not considered, because at the scale of the request they had not been separated out yet.
 
-FlowCore was built in slices for this reason, and the scope of each one is written into its standing instructions rather than left to intention:
+FlowCore was built in slices for this reason, and the scope of each one is written into its standing instructions [-- clarify, claude.md or agenctic instruction file, you find the appropriate term] rather than left to intention:
 
 ```text
 In scope: configure workflow, start workflow, get current step,
@@ -169,9 +169,9 @@ Do not build ahead into these.
 
 The decision log carries the same boundary throughout — *"full definition-side CRUD this slice"*, *"not precedent for building other concurrency machinery this slice"* — so a decision is scoped to the piece it was taken for, and the next piece gets its own interview rather than inheriting an answer.
 
-**Nobody would skip this on a project measured in months.** It gets skipped here because the whole thing arrives in an afternoon, and an afternoon does not feel like it needs a plan. The speed is real and the compression it invites is the cost: one interview instead of four means three sets of trade-offs that were never surfaced, and by this chapter's account never surfaced is the same as never written down.
+**Slices are elusive with AI assisted development** The whole implementation can arrive in an afternoon, and an afternoon does not feel like it needs a plan. The discipline to clarify the phases before any implementation is needed to prevent the loosy compression of decisions. [-- removed sentences that were a repetition of previous section in my opinion]
 
-Not every piece of work needs the phases. A proof of concept, a script you will delete, an obvious fix with one option — the interview is overhead and the conventional answer is fine (Ch. 19). The risk is that the category is decided at the start and not revisited: the one-off that turns out to be the product, and the obvious fix that turns out to be three faults interacting.
+**Not every piece of work needs the phases.** A proof of concept, a script you will delete, an obvious fix with one option — the interview is overhead and the conventional answer is fine (Ch. 19). The risk is that the category is decided at the start and not revisited: the one-off that turns out to be the product, and the obvious fix that turns out to be three faults interacting.
 
 ---
 
