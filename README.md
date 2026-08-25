@@ -1,6 +1,6 @@
 # Load-Bearing
 
-**Which Software Principles Hold, and Where They Stop**
+*Which Software Principles Hold, and Where They Stop*
 
 **Every claim you meet about software is one of five kinds, and the kind determines how much authority it has** — not the confidence of the person saying it, not their track record, not how widely it is repeated.
 The same wiring code is unremarkable in Go and gets sent back in review in C#, and neither version is more correct.
