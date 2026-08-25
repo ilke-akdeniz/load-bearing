@@ -4030,3 +4030,50 @@ The rewrite is the draft's; the diagnosis of *what* was wrong is the author's, a
 Their first pass changed *this line* to *this line of reasoning*, which moves the referent from the line of code to the model's reasoning and is not the chapter's subject; the ambiguity they spotted was real, so it became *this line of code*.
 A bold span covered a subject clause but stopped before its predicate, so scanning it gave a noun phrase rather than a claim; the emphasis moved to the assertion it was pointing at.
 And the closing paragraph opened *"Finally, worth separating out another thing does survive"*, which does not parse.
+
+## 101. Chapter 23 reopened: granularity as grilling's second limit, and what a record buys beyond recovery
+
+**Context.**
+The author brought a stream of new material after 23 reached draft, and asked directly whether it was worth using or should be abandoned. Three ideas survived the assessment, one was reframed because it contradicted the book, and two were dropped.
+
+**Taken: granularity is grilling's second limit.**
+The chapter had one limit stated — the interview surfaces only what the corpus treats as a decision. The author's is different and easier to walk into: **it surfaces only decisions at the granularity you asked at.**
+
+> You can ask AI to generate the app in one go… it will give you something that looks good and works. But even if you used grilling, you compacted the process and as a result you skipped many granular decisions and trade-offs that could only be surfaced with the phases.
+
+And the reason it is missable, which is the part worth having: *"This is obvious with traditional dev, but easy to miss with AI because of the illusion of speed."* Nobody skips phases on a project measured in months; an afternoon does not feel like it needs a plan.
+
+**This is evidenced rather than proposed.** FlowCore was built in slices — the decision log says *"this slice"* twenty-seven times, with real scoping such as *"full definition-side CRUD this slice"* — and the boundary is written into its standing instructions rather than left to intention:
+
+```text
+In scope: configure workflow, start workflow, get current step, complete step.
+Out of scope: AI review steps, synchronization, failure handling, scale work.
+Do not build ahead into these.
+```
+
+Checked firsthand in `~/s/flowcore/CLAUDE.md` rather than taken from `ai-material.md`'s quotation of it.
+
+**Reframed, because as stated it contradicted the book.**
+The author proposed reusing decisions as instructions for other projects. A decision's reason is a fact about your situation, so carrying the conclusion across is precisely how a folk remedy is made — a term this chapter defines.
+
+The version that survives is better and is the book's own thesis pointed at its own artifact: **an entry is reusable exactly to the extent that it records why rather than what.** *Full-word identifiers everywhere* transfers nothing to a codebase with different readers; *abbreviations must be decoded rather than read, and the decoding does not get cheaper with familiarity* can be checked against those readers and kept or dropped on the evidence. A conclusion does not travel; a conclusion with its condition attached does.
+
+**Replay: evidenced, but not with the evidence the author offered.**
+Asked whether they had actually replayed a decision, the author pointed at this session — decision 26, recorded about chapter 08, invoked against a paragraph in chapter 23.
+
+That is a genuine instance, and a better one than a clean replay because it was **partial**: one of decision 26's three faults transferred, and the new context produced a finding decision 26 never contained. Which isolates the mechanism — decision 26 travelled because it recorded *written for someone who already knew the material* rather than *chapter 08 rewritten*.
+
+**The anecdote cannot be used, on two existing constraints.** Decision 47 takes a general rule from the author's own instruction: *"the drafting history belongs in the decision log, not in the chapter."* And `ai-material.md`: *"readers will discount a book that proves its method works by citing itself."*
+
+So the mechanism is stated and FlowCore supplies the evidence — its identifier rule ends in a pointer, *"Reasoning and worked examples: `docs/decisions.md`, decision 18"*, and the same file makes the log authoritative where the two disagree, so an unclear case is decided by returning to the reasoning rather than guessing at the rule's edge.
+
+**Dropped.**
+*Meta-source code* as a term, on the rule against a metaphor promoted to vocabulary. And this session as the worked example, per decision 47.
+
+**A placement error the author caught.**
+The draft proposed putting replay in chapter 19, reasoning that 19 owns the decision log. That is ownership by association rather than an argument: 19's claim is about the order of checking, and its interest in the log is that it records forced against chosen. Reuse serves no part of it.
+
+The argument that settles it: chapter 19 lost sixty-one lines of AI material in decision 96, on the grounds that a section about these tools dates the method chapter. Handing a log back to an agent is an AI-shaped practice and would date the same way, so putting replay there would re-import the problem decision 96 removed.
+
+**Consequence.**
+Chapter 23 runs 288 lines, up from 264. Two ledger rows added and one renamed, since grilling now has a first and a second limit rather than *the* limit.

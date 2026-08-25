@@ -336,7 +336,9 @@ Two papers are cited on opposite sides of whether stated reasoning reflects comp
 
 **Grilling**, moved here from chapter 19, as the only remedy there is — not an interview that extracts reasons, since there are none stored to extract, but a procedure that forces the decision into the open where a person makes it.
 It leaves two artifacts and the chapter counts both: the log, and a person who now holds the trade-off, which is the claim's own *while someone still remembers it*.
-Its limit is where the **folk remedy** is defined, discharging chapter 15's forward reference: advice applied far outside the context it was made for, which stays misapplied because nobody rebuilds its scope — *depend on abstractions, not concretions* is the worked case, and a corpus default is the purest instance, since there nobody knows a scope existed.
+It has two limits, and the second is easier to walk into: the interview only reaches decisions at the granularity of the request, so asking for a whole application never separates out the trade-offs inside its fourth piece — which is why FlowCore was built in slices with *do not build ahead into these* written into its standing instructions, and why the speed is what invites the compression.
+The chapter also takes what a record buys beyond recovery: an entry is reusable exactly to the extent that it records why rather than what, so a conclusion with its condition attached travels where a bare conclusion cannot.
+Its first limit is where the **folk remedy** is defined, discharging chapter 15's forward reference: advice applied far outside the context it was made for, which stays misapplied because nobody rebuilds its scope — *depend on abstractions, not concretions* is the worked case, and a corpus default is the purest instance, since there nobody knows a scope existed.
 
 Then what one lost decision becomes at volume: each guess adding a constraint nobody recorded either, until the requests can only be negative, and the honest options narrow to guessing or starting again.
 Which happens without these tools too, so what changed is the rate rather than the failure.
