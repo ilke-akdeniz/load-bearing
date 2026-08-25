@@ -4004,3 +4004,29 @@ Their expansion material became the chapter's last three paragraphs, close to as
 The draft added one connective clause, because the expansion assumes colleagues exist to ask and the chapter's own case is worse: where the code came from an agent there is nobody in that position at all.
 
 **Direct edits accepted without change:** *recovery window* for *window* in the claim, naming the agentic coding tool as what the negative requests are addressed to, and *None of this is new* for *None of which is new*. The author also deleted a sentence the draft had itself flagged as possible self-aware decoration — *"which is a sentence worth resisting the urge to soften"* — and was right to.
+
+## 100. The faithfulness passage was undermining the remedy that follows it
+
+**Context.**
+The author proposed applying decision 26's diagnosis to chapter 23's paragraph on chain-of-thought faithfulness, and reported an itch they could not place:
+
+> This reads like we value extracting those sentences from the coding agent "live", while it branches but then we say we have no idea if those sentences are of value, that's still debated. I know that's not the point of the passage but no matter how I try to read it it sounds like that.
+
+**Two faults, and the second is the one they were feeling.**
+
+**Register, exactly as decision 26 and the *source's register* rule describe it.** The paragraph carried `chain-of-thought` unglossed and used once; `unfaithfulness` and `incompleteness` used once each, which the rule calls *"a definition wearing a name"*; a fifteen-word quotation — *"the lossy compression needed to turn distributed transformer computation into a linear natural language narrative"* — which is chapter 17's failure verbatim; and two named researchers with two quotes, for an argument the chapter then says it does not need. The rule's own symptom line fits: *"a paragraph a reader has to decode rather than follow, in a chapter that was going fine until the citation arrived."*
+
+**Placement, which the author felt and the draft had not seen.** The passage sits immediately before the grilling section. A reader meets *whether a model's self-explanations mean anything is contested*, then meets a remedy built on interviewing a model, with nothing between them saying those are different questions. So the caveat reads as discounting the thing the chapter is about to recommend.
+
+They **are** different questions, and decision 96 records the distinction — the record grilling leaves is trustworthy *"for that reason rather than because anything introspected"*. It appeared only inside the grilling section, eighty lines later, which is after the wrong impression has formed.
+
+**Decision.**
+The passage is rewritten in the book's voice, with the paper titles in `## Sources` carrying the searchable terms so the body does not have to. A paragraph is added drawing the distinction where the reader needs it: a model accounting for its own output afterwards is what the research contests; a decision put to a person before any code is written, and settled by facts that person supplied, is not.
+
+**Authorship.**
+The rewrite is the draft's; the diagnosis of *what* was wrong is the author's, and the final wording is theirs — they took the draft's version and revised it again, adding *without deliberate effort* to the behaviour-survives paragraph, which sharpens the contrast, since decisions need effort to preserve and behaviour does not.
+
+**Three corrections to that revision, made rather than asked about.**
+Their first pass changed *this line* to *this line of reasoning*, which moves the referent from the line of code to the model's reasoning and is not the chapter's subject; the ambiguity they spotted was real, so it became *this line of code*.
+A bold span covered a subject clause but stopped before its predicate, so scanning it gave a noun phrase rather than a claim; the emphasis moved to the assertion it was pointing at.
+And the closing paragraph opened *"Finally, worth separating out another thing does survive"*, which does not parse.
