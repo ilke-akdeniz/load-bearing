@@ -4102,3 +4102,39 @@ It also reached for **compression**, which the chapter had already spent eighty 
 
 **A cut of the draft's that the author was right to make.**
 They removed two sentences ending *"never surfaced is the same as never written down"*, noting they repeated the earlier section. They did — the claim had already been made twice by that point, and the paragraph was restating it a third time to land a rhythm rather than a fact.
+
+## 103. There is no chapter 01: the README is the introduction, and 02–23 become 01–22
+
+**Date.** 2026-08-25
+
+**Context.**
+With twenty-two chapters at draft, only chapter 01 — *Why good advice goes wrong* — remained unwritten. Three attempts to give it a claim each landed on ground another chapter already owned.
+
+- The TOC's plan, *"advice arrives without its conditions attached"*, is chapter 15's mechanism. That chapter opens by reconciling the two words: *"Scope is the same boundary seen from the other side."*
+- Its planned demonstration, *"two teams receive the same advice and get opposite outcomes"*, is chapter 19's section `The same advice, four verdicts`.
+- The draft's own proposal — *advice that is true can still be wrong for you, and nothing in the advice tells you which* — turned out to be the README's premise, which is `CLAUDE.md`'s thesis almost word for word.
+
+**The test this book already applies.**
+When a chapter cannot be given a claim that is not already somebody else's, it has no job. Decision 24 cut the AI chapter on that basis — *"there is no single mechanism, so there is no chapter"* — and decision 83 cut the database chapter outright. This is the third application, not a new rule.
+
+**The author's proposal, which is what the evidence pointed at anyway.**
+
+> README.md is actually what we called "first chapter" in this session… That's both the elevator pitch and converter. If the book does ever get published README.md could be foreword or introduction. What do we write on the first chapter then? Nothing, first chapter already exists, it's the current chapter 02.
+
+**Decision.**
+No chapter 01 is written. The README becomes the book's introduction, and chapters 02 through 23 renumber to 01 through 22. The book is twenty-two chapters.
+
+**Why chapter 02 works as the opener with no repair.**
+It opens cold — nothing in it refers to a predecessor. Its first heading is `## The book's model` rather than `## The claim`, because decision 43 established that it states a premise rather than a claim, and it says so itself: *"Both are assumed by the rest of the book rather than proved by this one."* That is an oddity in a second chapter and exactly right in a first.
+
+**What was checked before the sweep.**
+Prior renumberings in this repo corrupted unrelated numbers, so the hazards were enumerated first: *"16 of 23 patterns"* in chapter 13, the TOC and the ledger is the Gang of Four count; *"a team of 20"* is a team size; and *Clean Architecture*'s chapter 30 is somebody else's book. None matches a `chapter NN` pattern, and none was touched.
+
+**The decision log is renumbered, reversing the draft's first position.**
+The draft proposed leaving `docs/DECISIONS.md` alone, carrying over the reasoning from decision 93, where `docs/pending/` was left in place because decision 78 is *titled* for that path — there, the path was part of what was decided.
+
+The author asked why, and the analogy does not hold. **A chapter number in the log is an address, not part of what was decided.** Leaving it would be worse than stale: decision 26 is titled *"Chapter 08 rewritten"*, and after the shift a reader looking up chapter 08 would land on a different chapter that the entry is not about — a wrong pointer rather than a dead one. The README says the log exists *"so that claim can be checked rather than taken on trust"*, and four hundred silently-off-by-one pointers is a tax on precisely that.
+
+So the log's own prose and entry titles are renumbered. **The eight quoted lines containing a chapter number are left exactly as spoken**, with a bracketed `[now NN]` gloss — the conventional signal for an editorial insertion — so nobody's words are altered and no reader is misdirected. Six of the eight are the author's.
+
+**Entries above this one were written before the shift.** Their prose has been renumbered to match the current book; their quotations have not.
