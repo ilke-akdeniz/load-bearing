@@ -173,7 +173,7 @@ The top four are not proverbs. Nobody wrote the single responsibility principle 
 
 The bottom two are not proverbs either, and they pass. *Money* and *cgo* name situations. There is nowhere to resolve them outward to.
 
-**So the property belongs to the wording, not to the genre.** Being built for memorability makes it more likely that the situation gets left out, because a situation is the longest part and the first to go. It is not what causes the omission. Chapters 15, 17 and 18 are three principles from the second column, each traced to what its wide reading produced.
+**So the property belongs to the wording, not to the genre.** Being built for memorability makes it more likely that the situation gets left out, because a situation is the longest part and the first to go. It is not what causes the omission. Chapters 14, 16 and 17 are three principles from the second column, each traced to what its wide reading produced.
 
 **On what these sources are worth**, because they are not equal. Pike's talk is primary. The Go project's wiki page is an official artifact and the strongest evidence that the misreading was real enough to be worth correcting — though note that it attributes the over-use to enthusiasm rather than to the proverb, and this chapter does not claim the proverb caused it. The Reddit thread is community anecdote: one instance, dated, and useful only because the over-application is self-reported rather than attributed by somebody else. It shows the confusion exists and what shape it takes. It establishes nothing about how often, and nothing here claims otherwise.
 
@@ -241,7 +241,7 @@ So a proverb about the board can accumulate a stable scope, while a proverb abou
 
 This chapter ends in repair, which is why it does not claim that a principle stripped of its scope stays that way. The scope was rebuilt three times here: officially, in a wiki page with a table; informally, by strangers answering a question; and by the source himself, in a talk given to supply a distinction he had left out.
 
-Where that does not happen — where the wide reading hardens and nobody writes the page — you get what chapter 22 calls a folk remedy. Chapters 15, 17 and 18 are three cases that travelled further than this one did.
+Where that does not happen — where the wide reading hardens and nobody writes the page — you get what chapter 22 calls a folk remedy. Chapters 14, 16 and 17 are three cases that travelled further than this one did.
 
 ---
 

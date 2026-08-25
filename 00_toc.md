@@ -373,7 +373,7 @@ Which happens without these tools too, so what changed is the rate rather than t
 
 ### AI material
 
-Chapters 01, 03, 15, 17, 20, 22 and 24 each owe a piece of this, noted in their contents lines above.
+Chapters 01, 02, 14 and 16 each still owe a piece of this, noted in their contents lines above; 21 and 22 have taken theirs.
 The worked argument — findings, FlowCore evidence, the grilling text with its provenance, and the traps — is in **`docs/pending-tasks/ai-material.md`**.
 Read that rather than re-deriving it, so the seven mentions agree with each other.
 
@@ -383,13 +383,13 @@ Chapters already at **draft** that are owed an addition. Listed here because a d
 
 | Chapter | Owed | Do it when |
 |---|---|---|
-| 02 | corpus monoculture as a new instance of *monoculture makes Idioms look like physics* | chapter 22 exists, so the mention can point at the synthesis |
-| 03 | an AI coding agent cannot see your Forces; the team-size Force at its limit — no continuity, unbounded volume | as above |
-| 02 | Pike on arguments about language features being opinion argued with certainty — a witness for *tone does not vary with authority*, in `docs/pending-tasks/pike-retrospective.md` | next time 02 is open |
-| 09 | Pike pricing Go's compatibility promise: it costs, and it blocks feature-itis — the constraint adopted deliberately rather than suffered | next time 09 is open |
-| 15 | that generated design never had a scope set, so 15's own test has nothing to check — ledger row *The scope was never set* cites `docs/pending-tasks/ai-material.md`, where **the argument is not yet worked** | next time 15 is open |
-| 17 | generated tests that never reach the condition they name, with FlowCore decision 37 — mutation is the only check that catches them, which 17 already owns | next time 17 is open |
-| 13 | possibly the async/await aside and *coloured functions*; check the fit before using it, it may belong to 20 or nowhere | next time 13 is open |
+| 01 | corpus monoculture as a new instance of *monoculture makes Idioms look like physics* | chapter 22 exists, so the mention can point at the synthesis |
+| 02 | an AI coding agent cannot see your Forces; the team-size Force at its limit — no continuity, unbounded volume | as above |
+| 01 | Pike on arguments about language features being opinion argued with certainty — a witness for *tone does not vary with authority*, in `docs/pending-tasks/pike-retrospective.md` | next time 01 is open |
+| 08 | Pike pricing Go's compatibility promise: it costs, and it blocks feature-itis — the constraint adopted deliberately rather than suffered | next time 08 is open |
+| 14 | that generated design never had a scope set, so 14's own test has nothing to check — ledger row *The scope was never set* cites `docs/pending-tasks/ai-material.md`, where **the argument is not yet worked** | next time 14 is open |
+| 16 | generated tests that never reach the condition they name, with FlowCore decision 37 — mutation is the only check that catches them, which 16 already owns | next time 16 is open |
+| 12 | possibly the async/await aside and *coloured functions*; check the fit before using it, it may belong to 19 or nowhere | next time 12 is open |
 
 The worked argument is in `docs/pending-tasks/ai-material.md`; decision 24 records what was decided and why.
 

@@ -131,7 +131,7 @@ Provenance stays in the prose where the claim is made, so the section adds no fo
 
 ### Part IV takes a different shape
 
-Chapters 15, 17 and 18 are case studies. Chapter 14 makes the claim; they are three instances of it, and they do not each get a claim of their own.
+Chapters 14, 16 and 17 are case studies. Chapter 14 makes the claim; they are three instances of it, and they do not each get a claim of their own.
 
 Forcing the rubric on them produced manufactured claim sentences — each one two assertions welded with *and* or *neither/nor*, half reporting what a source said and half stating the chapter's technical finding. The author rejected all four. **A chapter whose job is to be evidence for another chapter's claim does not need a claim; it needs the case laid out.**
 
@@ -495,7 +495,7 @@ Three times while finishing chapter 14, a single word caught in review was doing
 
 So when a word is found doing the wrong job, **grep every use of it before calling it fixed** — and not only in the chapter. `docs/LEDGER.md` and `00_toc.md` carry the same vocabulary, go stale silently, and were wrong in each of these cases.
 
-The cross-chapter version is the same rule at larger scale. *Scope* had acquired three incompatible meanings across chapters 12, 14, and 15, two of them bold definitions in adjacent chapters, before anyone counted. One survey found it; a lot of careful reading had not. `tools/check-drift.py` catches structural drift and cannot catch this, so the survey has to be run by hand when a term is in question.
+The cross-chapter version is the same rule at larger scale. *Scope* had acquired three incompatible meanings across chapters 11, 13, and 14, two of them bold definitions in adjacent chapters, before anyone counted. One survey found it; a lot of careful reading had not. `tools/check-drift.py` catches structural drift and cannot catch this, so the survey has to be run by hand when a term is in question.
 
 ### The final sweep
 
@@ -534,7 +534,7 @@ Never amend or rebase the author's commits — the point of the history is that 
 **Rename a file in its own commit, and edit it in the next one.**
 Git matches a renamed file to its original by similarity, and gives up below fifty percent.
 Chapter 19's rename shipped alongside its edits and came out at forty-three, so `git show` reported a deleted file and a new one and the review diff was unreadable at exactly the moment somebody wanted to read it.
-This has come up three times — chapters 10, 16 and 20 — and the fix costs one extra commit.
+This has come up three times — chapters 09, 15 and 19 — and the fix costs one extra commit.
 
 Keep the message short: a subject line, and a body only when the change needs a reason rather than a description.
 Where a change reverses something, or was made against a request, say so in the body.

@@ -411,7 +411,7 @@ cache.Set(key, value, ttl)
 - **Backpressure** — when the consumer cannot keep up, make the producer wait rather than growing a queue. The alternative is chapter 07's queue curve, and it ends in memory exhaustion.
 - **CQRS** — separate the write model from the read model, so each can be shaped for its own access pattern. Its real cost is that they are now two models that can disagree.
 - **Materialised view** — precompute the answer, and accept that it lags.
-- **Data-oriented layout** — chapters 04 and 08 own it; the 7× that comes from where the bytes sit rather than what the algorithm does.
+- **Data-oriented layout** — chapters 03 and 07 own it; the 7× that comes from where the bytes sit rather than what the algorithm does.
 
 ### Force: Control of the callers
 

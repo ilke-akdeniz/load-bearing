@@ -101,7 +101,7 @@ Useful as context if the chapter ever wants a case where dependency cost drove t
 ## The decision on chapters already at draft
 
 **Record now, apply when the chapter is next open.**
-Chapters 01, 05, 09, and 13 are at **draft**, and the additions above wait.
+Chapters 01, 04, 08, and 12 are at **draft**, and the additions above wait.
 
 Three reasons.
 

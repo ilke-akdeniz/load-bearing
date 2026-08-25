@@ -216,11 +216,11 @@ This was an author correction to the draft, recorded in decision 24: the draft h
 |---|---|---|
 | Corpus monoculture | 01 | a paragraph, as a new instance of an owned mechanism |
 | Cannot see your Forces; team-size Force at its limit | 02 | a passage in the relevant Force sections |
-| The conditions were never derived | 14 | a paragraph applying 15's own test — **the argument is not worked above**; ledger row *The scope was never set* cites this file for it and there is nothing here yet |
+| The conditions were never derived | 14 | a paragraph applying 14's own test — **the argument is not worked above**; ledger row *The scope was never set* cites this file for it and there is nothing here yet |
 | Generated tests that never reach their condition | 16 | a passage, with FlowCore decision 37 |
 | Grilling, in full | 22 | **done** — drafted into 19, moved to 23 by decision 96; the frozen text, the provenance, the two versions' disagreement and the limit |
-| An Idiom whose precondition failed | 21 | **done** — landed in 22 rather than 21, because 02's mechanical test sorts short names as Style (decision 87) |
+| An Idiom whose precondition failed | 21 | **done** — landed in 22 rather than 21, because 01's mechanical test sorts short names as Style (decision 87) |
 | Silent defaults; receiving generated code | 22 | **done** — the chapter was created for it (decision 96), and it is no longer a *receiving case*, since 23 stopped being the receiving chapter |
 
-Chapters 01, 03, 15 and 17 are all at **draft**; see *Pending revisits* in `00_toc.md`.
+Chapters 01, 02, 14 and 16 are all at **draft**; see *Pending revisits* in `00_toc.md`.
 This file is deleted once the four outstanding pieces land, per decision 92.
