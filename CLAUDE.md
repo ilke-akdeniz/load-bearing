@@ -501,6 +501,8 @@ The cross-chapter version is the same rule at larger scale. *Scope* had acquired
 Rules and material accumulated while the book was written, so a chapter drafted early was held to fewer rules than one drafted late.
 The correction is a single pass over the whole book, run once, after the last chapter reaches **draft**.
 
+**`docs/ABOUT.md` is reviewed before slice 2, not after.** It states the chapter rubric, and slice 2 is the pass that applies that rubric to every chapter — reviewing it afterwards means measuring the book against a document nobody has checked.
+
 **It is the author's to start.**
 When every chapter is at draft, ask for confirmation rather than beginning, and do not run it early because a chapter looks finished.
 
