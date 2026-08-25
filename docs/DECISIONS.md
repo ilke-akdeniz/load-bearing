@@ -4190,3 +4190,39 @@ The author noticed that with the headings gone, nothing marks the arrow links as
 The side effect is the useful part: the numbers read `01, 05, 06, 09, 02`, so a reader infers *start here, or jump in* from the sequence. **That recovers exactly what removing the headings gave up**, without a label.
 
 **Also fixed:** a stray `**` after *"how widely it is repeated"*, left over from the edit, which would have rendered as literal asterisks.
+
+## 106. The renumbering sweep broke things nothing could see, so the checker learns to see them
+
+**Context.**
+The author asked for chapter navigation and, on the way, noticed `00_toc.md` referred to *"chapters 01, 03, 15, 17, 20, 22 and 24"* — a chapter 24 that has never existed in this numbering. That opened an audit of the renumbering in decision 103, which turned out to be broken in three ways.
+
+**What the sweep missed.**
+The ledger's `cite` column entirely — 147 entries, still holding a `cite 23`. The *Pending revisits* table's chapter column and its *"next time NN is open"* cells. Around thirty bare references of the shape `cite 02; 06 owns the races`. Nine chapter lists, where only the first number moved: `Chapters 02, 03, 15 and 17` became `Chapters 01, 03, 15 and 17`. And five possessives such as *"15's own test"*.
+
+**What it corrupted.**
+The ledger example `split(8.03, 3)` became `split(8.02, 3)` while its owner column stayed at `03`. The sweep replaced the first occurrence of the target string within each match, and in that row the first `03` is inside the float. It renamed a real example from chapter 02 and left untouched the thing it was meant to change.
+
+**And the repair introduced a fault of its own.**
+The fix for bare references ran over `00_toc.md`, which already held correctly-shifted `chapter NN owns` phrases, so four of them moved twice — the entity-component inversion ended up credited to *Three Kinds of True*. Caught by a semantic spot-check that printed each citation beside the title of the chapter it named, not by any pattern.
+
+**Two faults that predate the renumbering, fixed while there.**
+Three ledger rows still cited the force-map chapter for grilling after decision 96 moved grilling out of it — their owner was changed and their citation was not. And the `and 24` line was stale from an earlier renumbering.
+
+**The author's diagnosis, and a check of the draft's instinct against it.**
+
+> Every chapter gets a unique id in their filename… Then you do all your matchings with ids never by chapter number.
+
+The draft's first reaction was that the slug already is a stable identifier and no new token is needed. **The history says otherwise**: five slugs have changed — `the-five-levels`, `the-scale-test`, `principle-to-movement`, `oop-vs-direction`, `six-domains` — which is more churn than the numbers have had. An opaque identifier is better founded than the draft's alternative.
+
+**Decision: validation first, identifiers after.**
+Converting roughly 840 references without a checker is how this happened. `tools/check-drift.py` gains four checks:
+
+- **Every chapter reference in every live document resolves.** Check 5 was case-sensitive on `Ch`/`Chapter` and never looked at the ledger, which is why `cite 23` survived. The new one covers lowercase prose, `cite NN`, comma-and-`and` lists, bare `NN owns`, and `next time NN is open`, across the chapters, the TOC, the README, `CLAUDE.md`, `AGENTS.md`, the ledger, `docs/ABOUT.md` and the pending-tasks documents.
+- **The ledger's columns agree**: a row owned by `NN` cites `NN`, in both its `cite NN` and its `(Ch. NN)` phrase.
+- **Markdown links resolve**, and where the link text names a chapter number it must match the file it points at.
+- **TOC tables agree with themselves**: the status row's number against its filename, and a revisits row's number against its own *"next time NN is open"*.
+
+**Verified against the broken state rather than the fixed one.** Run over the pre-sweep commit, the checker reports 52 problems, including the four dead README links that were originally found by accident.
+
+**The limit, stated because it decides whether the identifiers are still worth doing.**
+Resolution cannot catch an off-by-one where the wrong target also exists. A reference that should say 04 and says 05 passes every check above. So the checker catches dangling references, dead links and internal disagreement; it does not catch a consistent, wrong shift. **That gap is exactly what matching by identifier closes**, which is the argument for doing the identifiers next rather than considering the problem solved.

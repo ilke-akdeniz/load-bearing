@@ -105,6 +105,84 @@ for fname in chapter_files + ["00_toc.md", "README.md", "CLAUDE.md"]:
             if num not in known:
                 fail("dangling ref", f"{fname}:{n} refers to chapter {ref}, which is not in the TOC")
 
+# 5b. Every chapter reference, in every live document, resolves to a chapter
+#     that exists. Wider than check 5: lowercase "chapter NN", "cite NN",
+#     lists like "chapters 02, 03 and 15", and bare "NN owns" in the ledger.
+#     DECISIONS.md is the historical record and is exempt.
+checked += 1
+live_docs = chapter_files + ["00_toc.md", "README.md", "CLAUDE.md", "AGENTS.md",
+                             "docs/LEDGER.md", "docs/ABOUT.md",
+                             "docs/pending-tasks/ai-material.md",
+                             "docs/pending-tasks/pike-retrospective.md"]
+REF_PATTERNS = [
+    re.compile(r"\bCh\. (\d\d)\b"),
+    re.compile(r"\b[Cc]hapters? (\d\d)\b"),
+    re.compile(r"\bcite (\d\d)\b"),
+    re.compile(r"(?<![\w.'])(\d\d) (?:owns?|may cite)\b"),
+    re.compile(r"\bnext time (\d\d) is open\b"),
+]
+LIST_RE = re.compile(r"\b[Cc]hapters?\s+((?:\d\d)(?:\s*(?:,\s*and\s+|,\s*|\s+and\s+)\d\d)+)")
+for fname in live_docs:
+    path = ROOT / fname
+    if not path.exists():
+        continue
+    prose = strip_fences(path.read_text())
+    for n, line in enumerate(prose.split("\n"), 1):
+        found = set()
+        for rx in REF_PATTERNS:
+            found.update(rx.findall(line))
+        for group in LIST_RE.findall(line):
+            found.update(re.findall(r"\d\d", group))
+        for num in sorted(found):
+            if num not in known:
+                fail("dangling ref",
+                     f"{fname}:{n} refers to chapter {num}, which is not in the TOC")
+
+# 5c. The ledger's own columns must agree: a row owned by NN cites NN.
+checked += 1
+for n, line in enumerate(read("docs/LEDGER.md").split("\n"), 1):
+    row = re.match(r"^\| [^|]* \| (\d\d) \| .* \| ([^|]*)\|\s*$", line)
+    if not row:
+        continue
+    owner, cite_cell = row.group(1), row.group(2)
+    for kind, rx in (("cite", r"\bcite (\d\d)\b"), ("(Ch. NN)", r"\(Ch\. (\d\d)\)")):
+        for got in re.findall(rx, cite_cell):
+            if got != owner:
+                fail("ledger", f"docs/LEDGER.md:{n} row is owned by {owner} "
+                               f"but its {kind} says {got}")
+
+# 5d. A markdown link to a chapter must resolve, and if its text names a
+#     chapter number that number must match the file it points at.
+checked += 1
+for fname in live_docs:
+    path = ROOT / fname
+    if not path.exists():
+        continue
+    base = path.parent
+    for n, line in enumerate(path.read_text().split("\n"), 1):
+        for text, target in re.findall(r"\[([^\]]*)\]\((\d\d_[a-z0-9-]+\.md)\)", line):
+            if not (base / target).exists() and not (ROOT / target).exists():
+                fail("dead link", f"{fname}:{n} links to {target}, which does not exist")
+                continue
+            said = re.search(r"[Cc]hapter (\d\d)", text)
+            if said and said.group(1) != target[:2]:
+                fail("link mismatch", f"{fname}:{n} says chapter {said.group(1)} "
+                                      f"but links to {target}")
+
+# 5e. Tables in the TOC whose rows carry the chapter number twice must agree
+#     with themselves: the status table's number against its filename, and the
+#     revisits table's number against its "next time NN is open".
+checked += 1
+for n, line in enumerate(toc_lines, 1):
+    row = re.match(r"^\| (\d\d) \| `(\d\d)_[a-z0-9-]+\.md` \|", line)
+    if row and row.group(1) != row.group(2):
+        fail("toc table", f"00_toc.md:{n} status row says chapter {row.group(1)} "
+                          f"but names file {row.group(2)}_...")
+    row = re.match(r"^\| (\d\d) \| (?!`).*next time (\d\d) is open", line)
+    if row and row.group(1) != row.group(2):
+        fail("toc table", f"00_toc.md:{n} revisits row is for chapter {row.group(1)} "
+                          f"but says 'next time {row.group(2)} is open'")
+
 # 6. Terminology that a past sweep retired. DECISIONS.md is the historical
 #    record and is deliberately exempt.
 checked += 1
