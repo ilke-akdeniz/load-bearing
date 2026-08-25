@@ -323,7 +323,7 @@ The rule covering both: before treating something as Style, check that both opti
 `23_never-written-down.md`
 
 The closing chapter, and the one the AI material was always going to need.
-The claim: **a decision nobody stated can be recovered only while someone still remembers it — and when the author was an AI coding agent that remembers nothing between sessions, that recovery window was never open.**
+The claim: **a decision nobody wrote down can be recovered only while someone still remembers it — and when the author was an AI coding agent that remembers nothing between sessions, that recovery window was never open.**
 Decision 96 records why decision 24's ruling against an AI chapter was reversed, and why this one is titled for its mechanism rather than for a technology.
 
 The demonstration is a transaction around two reads that looks like ceremony and is load-bearing, removed by somebody who could not have known: both versions run, and with an edit landing between the reads the simplified one returns revision 1 of a definition with three steps, which was never saved.

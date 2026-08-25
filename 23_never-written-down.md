@@ -2,9 +2,9 @@
 
 ## The claim
 
-**A decision nobody stated can be recovered only while someone still remembers it — and when the author was an AI coding agent that remembers nothing between sessions, that recovery window was never open.**
+**A decision nobody wrote down can be recovered only while someone still remembers it — and when the author was an AI coding agent that remembers nothing between sessions, that recovery window was never open.**
 
-Every chapter before this one works on a claim somebody made. A proverb, a review comment, a pattern name, a rule in a style guide — the technique throughout has been to find the condition behind the assertion and check whether it holds here. This chapter is about the case where there is no assertion, because the decision was taken without ever being said.
+Every chapter before this one works on a claim somebody made. A proverb, a review comment, a pattern name, a rule in a style guide — the technique throughout has been to find the condition behind the assertion and check whether it holds here. This chapter is about the case where there is no assertion, because the decision was taken without ever being written down.
 
 ---
 
