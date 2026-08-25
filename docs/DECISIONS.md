@@ -3959,3 +3959,48 @@ A path-wide replacement would have corrupted all of them. This is the second tim
 **What changed:** seven sites in chapter 23, one in chapter 19, two ledger rows, one line in `00_toc.md`'s owed table, and two headings in `docs/pending-tasks/ai-material.md` so the material lands in chapters 02 and 03 with the right vocabulary.
 
 **`docs/DECISIONS.md` is left alone**, on the same reasoning as decision 93: it records what was decided in the language used at the time, and decision 24 is titled for the material it describes.
+
+## 99. Chapter 23 review 01: a cost bullet that was arguing against the chapter
+
+**Context.**
+First review of chapter 23, worked as a grilling. Two commits from the author, nine items.
+
+This entry exists because the author asked for it, for the second time in one session, after decision 88 added the rule requiring it. Recorded here rather than treated as a note: **the rule has now failed twice on the session that introduced it**, which is evidence about where it needs to fire — at the end of a review pass, not only at the end of a drafting session.
+
+**The folk remedy had been over-built, against what was already agreed.**
+The author's tag: *"this section should simply be deleted, adds not much to the chapter, mostly distracts from the natural flow."*
+
+Decision 96 records the agreement as *"in a paragraph rather than a section"*, and the draft wrote a five-paragraph `###` section. The reaction was to the thing the draft built past the agreement.
+
+The draft put the constraint in front of the author before acting: deleting it outright dangles chapter 15, which ends on *"you get what chapter 23 calls a folk remedy"*, plus a ledger row and a TOC line. Compressed instead to one paragraph inside grilling's limit passage, where the term is used, with the term bolded so 15's promise is discharged and the reference stays findable. **The heading going is most of what fixed the flow** — a `###` between the recovery argument and grilling reads as a new subject arriving.
+
+The author asked for a short example. They proposed *depend on interfaces* or DRY applied to a one-off script; the draft recommended chapter 18's own phrasing, *depend on abstractions, not concretions*, because 18 is the worked case and can carry it in a clause, and because it is exactly what an AI coding agent emits unasked — which is what makes it belong in the limit passage rather than beside it.
+
+**A cost bullet that was arguing against the chapter.**
+The author flagged *"It requires you to hold opinions"* as reversing an earlier point. It was: the chapter said both *"grilling does not produce better answers, it produces answers somebody can disagree with"* and, forty lines later, that a record of accepted recommendations is *"worse than none, because it looks like evidence."*
+
+The draft offered two ways out — delete, or fix the direction so the record is genuine but thin. **The author supplied a third that is better than either**, and it is recorded in their words because the draft would not have reached it:
+
+> the real issue is making choices without fully grasping the options and what they mean, without understanding the trade-offs. Even if you went with all of the recommended options — by the way this happens 90% of the time in my experience — if you read every decision and option carefully and put an effort to make a conscious decision, something intangible but very real was gained. The expanded versions of those decisions and reasons are now in you as a person.
+
+**This is not a cost. It is the claim's own first half, which the chapter had not noticed it was resting on.** The claim says a decision can be recovered *while someone still remembers it*. Grilling produces two artifacts — the log, and a person who now holds the trade-off — and the chapter was counting only the first.
+
+**One adjustment to the author's point, flagged rather than made silently.** They wrote that the agent *"will never be able to make"* those connections. That is a capability claim, and `docs/pending-tasks/ai-material.md` is explicit that capability claims do not survive while structural ones do. Written structurally instead: it keeps nothing between sessions, so the connection has to live in a person or a document.
+
+**The force-reading paragraph, deleted.**
+The author found it cynical — showing at length how badly this goes and then adding that the book takes no position reads as washing hands.
+
+The draft checked whether deleting it breached decision 24, which records the author's own correction that *"usage is a fact, and the book does not take positions on facts."* It does not. Decision 24 requires the book not to take a position; it does not require a paragraph saying so, and the paragraph before it already does the work by observing that this is the ordinary history of software written entirely by people and that only the rate changed. The disclaimer added a defensive tone and nothing else.
+
+**Two places the draft disagreed.**
+
+*Comments that say what the code does.* The author objected that sometimes a comment restating bad code is exactly what is needed and there is no time to refactor. Correct, and the bullet was too absolute. Narrowed rather than dropped: a comment restating dense code earns its place, and **the signal is when every comment in a file is of that kind**, because the reason is then nowhere.
+
+*The closing question.* The author preferred *who can tell us why it was done?* over *what would tell us*. The draft kept *what*, because the three answers immediately below it are a person, a document, and inference — *who* covers only the first. The dead clause the author actually objected to, *if this turns out to be wrong*, was cut, and the paragraph now says why it is *what*.
+
+**The ending, which is the author's.**
+Their expansion material became the chapter's last three paragraphs, close to as supplied: reading is rarely enough on its own, you ask the people who might know and they half-remember different things, and what you hold at the end is not an answer but a position — fixing Y changes Z, some customers depend on Z, leaving Y another month costs a different customer. Nobody is being unreasonable and no fact available settles it.
+
+The draft added one connective clause, because the expansion assumes colleagues exist to ask and the chapter's own case is worse: where the code came from an agent there is nobody in that position at all.
+
+**Direct edits accepted without change:** *recovery window* for *window* in the claim, naming the agentic coding tool as what the negative requests are addressed to, and *None of this is new* for *None of which is new*. The author also deleted a sentence the draft had itself flagged as possible self-aware decoration — *"which is a sentence worth resisting the urge to soften"* — and was right to.
