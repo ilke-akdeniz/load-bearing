@@ -23,7 +23,7 @@ Back to [the introduction](README.md).
 ## Part III — Patterns, Graded
 
 - 09. [What a Pattern Is For](09_what-a-pattern-is-for_3xzc.md)
-- 10. [Patterns That Cross The Line](10_patterns-that-cross_r8dw.md)
+- 10. [Patterns That Cross the Line](10_patterns-that-cross_r8dw.md)
 - 11. [Patterns That Survive Translation](11_patterns-that-survive-translation_us2k.md)
 - 12. [Patterns That Are Missing Language Features](12_missing-language-features_esqm.md)
 - 13. [Smuggled Verdicts](13_smuggled-verdicts_8y69.md)

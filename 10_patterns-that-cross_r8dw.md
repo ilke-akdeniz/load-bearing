@@ -1,4 +1,4 @@
-# Patterns That Cross The Line
+# Patterns That Cross the Line
 
 ## The claim
 
