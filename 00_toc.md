@@ -323,16 +323,27 @@ The rule covering both: before treating something as Style, check that both opti
 `23_never-written-down.md`
 
 The closing chapter, and the one the AI material was always going to need.
-The claim: **a decision nobody stated can be recovered only while someone still remembers it — and when the author was a tool that remembers nothing between sessions, that window was never open.**
+The claim: **a decision nobody stated can be recovered only while someone still remembers it — and when the author was an AI coding agent that remembers nothing between sessions, that recovery window was never open.**
 Decision 96 records why decision 24's ruling against an AI chapter was reversed, and why this one is titled for its mechanism rather than for a technology.
 
-Contents: a design decision taken for a non-obvious but correct reason, never stated, then violated by someone who could not have known — worked in code rather than as a log entry, which is chapter 19's facet of the same FlowCore decision.
-Why asking afterwards does not recover it: a forward pass discards its activations and every persistence mechanism these tools have stores text, so there is never a replay — which gives three cases, and the middle one, where the session is still open and the answer is a correlation rather than a recollection, is the one that makes *ask it while the context is fresh* feel reliable.
-**Grilling**, moved here from chapter 19, as the only remedy there is: not an interview that extracts reasons, but a procedure that forces the decision into the open where a person makes it and it gets written down.
-The **folk remedy** — the author's term, promised by chapter 15 — defined here because a corpus default is its purest instance: advice applied far outside the context it was made for, where nobody rebuilds the scope because nobody knows a scope existed.
-Then what one lost decision becomes at volume: patching against a black box, and the rewrite arriving as the only remaining option — which happens without these tools too, so what changed is the rate rather than the failure.
+The demonstration is a transaction around two reads that looks like ceremony and is load-bearing, removed by somebody who could not have known: both versions run, and with an edit landing between the reads the simplified one returns revision 1 of a definition with three steps, which was never saved.
+Chapter 19 maps that same FlowCore decision as a log entry; this is the same decision in the code, where none of the reasoning is visible.
 
-*Where the claim doesn't apply:* to be worked when the chapter is drafted.
+Why asking afterwards does not get it back: a forward pass discards its activations and every persistence mechanism an agentic coding tool has stores text, so there is never a replay.
+That gives three cases — the reasoning written out, which is real retrieval of what was said; nothing written but the session still open, which is a fresh computation on overlapping input and a correlation rather than a recollection; and a new session, which has only the artifact.
+The middle one does the damage, because it is right often enough to be trusted and nothing distinguishes it from the third.
+Two papers are cited on opposite sides of whether stated reasoning reflects computation, and the chapter says explicitly that it needs that argument settled either way.
+
+**Grilling**, moved here from chapter 19, as the only remedy there is — not an interview that extracts reasons, since there are none stored to extract, but a procedure that forces the decision into the open where a person makes it.
+It leaves two artifacts and the chapter counts both: the log, and a person who now holds the trade-off, which is the claim's own *while someone still remembers it*.
+Its limit is where the **folk remedy** is defined, discharging chapter 15's forward reference: advice applied far outside the context it was made for, which stays misapplied because nobody rebuilds its scope — *depend on abstractions, not concretions* is the worked case, and a corpus default is the purest instance, since there nobody knows a scope existed.
+
+Then what one lost decision becomes at volume: each guess adding a constraint nobody recorded either, until the requests can only be negative, and the honest options narrow to guessing or starting again.
+Which happens without these tools too, so what changed is the rate rather than the failure.
+
+*Where the claim doesn't apply:* the decision the artifact enforces — a `UNIQUE` constraint states the rule, refuses the change that contradicts it, and nobody needs to remember why, which is worth more than a record and available for far fewer decisions than people hope; and the decision nobody needs, most code embodying none worth recovering.
+
+*What it costs:* grilling is slow per decision and absurd on a small change; the record is partial by construction, since the interview surfaces only what the agent presents as a decision; and writing a decision down makes it revisable rather than right.
 
 ---
 
@@ -367,7 +378,7 @@ Then what one lost decision becomes at volume: patching against a black box, and
 | 20 | `20_six-profiles.md` | **draft** |
 | 21 | `21_idioms.md` | **draft** |
 | 22 | `22_style.md` | **draft** |
-| 23 | `23_never-written-down.md` | **in progress** |
+| 23 | `23_never-written-down.md` | **draft** |
 
 ### AI material
 
