@@ -3792,3 +3792,73 @@ Which, as the author noted, is also why a decision log for Style choices is wort
 
 **One direct edit accepted without change.**
 The author deleted the draft's note that Black and Prettier were not installed. The chapter claims no output from either, so the caveat was defensive noise.
+
+## 96. Decision 24 reversed: there is an AI chapter, and grilling moves into it
+
+**Context.**
+Decision 24, on 2026-08-12, rejected a chapter on AI-assisted development and distributed the material instead.
+The author proposed the chapter then; the draft argued against it and won on this test:
+
+> The draft argued for a chapter on the grounds that it needs one organizing mechanism the way chapter 15 has one; testing that honestly, *the derivation never happened* explains the Forces finding and not the monoculture, confidence, or volume findings. **There is no single mechanism, so there is no chapter.**
+
+**Why it is reversed.**
+The author proposed it again while chapter 23 was being planned, and supplied a mechanism decision 24 never tested.
+Decision 24 examined *the derivation never happened*. The author's is **the decisions were never stated, and what would have to survive for them to be recovered does not exist.**
+
+The second half is new to the book. Nothing in decision 24, in the pending document, or in chapter 19 says anything about irreversibility. The nearest thing is 19's line that *"the reasoning is the perishable half"*, which is about one interview's output rather than a system passing a point of no return.
+
+The author's own framing, recorded because it is sharper than the draft's summary of it:
+
+> AI is like a giant force that skewed most of the topics we talked in this book… the ideas explained in this book were not eliminated, they [are] more important than before… you don't know the trade-offs that were made, you don't know the forces that were considered… the entropy takes over quickly and you have nothing to tame it.
+
+And the line that decided the chapter's shape:
+
+> it's a black box for the AI as well
+
+**Decision 24's dating objection stands and is answered rather than dismissed.**
+It held that *"a chapter titled for a technology is a dated object by construction."* The chapter is titled for its mechanism — *What Was Never Written Down* — and its claim is true of any unstated decision, with these tools as the force that makes it bite.
+
+**Grilling moves from chapter 19 into it.**
+Decision 24 placed grilling in 19 because *"grilling is a method rather than a way of reading."* That was a choice between 19 and chapter 23 as then planned, which was six ways of reading. It was never a choice against a chapter about method under these tools, because none was proposed.
+
+The draft's own argument for moving it is decision 24's, applied one level down: a sixty-one-line section about these tools inside the method chapter dates the method chapter. Moving it quarantines the dating where it belongs and leaves 19 as a method that survives model generations.
+
+**A verification task the author called for, and it changed the claim.**
+
+The claim under discussion was *a decision nobody stated can be recovered while the context that produced it is alive*. The author stopped the drafting to ask whether that is true when the author of the decision is a tool — whether such tools make decisions with reasons in any sense that permits recovery, or whether asking produces invention.
+
+That is a claim about mechanism, so it was checked rather than reasoned out.
+
+**What the sources support.** Turpin et al., *Language Models Don't Always Say What They Think* (NeurIPS 2023): chain-of-thought explanations *"can systematically misrepresent the true reason for a model's prediction"* — shown by biasing inputs, with models rationalising the biased answer and failing to mention what moved them.
+
+**What is contested, and the draft would not have known without looking.** A later paper argues the standard metric *"confuses unfaithfulness with incompleteness, the lossy compression needed to turn distributed transformer computation into a linear natural language narrative"*, that non-verbalised influences still act causally through the reasoning, and that larger inference budgets improve verbalisation.
+
+**What is not established.** Nothing studies our actual case — a coding tool asked afterwards why it made a design choice in code it wrote. The chapter will not extrapolate from benchmark reasoning traces to that.
+
+**The correction this produced.**
+The author read the finding and drew the strong conclusion: *there is simply nothing to recover, the decisions never existed.*
+The draft agreed with the practical consequence and objected to the metaphysics, because the counter-paper's result is that non-verbalised influences **do** act causally — something determined this line rather than another one. What never existed is not the determination but the articulation.
+
+Settled formulation, the author's, accepted:
+
+> There was a computation that produced this line rather than another one, and there was never a sentence saying why. Asking afterwards does not retrieve one. It produces one.
+
+**And the architectural fact the chapter turns on**, which is not research and not contested: a forward pass discards its activations; the key-value cache is derived from tokens and is a recomputation shortcut rather than a record; every persistence mechanism these tools have stores **text**. So there is never a replay. What persists is always tokens.
+
+Which gives three cases rather than the two the author posed, and the middle one is the chapter's contribution: same session with the reasoning written out is genuine retrieval of what was *said*; same session with nothing written is a fresh computation on overlapping input, producing a correlated answer that is not a recollection; a new session has only the artifact. **From the outside all three are fluent and indistinguishable**, which is why *ask it while the context is fresh* feels reliable.
+
+**A consequence for grilling, which improves it.**
+If there are no reasons to extract, grilling is not an interview that gets reasons out of a tool. It is a procedure that forces the decision to happen in the open, where a person makes it, and the record is trustworthy for that reason rather than because anything introspected. Chapter 19 already contains the evidence — *"note who supplied them. In both cases the human"* — without drawing the conclusion.
+
+This also answers the author's question of whether grilling with every recommendation accepted differs from not grilling at all. It does, and not marginally: the decision was made by a person and written down either way.
+
+**The claim, settled.**
+
+> **A decision nobody stated can be recovered only while someone still remembers it — and when the author was a tool that remembers nothing between sessions, that window was never open.**
+
+**The title.**
+The draft proposed *Decisions That Leave No Mark* and the author rejected it — it *"frames the guilt on the decisions"*, which is the personification the register rules exclude, and the draft should have caught that before offering it.
+The author preferred *Decisions Nobody Stated*; the draft raised that it is chapter 03's construction — *Forces: the inputs nobody names* — and the same shape of claim.
+Settled on **What Was Never Written Down**, which names the absence of a record rather than the absence of a decision, and is the distinction the verification established.
+
+**The folk remedy lands here after all**, in a paragraph rather than a section. Chapter 15 forward-references *"what chapter 23 calls a folk remedy"*, and the term's purest instance is a corpus default: advice applied far outside the context it was made for, where nobody rebuilds the scope because nobody knows a scope existed. The author noted the monoculture point already appears in grilling's limit passage, so the term is defined once early and the limit passage then *uses* it — which shortens the transplanted section and stops the observation appearing twice.
