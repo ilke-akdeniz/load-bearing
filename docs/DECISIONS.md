@@ -4138,3 +4138,28 @@ The author asked why, and the analogy does not hold. **A chapter number in the l
 So the log's own prose and entry titles are renumbered. **The eight quoted lines containing a chapter number are left exactly as spoken**, with a bracketed `[now NN]` gloss — the conventional signal for an editorial insertion — so nobody's words are altered and no reader is misdirected. Six of the eight are the author's.
 
 **Entries above this one were written before the shift.** Their prose has been renumbered to match the current book; their quotations have not.
+
+## 104. The README gets a default entry point, and the disclosure stays put
+
+**Context.**
+First review of the restructured README. Three tags.
+
+**Chapter 01 gets its own hook, and the jump-ins get demoted.**
+The author's point: with the README now the introduction, its *Start here* block sent readers to chapters 05, 06, 09 and 02 and skipped the model entirely.
+
+> 01 is the default start, those are jumping, skipping suggestions if 01 doesn't sound "sexy".
+
+So *Start here* now carries one hook, for chapter 01, and the four existing ones move under **Or start anywhere** — a title the author invited a suggestion for.
+
+**The hook, written to decision 51's rule.** It comes from the chapter's own claim at full strength — *the kind determines how much authority it has, not the confidence of the person saying it* — and is cashable, because the chapter carries both code samples and the line *"The C# version works… It will still be sent back."*
+
+> **The same wiring code is unremarkable in Go and gets sent back in review in C#.**
+> It compiles, it runs, it serves requests correctly, it is thread-safe — and neither version is more correct than the other.
+> Some of the rules you follow are like that and some are not, and they arrive in the same voice.
+
+It deliberately does not reuse the acyclic-versus-repository pair, which is the premise section's example two screens further down.
+
+**A question answered rather than a change made.**
+The author asked whether *How this book was written* had been slated to leave the README. It had not. The decision was to **reorder** it — the draft asked whether it should sit after the premise and the spine rather than between the hooks and the premise, so a reader meets the idea before judging the method, and the author answered *"move it"*.
+
+It stays in the README on a stronger ground than habit: `CLAUDE.md` treats the disclosure as part of the book's claim about itself — *"The README states this openly and `docs/DECISIONS.md` is the evidence"* — so relocating it to `docs/ABOUT.md` would bury the thing the book is most exposed on, in the document a visitor is least likely to open.
