@@ -1,28 +1,29 @@
 # Load-Bearing
-[-- moving the status at the end because that's the least important thing in this page. Also removed other sentenctes here which became a repetition of the claim at start here. I'm fine with "Start here" right after the title.]
-[-- removed "start" titles. Addition by substraction in my opinion, first sub-title is our suggestion to start, or you move to the next ones, no need for explicit titles for that.]
 
-**Every claim you meet about software is one of five kinds, and the kind determines how much authority it has** — not the confidence of the person saying it, not their track record, not how widely it is repeated.** [-- this is the verbatim claim of chapter 01 and I think the repetition is justified. This is in my opinion most beautiful and striking claim in the book.]
-→ [The Five Kinds of Claim](01_the-five-kinds.md)
+**Which Software Principles Hold, and Where They Stop**
+
+**Every claim you meet about software is one of five kinds, and the kind determines how much authority it has** — not the confidence of the person saying it, not their track record, not how widely it is repeated.
+The same wiring code is unremarkable in Go and gets sent back in review in C#, and neither version is more correct.
+→ [Chapter 01 — The Five Kinds of Claim](01_the-five-kinds.md)
 
 **Your clock cannot tell you what happened first.**
 Two consecutive reads of the system clock return the same number 95% of the time — on one machine, with nothing going wrong.
 That number is measured, not asserted.
-→ [Time: Concurrency and Clocks](05_time.md)
+→ [Chapter 05 — Time: Concurrency and Clocks](05_time.md)
 
 **You cannot tell a slow machine from a dead one.**
 Not that it is hard. You cannot — and most of what is impossible in distributed systems follows from it.
 Almost every retry, timeout, and health check you have written assumes otherwise.
-→ [Distribution: What's Impossible](06_distribution.md)
+→ [Chapter 06 — Distribution: What's Impossible](06_distribution.md)
 
 **"This should be a Repository." What would that rule out?**
 A pattern name earns its place by forbidding something.
 Run that test on the names you use in code review and count how many survive it.
-→ [What a Pattern Is For](09_what-a-pattern-is-for.md)
+→ [Chapter 09 — What a Pattern Is For](09_what-a-pattern-is-for.md)
 
 **Why design arguments don't get settled.**
 Because both sides are arguing about the answer while disagreeing about the situation — and nobody wrote the situation down.
-→ [Forces: The Inputs Nobody Names](02_forces.md)
+→ [Chapter 02 — Forces: The Inputs Nobody Names](02_forces.md)
 
 ## The premise
 

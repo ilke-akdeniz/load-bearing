@@ -4163,3 +4163,30 @@ It deliberately does not reuse the acyclic-versus-repository pair, which is the 
 The author asked whether *How this book was written* had been slated to leave the README. It had not. The decision was to **reorder** it — the draft asked whether it should sit after the premise and the spine rather than between the hooks and the premise, so a reader meets the idea before judging the method, and the author answered *"move it"*.
 
 It stays in the README on a stronger ground than habit: `CLAUDE.md` treats the disclosure as part of the book's claim about itself — *"The README states this openly and `docs/DECISIONS.md` is the evidence"* — so relocating it to `docs/ABOUT.md` would bury the thing the book is most exposed on, in the document a visitor is least likely to open.
+
+## 105. The README's opening block, and naming the links as chapters
+
+**Context.**
+Second review of the README. The author moved the status line to the foot of the page, removed the `Start here` / `Or start anywhere` headings, cut the three-line tagline and the subtitle, and replaced the draft's chapter 01 hook with the chapter's claim verbatim.
+
+**Taken as given.**
+The status line at the foot — the author's call on what a visitor needs first, and it is the least urgent thing on the page.
+
+The headings removed. Their argument is *addition by subtraction*: the first entry is the suggested start and the rest are alternatives, and ordering says so without a label.
+
+**The verbatim claim, which is more rule-compliant than the draft's version.** Decision 51 requires the hook be written *"from the chapter's own claim sentence at full strength"*; the chapter's own sentence is full strength by definition. The draft had paraphrased into the Go-versus-C# observation, which is weaker and one step removed.
+
+> this is the verbatim claim of chapter 01 and I think the repetition is justified. This is in my opinion most beautiful and striking claim in the book.
+
+**Two things restored, on the draft's objection.**
+
+**The subtitle.** *Which Software Principles Hold, and Where They Stop* had survived only in `CLAUDE.md`, `docs/ABOUT.md` and this log — nowhere a reader sees. A visitor arriving from a link would get `# Load-Bearing` and a claim about five kinds, without learning what the book is called or that its subject is software. The author's reason for the cut holds for the three-line tagline, which really is the claim in weaker words, and does not hold for the book's name. Tagline stays cut; subtitle back.
+
+**A fact line under the first hook.** The other four are claim, fact, sharpener, link — *95% of the time*, *most of what is impossible follows from it*. Chapter 01's was claim and link, making the default entry the thinnest item on the page, and the fact is what makes a hook credible rather than merely assertive. The Go-versus-C# observation the draft had over-promoted to a claim works at its proper size as that beat.
+
+**Naming the links as chapters, which does more than clarify.**
+The author noticed that with the headings gone, nothing marks the arrow links as belonging to this book. Links are now `Chapter 01 — The Five Kinds of Claim` and so on.
+
+The side effect is the useful part: the numbers read `01, 05, 06, 09, 02`, so a reader infers *start here, or jump in* from the sequence. **That recovers exactly what removing the headings gave up**, without a label.
+
+**Also fixed:** a stray `**` after *"how widely it is repeated"*, left over from the edit, which would have rendered as literal asterisks.
