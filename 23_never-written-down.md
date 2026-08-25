@@ -91,19 +91,11 @@ There was a computation that produced this line rather than another one, and the
 
 And one thing does survive, which is worth separating out because it gets conflated with the other. **What the code does is re-derivable from the code**, by a person or by the agent, at any time. Asking for a description of behaviour is reading. Asking why this shape was chosen is not — that was never in the artifact, and no amount of freshness puts it there.
 
-### The folk remedy [-- this section should simply be deleted, adds not much too the chapter, mostly distracts from the natural flow - reading of the chapter]
-
-There is a name worth having for the thing that arrives instead of a decision.
-
-A **folk remedy** is advice applied far outside the context it was made for, which stays misapplied because nobody rebuilds its scope. *Drink two litres of water a day* is the pattern — a number from a context nobody can now name, repeated by people who did not take it from a source and cannot say what it was for. The term is this book's author's rather than standard vocabulary. Chapter 15 shows a principle losing its scope in transmission and then having it rebuilt three times; a folk remedy is what the same process produces when nobody writes the page.
-
-**A corpus default is the purest instance there is.** The convention arrives because it is what most code does, not because it answers anything about your situation, and nobody rebuilds the scope because nobody knows a scope existed — or that a choice was made. Chapter 02 names monoculture as the single most common source of confusion between the kinds and prescribes one cure: work in a second ecosystem long enough that its conventions stop feeling wrong and start feeling like conventions. That cure is unavailable to a model with one training distribution, and an agent built on it inherits the limit.
-
 ### Grilling: making the decision happen in the open
 
 Chapter 19's procedure assumes you can name the forces before the design exists. Usually you cannot — not because you are careless, but because you do not yet know which decisions are about to be made, so you do not know which facts about your situation are about to matter.
 
-One technique inverts the flow, and it is worth stating in full because it is the method's shape [-- which method? I know the answer but most reader's would not, need a reminder here] with the roles swapped. Instead of supplying forces up front, you have the decisions surfaced one at a time and supply the fact that settles each one as it arrives. The prompt, quoted as the author of this book uses it:
+One technique inverts the flow, and it is worth stating in full because it is chapter 19's shape — forces, then principles, then idioms — with the roles swapped. Instead of supplying forces up front, you have the decisions surfaced one at a time and supply the fact that settles each one as it arrives. The prompt, quoted as the author of this book uses it:
 
 > Interview me relentlessly about every aspect of this until we reach a shared understanding. Walk down each branch of the decision tree, resolving dependencies between decisions one-by-one. For each question, provide your recommended answer.
 >
@@ -153,7 +145,7 @@ That closes the circuit, and it is worth seeing as one thing rather than three. 
 
 The upstream text has since changed in a way worth one line: it asks a round of questions at once where the frozen version asks one at a time. That is throughput against how much the reader has to hold in working memory, which is a force with a value, so neither version is a regression.
 
-**The limit, and it is severe. Grilling is weakest against folk remedies**, because a folk remedy [-- if you agree on removing the folk remedy section above, the terms here should be changed accordingly. "mainstream advice that lost it's scope"] does not present itself as a branch point. The interview surfaces the decisions the agent treats *as* decisions, and that set comes from the same corpus, so a question settled uniformly across it is not offered at all — it is simply how things are done.
+**The limit, and it is severe.** Grilling is weakest against what this book's author calls a **folk remedy** — advice applied far outside the context it was made for, which stays misapplied because nobody rebuilds its scope. *Depend on abstractions, not concretions* is one, and chapter 18 is the case. A corpus default is the purest instance: there the scope is not merely unrebuilt, because nobody knows one existed. So it never presents itself as a branch point — it is simply how things are done, and the interview does not offer it.
 
 Which means the technique surfaces contested choices and conceals settled ones, and settled-in-the-corpus is the class most likely to be wrong outside the ecosystem it came from. This follows from chapter 02's mechanism rather than from any measurement, and it should be read as reasoning rather than as a finding.
 
@@ -179,11 +171,9 @@ What that looks like from outside is a system that works and cannot be changed. 
 
 **And the agent is in the same position.** This is the part that has no equivalent in the pre-AI version of the story. A codebase that people wrote and failed to document is still readable by people, slowly and expensively. Here the artifact is equally opaque to the agent that produced it, because it kept nothing either. There is no party to the situation who knows more than the code says.
 
-From there the honest options are guessing the design reasons or starting the development from scratch. [--deleted that sentence because low value, hard to prove claim.]
+From there the honest options are guessing the design reasons or starting the development from scratch.
 
 **None of this is new.** Undocumented design decisions, accumulated local reasonableness, and a rewrite at the end of it is the ordinary history of a great deal of software written entirely by people. What changed is not the failure. It is that the interval which used to be measured in years can now be measured in weeks, because the rate at which decisions get taken went up by orders of magnitude and the rate at which they get recorded did not move.
-
-That is a force reading, not a verdict (Ch. 03). Whether to work this way is a fact about your situation rather than a position this book takes. [-- I find this a little bit cynical, knowing that a big majority uses ai to generate code and make design decisions, then showing how things can go terribly wrond if you don't record the decisions and then sating feel free to not use this method is not ok. I would just delete this paragraph. ]
 
 ---
 
@@ -226,7 +216,9 @@ Most code embodies no decision worth recovering. The name of a local variable, t
 
 **Grilling is slow, and the cost is per decision rather than per project.** One question at a time, waiting for each answer, on work that a single sentence would otherwise have produced. On a small change it is absurd overhead, and the honest version of the advice includes the word *sometimes*.
 
-**It requires you to hold opinions.** A person who accepts every recommendation has bought the silent defaults back with ceremony attached, and now has a record showing that each one was considered. That record is worse than none, because it looks like evidence. [-- maybe delete this. It look like the reversal of "even when you take only recommended options, it's still useful..." point made earlier.]
+**It requires you to read, not merely to answer.** The failure is not accepting the recommendation — that is the common case and frequently right. It is answering without having understood what was being chosen between, which produces the silent defaults again with a paper trail attached.
+
+Where you did understand it, something is left that no log holds. The trade-off is now yours, and when a related question arrives next month you connect the two. An agent will not do that for you, and the reason is structural rather than a matter of capability: it keeps nothing between sessions, so the connection has to live in a person or in a document. **This chapter's claim names that half out loud** — recovery needs someone who still remembers, and this is how they come to.
 
 **The record is partial by construction.** The interview surfaces what the agent presents as a decision, and what it presents comes from the same place its recommendations do. A complete record is not on offer; a record of the contested decisions is.
 
@@ -239,7 +231,7 @@ Most code embodies no decision worth recovering. The name of a local variable, t
 **In a codebase:**
 
 - **A commit that removes something as unnecessary, with no reason given either way.** The change and the thing it removed are now both undocumented, and the second one used to work.
-- **Comments that say what the code does.** Restating the mechanism is what a reader could already get. The line that cannot be recovered is why this mechanism rather than another one. [-- don't agree, sometimes you really need a comment that say what the code does, because the code is simply crap and there is no time or safety net to refactor it.]
+- **Comments that only say what the code does.** A comment restating dense or bad code earns its place, and sometimes it is all there is time for. The signal is when every comment in a file is of that kind, because the reason is then nowhere: not in the code, and not beside it.
 - **Defensive code nobody will touch.** A retry, a lock, a sleep, a `try` that catches everything — kept because removing it once caused something and nobody found out what.
 - **A test suite that passes and a system nobody will change.** The tests encode the behaviour and none of the reasons, so they say a change is safe without being able to say a change is correct.
 
@@ -247,13 +239,16 @@ Most code embodies no decision worth recovering. The name of a local variable, t
 
 - **"Fix this, don't break that."** The request is negative because the observable behaviour is the only thing anybody can still specify.
 - **"I don't know why it does that, but leave it."** An accurate report of the situation, and the last point at which asking is cheap.
-- **"Let's just regenerate it."** Sometimes correct. It is also the move that guarantees the next version has no recorded decisions either. [-- regenerate what? regenerate meaning write a new prompt to generate code?]
+- **"Let's just regenerate it"** — meaning throw the code away and prompt for it again. Sometimes correct, and cheaper than it used to be. It also guarantees the replacement arrives with no recorded decisions either, so the next person is where you are now.
 - **"It was working yesterday."** Said about a system whose working state nobody can characterise, which is what makes the sentence unanswerable.
 
-The question that does the work: **if this turns out to be wrong, what would tell us why it was done?** [-- i don't get what the first part of the sentence contributes. I would prefer this : "who can tell us why it was done?"]
+The question that does the work: **what would tell us why this was done?**
 
-If the answer is a person, ask them now. If it is a document this chapter does not apply to you. If the answer is that somebody would read the code and infer — then what you have is the code, and the reason was never written down.
-[-- this part could be worthy of an expansion: "If the answer is that somebody would read the code and infer — then what you have is the code, and the reason was never written down." I am that somebody very often and the process is very painful. Also reading the code most of the time is not enough, you end up going back and asking to other people, and it frequently ends with: I read the code and tested, it looks like code was written to support Y and Z. I've asked A he said this, I've asked B, he said that. We still don't know what to do with this, if we fix Y the behavior Z changes and many clients don't want that. If we don't fix Y for another month Acme Corp will be angry.]
+*What* rather than *who*, because the answer is not always a person. If it is a person, ask them now. If it is a document, this chapter does not apply to you.
+
+And if the answer is that somebody would read the code and work it out, that somebody is doing the job this chapter is about, so it is worth being exact about what the job is. Reading is rarely enough by itself. You read it, you test it, and you arrive at *this looks like it was written to support Y and Z*. Then you ask the people who might know, and they half-remember different things — A says one, B says another, and neither was there for the part that matters. Where the code came from an agent there is nobody in that position at all, which is the same predicament with a step removed.
+
+What you end up holding is not an answer but a position. Fixing Y changes Z; some customers depend on Z; leaving Y another month costs you a different customer. Nobody in that conversation is being unreasonable and nobody is going to win it, because **there is no fact available that settles it** — and one sentence, written at the time by whoever chose Y, is what would have.
 ---
 
 ## Sources
