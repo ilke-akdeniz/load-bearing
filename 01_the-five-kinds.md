@@ -32,7 +32,7 @@ You do not get to disagree with a Law. You only get to be in a situation where i
 
 A **property of your situation**: is there concurrency, does the data outlive the code, how large is the blast radius of a bug, do you control the callers, how often does this change.
 
-Forces are not recommendations, and they are not negotiable by argument. They are facts about where you are standing. Most unresolvable architecture disagreements are two people holding different Forces in mind while arguing about Principles. (Chapter 03 is entirely about them.)
+Forces are not recommendations, and they are not negotiable by argument. They are facts about where you are standing. Most unresolvable architecture disagreements are two people holding different Forces in mind while arguing about Principles. (Chapter 02 is entirely about them.)
 
 **This word is borrowed, and it is the one of the five you can go and look up** — though not where you would expect. In the literature on how to *write* patterns, *Forces* is a named element of the description, sitting alongside Problem, Context and Solution: the constraints and tensions a pattern has to resolve, and how they conflict with each other. The idea is Christopher Alexander's, whose formulation is that a pattern states a relationship between a context, a system of forces arising in that context, and a configuration that lets those forces resolve themselves. The Gang of Four book, which is what most people mean by design patterns, does not use the term at all.
 
@@ -60,7 +60,7 @@ Naming, formatting, file layout. **Arbitrary, but worth being consistent about.*
 
 Neither the compiler nor the runtime can tell which way you chose. Style has no authority at all, and the correct response to a Style argument is to pick one and stop discussing it.
 
-**Where that line falls is decided by the language, not by the category the choice appears to belong to.** Go makes an identifier's case its visibility and Python makes indentation syntax, so a naming or formatting decision that is arbitrary everywhere else is structural there. Chapter 21 works out what that costs; chapter 22 takes what is left, which is most of it.
+**Where that line falls is decided by the language, not by the category the choice appears to belong to.** Go makes an identifier's case its visibility and Python makes indentation syntax, so a naming or formatting decision that is arbitrary everywhere else is structural there. Chapter 20 works out what that costs; chapter 21 takes what is left, which is most of it.
 
 ---
 
@@ -128,7 +128,7 @@ Now translate it. C# with EF Core, Python with SQLAlchemy, Java with Hibernate, 
 
 That is what a Law violation looks like: the program is wrong, and the wrongness is mechanical.
 
-*(The Law being broken is check-then-act, which chapter 06 owns.)*
+*(The Law being broken is check-then-act, which chapter 05 owns.)*
 
 ### An Idiom difference: same shape, opposite reception
 
@@ -211,9 +211,9 @@ Five questions, in order. Stop at the first that answers.
 
 | Claim | Kind | Note |
 |---|---|---|
-| "Exactly-once delivery is impossible" | **Law** | proven; Ch. 07 |
-| "Dependencies must be acyclic" | **Law** | near-tautology; Ch. 05 |
-| "Check-then-act is not atomic" | **Law** | Ch. 06 |
+| "Exactly-once delivery is impossible" | **Law** | proven; Ch. 06 |
+| "Dependencies must be acyclic" | **Law** | near-tautology; Ch. 04 |
+| "Check-then-act is not atomic" | **Law** | Ch. 05 |
 | "A cache needs an invalidation strategy" | **Law** | without one it is a copy that goes wrong |
 | "Requests are served concurrently" | **Force** | a fact wearing advice's clothing |
 | "The schema outlives the code" | **Force** | decides where invariants belong |
@@ -226,10 +226,10 @@ Five questions, in order. Stop at the first that answers.
 | "Premature optimization is the root of all evil" | **Principle** | routinely quoted with Knuth's conditions removed |
 | "Use dependency injection" | **Principle** | the technique |
 | "Use a DI container" | **Idiom** | the tooling — a different kind of claim entirely |
-| "Every repository gets an interface" | **Idiom** | C#/Java; Ch. 17 for why |
+| "Every repository gets an interface" | **Idiom** | C#/Java; Ch. 16 for why |
 | "Accept interfaces, return structs" | **Idiom** | Go |
 | "Exceptions are for exceptional cases" | **Idiom** | Go and Python disagree at the root |
-| "Short local names" | **Style** | Go-specific, and still Style — nothing sees it; Ch. 22 |
+| "Short local names" | **Style** | Go-specific, and still Style — nothing sees it; Ch. 21 |
 | "Prefer `var` / avoid `var`" | **Style** | pick one, stop talking |
 | "Tabs vs spaces" | **Style** | genuinely arbitrary |
 
@@ -247,7 +247,7 @@ Four mechanisms, none of them anyone's fault in particular.
 
 **Tone does not vary with authority.** Confidence is a personality trait and a rhetorical choice. Someone stating a proven theorem and someone stating a formatting preference can sound identical — and frequently the formatting preference sounds *more* certain, because there is less to qualify.
 
-**Advocacy compresses.** "Always do X" travels further than "do X when Y, unless Z." The conditions are the first thing lost, and they were the content. Chapter 15 traces this mechanism in detail.
+**Advocacy compresses.** "Always do X" travels further than "do X when Y, unless Z." The conditions are the first thing lost, and they were the content. Chapter 14 traces this mechanism in detail.
 
 **Monoculture makes Idioms look like physics.** If you have only worked in one ecosystem, its conventions are indistinguishable from necessity. You have never seen the counter-example, so you conclude there isn't one. This is the single most common source of confusion here, and the only reliable cure is working in a second ecosystem long enough to be fluent — long enough that its conventions stop feeling wrong and start feeling like conventions.
 
@@ -269,7 +269,7 @@ Nothing about the claim changed. The Force did: *someone is trying*. Treat secur
 
 **Arguing about the classification is itself the failure.** The model is a thinking aid, not a taxonomy to litigate. Two people debating whether something is a Principle or an Idiom have already extracted the value — they have agreed it is not a Law — and everything after that is the sort of dispute this book exists to end, not to relocate.
 
-**Classifying is not deciding.** The model tells you what kind of claim you are holding. It does not tell you what to do about it. Recognizing something as an Idiom is not permission to ignore it — chapter 21 argues that following local convention is usually correct even when you can out-argue it, because reviewability and shared expectations are worth more than being interesting. The model narrows the question; it does not answer it.
+**Classifying is not deciding.** The model tells you what kind of claim you are holding. It does not tell you what to do about it. Recognizing something as an Idiom is not permission to ignore it — chapter 20 argues that following local convention is usually correct even when you can out-argue it, because reviewability and shared expectations are worth more than being interesting. The model narrows the question; it does not answer it.
 
 **The model needs comparative experience it cannot supply.** This is the real limit, and it is uncomfortable.
 
@@ -322,4 +322,4 @@ That last one is the most expensive and the easiest to fix. When an architecture
 
 ---
 
-**Next:** chapter 03 takes Forces seriously — the properties of a situation that decide which Laws bind and which Principles hold, and why naming them is most of the work.
+**Next:** chapter 02 takes Forces seriously — the properties of a situation that decide which Laws bind and which Principles hold, and why naming them is most of the work.

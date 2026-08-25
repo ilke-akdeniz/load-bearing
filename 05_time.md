@@ -265,7 +265,7 @@ The strongest version of removing the sharing. If exactly one thread, process, o
 
 This is why partitioned designs are fast. A queue consumer that owns its partition, an actor that owns its state, a shard that owns its key range — each is a single writer, and the coordination cost is zero because there is nothing to coordinate with.
 
-The price is that the partition is now part of your design, permanently. Any operation spanning two partitions is back to needing coordination, and the boundaries are difficult to move once data has accumulated behind them (Ch. 03, on why that decision expires).
+The price is that the partition is now part of your design, permanently. Any operation spanning two partitions is back to needing coordination, and the boundaries are difficult to move once data has accumulated behind them (Ch. 02, on why that decision expires).
 
 ### Clocks do not order events
 
@@ -364,7 +364,7 @@ In each, there is exactly one thread of control touching the state. Check-then-a
 
 This matters more than it sounds, because the defensive habit travels further than the danger. A distributed-systems reflex applied to a single-threaded program produces machinery that cannot help, and hides the fact that the program's real risks are elsewhere.
 
-The check is chapter 02's: **name the second writer.** If you cannot, the Law is inert. If you can, it binds — and the number of writers is a Force whose intensity you should have read rather than assumed (Ch. 03).
+The check is chapter 01's: **name the second writer.** If you cannot, the Law is inert. If you can, it binds — and the number of writers is a Force whose intensity you should have read rather than assumed (Ch. 02).
 
 ### The window is sometimes cheaper than the fix
 
@@ -372,13 +372,13 @@ Not every race is worth removing.
 
 A view counter that occasionally loses an increment is a defect. Whether it is a defect worth an atomic operation depends on what the number is used for — and if the answer is "a rough popularity sort on a dashboard," then the lost update costs nothing and the coordination costs something on every write.
 
-This is not permission to leave races in. It is the observation that "remove the race" has a price, and the price is only obviously worth paying when the state is load-bearing. The way to tell is the same as ever: what happens when it is wrong, and who finds out (Ch. 03, blast radius).
+This is not permission to leave races in. It is the observation that "remove the race" has a price, and the price is only obviously worth paying when the state is load-bearing. The way to tell is the same as ever: what happens when it is wrong, and who finds out (Ch. 02, blast radius).
 
 ### Single-machine ordering is often good enough
 
 Clocks do not order events *across machines*. Within one process, a monotonic counter, a mutex-protected sequence, or the database's own transaction ordering gives you a real order at negligible cost, and a great many systems need no more than that.
 
-The failure is importing distributed-systems machinery — vector clocks, causal metadata, conflict-free replicated types — into a system with one database that already provides ordering for free. Chapter 07 works through where that machinery genuinely becomes necessary.
+The failure is importing distributed-systems machinery — vector clocks, causal metadata, conflict-free replicated types — into a system with one database that already provides ordering for free. Chapter 06 works through where that machinery genuinely becomes necessary.
 
 ---
 
@@ -390,7 +390,7 @@ The failure is importing distributed-systems machinery — vector clocks, causal
 
 **Enforcement in one place means error messages in another.** Moving uniqueness into a database constraint gets you correctness and a constraint violation with a constraint name in it. Turning that back into something a user can read is real work, done in a place that has to know what every constraint means.
 
-**Atomic operations are easy to make slower than locks.** A single mutex under low contention is frequently faster than a lock-free structure written to avoid it, because the lock-free version pays on every access what the mutex pays only when contended. Measure, and expect to be wrong (Ch. 04, on empirical constants).
+**Atomic operations are easy to make slower than locks.** A single mutex under low contention is frequently faster than a lock-free structure written to avoid it, because the lock-free version pays on every access what the mutex pays only when contended. Measure, and expect to be wrong (Ch. 03, on empirical constants).
 
 **Causal ordering costs space that grows with the system.** Lamport clocks are an integer. Vector clocks are an integer per node, attached to every message, and pruning them safely as nodes come and go is its own problem.
 
@@ -406,7 +406,7 @@ The failure is importing distributed-systems machinery — vector clocks, causal
 - **`select … for update` missing from a read whose value is about to be written back.**
 - **Last-write-wins on a wall-clock timestamp**, deciding which of two concurrent updates survives. The winner is whoever's clock was ahead.
 - **A timestamp column used to order events from more than one machine**, especially one populated by the application rather than the database.
-- **Retry logic without idempotency**, which turns one race into several (Ch. 07).
+- **Retry logic without idempotency**, which turns one race into several (Ch. 06).
 - **A mutex in a program with one goroutine**, which usually means the last person could not name the second writer either.
 
 **In a conversation:**
@@ -423,4 +423,4 @@ If the answer is *nothing, because nothing else writes here*, the Law is inert a
 
 ---
 
-**Next:** chapter 07 takes the same problem across machines, where coordination stops being expensive and starts being impossible — and works through what has been proved unachievable, along with the engineering that exists because of it.
+**Next:** chapter 06 takes the same problem across machines, where coordination stops being expensive and starts being impossible — and works through what has been proved unachievable, along with the engineering that exists because of it.

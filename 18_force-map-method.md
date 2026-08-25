@@ -12,11 +12,11 @@ Everything before this chapter was diagnosis. This is the procedure, and it is s
 
 ### The three steps of force-mapping
 
-**One: read the forces.** Not the requirements — the forces. Chapter 03 names seven and gives each a question: how many run at once and do they touch the same state; how long what this writes outlives the code that wrote it; what happens when it is wrong and who finds out; how often it changes and how many places change with it; how many people must agree and how many will still be here; what the latency budget is and what fraction one mechanism costs; whether you can change every call site and would know if you broke one.
+**One: read the forces.** Not the requirements — the forces. Chapter 02 names seven and gives each a question: how many run at once and do they touch the same state; how long what this writes outlives the code that wrote it; what happens when it is wrong and who finds out; how often it changes and how many places change with it; how many people must agree and how many will still be here; what the latency budget is and what fraction one mechanism costs; whether you can change every call site and would know if you broke one.
 
 Answers are values, not verdicts. *Concurrency: two writers, same row, twice a second.* Not *concurrency is important.*
 
-**Two: derive the principles those forces support.** A Principle is good advice given certain forces (Ch. 02), so with the forces in hand the derivation is mechanical in one direction: information hiding follows from not controlling your callers; idempotency follows from at-least-once delivery; a version column follows from concurrent writers and a rule spanning the read and the write.
+**Two: derive the principles those forces support.** A Principle is good advice given certain forces (Ch. 01), so with the forces in hand the derivation is mechanical in one direction: information hiding follows from not controlling your callers; idempotency follows from at-least-once delivery; a version column follows from concurrent writers and a rule spanning the read and the write.
 
 **Three: check the idioms last.** An idiom is a local convention. Once you know which principles you need, the question about any convention becomes answerable: does this serve the principle, is it neutral, or does it work against it? Before you know that, the same convention is just what people do here.
 
@@ -24,7 +24,7 @@ The sequence is the whole of the method. The same three steps in a different ord
 
 ### Reading a force is not measuring one
 
-Chapter 03 calls forces facts about your situation, and the word invites a picture that is wrong: an instrument, a reading, a number. Some are like that. Row counts, request rates, latency budgets, the number of people with commit access, how many clients you cannot contact — these are countable, and where they are countable a disagreement is settled by going and counting.
+Chapter 02 calls forces facts about your situation, and the word invites a picture that is wrong: an instrument, a reading, a number. Some are like that. Row counts, request rates, latency budgets, the number of people with commit access, how many clients you cannot contact — these are countable, and where they are countable a disagreement is settled by going and counting.
 
 Most are not. *What happens when this is wrong and who finds out* requires knowing what the system is for and who is downstream of it. *How often does this change and how many places change with it* requires a history somebody has to remember or reconstruct. Both are judgements, and two competent people can read them differently.
 
@@ -58,13 +58,13 @@ Nothing in that table is a design decision. Every cell is a fact somebody could 
 
 Now run advice the book has already graded across all four, and watch it change value.
 
-**Make illegal states unrepresentable** (Ch. 12). For the ledger this is worth a type and a constructor per rule: durability is decades, so a bad row outlives every engineer who could explain it, and being wrong costs money. For the script it is waste — an invalid state cannot outlive the afternoon, and the re-run is the recovery. The force that moved is durability.
+**Make illegal states unrepresentable** (Ch. 11). For the ledger this is worth a type and a constructor per rule: durability is decades, so a bad row outlives every engineer who could explain it, and being wrong costs money. For the script it is waste — an invalid state cannot outlive the afternoon, and the re-run is the recovery. The force that moved is durability.
 
-**Hide the representation** (Ch. 05). For the library this is the central obligation: control of callers is *none*, so anything observable becomes a commitment you cannot withdraw. For the simulator it inverts — the memory layout *is* the design, and hiding it costs the frame budget, which is the entity-component case chapter 05 works through. The force that moved is the latency budget, and it moved far enough to flip a Principle rather than weaken it.
+**Hide the representation** (Ch. 04). For the library this is the central obligation: control of callers is *none*, so anything observable becomes a commitment you cannot withdraw. For the simulator it inverts — the memory layout *is* the design, and hiding it costs the frame budget, which is the entity-component case chapter 04 works through. The force that moved is the latency budget, and it moved far enough to flip a Principle rather than weaken it.
 
-**Compatibility is add-only** (Ch. 09). For the library this binds absolutely: you cannot deploy other people's software, so a removed field is a permanent break in code you will never see. For the ledger and the script it does not bind at all, because you control every caller and can change them in the same commit. The force that moved is control of the callers, and note that it did not weaken the rule anywhere — it removed it, and a rule that does not apply is not a rule you get partial credit for following.
+**Compatibility is add-only** (Ch. 08). For the library this binds absolutely: you cannot deploy other people's software, so a removed field is a permanent break in code you will never see. For the ledger and the script it does not bind at all, because you control every caller and can change them in the same commit. The force that moved is control of the callers, and note that it did not weaken the rule anywhere — it removed it, and a rule that does not apply is not a rule you get partial credit for following.
 
-**One writer, no coordination** (Ch. 06). For the simulator this is the design: each system owns its arrays, nothing else writes them, and the coordination cost falls to zero — which is the only way the frame budget survives extreme concurrency. For the ledger it is unavailable. Many clients write the same rows and none of them can be made to stop, so the concurrency has to be paid for rather than removed. Same force at a similar value, opposite answers, because what differs is whether you control who writes.
+**One writer, no coordination** (Ch. 05). For the simulator this is the design: each system owns its arrays, nothing else writes them, and the coordination cost falls to zero — which is the only way the frame budget survives extreme concurrency. For the ledger it is unavailable. Many clients write the same rows and none of them can be made to stop, so the concurrency has to be paid for rather than removed. Same force at a similar value, opposite answers, because what differs is whether you control who writes.
 
 Every difference above traces to a cell in the table, which means each one can be checked instead of argued.
 
@@ -116,11 +116,11 @@ Every line above is in FlowCore's decision log already, in prose. The map is the
 
 The *chosen* line is the one people skip, and it is the most useful. Four queries against one join is a legibility call; a join would satisfy atomicity equally well. Writing that down means the next person can revisit the query shape without re-opening the question of whether the read has to be atomic. Without it, both look like the same kind of decision, so touching either feels equally risky and nobody touches anything.
 
-The *deferred* line is a decision, not a gap. Completion-path locking is not missing; it is scheduled against a trigger, and the entry says so — the justification "is kept local to Get; it's not precedent for building other concurrency machinery this slice." A deferred decision with a stated trigger is chapter 03's reversibility rule leaving a mark.
+The *deferred* line is a decision, not a gap. Completion-path locking is not missing; it is scheduled against a trigger, and the entry says so — the justification "is kept local to Get; it's not precedent for building other concurrency machinery this slice." A deferred decision with a stated trigger is chapter 02's reversibility rule leaving a mark.
 
 And *revisit if* is what makes the map outlive the decision. Forces move on their own clock, and a codebase does not announce it when they do. This line converts that into something a person can search for.
 
-**None of which is a new artifact.** Chapter 12 lists the architecture decision record among the patterns that answer team size and turnover — the reasoning written down while it was fresh, for the people who were not in the room. A force map is what an ADR's first section already asks for, and the original template says so in the book's own vocabulary. Michael Nygard's, from 2011: the Context section *"describes the forces at play, including technological, political, social, and project local."*
+**None of which is a new artifact.** Chapter 11 lists the architecture decision record among the patterns that answer team size and turnover — the reasoning written down while it was fresh, for the people who were not in the room. A force map is what an ADR's first section already asks for, and the original template says so in the book's own vocabulary. Michael Nygard's, from 2011: the Context section *"describes the forces at play, including technological, political, social, and project local."*
 
 His reason for the practice is this chapter's argument in different words. Without the rationale, whoever arrives later is left either accepting decisions that may no longer apply, or reversing them without knowing what they cost.
 
@@ -131,7 +131,7 @@ Generalising from that: the output is not a design. It is a record of which deci
 
 A forced decision has a force behind it — *this is a version column because two writers touch one row.* A chosen decision does not — *this is a version column because that is what we do.* Both produce identical code. Only the first says what would have to change for it to stop being right.
 
-Which answers something chapter 03 raises and leaves open. Forces move on their own clock, and nobody revisits a design when they do, because nothing signals it. A map is what makes the revisit possible: it says *this assumed two writers*, so when the second writer goes away there is a sentence to search for.
+Which answers something chapter 02 raises and leaves open. Forces move on their own clock, and nobody revisits a design when they do, because nothing signals it. A map is what makes the revisit possible: it says *this assumed two writers*, so when the second writer goes away there is a sentence to search for.
 
 ### How to notice a principle whose forces are absent
 
@@ -139,23 +139,23 @@ Most principles in a codebase were not derived there. They arrived with a framew
 
 The test is one question, and it is the reverse of the derivation: **what would have to be true for this to be unnecessary?**
 
-If the answer comes back concrete — *if only one process ever wrote to this table* — you have found the force, and you can go and look at whether it holds. If the answer is *nothing, it is just good practice*, the principle arrived without its conditions and nobody in the room can say what it is for. That is chapter 15's mechanism, detected from inside your own codebase rather than in a talk.
+If the answer comes back concrete — *if only one process ever wrote to this table* — you have found the force, and you can go and look at whether it holds. If the answer is *nothing, it is just good practice*, the principle arrived without its conditions and nobody in the room can say what it is for. That is chapter 14's mechanism, detected from inside your own codebase rather than in a talk.
 
 The failure has a shape worth naming. Inherited principles cluster: a codebase does not carry a single one, it carries the whole set that travelled together from similar sources. Finding one unforced principle is a reason to look at its neighbours.
 
 ### When the forces conflict
 
-Chapter 03 states the problem and hands it here: low latency pulls against durability, a small team pulls against a large blast radius, and naming both does not tell you which wins. It does not, and no method computes it. Trade-offs are decided.
+Chapter 02 states the problem and hands it here: low latency pulls against durability, a small team pulls against a large blast radius, and naming both does not tell you which wins. It does not, and no method computes it. Trade-offs are decided.
 
 What the map does is make the decision smaller. Five moves, roughly in the order worth trying them.
 
 **Check that both forces are at the values you assumed.** Conflicts dissolve under measurement more often than they get resolved. *Low latency* is a budget with a number; *durability* is a retention period someone can name. Two people arguing usually have different numbers in mind and have never said them out loud.
 
-**Look for the third option.** Most conflicts are between two implementations rather than two requirements. Durability against latency is irreconcilable if the choice is *write to disk synchronously* versus *do not*; it often dissolves at *write to a log and acknowledge*, which is chapter 07's outbox reasoning applied one level down.
+**Look for the third option.** Most conflicts are between two implementations rather than two requirements. Durability against latency is irreconcilable if the choice is *write to disk synchronously* versus *do not*; it often dissolves at *write to a log and acknowledge*, which is chapter 06's outbox reasoning applied one level down.
 
-**Ask which direction is reversible.** Chapter 03's rule decides this: if one branch is cheap to walk back and the other is not, take the reversible one and buy information. That is not a compromise; it is choosing to decide later with more facts, which is a different thing.
+**Ask which direction is reversible.** Chapter 02's rule decides this: if one branch is cheap to walk back and the other is not, take the reversible one and buy information. That is not a compromise; it is choosing to decide later with more facts, which is a different thing.
 
-**Bound the loss instead of estimating the odds.** When you cannot say which force wins, you can usually say what it costs to be wrong in each direction. Pick the branch whose wrong case is survivable. Chapter 03 draws the line this sits on — a risk with no instrument is bounded rather than estimated harder.
+**Bound the loss instead of estimating the odds.** When you cannot say which force wins, you can usually say what it costs to be wrong in each direction. Pick the branch whose wrong case is survivable. Chapter 02 draws the line this sits on — a risk with no instrument is bounded rather than estimated harder.
 
 **Then escalate, and say what you are escalating.** A genuine conflict between latency and durability is a business decision wearing technical clothes. Handing it up is correct, and the map is what makes the hand-off usable: *we can acknowledge a write in under ten milliseconds, or we can guarantee it survives a machine dying, and we cannot do both on the same write — here is what each one costs.* That sentence is answerable by someone who does not write code. *Which is more important, speed or reliability* is not.
 
@@ -187,13 +187,13 @@ What the two teams cannot do is disagree about the forces without one of them be
 
 Most decisions do not deserve this. A form with three fields, a script that prints a report, a config file — the conventional answer is fine, the cost of being wrong is a rewrite that takes an afternoon, and the analysis costs more than the decision.
 
-The test is chapter 03's blast radius applied to the decision itself rather than to the code: **what does being wrong here cost, and who finds out?** Where the answer is *me, in ten minutes*, take the convention and move on. The method is for decisions that are expensive to reverse, and using it everywhere is a way of never shipping.
+The test is chapter 02's blast radius applied to the decision itself rather than to the code: **what does being wrong here cost, and who finds out?** Where the answer is *me, in ten minutes*, take the convention and move on. The method is for decisions that are expensive to reverse, and using it everywhere is a way of never shipping.
 
 ### The forces are not knowable yet
 
 Some forces cannot be read at the time the decision is made. You do not know the load, the team is not hired, the customers do not exist. Reading them is then guessing with a table attached, which is worse than guessing, because the table makes it look like analysis.
 
-The correct move is chapter 03's: identify what would tell you, and defer if deferral is cheap. A force you cannot measure is not a force you get to assume.
+The correct move is chapter 02's: identify what would tell you, and defer if deferral is cheap. A force you cannot measure is not a force you get to assume.
 
 ### A decision with one live option
 
@@ -205,11 +205,11 @@ Sometimes the platform, the contract, or the existing schema leaves one thing yo
 
 **It requires the expertise it appears to replace.** This is the condition to state most harshly, because the method reads like a substitute for experience and is the opposite. Most of that expertise goes into step one, for the reason given earlier: reading a force is a judgement about which facts matter to the decision in front of you, not a measurement. Deriving *idempotency follows from at-least-once delivery* requires already knowing what at-least-once delivery implies. Reading a latency budget as a force requires knowing what a mechanism costs. The method organizes knowledge you have; it does not supply knowledge you lack, and a force map produced by someone who cannot price the options is a confident-looking document with the wrong cells filled in.
 
-The same holds wherever the method is run with an AI coding agent in the loop, which chapter 23 takes in full: overriding a recommendation is only possible for someone who can tell that it is a convention rather than a consequence, and that scales with depth in the specific domain.
+The same holds wherever the method is run with an AI coding agent in the loop, which chapter 22 takes in full: overriding a recommendation is only possible for someone who can tell that it is a convention rather than a consequence, and that scales with depth in the specific domain.
 
 **It costs real time per decision, and pays only under specific forces.** FlowCore carries thirty-eight recorded decisions for roughly five thousand lines. That ratio is justified by durability: those are schema decisions that outlive the code. On a script with a known death date the same ratio is waste, and saying so is not a hedge — it is the method applied to itself.
 
-**The map goes stale silently.** Forces move on their own clock (Ch. 03) and nothing in a codebase announces that the team grew, the client count doubled, or the row count crossed the point where the query plan changed. A force map records what was true when it was written, which is what makes the revisit possible and also what makes it necessary.
+**The map goes stale silently.** Forces move on their own clock (Ch. 02) and nothing in a codebase announces that the team grew, the client count doubled, or the row count crossed the point where the query plan changed. A force map records what was true when it was written, which is what makes the revisit possible and also what makes it necessary.
 
 **It is socially expensive in a room that has already decided.** Asking *what forces support that* reads as obstruction when everyone else is on the implementation. The move that works is narrower: ask what would have to be true for the choice to be wrong. It is the same question, it takes one sentence, and it does not require anyone to defend a position they have not yet realized they are holding.
 
@@ -227,13 +227,13 @@ The same holds wherever the method is run with an AI coding agent in the loop, w
 **In a conversation:**
 
 - **"That's the standard approach."** True and irrelevant until someone says which force it answers. The useful reply names one: *standard where the callers are strangers — are ours?*
-- **"We might need to scale."** *Scale* is not a force; chapter 03 splits it into steady load, bursts and data volume, which have different designs. The question is which one, at what number.
-- **"Let's keep it flexible."** Flexible against what? Flexibility is bought against a specific change, and a change nobody can name is not one you can prepare for (Ch. 18).
-- **Two people arguing about a design for more than ten minutes.** Write the forces down instead. It ends more of these arguments than continuing them does, for the reason chapter 03 gives.
+- **"We might need to scale."** *Scale* is not a force; chapter 02 splits it into steady load, bursts and data volume, which have different designs. The question is which one, at what number.
+- **"Let's keep it flexible."** Flexible against what? Flexibility is bought against a specific change, and a change nobody can name is not one you can prepare for (Ch. 17).
+- **Two people arguing about a design for more than ten minutes.** Write the forces down instead. It ends more of these arguments than continuing them does, for the reason chapter 02 gives.
 
 The question that does the work: **which fact about our situation would have to change for this to be the wrong choice?**
 
-Ask it of your own decisions and it produces the force map as a by-product. Ask it of advice arriving from outside and it is the same question chapter 15 ends on, pointed at the present rather than at a source. If there is no answer — if no fact about the situation could make the choice wrong — then what you are holding is not a design decision, and finding out which of the five kinds it actually is takes one pass through chapter 02.
+Ask it of your own decisions and it produces the force map as a by-product. Ask it of advice arriving from outside and it is the same question chapter 14 ends on, pointed at the present rather than at a source. If there is no answer — if no fact about the situation could make the choice wrong — then what you are holding is not a design decision, and finding out which of the five kinds it actually is takes one pass through chapter 01.
 
 ---
 
@@ -244,4 +244,4 @@ Ask it of your own decisions and it produces the force map as a by-product. Ask 
 
 ---
 
-**Next:** chapter 20 runs the method across six force profiles and finds that the forces each one pins invert a piece of standard advice — not weaken it, invert it, so that the thing to do is the opposite of what the advice says.
+**Next:** chapter 19 runs the method across six force profiles and finds that the forces each one pins invert a piece of standard advice — not weaken it, invert it, so that the thing to do is the opposite of what the advice says.

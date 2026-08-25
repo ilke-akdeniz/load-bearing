@@ -24,7 +24,7 @@ The author's framing, which is the sharpest available:
 
 > Without "grilling", I would be building a system where I didn't know the trade-offs and important decisions and where a default "recommended" decision was silently made by the AI.
 
-Chapter 02 says the kinds get confused because tone does not vary with authority.
+Chapter 01 says the kinds get confused because tone does not vary with authority.
 Generated code is worse than that: it has no tone, because it makes no claim.
 
 ---
@@ -33,9 +33,9 @@ Generated code is worse than that: it has no tone, because it makes no claim.
 
 Each is an instance of a mechanism the book already owns, which is why this is distributed rather than a chapter.
 
-### 1. The training corpus is a monoculture — chapter 02
+### 1. The training corpus is a monoculture — chapter 01
 
-Chapter 02 names monoculture as "the single most common source of confusion here" and prescribes exactly one cure: work in a second ecosystem long enough that its conventions stop feeling wrong and start feeling like conventions.
+Chapter 01 names monoculture as "the single most common source of confusion here" and prescribes exactly one cure: work in a second ecosystem long enough that its conventions stop feeling wrong and start feeling like conventions.
 
 A model has one training distribution.
 It cannot go and work somewhere else.
@@ -43,25 +43,25 @@ It cannot go and work somewhere else.
 
 This is the finding that makes the material non-obvious: it is not a claim about capability, it is a claim about what "idiomatic" can mean to something with one corpus.
 
-### 2. An AI coding agent cannot see your Forces — chapter 03
+### 2. An AI coding agent cannot see your Forces — chapter 02
 
-Chapter 03's claim is that evaluating the Forces is the groundwork.
+Chapter 02's claim is that evaluating the Forces is the groundwork.
 A model has the prompt.
 Forces are facts about your situation, so the derivation happens without its inputs — not carelessly, but by construction.
 
-Chapter 03 leaves a reader stuck here, and grilling is the resolution: you cannot supply the Forces in a prompt because you do not yet know which ones are about to matter.
+Chapter 02 leaves a reader stuck here, and grilling is the resolution: you cannot supply the Forces in a prompt because you do not yet know which ones are about to matter.
 The interview inverts the flow — the model surfaces the decision, the human supplies the fact that settles it.
 
-### 3. Uniform confidence across all five kinds — chapter 02
+### 3. Uniform confidence across all five kinds — chapter 01
 
 One agent produces Laws, Principles, Idioms, and Style in one voice.
-Chapter 02's first mechanism, with a single source behind it.
+Chapter 01's first mechanism, with a single source behind it.
 
 Weaker than the other three, and should stay a clause rather than a section.
 
-### 4. The team-size Force at its limit — chapter 03
+### 4. The team-size Force at its limit — chapter 02
 
-Chapter 03's team-size Force asks how many people must agree, and how many of today's people will still be here.
+Chapter 02's team-size Force asks how many people must agree, and how many of today's people will still be here.
 Its mechanism is that a rule migrates **comment → review habit → type system** as the number who must know it rises and the chance any of them was present for the original argument falls.
 
 Generated code sits at the extreme of both axes at once: a contributor present for no conversation, retaining nothing between sessions, producing at a rate no review process was sized for.
@@ -71,7 +71,7 @@ Rules that survived in a comment or a review habit must move into types, constra
 
 ---
 
-## Grilling — chapter 19
+## Grilling — chapter 18
 
 A skill the author runs by default in FlowCore sessions.
 It is an **interview conducted before generation**, not a review technique.
@@ -124,7 +124,7 @@ A question settled uniformly across the training data does not present itself as
 So **grilling is weakest exactly where the monoculture is strongest.**
 It surfaces contested choices and hides settled ones — and settled-in-the-corpus is precisely the class most likely to be wrong outside the ecosystem it came from.
 
-This follows from chapter 02's mechanism rather than from measurement.
+This follows from chapter 01's mechanism rather than from measurement.
 State it as reasoning, not as a finding.
 
 ### The ordinary costs
@@ -139,7 +139,7 @@ State it as reasoning, not as a finding.
 Lead with this rather than with the book's own decision log.
 FlowCore's log is about schemas, concurrency, and naming, with consequences; this book's log is about prose, and readers will discount a book that proves its method works by citing itself.
 
-### Decision 18 — an Idiom whose precondition failed (chapter 21)
+### Decision 18 — an Idiom whose precondition failed (chapter 20)
 
 Its context line:
 
@@ -152,9 +152,9 @@ What broke was the Idiom's precondition, which decision 18 states exactly: the c
 That holds when you write the code.
 It does not hold when you review generated code in volume, having authored none of it.
 
-So the Force that changed is **the reader is no longer the author**, and the result is a documented, deliberately narrow deviation — which is chapter 21's prescription (declare it, document the reason, keep it narrow) carried out in full, for an AI-shaped reason.
+So the Force that changed is **the reader is no longer the author**, and the result is a documented, deliberately narrow deviation — which is chapter 20's prescription (declare it, document the reason, keep it narrow) carried out in full, for an AI-shaped reason.
 
-### Decision 37 — generated tests that never reach their condition (chapter 17)
+### Decision 37 — generated tests that never reach their condition (chapter 16)
 
 > This is the fifth toothless or invalid test in the iteration […] The recurring shape is a test that never reaches the condition it names.
 
@@ -191,13 +191,13 @@ The loop is the thing.
 Three, and the first is the serious one.
 
 **This is where the book is most likely to commit its own diagnosed error.**
-Twenty-two chapters arguing that advice arrives stripped of its conditions, closing with "keep a decision log and interview the model," is chapter 15's mechanism running on the book itself, in its final pages, with the author as the movement.
+Twenty-two chapters arguing that advice arrives stripped of its conditions, closing with "keep a decision log and interview the model," is chapter 14's mechanism running on the book itself, in its final pages, with the author as the movement.
 
 Avoiding it requires the conditions stated as harshly as Part IV states them for TDD.
 Two are non-negotiable:
 
 - **The countermeasure requires the expertise it was supposed to substitute for.** The author caught this book's CAP overreach because they knew CAP well enough to be suspicious. A reviewer without that knowledge reads the same confident paragraph and approves it. This scales with the reviewer's depth in the specific domain, which is the opposite of what people want from these tools — and saying so is the most valuable thing the material can contribute, because most writing on the subject will not.
-- **The log costs real time per decision and pays only under specific Forces.** FlowCore has 38 entries for roughly 5,000 lines. That ratio is justified by durability — those are schema decisions that outlive the code (chapter 03) — and it would be waste on a script with a known death date.
+- **The log costs real time per decision and pays only under specific Forces.** FlowCore has 38 entries for roughly 5,000 lines. That ratio is justified by durability — those are schema decisions that outlive the code (chapter 02) — and it would be waste on a script with a known death date.
 
 **Dating.**
 Refuse every capability claim.
@@ -214,13 +214,13 @@ This was an author correction to the draft, recorded in decision 24: the draft h
 
 | Piece | Chapter | Shape |
 |---|---|---|
-| Corpus monoculture | 02 | a paragraph, as a new instance of an owned mechanism |
-| Cannot see your Forces; team-size Force at its limit | 03 | a passage in the relevant Force sections |
-| The conditions were never derived | 15 | a paragraph applying 15's own test — **the argument is not worked above**; ledger row *The scope was never set* cites this file for it and there is nothing here yet |
-| Generated tests that never reach their condition | 17 | a passage, with FlowCore decision 37 |
-| Grilling, in full | 23 | **done** — drafted into 19, moved to 23 by decision 96; the frozen text, the provenance, the two versions' disagreement and the limit |
-| An Idiom whose precondition failed | 22 | **done** — landed in 22 rather than 21, because 02's mechanical test sorts short names as Style (decision 87) |
-| Silent defaults; receiving generated code | 23 | **done** — the chapter was created for it (decision 96), and it is no longer a *receiving case*, since 23 stopped being the receiving chapter |
+| Corpus monoculture | 01 | a paragraph, as a new instance of an owned mechanism |
+| Cannot see your Forces; team-size Force at its limit | 02 | a passage in the relevant Force sections |
+| The conditions were never derived | 14 | a paragraph applying 15's own test — **the argument is not worked above**; ledger row *The scope was never set* cites this file for it and there is nothing here yet |
+| Generated tests that never reach their condition | 16 | a passage, with FlowCore decision 37 |
+| Grilling, in full | 22 | **done** — drafted into 19, moved to 23 by decision 96; the frozen text, the provenance, the two versions' disagreement and the limit |
+| An Idiom whose precondition failed | 21 | **done** — landed in 22 rather than 21, because 02's mechanical test sorts short names as Style (decision 87) |
+| Silent defaults; receiving generated code | 22 | **done** — the chapter was created for it (decision 96), and it is no longer a *receiving case*, since 23 stopped being the receiving chapter |
 
-Chapters 02, 03, 15 and 17 are all at **draft**; see *Pending revisits* in `00_toc.md`.
+Chapters 01, 03, 15 and 17 are all at **draft**; see *Pending revisits* in `00_toc.md`.
 This file is deleted once the four outstanding pieces land, per decision 92.

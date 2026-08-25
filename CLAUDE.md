@@ -131,7 +131,7 @@ Provenance stays in the prose where the claim is made, so the section adds no fo
 
 ### Part IV takes a different shape
 
-Chapters 16, 17 and 18 are case studies. Chapter 15 makes the claim; they are three instances of it, and they do not each get a claim of their own.
+Chapters 15, 17 and 18 are case studies. Chapter 14 makes the claim; they are three instances of it, and they do not each get a claim of their own.
 
 Forcing the rubric on them produced manufactured claim sentences — each one two assertions welded with *and* or *neither/nor*, half reporting what a source said and half stating the chapter's technical finding. The author rejected all four. **A chapter whose job is to be evidence for another chapter's claim does not need a claim; it needs the case laid out.**
 
@@ -142,7 +142,7 @@ So a Part IV case uses this shape instead:
 3. **What the wide reading produces** — the demonstration, in code, and where the chapter's own finding lands.
 4. **Why the wide reading gets taken** — the mechanism.
 5. **Where the wide reading is right** — the mandatory counter-example, framed as *when following the compressed version is correct* rather than as an exception to a claim the chapter never made.
-6. **What it costs** — where both sides have a bill, two sections: *what following the advice costs* and *what taking the alternative costs*. Mixing them in one list is what made chapter 17's costs section unreadable.
+6. **What it costs** — where both sides have a bill, two sections: *what following the advice costs* and *what taking the alternative costs*. Mixing them in one list is what made chapter 16's costs section unreadable.
 7. **How to recognize it**
 
 The counter-example rule is unchanged and still mandatory; only its framing moves. Everything before Part IV keeps the general rubric, because those chapters do make claims of their own.
@@ -152,10 +152,10 @@ The counter-example rule is unchanged and still mandatory; only its framing move
 The claim may assert **only what the chapter goes on to demonstrate**, and the standing bias is toward asserting more.
 The bias has a specific shape: claiming *sufficiency* where only *necessity* was shown.
 
-Two drafts of chapter 03's claim failed this, in the same direction:
+Two drafts of chapter 02's claim failed this, in the same direction:
 
 - *"Evaluating the Forces is most of the work of choosing well"* — unquantifiable, and not what the chapter demonstrates.
-- *"…is where the design is actually decided"* — contradicted by the book itself in three places: chapter 02's *classifying is not deciding*, chapter 03's own concession that conflicting Forces are decided rather than computed, and chapter 21's case for obeying an Idiom you can out-argue.
+- *"…is where the design is actually decided"* — contradicted by the book itself in three places: chapter 01's *classifying is not deciding*, chapter 02's own concession that conflicting Forces are decided rather than computed, and chapter 20's case for obeying an Idiom you can out-argue.
 
 What survived was *"…is the groundwork"* — a prerequisite claim, necessary and explicitly not sufficient, provable from the seven cases the chapter works through.
 
@@ -201,7 +201,7 @@ The lists below are **illustrative, not a lookup table** — a term missing from
 - **Usually explained at first use** — terms whose specialist meaning is the one being used. Cache line, prefetcher, working set, coherency traffic, linearizability, quorum, entity-component system, bitemporality.
 
 The structural fix beats the inline definition: **lead with the situation, give the number, name the thing last.**
-Chapter 08's Amdahl section works because a hundred-minute report with twenty un-splittable minutes makes the ceiling obvious before any formula appears — the name then labels something already understood rather than gating it.
+Chapter 07's Amdahl section works because a hundred-minute report with twenty un-splittable minutes makes the ceiling obvious before any formula appears — the name then labels something already understood rather than gating it.
 
 Two failure symptoms, opposite directions.
 Under-explaining reads as a textbook: the reader decodes vocabulary instead of following the argument, and the point is lost in the decoding.
@@ -257,7 +257,7 @@ Naming a result is one thing; explaining its mechanism, or saying what its terms
 The trigger is writing a sentence of the form *the mechanism is…*, *what X actually meant was…*, or *the reason this holds is…* about a named law, paper, or person's argument.
 At that point, go and read it.
 
-Chapter 09 explained Conway's Law twice without reading Conway.
+Chapter 08 explained Conway's Law twice without reading Conway.
 The first attempt made it a temptation acting on individuals, which the author rejected as implausible.
 The second replaced that with an ownership mechanism, which was defensible and still could not answer *is this what he said*.
 One fetch settled it: Conway's own words are *negotiated and agreed upon*, which is the ownership reading in his vocabulary — and the paper contained a sharper example than anything invented for it, a five-person team producing a five-phase compiler and a three-person team producing a three-phase one.
@@ -270,7 +270,7 @@ Two things follow, and the second is the reason the rule is worth the trouble.
 When the source genuinely cannot be reached — paywalled, offline, out of print — say so in the chapter's review notes and keep the claim to what is uncontroversially attributed, rather than explaining a mechanism from inference.
 
 **Read the primary source in full, and never splice inference into it.**
-Chapter 15 got the Pike material from a third-party transcript, read in excerpts, and then failed in a way excerpt-reading makes almost inevitable.
+Chapter 14 got the Pike material from a third-party transcript, read in excerpts, and then failed in a way excerpt-reading makes almost inevitable.
 
 Pike's talk lists *Don't communicate by sharing memory* and, two items later, *Channels orchestrate; mutexes serialize*.
 The draft asserted that the second is the **condition** for the first — "the condition was published beside the proverb, by the same person, on the same afternoon."
@@ -279,7 +279,7 @@ The author caught it by watching the talk.
 
 Four rules follow, and the third is the one that would have caught this.
 
-- **Read the whole thing, not the passages that answer your question.** This is the rule, and it is about partiality rather than about medium. Excerpts fetched to confirm a thesis return what was asked for; the context that would have disproved it sits in the parts nobody requested. A full verbatim transcript read end to end is a good source. The same transcript read in four keyword searches is how chapter 15 went wrong.
+- **Read the whole thing, not the passages that answer your question.** This is the rule, and it is about partiality rather than about medium. Excerpts fetched to confirm a thesis return what was asked for; the context that would have disproved it sits in the parts nobody requested. A full verbatim transcript read end to end is a good source. The same transcript read in four keyword searches is how chapter 14 went wrong.
 - **Rank what you have, and say which you used.** The author's own writing, then a full recording or transcript of them speaking, then someone else's account of it. Name the one you actually read when the chapter quotes it.
 - **Never silently combine an author's words with your own inference and present the result as theirs.** Quoting two real sentences and asserting a relationship between them produces a claim the author never made, out of material that is entirely genuine. Where a connection is the book's, say so in the sentence.
 - **Surface what the author must check.** End the response that ships a chapter with the primary sources under the heading **Must be read by the author before this chapter is marked draft**, with direct links and timestamps where they exist.
@@ -293,7 +293,7 @@ A paper, a specification, or a standards document states its finding in the voca
 That vocabulary exists so other specialists can check the work.
 It is not what the finding says, and a chapter that carries it across has swapped its own reader for the source's.
 
-Chapter 17 shipped a draft with three stacked block quotes, one of them containing *"this advice would require a negative (statistically significant) coefficient, which the models did not produce."*
+Chapter 16 shipped a draft with three stacked block quotes, one of them containing *"this advice would require a negative (statistically significant) coefficient, which the models did not produce."*
 What that sentence means is *they looked for a link in either direction and found none — had test-first been harmful, more of it would have gone with worse results.*
 Same content, and only the second version is usable by this book's reader.
 The same draft carried the paper's `GRA / UNI / SEQ / REF` abbreviations, used once each, and gave *external quality* as though it were plain English rather than *how much of a supplied acceptance suite the code passed*.
@@ -344,7 +344,7 @@ Four rules, and they exist because the source is read as prose and will one day 
 - **Every code fence carries a language tag** — `go`, `csharp`, `python`, `sql`, `rust`, and `text` for terminal output, compiler errors, and ASCII diagrams. No bare fences.
 
 Everything else stays as it reads best.
-Long code lines, box-drawing characters in diagrams, `>` blockquotes, `---` section dividers, and plain `(Ch. 05)` cross-references are all fine — each is a build-time transformation, and none is worth making the source uglier for.
+Long code lines, box-drawing characters in diagrams, `>` blockquotes, `---` section dividers, and plain `(Ch. 04)` cross-references are all fine — each is a build-time transformation, and none is worth making the source uglier for.
 
 **For whoever writes the PDF build.**
 Long code lines are handled by `fvextra`, which extends the `fancyvrb` environments pandoc already emits, so pandoc's syntax highlighting is kept:
@@ -382,7 +382,7 @@ These are read as diffs, not as prose, so sentence-level granularity is worth mo
 The TOC drifts in two ways, and they need different handling.
 
 **Local drift** — an entry describing its own chapter wrongly, because the chapter changed during review.
-Chapter 13's entry said *"Decorator is function composition"* after the chapter had measured that and found it false.
+Chapter 12's entry said *"Decorator is function composition"* after the chapter had measured that and found it false.
 This needs judgment, so **update a chapter's entry when it moves to draft**, while what changed is still fresh.
 Folding it into the status change costs a minute; finding it later means re-reading the chapter to reconstruct a conclusion nobody remembers reaching.
 
@@ -391,7 +391,7 @@ A stale one produces a wrong chapter rather than a wrong paragraph, so update th
 
 **Global drift** — two things that must differ don't, a retired term survives in one place, a count disagrees across files.
 No per-chapter review catches these, because no single chapter is wrong.
-Part I was called "The five kinds" while chapter 02 was called "The five kinds of claim" — neither wrong alone, and the collision was *created* by the sweep that fixed the terminology.
+Part I was called "The five kinds" while chapter 01 was called "The five kinds of claim" — neither wrong alone, and the collision was *created* by the sweep that fixed the terminology.
 This is what `tools/check-drift.py` is for. Run it rather than looking for these by eye.
 
 ### Chapter status
@@ -428,7 +428,7 @@ The log doubles as the authorship record for an AI-assisted work, so it has to s
 
 ### Grilling
 
-**Both a chapter and a review are worked through by interview, not by delivering a result and waiting for objections.** Chapter 19 documents the technique and quotes the prompt it comes from; this is the same thing, run by Claude, with the author answering.
+**Both a chapter and a review are worked through by interview, not by delivering a result and waiting for objections.** Chapter 18 documents the technique and quotes the prompt it comes from; this is the same thing, run by Claude, with the author answering.
 
 The procedure:
 
@@ -436,13 +436,13 @@ The procedure:
 - **One question at a time**, waiting for the answer before the next one. A batch of questions is bewildering, and it also hides which ones were dependent on which.
 - **Give a recommended answer with every question**, and the reasoning for it. A question with no recommendation pushes the work back onto the author, which is the opposite of the point.
 - **Look facts up rather than asking.** Counts, cross-references, what a source actually says, what a rename would cost — go and find out. The *decisions* are the author's; the facts are Claude's job, and a fact discovered before the question is asked often settles it.
-- **Order the questions by dependency.** Ask the root decision first. Chapter 20's terminology question came first because the title, every heading, the TOC entry, three ledger rows and two cross-references all inherited from it, and asking anything else first would have meant asking it twice.
+- **Order the questions by dependency.** Ask the root decision first. Chapter 19's terminology question came first because the title, every heading, the TOC entry, three ledger rows and two cross-references all inherited from it, and asking anything else first would have meant asking it twice.
 - **Say what a decision will cost before it is taken**, where the cost is not obvious. The answer changes when the consequence is visible.
 - **Surface decisions the author did not tag.** A review is not an exhaustive list of what is wrong; anything found on the way in is worth putting to them as a question of its own.
 - **Log the interview, not only what it concluded.** Grilling is where the book's judgments get made, so the exchange goes into `docs/DECISIONS.md` with the work: the author's objection in their own words, the draft's recommendation where it did not survive, and any fact found mid-interview that changed the question being asked. This is the argument in *Attribution in decision entries* below, applied to the format that generates the most attributable material — a log that keeps only the conclusions is the quiet failure recorded there, and grilling produces conclusions that look self-evident once reached and were not.
-- **Keep a running note as the answers land.** Four questions in, the early exchanges are easy to reconstruct wrongly and easy to reconstruct confidently. The author's exact words are worth more than the paraphrase: chapter 21's two counter-arguments were sharper than the summary written from memory an hour later would have been.
+- **Keep a running note as the answers land.** Four questions in, the early exchanges are easy to reconstruct wrongly and easy to reconstruct confidently. The author's exact words are worth more than the paraphrase: chapter 20's two counter-arguments were sharper than the summary written from memory an hour later would have been.
 
-**When it is not worth it.** The technique is slow by design, which chapter 19 states as one of its costs. A review that is three typos and a wording fix is applied, not interviewed. The test is whether any item would change what the other items should be — where nothing depends on anything, there is no tree to walk, and an interview is ceremony.
+**When it is not worth it.** The technique is slow by design, which chapter 18 states as one of its costs. A review that is three typos and a wording fix is applied, not interviewed. The test is whether any item would change what the other items should be — where nothing depends on anything, there is no tree to walk, and an interview is ceremony.
 
 ### Attribution in decision entries
 
@@ -487,7 +487,7 @@ Reversing this order could yield unwanted results, and tags sometimes explain a 
 - **Report what changed and why**, including anything found that was not asked about.
 
 **A wording problem found in one place is a survey, not a fix.**
-Three times while finishing chapter 15, a single word caught in review was doing the same wrong job elsewhere, and the one-site fix would have left the rest.
+Three times while finishing chapter 14, a single word caught in review was doing the same wrong job elsewhere, and the one-site fix would have left the rest.
 
 - *Sentence* was vague in the claim. Correcting it exposed **thirteen** more uses in the body standing in as general vocabulary, including the chapter's second-strongest line and its closing test.
 - *Extent* was a private synonym for *scope*, used **ten** times for the same thing inside one chapter.
@@ -495,7 +495,7 @@ Three times while finishing chapter 15, a single word caught in review was doing
 
 So when a word is found doing the wrong job, **grep every use of it before calling it fixed** — and not only in the chapter. `docs/LEDGER.md` and `00_toc.md` carry the same vocabulary, go stale silently, and were wrong in each of these cases.
 
-The cross-chapter version is the same rule at larger scale. *Scope* had acquired three incompatible meanings across chapters 13, 14, and 15, two of them bold definitions in adjacent chapters, before anyone counted. One survey found it; a lot of careful reading had not. `tools/check-drift.py` catches structural drift and cannot catch this, so the survey has to be run by hand when a term is in question.
+The cross-chapter version is the same rule at larger scale. *Scope* had acquired three incompatible meanings across chapters 12, 14, and 15, two of them bold definitions in adjacent chapters, before anyone counted. One survey found it; a lot of careful reading had not. `tools/check-drift.py` catches structural drift and cannot catch this, so the survey has to be run by hand when a term is in question.
 
 ### The final sweep
 
@@ -533,8 +533,8 @@ Never amend or rebase the author's commits — the point of the history is that 
 
 **Rename a file in its own commit, and edit it in the next one.**
 Git matches a renamed file to its original by similarity, and gives up below fifty percent.
-Chapter 20's rename shipped alongside its edits and came out at forty-three, so `git show` reported a deleted file and a new one and the review diff was unreadable at exactly the moment somebody wanted to read it.
-This has come up three times — chapters 11, 16 and 20 — and the fix costs one extra commit.
+Chapter 19's rename shipped alongside its edits and came out at forty-three, so `git show` reported a deleted file and a new one and the review diff was unreadable at exactly the moment somebody wanted to read it.
+This has come up three times — chapters 10, 16 and 20 — and the fix costs one extra commit.
 
 Keep the message short: a subject line, and a body only when the change needs a reason rather than a description.
 Where a change reverses something, or was made against a request, say so in the body.

@@ -37,7 +37,7 @@ The metaphor does the work without explanation: in a building some walls carry t
 It also supplies the working question in three words — *is this load-bearing?* — which is what a reader should be left holding.
 
 The rejected candidates each failed differently.
-*Altitude* names the model but explains nothing until chapter 02 has been read; a title should not need a footnote.
+*Altitude* names the model but explains nothing until chapter 01 has been read; a title should not need a footnote.
 *Where It Stops* is honest but sounds like a book about limits rather than judgment.
 *It Depends* is memorable and undersells the material — a good deal of the book is emphatically not "it depends."
 *Laws, Idioms, and Slogans* reads like a paper title; it survives as a section name.
@@ -53,7 +53,7 @@ The subtitle commits publicly to the mandatory *Where this doesn't apply* sectio
 **Date.** 2026-08-03
 
 **Context.**
-The first draft of chapter 02 used both terms — "the five altitudes" in the title and model, "levels" throughout the prose.
+The first draft of chapter 01 used both terms — "the five altitudes" in the title and model, "levels" throughout the prose.
 
 **Options.**
 Standardize on *altitudes*; standardize on *levels*; keep both with one as a formal term and one as shorthand.
@@ -70,9 +70,9 @@ Second, the book's stated register is simple language wherever possible.
 The counter-argument — that *level* is overloaded in software (log levels, isolation levels, levels of abstraction) — was judged weaker than plainness and consistency.
 
 **Consequence.**
-The chapter file was renamed `02_the-five-altitudes.md` → `02_the-five-levels.md`.
+The chapter file was renamed `01_the-five-altitudes.md` → `01_the-five-levels.md`.
 Every occurrence of "altitude" was removed from `README.md`, `LEDGER.md`, and the chapter.
-Chapter 23's title became "Reading advice at the right level"; Part I became "The five levels."
+Chapter 22's title became "Reading advice at the right level"; Part I became "The five levels."
 
 ---
 
@@ -95,11 +95,11 @@ Raised and decided by the author, with the reasoning: *numbering is decoration t
 "A Level 0 violation" forces the reader to decode an arbitrary index before the sentence means anything, and the decoding must be repeated on every occurrence.
 "A Law violation" is self-describing at the point of use.
 
-This is the same argument the book makes about pattern names in chapter 10 — a name earns its place by compressing, and an index compresses nothing — so using numbers here would have contradicted the book's own test.
+This is the same argument the book makes about pattern names in chapter 09 — a name earns its place by compressing, and an index compresses nothing — so using numbers here would have contradicted the book's own test.
 
 **Consequence.**
 Where relative position genuinely matters, the text names the ladder explicitly (Law → Principle → Idiom → Style) and says "one rung higher," rather than performing arithmetic on level numbers.
-The `LEDGER.md` cross-reference convention was updated to `"a Law / an Idiom (Ch. 02)"`.
+The `LEDGER.md` cross-reference convention was updated to `"a Law / an Idiom (Ch. 01)"`.
 
 ---
 
@@ -179,7 +179,7 @@ A snappy heuristic that is wrong is worse than none, and the five-question test 
 **Date.** 2026-08-03
 
 **Context.**
-Chapter 02's *Where this doesn't apply* section closed with:
+Chapter 01's *Where this doesn't apply* section closed with:
 
 > In a homogeneous shop — one language, one stack, one domain, stable team — the kinds rarely come into conflict.
 > Local convention is a perfectly good proxy for correctness there […]
@@ -209,7 +209,7 @@ The stated remedy is acquiring contrast — reading the *source* of well-regarde
 
 **Consequence.**
 The boundary count rose from four to five: a further boundary, **classifying is not deciding**, was added in the same pass.
-Recognizing something as an Idiom is not permission to ignore it, and chapter 21 argues that following local convention is usually correct even when one can out-argue it.
+Recognizing something as an Idiom is not permission to ignore it, and chapter 20 argues that following local convention is usually correct even when one can out-argue it.
 This closes the "licence to dismiss" loophole structurally rather than only in the costs section.
 
 Related: the cryptic "validate input at the boundary" note was deleted from the same chapter in this pass, as in-chapter repetition of a point the boundary section already makes properly.
@@ -240,7 +240,7 @@ The ledger also names the small set of ideas permitted to recur — each chapter
 
 **Why.**
 The first option fails because the problem is structural, not attitudinal.
-Discipline cannot compensate for missing information; a writer who does not know chapter 05 already covered acyclic dependency is not being careless when they cover it again.
+Discipline cannot compensate for missing information; a writer who does not know chapter 04 already covered acyclic dependency is not being careless when they cover it again.
 The fix has to supply the missing information, which means it has to be external and written down.
 
 The second option — drafting everything at once — trades one failure for a worse one: no opportunity for the author to steer between chapters, which is where this book's judgments are actually being made.
@@ -248,8 +248,8 @@ The second option — drafting everything at once — trades one failure for a w
 The third tolerates the defect being solved for.
 
 **Consequence.**
-The ledger was created **before** chapter 02 rather than retrofitted, so the first chapter was written against it.
-The effect is visible in that chapter: it uses the seat-reservation race, manual DI wiring, and acyclic dependency, and explains none of them — each is demonstrated and handed to its owning chapter, e.g. *"the Law being broken is check-then-act, which chapter 06 owns."*
+The ledger was created **before** chapter 01 rather than retrofitted, so the first chapter was written against it.
+The effect is visible in that chapter: it uses the seat-reservation race, manual DI wiring, and acyclic dependency, and explains none of them — each is demonstrated and handed to its owning chapter, e.g. *"the Law being broken is check-then-act, which chapter 05 owns."*
 
 Costs: one more file to maintain, and a mandatory read-and-update step per chapter.
 The bookkeeping is real, and it will be wrong occasionally.
@@ -266,7 +266,7 @@ Author review remains the backstop, and a repetition found in the drafts should 
 **Date.** 2026-08-03
 
 **Context.**
-Chapter 05 had to say something about layering, which is the most widely endorsed structural advice in software and also the source of some of the worst structure in it.
+Chapter 04 had to say something about layering, which is the most widely endorsed structural advice in software and also the source of some of the worst structure in it.
 Treating it as a single claim makes that contradiction unexplainable: either the advice is good and the pass-through classes are somebody's execution failure, or the advice is bad and a great deal of well-functioning software is an accident.
 
 **Options.**
@@ -286,7 +286,7 @@ The split explains the contradiction instead of restating it.
 Almost all real damage is a violation of claim 1; almost all damage done by layering *advocacy* is claim 3 applied where the graph is not a line.
 That is a diagnosis, and it tells a reviewer which of the three they are looking at.
 
-It is also the book's own model applied to its most important structural material — three levels bundled under one name is precisely the failure chapter 02 describes.
+It is also the book's own model applied to its most important structural material — three levels bundled under one name is precisely the failure chapter 01 describes.
 If the model could not take layering apart, that would be evidence against the model.
 
 **Provenance.**
@@ -295,12 +295,12 @@ That document also supplies the formulation the chapter quotes: *managed, acycli
 The draft's contribution is separating the taxonomy from its *expression as directories*, and attaching the five-level kinds to each claim.
 
 **Consequence.**
-Chapter 05 leads with the three-way table rather than with a definition of layering.
-`LEDGER.md` records "layered is three claims" as owned by 05, so chapters 16, 18, 19, and 20 cite it rather than re-deriving it — 18 in particular, which owns what expressing claim 3 as packages actually costs.
+Chapter 04 leads with the three-way table rather than with a definition of layering.
+`LEDGER.md` records "layered is three claims" as owned by 05, so chapters 15, 18, 19, and 20 cite it rather than re-deriving it — 18 in particular, which owns what expressing claim 3 as packages actually costs.
 
 ---
 
-## 9. Chapter 05 uses FlowCore for type-enforced direction, not for its package layout
+## 9. Chapter 04 uses FlowCore for type-enforced direction, not for its package layout
 
 **Date.** 2026-08-03
 
@@ -323,7 +323,7 @@ The compiler error is quotable from FlowCore's decision 37, so the enforcement c
 The third option was rejected on the ledger's own logic — an argument split across two chapters is re-established in both.
 
 **Consequence.**
-Chapter 05 quotes decision 10's reasoning for keeping `querier` unexported ("a public commitment to a shape pgx defines") as its worked instance of export-surface-as-liability, and leaves the flat package unmentioned except as a cross-reference.
+Chapter 04 quotes decision 10's reasoning for keeping `querier` unexported ("a public commitment to a shape pgx defines") as its worked instance of export-surface-as-liability, and leaves the flat package unmentioned except as a cross-reference.
 The chapter's other examples are deliberately non-FlowCore — a compiler's DAG, ECS parallel arrays, `net/http` — so no section rests on it alone.
 
 ---
@@ -362,8 +362,8 @@ What sentence-per-line buys — one-word-change-is-one-line-diff — is recovera
 Source readability is paid on every read; diff granularity is a flag away.
 
 The larger convention set was rejected on a test the book itself supplies.
-Its extra rules — `::: claim` fenced divs, `[Ch. 05](05_structure.md)` cross-reference links, ASCII-only diagrams, dropped `---` dividers — each traded source readability for build convenience, **and every one of them is a transformation a script can perform in a single pass years from now.**
-Box-drawing glyphs need a font, not a rewrite; `(Ch. 05)` is a regex; `---` is one line of filter code.
+Its extra rules — `::: claim` fenced divs, `[Ch. 04](04_structure.md)` cross-reference links, ASCII-only diagrams, dropped `---` dividers — each traded source readability for build convenience, **and every one of them is a transformation a script can perform in a single pass years from now.**
+Box-drawing glyphs need a font, not a rewrite; `(Ch. 04)` is a regex; `---` is one line of filter code.
 Paying in readability today for work a machine can do later is the wrong direction.
 
 The surviving rules are those a script *cannot* do:
@@ -373,7 +373,7 @@ The surviving rules are those a script *cannot* do:
 
 **Correction: the 72-column code rule failed its own test.**
 The first version of this decision required code fences to stay under 72 columns, on the reasoning that breaking a long signature well needs judgment and therefore could not be automated.
-Chapters 02 and 05 were converted on that basis, with 16 lines rewrapped by hand.
+Chapters 01 and 05 were converted on that basis, with 16 lines rewrapped by hand.
 
 The author rejected the result on sight: the breaks made the code harder to read and harder to follow.
 That objection is correct, and the rule was wrong for the reason the rest of this entry gives — **it was paying in source readability for something the build can do.**
@@ -397,7 +397,7 @@ The decision is also reversible: pandoc converts markdown to AsciiDoc or LaTeX m
 
 **Consequence.**
 `CLAUDE.md`'s markdown section was split into shared rules, book rules, and `docs/` rules.
-Chapters 02 and 05 were converted: prose joined to one paragraph per line, chapter numbers removed from both H1s, 4 untagged code blocks given languages, and the DAG diagram in 05 narrowed from 86 to 52 columns.
+Chapters 01 and 05 were converted: prose joined to one paragraph per line, chapter numbers removed from both H1s, 4 untagged code blocks given languages, and the DAG diagram in 05 narrowed from 86 to 52 columns.
 All code is byte-identical to what it was before the conversion, verified by diff.
 The prose was verified unchanged word-for-word; the only differences are the two chapter numbers and one redundant `>` prefix on a joined blockquote.
 
@@ -414,19 +414,19 @@ The visible cost is that a chapter's prose is now unreadable in a terminal witho
 
 **Context.**
 `README.md` and `CLAUDE.md` specify three inline markers for tagging a claim's standing: `(established)`, `(contested)`, `(ours)`.
-Reviewing chapter 05, the author's reaction to `` `(established)` Parnas, 1972 `` was that the markers read as leftover draft notes rather than as content.
+Reviewing chapter 04, the author's reaction to `` `(established)` Parnas, 1972 `` was that the markers read as leftover draft notes rather than as content.
 
 **Options.**
-Keep the bracketed tags and explain them once in chapter 02; keep them but use them more sparingly; replace them with plain English in the prose; drop the distinction entirely.
+Keep the bracketed tags and explain them once in chapter 01; keep them but use them more sparingly; replace them with plain English in the prose; drop the distinction entirely.
 
 **Decision.**
-Write the standing into the sentence, in chapter 05.
+Write the standing into the sentence, in chapter 04.
 `` `(ours)` `` on the three-claims table became "Splitting them this way is this book's, not standard vocabulary."
 `` `(established)` Parnas, 1972 `` became "Parnas, 1972 — the founding paper, and still the clearest statement."
 `` `(established)` `` on Hyrum's Law became "The name comes from Hyrum Wright at Google; the observation is standard and uncontroversial."
 
 **Why.**
-The author's reading is correct, and the reason is one the book already argues in chapter 02: a marker the reader must decode before the sentence means anything is a cost, and this one earns nothing back.
+The author's reading is correct, and the reason is one the book already argues in chapter 01: a marker the reader must decode before the sentence means anything is a cost, and this one earns nothing back.
 `(established)` in front of a dated citation is redundant — *Parnas, 1972* already is the provenance, stated in the form scholarship uses.
 
 The tags also fail differently in the two directions they are meant to work.
@@ -437,22 +437,22 @@ This is the same argument as decision 3, which removed numbering from the five k
 Applying it to provenance markers is consistent rather than novel.
 
 **Open.** *(Resolved by decision 13, which removed the notation entirely.)*
-`README.md` and `CLAUDE.md` still document the bracketed form, and chapter 02 still uses it in two places.
-Reconciling them is the author's call: either the marker convention is replaced book-wide with the prose form, or chapter 05 is the exception and the rule stands.
+`README.md` and `CLAUDE.md` still document the bracketed form, and chapter 01 still uses it in two places.
+Reconciling them is the author's call: either the marker convention is replaced book-wide with the prose form, or chapter 04 is the exception and the rule stands.
 Nothing was changed in those files, because the convention is a structural decision and this entry records only what was done to one chapter.
 
 **Consequence.**
-No bracketed markers remain in chapter 05.
-If the prose form is adopted book-wide, `README.md`'s "Provenance markers" section and `CLAUDE.md`'s equivalent are the two places to edit, and chapter 02 has two occurrences.
+No bracketed markers remain in chapter 04.
+If the prose form is adopted book-wide, `README.md`'s "Provenance markers" section and `CLAUDE.md`'s equivalent are the two places to edit, and chapter 01 has two occurrences.
 
 ---
 
-## 12. Chapter 05 revised against the author's first content review
+## 12. Chapter 04 revised against the author's first content review
 
 **Date.** 2026-08-05
 
 **Context.**
-Chapter 05 was drafted and committed, then reviewed by the author in one pass of seventeen comments.
+Chapter 04 was drafted and committed, then reviewed by the author in one pass of seventeen comments.
 The comments fell into three groups rather than being a list of wording fixes, and the grouping is the useful record.
 
 **Group one — claims asserted rather than shown.**
@@ -493,7 +493,7 @@ A related question — *doesn't dependency injection contradict information hidi
 
 **Consequence.**
 `LEDGER.md` gained 10 concept rows and 6 example rows, most of them for material that did not exist before the review.
-That is the ledger working as decision 7 intended: the additions were entered at the point the chapter claimed them, so chapters 09, 13, 16, 17, and 18 now have explicit boundaries against material they would otherwise have re-derived.
+That is the ledger working as decision 7 intended: the additions were entered at the point the chapter claimed them, so chapters 08, 13, 16, 17, and 18 now have explicit boundaries against material they would otherwise have re-derived.
 
 **Worth recording about the process.**
 Every one of the seventeen comments identified something real; none was rejected on the merits.
@@ -507,7 +507,7 @@ The README's claim that the drafts are read and sent back is doing real work her
 **Date.** 2026-08-08
 
 **Context.**
-Decision 11 left the marker convention half-applied: chapter 05 stated provenance in prose, while `README.md` and `CLAUDE.md` still documented `(established)` / `(contested)` / `(ours)`, and chapter 02 and the TOC still used them.
+Decision 11 left the marker convention half-applied: chapter 04 stated provenance in prose, while `README.md` and `CLAUDE.md` still documented `(established)` / `(contested)` / `(ours)`, and chapter 01 and the TOC still used them.
 
 Settling it meant choosing a form.
 The author's objection to the bare parenthesis was precise: it does not signal *this is a shorthand and the full description is elsewhere*.
@@ -561,20 +561,20 @@ That is right, and it generalizes: a section whose content is the *absence* of a
 Documenting a removal is a decision-log job, not a landing-page job.
 
 `CLAUDE.md`'s section became a writing instruction with three worked cases, and is now the only place the discipline is recorded.
-`02_the-five-levels.md`'s epigraph now reads "the book's own framework, not standard terminology you will find elsewhere under these names."
-`00_toc.md`'s chapter 17 summary now states the actual dispute — that the controlled studies disagree with each other and mostly measure test-first against no tests rather than against test-after — which is more informative than the tag it replaced and is the pattern the rest of the book should follow.
+`01_the-five-levels.md`'s epigraph now reads "the book's own framework, not standard terminology you will find elsewhere under these names."
+`00_toc.md`'s chapter 16 summary now states the actual dispute — that the controlled studies disagree with each other and mostly measure test-first against no tests rather than against test-after — which is more informative than the tag it replaced and is the pattern the rest of the book should follow.
 
 No markers remain anywhere in the book or its instructions.
 The occurrences in this log are historical record and stay as written.
 
 ---
 
-## 14. Chapter 05, second review: three reframings and a reversal
+## 14. Chapter 04, second review: three reframings and a reversal
 
 **Date.** 2026-08-08
 
 **Context.**
-The author's second pass over chapter 05 ran to fourteen comments, worked in four batches with a commit between each. Two batches were corrections of fact and structure; two were conceptual.
+The author's second pass over chapter 04 ran to fourteen comments, worked in four batches with a commit between each. Two batches were corrections of fact and structure; two were conceptual.
 
 **The reversal, recorded first because decision 12 got it wrong.**
 
@@ -609,19 +609,19 @@ Making the three claims explicit, as the author asked, exposed a weakness in Par
 The author also noted that claim three's physical boundary was more often *libraries and assemblies* than directories in their C# experience. Generalized.
 
 **Consequence.**
-Chapter 05 is 857 lines, from 375 before the first review. `LEDGER.md` gained four concept rows, lost the reversed escape-hatch row, and had five rows corrected where the chapter had moved beneath them.
+Chapter 04 is 857 lines, from 375 before the first review. `LEDGER.md` gained four concept rows, lost the reversed escape-hatch row, and had five rows corrected where the chapter had moved beneath them.
 
 Worth recording about the process: of fourteen comments, one was a factual error in a shipped commit, two were sentences that did not parse, three were conceptual framings where the author's version was simply better than the draft's, and one reversed a decision this log had already recorded as settled. The failure modes are consistent with the first review — asserting rather than showing, and compressing until meaning is lost — with one new one: **verifying a claim by asserting it confidently.** The Python example was never run. It is now, along with the CommonJS and Go examples that replaced parts of it.
 
 ---
 
-## 15. Chapter 03: a Force is a dial, not a switch
+## 15. Chapter 02: a Force is a dial, not a switch
 
 **Date.** 2026-08-09
 
 **Context.**
-The TOC lists seven Forces for chapter 03 and asks for "a code demo of the same problem solved differently under different values of it."
-Chapter 02 had already established what a Force *is* — a property of the situation rather than advice, acting differently on Laws than on Principles — so 03 needed something beyond a catalogue, or it would be seven definitions and a table.
+The TOC lists seven Forces for chapter 02 and asks for "a code demo of the same problem solved differently under different values of it."
+Chapter 01 had already established what a Force *is* — a property of the situation rather than advice, acting differently on Laws than on Principles — so 03 needed something beyond a catalogue, or it would be seven definitions and a table.
 
 **Options.**
 Present the seven as a reference list with a demonstration each; organize around one running problem shown seven ways; find the claim the catalogue is evidence for and lead with that.
@@ -672,16 +672,16 @@ One example was discarded during verification. A first version of the precision 
 `LEDGER.md` gained twelve concept rows and six example rows.
 The seven Forces are now individually owned by 03, so later chapters name a Force and cite rather than re-deriving it — and the two that were being coined in passing by earlier chapters, control-of-callers and the memory hierarchy, have a home.
 
-Chapter 03 runs 381 lines, the shortest of the three drafted so far, which suits a chapter whose job is to supply vocabulary the rest of the book spends.
+Chapter 02 runs 381 lines, the shortest of the three drafted so far, which suits a chapter whose job is to supply vocabulary the rest of the book spends.
 
 ---
 
-## 16. Chapter 04: one grade, one move
+## 16. Chapter 03: one grade, one move
 
 **Date.** 2026-08-09
 
 **Context.**
-Chapter 04's difficulty is structural rather than editorial: it grades material that other chapters own. CAP belongs to 07, Conway to 09, the memory hierarchy to 08, acyclic dependency to 05, Hyrum's Law to 05. Written straight, the chapter becomes a tour of other chapters' examples with a letter attached to each.
+Chapter 03's difficulty is structural rather than editorial: it grades material that other chapters own. CAP belongs to 07, Conway to 09, the memory hierarchy to 08, acyclic dependency to 05, Hyrum's Law to 05. Written straight, the chapter becomes a tour of other chapters' examples with a letter attached to each.
 
 **Options.**
 Present the three grades as a taxonomy with examples; organize around how to check a claimed Law; find what the grade is *for* and make that the claim.
@@ -700,20 +700,20 @@ Each grade needed a demonstration that was 04's own rather than a borrowed one.
 
 Grade A shows an assumption being removed instead of a theorem being stated: the same delivery problem in one process, where a channel cannot lose anything, and across a network, where the acknowledgement can be lost after the work is done. Running it prints three charges for one intended charge, and the caller was never careless — it could not distinguish *never arrived* from *arrived, reply lost*.
 
-Grade B uses a cache read once at startup. Chapter 02 lists "a cache needs an invalidation strategy" in its table of classified claims but nothing owns the argument, so 04 takes it. The point is the escape: if the original is a compile-time constant there is no cache in the strict sense, so the Law is true and inert.
+Grade B uses a cache read once at startup. Chapter 01 lists "a cache needs an invalidation strategy" in its table of classified claims but nothing owns the argument, so 04 takes it. The point is the escape: if the original is a compile-time constant there is no cache in the strict sense, so the Law is true and inert.
 
 Grade C uses Go's randomized map iteration against Python's guaranteed dictionary order — one observation, two opposite responses, verified by running both. It carries something the other grades cannot: Python's dict order began as an implementation detail, became widely depended upon, and was promoted to a guarantee in 3.7. The empirical claim's own prediction changed the thing it predicted, which is only possible for a Grade C.
 
 **A distinction the chapter adds.**
-The TOC asked what makes Conway's Law different from "prefer composition over inheritance." The answer turned out to be one line worth keeping: **a Law describes; a Principle prescribes.** Conway's Law cannot be bad advice because it is not advice. That separates the two faster than arguing about how universal either feels, and it gives chapter 02's classification test a sharper edge for this one boundary.
+The TOC asked what makes Conway's Law different from "prefer composition over inheritance." The answer turned out to be one line worth keeping: **a Law describes; a Principle prescribes.** Conway's Law cannot be bad advice because it is not advice. That separates the two faster than arguing about how universal either feels, and it gives chapter 01's classification test a sharper edge for this one boundary.
 
 **The boundary section leads with the chapter's own misuse.**
 *Grade is not importance.* Amdahl's Law is Grade A and irrelevant to a single-threaded tool; the cache-to-memory gap is Grade C, drifting, machine-dependent, and decides a game engine's whole architecture. Reading the grades as a priority ranking commits the error the book is about — treating a firm claim as an important one — using the book's own vocabulary to do it.
 
 **Consequence.**
 `LEDGER.md` gains five concept rows and three example rows.
-Chapter 05's existing commitments are honoured: acyclic dependency stays Grade B, and Hyrum's Law stays an empirical regularity rather than a theorem.
-Chapter 04 runs 206 lines, the shortest so far, which suits a chapter whose job is a distinction rather than a subject.
+Chapter 04's existing commitments are honoured: acyclic dependency stays Grade B, and Hyrum's Law stays an empirical regularity rather than a theorem.
+Chapter 03 runs 206 lines, the shortest so far, which suits a chapter whose job is a distinction rather than a subject.
 
 ---
 
@@ -722,7 +722,7 @@ Chapter 04 runs 206 lines, the shortest so far, which suits a chapter whose job 
 **Date.** 2026-08-10
 
 **Context.**
-Chapter 04 was drafted with the TOC's A/B/C grading — Grade A a proven theorem, Grade B a near-tautology, Grade C an empirical constant.
+Chapter 03 was drafted with the TOC's A/B/C grading — Grade A a proven theorem, Grade B a near-tautology, Grade C an empirical constant.
 Reviewing it, the author proposed two changes: refer to the kinds by name rather than by letter, and consider abandoning the grading concept entirely, on the grounds that grading implies a hierarchy nobody can justify — *I don't see why a theorem comes before tautology*.
 
 **Options.**
@@ -733,7 +733,7 @@ Drop the grading. The kinds are **theorem**, **definition**, and **empirical law
 The chapter's title changes from *Grading a Law* to *Three Kinds of True*.
 
 **Why.**
-The author's objection is correct, and the decisive support for it is that **this book already decided this question, in decision 3, and chapter 04 contradicted it.**
+The author's objection is correct, and the decisive support for it is that **this book already decided this question, in decision 3, and chapter 03 contradicted it.**
 
 Decision 3 removed numbering from the five kinds, with the reasoning that "a Level 0 violation" forces the reader to decode an arbitrary index before the sentence means anything, while "a Law violation" is self-describing at the point of use. Grade A, B, and C is the identical failure, introduced a week later in a chapter drafted against a file that records the earlier decision. The draft did not notice.
 
@@ -751,8 +751,8 @@ The author changed *near-tautology* to *tautology*, adding a parenthetical that 
 - **CAP was asserted rather than shown**, and the author flagged both claims as ones that will attract probing. Both are now argued: the theorem is narrow because it concerns linearizable registers and requires every non-failed node to answer, and partition tolerance is not a choice because a partition is an event rather than a design option, so the only real choice is what to do while one is happening. Brewer's own 2012 retrospective is cited for the second.
 
 **Consequence.**
-`00_toc.md` gains the new chapter title and loses "Grade A theorems" from chapter 07's entry.
-`05_structure.md`'s three-claims table now reads "true by definition (Ch. 04)" rather than "near-tautology, Grade B."
+`00_toc.md` gains the new chapter title and loses "Grade A theorems" from chapter 06's entry.
+`04_structure.md`'s three-claims table now reads "true by definition (Ch. 03)" rather than "near-tautology, Grade B."
 `LEDGER.md` has seven rows reworded and one added, for the regularity-versus-magnitude distinction.
 `CLAUDE.md` gains a rule the author asked for directly: **write Go for a reader who does not know Go**, since the audience is fluent in Java, C#, or Python, and an unglossed `chan` spends the example.
 
@@ -763,7 +763,7 @@ The author changed *near-tautology* to *tautology*, adding a parenthetical that 
 **Date.** 2026-08-10
 
 **Context.**
-The author's second pass on chapter 04 raised three things. One was a question about which assumptions the worked example was talking about. Answering it exposed an error in the chapter's central framing.
+The author's second pass on chapter 03 raised three things. One was a question about which assumptions the worked example was talking about. Answering it exposed an error in the chapter's central framing.
 
 **The error.**
 The chapter claimed that the only move against a theorem is to change which of its assumptions hold, then demonstrated it with Two Generals and offered idempotency as the fix — describing idempotency as "removing an assumption."
@@ -796,18 +796,18 @@ The failure-list entry changes with it: *"we can't check that, halting problem"*
 The empirical section's practical form gains a second half: quoting somebody's number is not the same as knowing yours, **and knowing yours does not mean you should be chasing their target.** Worth having — it closes the failure that follows a successful measurement, where a team measures honestly and then adopts someone else's goal for the number.
 
 **Consequence.**
-`00_toc.md`'s chapter 04 entry names the actual examples; CAP stays with chapter 07, which owns it.
+`00_toc.md`'s chapter 03 entry names the actual examples; CAP stays with chapter 06, which owns it.
 `LEDGER.md` gains a row for the two escapes and one for the halting problem, and loses the CAP row.
-Chapter 04 runs 259 lines.
+Chapter 03 runs 259 lines.
 
 ---
 
-## 19. Chapter 06: two halves, one claim
+## 19. Chapter 05: two halves, one claim
 
 **Date.** 2026-08-10
 
 **Context.**
-The TOC gives chapter 06 seven topics across what look like two subjects — check-then-act, races, lock-holders, single-writer, clock skew, Lamport and vector clocks, coordination latency. Written as a list it is two chapters sharing a file.
+The TOC gives chapter 05 seven topics across what look like two subjects — check-then-act, races, lock-holders, single-writer, clock skew, Lamport and vector clocks, coordination latency. Written as a list it is two chapters sharing a file.
 
 **Decision.**
 One claim, stated so both halves fall out of it:
@@ -837,13 +837,13 @@ One demonstration was rebuilt during verification. The first check-then-act vers
 **A corollary the chapter states separately**, because it is the part people resist: an application-level check is not wrong, but it is not the enforcement. Keep it for the error message, which is what it is good at. Do not keep it as the guarantee.
 
 **Consequence.**
-`LEDGER.md` gains eleven concept rows and five example rows; chapter 06 was previously carrying two.
-Six forward references from chapters 02, 03, and 05 are now discharged.
-Chapter 06 runs 288 lines and moves to **in progress**.
+`LEDGER.md` gains eleven concept rows and five example rows; chapter 05 was previously carrying two.
+Six forward references from chapters 01, 03, and 05 are now discharged.
+Chapter 05 runs 288 lines and moves to **in progress**.
 
 ---
 
-## 20. Chapter 06 pairs every break with its repair
+## 20. Chapter 05 pairs every break with its repair
 
 **Date.** 2026-08-10
 
@@ -870,18 +870,18 @@ Nothing in the original chapter was wrong. The boundary section already said the
 The author could not find the mutex in the sample, because `exists` and `insert` were described as taking one without being shown; both are now shown. They rewrote a Go comment for readers who do not know the language, which was a rule added at their request two chapters ago and not applied here. And they caught that the broken and fixed versions of the registration handler used different operations — one called `insert`, the other incremented the map directly — so the comparison was not quite like for like.
 
 **Consequence.**
-Chapter 06 runs 393 lines, up from 288.
+Chapter 05 runs 393 lines, up from 288.
 `LEDGER.md` gains four concept rows and four example rows.
 The atomic fix moved out of *Only the lock-holder can enforce*, which now generalizes the same move to the multi-process case rather than introducing it.
 
 ---
 
-## 21. Two examples in chapter 06 were contrived; both replaced
+## 21. Two examples in chapter 05 were contrived; both replaced
 
 **Date.** 2026-08-10
 
 **Context.**
-The author's second pass on chapter 06 rejected two demonstrations. Both objections were about the same failure: the code was arranged to produce a result rather than to be a thing anyone would write.
+The author's second pass on chapter 05 rejected two demonstrations. Both objections were about the same failure: the code was arranged to produce a result rather than to be a thing anyone would write.
 
 **The sign-up example.**
 
@@ -912,18 +912,18 @@ That is a genuinely different outcome rather than different syntax, and it makes
 The chapter had named three ordinary fixes up front, and the old filesystem example was the only instance of the third — *do not check at all*. The new one demonstrates the first instead. Rather than leave a move without an example, the SQL fix now carries it explicitly: the `select` disappears, and the insert with a unique constraint is what "stop asking, let the attempt answer" looks like in practice.
 
 **Consequence.**
-Chapter 06 runs 425 lines.
+Chapter 05 runs 425 lines.
 `LEDGER.md` has two example rows rewritten.
 Both replacements were run before they went in, along with the attacker process for the symlink swap.
 
 ---
 
-## 22. Chapter 07 leads with the root fact, not the theorem list
+## 22. Chapter 06 leads with the root fact, not the theorem list
 
 **Date.** 2026-08-10
 
 **Context.**
-The TOC gives chapter 07 six topics: CAP, PACELC, FLP, Two Generals, timeouts as guesses, p^N, plus the outbox and saga patterns. Written as a survey it is a reference card, and the reader leaves knowing three acronyms rather than one thing.
+The TOC gives chapter 06 six topics: CAP, PACELC, FLP, Two Generals, timeouts as guesses, p^N, plus the outbox and saga patterns. Written as a survey it is a reference card, and the reader leaves knowing three acronyms rather than one thing.
 
 **Decision.**
 Lead with the fact the theorems are consequences of:
@@ -934,12 +934,12 @@ Two Generals, FLP, and CAP then arrive as three formalizations of one predicamen
 
 `p^N` is deliberately kept outside that unification and named as the other kind of fact, because it is arithmetic about independent events rather than a limit on knowledge. Folding it in would have been tidier and false.
 
-**The theorems are presented by their assumptions rather than their proofs**, following chapter 04: the assumptions are the only negotiable part. FLP is stated with the consequence that matters — Raft and Paxos do not evade it, they add timeouts, giving up guaranteed termination to keep guaranteed safety. CAP is stated once and then set aside for PACELC, because the else-branch applies every day and CAP's branch only during an outage.
+**The theorems are presented by their assumptions rather than their proofs**, following chapter 03: the assumptions are the only negotiable part. FLP is stated with the consequence that matters — Raft and Paxos do not evade it, they add timeouts, giving up guaranteed termination to keep guaranteed safety. CAP is stated once and then set aside for PACELC, because the else-branch applies every day and CAP's branch only during an outage.
 
-**Chapter 06's review shaped the structure.**
+**Chapter 05's review shaped the structure.**
 Two lessons carried forward without being asked for.
 
-The boundary section moved to the **front**, as *When any of this applies to you*, because chapter 06 established that a qualification arriving after the alarm does not undo it. This chapter needed it more: distributed-systems machinery is imported into single-database systems constantly, and a reader who meets four impossibility results before being told none of them binds will import them again.
+The boundary section moved to the **front**, as *When any of this applies to you*, because chapter 05 established that a qualification arriving after the alarm does not undo it. This chapter needed it more: distributed-systems machinery is imported into single-database systems constantly, and a reader who meets four impossibility results before being told none of them binds will import them again.
 
 Every failure is **paired with its repair, adjacent** — four pairs, all run. The retry that charges three times against the idempotency key that charges once; the order that commits while the event is lost against the outbox that makes it one write.
 
@@ -950,8 +950,8 @@ Distributed transactions are not impossible. Two-phase commit works and is used.
 
 **Consequence.**
 `LEDGER.md` gains ten concept rows and four example rows.
-Debts from chapters 02, 03, 04, and 06 are discharged: exactly-once impossibility, why redelivery cannot be eliminated, and what idempotency is for.
-Chapter 07 runs 262 lines and moves to **in progress**.
+Debts from chapters 01, 03, 04, and 06 are discharged: exactly-once impossibility, why redelivery cannot be eliminated, and what idempotency is for.
+Chapter 06 runs 262 lines and moves to **in progress**.
 
 ---
 
@@ -960,7 +960,7 @@ Chapter 07 runs 262 lines and moves to **in progress**.
 **Date.** 2026-08-11
 
 **Context.**
-The author's review of chapter 07 identified a recurring failure and asked for it to be written into `CLAUDE.md`:
+The author's review of chapter 06 identified a recurring failure and asked for it to be written into `CLAUDE.md`:
 
 > I'm guessing you just put the "test code" you used to see if a claim is true directly into the book. You should never do that. […] You say "a client calls a service with a 100 ms timeout," calling code has different params on each call, 100ms is nowhere. What's worse is that the client is setting the timeout to 0 deliberately and nobody would see this as "slow peer."
 
@@ -981,7 +981,7 @@ The example was rewritten as code a reader might have written: a `charge` functi
 And a rule was added to `CLAUDE.md`, under the existing verification section, naming four tells: parameters that exist to select the scenario, a number promised in prose but absent from the code, one function standing in for two systems, and harness names like `call` or `run` where the chapter is discussing a payment. The procedure is now explicit: verify with whatever is quickest, **then write the example again** in the shape a reader would recognize, and run that one.
 
 **Why this is worth a decision entry.**
-It is a distinct failure from the one decision 14 recorded. That rule says *run the code*; this one says *the thing you ran and the thing you print are two artifacts with different readers*. Following decision 14 exactly — as chapter 07 did — still produces this defect, because a verified harness is verified.
+It is a distinct failure from the one decision 14 recorded. That rule says *run the code*; this one says *the thing you ran and the thing you print are two artifacts with different readers*. Following decision 14 exactly — as chapter 06 did — still produces this defect, because a verified harness is verified.
 
 **A second rule, also requested.**
 Expand an abbreviation on first use unless an experienced engineer would produce the long form without hesitating. `API` and `SQL` need nothing; `FLP`, `2PC`, `PACELC`, `TOCTOU`, `CQRS` get one expansion at first appearance. Where the name is initials of people, say so — FLP is Fischer, Lynch, and Paterson — because that is what the reader needs in order to search for it.
@@ -995,11 +995,11 @@ They also asked where the transaction was in the outbox example, since only a co
 **Consequence.**
 `CLAUDE.md` gains the verification-versus-example rule and the abbreviation rule.
 `LEDGER.md` gains a row for publish-then-delete and one reworded for availability.
-Chapter 07 runs 320 lines, up from 262.
+Chapter 06 runs 320 lines, up from 262.
 
 ---
 
-## 24. AI material: distributed, not a chapter — and grilling goes to chapter 19
+## 24. AI material: distributed, not a chapter — and grilling goes to chapter 18
 
 **Date.** 2026-08-12
 
@@ -1009,14 +1009,14 @@ The author proposed a new chapter on AI-assisted development, reasoning that gen
 **Is there something real.**
 Yes, and it is more specific than amplification. Four findings, each an instance of a mechanism the book already owns:
 
-- **The training corpus is a monoculture.** Chapter 02 names monoculture as the single most common source of confusion and prescribes one cure — work in a second ecosystem until its conventions stop feeling wrong. That cure is structurally unavailable to a model, which has one distribution and no way to acquire another.
-- **The generator cannot see your Forces**, so chapter 03's groundwork is skipped by construction rather than by carelessness.
-- **Uniform confidence across all five kinds**, which is chapter 02's first mechanism with a single generator behind it.
-- **The team-size Force at its limit** — a contributor present for no conversation, retaining nothing between sessions, producing at a rate no review process was sized for. Chapter 03's migration from comment to review habit to type system is forced harder and sooner.
+- **The training corpus is a monoculture.** Chapter 01 names monoculture as the single most common source of confusion and prescribes one cure — work in a second ecosystem until its conventions stop feeling wrong. That cure is structurally unavailable to a model, which has one distribution and no way to acquire another.
+- **The generator cannot see your Forces**, so chapter 02's groundwork is skipped by construction rather than by carelessness.
+- **Uniform confidence across all five kinds**, which is chapter 01's first mechanism with a single generator behind it.
+- **The team-size Force at its limit** — a contributor present for no conversation, retaining nothing between sessions, producing at a rate no review process was sized for. Chapter 02's migration from comment to review habit to type system is forced harder and sooner.
 
 **Decision — distribute, do not add a chapter.**
 Every finding attaches to a concept another chapter owns, so a separate chapter would be six cross-references wearing a title.
-The draft argued for a chapter on the grounds that it needs one organizing mechanism the way chapter 15 has one; testing that honestly, *the derivation never happened* explains the Forces finding and not the monoculture, confidence, or volume findings. There is no single mechanism, so there is no chapter.
+The draft argued for a chapter on the grounds that it needs one organizing mechanism the way chapter 14 has one; testing that honestly, *the derivation never happened* explains the Forces finding and not the monoculture, confidence, or volume findings. There is no single mechanism, so there is no chapter.
 
 The author raised distribution and the draft's own evidence undercut the draft's position, which is recorded here because the log is where a reversed recommendation belongs.
 
@@ -1027,15 +1027,15 @@ Five of the seven landing sites do not exist yet, so most of this material is bl
 The placements are recorded in `00_toc.md`'s contents lines and in `LEDGER.md`, because those are read when a chapter is drafted and this entry is not.
 The two chapters already at draft — 02 and 03 — are listed under *Pending revisits* in the TOC.
 
-**Decision — the synthesis goes in chapter 23, and grilling in chapter 19.**
-Chapter 23's contents already list *receiving a blog post; a code review comment; a book; a colleague's strong opinion; your own past decisions.* Receiving generated code is the sixth item and the one the other five rehearse for.
+**Decision — the synthesis goes in chapter 22, and grilling in chapter 18.**
+Chapter 22's contents already list *receiving a blog post; a code review comment; a book; a colleague's strong opinion; your own past decisions.* Receiving generated code is the sixth item and the one the other five rehearse for.
 
-Grilling is a method rather than a way of reading, so it belongs to chapter 19, the force-map method — it is that method run with a generator in the loop, and the interview is how the forces get read.
+Grilling is a method rather than a way of reading, so it belongs to chapter 18, the force-map method — it is that method run with a generator in the loop, and the interview is how the forces get read.
 
 **A correction the author made, worth recording as such.**
 The draft asked whether the book should take a position on whether to use these tools. The author's answer: usage is a fact, and the book does not take positions on facts.
 
-That is the book's own model applied to the draft's question. Chapter 02 defines a Force as a property of the situation, *not negotiable by argument* — so the draft had misclassified a Force as a Principle while working on the chapter that defines the difference.
+That is the book's own model applied to the draft's question. Chapter 01 defines a Force as a property of the situation, *not negotiable by argument* — so the draft had misclassified a Force as a Principle while working on the chapter that defines the difference.
 
 **A second correction, on what grilling is.**
 The draft described grilling as a review technique — interrogating a draft after it exists, probing what the text does not say. That is the author's practice in *this* repo, the `[claude …]` tags, and the draft attached the wrong name to it.
@@ -1048,14 +1048,14 @@ The distinction matters more than a mislabelling, because it changes the failure
 
 **Generated code does not state its decisions at all.** It arrives with every branch already taken, and a taken branch leaves no mark — there is no confident sentence to be suspicious of, because there is no sentence. Review cannot reach that, since catching a silent default requires already suspecting the branch existed. Grilling makes the branch visible before anything is written.
 
-It also resolves something chapter 03 leaves open. That chapter says a model cannot see your Forces, which leaves a reader unable to act: you cannot supply the Forces in a prompt without knowing which are about to matter. The interview inverts the flow — the model surfaces the decision, the human supplies the situational fact that settles it.
+It also resolves something chapter 02 leaves open. That chapter says a model cannot see your Forces, which leaves a reader unable to act: you cannot supply the Forces in a prompt without knowing which are about to matter. The interview inverts the flow — the model surfaces the decision, the human supplies the situational fact that settles it.
 
 The load-bearing detail is the author's: *sometimes I choose an option that was not the recommended one.* The recommendation comes from the corpus, so overriding it is a local Force beating a majority convention — possible only because the convention was made visible as a choice rather than delivered as code. FlowCore's decision 18 is the artifact of exactly that: short Go names were a corpus default that lost to a local Force once it was on the table.
 
 **The limit, which the chapter must state.**
 Grilling surfaces the decisions the model recognizes *as* decisions, and that set comes from the same corpus. A question settled uniformly across the training data does not present itself as a branch point; it is simply how things are done.
 
-So **grilling is weakest exactly where the monoculture is strongest** — it surfaces contested choices and hides settled ones, and settled-in-the-corpus is the class most likely to be wrong outside the ecosystem it came from. This follows from chapter 02's mechanism rather than from measurement and must be stated as reasoning, not as a finding.
+So **grilling is weakest exactly where the monoculture is strongest** — it surfaces contested choices and hides settled ones, and settled-in-the-corpus is the class most likely to be wrong outside the ecosystem it came from. This follows from chapter 01's mechanism rather than from measurement and must be stated as reasoning, not as a finding.
 
 Two ordinary costs alongside it: the protocol is slow by design, so it is absurd overhead on a small change; and it requires the human to hold opinions, since a user who accepts every recommendation has bought the silent defaults back with ceremony attached.
 
@@ -1082,12 +1082,12 @@ Worth recording that the upstream version converged on the same language indepen
 
 ---
 
-## 25. Chapter 08 organizes by shape, and reports two measurements that contradicted the plan
+## 25. Chapter 07 organizes by shape, and reports two measurements that contradicted the plan
 
 **Date.** 2026-08-12
 
 **Context.**
-The TOC gives chapter 08 seven topics: Amdahl, the Universal Scalability Law, Little's Law, queueing and "why 85% utilization is a cliff," the memory hierarchy with an array-of-structs benchmark, the speed of light, and big-O against constants. Written as a list it is a formula sheet.
+The TOC gives chapter 07 seven topics: Amdahl, the Universal Scalability Law, Little's Law, queueing and "why 85% utilization is a cliff," the memory hierarchy with an array-of-structs benchmark, the speed of light, and big-O against constants. Written as a list it is a formula sheet.
 
 **Decision.**
 Organize by **shape**, since the shape is what decides the fix:
@@ -1118,25 +1118,25 @@ What rises is the marginal cost, continuously, from the start. 85% is a conventi
 
 Following decision 14's rule that a failed demonstration is the finding, the chapter reports it and runs the integer version, where the scan wins to about eleven elements. So **the crossover is not a property of the two algorithms**: it is set by the cost of one comparison against the cost of one hash, and string comparison is expensive enough to move the crossing off the bottom of the chart.
 
-That makes the widely repeated *use a slice under about twenty items* a magnitude quoted without its conditions — chapter 04's exact failure, arriving unprompted in the material. The boundary section is stronger for the demonstration having failed than it would have been had it worked.
+That makes the widely repeated *use a slice under about twenty items* a magnitude quoted without its conditions — chapter 03's exact failure, arriving unprompted in the material. The boundary section is stronger for the demonstration having failed than it would have been had it worked.
 
 **Provenance for the measurements.**
-Every number was measured on the machine the chapter was written on — an Apple M4, Go 1.26.5 — and a section before the demonstration says so, with the reason: the regularity holds everywhere and the magnitude is local, so the formulas are exact and the numbers are an instance. That is chapter 04's regularity-versus-magnitude distinction applied to the chapter's own evidence.
+Every number was measured on the machine the chapter was written on — an Apple M4, Go 1.26.5 — and a section before the demonstration says so, with the reason: the regularity holds everywhere and the magnitude is local, so the formulas are exact and the numbers are an instance. That is chapter 03's regularity-versus-magnitude distinction applied to the chapter's own evidence.
 
-The AoS/SoA benchmark uses an 80-byte struct against a 64-byte cache line and shows 4.3× from field layout alone, discharging chapter 05's deferral of the arithmetic and chapter 03's latency-Force pointer.
+The AoS/SoA benchmark uses an 80-byte struct against a 64-byte cache line and shows 4.3× from field layout alone, discharging chapter 04's deferral of the arithmetic and chapter 02's latency-Force pointer.
 
 **Consequence.**
 `LEDGER.md` gains nine concept rows and four example rows.
-Chapter 08 runs 280 lines and moves to **in progress**.
+Chapter 07 runs 280 lines and moves to **in progress**.
 
 ---
 
-## 26. Chapter 08 rewritten: jargon, a repeated example, and a prose tic
+## 26. Chapter 07 rewritten: jargon, a repeated example, and a prose tic
 
 **Date.** 2026-08-12
 
 **Context.**
-The author's review of chapter 08 ran to fourteen tags and included the judgement that a rewrite might be warranted. It was. The tags were not local wording problems — three systemic faults ran through the whole chapter.
+The author's review of chapter 07 ran to fourteen tags and included the judgement that a rewrite might be warranted. It was. The tags were not local wording problems — three systemic faults ran through the whole chapter.
 
 **Fault one: written for someone who already knew the material.**
 The author's summary:
@@ -1162,11 +1162,11 @@ workers   shared counter    private counters
 Between two workers and four, throughput **falls more than fourfold** and never recovers. That is the reversal measured on the machine rather than drawn from fitted coefficients, and it shows the fix in the same table: the right-hand column is the same arithmetic without the sharing.
 
 **Fault three: a repeated example, which is a ledger violation.**
-The chapter reused chapter 05's `Particle` struct for the memory-layout benchmark. The ledger had split the two — 05 owns the encapsulation argument, 08 owns the arithmetic — but using the same struct made it read as the same example twice.
+The chapter reused chapter 04's `Particle` struct for the memory-layout benchmark. The ledger had split the two — 05 owns the encapsulation argument, 08 owns the arithmetic — but using the same struct made it read as the same example twice.
 
 The author's rule, which is worth keeping: if two chapters share a *shape*, keep the shape and change the example, so it does not land as "oh, the particle thing again."
 
-Replaced with summing one field across two million order records, which is the book's running domain (orders appear in chapters 03 and 07) and gives a **7.1×** difference against a 120-byte record. It also connects outward: this is why analytics databases store columns rather than rows.
+Replaced with summing one field across two million order records, which is the book's running domain (orders appear in chapters 02 and 07) and gives a **7.1×** difference against a 120-byte record. It also connects outward: this is why analytics databases store columns rather than rows.
 
 **A prose tic, and a new rule.**
 The author flagged two paragraphs as *"the pinnacle"* of an AI prose style and asked for a `CLAUDE.md` entry against it.
@@ -1179,22 +1179,22 @@ The instruction is not to delete every turn but to **let most paragraphs end fla
 The epigraph said *grades*, which decision 17 replaced with *kinds* — a regression against a recorded decision, caught by the author.
 
 **Consequence.**
-Chapter 08 runs 338 lines, up from 280, almost entirely in definitions and worked setup.
+Chapter 07 runs 338 lines, up from 280, almost entirely in definitions and worked setup.
 `LEDGER.md` has one example row replaced and three added.
 
 ---
 
-## 27. Chapter 09 organizes by rate of change, and grades Lehman honestly
+## 27. Chapter 08 organizes by rate of change, and grades Lehman honestly
 
 **Date.** 2026-08-12
 
 **Context.**
-Chapter 09 covers Lehman's laws, Conway's Law and the inverse manoeuvre, Brooks's Law, and compatibility. Four results from four different literatures, with no obvious connection beyond operating on long timescales.
+Chapter 08 covers Lehman's laws, Conway's Law and the inverse manoeuvre, Brooks's Law, and compatibility. Four results from four different literatures, with no obvious connection beyond operating on long timescales.
 
 **Decision.**
 Organize by **rate of change**: code changes daily, schemas monthly, published interfaces rarely and never backwards, organizations yearly and expensively. The claim follows — everything changes, but not at the same rate, and the slow parts set the terms for the fast ones.
 
-That gives the chapter a usable test (*which layer does this decision land in?*) and puts the four laws in an order that explains itself. It also keeps clear of chapter 03, which owns durability as a **Force** — 03 asks whether a mistake stays correctable, 09 asks what governs change across years and adds the organization, which 03 does not cover.
+That gives the chapter a usable test (*which layer does this decision land in?*) and puts the four laws in an order that explains itself. It also keeps clear of chapter 02, which owns durability as a **Force** — 03 asks whether a mistake stays correctable, 09 asks what governs change across years and adds the organization, which 03 does not cover.
 
 **The compatibility demonstration, and what it turned up.**
 An old client against four server changes, run rather than described:
@@ -1216,7 +1216,7 @@ That is better than an assertion about compatibility promises: it is checkable, 
 **Lehman is graded rather than recited.**
 There are eight of Lehman's laws and they are not equally solid. The chapter uses two — continuing change, and increasing complexity — and says plainly that the study population was mainframe systems decades ago with release cycles measured in years, and that several of the others ("conservation of familiarity," "conservation of organizational stability") are vague enough to resist checking.
 
-This follows chapter 04's empirical-law framing applied to the book's own sources: an empirical law carries a study population, and citing all eight equally would repeat the error the book exists to describe.
+This follows chapter 03's empirical-law framing applied to the book's own sources: an empirical law carries a study population, and citing all eight equally would repeat the error the book exists to describe.
 
 The same treatment is given to the inverse Conway manoeuvre. Conway's observation is established; the claim that architecture can be driven by reshaping teams is a strategy rather than a finding, and the chapter says so.
 
@@ -1228,8 +1228,8 @@ The same treatment is given to the inverse Conway manoeuvre. Conway's observatio
 
 **Consequence.**
 `LEDGER.md` gains seven concept rows and three example rows.
-Part II is complete: chapters 04 through 09 are drafted.
-Chapter 09 runs 219 lines and moves to **in progress**.
+Part II is complete: chapters 03 through 09 are drafted.
+Chapter 08 runs 219 lines and moves to **in progress**.
 
 ---
 
@@ -1238,7 +1238,7 @@ Chapter 09 runs 219 lines and moves to **in progress**.
 **Date.** 2026-08-12
 
 **Context.**
-The author's review of chapter 09 raised eight points. Two were challenges to the substance, and both found real defects.
+The author's review of chapter 08 raised eight points. Two were challenges to the substance, and both found real defects.
 
 **Conway's mechanism was written so that it implied something absurd.**
 The draft's illustration set two engineers at neighbouring desks, who build tightly coupled code, against two teams in different time zones, who build a versioned interface. The author's objection:
@@ -1267,7 +1267,7 @@ Same team, same hire, opposite answers — and sweeping the remaining work puts 
 
 That is not the same question as *are we behind schedule*, and the two come apart precisely in case B: a project badly behind a wrong estimate is not late in Brooks's sense, it is under-staffed, and the fix is people added now rather than later, since the ramp-up cost is fixed and the runway only shrinks.
 
-The ramp-up figures are marked illustrative rather than measured, with the note that substituting your own moves the break-even — which is the reason to compute it rather than quote it (Ch. 04).
+The ramp-up figures are marked illustrative rather than measured, with the note that substituting your own moves the break-even — which is the reason to compute it rather than quote it (Ch. 03).
 
 **An expansion the author asked for, and the ledger allowed.**
 They asked whether one-team-per-service deserved treatment here. Nothing else in `LEDGER.md` owns organizational structure, so it landed in 09.
@@ -1278,7 +1278,7 @@ The section states the heuristic's real content and the two ways it is misapplie
 A sentence reading as an instruction to the writer — *cite the two, treat the rest as observations of their era* — was removed. Go struct tags are now explained, with the Java and C# equivalents, which is the audience rule applied in a chapter drafted after that rule was added. And the demonstration now says the server sends the new shape in every case and the output is what the client makes of it, since the draft said "reaches" while the output said "parsed."
 
 **Consequence.**
-Chapter 09 runs 278 lines, up from 219.
+Chapter 08 runs 278 lines, up from 219.
 `LEDGER.md` gains three concept rows and one example row.
 
 ---
@@ -1314,7 +1314,7 @@ The ownership mechanism is the draft's; the two objections that forced it are th
 
 **Consequence.**
 `LEDGER.md` gains a row for the ownership asymmetry.
-Chapter 09 runs 289 lines.
+Chapter 08 runs 289 lines.
 
 ---
 
@@ -1349,7 +1349,7 @@ Two rounds were spent rewriting an explanation of Conway's Law without reading C
 The book's rule is mechanism over authority, which is about not using citation as proof. It is not a licence to skip reading the thing being cited.
 
 **Consequence.**
-Chapter 09 runs 301 lines.
+Chapter 08 runs 301 lines.
 `LEDGER.md`'s row is reworded: the mechanism is negotiation, and it is Conway's.
 
 ---
@@ -1380,7 +1380,7 @@ Marked as this book's reading. Conway states the homomorphism and does not draw 
 
 **Consequence.**
 `LEDGER.md` gains a row for the homomorphism and its direction.
-Chapter 09 runs 311 lines.
+Chapter 08 runs 311 lines.
 
 ---
 
@@ -1389,7 +1389,7 @@ Chapter 09 runs 311 lines.
 **Date.** 2026-08-12
 
 **Context.**
-Chapter 09 explained Conway's Law twice without reading Conway, and the author asked for a rule that would prevent it.
+Chapter 08 explained Conway's Law twice without reading Conway, and the author asked for a rule that would prevent it.
 
 **What actually happened.**
 The first attempt described the law as a temptation acting on individual engineers; the author rejected it as implausible, since competent engineers are not tempted into bad structure. The second replaced that with an ownership mechanism. It was defensible, survived scrutiny, and still could not answer the question the author then asked — *is this what he said*. Only fetching the paper settled it.
@@ -1419,7 +1419,7 @@ The failure and the rule are both the draft's; the author identified the pattern
 **Date.** 2026-08-12
 
 **Context.**
-Chapter 10 opens Part III and has to say what the two tests are testing. The book's model classifies claims into five kinds, and the obvious move was to ask which kind a pattern is.
+Chapter 09 opens Part III and has to say what the two tests are testing. The book's model classifies claims into five kinds, and the obvious move was to ask which kind a pattern is.
 
 **Decision.**
 None of them, and the chapter says so in its first line.
@@ -1445,11 +1445,11 @@ The saving exists only for a reader who already knows the term. Introducing a na
 **Provenance.**
 The vocabulary-versus-prescription distinction and the Transaction Script compression example come from the FlowCore architecture dialogue at `~/c/TechIter/01/coding-style-architecture.md`, where the author worked them through — including the observation that a catalogue is ethnography, and that a name's other value is as an index into the literature on its failure modes.
 
-Two things from that document are deliberately left alone: *anemic domain model* as a term that smuggles a verdict belongs to chapter 14, and *does the idea come with the conditions under which it's wrong* belongs to chapter 15.
+Two things from that document are deliberately left alone: *anemic domain model* as a term that smuggles a verdict belongs to chapter 13, and *does the idea come with the conditions under which it's wrong* belongs to chapter 14.
 
 **Consequence.**
 `LEDGER.md` gains six concept rows and two example rows.
-Chapter 10 runs 181 lines and moves to **in progress**.
+Chapter 09 runs 181 lines and moves to **in progress**.
 
 ---
 
@@ -1458,7 +1458,7 @@ Chapter 10 runs 181 lines and moves to **in progress**.
 **Date.** 2026-08-12
 
 **Context.**
-The TOC promised chapter 10 a boundary at teaching: *a name with low information content is still a useful handle for a beginner.* The draft wrote it that way. The author rejected the argument:
+The TOC promised chapter 09 a boundary at teaching: *a name with low information content is still a useful handle for a beginner.* The draft wrote it that way. The author rejected the argument:
 
 > what can you realistically teach with a name that doesn't compress and doesn't forbid? This is a facade. Ok so what? […] in fact most of the times it clouds the learning because the reasons — principles behind that shape is not identified. […] Then you never encounter that particular requirement in real life and you forget the pattern even exists.
 
@@ -1467,12 +1467,12 @@ The objection holds and the boundary is removed.
 
 Attempts to steelman it all collapse into a boundary the chapter already had. The strongest version — that a name gives a learner something to recognize the shape by later — fails on the author's point that recognition without the reason is not usable knowledge: you can identify a Facade and still not know when a simplified interface is the right move, what it costs, or how to design a good one.
 
-What survives is narrower and is folded into the *search* boundary: a name a learner can look up is a door into the discussion of when the shape fails, and a name without that discussion attached is a sound they can make in a meeting. The chapter now says the widely assumed opposite is wrong, and connects the failure to chapter 15's mechanism — a compressed judgement, repeated without its conditions, becomes a slogan.
+What survives is narrower and is folded into the *search* boundary: a name a learner can look up is a door into the discussion of when the shape fails, and a name without that discussion attached is a sound they can make in a meeting. The chapter now says the widely assumed opposite is wrong, and connects the failure to chapter 14's mechanism — a compressed judgement, repeated without its conditions, becomes a slogan.
 
 **The replacement boundary is the author's, from a separate note.**
 Commenting on *naming precisely costs more than naming vaguely*, they added that a vague name is sometimes the right move because the design is not mature enough to decide, and that waiting for a little more functionality often turns four awkward things into three natural ones.
 
-That is a genuine counter-example to the chapter's claim, and a better one than teaching: **the two tests assume you can say what the code does.** Before that is true, a precise name is a claim you have not earned. The chapter states the failure precisely — not the vague name, but losing track that it is provisional — and borrows chapter 03's device for any deferred decision: write down what would have to become true for the name to be settled.
+That is a genuine counter-example to the chapter's claim, and a better one than teaching: **the two tests assume you can say what the code does.** Before that is true, a precise name is a claim you have not earned. The chapter states the failure precisely — not the vague name, but losing track that it is provisional — and borrows chapter 02's device for any deferred decision: write down what would have to become true for the name to be settled.
 
 **Two smaller corrections.**
 The constraint demonstrations now show what each name *permits* before what it forbids, at the author's suggestion, which makes the forbidden case legible rather than requiring the reader to infer the permitted one.
@@ -1480,9 +1480,9 @@ The constraint demonstrations now show what each name *permits* before what it f
 And the failure list's `strategies/` entry now carries its reason, which the author could see was a failure but not articulate: **a directory should group things that change together, while a pattern name groups things that are shaped alike.** So every feature change reaches into a folder holding other features' code.
 
 **Consequence.**
-`00_toc.md`'s boundary line for chapter 10 is rewritten, since the promised boundary is gone. The TOC now names the three that survive.
+`00_toc.md`'s boundary line for chapter 09 is rewritten, since the promised boundary is gone. The TOC now names the three that survive.
 `LEDGER.md` gains two concept rows and one reworded.
-Chapter 10 runs 202 lines.
+Chapter 09 runs 202 lines.
 
 ---
 
@@ -1491,14 +1491,14 @@ Chapter 10 runs 202 lines.
 **Date.** 2026-08-12
 
 **Context.**
-The TOC frames chapter 11 around scale: the same name is trivial at class scale and load-bearing at system scale, with Adapter becoming an Anti-Corruption Layer. Written literally, "scale" means size, which is wrong in a way that would have made the chapter unusable — a fifty-line integration with a vendor is system scale, and a thousand-line internal refactor is not.
+The TOC frames chapter 10 around scale: the same name is trivial at class scale and load-bearing at system scale, with Adapter becoming an Anti-Corruption Layer. Written literally, "scale" means size, which is wrong in a way that would have made the chapter unusable — a fifty-line integration with a vendor is system scale, and a thousand-line internal refactor is not.
 
 **Decision.**
 State the axis as **ownership**: can you change the other side?
 
 Class scale means both sides are yours — same repository, same deploy — so if two things do not fit you may change either. System scale means one side is not yours to edit: a vendor's API, another team's service, a published format.
 
-That reframing does three things the size framing cannot. It explains why a small integration is a serious commitment and a large refactor is not. It connects the chapter to material the book already owns — chapter 03's control-of-the-callers Force and chapter 09's *you cannot deploy other people's software*. And it produces the diagnostic the chapter ends on, which is a question with an answer rather than a judgement call.
+That reframing does three things the size framing cannot. It explains why a small integration is a serious commitment and a large refactor is not. It connects the chapter to material the book already owns — chapter 02's control-of-the-callers Force and chapter 08's *you cannot deploy other people's software*. And it produces the diagnostic the chapter ends on, which is a question with an answer rather than a judgement call.
 
 **The insight that carries the demonstration.**
 What makes Adapter cheap at class scale is not the line count. It is that **a third option exists**: change the other side so no adapter is needed. Rename the method, change the signature, move the parameter.
@@ -1508,13 +1508,13 @@ At system scale that option is gone, and the pattern stops being one fix among s
 **What the scale table is actually tracking.**
 Drafting the table showed that the second column is not "the same thing but bigger." Every entry acquires a **failure mode** that the class-scale version does not have — the vendor changes without asking, the surface becomes a commitment, delivery can fail or repeat, the call can be slow or partial.
 
-Those are Part II's Laws arriving one at a time. So the table's last column names them, and the chapter can say what it is really about: a pattern name transfers the shape and drops the Forces, and the Forces were the expensive half. That is chapter 02's mechanism — advice stripped of its conditions — in a new place.
+Those are Part II's Laws arriving one at a time. So the table's last column names them, and the chapter can say what it is really about: a pattern name transfers the shape and drops the Forces, and the Forces were the expensive half. That is chapter 01's mechanism — advice stripped of its conditions — in a new place.
 
 **Both demonstrations were run.**
 Go's structural typing satisfying `querier` with two vendor types and zero wrapper code, against the C# shape that needs a class and two forwarding methods per type. And the Stripe status leaking into three call sites versus stopping at one translation function, with the counts taken from the file rather than asserted.
 
-**A question chapter 10 left open is answered here.**
-Chapter 10 used Facade to show that compression and constraint are independent — it compresses well and forbids nothing — and handed the scale question forward. The answer: at class scale a facade is a word for a wrapper; at system scale it is what other teams call, so chapter 09's compatibility rule applies and it may be added to but never narrowed. The name did not change; the commitment did.
+**A question chapter 09 left open is answered here.**
+Chapter 09 used Facade to show that compression and constraint are independent — it compresses well and forbids nothing — and handed the scale question forward. The answer: at class scale a facade is a word for a wrapper; at system scale it is what other teams call, so chapter 08's compatibility rule applies and it may be added to but never narrowed. The name did not change; the commitment did.
 
 **The boundary section found a genuine asymmetry.**
 The TOC asked for patterns trivial at every scale. The test that works is whether you can state the system-scale version at all — Strategy and Template Method have none, because nothing about passing a function becomes unreliable when the program grows.
@@ -1523,11 +1523,11 @@ Singleton turns out to do the opposite, and is worth the contrast: at system sca
 
 **Consequence.**
 `LEDGER.md` gains six concept rows and two example rows.
-Chapter 11 runs 222 lines and moves to **in progress**.
+Chapter 10 runs 222 lines and moves to **in progress**.
 
 ---
 
-## 36. Chapter 11 fought its own vocabulary; the word "scale" is now the thing being corrected
+## 36. Chapter 10 fought its own vocabulary; the word "scale" is now the thing being corrected
 
 **Date.** 2026-08-14
 
@@ -1550,10 +1550,10 @@ Delete the terms. The two ends are now described rather than named — *both sid
 
 And confront the word in the opening rather than working around it. The chapter now says people call this a question of scale, that this is close enough to be misleading, and why: size correlates with the thing that matters because systems acquire other owners as they grow, but reasoning from size gives wrong answers in both directions.
 
-The title stays. *The Scale Test* now names the received framing the chapter examines, which is the same move chapter 05 makes with "layered architecture" — worth flagging to the author as reversible if they would rather the title matched the conclusion.
+The title stays. *The Scale Test* now names the received framing the chapter examines, which is the same move chapter 04 makes with "layered architecture" — worth flagging to the author as reversible if they would rather the title matched the conclusion.
 
 **One running example, replacing two borrowed ones.**
-The author objected that the `querier` demonstration had already been used repeatedly — it appears nine times in chapter 05 — and suggested one coherent example carrying the whole chapter, sketching it as *we own FastSell and have our own payment processor, then we switch to Stripe*.
+The author objected that the `querier` demonstration had already been used repeatedly — it appears nine times in chapter 04 — and suggested one coherent example carrying the whole chapter, sketching it as *we own FastSell and have our own payment processor, then we switch to Stripe*.
 
 Adopted as sketched. FastSell's own `Receipt` and `LedgerEntry` for the owned case, then the same problem after moving to Stripe. That is better than two static examples because it shows **the transition** — the moment an option disappears — rather than two unrelated states, and the pattern's shape is identical on both sides of it, which is the chapter's whole point.
 
@@ -1563,11 +1563,11 @@ Adopted as sketched. FastSell's own `Receipt` and `LedgerEntry` for the owned ca
 
 **Consequence.**
 `LEDGER.md` has five rows reworded and three examples replaced.
-Chapter 11 stays at 222 lines; almost all of it is different.
+Chapter 10 stays at 222 lines; almost all of it is different.
 
 ---
 
-## 37. Chapter 11's axis is chapter 03's Force, and the pattern table is graded
+## 37. Chapter 10's axis is chapter 02's Force, and the pattern table is graded
 
 **Date.** 2026-08-14
 
@@ -1577,9 +1577,9 @@ Sixteen review notes. Three of them were challenges to whether the chapter was s
 **The axis was already in the book, and the chapter had not noticed.**
 The author asked whether *can I change the other side* is one of the seven Forces, and if so which.
 
-It is. Chapter 03's **control of the callers** asks whether you can change everyone who calls you; chapter 11 asks whether you can change what you call. Same Force, same three settings, pointed the other way — which the chapter now says explicitly rather than presenting the axis as new.
+It is. Chapter 02's **control of the callers** asks whether you can change everyone who calls you; chapter 10 asks whether you can change what you call. Same Force, same three settings, pointed the other way — which the chapter now says explicitly rather than presenting the axis as new.
 
-The same oversight produced the repetition the author flagged separately. The *partial ownership* boundary had re-derived chapter 03's middle setting — *you can see them but not change them* — in fresh words, which is precisely what `LEDGER.md` exists to prevent. It now cites 03 for the three settings and spends its space on what the middle one does to the pattern question: a temporary forwarding method with a removal date, which is neither an adapter nor a permanent translation layer.
+The same oversight produced the repetition the author flagged separately. The *partial ownership* boundary had re-derived chapter 02's middle setting — *you can see them but not change them* — in fresh words, which is precisely what `LEDGER.md` exists to prevent. It now cites 03 for the three settings and spends its space on what the middle one does to the pattern question: a temporary forwarding method with a removal date, which is neither an adapter nor a permanent translation layer.
 
 **The pattern table is now graded rather than asserted.**
 The author asked whether the table was solid or this book's theory, and separately whether a message bus is really Observer with a network in it or only a surface resemblance.
@@ -1594,16 +1594,16 @@ Checked row by row, and they are not equally supported:
 Grading the rows turned out to strengthen the chapter rather than weaken it, because the distribution is informative: **the rows that survive best are the ones where nothing structural is added.** That is a condition on when this reading applies at all, and it was not visible while every row was asserted equally.
 
 **Singleton expanded, at the author's request.**
-Their question was what invariant ties one object in one process to consensus across machines, given that a cluster obviously *has* many machines. The answer needed stating: the singleton is in the **role**, not the hardware — exactly one machine running the billing job while the others stand ready. The shared invariant is *at most one holder at a time, and everyone agrees which one*, and both halves are free in one process and expensive across machines, for reasons chapter 07 owns.
+Their question was what invariant ties one object in one process to consensus across machines, given that a cluster obviously *has* many machines. The answer needed stating: the singleton is in the **role**, not the hardware — exactly one machine running the billing job while the others stand ready. The shared invariant is *at most one holder at a time, and everyone agrees which one*, and both halves are free in one process and expensive across machines, for reasons chapter 06 owns.
 
 **A claim that was simply wrong.**
 The draft said a ten-thousand-line refactor is not a serious commitment. The author rejected that, correctly. The point being reached for was about *kinds* of expense: a large refactor is a large piece of work that ends, while a small integration is a standing obligation that does not. Rewritten to say that.
 
 **Title.**
-Changed by the author to *Patterns That Cross The Line*, on the grounds that chapter 08 is already called *Scale* and using the word here is confusing when the chapter argues it is the wrong word. Kept, with the TOC entry, the ledger row, and chapter 10's two forward references updated to match.
+Changed by the author to *Patterns That Cross The Line*, on the grounds that chapter 07 is already called *Scale* and using the word here is confusing when the chapter argues it is the wrong word. Kept, with the TOC entry, the ledger row, and chapter 09's two forward references updated to match.
 
 **Consequence.**
-Chapter 11 runs 302 lines, up from 222, almost all of it in the graded table, the Singleton expansion, and worked code for the facade and partial-ownership cases the author asked to see rather than be told about.
+Chapter 10 runs 302 lines, up from 222, almost all of it in the graded table, the Singleton expansion, and worked code for the facade and partial-ownership cases the author asked to see rather than be told about.
 
 ---
 
@@ -1612,7 +1612,7 @@ Chapter 11 runs 302 lines, up from 222, almost all of it in the graded table, th
 **Date.** 2026-08-14
 
 **Context.**
-The author's third pass on chapter 11 was direct edits only, with no tags, plus a file rename. They asked for the edits to be reviewed rather than absorbed.
+The author's third pass on chapter 10 was direct edits only, with no tags, plus a file rename. They asked for the edits to be reviewed rather than absorbed.
 
 **Their catch, which was substantive.**
 The draft said that once the orders object is exposed over HTTP, *you may not rename `Place`*. That is false, and the author's edit — changing it to "the endpoints `Place`" — was reaching for the right correction even though the wording conflated two things.
@@ -1637,27 +1637,27 @@ That is a better demonstration than the original, because it shows the boundary 
 *"Singleton is a notable exception"* is shorter and clearer than the draft's "the exception to this exception," which was cute and hard to parse. Kept, with the comma splice repaired and the referent named, since the point of the original tag was that a reader inside *Where this doesn't apply* needs to know what Singleton is an exception **to**.
 
 **Housekeeping.**
-The file was renamed `11_the-scale-test.md` → `11_patterns-that-cross.md`. Two references in `00_toc.md` still pointed at the old name and are updated.
+The file was renamed `10_the-scale-test.md` → `10_patterns-that-cross.md`. Two references in `00_toc.md` still pointed at the old name and are updated.
 
 **Worth recording about process.**
 The instruction was a reminder: *always check my direct edits as well.* This pass is why the rule exists — one of five edits contained a correction the draft would have absorbed silently, and following it through produced a better example than either version had.
 
 ---
 
-## 39. Chapter 12 is not a catalogue
+## 39. Chapter 11 is not a catalogue
 
 **Date.** 2026-08-14
 
 **Context.**
-The TOC planned chapter 12 as a graded catalogue: roughly sixty patterns, each with a definition, the constraint it imposes, a code demo, and its Force. Drafting it as specified would have produced four problems at once.
+The TOC planned chapter 11 as a graded catalogue: roughly sixty patterns, each with a definition, the constraint it imposes, a code demo, and its Force. Drafting it as specified would have produced four problems at once.
 
-It **re-covers owned material** — the Outbox, Saga, and Idempotency Key are chapter 07's; the Anti-Corruption Layer is 11's; Transaction Script is 10's compression example; the test-double taxonomy is 17's; data-oriented layout is 05's and 08's. A catalogue explains them again, which is what `LEDGER.md` exists to prevent.
+It **re-covers owned material** — the Outbox, Saga, and Idempotency Key are chapter 06's; the Anti-Corruption Layer is 11's; Transaction Script is 10's compression example; the test-double taxonomy is 17's; data-oriented layout is 05's and 08's. A catalogue explains them again, which is what `LEDGER.md` exists to prevent.
 
 It **has no claim.** The rubric requires one sentence the chapter demonstrates, and sixty entries have sixty. The TOC's own boundary line conceded it: *each entry carries its own boundary* is not a boundary section.
 
-It **undercuts chapter 10**, which argues that a name earns its place by compressing and ruling something out. Listing sixty names without applying those tests contradicts the chapter two before it.
+It **undercuts chapter 09**, which argues that a name earns its place by compressing and ruling something out. Listing sixty names without applying those tests contradicts the chapter two before it.
 
-And it **overlaps chapter 13**, which owns *if it disappears when you change language, it was a workaround*. The catalogue as planned is the positive cases of that same test.
+And it **overlaps chapter 12**, which owns *if it disappears when you change language, it was a workaround*. The catalogue as planned is the positive cases of that same test.
 
 **Decision.**
 Keep the material and replace the organizing idea. The claim is that **the patterns which last are answers to Forces, and grouping them by Force finds the name from the situation** — the direction that is actually useful, and the one a catalogue organized by shape cannot serve, since it can only be searched by a name you already have.
@@ -1670,7 +1670,7 @@ Resolved by splitting the entries in two. **Worked** entries — two per Force, 
 **The sort was done before the chapter was written, and produced the boundary section.**
 Forty-three patterns fall into six Forces. Seven refuse, and they fail in two distinct ways, which is more useful than a tidy result would have been.
 
-Some answer a **goal** rather than a situation — golden tests, property-based testing, the test-double taxonomy, functional core / imperative shell. All answer *how will I know this works*, which is something you want, not a fact about where you are standing. Chapter 03 is explicit that a Force is not negotiable by argument; testability is.
+Some answer a **goal** rather than a situation — golden tests, property-based testing, the test-double taxonomy, functional core / imperative shell. All answer *how will I know this works*, which is something you want, not a fact about where you are standing. Chapter 02 is explicit that a Force is not negotiable by argument; testability is.
 
 Some answer the **shape of the problem** rather than the situation. A state machine is right when the domain has states and transitions, which is a fact about the business. Transaction Script is what you write when no Force pushes you anywhere else.
 
@@ -1680,9 +1680,9 @@ So the chapter's claim is stated in its narrower true form, and the boundary sec
 Most entries are structural, which needs no run. The one behavioural claim was measured: at a millisecond per round trip, a thousand rows takes 1,145 ms one call at a time and 11 ms in batches of a hundred.
 
 **Consequence.**
-`00_toc.md`'s entry for chapter 12 is rewritten, since the planned chapter no longer describes this one.
+`00_toc.md`'s entry for chapter 11 is rewritten, since the planned chapter no longer describes this one.
 `LEDGER.md` gains four concept rows and six example rows.
-Chapter 12 runs 385 lines, the longest so far, against 600–900 for the catalogue it replaces.
+Chapter 11 runs 385 lines, the longest so far, against 600–900 for the catalogue it replaces.
 
 ---
 
@@ -1703,15 +1703,15 @@ The convention had a real justification: this book argues that you should know w
 
 But the placement was wrong, and that is what the author identified. *This chapter is Law of the strictest kind* means nothing to a reader who does not yet know what the chapter is about. The classification is useful **after** the claim, not before — which is where several chapters already stated it anyway, making the epigraph a duplicate as well as an interruption.
 
-Checked before deleting: eight of the eleven were already covered in their bodies. Chapter 06 states the definitional point at line 353, chapter 09 gives the study-population caveat inside the Lehman section, chapter 08 has an entire *About the numbers* section.
+Checked before deleting: eight of the eleven were already covered in their bodies. Chapter 05 states the definitional point at line 353, chapter 08 gives the study-population caveat inside the Lehman section, chapter 07 has an entire *About the numbers* section.
 
 **Three needed relocating first**, and were.
 
-Chapter 02's epigraph carried the only statement that the five-level model is this book's own rather than standard vocabulary — provenance that decision 13 requires be in the prose. It now sits in the claim section, with the addition that the reader should expect nothing when they search for the names, and should instead find the distinctions already familiar and only unnamed.
+Chapter 01's epigraph carried the only statement that the five-level model is this book's own rather than standard vocabulary — provenance that decision 13 requires be in the prose. It now sits in the claim section, with the addition that the reader should expect nothing when they search for the names, and should instead find the distinctions already familiar and only unnamed.
 
-Chapter 07's carried the two escapes from a theorem as a bulleted list. Those are load-bearing: the chapter refers back to them, and the boundary section depends on them. Moved into the body before *When any of this applies to you*.
+Chapter 06's carried the two escapes from a theorem as a bulleted list. Those are load-bearing: the chapter refers back to them, and the boundary section depends on them. Moved into the body before *When any of this applies to you*.
 
-Chapter 10's carried a substantive argument — a pattern is not one of the five kinds, because the kinds classify claims and a name is not a claim. That is the question a reader arriving from Part II will actually ask, so it became a short named section immediately after the claim rather than a note before it.
+Chapter 09's carried a substantive argument — a pattern is not one of the five kinds, because the kinds classify claims and a name is not a claim. That is the question a reader arriving from Part II will actually ask, so it became a short named section immediately after the claim rather than a note before it.
 
 **Consequence.**
 `CLAUDE.md`'s rubric now says the chapter opens on the claim, with the reason: a reader who does not yet know the subject cannot use a note about the subject's standing.
@@ -1731,9 +1731,9 @@ Their reason was a reading experience: the questions read as though they were ab
 **The measurement, which is stronger than the impression.**
 The distance from `## The claim` to `## Why it holds` runs from 125 to 489 lines, median about 224.
 
-More decisive than distance is what immediately precedes the heading, since a pronoun binds to its nearest antecedent. In chapter 05 the reader has just finished *Hyrum's Law*, so "Why it holds" reads as *why Hyrum's Law holds*. In chapter 12 they have just finished *Force six*. **That is the default reading rather than a risk**, which makes the author's experience the predictable one.
+More decisive than distance is what immediately precedes the heading, since a pronoun binds to its nearest antecedent. In chapter 04 the reader has just finished *Hyrum's Law*, so "Why it holds" reads as *why Hyrum's Law holds*. In chapter 11 they have just finished *Force six*. **That is the default reading rather than a risk**, which makes the author's experience the predictable one.
 
-Chapter 05 supplies a sharper case: its claim is two claims joined by *and* — the dependency graph must be acyclic, and what a module makes observable is what it has committed to. "Why it holds" has no referent there even in principle.
+Chapter 04 supplies a sharper case: its claim is two claims joined by *and* — the dependency graph must be acyclic, and what a module makes observable is what it has committed to. "Why it holds" has no referent there even in principle.
 
 **Decision.**
 Change the headings, not only the rubric. Thirty-two headings across eleven chapters, plus the rubric in `CLAUDE.md` and `README.md`, the mandatory-boundary sentence in both, one `LEDGER.md` reference, and twenty-three boundary labels in `00_toc.md`.
@@ -1747,7 +1747,7 @@ Not a problem, and for a reason specific to headings. Three `##` headings contai
 `docs/DECISIONS.md` keeps the old names throughout. Entries are contemporaneous records of what was decided when, and rewriting them to match later terminology would falsify the log the README points at as evidence.
 
 **A gap the sweep exposed.**
-Chapter 02 has no *Why the claim holds* section at all — it has *Why the kinds get confused*, which serves a different purpose. Ten chapters have three rubric sections and 02 has two. Left alone for now, since the instruction was to make the headings uniform rather than to add a missing section, but it is a real omission in the chapter that introduces the model.
+Chapter 01 has no *Why the claim holds* section at all — it has *Why the kinds get confused*, which serves a different purpose. Ten chapters have three rubric sections and 02 has two. Left alone for now, since the instruction was to make the headings uniform rather than to add a missing section, but it is a real omission in the chapter that introduces the model.
 
 **Still open.**
 Two `[claude …]` tags remain in `CLAUDE.md`, on the *five levels* heading: what the five are five *of*, and whether the book has drifted from *level* to *kind*. Both are unresolved pending the author's decision, and the tags are left in place rather than removed, because the questions are live.
@@ -1761,7 +1761,7 @@ Two `[claude …]` tags remain in `CLAUDE.md`, on the *five levels* heading: wha
 **Context.**
 The author queried the `CLAUDE.md` heading *The five levels* on two grounds: five levels **of what**, given that Force is not advice; and whether the book had drifted from *level* to *kind* without the structural labels following.
 
-Both were right, and the first exposed a live contradiction in the book's foundational sentence. Chapter 02 opened with
+Both were right, and the first exposed a live contradiction in the book's foundational sentence. Chapter 01 opened with
 
 > Every piece of software advice is one of five kinds
 
@@ -1776,31 +1776,31 @@ and said ten lines later
  "five levels"    9        "the levels"    0
 ```
 
-Zero occurrences of *the levels* in prose is decisive: the drift had already happened everywhere except in structural labels — Part I's name, chapter 02's title and one heading, the README's spine heading, `CLAUDE.md`'s heading, and one `LEDGER.md` row.
+Zero occurrences of *the levels* in prose is decisive: the drift had already happened everywhere except in structural labels — Part I's name, chapter 01's title and one heading, the README's spine heading, `CLAUDE.md`'s heading, and one `LEDGER.md` row.
 
 **Decision.**
 **Four levels, five kinds**, and the two words now mean different things rather than being synonyms.
 
 The four levels are rungs on the ladder of authority: Law → Principle → Idiom → Style. Force is the fifth *kind* precisely because it is not on the ladder. So *level* is reserved for position, and *kind* for membership.
 
-That also fixes the contradiction without weakening anything. The five classify **claims** — anything that can be true, false, or conditional — which is the answer chapter 10 had already reached independently while arguing that a pattern is not one of the five. Chapter 02's opening becomes *every claim you meet about software is one of five kinds*, which is true of Force as well as of the other four.
+That also fixes the contradiction without weakening anything. The five classify **claims** — anything that can be true, false, or conditional — which is the answer chapter 09 had already reached independently while arguing that a pattern is not one of the five. Chapter 01's opening becomes *every claim you meet about software is one of five kinds*, which is true of Force as well as of the other four.
 
 **This partly reverses decision 2**, which chose *Levels* over *Altitudes*. That decision's reasoning was plainness and consistency, and both now favour the change: *kind* is what the prose had already settled on, and *level* was being used for two things at once.
 
 **Consequence.**
-`02_the-five-levels.md` renamed to `02_the-five-kinds.md`, titled *The Five Kinds*, with a paragraph stating the four-and-five distinction where the ladder is introduced.
+`01_the-five-levels.md` renamed to `01_the-five-kinds.md`, titled *The Five Kinds*, with a paragraph stating the four-and-five distinction where the ladder is introduced.
 Part I renamed. The README's spine section renamed, with a sentence on why the counts differ. `CLAUDE.md`'s section renamed, now saying the five classify claims and reserving *level* for the ladder. `LEDGER.md`'s row rewritten. The five-level model becomes the five-kind model in both places `CLAUDE.md` names it.
 
-Chapter 23's title, *Reading advice at the right level*, is deliberately left alone — that chapter is about placing advice on the ladder, which is what *level* now means.
+Chapter 22's title, *Reading advice at the right level*, is deliberately left alone — that chapter is about placing advice on the ladder, which is what *level* now means.
 
 ---
 
-## 43. Chapter 02 states a premise, not a claim
+## 43. Chapter 01 states a premise, not a claim
 
 **Date.** 2026-08-14
 
 **Context.**
-The author raised three connected points about chapter 02. The heading *The five kinds* did not say five kinds of what. The rubric headings created a recursion — *where the claim doesn't apply* inside a chapter whose subject is kinds of claim. And a hypothesis: perhaps the chapter's opening is not a claim in this book's sense at all, which would explain the missing *Why the claim holds* section noted in decision 41.
+The author raised three connected points about chapter 01. The heading *The five kinds* did not say five kinds of what. The rubric headings created a recursion — *where the claim doesn't apply* inside a chapter whose subject is kinds of claim. And a hypothesis: perhaps the chapter's opening is not a claim in this book's sense at all, which would explain the missing *Why the claim holds* section noted in decision 41.
 
 They asked for the hypothesis to be tested rather than accepted: *to rule out that this is not a claim you should try to find satisfactory proofs for this chapter's claim and be unsuccessful.*
 
@@ -1815,48 +1815,48 @@ They asked for the hypothesis to be tested rather than accepted: *to rule out th
 So the sentence has two halves and neither can be shown, for opposite reasons — one is true by construction and the other is an exhaustiveness claim that admits counter-examples. The author's hypothesis is correct.
 
 **It also explains the gap.**
-Decision 41 noted that chapter 02 has no *Why the claim holds* section and called it an omission. It is not. There is nothing to hold.
+Decision 41 noted that chapter 01 has no *Why the claim holds* section and called it an omission. It is not. There is nothing to hold.
 
 **Decision.**
-Chapter 02's rubric headings change: *The claim* becomes **The premise**, *Where the claim doesn't apply* becomes **Where the model breaks down**, *What the claim costs* becomes **What the model costs**. A paragraph after the premise names both reasons it cannot be demonstrated and says why the chapter's headings differ from every other one's, so the deviation reads as deliberate rather than as an oversight.
+Chapter 01's rubric headings change: *The claim* becomes **The premise**, *Where the claim doesn't apply* becomes **Where the model breaks down**, *What the claim costs* becomes **What the model costs**. A paragraph after the premise names both reasons it cannot be demonstrated and says why the chapter's headings differ from every other one's, so the deviation reads as deliberate rather than as an oversight.
 
-This makes chapter 02 a deliberate exception to the uniformity decision 41 established, on the grounds that 02 defines the model while every other chapter applies it.
+This makes chapter 01 a deliberate exception to the uniformity decision 41 established, on the grounds that 02 defines the model while every other chapter applies it.
 
 **Why not "axiom", which the author proposed.**
 It is closer than *model* and still over-claims, for two reasons.
 
 An axiom is posited without justification, and this chapter justifies itself — three worked demonstrations and twenty classified claims. Something offering evidence is not an axiom.
 
-More seriously, it borrows mathematical authority the thing has not got. Chapter 04 grades claims as theorem, definition, or empirical law, and warns that folk versions drop quantifiers and conditions. *Axiom* sits adjacent to *theorem*, so using it would claim standing the model cannot support — in the chapter that defines the test for exactly that error. **Premise** keeps the derivation role and drops the over-claim.
+More seriously, it borrows mathematical authority the thing has not got. Chapter 03 grades claims as theorem, definition, or empirical law, and warns that folk versions drop quantifiers and conditions. *Axiom* sits adjacent to *theorem*, so using it would claim standing the model cannot support — in the chapter that defines the test for exactly that error. **Premise** keeps the derivation role and drops the over-claim.
 
-It also echoes `README.md`'s own *The premise* section, where the book states the same idea informally; chapter 02 is that premise made precise, and the TOC entry now says so.
+It also echoes `README.md`'s own *The premise* section, where the book states the same idea informally; chapter 01 is that premise made precise, and the TOC entry now says so.
 
 **Title.**
 *The Five Kinds of Claim*, from the author, which answers "five kinds of what" permanently.
 
 **Consequence.**
-Prose uses of *the model* inside chapter 02 are left alone — by that point the chapter has defined the referent, and the overloading risk is in a heading a reader arrives at cold.
+Prose uses of *the model* inside chapter 01 are left alone — by that point the chapter has defined the referent, and the overloading risk is in a heading a reader arrives at cold.
 
 ---
 
-## 44. Chapter 12 uses chapter 03's Force names and order, which changed the sort
+## 44. Chapter 11 uses chapter 02's Force names and order, which changed the sort
 
 **Date.** 2026-08-14
 
 **Context.**
-The author's second review of chapter 12 made one point:
+The author's second review of chapter 11 made one point:
 
-> we already named and listed forces on chapter 2. Follow the exact namings here in the chapter, then you don't have to say "this is … durability of medium" later. Also follow the exact order of forces used on that chapter unless there is a very good reason not to.
+> we already named and listed forces on chapter 2 [Forces — now chapter 02]. Follow the exact namings here in the chapter, then you don't have to say "this is … durability of medium" later. Also follow the exact order of forces used on that chapter unless there is a very good reason not to.
 
-The draft had invented six group names — *something must survive*, *two things at once*, and so on — in an order of its own, and then annotated each with which chapter 03 Force it corresponded to. That is a fresh vocabulary for concepts the book had already named, which is the drift `LEDGER.md` exists to prevent, and it cost a line per section explaining the mapping.
+The draft had invented six group names — *something must survive*, *two things at once*, and so on — in an order of its own, and then annotated each with which chapter 02 Force it corresponded to. That is a fresh vocabulary for concepts the book had already named, which is the drift `LEDGER.md` exists to prevent, and it cost a line per section explaining the mapping.
 
 **Decision.**
-Use chapter 03's seven names, in chapter 03's order: concurrency, durability of the medium, blast radius, change frequency and its shape, team size and turnover, latency budget, control of the callers. The per-section translation lines are gone, since there is nothing left to translate.
+Use chapter 02's seven names, in chapter 02's order: concurrency, durability of the medium, blast radius, change frequency and its shape, team size and turnover, latency budget, control of the callers. The per-section translation lines are gone, since there is nothing left to translate.
 
 **What that exposed.**
-The invented list had six entries against chapter 03's seven, and the missing one was **team size and turnover**. That was not a considered omission — it was invisible while the labels were the draft's own, and it became obvious the moment the two lists were laid side by side.
+The invented list had six entries against chapter 02's seven, and the missing one was **team size and turnover**. That was not a considered omission — it was invisible while the labels were the draft's own, and it became obvious the moment the two lists were laid side by side.
 
-Writing the missing section produced a finding worth keeping. This Force does not change *what* a rule is, it changes **where the rule lives** — chapter 03's migration from comment, to review habit, to type system. So it generates fewer patterns of its own than the others and mostly relocates rules the remaining Forces produced, which is why the section is short and says so.
+Writing the missing section produced a finding worth keeping. This Force does not change *what* a rule is, it changes **where the rule lives** — chapter 02's migration from comment, to review habit, to type system. So it generates fewer patterns of its own than the others and mostly relocates rules the remaining Forces produced, which is why the section is short and says so.
 
 **The sort changed, and the change is evidence the sort is real.**
 Golden tests had been in the *refuses to sort* list, filed under patterns that answer a goal rather than a situation. With team size restored they have an obvious home: a golden test exists so behaviour cannot change silently under people who did not write it.
@@ -1866,9 +1866,9 @@ The chapter now records that, because it demonstrates the method doing work rath
 Counts move from forty-three sorted and seven refusing, to forty-nine sorted and five refusing.
 
 **Consequence.**
-`00_toc.md`'s entry for chapter 12 gives the new counts and says the Forces are chapter 03's, so the grouping can be checked against the definition rather than against a fresh set of labels.
-`LEDGER.md` loses the six-family row and gains two: the sort against chapter 03's seven, and the observation about team size relocating rules.
-Chapter 12 runs 432 lines, up from 385.
+`00_toc.md`'s entry for chapter 11 gives the new counts and says the Forces are chapter 02's, so the grouping can be checked against the definition rather than against a fresh set of labels.
+`LEDGER.md` loses the six-family row and gains two: the sort against chapter 02's seven, and the observation about team size relocating rules.
+Chapter 11 runs 432 lines, up from 385.
 
 ---
 
@@ -1877,11 +1877,11 @@ Chapter 12 runs 432 lines, up from 385.
 **Date.** 2026-08-15
 
 **Context.**
-The author's third review of chapter 12 raised a pattern that had built up unnoticed:
+The author's third review of chapter 11 raised a pattern that had built up unnoticed:
 
 > I started to thing that lines like this after each worked pattern are like the chapter epigraphs we got rid off. Not much value and they create noise. Evaluate if removing these while preserving valuable parts without saying chapter this chapter that is better
 
-Eleven of the fourteen worked patterns ended on a line naming another chapter — *chapter 04's definitional claim applies*, *which is chapter 07's territory*, *Chapter 06's registration example puts the hashing outside the lock for exactly this reason*.
+Eleven of the fourteen worked patterns ended on a line naming another chapter — *chapter 03's definitional claim applies*, *which is chapter 06's territory*, *Chapter 05's registration example puts the hashing outside the lock for exactly this reason*.
 
 **Options.**
 Delete them all, which loses real pointers; keep them, which is the status quo the author objected to; or separate the two things they were doing.
@@ -1889,14 +1889,14 @@ Delete them all, which loses real pointers; keep them, which is the status quo t
 **Decision.**
 Separate them. A cross-reference stays when the fact it carries is one the reader needs at that moment, and it is then written as the fact with a compact `(Ch. NN)` pointer. It goes when the sentence exists only to say another chapter owns the idea.
 
-By that test six lines lost their scaffolding and kept their content — *a copy with no invalidation strategy is a copy that is allowed to be wrong (Ch. 04)* says the thing rather than reporting that chapter 04 says it. One sentence was deleted outright: chapter 06's registration example was a pure location, and the claim before it already stood.
+By that test six lines lost their scaffolding and kept their content — *a copy with no invalidation strategy is a copy that is allowed to be wrong (Ch. 03)* says the thing rather than reporting that chapter 03 says it. One sentence was deleted outright: chapter 05's registration example was a pure location, and the claim before it already stood.
 
 **Why.**
 The failure is the one the epigraph decision found. A line that names another chapter reads as though it is adding authority, and authority is not what the book runs on — the mechanism is. It also degrades over time: a pointer to *where* a claim lives breaks silently when chapters move, while a pointer that states the claim survives being wrong about the number.
 
 **Consequence.**
-The pattern generalizes past chapter 12 and is worth applying whenever cross-references accumulate: **write what the other chapter established, not that it established it.**
-The same review applied the author's other standing note — that showing the failing code before the pattern is worth doing where it does not make the example worse — to the tolerant reader, which now opens with a strict decoder that breaks on the one change chapter 09 calls always safe.
+The pattern generalizes past chapter 11 and is worth applying whenever cross-references accumulate: **write what the other chapter established, not that it established it.**
+The same review applied the author's other standing note — that showing the failing code before the pattern is worth doing where it does not make the example worse — to the tolerant reader, which now opens with a strict decoder that breaks on the one change chapter 08 calls always safe.
 Both tags were the author's; the test that separates a fact-carrying reference from a locating one is the draft's.
 
 ---
@@ -1906,7 +1906,7 @@ Both tags were the author's; the test that separates a fact-carrying reference f
 **Date.** 2026-08-15
 
 **Context.**
-The author's fourth review of chapter 12 asked for caller code under *Make illegal states unrepresentable*:
+The author's fourth review of chapter 11 asked for caller code under *Make illegal states unrepresentable*:
 
 > just show this with caller's code at the end with a simple comment at the top of the code
 
@@ -1935,7 +1935,7 @@ This is the rule about running code catching an error that a reading pass would 
 **Date.** 2026-08-15
 
 **Context.**
-Decision 44 recorded that golden tests moved out of the *refuses to sort* list once chapter 03's real Force names were restored, and the chapter carried a paragraph saying so. The author's fourth review cut it:
+Decision 44 recorded that golden tests moved out of the *refuses to sort* list once chapter 02's real Force names were restored, and the chapter carried a paragraph saying so. The author's fourth review cut it:
 
 > above paragraph is a specific situation that happened durung our book writing process, delete the paragraph, not valuable for the audience of the book.
 
@@ -1956,7 +1956,7 @@ A general test worth keeping: **the drafting history belongs in the decision log
 **Date.** 2026-08-15
 
 **Context.**
-Chapter 12's *five that refuse to sort* ended on a bolded summary: **A Force is a fact about your circumstances. The shape of the problem is a fact about the business. A goal is something you chose and could choose differently.** The author's fifth review cut it, on the grounds that the two paragraphs above already made the distinction, and that *your circumstances* was adding a phrase rather than a fact.
+Chapter 11's *five that refuse to sort* ended on a bolded summary: **A Force is a fact about your circumstances. The shape of the problem is a fact about the business. A goal is something you chose and could choose differently.** The author's fifth review cut it, on the grounds that the two paragraphs above already made the distinction, and that *your circumstances* was adding a phrase rather than a fact.
 
 **Decision.**
 Removed. The section now has two bolded lead-ins — *Some answer a goal rather than a situation* and *Some answer what the problem is rather than what the situation is* — and the paragraph that follows them names all three in passing: *confusing the Forces, goals, and problem shapes in play.* Nothing states the taxonomy as a taxonomy.
@@ -1968,7 +1968,7 @@ It was a grand summary of the two preceding paragraphs, and a rule of three, whi
 The suggestion was to replace the *Some answer a goal* paragraph wholesale with the goal definition written in the fourth review. That paragraph names the three patterns at issue — property-based testing, the test-double taxonomy, functional core / imperative shell — and this is the section that says which five refuse to sort, so the names cannot go. Merged instead: the lead-in keeps the names, the definition and its test follow.
 
 **Consequence.**
-`LEDGER.md`'s row for this concept is reworded, since the canonical phrasing it pointed at no longer exists. The concept is still chapter 12's; it is now carried by the section rather than by a quotable line.
+`LEDGER.md`'s row for this concept is reworded, since the canonical phrasing it pointed at no longer exists. The concept is still chapter 11's; it is now carried by the section rather than by a quotable line.
 
 ---
 
@@ -2003,7 +2003,7 @@ Go is still the case the instruction argues, because Go style is the only one of
 
 *The single-dominant-parameter exception is gone.*
 FlowCore allows a receiver-style short name for the one value a short function operates on — `fillIDs(d *WorkflowDefinition)`.
-A survey of every Go sample in chapters 02 through 12 found about seventy-five short-name sites, and this exception licensed nearly all the ones that read badly: `FromMinorUnits(a int64, c string)` reduces amount and currency to letters in a chapter arguing about money handling, and `(b *Billing) Charge(m uuid.UUID)` uses a letter that is not the initial of anything on the line, so there is nothing to recover it from.
+A survey of every Go sample in chapters 01 through 12 found about seventy-five short-name sites, and this exception licensed nearly all the ones that read badly: `FromMinorUnits(a int64, c string)` reduces amount and currency to letters in a chapter arguing about money handling, and `(b *Billing) Charge(m uuid.UUID)` uses a letter that is not the initial of anything on the line, so there is nothing to recover it from.
 The exception is written as a structural rule, which is how it stops applying FlowCore's own test.
 Receivers keep the convention, because the receiver's type is on the same line and a spelled-out receiver stops looking like Go.
 
@@ -2013,17 +2013,17 @@ Where a real signature carries a name that will not read, the fix is a comment, 
 
 *The structural-particle exception gained a clause.* It exempts `err`, `ok`, and `ctx` from being renamed, not from being explained — the gloss rule still applies at first appearance.
 
-*The type-shadow exception is unchanged*, and it earns its place: `05_structure.md` carries a real `q querier` quoted from FlowCore.
+*The type-shadow exception is unchanged*, and it earns its place: `04_structure.md` carries a real `q querier` quoted from FlowCore.
 
 **Consequence.**
-About thirty-five identifiers across chapters 02 through 12 do not comply.
+About thirty-five identifiers across chapters 01 through 12 do not comply.
 Those chapters are at **draft**, so the cleanup is a separate pass on the author's word rather than a silent edit.
 `CLAUDE.md`'s pointer now resolves: it named `docs/decisions.md, decision 18`, which in this repo is the entry on theorems and the halting problem, and now cites FlowCore's file by path alongside this entry.
 Three copy artifacts from the verbatim import were fixed: an exception list introduced as "two" and containing three, a missing article, and a lost trailing newline.
 
 ---
 
-## 50. The identifier sweep across chapters 02 through 12
+## 50. The identifier sweep across chapters 01 through 12
 
 **Date.** 2026-08-15
 
@@ -2039,13 +2039,13 @@ Swept all of them in one pass, verifying rather than assuming: every Go sample w
 *Domain nouns reduced to letters* — the bulk of it.
 `FromMinorUnits(a int64, c string)` became `(amount int64, currency string)` in a chapter arguing that money must not be a float.
 `(b *Billing) Charge(m uuid.UUID)` became `Charge(merchantID uuid.UUID)`; `m` was the initial of nothing on the line, which is the case the rule exists for.
-Also `Receipt(o Order)`, `Register(name string, m Method)`, `chargeBad(l *Ledger, …)`, `PlaceOrder(…, q Queue, o Order)`, `receipt(c StripeCharge)` and its four neighbours, `adapt(r Receipt)`, `signUp(e Email)`, and the sign-up store's `u`, `e`, and `h` in chapter 06.
+Also `Receipt(o Order)`, `Register(name string, m Method)`, `chargeBad(l *Ledger, …)`, `PlaceOrder(…, q Queue, o Order)`, `receipt(c StripeCharge)` and its four neighbours, `adapt(r Receipt)`, `signUp(e Email)`, and the sign-up store's `u`, `e`, and `h` in chapter 05.
 
 *Truncations* — `qty` to `quantity`, `pct` to `percent`, `dec` to `decoder`, `st` to `stat`, `dt` to `deltaTime`, `msgs`/`m` to `messages`/`message`, `Cur` to `Currency`, `src` to `source`, `key` to `idempotencyKey` where the chapter's own pattern name is *Idempotency key*.
 
 *Paired letters standing for two things* — `a`/`b` became `accounts`/`billing` in the cycle example, `first`/`second` in Singleton, `timestampA`/`timestampB` in the clock-resolution measurement, where the prose already spoke of events A and B.
 
-*One rename beyond the letter of the rule*, flagged because the rule names variables, fields, and parameters but not functions: chapter 06's Lamport-clock method `recv` became `receive`.
+*One rename beyond the letter of the rule*, flagged because the rule names variables, fields, and parameters but not functions: chapter 05's Lamport-clock method `recv` became `receive`.
 The defect is the same and the fix was free; it is recorded here so it can be reverted if the author disagrees.
 
 **What was deliberately left, all fourteen sites.**
@@ -2056,11 +2056,11 @@ The defect is the same and the fix was free; it is recorded here so it can be re
 - **`(c *Conn) Raw(f func(driverConn any) error)`** is labelled in the chapter as a real standard-library method, so the quoted-code exception applies and it keeps `f`. The caller written beneath it is the book's own, and its `dc` and `pg` became `driverConn` and `pgxConn`.
 
 **What the verification caught.**
-Nothing behavioural, but two formatting defects the renames introduced: `Currency` lengthened chapter 11's struct and broke `gofmt`'s field alignment, and chapter 12's identity map needed its call sites updated to match.
-Chapter 04's retranscribed output, chapter 06's race, chapter 12's identity map, and chapter 12's compiler error were all re-run and match what the chapters print — including the error text quoted in a comment, *cannot refer to unexported field at in struct literal of type delivery.Delivered*.
+Nothing behavioural, but two formatting defects the renames introduced: `Currency` lengthened chapter 10's struct and broke `gofmt`'s field alignment, and chapter 11's identity map needed its call sites updated to match.
+Chapter 03's retranscribed output, chapter 05's race, chapter 11's identity map, and chapter 11's compiler error were all re-run and match what the chapters print — including the error text quoted in a comment, *cannot refer to unexported field at in struct literal of type delivery.Delivered*.
 
 **Consequence.**
-Chapters 02, 08, and 09 needed no changes.
+Chapters 01, 08, and 09 needed no changes.
 The eleven drafted chapters now comply, so the rule applies to new drafting rather than accumulating a backlog behind it.
 
 ---
@@ -2085,26 +2085,26 @@ Placed directly under the status callout, so the first thing after a reader lear
 
 **Why this does not conflict with the book's register.**
 The hooks are the chapters' own claim sentences at full strength, not copy written over them.
-*You cannot tell a slow machine from a dead one* is chapter 07's claim verbatim.
-The 95% is chapter 06's measured figure.
+*You cannot tell a slow machine from a dead one* is chapter 06's claim verbatim.
+The 95% is chapter 05's measured figure.
 So the promotional voice and the book's voice are the same sentences, which is the only version of this the book can defend.
 
 Two hooks were pulled back on a check against the chapters, and the corrections are the substance of this entry.
-*"You cannot, and it is a theorem"* was wrong: chapter 07 calls the indistinguishability a property of asking questions over a network, and the theorems are its consequences. Now *"most of what is impossible in distributed systems follows from it."*
-*"'This should be a Repository' forbids nothing"* asserted something the chapter does not demonstrate — it works the test on Facade and lists Repository as a case for the reader to apply it to. Now phrased as chapter 10's own question, *what would that rule out?*, which is both accurate and a better invitation.
+*"You cannot, and it is a theorem"* was wrong: chapter 06 calls the indistinguishability a property of asking questions over a network, and the theorems are its consequences. Now *"most of what is impossible in distributed systems follows from it."*
+*"'This should be a Repository' forbids nothing"* asserted something the chapter does not demonstrate — it works the test on Facade and lists Repository as a case for the reader to apply it to. Now phrased as chapter 09's own question, *what would that rule out?*, which is both accurate and a better invitation.
 
 **Consequence.**
 The rule this establishes for any promotional copy: **a hook must be cashable by the chapter it links to.**
-A reader who arrives on an overclaim and then meets chapter 04's careful separation of theorem, definition, and empirical law will feel the mismatch, and not overclaiming is the book's differentiator.
+A reader who arrives on an overclaim and then meets chapter 03's careful separation of theorem, definition, and empirical law will feel the mismatch, and not overclaiming is the book's differentiator.
 
 ---
 
-## 52. Chapter 13 argues from Java's own history rather than across four languages
+## 52. Chapter 12 argues from Java's own history rather than across four languages
 
 **Date.** 2026-08-15
 
 **Context.**
-`00_toc.md` planned chapter 13 as Norvig's observation "demonstrated in four languages side by side."
+`00_toc.md` planned chapter 12 as Norvig's observation "demonstrated in four languages side by side."
 The author installed a JDK on request, which made a better argument available and changed the chapter's centrepiece.
 
 **Decision.**
@@ -2125,7 +2125,7 @@ Same guarantee, 28 lines against 11.
 The talk was fetched and its slides extracted rather than paraphrased from memory, and two things in it do not survive into the version people quote.
 
 Norvig's count is "16 of 23 patterns are either **invisible or simpler**", and the preceding slide adds "**for at least some uses of each pattern**".
-The folk version — *patterns are just missing language features* — drops both, which is chapter 04's dropped-quantifier failure applied to a smaller result.
+The folk version — *patterns are just missing language features* — drops both, which is chapter 03's dropped-quantifier failure applied to a smaller result.
 He also defines three levels, invisible / informal / formal, where the retelling has two.
 And he lists five purposes for patterns, of which "to avoid limitations of implementation language" is one; the claim that patterns are *only* workarounds is something readers added.
 
@@ -2134,14 +2134,14 @@ The chapter therefore states the narrower version, and is better for it: the str
 **The counter-example came out of the source too.**
 Norvig's sixteen omit seven — Adapter, Bridge, Composite, Decorator, Memento, Prototype, Singleton — and that omission is the boundary section.
 The sharpest form is that **sum types dissolve Visitor and leave Composite standing in the same file**: the dispatch mechanism changes completely and the containment does not, because directories containing files is a fact about filesystems rather than about a compiler.
-That is chapter 12's category of patterns answering the shape of the problem, reached from a different direction.
+That is chapter 11's category of patterns answering the shape of the problem, reached from a different direction.
 
-Two further boundaries: Observer dissolves in one process and returns across a machine with all of chapter 07's failure modes, so the test is scoped and returns a confident wrong answer when run at the wrong scope; and the test names the language you moved *to*, so "Visitor is a workaround" is true and useless if your compiler lacks sum types.
+Two further boundaries: Observer dissolves in one process and returns across a machine with all of chapter 06's failure modes, so the test is scoped and returns a confident wrong answer when run at the wrong scope; and the test names the language you moved *to*, so "Visitor is a workaround" is true and useless if your compiler lacks sum types.
 
 **Consequence.**
 Every sample was compiled and run as printed — nine fences across Java, Go, and Python, plus both quoted `javac` errors.
 `LEDGER.md` gains nine concept rows and four example rows.
-The relationship to chapter 12 is stated in the second sentence rather than left implicit: 12 asks what a pattern answers, 13 asks what it is made of, and the two are independent.
+The relationship to chapter 11 is stated in the second sentence rather than left implicit: 12 asks what a pattern answers, 13 asks what it is made of, and the two are independent.
 
 ---
 
@@ -2150,7 +2150,7 @@ The relationship to chapter 12 is stated in the second sentence rather than left
 **Date.** 2026-08-16
 
 **Context.**
-The author's first review of chapter 13 objected to the Strategy demonstration:
+The author's first review of chapter 12 objected to the Strategy demonstration:
 
 > most reader will object that two versions don't offer the same guarantee or maintainability. In the first example the shipping formulas are defined in one place, they are named and can be reused easily. […] But if there is a trade-off then does our claim that the pattern became simpler still hold here?
 
@@ -2187,9 +2187,9 @@ The chapter closed on *whatever survives is the design, whatever vanishes was th
 The move is now stated: **name the language first, then the design.** A document saying "use Strategy" means an interface and three classes in one language and passing a function in another, so omitting the language underspecifies the work — and the same reading applies to advice you receive.
 
 **Also on review.**
-The quantifier discussion was rewritten in plain words with chapter 04's halting-problem parallel given enough context to work without turning back, per the author's note that nobody re-reads an earlier chapter.
+The quantifier discussion was rewritten in plain words with chapter 03's halting-problem parallel given enough context to work without turning back, per the author's note that nobody re-reads an earlier chapter.
 *Sum type* is now defined at first use.
-Two cross-references to chapters 10 and 11 were cut as detours; the author's standing objection to "abrupt flashbacks" is that they need to earn their place, and these restated a convergence the local argument did not need.
+Two cross-references to chapters 09 and 11 were cut as detours; the author's standing objection to "abrupt flashbacks" is that they need to earn their place, and these restated a convergence the local argument did not need.
 
 **Consequence.**
 Twelve code fences, all compiled and run as printed.
@@ -2197,12 +2197,12 @@ The chapter grew from 379 to about 470 lines, almost entirely in the boundary se
 
 ---
 
-## 54. The book has no authorial "we", and chapter 13 nearly acquired one
+## 54. The book has no authorial "we", and chapter 12 nearly acquired one
 
 **Date.** 2026-08-16
 
 **Context.**
-The author's second review of chapter 13 was direct edits only, no tags.
+The author's second review of chapter 12 was direct edits only, no tags.
 Two of them introduced first-person plural: "Before **we** see the Java 26 version" and "So **we** keep the names."
 
 **The check, and what it found.**
@@ -2237,7 +2237,7 @@ The kept version is: *Visitor changed status between two releases of Java, so th
 
 ---
 
-## 55. Chapter 14 grades loaded terms into three tiers rather than condemning them
+## 55. Chapter 13 grades loaded terms into three tiers rather than condemning them
 
 **Date.** 2026-08-16
 
@@ -2255,9 +2255,9 @@ Fowler on *CodeSmell*, crediting Kent Beck with the coinage: *"a surface indicat
 So the chapter grades terms in three tiers rather than treating loadedness as binary: **shape name, hint word, verdict noun**, separated by a one-sentence test — say the term about your own code, then disagree with it, and see whether the result parses.
 This grading is the book's own and the chapter says so.
 
-**Why this is not a repeat of chapters 04 and 13.**
+**Why this is not a repeat of chapters 03 and 13.**
 Both of those are about a claim losing a qualifier — the halting problem's quantifier, Norvig's *for at least some uses*.
-Chapter 14's mechanism is lexical rather than propositional: a claim can be qualified and a noun cannot, so the condition is not merely dropped but made unsayable while the word is in play.
+Chapter 13's mechanism is lexical rather than propositional: a claim can be qualified and a noun cannot, so the condition is not merely dropped but made unsayable while the word is in play.
 The chapter states that difference rather than leaving the three to look alike.
 
 **The boundary comes from the book's own spine.**
@@ -2268,7 +2268,7 @@ Two further boundaries: refusing all judgment-laden vocabulary is itself a sloga
 **Source material.**
 The argument is largely the author's, worked through while building FlowCore and recorded in `~/c/TechIter/01/coding-style-architecture.md` — the *anemic domain model* critique, the vocabulary-versus-prescription distinction, and *placed by scope* with its worked rules.
 Per `CLAUDE.md`, that was read rather than re-derived.
-Chapter 19 owns the placement method; chapter 14 takes only what the vocabulary argument needs and cites 06 for why the widest scope is not a preference.
+Chapter 18 owns the placement method; chapter 13 takes only what the vocabulary argument needs and cites 06 for why the widest scope is not a preference.
 
 **Verification.**
 The Go sample compiles and runs as printed.
@@ -2280,7 +2280,7 @@ The chapter is titled *Patterns That Smuggle a Verdict*, matching the TOC, but i
 
 ---
 
-## 56. Chapter 14: "meaningful" beats "parses", and the title loses "Patterns"
+## 56. Chapter 13: "meaningful" beats "parses", and the title loses "Patterns"
 
 **Date.** 2026-08-16
 
@@ -2307,34 +2307,34 @@ This is the book's own rule about the five kinds — **never number them, the na
 
 *The Fowler service-layer paragraph* was cut as a detour. Correct: it defends Fowler against a misreading, which is not this chapter's argument.
 
-*The Law/Principle boundary needed worked examples* — the author reported not following it. It now works two: **SQL injection**, where the condition attached to the verdict is *always*, so compressing it costs nothing; and **premature optimization**, where the judgment sits in the first word and whether it is premature is a latency-budget question that chapter 03 measures across four orders of magnitude. *Use-after-free* was dropped rather than explained, since three Law examples were already enough.
+*The Law/Principle boundary needed worked examples* — the author reported not following it. It now works two: **SQL injection**, where the condition attached to the verdict is *always*, so compressing it costs nothing; and **premature optimization**, where the judgment sits in the first word and whether it is premature is a latency-budget question that chapter 02 measures across four orders of magnitude. *Use-after-free* was dropped rather than explained, since three Law examples were already enough.
 
 *The "you still need the term" section was deleted*, on the author's objection that its tone belonged in a different book. That was right, and the register rules name the failure: atmosphere, the beleaguered engineer. It is replaced by a boundary that does more work — **a term's tier is not fixed**, evidenced by *monolith* moving from shape name to verdict noun and partly back within fifteen years, which means the test measures a term in a community at a time and has to be re-run rather than memorized.
 
 **Also.**
-A latency table written for the Principle example was cut before commit: it ran to 75 columns, and it re-presented chapter 03's own order-matcher example rather than citing it. It is now one sentence with a cross-reference.
+A latency table written for the Principle example was cut before commit: it ran to 75 columns, and it re-presented chapter 02's own order-matcher example rather than citing it. It is now one sentence with a cross-reference.
 
 ---
 
-## 57. Part III is about names, and chapter 14 now says so
+## 57. Part III is about names, and chapter 13 now says so
 
 **Date.** 2026-08-16
 
 **Context.**
-The author asked why chapter 14 sits in *Part III — Patterns, graded* if its subject is vocabulary rather than patterns, having added *pattern* to the claim sentence for that reason and had it reverted:
+The author asked why chapter 13 sits in *Part III — Patterns, graded* if its subject is vocabulary rather than patterns, having added *pattern* to the claim sentence for that reason and had it reverted:
 
-> If chapter 14 is about vocabulary and not patterns I'm not sure how to justify this placement. […] So I'm still confused how vocabulary, namings and patterns relate and is it still ok for chapter 14 to belong to part III?
+> If chapter 14 [now 13] is about vocabulary and not patterns I'm not sure how to justify this placement. […] So I'm still confused how vocabulary, namings and patterns relate and is it still ok for chapter 14 to belong to part III?
 
-**What settled it was chapter 10's actual scope.**
+**What settled it was chapter 09's actual scope.**
 Its formal claim is about names, not patterns: *"A pattern is a name for a shape, and names are neither"* true nor false.
 Both of its tests are run on `Manager`, `Helper`, `Util`, `OrderManager`, `PaymentHelper`, and `DataUtil` — none of which are patterns — alongside Singleton and Transaction Script.
 
 So the part's opening chapter already generalises past the catalogue. **Part III is about names, with the pattern catalogue as the densest supply of them.**
-Chapter 10 asks what a name buys; 11, 12, and 13 grade the catalogue's names against ownership, Forces, and language; 14 is what a name can do when it stops being neutral.
+Chapter 09 asks what a name buys; 11, 12, and 13 grade the catalogue's names against ownership, Forces, and language; 14 is what a name can do when it stops being neutral.
 
 **Decision.**
-Chapter 14 stays in Part III, and the claim stays general.
-The defect was that the chapter never justified its own placement — it leaned on chapter 10 in a single clause and left the relationship implicit.
+Chapter 13 stays in Part III, and the claim stays general.
+The defect was that the chapter never justified its own placement — it leaned on chapter 09 in a single clause and left the relationship implicit.
 Two paragraphs now state it, including why the demonstration is pattern vocabulary and the boundary cases are not.
 
 **Why the claim is not narrowed to "pattern vocabulary".**
@@ -2342,12 +2342,12 @@ The chapter's own material defeats it — *code smell*, *anti-pattern*, *prematu
 Narrowing the claim to fit the part title would have made the chapter assert less than it demonstrates, which is the failure the claim-sentence rule exists to prevent, pointed the other way.
 
 **Part III's title is left as "Patterns, graded".**
-It names the part's centre of gravity, which is the catalogue, and chapters 10 and 14 are the frame around it — what a name is worth going in, and what a name can do coming out.
+It names the part's centre of gravity, which is the catalogue, and chapters 09 and 14 are the frame around it — what a name is worth going in, and what a name can do coming out.
 The alternatives considered were vaguer, and the author's question was about placement rather than about the title.
 
 ---
 
-## 58. Chapter 14 restructured onto two axes, because a ladder made *Decorator* and *code smell* the same species
+## 58. Chapter 13 restructured onto two axes, because a ladder made *Decorator* and *code smell* the same species
 
 **Date.** 2026-08-16
 
@@ -2366,10 +2366,10 @@ The chapter graded terms on a single ladder — shape name, hint word, verdict n
 
 On those axes *Decorator* and *code smell* are diagonally opposite, and the ladder had put them adjacent with *anemic* in between.
 
-**Chapter 10 had already got this right and the draft ignored it.**
+**Chapter 09 had already got this right and the draft ignored it.**
 It grades names on compression and constraint, has a section headed *The two tests are independent*, and prints a 2×2 with four named outcomes.
-Chapter 14 took a related question about the same objects and flattened it, which is also why the chapter read as though it did not belong in the part.
-Restructuring makes it fit better, not worse: it is chapter 10's method applied to a different pair of questions.
+Chapter 13 took a related question about the same objects and flattened it, which is also why the chapter read as though it did not belong in the part.
+Restructuring makes it fit better, not worse: it is chapter 09's method applied to a different pair of questions.
 
 **The ladder also had the ordering backwards on one axis.**
 By *can you dissent*, the shape-plus-verdict cell is worse — *anemic* forbids the sentence that disagrees with it and *smell* does not.
@@ -2384,12 +2384,12 @@ That a no-shape term is admissible when it is marked as what it is, contrasted i
 > "This part has code smells, but I can't make up what could go wrong. Can you walk me over why you choose this shape"
 
 The first goes hunch to conclusion with nothing checkable between, so only deference and refusal are available and seniority decides.
-The second declares its own status and converts into a request for the reasoning — which is chapter 03's Forces question.
+The second declares its own status and converts into a request for the reasoning — which is chapter 02's Forces question.
 The rule the chapter now states: **a no-shape term is admissible when it is stated as the speaker's state and turned into a question.**
 
 **Two things the draft added on top.**
 That a no-shape term is **a fact about the reader rather than about the code** — Fowler's own *"surface indication"* says exactly this and the word will not carry it.
-And that **chapter 02's classification test has nothing to grip** on *this smells*: it is not a Law, Force, Principle, Idiom, or Style, because it is not a claim about software. If the test cannot take it, it was not a design claim.
+And that **chapter 01's classification test has nothing to grip** on *this smells*: it is not a Law, Force, Principle, Idiom, or Style, because it is not a claim about software. If the test cannot take it, it was not a design claim.
 
 **Consequences.**
 The claim sentence now covers both axes.
@@ -2431,7 +2431,7 @@ The paragraph closes on the chapter's own test — *if you accept the word, what
 
 ---
 
-## 60. Chapter 15 gets its mechanism from Pike's own transcript, not from the paraphrase
+## 60. Chapter 14 gets its mechanism from Pike's own transcript, not from the paraphrase
 
 **Date.** 2026-08-16
 
@@ -2456,7 +2456,7 @@ That converts the chapter from a description of a sequence into an explanation o
 *Don't communicate by sharing memory* is the first item on the list; *Channels orchestrate; mutexes serialize* is the third.
 One is quoted in code reviews a decade later and the other is not, and the difference is length and rhythm rather than correctness.
 A counter written both ways: 14 lines and 145 ns/op with a mutex, 34 lines and 355 ns/op with a goroutine and three channels — one machine, ratio 2.4–2.5 across repeats, and the chapter says so rather than quoting a single run as if it were a constant.
-Chapter 06 owns why the channel version is a correct way to protect state, so this cites it rather than re-deriving it.
+Chapter 05 owns why the channel version is a correct way to protect state, so this cites it rather than re-deriving it.
 
 **The AI material owed to this chapter is a section rather than a paragraph.**
 `docs/ai-material.md` assigns 15 "a paragraph applying 15's own test", and the finding is that generated design fails it in a way the four steps cannot describe: not that the conditions were forgotten but that none were ever formed.
@@ -2464,7 +2464,7 @@ The chapter also draws the consequence the source material implies — this is a
 
 **The third boundary is the trap the material warned about.**
 `ai-material.md` says the book is most likely to commit its own diagnosed error by closing with a method and a name.
-Chapter 15 is where that has to be answered, since it is the chapter that names the mechanism, so its boundary section states the two non-negotiable conditions: chapter 02's model is a lens that cannot be proved, and the review practice requires the expertise it appears to replace.
+Chapter 14 is where that has to be answered, since it is the chapter that names the mechanism, so its boundary section states the two non-negotiable conditions: chapter 01's model is a lens that cannot be proved, and the review practice requires the expertise it appears to replace.
 
 **Verification.**
 Both Go samples compiled, `gofmt` clean, `go vet` clean. Benchmarks run four times.
@@ -2472,12 +2472,12 @@ One error caught on re-reading before commit: the line counts were quoted invert
 
 ---
 
-## 61. Chapter 15 rewritten after the draft fabricated its own centrepiece
+## 61. Chapter 14 rewritten after the draft fabricated its own centrepiece
 
 **Date.** 2026-08-17
 
 **Context.**
-The first draft of chapter 15 rested on a claim the author disproved by watching the source.
+The first draft of chapter 14 rested on a claim the author disproved by watching the source.
 The draft said Pike's *channels orchestrate, mutexes serialize* is the **condition** for *don't communicate by sharing memory* — "the condition was published beside the proverb, by the same person, on the same afternoon."
 He never says that. They are two entries on a list, each with its own explanation, and the relationship was the draft's inference presented as his structure.
 
@@ -2519,16 +2519,16 @@ The chapter's test is now checkable rather than hopeful: look at the grammatical
 The author proposed *How a Principle Becomes a Folk Remedy*.
 The draft argued against it and the author accepted: the chapter's evidence ends in **repair** rather than entrenchment, so a title naming a bad endpoint overshoots what is demonstrated.
 *How a Principle Loses Its Scope* claims exactly what is shown.
-*Folk remedy* is a good term for the case where repair never arrives, and moves to chapter 23, recorded in its TOC entry so it is not lost.
+*Folk remedy* is a good term for the case where repair never arrives, and moves to chapter 22, recorded in its TOC entry so it is not lost.
 
 **Consequence.**
-`LEDGER.md`'s eleven rows for chapter 15 are replaced; the old ones describe a chapter that no longer exists.
+`LEDGER.md`'s eleven rows for chapter 14 are replaced; the old ones describe a chapter that no longer exists.
 Sensei's Library material is used under short quotation for commentary — its content is under the OpenContent License, whose share-alike clause defers to fair use, so the chapter states facts about the page and quotes two sentences rather than reproducing lists.
 The author's review file keeps its words; only trailing whitespace was normalised so the drift check stops failing on it.
 
 ---
 
-## 62. Chapter 15, second review: Pike glosses the proverb rather than coining it
+## 62. Chapter 14, second review: Pike glosses the proverb rather than coining it
 
 **Date.** 2026-08-17
 
@@ -2543,22 +2543,22 @@ Now conditional: **it carries the scope only where the sentence names it**, and 
 **Two sections cut on the author's judgement.**
 
 *This book is doing it too* — their objection was that it read as "part splitting hairs, part self-flattery, and part trying to counter every possible argument against the book pre-emptively like a paranoid."
-That is right about its placement. The material came from `docs/ai-material.md`'s warning that the book is most likely to commit its own diagnosed error, but answering the charge in the chapter that names the mechanism is pre-emption. The two non-negotiable conditions move to chapter 23's TOC entry, where the method is actually delivered.
+That is right about its placement. The material came from `docs/ai-material.md`'s warning that the book is most likely to commit its own diagnosed error, but answering the charge in the chapter that names the mechanism is pre-emption. The two non-negotiable conditions move to chapter 22's TOC entry, where the method is actually delivered.
 
-The opening paragraph listing chapters 04, 13, and 14 as prior instances also went. It was orientation rather than argument.
+The opening paragraph listing chapters 03, 13, and 14 as prior instances also went. It was orientation rather than argument.
 
 **One recognition bullet was wrong about its own evidence.**
 The draft described the Reddit thread as an argument about what a word covers. The author quoted the post to show it is not: the poster found working code, could not fault it, still suspected it violated the proverb, and asked.
 That is a better tell than a dispute, and quieter — **a competent reader who cannot reconcile a rule with code they have no complaint about is missing the rule's extent, not their own judgement.** The bullet now says that.
 
 **Consequence.**
-Chapter 15's TOC entry is rewritten; the old one described the movement chapter that no longer exists.
+Chapter 14's TOC entry is rewritten; the old one described the movement chapter that no longer exists.
 `LEDGER.md` loses the row for the deleted section and has two rows corrected — the claim's wording, and the note that Pike glosses rather than coins.
 The chapter runs 193 lines.
 
 ---
 
-## 63. How chapter 15's claim sentence was arrived at
+## 63. How chapter 14's claim sentence was arrived at
 
 **Date.** 2026-08-17
 
@@ -2593,7 +2593,7 @@ The draft had twice patched around this rather than fixing it, keeping *sentence
 Correct — a domain is not a narrowing.
 
 **What resolved it was already in the book.**
-The thing the good ones name is a **situation**. Go is not a situation; software is not a situation. And *situation* is chapter 03's word for what a Force is a property of, and chapter 02's first classification question asks whether a claim is a statement about your situation.
+The thing the good ones name is a **situation**. Go is not a situation; software is not a situation. And *situation* is chapter 02's word for what a Force is a property of, and chapter 01's first classification question asks whether a claim is a statement about your situation.
 So the claim borrows vocabulary the reader has had since Part I rather than introducing a third term — which was the author's original objection to *sentence*, satisfied rather than worked around.
 
 **The result.**
@@ -2614,7 +2614,7 @@ That the claim contradicted its own chapter was caught by the author reading the
 **Date.** 2026-08-17
 
 **Context.**
-The author's third review deleted a clause from chapter 15's cost section. It had read that reconstructing rather than reading is how a plausible mechanism gets attached to somebody else's words — *"this chapter's first draft did exactly that, asserting a relationship between two of Pike's proverbs that he never claimed."*
+The author's third review deleted a clause from chapter 14's cost section. It had read that reconstructing rather than reading is how a plausible mechanism gets attached to somebody else's words — *"this chapter's first draft did exactly that, asserting a relationship between two of Pike's proverbs that he never claimed."*
 
 **Decision.**
 Accepted. The clause is gone.
@@ -2635,7 +2635,7 @@ The rest of both reviews stands: *scope* for *content* where the chapter's own k
 
 ---
 
-## 65. Bridging chapter 15 from proverbs to principles, and making 16–18 read as instances
+## 65. Bridging chapter 14 from proverbs to principles, and making 16–18 read as instances
 
 **Date.** 2026-08-17
 
@@ -2644,9 +2644,9 @@ The author raised a structural worry before drafting 16:
 
 > I'm slightly worried that we need to find a way to generalize Pike's "go proverbs losing the scope" to "principles losing the scope." That looks very plausible but do we have a plan for it.
 
-Stated sharply: **chapter 15's title and claim say *principle*, and every piece of its evidence is a *proverb*** — a genre built on purpose to be short and memorable, which a reader can fairly call a special case.
+Stated sharply: **chapter 14's title and claim say *principle*, and every piece of its evidence is a *proverb*** — a genre built on purpose to be short and memorable, which a reader can fairly call a special case.
 
-Checking turned up a second gap the author had not asked about. Chapters 16, 17, and 18 *are* the generalization, but nothing in their TOC entries said so; read cold they were three independent critiques. So chapter 15's opening line — *this chapter is the mechanism they share* — was a promise the rest of Part IV did not keep.
+Checking turned up a second gap the author had not asked about. Chapters 15, 17, and 18 *are* the generalization, but nothing in their TOC entries said so; read cold they were three independent critiques. So chapter 14's opening line — *this chapter is the mechanism they share* — was a promise the rest of Part IV did not keep.
 
 **Decision, gap one.**
 A short section in 15 runs the chapter's structural test on advice nobody wrote to be memorable.
@@ -2660,38 +2660,38 @@ So **the property belongs to the wording rather than to the genre.** Being built
 **Decision, gap two.**
 Each of 16, 17, and 18 gains a block naming the principle, the term with no fixed extent, and the wide reading:
 
-- **16** — *behaviour belongs with the data it operates on*; **belongs with**; every entity gets methods reaching other entities, producing object webs and cycles. The narrow reading is chapter 14's *placed by scope*.
+- **16** — *behaviour belongs with the data it operates on*; **belongs with**; every entity gets methods reaching other entities, producing object webs and cycles. The narrow reading is chapter 13's *placed by scope*.
 - **17** — *write the test first* and *mock your dependencies*; what **first** buys, and what counts as a **dependency**; the ordering ritual causes good design, and anything you did not write gets mocked.
-- **18** — *depend on abstractions* and *the database is a detail*; **abstraction** and **detail**; an interface at every boundary and a directory per layer. The narrow reading is chapter 05's, and `docs/speculative-abstraction.md` holds the argument.
+- **18** — *depend on abstractions* and *the database is a detail*; **abstraction** and **detail**; an interface at every boundary and a directory per layer. The narrow reading is chapter 04's, and `docs/speculative-abstraction.md` holds the argument.
 
 **Why this was worth doing before drafting 16 rather than after.**
 Without it, 16 gets written as a standalone critique of object orientation and has to be retrofitted into Part IV's structure later. With it, each drafting session starts with a spine rather than a topic — and the three chapters stop being three complaints.
 
 **Consequence.**
 `LEDGER.md` gains a row for the wording-not-genre finding.
-Chapter 15 runs 214 lines.
+Chapter 14 runs 214 lines.
 
 ---
 
-## 66. "Scope" gets one meaning; chapter 14's is renamed and chapter 15 drops its synonym
+## 66. "Scope" gets one meaning; chapter 13's is renamed and chapter 14 drops its synonym
 
 **Date.** 2026-08-18
 
 **Context.**
-The author noticed chapter 15 had started saying *scope* where earlier chapters say *conditions*, and asked whether the book should sweep one word for the other.
+The author noticed chapter 14 had started saying *scope* where earlier chapters say *conditions*, and asked whether the book should sweep one word for the other.
 
-The survey said no to the sweep and found a different problem. Of 92 uses of *condition*, only about a third are chapter 15's sense; the rest are logical antecedents, code branches, and ordinary English including the README's licence terms. And *conditions* already carries one clean meaning across seven chapters, tied to Forces by `CLAUDE.md`'s own definition of a Principle as *good advice given certain Forces — conditional*. Replacing it would cut the word loose from the thing it names.
+The survey said no to the sweep and found a different problem. Of 92 uses of *condition*, only about a third are chapter 14's sense; the rest are logical antecedents, code branches, and ordinary English including the README's licence terms. And *conditions* already carries one clean meaning across seven chapters, tied to Forces by `CLAUDE.md`'s own definition of a Principle as *good advice given certain Forces — conditional*. Replacing it would cut the word loose from the thing it names.
 
 **The real defect was that *scope* meant three things.**
 
-- Chapter 13, casually: whether a test runs in one process or across machines.
-- Chapter 14, defined in bold: how much data you must see before you can tell whether a rule holds.
-- Chapter 15, defined and in the title: how far a piece of advice reaches.
+- Chapter 12, casually: whether a test runs in one process or across machines.
+- Chapter 13, defined in bold: how much data you must see before you can tell whether a rule holds.
+- Chapter 14, defined and in the title: how far a piece of advice reaches.
 
-Chapters 14 and 15 are adjacent, and each defines the word.
+Chapters 13 and 15 are adjacent, and each defines the word.
 
 **Decisions, all the author's.**
-Chapter 15 keeps *scope*. Chapter 13 stays as it is, its single use being casual rather than definitional. Chapter 14's term is renamed.
+Chapter 14 keeps *scope*. Chapter 12 stays as it is, its single use being casual rather than definitional. Chapter 13's term is renamed.
 
 **Why not *data access*, which the author proposed.**
 It collides with *data access layer*, a term of art in exactly the architecture space this book argues about, and *access* names permission rather than quantity, which is the wrong axis.
@@ -2699,37 +2699,37 @@ It collides with *data access layer*, a term of art in exactly the architecture 
 **Why no replacement noun at all.**
 The chapter already had the plain version one line below the bold term: its table is headed *how much you must see*. The noun was carrying nothing the table did not. So the term becomes the phrase — **what the rule must see** — which is self-defining and has nothing to look up. `CLAUDE.md`'s rule points the same way: a figure of speech promoted to vocabulary needs defining, and if it needs defining it is not worth the definition.
 
-**Chapter 15's private synonym also went.**
+**Chapter 14's private synonym also went.**
 It used *extent* ten times for exactly what it called *scope* — two words, one meaning, inside one chapter. All ten are now *scope*.
 
 **Consequence.**
-`CLAUDE.md`'s Sources line still says the author's FlowCore document feeds *placement-by-scope*, and is left alone: it describes what is in that file, and that file says *scope*. Chapter 19 should note the book renamed it, or a later session will search the source for a phrase that is not there.
+`CLAUDE.md`'s Sources line still says the author's FlowCore document feeds *placement-by-scope*, and is left alone: it describes what is in that file, and that file says *scope*. Chapter 18 should note the book renamed it, or a later session will search the source for a phrase that is not there.
 Two `DECISIONS.md` entries mention *placed by scope* and stay as written.
-Chapter 14's *value-scoped rules* also went, being the retired sense leaking into a passage.
-The sweep turned up that chapter 15's TOC entry still carried the pre-review claim, including the word *sentence* that three reviews removed from the chapter; it now matches.
+Chapter 13's *value-scoped rules* also went, being the retired sense leaking into a passage.
+The sweep turned up that chapter 14's TOC entry still carried the pre-review claim, including the word *sentence* that three reviews removed from the chapter; it now matches.
 
 ---
 
-## 67. Chapter 15 defines *scope* against *conditions* at first use
+## 67. Chapter 14 defines *scope* against *conditions* at first use
 
 **Date.** 2026-08-18
 
 **Context.**
-Decision 66 settled that the book keeps both words — *conditions* in the earlier chapters, *scope* in chapter 15 — on the grounds that they are not synonyms. The author then made the obvious follow-on point:
+Decision 66 settled that the book keeps both words — *conditions* in the earlier chapters, *scope* in chapter 14 — on the grounds that they are not synonyms. The author then made the obvious follow-on point:
 
-> This confusion between principle's conditions, and principle's scope is a real risk for the reader and we are not stating the exact meaning of scope in chapter 15 as it is introduced.
+> This confusion between principle's conditions, and principle's scope is a real risk for the reader and we are not stating the exact meaning of scope in chapter 15 [now 14] as it is introduced.
 
 Correct, and the risk was created by the previous decision. Keeping two words for one boundary is only defensible if the chapter says which is which.
 
 **Decision.**
 Two short paragraphs after the claim, before anything else.
 
-**Conditions** are what must be true for a Principle to hold, which is always some fact about your Forces — chapter 05's information-hiding Principle has a sharp one, *you do not control your callers*.
+**Conditions** are what must be true for a Principle to hold, which is always some fact about your Forces — chapter 04's information-hiding Principle has a sharp one, *you do not control your callers*.
 **Scope is the same boundary seen from the other side: the situations the advice reaches.**
 
 **Why the book needs both, stated in the chapter rather than left implicit.**
 Stating the conditions gives you the scope, and naming the situation gives you the scope too — they are two routes to one boundary.
-Chapter 15 says *scope* because it tracks **what the wording carries** rather than what the advice requires, and a principle can carry that boundary either way. *Don't store money in a float* names a situation and states no condition, and passes the chapter's test regardless. A chapter using *conditions* would have to call that a principle whose conditions are absent, which is false.
+Chapter 14 says *scope* because it tracks **what the wording carries** rather than what the advice requires, and a principle can carry that boundary either way. *Don't store money in a float* names a situation and states no condition, and passes the chapter's test regardless. A chapter using *conditions* would have to call that a principle whose conditions are absent, which is false.
 
 **Consequence.**
 `LEDGER.md` gains a row for the relationship, so a later chapter reaching for either word knows it is picking a view rather than a synonym.
@@ -2737,7 +2737,7 @@ This closes the terminology work opened by decision 66.
 
 ---
 
-## 68. A named situation is a proxy, and chapter 15's test is weaker than it read
+## 68. A named situation is a proxy, and chapter 14's test is weaker than it read
 
 **Date.** 2026-08-18
 
@@ -2765,31 +2765,31 @@ This is a limit on the chapter's sharpest tool, discovered from the same source 
 
 **Consequence.**
 `LEDGER.md` gains two rows, one for the proxy and one for what the test actually measures.
-Chapter 15's TOC boundary line now leads with the proxy limit.
+Chapter 14's TOC boundary line now leads with the proxy limit.
 The chapter runs 240 lines.
 
 ---
 
-## 69. Chapter 14's Fowler section was chapter 15's mechanism, and the overlap was a ledger defect
+## 69. Chapter 13's Fowler section was chapter 14's mechanism, and the overlap was a ledger defect
 
 **Date.** 2026-08-18
 
 **Context.**
-The author, rereading chapter 14 after 15 was finished:
+The author, rereading chapter 13 after 15 was finished:
 
-> This section of chapter 14 has many parallels with chapter 15, it reads like a mini chapter 15 to me now. I'm not saying that is bad, that's interesting and I'm wondering if we should do anything about it, like at least acknowledging that and trying to find some insight from it
+> This section of chapter 14 [now 13] has many parallels with chapter 15 [now 14], it reads like a mini chapter 15 to me now. I'm not saying that is bad, that's interesting and I'm wondering if we should do anything about it, like at least acknowledging that and trying to find some insight from it
 
 They were right, and `CLAUDE.md` names the diagnosis: **a repetition found in review is a ledger defect, not a local wording problem.** Two rows were wrong.
 
-Row: *Compression is what strips the condition* was assigned to **14**. That is chapter 15's mechanism, and 15 was rewritten after 14 shipped, so nothing caught it. It is now split — 14 keeps *compressing well is why a verdict noun spreads*, 15 keeps why the qualifier is the part that goes.
+Row: *Compression is what strips the condition* was assigned to **14**. That is chapter 14's mechanism, and 15 was rewritten after 14 shipped, so nothing caught it. It is now split — 14 keeps *compressing well is why a verdict noun spreads*, 15 keeps why the qualifier is the part that goes.
 
-Row: *Scope is carried only where named* still carried chapter 15's pre-review wording, including *extent* and *sentence*, both retired from the chapter by later reviews.
+Row: *Scope is carried only where named* still carried chapter 14's pre-review wording, including *extent* and *sentence*, both retired from the chapter by later reviews.
 
 **Two other things the reread surfaced.**
-Chapter 14's closing line still described the chapter 15 that no longer exists — *a true observation acquires a name, the name acquires a community.* That is the movement chapter, deleted in decision 61.
-And chapter 14's Fowler section had generalised past its own subject: *that is not a fact about Fowler; it is a fact about the shape of the term… the one word that survives being repeated.* That sentence states 15's mechanism. It is trimmed to hand the transmission question to 15 and keep 14's own narrower point — the word that survived **convicts**, so a reply must reject the vocabulary before it can reach the design.
+Chapter 13's closing line still described the chapter 14 that no longer exists — *a true observation acquires a name, the name acquires a community.* That is the movement chapter, deleted in decision 61.
+And chapter 13's Fowler section had generalised past its own subject: *that is not a fact about Fowler; it is a fact about the shape of the term… the one word that survives being repeated.* That sentence states 15's mechanism. It is trimmed to hand the transmission question to 15 and keep 14's own narrower point — the word that survived **convicts**, so a reply must reject the vocabulary before it can reach the design.
 
-**The insight the author asked for, now in chapter 15.**
+**The insight the author asked for, now in chapter 14.**
 
 The two cases are different kinds of vocabulary losing different kinds of qualifier. *Anemic domain model* is a verdict noun and lost an **antecedent**. *Don't communicate by sharing memory* is an imperative proverb and lost a **situation**.
 
@@ -2808,7 +2808,7 @@ The overlap is now a relationship the book states rather than a duplication a re
 **Date.** 2026-08-18
 
 **Context.**
-The author could not follow chapter 15's table generalising the test past proverbs, and gave two reasons.
+The author could not follow chapter 14's table generalising the test past proverbs, and gave two reasons.
 
 The first was a plain error. Column one read *one reason to change* and column three read *responsibility* — a word not present in the row it was labelling. The statement of the principle was in one cell and the name of the principle was being drawn on for the other.
 
@@ -2850,7 +2850,7 @@ No. The author's ruling:
 `CLAUDE.md` is canonical and stays unaware of any other agent. An adapter file is responsible for its own adaptation. A third agent writes its own adapter and does not edit the canonical file either.
 
 **Why, in the book's own terms.**
-The dependency runs adapter → canonical, and it has to stay one-way. `AGENTS.md` names `CLAUDE.md` in its second line. If `CLAUDE.md` named `AGENTS.md` back, the two would each require the other as context, which is chapter 05's cycle — and the cost is the one that chapter states: neither file can then be read or changed without the other, for as long as both exist.
+The dependency runs adapter → canonical, and it has to stay one-way. `AGENTS.md` names `CLAUDE.md` in its second line. If `CLAUDE.md` named `AGENTS.md` back, the two would each require the other as context, which is chapter 04's cycle — and the cost is the one that chapter states: neither file can then be read or changed without the other, for as long as both exist.
 
 Keeping the arrow single means `CLAUDE.md` can be edited without checking anything else, which is the property that matters for the file every session loads.
 
@@ -2863,12 +2863,12 @@ The stale-pointer concern that motivated the suggestion is real but lands on the
 
 ---
 
-## 72. Pike's 2023 retrospective gives chapter 15 the harm it had conceded it lacked
+## 72. Pike's 2023 retrospective gives chapter 14 the harm it had conceded it lacked
 
 **Date.** 2026-08-18
 
 **Context.**
-The author supplied Pike's closing talk from GopherConAU 2023, *What We Got Right, What We Got Wrong*, published on his own site. Two passages in it are chapter 15's mechanism with Pike naming it.
+The author supplied Pike's closing talk from GopherConAU 2023, *What We Got Right, What We Got Wrong*, published on his own site. Two passages in it are chapter 14's mechanism with Pike naming it.
 
 **What it supplies.**
 
@@ -2877,7 +2877,7 @@ The author supplied Pike's closing talk from GopherConAU 2023, *What We Got Righ
 *An admission about his own project.* On concurrency, the team's use cases were server software and he says they should have explained that up front, that programmers who tried it elsewhere struggled to see how it helped, and that the lack of guidance was theirs. On concurrency versus parallelism, that the team did a terrible job explaining it and it probably drove some programmers away.
 
 **Why this changes the chapter rather than decorating it.**
-Chapter 15 had conceded it has **no documented harm**, and that concession shaped its boundary section — the chain ends in repair, harm deferred to 16 through 18. That is now only half true. This is the source of a piece of advice stating that the situation was never named and what it cost, which is stronger than a reader's complaint or an inference from a codebase.
+Chapter 14 had conceded it has **no documented harm**, and that concession shaped its boundary section — the chain ends in repair, harm deferred to 16 through 18. That is now only half true. This is the source of a piece of advice stating that the situation was never named and what it cost, which is stronger than a reader's complaint or an inference from a codebase.
 
 It also supplies a third repair. Pike gave a whole talk in 2012 to restore the concurrency/parallelism distinction, and says it should have happened earlier.
 
@@ -2902,7 +2902,7 @@ The chapter runs 282 lines.
 **Date.** 2026-08-18
 
 **Context.**
-The author rewrote the closing paragraph of chapter 15's retrospective section to end on the mechanism — *the underlying mechanism is the same: a principle loses its scope and causes long-term harm.*
+The author rewrote the closing paragraph of chapter 14's retrospective section to end on the mechanism — *the underlying mechanism is the same: a principle loses its scope and causes long-term harm.*
 
 The draft replaced it with a version that restated the two preceding subsections and added dates. The author's verdict was that this "runs around the crucial matter and produces word salad", being a summary of what the reader had just read, and that the crucial information was to pinpoint the mechanism.
 
@@ -2933,7 +2933,7 @@ The author proposed opening the turn with *However*. The turn is needed — afte
 **Date.** 2026-08-18
 
 **Context.**
-Chapter 15 took two passages from Pike's 2023 GopherConAU talk. Reading it turned up material owed to several other chapters, four of which are already at **draft**, and the author asked for a record plus a decision on whether to apply it now.
+Chapter 14 took two passages from Pike's 2023 GopherConAU talk. Reading it turned up material owed to several other chapters, four of which are already at **draft**, and the author asked for a record plus a decision on whether to apply it now.
 
 **Decision, part one: a source document.**
 `docs/pike-retrospective.md`, in the shape of `docs/ai-material.md` — the passages sorted by which chapter is owed them, with the fit argued once so the mentions agree.
@@ -2941,20 +2941,20 @@ It says at the top to read the talk rather than the file, because everything in 
 
 **What it assigns.**
 
-*Chapter 21* gets the most, and the strongest. Pike says interfaces **coloured the team's thinking** in ways it took more than a decade to correct — an Idiom bounding what its own designers could imagine, which is a cost the chapter can state without needing a community that got something wrong. Second, the early compiler written in C against the language community's expectations: reason stated, offence taken, right at the time, and reversed later once the reason expired. That is 21's promised *declare it, document the reason, keep it narrow* with all three present.
+*Chapter 20* gets the most, and the strongest. Pike says interfaces **coloured the team's thinking** in ways it took more than a decade to correct — an Idiom bounding what its own designers could imagine, which is a cost the chapter can state without needing a community that got something wrong. Second, the early compiler written in C against the language community's expectations: reason stated, offence taken, right at the time, and reversed later once the reason expired. That is 21's promised *declare it, document the reason, keep it narrow* with all three present.
 
-*Chapter 02* gets a paragraph: Pike observing that what is good and bad in a language is largely opinion, argued with certainty. That is 02's *tone does not vary with authority*, witnessed by a language designer about arguments over his own language.
+*Chapter 01* gets a paragraph: Pike observing that what is good and bad in a language is largely opinion, argued with certainty. That is 02's *tone does not vary with authority*, witnessed by a language designer about arguments over his own language.
 
-*Chapter 09* gets the compatibility promise priced by the person who made it — it costs, and it blocks feature-itis. The chapter argues the constraint; this is somebody adopting it deliberately as a feature.
+*Chapter 08* gets the compatibility promise priced by the person who made it — it costs, and it blocks feature-itis. The chapter argues the constraint; this is somebody adopting it deliberately as a feature.
 
-*Chapter 13* gets a flagged maybe — the async/await aside and *coloured functions* — with an explicit instruction not to force it, since 13 is about patterns dissolving into features and this is closer to the inverse.
+*Chapter 12* gets a flagged maybe — the async/await aside and *coloured functions* — with an explicit instruction not to force it, since 13 is about patterns dissolving into features and this is closer to the inverse.
 
 **Decision, part two: chapters at draft wait.**
 
 Record now, apply when the chapter is next open.
 
 Applying to four finished chapters at once means four review cycles in parallel, which is the batching this project avoids everywhere.
-Material of this kind is strongest when the chapter is live, because the argument can be shaped around it — chapter 15's use worked for that reason, and a quotation bolted onto a finished chapter is the decoration the register rules exclude.
+Material of this kind is strongest when the chapter is live, because the argument can be shaped around it — chapter 14's use worked for that reason, and a quotation bolted onto a finished chapter is the decoration the register rules exclude.
 And the precedent exists: `ai-material.md` holds material for 02 and 03 the same way, and the TOC's *Pending revisits* table is the mechanism for not losing it.
 
 **The test that would have overridden this**, stated because it is the part that matters: **a revisit can wait, a contradiction cannot.**
@@ -2962,7 +2962,7 @@ The talk was checked against what is already shipped and contradicts none of it.
 
 **Consequence.**
 `CLAUDE.md` names the document as the third of its kind and says when to read it.
-`00_toc.md` gains three rows in *Pending revisits* and a block in chapter 21's entry.
+`00_toc.md` gains three rows in *Pending revisits* and a block in chapter 20's entry.
 `LEDGER.md` gains two rows for 21, since those concepts are definite enough to be owned before the chapter exists.
 
 ---
@@ -2985,11 +2985,11 @@ A `## Sources` section at the end of every chapter, in the back matter above the
 **The draft's recommendation did not survive, and the author's argument was the medium.**
 The draft proposed `docs/SOURCES.md` — an internal record of what was cited and which form of each source was actually consulted — with a reader-facing appendix generated later, at publication.
 The author's objection: this is a free online book whose chapters are separate files, and the README links readers straight into 03, 06, 07, and 10.
-A reader arriving at chapter 07 from one of those links has no reason to know a references file exists elsewhere in the repository.
+A reader arriving at chapter 06 from one of those links has no reason to know a references file exists elsewhere in the repository.
 The sources belong where the reading happens.
 
 That also absorbed the one job the internal record was for.
-`CLAUDE.md` requires ranking the available sources and naming the one actually read — a rule that exists because chapter 15's Pike material came from a third-party transcript read in excerpts.
+`CLAUDE.md` requires ranking the available sources and naming the one actually read — a rule that exists because chapter 14's Pike material came from a third-party transcript read in excerpts.
 Recording that in the chapter rather than in a private file matches how the book already handles its claims about itself.
 
 **Why it is not an academic apparatus.**
@@ -2998,9 +2998,9 @@ The section is a lookup table, not a footnote system: no superscripts, no number
 *Parnas, 1972* stays where it is and also appears in the list.
 
 **Consequence.**
-Chapter 15 was done first as the prototype, every link verified against the author's local source archive or fetched live.
+Chapter 14 was done first as the prototype, every link verified against the author's local source archive or fetched live.
 `Sources` is now in the chapter rubric in `CLAUDE.md` and `README.md`, placed as back matter rather than as a seventh section, because it is not a step in the argument — so chapters 01 and 16–23 are drafted with it.
-Chapters 02–14 are retrofitted in the final sweep, decision 77.
+Chapters 01–14 are retrofitted in the final sweep, decision 77.
 
 ---
 
@@ -3009,7 +3009,7 @@ Chapters 02–14 are retrofitted in the final sweep, decision 77.
 **Date.** 2026-08-18
 
 **Context.**
-Chapter 15's first Sources section annotated each entry with what the chapter had taken from it — which quotations came from the recording, which part of a large wiki page was used.
+Chapter 14's first Sources section annotated each entry with what the chapter had taken from it — which quotations came from the recording, which part of a large wiki page was used.
 The author then asked whether the links could be made to open in a new tab.
 
 **Decision.**
@@ -3088,7 +3088,7 @@ The author's reason: a document can then be added or renamed without editing `CL
 It is the same derivation principle as slice 2, applied to material rather than to rules.
 
 The per-file chapter lists went for the same reason, and one of them was already wrong.
-`CLAUDE.md` said to read `ai-material.md` before drafting 02, 03, 15, 17, 19, 21, or 23; chapters 02, 03, and 15 had all reached draft, and nobody had updated the line.
+`CLAUDE.md` said to read `ai-material.md` before drafting 02, 03, 15, 17, 19, 21, or 23; chapters 01, 03, and 15 had all reached draft, and nobody had updated the line.
 Each document tracks its own chapters in the table it already carries.
 
 **Two calls made in the draft.**
@@ -3107,7 +3107,7 @@ Slice 4 reconciles ledger rows, so it is where a path gets fixed when a document
 **Date.** 2026-08-19
 
 **Context.**
-Chapter 17 takes its ordering argument from Fucci et al., read in full.
+Chapter 16 takes its ordering argument from Fucci et al., read in full.
 The draft that came back from that reading carried three stacked block quotes in the paper's own prose, including *"this advice would require a negative (statistically significant) coefficient, which the models did not produce."*
 It also carried the paper's `GRA / UNI / SEQ / REF` abbreviations, each used once, and used *external quality* and *productivity* as if they were plain English rather than the paper's operationalized measures.
 
@@ -3133,21 +3133,21 @@ The symptom named for future review is a paragraph the reader must decode rather
 
 **The sweep was scoped before it was proposed.**
 The author asked whether earlier chapters need the same pass.
-A survey found the problem contained: one block quote over 200 characters in the whole book — Conway's, in chapter 09, which the chapter's argument turns on and which is his own plain wording — and three hits for statistics vocabulary, all of them ordinary usage (*control group* describing a study's limits, *correlate* in its everyday sense).
-So no standalone sweep. Chapter 08 had already been through a jargon pass in August, and anything not visible to this survey is covered by the final sweep's slice 2 (decision 77), which checks each chapter against the rules that postdate it — a set this rule now joins.
+A survey found the problem contained: one block quote over 200 characters in the whole book — Conway's, in chapter 08, which the chapter's argument turns on and which is his own plain wording — and three hits for statistics vocabulary, all of them ordinary usage (*control group* describing a study's limits, *correlate* in its everyday sense).
+So no standalone sweep. Chapter 07 had already been through a jargon pass in August, and anything not visible to this survey is covered by the final sweep's slice 2 (decision 77), which checks each chapter against the rules that postdate it — a set this rule now joins.
 
 **Consequence.**
-The chapter 17 section reads as three plain statements with short quoted fragments attached, and states the study's outcomes as what they measured rather than as their names.
+The chapter 16 section reads as three plain statements with short quoted fragments attached, and states the study's outcomes as what they measured rather than as their names.
 `CLAUDE.md` gains the rule; no chapter is reopened for it now.
 
 ---
 
-## 80. Speculative abstraction gets chapter 19; 19–23 renumber to 20–24
+## 80. Speculative abstraction gets chapter 18; 19–23 renumber to 20–24
 
 **Date.** 2026-08-20
 
 **Context.**
-`docs/pending/speculative-abstraction.md` had carried an open question since it was written: chapter 18's subject is a structural idea expressed as directories, this argument is about abstraction bought as insurance, and the two are adjacent without being the same.
+`docs/pending/speculative-abstraction.md` had carried an open question since it was written: chapter 17's subject is a structural idea expressed as directories, this argument is about abstraction bought as insurance, and the two are adjacent without being the same.
 It marked the resolution as the author's call.
 Drafting 18, the draft answered the question itself and folded both into one chapter, joined by an *and* in the claim sentence.
 
@@ -3160,7 +3160,7 @@ A chapter titled *versus the language* cannot rest half its length on an argumen
 Two further confirmations the draft had missed. 18's own contents line in `00_toc.md` already scoped it correctly — exports, mapping tax, the `internal/` manoeuvre, three layouts — a complete chapter with no abstraction material in it. And FlowCore's decision 1 supplied the two items the first draft skipped, so the material was available and unused.
 
 **Decision.**
-A new chapter 19, *Abstraction as insurance*, running *depend on abstractions, not concretions*.
+A new chapter 18, *Abstraction as insurance*, running *depend on abstractions, not concretions*.
 Part IV becomes five chapters; 19–23 renumber to 20–24; the book is twenty-four chapters.
 
 **On which slogan moved.**
@@ -3174,17 +3174,17 @@ Worth noting that the draft had written a version of that sentence into 18's *Wh
 
 **The renumbering.**
 Twenty-nine references across twelve files, swept descending so the ranges never collide, and restricted to chapter-context forms — `chapter NN`, `Ch. NN`, `cite NN`, TOC headings, bare table cells, filenames, `belongs to NN`, `(→ NN)`.
-A numeric sweep would have corrupted *16 of 23 patterns* in chapter 13, *a team of 20* in chapter 09, and `Trace.java:19` in 13. Every changed line was reviewed.
+A numeric sweep would have corrupted *16 of 23 patterns* in chapter 12, *a team of 20* in chapter 08, and `Trace.java:19` in 13. Every changed line was reviewed.
 
 `docs/DECISIONS.md` is deliberately **not** renumbered, on the same reasoning as decision 78's file paths: an entry written when 19 was the force-map method should say 19. This entry is the key for reading the earlier ones.
 
 **Consequence.**
 `README.md`'s count and status line, and the count words in `tools/check-drift.py`, move to twenty-four.
-`docs/pending/speculative-abstraction.md` records the question as settled and now owes only one line, to chapter 21.
+`docs/pending/speculative-abstraction.md` records the question as settled and now owes only one line, to chapter 20.
 
 **The pattern worth recording, because it is the second instance.**
 A working document said *this is the author's call*, the draft formed a view and shipped the view instead of the question.
-Chapter 17 had the same shape when the draft decided a paper's conditions were its to summarize.
+Chapter 16 had the same shape when the draft decided a paper's conditions were its to summarize.
 Flagging rather than resolving is the cheaper error in both directions, and the draft has twice taken the expensive one.
 
 ---
@@ -3194,36 +3194,36 @@ Flagging rather than resolving is the cheaper error in both directions, and the 
 **Date.** 2026-08-20
 
 **Context.**
-Reviewing chapter 19, the author objected that *depend on abstractions, not concretions* was being treated as a scopeless slogan when it is the Dependency Inversion Principle and has a reachable statement.
+Reviewing chapter 18, the author objected that *depend on abstractions, not concretions* was being treated as a scopeless slogan when it is the Dependency Inversion Principle and has a reachable statement.
 That was right, and reading the source falsified the chapter's claim.
 The author then ran the same check over 16, 17 and 18 and collected the objections in `docs/pending/claim-research.md`, in the shape that had worked: the objection, the reasoning, and a lead rather than an answer.
 
 **What the four sources say.**
 
-*Chapter 16.* Riel's heuristic 2.9 is *keep related data and behavior in one place*, and his own gloss defines *related* — "the two areas are actually of the same key abstraction." By his 2.8 an order and a customer are two abstractions, so the chapter's case is outside the heuristic's stated reach. His introduction calls all sixty *warning bells* rather than rules, says it is "perfectly valid to state that the heuristic does not apply," and was written expressly to avoid what happened to *goto considered harmful*.
+*Chapter 15.* Riel's heuristic 2.9 is *keep related data and behavior in one place*, and his own gloss defines *related* — "the two areas are actually of the same key abstraction." By his 2.8 an order and a customer are two abstractions, so the chapter's case is outside the heuristic's stated reach. His introduction calls all sixty *warning bells* rather than rules, says it is "perfectly valid to state that the heuristic does not apply," and was written expressly to avoid what happened to *goto considered harmful*.
 
-*Chapter 17.* Fowler named two schools in 2007 — classical and mockist — and came down classical. *Mock your dependencies* is one side of a recorded disagreement stated as if it were the only side. Beck's own statement of the TDD loop mentions no mocking, no isolation requirement and no speed requirement.
+*Chapter 16.* Fowler named two schools in 2007 — classical and mockist — and came down classical. *Mock your dependencies* is one side of a recorded disagreement stated as if it were the only side. Beck's own statement of the TDD loop mentions no mocking, no isolation requirement and no speed requirement.
 
-*Chapter 18.* Martin separates the data model, "highly significant to the architecture of your system," from the database system, "a low-level detail — a mechanism," and his 2012 post is about deferring the choice rather than hiding it.
+*Chapter 17.* Martin separates the data model, "highly significant to the architecture of your system," from the database system, "a low-level detail — a mechanism," and his 2012 post is about deferring the choice rather than hiding it.
 
-*Chapter 19.* Martin's 1994 paper names stability as the test and derives stability from plurality: "the more varieties of Reader and Writer exist, the more dependents these classes have."
+*Chapter 18.* Martin's 1994 paper names stability as the test and derives stability from plurality: "the more varieties of Reader and Writer exist, the more dependents these classes have."
 
 **Decision.**
 All four chapters rebuilt on their sources; all four dropped from **draft** to **in progress**, since a falsified claim is a contradiction rather than a revisit.
 
 **The finding, and where it landed.**
 The compression survives and the qualification does not, four times out of four, across four independent sources.
-That is a sharper thesis than *this advice is vague*, and it changes what chapter 15 could say: its cost section asserted that "usually nobody wrote it down," directly above four counter-instances.
+That is a sharper thesis than *this advice is vague*, and it changes what chapter 14 could say: its cost section asserted that "usually nobody wrote it down," directly above four counter-instances.
 
-Chapter 15 now splits the case by who said it, and states the consequence: **prominence is what makes advice travel and also what makes its scope recoverable, and only the first gets used** — so the failure is retrieval rather than preservation, and retrieval fails because the compressed form is complete enough to act on.
+Chapter 14 now splits the case by who said it, and states the consequence: **prominence is what makes advice travel and also what makes its scope recoverable, and only the first gets used** — so the failure is retrieval rather than preservation, and retrieval fails because the compressed form is complete enough to act on.
 
 **What was declined.**
 A Part IV framing line saying the pattern held four times. The author's call, and skipped.
 
 **Two corrections to the draft's own work, recorded because both were overclaims in the book's own diagnosed shape.**
-Chapter 16 had asserted the advice "has no author," on the strength of one failed fetch, and made the absence load-bearing.
+Chapter 15 had asserted the advice "has no author," on the strength of one failed fetch, and made the absence load-bearing.
 It had also used Riel's 4.6 as a cohesion test that a two-entity rule fails; 4.6 detects a class holding two abstractions, which is the opposite failure.
-Chapter 17 had said mocking is taught with test-first "and always has been," which Beck's canon contradicts.
+Chapter 16 had said mocking is taught with test-first "and always has been," which Beck's canon contradicts.
 
 **Consequence.**
 `docs/pending/claim-research.md` is marked consumed and records where each source was found.
@@ -3238,7 +3238,7 @@ Two sources remain unreached and nothing is claimed from them: Rafique and Miši
 **Date.** 2026-08-22
 
 **Context.**
-Chapter 15 states a mechanism and chapters 16 through 19 were planned as case studies of it — "the mechanism, stated once, so the case studies can be short."
+Chapter 14 states a mechanism and chapters 15 through 19 were planned as case studies of it — "the mechanism, stated once, so the case studies can be short."
 They were drafted in the general rubric anyway, opening on a bolded claim sentence like every other chapter.
 
 **The author's diagnosis, after a full re-read of 15–19.**
@@ -3246,14 +3246,14 @@ The four claim sentences are not claims. They are loose summaries, and forcing t
 
 Checking it against the four confirmed a sharper version. Each of those chapters carries two different kinds of content:
 
-- **A particular** — this piece of advice had a stated scope, here it is, here is what travelled instead. That is *evidence for chapter 15's claim*, not a claim.
+- **A particular** — this piece of advice had a stated scope, here it is, here is what travelled instead. That is *evidence for chapter 14's claim*, not a claim.
 - **A general** — a value graph with a cycle breaks generic walkers; a test can only fail for reasons it can reach; a directory costs whatever the language ties to it; an abstraction's stability comes from having dependents.
 
 The single `## The claim` slot forced the two together, and every one of the four came out as two assertions joined by a connective: 16's *"drops two qualifications … **and** placing each such rule leaves a reference pointing each way"*; 17's *"**Neither** X **nor** Y …"*.
-That is the same welding the author rejected in chapter 18 at decision 80, which was treated then as one chapter's mistake. It was systemic and the draft did not see it.
+That is the same welding the author rejected in chapter 17 at decision 80, which was treated then as one chapter's mistake. It was systemic and the draft did not see it.
 
 **Decision.**
-A stated Part IV shape, recorded in `CLAUDE.md`, replacing the claim rubric for chapters 16–19 only: the advice, what the source said, what the wide reading produces, why it is the reading that gets taken, where the wide reading is right, what the alternative costs, how to recognize it.
+A stated Part IV shape, recorded in `CLAUDE.md`, replacing the claim rubric for chapters 15–19 only: the advice, what the source said, what the wide reading produces, why it is the reading that gets taken, where the wide reading is right, what the alternative costs, how to recognize it.
 
 The mandatory counter-example survives unchanged; only its framing moves, from *where this claim doesn't apply* to *when following the compressed version is correct*. Chapters before Part IV keep the general rubric, because they do make claims of their own.
 
@@ -3263,25 +3263,25 @@ That evidence is spread roughly evenly across the four, and a merged chapter kee
 Length was never the problem. The manufactured claim was.
 
 **Consequence.**
-Chapter 16 is reworked first as the prototype, for review before 17, 18 and 19 follow.
-Chapter 15's line *"Part IV is four case studies, and this chapter is the mechanism they share, stated once"* stops being descriptive and becomes the thing that licenses the different shape.
+Chapter 15 is reworked first as the prototype, for review before 17, 18 and 19 follow.
+Chapter 14's line *"Part IV is four case studies, and this chapter is the mechanism they share, stated once"* stops being descriptive and becomes the thing that licenses the different shape.
 
 ---
 
-## 83. *The database is a detail* is cut, and with it chapter 18
+## 83. *The database is a detail* is cut, and with it chapter 17
 
 **Date.** 2026-08-22
 
 **Context.**
-Chapter 18 ran chapter 15's mechanism on *the database is a detail*, and demonstrated the cost with a Go package split that publishes the helpers it was drawn to hide.
+Chapter 17 ran chapter 14's mechanism on *the database is a detail*, and demonstrated the cost with a Go package split that publishes the helpers it was drawn to hide.
 Reworking it into the Part IV case-study shape did not fix it, and the author called the result a failure: two unrelated things bundled under a common theme.
 
 **The decisive argument, which is the draft's and is stronger than "uninteresting".**
 Every other Part IV case shows damage that follows from the *reading*. This one does not.
-The export bill is a property of Go's package semantics, paid identically whatever the motive for the split — and the chapter's own boundary section conceded it: *"Splitting a package to break a dependency cycle is chapter 05's third option, and it works — the cycle is gone whatever the export cost."*
+The export bill is a property of Go's package semantics, paid identically whatever the motive for the split — and the chapter's own boundary section conceded it: *"Splitting a package to break a dependency cycle is chapter 04's third option, and it works — the cycle is gone whatever the export cost."*
 So the demonstration was never a demonstration of the advice. It was a Go fact welded to a Martin sentence, which is the third time in Part IV the draft bound a real finding to advice it does not follow from.
 
-**The author's argument for cutting the database material entirely**, which the draft had wanted to salvage into chapter 17.
+**The author's argument for cutting the database material entirely**, which the draft had wanted to salvage into chapter 16.
 *Clean Architecture*'s chapter 30 is titled *The Database Is a Detail* and opens: *"From an architectural point of view, the database is a non-entity — it is a detail that does not rise to the level of an architectural element. Its relationship to the architecture of a software system is rather like the relationship of a doorknob to the architecture of your home."*
 The distinction the draft found — data model significant, database system a mechanism — comes later in the same chapter.
 That is not a scope stated plainly and lost in transmission. It is a chapter that opens on a maximal claim and qualifies it in its own pages, and untangling that is the original author's responsibility rather than this book's.
@@ -3289,17 +3289,17 @@ That is not a scope stated plainly and lost in transmission. It is a chapter tha
 It would also have contaminated the pattern. Riel's *related*, Fowler's two schools and Martin's stability criterion are clean transmission losses; authorial overreach-then-hedge is a different phenomenon, and mixing it in makes Part IV mushier rather than broader.
 
 **Decision.**
-Chapter 18 is deleted. Part IV is 15 plus three cases: OOP and the direction rule, TDD and mocks, abstraction as insurance.
-Chapters 19–24 renumber to 18–23; the book returns to twenty-three chapters.
+Chapter 17 is deleted. Part IV is 15 plus three cases: OOP and the direction rule, TDD and mocks, abstraction as insurance.
+Chapters 18–24 renumber to 18–23; the book returns to twenty-three chapters.
 
 **What was salvaged, and what was not.**
-`docs/pending/layout-and-language.md` holds the Go compile error, the `go doc` output, the `internal/` reasoning, the mapping tax and the three-language table, owed to chapter 21 as one section. A directory means a package in Go, nothing in C# until assemblies split, and nothing enforced in Python — which is an idiom finding, and *why ecosystems diverge* is the chapter for it.
+`docs/pending/layout-and-language.md` holds the Go compile error, the `go doc` output, the `internal/` reasoning, the mapping tax and the three-language table, owed to chapter 20 as one section. A directory means a package in Go, nothing in C# until assemblies split, and nothing enforced in Python — which is an idiom finding, and *why ecosystems diverge* is the chapter for it.
 The database material is not salvaged anywhere.
 
 **Consequence.**
-Chapter 05 loses three cross-references to a chapter that no longer exists; two of its sentences already stated the finding in full, so only the pointers went.
+Chapter 04 loses three cross-references to a chapter that no longer exists; two of its sentences already stated the finding in full, so only the pointers went.
 Five ledger rows move to 21 and three are deleted.
-`CLAUDE.md`'s Part IV shape, chapter 15's case counts in four places, chapter 16's opening, the README count and the drift checker's count words all follow.
+`CLAUDE.md`'s Part IV shape, chapter 14's case counts in four places, chapter 15's opening, the README count and the drift checker's count words all follow.
 
 ---
 
@@ -3308,40 +3308,40 @@ Five ledger rows move to 21 and three are deleted.
 **Date.** 2026-08-23
 
 **Context.**
-Chapter 19 documents grilling — an interview conducted before generation, in which each decision is put to the human with a recommended answer, one at a time. Until now it was material the book described rather than a way the book was made.
-The author ran chapter 20's first review that way instead of tagging and waiting, and then asked for it to become standing practice for both drafting and review.
+Chapter 18 documents grilling — an interview conducted before generation, in which each decision is put to the human with a recommended answer, one at a time. Until now it was material the book described rather than a way the book was made.
+The author ran chapter 19's first review that way instead of tagging and waiting, and then asked for it to become standing practice for both drafting and review.
 
 **Decision.**
 `CLAUDE.md` gains a *Grilling* section under *How we work*, with the procedure stated as Claude's behaviour rather than as a prompt, and pointers to it from the drafting rule and from step one of the review cycle.
 
-**What the chapter 20 session added to the technique as documented.**
+**What the chapter 19 session added to the technique as documented.**
 Three things, all learned by doing it and none of them in the original prompt.
 
 **Order the questions by dependency.** Terminology had to be question one, because the title, every section heading, the TOC entry, three ledger rows and two cross-references inherited from it. Asked later, it would have been asked twice.
 
-**Look up the blast radius before asking.** Counting *domain* across the book — 71 uses, only three outside chapter 20 in that chapter's sense — turned a matter of taste into an easy decision, and it was Claude's job to find that rather than the author's to weigh it.
+**Look up the blast radius before asking.** Counting *domain* across the book — 71 uses, only three outside chapter 19 in that chapter's sense — turned a matter of taste into an easy decision, and it was Claude's job to find that rather than the author's to weigh it.
 
 **Surface what the author did not tag.** Two items came out of that session unprompted: the file needed renaming because its slug carried the removed word, and the Sources section listed a work the chapter never cited.
 
 **The limit, stated because the book states it.**
-Grilling is slow by design, and chapter 19 records that as one of its costs.
+Grilling is slow by design, and chapter 18 records that as one of its costs.
 A review that is three typos is applied rather than interviewed, and the test written into `CLAUDE.md` is whether any item would change what the other items should be. Where nothing depends on anything there is no tree to walk.
 
 **Consequence.**
 The review cycle's shape is unchanged — the author still reviews in the file, still commits, and Claude still commits one pass at a time. What changes is that between their commit and Claude's there is now a conversation, and the work is applied in one go at the end of it rather than tag by tag.
 
-## 85. Chapter 20: *extreme* was a private synonym for a term chapter 03 owns
+## 85. Chapter 19: *extreme* was a private synonym for a term chapter 02 owns
 
 **Context.**
-Chapter 20's second review raised four things, and the first one governed the rest.
+Chapter 19's second review raised four things, and the first one governed the rest.
 The chapter defined a force profile as a reading "with at least one force pinned at an extreme," and used *extreme* ten times as its threshold word.
 
 **The author rejected it on meaning:** *extreme* evokes rareness, and the threshold is not at 99% — a force tipped to 70% is enough.
 They proposed *significant intensity* instead, and said they believed *intensity* had been used in an earlier chapter.
 
 It had, and more heavily than the suggestion assumed.
-Chapter 03 defines it at line 11 — *"Intensity means **how hard the Force presses on the design**, which is not always the same as how large the number is… Read the pressure, not the number"* — uses it thirteen times, and chapter 12 leans on it to choose between patterns answering the same Force.
-So the author's objection was already the book's stated position, and *extreme* was not merely evocative: it was chapter 20 inventing a private synonym for a term another chapter owns, which is the drift `docs/LEDGER.md` exists to prevent.
+Chapter 02 defines it at line 11 — *"Intensity means **how hard the Force presses on the design**, which is not always the same as how large the number is… Read the pressure, not the number"* — uses it thirteen times, and chapter 11 leans on it to choose between patterns answering the same Force.
+So the author's objection was already the book's stated position, and *extreme* was not merely evocative: it was chapter 19 inventing a private synonym for a term another chapter owns, which is the drift `docs/LEDGER.md` exists to prevent.
 
 **Options for the threshold word.**
 *Significant intensity*, the author's proposal.
@@ -3349,7 +3349,7 @@ So the author's objection was already the book's stated position, and *extreme* 
 No adjective at all.
 
 **Decision, reached jointly.**
-The draft argued against *significant* — an evaluative adjective is a judgment about the reading rather than a position on chapter 03's dial, which the register rules exclude — and proposed instead a sentence chapter 20 already contained.
+The draft argued against *significant* — an evaluative adjective is a judgment about the reading rather than a position on chapter 02's dial, which the register rules exclude — and proposed instead a sentence chapter 19 already contained.
 Line 142 read *"A profile is where one force leaves the ordinary range and stays there."*
 That answers the rareness objection directly, needs no new vocabulary, and pairs with the chapter's own boundary section on the ordinary case, so the two now share wording.
 The definition is: **the reading of every force bearing on a system, with at least one at an intensity outside the ordinary range, and staying there.**
@@ -3380,45 +3380,45 @@ Someone who works on embedded systems finds their section by the word *embedded*
 A sentence under the table now says the left column is where a profile is commonly met rather than what it is, and that the two sales systems share a domain and would not share a row.
 
 **A misattribution the review did not tag.**
-Chapter 20 said the UI-framework force sits *"at the value chapter 03 names as the extreme."*
-Chapter 03 names no such value; it gives control of the callers three intensities, the third being *"you can neither see nor change them."*
+Chapter 19 said the UI-framework force sits *"at the value chapter 02 names as the extreme."*
+Chapter 02 names no such value; it gives control of the callers three intensities, the third being *"you can neither see nor change them."*
 Fixed to name the actual position.
 
 **Consequence.**
-Ten uses of *extreme* in chapter 20, one heading, two TOC lines, and four ledger rows changed, including chapter 03's own row, whose canonical citation was *"read the value"* and is now *"read the intensity"* to match the chapter's bolded term.
-Chapter 19 is at draft and was touched once, in its handoff line, where *"each one's dominant force"* was singular against a definition that permits several — games pins the frame budget and the memory hierarchy, embedded pins the deadline and the absence of a heap.
-Its force-map cell reading `extreme` was left alone: there the word is ordinary English about one reading, in a row that also carries `none`, `real` and `unknown`, and chapter 20 giving up the word as vocabulary does not oblige the book to give up the adjective.
+Ten uses of *extreme* in chapter 19, one heading, two TOC lines, and four ledger rows changed, including chapter 02's own row, whose canonical citation was *"read the value"* and is now *"read the intensity"* to match the chapter's bolded term.
+Chapter 18 is at draft and was touched once, in its handoff line, where *"each one's dominant force"* was singular against a definition that permits several — games pins the frame budget and the memory hierarchy, embedded pins the deadline and the absence of a heap.
+Its force-map cell reading `extreme` was left alone: there the word is ordinary English about one reading, in a row that also carries `none`, `real` and `unknown`, and chapter 19 giving up the word as vocabulary does not oblige the book to give up the adjective.
 
 ## 86. One idea, seven places: the repetition the ledger had no row for
 
 **Context.**
-Chapter 20's third review objected to a paragraph explaining that two people arguing about whether logic belongs in the database are really disagreeing about forces.
+Chapter 19's third review objected to a paragraph explaining that two people arguing about whether logic belongs in the database are really disagreeing about forces.
 The author's note: *"this 'two people arguing both are right' theme was used maybe 5 times in the book with near identical idea… You need to do something about this problem. It's ok to edit older chapters."*
 
 **The survey, and a false start.**
 The first pass was run case-sensitively and missed every instance that begins a sentence, which produced a count of five and a plan built on it.
-Re-run properly, the idea appears seven times: chapter 02 twice, chapter 03 twice, chapter 19 twice, chapter 20 once.
+Re-run properly, the idea appears seven times: chapter 01 twice, chapter 02 twice, chapter 18 twice, chapter 19 once.
 The correction was reported before the second decision was taken rather than after, and the three sites already agreed were the right three.
 
 **The cause is a ledger defect, as `CLAUDE.md` predicts.**
 No row in `docs/LEDGER.md` owned the concept.
 With no owner, four chapters each re-established it, and — this is what made it invisible — each one politely cited the others while doing so.
-Chapter 03 cited 02, chapter 19 cited 03, chapter 20 cited 03.
+Chapter 02 cited 02, chapter 18 cited 03, chapter 19 cited 03.
 A citation reads like deference to an owner, so nothing looked wrong at any single site.
 
 **Decision.**
-Chapter 03 owns the mechanism, since it is the Forces chapter and states it at line 393.
-Chapter 02 keeps one sentence and its handoff, which is exactly what the anti-repetition protocol allows.
+Chapter 02 owns the mechanism, since it is the Forces chapter and states it at line 393.
+Chapter 01 keeps one sentence and its handoff, which is exactly what the anti-repetition protocol allows.
 Four sites were cut:
 
 **03:504** said it a third time, thirty pages after 393, before delivering its remedy.
 The restatement goes; the remedy stays.
 
-**19:288** recapped chapter 03's finding in two sentences with a citation attached, and carried a remedy nearly identical to 03's.
-Reduced to the trigger plus chapter 19's own remedy, which is the force map rather than 03's advice.
+**19:288** recapped chapter 02's finding in two sentences with a citation attached, and carried a remedy nearly identical to 03's.
+Reduced to the trigger plus chapter 18's own remedy, which is the force map rather than 03's advice.
 
 **20:143** spent four sentences rebuilding 03's case to reach one clause of new material.
-That clause is genuinely chapter 20's and was kept: **an ordinary force disagreement ends when somebody measures, and a profile disagreement does not**, because each side is reading a force that will not move in their own system.
+That clause is genuinely chapter 19's and was kept: **an ordinary force disagreement ends when somebody measures, and a profile disagreement does not**, because each side is reading a force that will not move in their own system.
 So 20 now owns the stability and nothing else.
 
 **20:221** duplicated 20:185 — the senior person who is right somewhere else — thirty-six lines apart, inside one chapter.
@@ -3426,33 +3426,33 @@ Replaced.
 
 **Two ledger rows added**, which is the actual fix: one assigning the mechanism to 03, one recording that 20 owns only the non-resolution.
 
-**Four passages that look like the theme and are not**, left alone: chapter 05's folder-structure pair are confusing an Idiom for a Law, chapter 11's two engineers are picturing different scopes of one word, chapter 19:33's pair is about which arguments are winnable at all, and chapter 02:263 is about litigating the classification.
+**Four passages that look like the theme and are not**, left alone: chapter 04's folder-structure pair are confusing an Idiom for a Law, chapter 10's two engineers are picturing different scopes of one word, chapter 18:33's pair is about which arguments are winnable at all, and chapter 01:263 is about litigating the classification.
 
 **Three further items in the same review.**
 
 **A loaded word.**
 The author asked what *framework* meant in a recognition bullet and whether *tech stack* was intended.
-It was not: chapter 20 defines the term in its own UI-framework section — a framework calls you, a library is what you call — but the bullet did not recall that, so the loaded reading was available.
+It was not: chapter 19 defines the term in its own UI-framework section — a framework calls you, a library is what you call — but the bullet did not recall that, so the loaded reading was available.
 Retitled *Fighting the lifecycle*, with the distinction restated in the clause.
 
 **A bullet that named no failure.**
 *"A god object that only has fan-in… if it does not, it may be an AST"* asked the reader to supply the failure themselves.
 Now concrete: five named consumers each get a narrowed view of the syntax tree and adapter code to convert back, so a change touches the tree and five translations of it.
 
-**The conversation list was chapter 03's list.**
+**The conversation list was chapter 02's list.**
 The author asked for the bullets to be tied to force profiles.
-Doing it revealed why they needed it: *"That's not how it's done"* was already chapter 03's opening bullet in the same kind of section, and the senior-person bullet was chapter 20's own line repeated.
-Naming a profile in each is what makes the list chapter 20's — the database bullet is line-of-business, premature optimization is frame-budget and hard-deadline, *"we're not Google"* is the distributed profile — and two bullets that could not be tied were replaced.
+Doing it revealed why they needed it: *"That's not how it's done"* was already chapter 02's opening bullet in the same kind of section, and the senior-person bullet was chapter 19's own line repeated.
+Naming a profile in each is what makes the list chapter 19's — the database bullet is line-of-business, premature optimization is frame-budget and hard-deadline, *"we're not Google"* is the distributed profile — and two bullets that could not be tied were replaced.
 
 **One direct edit reverted.**
 The review restructured the claim section's two definitions into a list under *"To make the claim precise two terms need to be settled:"*.
-The list is an improvement and was kept; the lead-in is announce-then-deliver, which `CLAUDE.md`'s cadence rule names explicitly and which commit `052d09d` cut from chapter 15's opener.
+The list is an improvement and was kept; the lead-in is announce-then-deliver, which `CLAUDE.md`'s cadence rule names explicitly and which commit `052d09d` cut from chapter 14's opener.
 The edit had also dropped that *domain* keeps its meaning book-wide rather than only in this chapter, which is what stops a reader treating it as local jargon; restored.
 
-## 87. The Idiom/Style line is mechanical, and chapter 21's claim is about conditions
+## 87. The Idiom/Style line is mechanical, and chapter 20's claim is about conditions
 
 **Context.**
-Chapter 21 was drafted through a grilling session — four questions, each answered before the next was asked, nothing written until the author closed the interview.
+Chapter 20 was drafted through a grilling session — four questions, each answered before the next was asked, nothing written until the author closed the interview.
 This entry records the exchange rather than only the outcome, at the author's request: *"grilling is like interactive reviewing so remember to log all my input and important decisions."*
 
 **Question 1 — the claim.**
@@ -3484,19 +3484,19 @@ And most Style has a stated reason from some authority if you dig — PEP 8 and 
 
 > It's style if your choice doesn't change the execution of code. It's an idiom when the execution changes even when the behavior is the same, ex: DI.
 
-The draft checked it against chapter 02's twenty-claim table and it sorts all six Idiom/Style rows correctly with no judgement call, which the draft's test could not do.
+The draft checked it against chapter 01's twenty-claim table and it sorts all six Idiom/Style rows correctly with no judgement call, which the draft's test could not do.
 
 **One refinement from the draft, accepted.**
-*Execution* alone mis-sorts the layout material: splitting a Go package changes what compiles rather than what runs, and under a strict reading that would make it Style and cost chapter 21 its strongest demonstration.
+*Execution* alone mis-sorts the layout material: splitting a Go package changes what compiles rather than what runs, and under a strict reading that would make it Style and cost chapter 20 its strongest demonstration.
 So the test is whether **the compiler or the runtime** acts on the choice, while the program behaves the same either way.
 
 **Consequences.**
-Short names are Style and move to chapter 22, and 02's table gains the row, because it is the case where intuition fails — Go-specific and still Style.
-Chapter 02's question 4 was catching short names before question 5 could sort them, so ecosystem-specificity is now stated as a consequence of the answer rather than as the test.
+Short names are Style and move to chapter 21, and 02's table gains the row, because it is the case where intuition fails — Go-specific and still Style.
+Chapter 01's question 4 was catching short names before question 5 could sort them, so ecosystem-specificity is now stated as a consequence of the answer rather than as the test.
 
 And the rule turned up better material than it cost.
 **The line falls in a different place in each language**, and the two places it moves are exactly the two things everyone files under Style: Go makes an identifier's case an access modifier, and Python makes indentation syntax.
-Chapter 21 owns that; 02 owns the test.
+Chapter 20 owns that; 02 owns the test.
 
 **Question 3 — the chapter's evidence was all Go.**
 The layout material, the capitalization finding and both Pike passages are Go, in a chapter arguing that you cannot see an ecosystem from inside it.
@@ -3508,7 +3508,7 @@ C# is given as mechanism without output, since the toolchain is not available he
 Adopted: *an Idiom rests on a condition about your surroundings rather than about your problem, and naming that condition is what separates deviating from an Idiom from merely ignoring one.*
 
 The draft offered a stronger alternative — *defensible **exactly when** you can name the condition* — and argued against its own suggestion, because *exactly when* claims sufficiency and the chapter's counter-example disproves it.
-That is the standing bias `CLAUDE.md` records — claiming sufficiency where only necessity was shown, which cost chapter 03 two drafts of its claim — caught this time before shipping rather than in review.
+That is the standing bias `CLAUDE.md` records — claiming sufficiency where only necessity was shown, which cost chapter 02 two drafts of its claim — caught this time before shipping rather than in review.
 
 **What reading the primary source in full supplied.**
 The Pike talk was read end to end rather than from the excerpts in `docs/pending/pike-retrospective.md`, and it contained something that file had missed.
@@ -3521,7 +3521,7 @@ The demonstration was dropped rather than dressed up.
 The chapter now shows `Close`'s signature, which is structural and needs no run, and states the mechanism: on a network filesystem the failed write surfaces at close and nowhere earlier.
 
 **Also fixed.**
-Four ledger rows owned by 21 still cited "Ch. 18" after the renumbering that cut the old chapter 18, and `docs/pending/layout-and-language.md` carried the same fossil in its own body.
+Four ledger rows owned by 21 still cited "Ch. 17" after the renumbering that cut the old chapter 17, and `docs/pending/layout-and-language.md` carried the same fossil in its own body.
 
 ## 88. Grilling sessions are logged, not just their outcomes
 
@@ -3534,7 +3534,7 @@ Two bullets added to the procedure: log the exchange rather than only its conclu
 
 **Why.**
 Grilling is the format that generates the most attributable material and loses it the fastest.
-In the chapter 21 session the author rejected the draft's proposed test and supplied a replacement, the draft's own recommendation lost twice, and one question was settled by a fact discovered while answering it.
+In the chapter 20 session the author rejected the draft's proposed test and supplied a replacement, the draft's own recommendation lost twice, and one question was settled by a fact discovered while answering it.
 An entry recording only the result — *the Idiom/Style line is mechanical* — would read as though the draft had worked it out, which is the failure the attribution rules already name as the more damaging of the two.
 
 The running note is the operational half.
@@ -3546,7 +3546,7 @@ Decision 87 is the worked shape for the format — questions in dependency order
 ## 89. What "behaves the same" means, and one duplication the ledger did not catch
 
 **Context.**
-The first review of chapters 21 and 02, worked as a grilling after a false start.
+The first review of chapters 20 and 02, worked as a grilling after a false start.
 The draft applied the whole review directly and committed it; the author asked whether grilling had been used, and it had not.
 The commit was discarded before it was pushed and the review restarted as an interview.
 
@@ -3559,7 +3559,7 @@ The draft proposed adding a rule to `CLAUDE.md` about it.
 
 **The author's correction to the Idiom/Style test.**
 Decision 87 settled the test as: the compiler or the runtime acts on an Idiom, *while the program behaves the same either way*.
-Reviewing chapter 02 the author rewrote the passage and caught that the last clause was doing unexamined work.
+Reviewing chapter 01 the author rewrote the passage and caught that the last clause was doing unexamined work.
 A container plainly does change behaviour — a missing registration fails at run time where a missing constructor argument fails at compile time — so as written the test's own worked example contradicted it.
 
 Their fix names which behaviour is held constant and what that excludes:
@@ -3568,17 +3568,17 @@ Their fix names which behaviour is held constant and what that excludes:
 
 Kept in full, in the book's register.
 The narrowness is what makes the test usable, and the excluded list is exactly what people reach for when arguing that a convention is more than a convention.
-Checked against chapter 02's table: the narrowing still sorts all four Idiom rows and all three Style rows with no judgement call.
+Checked against chapter 01's table: the narrowing still sorts all four Idiom rows and all three Style rows with no judgement call.
 
 Substance is the author's and unaltered. The draft corrected register and grammar — a bold lead-in standing alone as its own paragraph against the markdown conventions, *"Let's take a look at"* which appears nowhere else in the book, first-person plural used to define a term, and four slips — and merged the two parallel paragraphs into one, because they described the options rather than contrasting them.
 
 **Question 1: the package-boundary material.**
-The author asked for chapter 21's passage to be *gauged* for repetition rather than assumed repetitive.
+The author asked for chapter 20's passage to be *gauged* for repetition rather than assumed repetitive.
 
 The survey says the three sites do different jobs, which is the division `docs/pending/layout-and-language.md` planned.
-It also found a real duplication the ledger had not caught: chapter 03 already glosses what `internal/` is, and 21 explained it again from scratch, because **no row recorded 03's use.** Decision 86's shape exactly.
+It also found a real duplication the ledger had not caught: chapter 02 already glosses what `internal/` is, and 21 explained it again from scratch, because **no row recorded 03's use.** Decision 86's shape exactly.
 
-Three options were put: cite and keep, cut both elaborations, or move the mapping tax to chapter 05.
+Three options were put: cite and keep, cut both elaborations, or move the mapping tax to chapter 04.
 **The author chose cite-and-keep.**
 
 The draft's earlier private reasoning had been that the mapping tax weakens that option, since the same bill is charged in Go, C# and Java and so demonstrates no divergence.
@@ -3586,12 +3586,12 @@ Laying the options out disproved it: **the tax is only ever charged where the la
 That argument only appeared because the options had to be written down for someone else, which is the case for the interview and not for the draft's judgement.
 
 **Question 2: an overlap created by the review itself.**
-The author's new chapter 02 passage and chapter 21 both observed that a container moves a wiring mistake past the compiler.
-Chapter 21 was written before the edit existed, so neither cited the other.
+The author's new chapter 01 passage and chapter 20 both observed that a container moves a wiring mistake past the compiler.
+Chapter 20 was written before the edit existed, so neither cited the other.
 **The author chose to keep it in 02 and drop it from 21**, on the draft's recommendation: in 02 the fact is the evidence that a compiler acts on the choice, which is the test itself; in 21 it was a bonus clause riding along beside the actual argument, which is about who constructs your objects.
 
 **Consequence.**
-A ledger row assigns the `internal/` gloss to 03. Chapter 21 cites 03 for the mechanism and 05 for the general bill, and keeps its two contributions — what the directory is for, and the itemised mapping tax.
+A ledger row assigns the `internal/` gloss to 03. Chapter 20 cites 03 for the mechanism and 05 for the general bill, and keeps its two contributions — what the directory is for, and the itemised mapping tax.
 The row for the mechanical test now carries the narrowed definition.
 
 ## 90. The rewrite lost the point of the edit it was tidying
@@ -3620,7 +3620,7 @@ Standalone bolded sentences were checked before restoring the author's: there ar
 ## 91. A standalone bolded sentence is a signal, so it cannot be used for an ordinary topic sentence
 
 **Context.**
-The author's chapter 02 edit put a blank line after its bolded sentence, leaving it standing alone, and then proposed removing it: *"it's a formatting that doesn't exist elsewhere on the book so it can trip the reader as well."*
+The author's chapter 01 edit put a blank line after its bolded sentence, leaving it standing alone, and then proposed removing it: *"it's a formatting that doesn't exist elsewhere on the book so it can trip the reader as well."*
 
 **The premise is wrong and the conclusion is right, which is why the survey was worth running.**
 The form exists seventy-three times. Counted by what follows the bolded line: forty-eight introduce a list, five introduce a code block, and twenty introduce prose.
@@ -3628,9 +3628,9 @@ The form exists seventy-three times. Counted by what follows the bolded line: fo
 The twenty prose cases are what matter, and they are not a general licence:
 
 - **Thirteen are chapter claim sentences** — line 5 of every chapter that has one, which the rubric mandates.
-- **Five are chapter 05's enumerated markers** — *First, the small part*, *Option B*, *Four — replace a reference with an identifier*.
-- **One is chapter 03 line 121**, and it is an outlier inside its own device: *What changes with the Force* appears six times in that chapter and the other five are inline.
-- **One was chapter 02 line 53.**
+- **Five are chapter 04's enumerated markers** — *First, the small part*, *Option B*, *Four — replace a reference with an identifier*.
+- **One is chapter 02 line 121**, and it is an outlier inside its own device: *What changes with the Force* appears six times in that chapter and the other five are inline.
+- **One was chapter 01 line 53.**
 
 Against that, the inline form — a bolded lead-in continuing on its own line — is used **349 times**.
 
@@ -3638,17 +3638,17 @@ Against that, the inline form — a bolded lead-in continuing on its own line �
 Merged, as the author asked.
 
 **Why the real reason is stronger than the stated one.**
-The standalone form is not merely rare; in this book it *signals*. A reader who has met thirteen chapter claims and five enumerated options has learned that a bolded sentence alone on a line announces either the chapter's claim or a labelled branch of an argument. Chapter 02's line was neither — it was the topic sentence of the paragraph directly beneath it, which is exactly the job the inline lead-in does 349 times.
+The standalone form is not merely rare; in this book it *signals*. A reader who has met thirteen chapter claims and five enumerated options has learned that a bolded sentence alone on a line announces either the chapter's claim or a labelled branch of an argument. Chapter 01's line was neither — it was the topic sentence of the paragraph directly beneath it, which is exactly the job the inline lead-in does 349 times.
 So the objection is not that the reader has never seen the form. It is that they have, and it means something else.
 
-**The same inconsistency in chapter 03, surfaced and then fixed on the author's instruction.**
-*What changes with the Force* appears six times in chapter 03. Line 121 differed from the other five twice over: it stood alone, and it bolded the answer as well as the label, where the others bold only *What changes with the Force:* and leave the answer in plain text.
-Both are now matched to the majority form. Chapter 03 is at draft, and the change is formatting with no word altered.
+**The same inconsistency in chapter 02, surfaced and then fixed on the author's instruction.**
+*What changes with the Force* appears six times in chapter 02. Line 121 differed from the other five twice over: it stood alone, and it bolded the answer as well as the label, where the others bold only *What changes with the Force:* and leave the answer in plain text.
+Both are now matched to the majority form. Chapter 02 is at draft, and the change is formatting with no word altered.
 
 ## 92. A discharged pending document is deleted, and why the draft moved one instead
 
 **Context.**
-Chapter 21 reached draft, discharging `docs/pending/layout-and-language.md` entirely.
+Chapter 20 reached draft, discharging `docs/pending/layout-and-language.md` entirely.
 The draft moved it to `docs/`. The author's correction: **`docs/pending/` is a task list, and a finished task leaves nothing behind.**
 
 **Why the draft moved it, which is the part worth recording.**
@@ -3662,7 +3662,7 @@ It then recorded the result in its own reasoning as *nothing cites it, but `CLAU
 
 So the failure is not that the rule was misread.
 **The rule's condition was checked, found false, and the rule followed anyway** — on the strength of the instruction while the reason for the instruction had already been disproved for this document.
-It is the distinction chapter 21 had just been written about, running backwards: the chapter's claim is that naming the condition is what separates deviating from ignoring, and here the condition was named, shown not to hold, and obeyed.
+It is the distinction chapter 20 had just been written about, running backwards: the chapter's claim is that naming the condition is what separates deviating from ignoring, and here the condition was named, shown not to hold, and obeyed.
 
 **The reason was not spurious in general.**
 Seven ledger rows do cite pending documents — `ai-material.md` and `speculative-abstraction.md` — so the provenance concern is real for those.
@@ -3681,9 +3681,9 @@ The name did not say that: *pending* describes the documents, and what the autho
 
 **Decision.**
 The folder is `docs/pending-tasks/`.
-`docs/pending/speculative-abstraction.md` was deleted in the same pass — every row of its own table read **done**, and the last piece owed, the line-of-business inversion for chapter 20, is present at `20_six-profiles.md:54`. Its header still claimed one line outstanding, contradicting its table. The single ledger pointer to it and the TOC line sending readers to it went with it.
+`docs/pending/speculative-abstraction.md` was deleted in the same pass — every row of its own table read **done**, and the last piece owed, the line-of-business inversion for chapter 19, is present at `19_six-profiles.md:54`. Its header still claimed one line outstanding, contradicting its table. The single ledger pointer to it and the TOC line sending readers to it went with it.
 
-Two documents remain: `ai-material.md`, owed to chapter 23, and `pike-retrospective.md`, owed to 02, 09 and possibly 13.
+Two documents remain: `ai-material.md`, owed to chapter 22, and `pike-retrospective.md`, owed to 02, 09 and possibly 13.
 
 **What was updated, and what deliberately was not.**
 Fifteen live references were changed — four in `CLAUDE.md`, six ledger rows, three in `00_toc.md`, two inside `pike-retrospective.md`.
@@ -3693,18 +3693,18 @@ This log records what was decided at the time, so rewriting the path inside deci
 A log that is silently updated to match the present cannot be used as evidence about the past, which is the job the README gives this file.
 
 **One near-miss worth recording.**
-`10_what-a-pattern-is-for.md` contains `` `pending/` `` twice, in the passage about provisional names — a holding-pen folder in a hypothetical codebase, nothing to do with this repository's layout. A path-wide sweep would have renamed it and broken the example. It was checked before the sweep ran, not after.
+`09_what-a-pattern-is-for.md` contains `` `pending/` `` twice, in the passage about provisional names — a holding-pen folder in a hypothetical codebase, nothing to do with this repository's layout. A path-wide sweep would have renamed it and broken the example. It was checked before the sweep ran, not after.
 
-## 94. Chapter 22's claim, and two examples the author rejected
+## 94. Chapter 21's claim, and two examples the author rejected
 
 **Context.**
-Chapter 22 drafted through a grilling. Recorded per the rule added in decision 88.
+Chapter 21 drafted through a grilling. Recorded per the rule added in decision 88.
 
 **The claim, reached over three rounds.**
 The draft proposed *the only reliable end is to take the choice away from the people having it*.
 The author rejected the register — too dramatic — and proposed *only a resort to authority can end it*.
 
-The draft objected on a specific ground rather than a general one: **authority is a defined term in this book.** Chapter 02's own claim is that the kind of a claim *"determines how much authority it has"*, the four advice kinds *"form a ladder of authority"*, Style *"has no authority at all"*, chapter 04 has a section on where a claim's authority comes from, and 02 lists citing an authority rather than a mechanism as a failure symptom. So the sentence would have read as: Style has no authority, and what ends a Style argument is authority.
+The draft objected on a specific ground rather than a general one: **authority is a defined term in this book.** Chapter 01's own claim is that the kind of a claim *"determines how much authority it has"*, the four advice kinds *"form a ladder of authority"*, Style *"has no authority at all"*, chapter 03 has a section on where a claim's authority comes from, and 02 lists citing an authority rather than a mechanism as a failure symptom. So the sentence would have read as: Style has no authority, and what ends a Style argument is authority.
 
 The draft's replacement, *the choice is made once for everyone*, the author rejected in turn — *"wishy-washy… evokes the images of endless style convention meetings"* — which was correct, since it reads as consensus where the point is decisiveness.
 
@@ -3724,7 +3724,7 @@ That is the right call and the reaction is the evidence for it. Landing one boun
 
 **The trailing comma across two languages.** The draft then proposed: in Python the trailing comma looks like Style but has a fact behind it, the diff being three lines instead of one; in Go, omitting it is a syntax error.
 
-The author: *"I think you cheated on this."* The two halves were in two different languages, which makes it chapter 21's finding — the line moves by language — wearing a boundary's clothes.
+The author: *"I think you cheated on this."* The two halves were in two different languages, which makes it chapter 20's finding — the line moves by language — wearing a boundary's clothes.
 They specified the shape instead: **one language, two options that both appear available, you pick the second, and the second was never a real option.**
 
 That produced the boundary the chapter uses. The same trailing comma, inside Python: in a list it is Style and both forms build the identical object; in a one-element tuple it *is* the tuple, so `(order_id)` is an integer with brackets round it. Verified against `sqlite3`, which answers `ProgrammingError: parameters are of unsupported type`. The demonstration and the boundary now turn on the same token, so the chapter bounds itself without introducing a second subject.
@@ -3737,26 +3737,26 @@ They differ, and stripping debug information does not fix it: Go embeds a table 
 The chapter now states the caveat rather than hiding it.
 
 **Two categories cut from the plan.**
-The TOC promised naming, formatting, file layout and comment density. File layout's interesting half is chapter 21's — a directory costs what the language ties to it — leaving *which folder*, and there is no material for comment density.
+The TOC promised naming, formatting, file layout and comment density. File layout's interesting half is chapter 20's — a directory costs what the language ties to it — leaving *which folder*, and there is no material for comment density.
 Cut, with the author's agreement, on the grounds that the entry says *short, deliberately* and filling a plan line by inventing material is how that stops being true.
 
 **Verification.**
 `gofmt` is available and its output is quoted from a run. Black and Prettier are not installed, so they are given as mechanism with no output claimed.
 The naming demonstration turns on a verified silence: `gofmt` reports nothing about `a` versus `amounts`, which is why naming arguments outlive formatting ones.
 
-## 95. Chapter 22 review 01: a caveat written to defend the test against a fact that was never about it
+## 95. Chapter 21 review 01: a caveat written to defend the test against a fact that was never about it
 
 **Context.**
-First review of chapter 22, worked as a grilling. Six items, presented at once by the draft and corrected by the author — *"we are settling one question at a time"* — then taken in order.
+First review of chapter 21, worked as a grilling. Six items, presented at once by the draft and corrected by the author — *"we are settling one question at a time"* — then taken in order.
 
-**The largest item: a misreading of chapter 02, and where it actually came from.**
+**The largest item: a misreading of chapter 01, and where it actually came from.**
 The draft had written a paragraph noting that two differently-formatted Go files do not compile to identical binaries, because Go's line table records source positions, and offering that as the reason 02's test is about behaviour rather than about what the machine can see.
 
 The author's verdict: *"your identical binaries in go point is useless hair splitting, not worthy of mention and rebuttal."*
 Correct. The paragraph defends the test against a fact that was never about the test — the compiler recording a line number is not the compiler acting on a formatting choice — and the draft had gone and measured artifacts because it read *ignores* as *produces an identical artifact*.
 
-The author asked whether the confusion warranted clarifying chapter 02 as well.
-Checking that produced a better answer than either party had. **Chapter 02's test already carries the distinction:** question 4 reads *"while the program behaves the same either way"*, which excludes an ordinary code change such as `i++` against `i--`. No paragraph was needed.
+The author asked whether the confusion warranted clarifying chapter 01 as well.
+Checking that produced a better answer than either party had. **Chapter 01's test already carries the distinction:** question 4 reads *"while the program behaves the same either way"*, which excludes an ordinary code change such as `i++` against `i--`. No paragraph was needed.
 
 **But the check found the actual defect, one question further down.**
 Question 5 read *"Can neither of them tell which way you chose?"*
@@ -3799,13 +3799,13 @@ The author deleted the draft's note that Black and Prettier were not installed. 
 Decision 24, on 2026-08-12, rejected a chapter on AI-assisted development and distributed the material instead.
 The author proposed the chapter then; the draft argued against it and won on this test:
 
-> The draft argued for a chapter on the grounds that it needs one organizing mechanism the way chapter 15 has one; testing that honestly, *the derivation never happened* explains the Forces finding and not the monoculture, confidence, or volume findings. **There is no single mechanism, so there is no chapter.**
+> The draft argued for a chapter on the grounds that it needs one organizing mechanism the way chapter 15 [now 14] has one; testing that honestly, *the derivation never happened* explains the Forces finding and not the monoculture, confidence, or volume findings. **There is no single mechanism, so there is no chapter.**
 
 **Why it is reversed.**
-The author proposed it again while chapter 23 was being planned, and supplied a mechanism decision 24 never tested.
+The author proposed it again while chapter 22 was being planned, and supplied a mechanism decision 24 never tested.
 Decision 24 examined *the derivation never happened*. The author's is **the decisions were never stated, and what would have to survive for them to be recovered does not exist.**
 
-The second half is new to the book. Nothing in decision 24, in the pending document, or in chapter 19 says anything about irreversibility. The nearest thing is 19's line that *"the reasoning is the perishable half"*, which is about one interview's output rather than a system passing a point of no return.
+The second half is new to the book. Nothing in decision 24, in the pending document, or in chapter 18 says anything about irreversibility. The nearest thing is 19's line that *"the reasoning is the perishable half"*, which is about one interview's output rather than a system passing a point of no return.
 
 The author's own framing, recorded because it is sharper than the draft's summary of it:
 
@@ -3818,8 +3818,8 @@ And the line that decided the chapter's shape:
 **Decision 24's dating objection stands and is answered rather than dismissed.**
 It held that *"a chapter titled for a technology is a dated object by construction."* The chapter is titled for its mechanism — *What Was Never Written Down* — and its claim is true of any unstated decision, with these tools as the force that makes it bite.
 
-**Grilling moves from chapter 19 into it.**
-Decision 24 placed grilling in 19 because *"grilling is a method rather than a way of reading."* That was a choice between 19 and chapter 23 as then planned, which was six ways of reading. It was never a choice against a chapter about method under these tools, because none was proposed.
+**Grilling moves from chapter 18 into it.**
+Decision 24 placed grilling in 19 because *"grilling is a method rather than a way of reading."* That was a choice between 19 and chapter 22 as then planned, which was six ways of reading. It was never a choice against a chapter about method under these tools, because none was proposed.
 
 The draft's own argument for moving it is decision 24's, applied one level down: a sixty-one-line section about these tools inside the method chapter dates the method chapter. Moving it quarantines the dating where it belongs and leaves 19 as a method that survives model generations.
 
@@ -3848,7 +3848,7 @@ Settled formulation, the author's, accepted:
 Which gives three cases rather than the two the author posed, and the middle one is the chapter's contribution: same session with the reasoning written out is genuine retrieval of what was *said*; same session with nothing written is a fresh computation on overlapping input, producing a correlated answer that is not a recollection; a new session has only the artifact. **From the outside all three are fluent and indistinguishable**, which is why *ask it while the context is fresh* feels reliable.
 
 **A consequence for grilling, which improves it.**
-If there are no reasons to extract, grilling is not an interview that gets reasons out of a tool. It is a procedure that forces the decision to happen in the open, where a person makes it, and the record is trustworthy for that reason rather than because anything introspected. Chapter 19 already contains the evidence — *"note who supplied them. In both cases the human"* — without drawing the conclusion.
+If there are no reasons to extract, grilling is not an interview that gets reasons out of a tool. It is a procedure that forces the decision to happen in the open, where a person makes it, and the record is trustworthy for that reason rather than because anything introspected. Chapter 18 already contains the evidence — *"note who supplied them. In both cases the human"* — without drawing the conclusion.
 
 This also answers the author's question of whether grilling with every recommendation accepted differs from not grilling at all. It does, and not marginally: the decision was made by a person and written down either way.
 
@@ -3858,36 +3858,36 @@ This also answers the author's question of whether grilling with every recommend
 
 **The title.**
 The draft proposed *Decisions That Leave No Mark* and the author rejected it — it *"frames the guilt on the decisions"*, which is the personification the register rules exclude, and the draft should have caught that before offering it.
-The author preferred *Decisions Nobody Stated*; the draft raised that it is chapter 03's construction — *Forces: the inputs nobody names* — and the same shape of claim.
+The author preferred *Decisions Nobody Stated*; the draft raised that it is chapter 02's construction — *Forces: the inputs nobody names* — and the same shape of claim.
 Settled on **What Was Never Written Down**, which names the absence of a record rather than the absence of a decision, and is the distinction the verification established.
 
-**The folk remedy lands here after all**, in a paragraph rather than a section. Chapter 15 forward-references *"what chapter 23 calls a folk remedy"*, and the term's purest instance is a corpus default: advice applied far outside the context it was made for, where nobody rebuilds the scope because nobody knows a scope existed. The author noted the monoculture point already appears in grilling's limit passage, so the term is defined once early and the limit passage then *uses* it — which shortens the transplanted section and stops the observation appearing twice.
+**The folk remedy lands here after all**, in a paragraph rather than a section. Chapter 14 forward-references *"what chapter 22 calls a folk remedy"*, and the term's purest instance is a corpus default: advice applied far outside the context it was made for, where nobody rebuilds the scope because nobody knows a scope existed. The author noted the monoculture point already appears in grilling's limit passage, so the term is defined once early and the limit passage then *uses* it — which shortens the transplanted section and stops the observation appearing twice.
 
-## 97. How chapter 23 lost its planned identity, and a chapter outlined against a chapter nobody had read
+## 97. How chapter 22 lost its planned identity, and a chapter outlined against a chapter nobody had read
 
 **Context.**
-Decision 96 records the second half of the chapter 23 grilling — the reversal of decision 24, the source verification, the claim and the title. It was written mid-session and stopped there. This entry records the first half, and one process failure that is the point of writing it down at all.
+Decision 96 records the second half of the chapter 22 grilling — the reversal of decision 24, the source verification, the claim and the title. It was written mid-session and stopped there. This entry records the first half, and one process failure that is the point of writing it down at all.
 
 **Sequencing: 23 before 01.**
 With only chapters 01 and 23 unwritten, the draft recommended 01 — it is the last item in the launch set, and an opener written now describes twenty-one finished chapters rather than a plan.
 
 The author overruled it:
 
-> stop, chapter 01 generation. Let's do the final chapter now, then formulating 01 will be easier.
+> stop, chapter 01 [the opener, never written — see decision 103] generation. Let's do the final chapter now, then formulating 01 will be easier.
 
 Which is right for a reason the draft had not weighed: chapter 01 promises what the book delivers, and the delivery was not finished. An opener written before the closing chapter exists would describe a method whose last chapter had not been settled.
 
-**Chapter 19 had absorbed chapter 23's planned job, and nobody had noticed.**
+**Chapter 18 had absorbed chapter 22's planned job, and nobody had noticed.**
 
 The TOC gave 23 six receiving cases, four questions, the folk remedy, the book's own conditions, and *"the final answer to 'is this load-bearing' as a repeatable procedure rather than a judgement call."*
 
 A survey found:
 
-- **Chapter 19 already claims to be the procedure.** Its second line: *"Everything before this chapter was diagnosis. This is the procedure."*
+- **Chapter 18 already claims to be the procedure.** Its second line: *"Everything before this chapter was diagnosis. This is the procedure."*
 - **23's planned boundary was already spent.** The TOC assigned it *"when you don't have time to analyse and must simply pick the conventional answer"*; 19's boundary section opens with `### The conventional answer is good enough` and works it through blast radius.
 - **Four of the six receiving cases are worked elsewhere** — a review comment in 14, a colleague's strong opinion in 20, a book in 16, 17 and 18, a blog post in 15. Only *your own past decisions* and *generated code* were left.
 
-None of this was a defect in any chapter. Chapter 19 grew into the space while 23's entry sat unchanged from before 19 existed.
+None of this was a defect in any chapter. Chapter 18 grew into the space while 23's entry sat unchanged from before 19 existed.
 
 **And then the failure that matters.**
 
@@ -3895,22 +3895,22 @@ On that survey the draft proposed a claim for 23 built on reconstruction — *ad
 
 The author:
 
-> I'm genuinely struggling to figure out the difference between the claims of chapter 19 and this outline's main claims. I'm guessing that you didn't read the chapter 19, read the chapter 19 from start to finish and then reassess the situation.
+> I'm genuinely struggling to figure out the difference between the claims of chapter 19 [now 18] and this outline's main claims. I'm guessing that you didn't read the chapter 19, read the chapter 19 from start to finish and then reassess the situation.
 
 They were right. The draft had worked from 19's claim sentence and two greps. Reading it end to end showed that **every item in the outline was already in 19**: the reconstruction move at its *How to notice a principle whose forces are absent*; the four questions collapsed into its *what would have to be true for this to be unnecessary*, pointed at incoming advice in its closing line; the decision log in full; and both of the book's own conditions the outline was going to introduce, including the thirty-eight entries for five thousand lines.
 
-The proposed claim was chapter 19's claim, pointed slightly differently, and the author detected it from the outline alone.
+The proposed claim was chapter 18's claim, pointed slightly differently, and the author detected it from the outline alone.
 
 **This is the same failure as the FlowCore decision 18 error earlier in the same session** — asserting the contents of a document from memory and a keyword search rather than reading it — committed within a few hours of recording that one. `CLAUDE.md` states the rule for primary sources; the finding here is that **it applies to this book's own chapters too**, which is not obvious, because the draft believes it knows what they contain.
 
 **The options that followed**, once the space was actually mapped: a narrow chapter of what 19 leaves; cutting 23 entirely and letting 22 close the book; or reconceiving it around emitting advice rather than receiving it, which the book has never covered. The draft leaned toward the third. The author proposed the AI chapter instead, which decision 96 takes up.
 
 **The demonstration, and why the FlowCore decision reappears.**
-Chapter 19 already uses FlowCore's decision 12 for its worked force map, so the draft flagged reusing it as a second appearance and offered two alternatives — a sorted map iteration and a schema constraint.
+Chapter 18 already uses FlowCore's decision 12 for its worked force map, so the draft flagged reusing it as a second appearance and offered two alternatives — a sorted map iteration and a schema constraint.
 
 The author took decision 12 and supplied the differentiation:
 
-> I read chapter 19's section again, there the situation is very briefly described and then the decision log is dissected. Here the example would probably look very different: code samples, explanations of the decisions and the reasons, problematic change...
+> I read chapter 19's [now 18] section again, there the situation is very briefly described and then the decision log is dissected. Here the example would probably look very different: code samples, explanations of the decisions and the reasons, problematic change...
 
 Which is the ledger's requirement for FlowCore appearances met exactly: 19 shows the decision being **mapped**, 23 shows it being **lost**, and the second is in code where none of the first is visible.
 
@@ -3931,7 +3931,7 @@ The fix improved the transplanted text rather than merely avoiding a repeat: the
 ## 98. Say "AI coding agent", not "generator" or "the tool"
 
 **Context.**
-Chapter 23 and the AI material in chapters 19, 03 and the ledger avoided naming the technology, using *generator*, *the tool*, *a tool in the loop* and *something with one training distribution* instead.
+Chapter 22 and the AI material in chapters 18, 03 and the ledger avoided naming the technology, using *generator*, *the tool*, *a tool in the loop* and *something with one training distribution* instead.
 
 **The author's correction.**
 
@@ -3949,21 +3949,21 @@ Three, used deliberately rather than interchangeably:
 - **agentic coding tool** — the variant, where repetition would be worse.
 - **model** — kept only where the subject really is the underlying model: the faithfulness research, and the training corpus.
 
-That third distinction is a gain rather than a compromise. Chapter 23 cites Turpin et al. and Zaman and Srivastava, whose subject is models and not agents, and the sentence *"whether a model's stated reasoning reflects its computation"* is correct as written. Blanket-replacing would have made it wrong.
+That third distinction is a gain rather than a compromise. Chapter 22 cites Turpin et al. and Zaman and Srivastava, whose subject is models and not agents, and the sentence *"whether a model's stated reasoning reflects its computation"* is correct as written. Blanket-replacing would have made it wrong.
 
 **The survey, which mattered more than the replacements.**
-Twenty-three occurrences of *generat\** across the chapters, and **almost all of them were unrelated** — invoice generation, a compiler's code generator in chapter 20, JSON generated rather than written, an idempotency key generated by the client, `regenerate`. One was a verbatim quotation from the grilling transcript, *"Should ids be generated by the application or by the database?"*, which must not change because it is quoted.
+Twenty-three occurrences of *generat\** across the chapters, and **almost all of them were unrelated** — invoice generation, a compiler's code generator in chapter 19, JSON generated rather than written, an idempotency key generated by the client, `regenerate`. One was a verbatim quotation from the grilling transcript, *"Should ids be generated by the application or by the database?"*, which must not change because it is quoted.
 
-A path-wide replacement would have corrupted all of them. This is the second time in one session a sweep needed checking first — the other was `pending/` appearing in chapter 10 as a hypothetical source folder.
+A path-wide replacement would have corrupted all of them. This is the second time in one session a sweep needed checking first — the other was `pending/` appearing in chapter 09 as a hypothetical source folder.
 
-**What changed:** seven sites in chapter 23, one in chapter 19, two ledger rows, one line in `00_toc.md`'s owed table, and two headings in `docs/pending-tasks/ai-material.md` so the material lands in chapters 02 and 03 with the right vocabulary.
+**What changed:** seven sites in chapter 22, one in chapter 18, two ledger rows, one line in `00_toc.md`'s owed table, and two headings in `docs/pending-tasks/ai-material.md` so the material lands in chapters 01 and 03 with the right vocabulary.
 
 **`docs/DECISIONS.md` is left alone**, on the same reasoning as decision 93: it records what was decided in the language used at the time, and decision 24 is titled for the material it describes.
 
-## 99. Chapter 23 review 01: a cost bullet that was arguing against the chapter
+## 99. Chapter 22 review 01: a cost bullet that was arguing against the chapter
 
 **Context.**
-First review of chapter 23, worked as a grilling. Two commits from the author, nine items.
+First review of chapter 22, worked as a grilling. Two commits from the author, nine items.
 
 This entry exists because the author asked for it, for the second time in one session, after decision 88 added the rule requiring it. Recorded here rather than treated as a note: **the rule has now failed twice on the session that introduced it**, which is evidence about where it needs to fire — at the end of a review pass, not only at the end of a drafting session.
 
@@ -3972,9 +3972,9 @@ The author's tag: *"this section should simply be deleted, adds not much to the 
 
 Decision 96 records the agreement as *"in a paragraph rather than a section"*, and the draft wrote a five-paragraph `###` section. The reaction was to the thing the draft built past the agreement.
 
-The draft put the constraint in front of the author before acting: deleting it outright dangles chapter 15, which ends on *"you get what chapter 23 calls a folk remedy"*, plus a ledger row and a TOC line. Compressed instead to one paragraph inside grilling's limit passage, where the term is used, with the term bolded so 15's promise is discharged and the reference stays findable. **The heading going is most of what fixed the flow** — a `###` between the recovery argument and grilling reads as a new subject arriving.
+The draft put the constraint in front of the author before acting: deleting it outright dangles chapter 14, which ends on *"you get what chapter 22 calls a folk remedy"*, plus a ledger row and a TOC line. Compressed instead to one paragraph inside grilling's limit passage, where the term is used, with the term bolded so 15's promise is discharged and the reference stays findable. **The heading going is most of what fixed the flow** — a `###` between the recovery argument and grilling reads as a new subject arriving.
 
-The author asked for a short example. They proposed *depend on interfaces* or DRY applied to a one-off script; the draft recommended chapter 18's own phrasing, *depend on abstractions, not concretions*, because 18 is the worked case and can carry it in a clause, and because it is exactly what an AI coding agent emits unasked — which is what makes it belong in the limit passage rather than beside it.
+The author asked for a short example. They proposed *depend on interfaces* or DRY applied to a one-off script; the draft recommended chapter 17's own phrasing, *depend on abstractions, not concretions*, because 18 is the worked case and can carry it in a clause, and because it is exactly what an AI coding agent emits unasked — which is what makes it belong in the limit passage rather than beside it.
 
 **A cost bullet that was arguing against the chapter.**
 The author flagged *"It requires you to hold opinions"* as reversing an earlier point. It was: the chapter said both *"grilling does not produce better answers, it produces answers somebody can disagree with"* and, forty lines later, that a record of accepted recommendations is *"worse than none, because it looks like evidence."*
@@ -4008,13 +4008,13 @@ The draft added one connective clause, because the expansion assumes colleagues 
 ## 100. The faithfulness passage was undermining the remedy that follows it
 
 **Context.**
-The author proposed applying decision 26's diagnosis to chapter 23's paragraph on chain-of-thought faithfulness, and reported an itch they could not place:
+The author proposed applying decision 26's diagnosis to chapter 22's paragraph on chain-of-thought faithfulness, and reported an itch they could not place:
 
 > This reads like we value extracting those sentences from the coding agent "live", while it branches but then we say we have no idea if those sentences are of value, that's still debated. I know that's not the point of the passage but no matter how I try to read it it sounds like that.
 
 **Two faults, and the second is the one they were feeling.**
 
-**Register, exactly as decision 26 and the *source's register* rule describe it.** The paragraph carried `chain-of-thought` unglossed and used once; `unfaithfulness` and `incompleteness` used once each, which the rule calls *"a definition wearing a name"*; a fifteen-word quotation — *"the lossy compression needed to turn distributed transformer computation into a linear natural language narrative"* — which is chapter 17's failure verbatim; and two named researchers with two quotes, for an argument the chapter then says it does not need. The rule's own symptom line fits: *"a paragraph a reader has to decode rather than follow, in a chapter that was going fine until the citation arrived."*
+**Register, exactly as decision 26 and the *source's register* rule describe it.** The paragraph carried `chain-of-thought` unglossed and used once; `unfaithfulness` and `incompleteness` used once each, which the rule calls *"a definition wearing a name"*; a fifteen-word quotation — *"the lossy compression needed to turn distributed transformer computation into a linear natural language narrative"* — which is chapter 16's failure verbatim; and two named researchers with two quotes, for an argument the chapter then says it does not need. The rule's own symptom line fits: *"a paragraph a reader has to decode rather than follow, in a chapter that was going fine until the citation arrived."*
 
 **Placement, which the author felt and the draft had not seen.** The passage sits immediately before the grilling section. A reader meets *whether a model's self-explanations mean anything is contested*, then meets a remedy built on interviewing a model, with nothing between them saying those are different questions. So the caveat reads as discounting the thing the chapter is about to recommend.
 
@@ -4031,7 +4031,7 @@ Their first pass changed *this line* to *this line of reasoning*, which moves th
 A bold span covered a subject clause but stopped before its predicate, so scanning it gave a noun phrase rather than a claim; the emphasis moved to the assertion it was pointing at.
 And the closing paragraph opened *"Finally, worth separating out another thing does survive"*, which does not parse.
 
-## 101. Chapter 23 reopened: granularity as grilling's second limit, and what a record buys beyond recovery
+## 101. Chapter 22 reopened: granularity as grilling's second limit, and what a record buys beyond recovery
 
 **Context.**
 The author brought a stream of new material after 23 reached draft, and asked directly whether it was worth using or should be abandoned. Three ideas survived the assessment, one was reframed because it contradicted the book, and two were dropped.
@@ -4059,9 +4059,9 @@ The author proposed reusing decisions as instructions for other projects. A deci
 The version that survives is better and is the book's own thesis pointed at its own artifact: **an entry is reusable exactly to the extent that it records why rather than what.** *Full-word identifiers everywhere* transfers nothing to a codebase with different readers; *abbreviations must be decoded rather than read, and the decoding does not get cheaper with familiarity* can be checked against those readers and kept or dropped on the evidence. A conclusion does not travel; a conclusion with its condition attached does.
 
 **Replay: evidenced, but not with the evidence the author offered.**
-Asked whether they had actually replayed a decision, the author pointed at this session — decision 26, recorded about chapter 08, invoked against a paragraph in chapter 23.
+Asked whether they had actually replayed a decision, the author pointed at this session — decision 26, recorded about chapter 07, invoked against a paragraph in chapter 22.
 
-That is a genuine instance, and a better one than a clean replay because it was **partial**: one of decision 26's three faults transferred, and the new context produced a finding decision 26 never contained. Which isolates the mechanism — decision 26 travelled because it recorded *written for someone who already knew the material* rather than *chapter 08 rewritten*.
+That is a genuine instance, and a better one than a clean replay because it was **partial**: one of decision 26's three faults transferred, and the new context produced a finding decision 26 never contained. Which isolates the mechanism — decision 26 travelled because it recorded *written for someone who already knew the material* rather than *chapter 07 rewritten*.
 
 **The anecdote cannot be used, on two existing constraints.** Decision 47 takes a general rule from the author's own instruction: *"the drafting history belongs in the decision log, not in the chapter."* And `ai-material.md`: *"readers will discount a book that proves its method works by citing itself."*
 
@@ -4071,24 +4071,24 @@ So the mechanism is stated and FlowCore supplies the evidence — its identifier
 *Meta-source code* as a term, on the rule against a metaphor promoted to vocabulary. And this session as the worked example, per decision 47.
 
 **A placement error the author caught.**
-The draft proposed putting replay in chapter 19, reasoning that 19 owns the decision log. That is ownership by association rather than an argument: 19's claim is about the order of checking, and its interest in the log is that it records forced against chosen. Reuse serves no part of it.
+The draft proposed putting replay in chapter 18, reasoning that 19 owns the decision log. That is ownership by association rather than an argument: 19's claim is about the order of checking, and its interest in the log is that it records forced against chosen. Reuse serves no part of it.
 
-The argument that settles it: chapter 19 lost sixty-one lines of AI material in decision 96, on the grounds that a section about these tools dates the method chapter. Handing a log back to an agent is an AI-shaped practice and would date the same way, so putting replay there would re-import the problem decision 96 removed.
+The argument that settles it: chapter 18 lost sixty-one lines of AI material in decision 96, on the grounds that a section about these tools dates the method chapter. Handing a log back to an agent is an AI-shaped practice and would date the same way, so putting replay there would re-import the problem decision 96 removed.
 
 **Consequence.**
-Chapter 23 runs 288 lines, up from 264. Two ledger rows added and one renamed, since grilling now has a first and a second limit rather than *the* limit.
+Chapter 22 runs 288 lines, up from 264. Two ledger rows added and one renamed, since grilling now has a first and a second limit rather than *the* limit.
 
 ## 102. Naming the two artifacts, and a term the book had never settled
 
 **Context.**
-The author's review of the reopened chapter 23 raised four tags, three of which were one fault: the passage described its artifacts abstractly — *that promotion*, *the same file*, *the log*, *a pointer*, *standing instructions* — where a reader needs to know which document holds what.
+The author's review of the reopened chapter 22 raised four tags, three of which were one fault: the passage described its artifacts abstractly — *that promotion*, *the same file*, *the log*, *a pointer*, *standing instructions* — where a reader needs to know which document holds what.
 
 > is the rule an entry on CLAUDE.md? File => Claude.md ? log => decision.md? pointer is confusing => reference to a decision log
 
 That is decision 26's fault one again, in a passage written for somebody who already knew the layout.
 
 **A term the book had never settled, delegated to the draft.**
-A survey found the asymmetry. **Decision log** is settled and consistent — chapters 03, 05, 16, 17, 19 and 22 all use it, with `docs/decisions.md` named where it helps. **The instructions file has no term at all**: `CLAUDE.md` is named in no chapter, and *standing instructions* appears only in the two sentences the author tagged.
+A survey found the asymmetry. **Decision log** is settled and consistent — chapters 02, 05, 16, 17, 19 and 22 all use it, with `docs/decisions.md` named where it helps. **The instructions file has no term at all**: `CLAUDE.md` is named in no chapter, and *standing instructions* appears only in the two sentences the author tagged.
 
 The author left the choice to the draft. Settled the same way decision 98 settled *AI coding agent* against *model*: **the generic thing carries the argument, the concrete file is named once for discoverability.** `CLAUDE.md` alone dates and is product-specific; a generic phrase alone is what the author had just flagged as unclear. The chapter now says the instructions file is the set of rules an agent is given at the start of every session, that FlowCore's is `CLAUDE.md`, and that tools differ on the filename rather than on the idea.
 
@@ -4110,8 +4110,8 @@ They removed two sentences ending *"never surfaced is the same as never written 
 **Context.**
 With twenty-two chapters at draft, only chapter 01 — *Why good advice goes wrong* — remained unwritten. Three attempts to give it a claim each landed on ground another chapter already owned.
 
-- The TOC's plan, *"advice arrives without its conditions attached"*, is chapter 15's mechanism. That chapter opens by reconciling the two words: *"Scope is the same boundary seen from the other side."*
-- Its planned demonstration, *"two teams receive the same advice and get opposite outcomes"*, is chapter 19's section `The same advice, four verdicts`.
+- The TOC's plan, *"advice arrives without its conditions attached"*, is chapter 14's mechanism. That chapter opens by reconciling the two words: *"Scope is the same boundary seen from the other side."*
+- Its planned demonstration, *"two teams receive the same advice and get opposite outcomes"*, is chapter 18's section `The same advice, four verdicts`.
 - The draft's own proposal — *advice that is true can still be wrong for you, and nothing in the advice tells you which* — turned out to be the README's premise, which is `CLAUDE.md`'s thesis almost word for word.
 
 **The test this book already applies.**
@@ -4119,21 +4119,21 @@ When a chapter cannot be given a claim that is not already somebody else's, it h
 
 **The author's proposal, which is what the evidence pointed at anyway.**
 
-> README.md is actually what we called "first chapter" in this session… That's both the elevator pitch and converter. If the book does ever get published README.md could be foreword or introduction. What do we write on the first chapter then? Nothing, first chapter already exists, it's the current chapter 02.
+> README.md is actually what we called "first chapter" in this session… That's both the elevator pitch and converter. If the book does ever get published README.md could be foreword or introduction. What do we write on the first chapter then? Nothing, first chapter already exists, it's the current chapter 02 [now chapter 01].
 
 **Decision.**
-No chapter 01 is written. The README becomes the book's introduction, and chapters 02 through 23 renumber to 01 through 22. The book is twenty-two chapters.
+No chapter 01 is written. The README becomes the book's introduction, and chapters 01 through 23 renumber to 01 through 22. The book is twenty-two chapters.
 
-**Why chapter 02 works as the opener with no repair.**
+**Why chapter 01 works as the opener with no repair.**
 It opens cold — nothing in it refers to a predecessor. Its first heading is `## The book's model` rather than `## The claim`, because decision 43 established that it states a premise rather than a claim, and it says so itself: *"Both are assumed by the rest of the book rather than proved by this one."* That is an oddity in a second chapter and exactly right in a first.
 
 **What was checked before the sweep.**
-Prior renumberings in this repo corrupted unrelated numbers, so the hazards were enumerated first: *"16 of 23 patterns"* in chapter 13, the TOC and the ledger is the Gang of Four count; *"a team of 20"* is a team size; and *Clean Architecture*'s chapter 30 is somebody else's book. None matches a `chapter NN` pattern, and none was touched.
+Prior renumberings in this repo corrupted unrelated numbers, so the hazards were enumerated first: *"16 of 23 patterns"* in chapter 12, the TOC and the ledger is the Gang of Four count; *"a team of 20"* is a team size; and *Clean Architecture*'s chapter 30 is somebody else's book. None matches a `chapter NN` pattern, and none was touched.
 
 **The decision log is renumbered, reversing the draft's first position.**
 The draft proposed leaving `docs/DECISIONS.md` alone, carrying over the reasoning from decision 93, where `docs/pending/` was left in place because decision 78 is *titled* for that path — there, the path was part of what was decided.
 
-The author asked why, and the analogy does not hold. **A chapter number in the log is an address, not part of what was decided.** Leaving it would be worse than stale: decision 26 is titled *"Chapter 08 rewritten"*, and after the shift a reader looking up chapter 08 would land on a different chapter that the entry is not about — a wrong pointer rather than a dead one. The README says the log exists *"so that claim can be checked rather than taken on trust"*, and four hundred silently-off-by-one pointers is a tax on precisely that.
+The author asked why, and the analogy does not hold. **A chapter number in the log is an address, not part of what was decided.** Leaving it would be worse than stale: decision 26 is titled *"Chapter 07 rewritten"*, and after the shift a reader looking up chapter 07 would land on a different chapter that the entry is not about — a wrong pointer rather than a dead one. The README says the log exists *"so that claim can be checked rather than taken on trust"*, and four hundred silently-off-by-one pointers is a tax on precisely that.
 
 So the log's own prose and entry titles are renumbered. **The eight quoted lines containing a chapter number are left exactly as spoken**, with a bracketed `[now NN]` gloss — the conventional signal for an editorial insertion — so nobody's words are altered and no reader is misdirected. Six of the eight are the author's.
 

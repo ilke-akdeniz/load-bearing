@@ -32,7 +32,7 @@ FastSell started with its own payment code. Two internal packages, both written 
 // package payments — what a completed charge hands back
 type Receipt struct {
 	Ref      string // the payment's identifier
-	Cents    int64  // amount in cents; never a float (Ch. 03)
+	Cents    int64  // amount in cents; never a float (Ch. 02)
 	Complete bool   // true once the money has actually moved
 }
 
@@ -87,7 +87,7 @@ That is the whole fix: rename two fields and delete the adapter. It is smaller, 
 
 **This is why the pattern is cheap here, and the line count is not the reason.** It is that a third option exists — change the other side — and it is usually better than adapting. The pattern is available and unnecessary.
 
-*(Worth noting how completely this can evaporate. In Go, a type satisfies an interface by having the right methods, with no declaration required, so an adapter that exists only to announce conformance is not written at all. In C# or Java the same requirement produces a wrapper class per type. Chapter 13 takes up names whose content depends on the language that way.)*
+*(Worth noting how completely this can evaporate. In Go, a type satisfies an interface by having the right methods, with no declaration required, so an adapter that exists only to announce conformance is not written at all. In C# or Java the same requirement produces a wrapper class per type. Chapter 12 takes up names whose content depends on the language that way.)*
 
 ### One side theirs: the option disappears
 
@@ -131,7 +131,7 @@ Both versions produce identical output today. The difference shows up when Strip
    with a boundary      1   (inside fromStripe)
 ```
 
-Six is small because the example is small; a real integration reaches further. **The boundary converts a change that lands everywhere into a change that lands once** — chapter 05's argument about fan-in, applied to a dependency whose release schedule is not yours.
+Six is small because the example is small; a real integration reaches further. **The boundary converts a change that lands everywhere into a change that lands once** — chapter 04's argument about fan-in, applied to a dependency whose release schedule is not yours.
 
 The pattern literature calls this an **Anti-Corruption Layer**, a name from Eric Evans, where the corruption is another system's model spreading into yours. Note what it costs: a translation function, a set of mappings that encode real judgements, tests for code that does nothing but rename fields, and somebody whose job includes reading Stripe's release notes.
 
@@ -141,10 +141,10 @@ The pattern literature calls this an **Anti-Corruption Layer**, a name from Eric
 
 | Pattern | Both sides yours | The other side is theirs | What appears when it crosses |
 |---|---|---|---|
-| **Adapter** | a wrapper, or nothing at all | Anti-Corruption Layer | their model changes without asking (Ch. 09) |
-| **Facade** | an object with fewer methods | a service boundary or public API | your surface becomes permanent (Ch. 05, 09) |
-| **Observer** | a list of callbacks | a message bus | delivery can fail, or repeat (Ch. 07) |
-| **Proxy** | a wrapper adding behaviour | a network hop, with retries and caching | latency floor, partial failure (Ch. 07, 08) |
+| **Adapter** | a wrapper, or nothing at all | Anti-Corruption Layer | their model changes without asking (Ch. 08) |
+| **Facade** | an object with fewer methods | a service boundary or public API | your surface becomes permanent (Ch. 04, 09) |
+| **Observer** | a list of callbacks | a message bus | delivery can fail, or repeat (Ch. 06) |
+| **Proxy** | a wrapper adding behaviour | a network hop, with retries and caching | latency floor, partial failure (Ch. 06, 08) |
 
 Read the last column first. What changes across a row is not the amount of code — it is that something can now go wrong that could not go wrong before, and each of those is a Law from Part II.
 
@@ -152,14 +152,14 @@ Read the last column first. What changes across a row is not the amount of code 
 
 - **Proxy** is in the original catalogue. The Gang of Four list a *remote proxy* — "a local representative for an object in a different address space" — as one of the pattern's named variants. Crossing the line is not an extension here; it was in the definition.
 - **Adapter** is supported by the anti-corruption layer literature. Evans describes such a layer as containing translators, which is what an adapter is. The structure is genuinely the same on both sides; what is added is the obligation to maintain it.
-- **Facade** is this book's extension. Nobody's catalogue says a facade becomes a public API. The observation is that the structure is identical — fewer methods over more machinery — and that once the callers are outside your deploy, chapter 09's rule attaches to it.
+- **Facade** is this book's extension. Nobody's catalogue says a facade becomes a public API. The observation is that the structure is identical — fewer methods over more machinery — and that once the callers are outside your deploy, chapter 08's rule attaches to it.
 - **Observer is the weakest row, and it is worth saying why.** A message bus is not simply an observer with a network in the middle: a broker is genuinely new structure, and the publisher stops holding references to its subscribers, which is a change in the mechanism rather than only in what can fail. Treat the row as a family resemblance rather than the same pattern relocated. The point about failure modes still holds — delivery can be lost or repeated — but the "same shape" claim is looser here than in the rows above.
 
 That distribution is itself informative. **The rows that survive best are the ones where nothing structural is added**, which is a hint about when this reading applies at all.
 
 Observer makes it plainest. Among your own objects, notifying a listener is calling a function: it cannot be lost, cannot arrive twice, cannot arrive out of order. Across a process boundary all three become possible, and every one is a design decision the word "Observer" does not mention.
 
-Chapter 10 left a question here. **Facade** compresses well and rules nothing out, so what is it doing in a book about load-bearing claims? This is the answer, and "published" is worth making concrete.
+Chapter 09 left a question here. **Facade** compresses well and rules nothing out, so what is it doing in a book about load-bearing claims? This is the answer, and "published" is worth making concrete.
 
 ```go
 // Called only from inside this repository. Nothing here is a promise.
@@ -188,7 +188,7 @@ still yours     the method name, its parameters, everything behind it
 now theirs      the route, the field names on the wire, which are optional
 ```
 
-You may add `POST /v1/orders/{id}/hold`. You may not rename the route, remove `DELETE /v1/orders/{id}`, or make a field of the request body required — those are chapter 09's forbidden moves, and the client that breaks is one you cannot deploy.
+You may add `POST /v1/orders/{id}/hold`. You may not rename the route, remove `DELETE /v1/orders/{id}`, or make a field of the request body required — those are chapter 08's forbidden moves, and the client that breaks is one you cannot deploy.
 
 The name of the pattern did not change. What it commits you to did.
 
@@ -210,13 +210,13 @@ Everything the shape sits *in* varies, and it varies exactly where the pattern's
 
 So the name carries the part that transfers and silently drops the part that does not. **It gives you the picture and withholds the constraints, and the constraints were the expensive half.**
 
-**And the axis this chapter turns on is not a new one.** *Can I change the other side* is chapter 03's **control of the callers**, read from the other end: that Force asks whether you can change everyone who calls you, and this chapter asks whether you can change what you call. Same Force, same three settings, pointed the other way.
+**And the axis this chapter turns on is not a new one.** *Can I change the other side* is chapter 02's **control of the callers**, read from the other end: that Force asks whether you can change everyone who calls you, and this chapter asks whether you can change what you call. Same Force, same three settings, pointed the other way.
 
-The other Forces arrive through the failure modes. A message that can be lost is chapter 03's concurrency and chapter 07's distribution; a call that can be slow is the latency budget; a field you can never remove is durability of the medium. So the general statement is:
+The other Forces arrive through the failure modes. A message that can be lost is chapter 02's concurrency and chapter 06's distribution; a call that can be slow is the latency budget; a field you can never remove is durability of the medium. So the general statement is:
 
 > A pattern name transfers the **shape** and none of the **Forces**, and the Forces are what decide the cost.
 
-That is chapter 02's mechanism in a new place. There, advice arrived stripped of the Forces that made it good advice. Here a shape arrives stripped of the Forces that make it expensive — the same loss, because a shape without its Forces is as unusable as a Principle without its conditions.
+That is chapter 01's mechanism in a new place. There, advice arrived stripped of the Forces that made it good advice. Here a shape arrives stripped of the Forces that make it expensive — the same loss, because a shape without its Forces is as unusable as a Principle without its conditions.
 
 ---
 
@@ -238,7 +238,7 @@ In one process, both halves are free. There is one memory space, so a single var
 
 Across machines the same sentence becomes hard. Note what is *not* being claimed: the cluster obviously has many machines, and nobody is trying to prevent that. The singleton is in the **role**, not the hardware — exactly one machine may be running the nightly billing job, holding the write lease, or acting as primary, while the others stand ready.
 
-Both halves now cost something. "At most one" needs a mechanism that stops a second machine from starting when the first is merely slow — and chapter 07 shows you cannot tell a slow machine from a dead one, so that mechanism is a lease with a timeout and a guess. "Everyone agrees" is consensus, which chapter 07 shows cannot be guaranteed to terminate.
+Both halves now cost something. "At most one" needs a mechanism that stops a second machine from starting when the first is merely slow — and chapter 06 shows you cannot tell a slow machine from a dead one, so that mechanism is a lease with a timeout and a guess. "Everyone agrees" is consensus, which chapter 06 shows cannot be guaranteed to terminate.
 
 So the name survives the crossing and its cost does not. In one process, `sync.Once` and a package variable. Across machines, a consensus protocol, a lease duration nobody is confident about, and a plan for what the old holder does when it wakes up believing it is still in charge.
 
@@ -246,7 +246,7 @@ So the name survives the crossing and its cost does not. In one process, `sync.O
 
 The question has two answers in this chapter and three in reality, and the third is where most working code sits.
 
-Chapter 03 already sets it out: you control every caller; or you can see them but not change them; or you can neither see nor change them. The middle one is an internal service two other teams call. You *can* change both sides — it takes a conversation, a coordinated release, and somebody else's cooperation.
+Chapter 02 already sets it out: you control every caller; or you can see them but not change them; or you can neither see nor change them. The middle one is an internal service two other teams call. You *can* change both sides — it takes a conversation, a coordinated release, and somebody else's cooperation.
 
 What that does to the pattern question is make the alternatives expensive rather than absent:
 
@@ -268,7 +268,7 @@ Treat the middle case as fully yours and you break people. Treat it as fully the
 
 The chapter argues that a pattern is cheap when both sides are yours. Usually true, and not a rule.
 
-An internal dependency that changes weekly and is called from forty places behaves more like a vendor than like a sibling file: you *can* change it, and doing so is expensive enough that isolating it pays. Ownership is the dominant axis, not the only one — chapter 05's fan-in and chapter 03's change-frequency Force both bear on it, and a volatile dependency with many callers earns a boundary on their arithmetic rather than this chapter's.
+An internal dependency that changes weekly and is called from forty places behaves more like a vendor than like a sibling file: you *can* change it, and doing so is expensive enough that isolating it pays. Ownership is the dominant axis, not the only one — chapter 04's fan-in and chapter 02's change-frequency Force both bear on it, and a volatile dependency with many callers earns a boundary on their arithmetic rather than this chapter's.
 
 ---
 
@@ -290,7 +290,7 @@ An internal dependency that changes weekly and is called from forty places behav
 
 - **A vendor's type in a signature far from the integration** — their status enum in a reporting query, their error type in domain logic. The spread already happened; the only question left is how many files.
 - **A translation layer around a library you could have forked**, where the option was never actually closed.
-- **An interface with one implementation, wrapping a type you own** — a pattern solving a problem you could have solved by editing the other file (Ch. 17 traces where the reflex comes from).
+- **An interface with one implementation, wrapping a type you own** — a pattern solving a problem you could have solved by editing the other file (Ch. 16 traces where the reflex comes from).
 - **An in-process event bus with retry logic**, where nothing can be lost because nothing leaves the process.
 - **A published API that grew by accretion**, because nobody noticed when it stopped being internal and no removal has been possible since.
 - **Version numbers on an interface with two callers, both yours.**
@@ -308,4 +308,4 @@ If yes, you are choosing between options, and following the pattern is rarely th
 
 ---
 
-**Next:** chapter 12 works through the patterns that survive translation between languages — the ones describing a real shape rather than a workaround, grouped by what they are about, each with the Force that makes it worth its cost.
+**Next:** chapter 11 works through the patterns that survive translation between languages — the ones describing a real shape rather than a workaround, grouped by what they are about, each with the Force that makes it worth its cost.

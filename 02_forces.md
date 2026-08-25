@@ -55,7 +55,7 @@ The demonstration is above. Two things about the intensity dial are worth statin
 
 **The intensity is usually lower than the vocabulary suggests.** A web service is described as concurrent, and it is — but if two requests never touch the same row, the Force is inert for that code path. Concurrency binds where writers *collide*, not where they merely coexist.
 
-Chapter 06 owns the races themselves; chapter 07 owns why redelivery cannot be eliminated and idempotency is the answer.
+Chapter 05 owns the races themselves; chapter 06 owns why redelivery cannot be eliminated and idempotency is the answer.
 
 ### Durability of the medium
 
@@ -120,7 +120,7 @@ Notice that the mistake is not detectable later. Both migrations succeed, both a
 
 **What changes with the Force:** whether a mistake is correctable, and therefore how much care the decision is worth. That is the general form, and the tip column is one instance of it. Two others follow from the same reading.
 
-**Where an invariant should be enforced.** If the rows outlive every version of the code that writes them, then a rule enforced only in application code is a rule that holds for as long as one code path remembers it. A constraint in the schema holds for the `psql` session at 2am, the data-fix script, the bulk import, and the admin tool written next year by someone who has never read your service layer. The durability of the medium is the reason that argument is not merely a preference (Ch. 06 owns the class of invariants application code *cannot* enforce at all).
+**Where an invariant should be enforced.** If the rows outlive every version of the code that writes them, then a rule enforced only in application code is a rule that holds for as long as one code path remembers it. A constraint in the schema holds for the `psql` session at 2am, the data-fix script, the bulk import, and the admin tool written next year by someone who has never read your service layer. The durability of the medium is the reason that argument is not merely a preference (Ch. 05 owns the class of invariants application code *cannot* enforce at all).
 
 **Whether "we'll clean it up later" is available.** At the top of the dial it always is. At the bottom it is available only while the wrong state is small, and the window closes silently as rows accumulate.
 
@@ -250,7 +250,7 @@ public interface IPaymentRepository { Task Save(PaymentMethodEntity entity); }
 
 Adding *direct debit* means a new case, or a new field, in each of the six — and the mapper twice, once per direction. None of the six decides anything about direct debit that the others do not already know.
 
-That is not evidence of a careless team. It is a structure whose boundaries do not line up with the way change actually arrives, so every change crosses all of them. Chapter 05 owns why fan-in sets the price of a change; chapter 18 owns what these particular boundaries cost.
+That is not evidence of a careless team. It is a structure whose boundaries do not line up with the way change actually arrives, so every change crosses all of them. Chapter 04 owns why fan-in sets the price of a change; chapter 17 owns what these particular boundaries cost.
 
 **What changes with the Force:** whether structure that makes adding cheap is worth having. Frequency alone does not decide it — a thing that changes monthly in one file needs nothing.
 
@@ -289,7 +289,7 @@ func FromMinorUnits(amount int64, currency string) Money {
 
 **What changes with the Force:** where the rule lives. It migrates from a comment, to a review habit, to the type system, as the number of people who must know it rises and the chance that any of them was present for the original conversation falls.
 
-The second version is not free: it costs a package boundary and a constructor call at every site, and it is worth that only at some sizes. Chapter 12 catalogues the technique; the point here is that **the same rule needs a different mechanism at a different team size**, and neither mechanism is the better engineering in general.
+The second version is not free: it costs a package boundary and a constructor call at every site, and it is worth that only at some sizes. Chapter 11 catalogues the technique; the point here is that **the same rule needs a different mechanism at a different team size**, and neither mechanism is the better engineering in general.
 
 ### Latency budget
 
@@ -321,7 +321,7 @@ if user, ok := cache.Get(uid); ok {
 user_t *user = &users[uid];
 ```
 
-**What changes with the Force:** what you are able to spend on abstraction. At 200 milliseconds an interface, a copy, and an allocation are all invisible against a database round trip, so buy them. At 200 microseconds those same three cost a measurable share of everything you have, and the code stops looking like the code in books — not because its authors are cleverer, but because they cannot afford what you can. Chapter 08 owns the arithmetic underneath this; chapter 05's entity-component case is this Force pushed to its end.
+**What changes with the Force:** what you are able to spend on abstraction. At 200 milliseconds an interface, a copy, and an allocation are all invisible against a database round trip, so buy them. At 200 microseconds those same three cost a measurable share of everything you have, and the code stops looking like the code in books — not because its authors are cleverer, but because they cannot afford what you can. Chapter 07 owns the arithmetic underneath this; chapter 04's entity-component case is this Force pushed to its end.
 
 ### Control of the callers
 
@@ -366,7 +366,7 @@ The Force decides whether you can apply it:
 
 Same defect, same fix, three different projects. Nothing about the code told you which one you were in.
 
-**What changes with the Force:** not the design, the *plan*. This is the Force that decides how much a mistake costs to correct, which is why it belongs in the room before the API is designed rather than after. Chapter 05 owns what this implies for what you expose in the first place.
+**What changes with the Force:** not the design, the *plan*. This is the Force that decides how much a mistake costs to correct, which is why it belongs in the room before the API is designed rather than after. Chapter 04 owns what this implies for what you expose in the first place.
 
 ### The seven Forces, as questions
 
@@ -388,7 +388,7 @@ Three mechanisms support this chapter's claim. The third is the one that catches
 
 **A Force that is not evaluated is just a mood.** "It needs to scale" cannot be verified, argued with, or revisited, because it names no Force and gives no intensity. "Twelve thousand requests a minute at peak, of which about thirty are writes to the same row" reads two of them: the concurrency intensity is the thirty colliding writes, not the twelve thousand requests, and the latency budget is whatever is left of a page render after the other work. Both can be looked up, both can be wrong, and both can be checked again next year. Evaluation converts a mood into a claim, and claims can be tested.
 
-**Forces are where the disagreement actually lives.** Chapter 02 records this as a failure symptom; the mechanism is that two people arguing about a Principle have usually already agreed about the Principle and are differing about the situation it is conditioned on. Stating the Force ends the argument or relocates it to something answerable.
+**Forces are where the disagreement actually lives.** Chapter 01 records this as a failure symptom; the mechanism is that two people arguing about a Principle have usually already agreed about the Principle and are differing about the situation it is conditioned on. Stating the Force ends the argument or relocates it to something answerable.
 
 **Forces move on a different clock than code.** This is the part that does real damage. A team doubles. A service acquires a second client, then a client outside the company. A table crosses a hundred million rows. A batch job is called from a request handler for the first time. None of those are code changes, none show up in a diff, and every one of them can invalidate a Principle that was correctly derived years earlier. The code that was right is now wrong, and nothing in the repository records why it was ever right, arrived at without anyone making a mistake.
 
@@ -474,7 +474,7 @@ That is the reversibility question again, and it is the only one that still work
 
 **A written force-map goes stale, and a stale one is worse than none**, because it looks authoritative and nobody re-derives what a document already answers. Date them, and treat an undated one as unsigned.
 
-**This chapter does not resolve conflicts.** Low latency pulls against durability. A small team pulls against a large blast radius. Naming both does not tell you which wins, and the honest answer is that trade-offs are decided rather than computed. Chapter 19 works through what to do when Forces point in opposite directions.
+**This chapter does not resolve conflicts.** Low latency pulls against durability. A small team pulls against a large blast radius. Naming both does not tell you which wins, and the honest answer is that trade-offs are decided rather than computed. Chapter 18 works through what to do when Forces point in opposite directions.
 
 ---
 
@@ -483,8 +483,8 @@ That is the reversibility question again, and it is the only one that still work
 **In a codebase:**
 
 - **Retry with exponential backoff around a call to a function in the same binary.** A distribution Force imported wholesale from somewhere it was real. Read the intensity and there is nothing to retry: an in-process call does not suffer packet loss or a slow node, so a failure is a bug in your own code and calling it three times more slowly just delays the report by six seconds.
-- **A read-modify-write in a request handler.** A concurrency Force present and unread, and the symptom is silent data loss: two requests read the same value, both write, and the second overwrites the first with no error anywhere (Ch. 06).
-- **Retry logic with no idempotency key.** Half of a Force read: the failure was anticipated, the redelivery it causes was not (Ch. 07).
+- **A read-modify-write in a request handler.** A concurrency Force present and unread, and the symptom is silent data loss: two requests read the same value, both write, and the second overwrites the first with no error anywhere (Ch. 05).
+- **Retry logic with no idempotency key.** Half of a Force read: the failure was anticipated, the redelivery it causes was not (Ch. 06).
 - **A `not null default` in a migration** that quietly asserts something false about every row that predates it. The durability Force went unread: the author was thinking about the code, where a zero value is a harmless placeholder, and not about the rows, where it is a claim that this never happened — permanently indistinguishable from a claim that nobody recorded it.
 - **A cache with no invalidation rule.** The latency Force was read and the change-frequency Force was not, so the design answers one question and ignores the one that decides whether it is correct.
 - **An invariant enforced by a comment, in a codebase with forty contributors** and a third of them new this year.
@@ -503,4 +503,4 @@ The remedy in each case is the same, and it is almost never applied — stop arg
 
 ---
 
-**Next:** chapter 04 turns to Laws, and to the fact that they do not all have the same standing — a proven theorem, a near-tautology, and an empirical regularity are three different kinds of true.
+**Next:** chapter 03 turns to Laws, and to the fact that they do not all have the same standing — a proven theorem, a near-tautology, and an empirical regularity are three different kinds of true.
