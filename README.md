@@ -1,21 +1,9 @@
 # Load-Bearing
+[-- moving the status at the end because that's the least important thing in this page. Also removed other sentenctes here which became a repetition of the claim at start here. I'm fine with "Start here" right after the title.]
+[-- removed "start" titles. Addition by substraction in my opinion, first sub-title is our suggestion to start, or you move to the next ones, no need for explicit titles for that.]
 
-**Which Software Principles Hold, and Where They Stop**
-
-Some software rules hold everywhere.
-Most only hold where they were written.
-This is a book about telling them apart.
-
-> **Status: complete draft.** All twenty-two chapters are written and under review.
-
-## Start here
-
-**The same wiring code is unremarkable in Go and gets sent back in review in C#.**
-It compiles, it runs, it serves requests correctly, it is thread-safe — and neither version is more correct than the other.
-Some of the rules you follow are like that and some are not, and they arrive in the same voice.
+**Every claim you meet about software is one of five kinds, and the kind determines how much authority it has** — not the confidence of the person saying it, not their track record, not how widely it is repeated.** [-- this is the verbatim claim of chapter 01 and I think the repetition is justified. This is in my opinion most beautiful and striking claim in the book.]
 → [The Five Kinds of Claim](01_the-five-kinds.md)
-
-## Or start anywhere
 
 **Your clock cannot tell you what happened first.**
 Two consecutive reads of the system clock return the same number 95% of the time — on one machine, with nothing going wrong.
@@ -105,3 +93,5 @@ The decision log is there so that claim can be checked rather than taken on trus
 The full table of contents, with a summary and a stated boundary for every chapter, is in **[`00_toc.md`](00_toc.md)**.
 
 How the book is put together — the chapter rubric, the language conventions, the running example, the license and how to cite it — is in **[`docs/ABOUT.md`](docs/ABOUT.md)**.
+
+> **Status: complete draft.** All twenty-two chapters are written and under review.
