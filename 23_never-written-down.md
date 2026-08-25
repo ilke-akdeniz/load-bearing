@@ -253,7 +253,7 @@ Most code embodies no decision worth recovering. The name of a local variable, t
 The question that does the work: **if this turns out to be wrong, what would tell us why it was done?** [-- i don't get what the first part of the sentence contributes. I would prefer this : "who can tell us why it was done?"]
 
 If the answer is a person, ask them now. If it is a document this chapter does not apply to you. If the answer is that somebody would read the code and infer — then what you have is the code, and the reason was never written down.
-[-- this part could be worthy of an expansion: "If the answer is that somebody would read the code and infer — then what you have is the code, and the reason was never written down." I am that somebody very often and the process is very painful]
+[-- this part could be worthy of an expansion: "If the answer is that somebody would read the code and infer — then what you have is the code, and the reason was never written down." I am that somebody very often and the process is very painful. Also reading the code most of the time is not enough, you end up going back and asking to other people, and it frequently ends with: I read the code and tested, it looks like code was written to support Y and Z. I've asked A he said this, I've asked B, he said that. We still don't know what to do with this, if we fix Y the behavior Z changes and many clients don't want that. If we don't fix Y for another month Acme Corp will be angry.]
 ---
 
 ## Sources
