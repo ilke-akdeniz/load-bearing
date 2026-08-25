@@ -4077,3 +4077,28 @@ The argument that settles it: chapter 19 lost sixty-one lines of AI material in 
 
 **Consequence.**
 Chapter 23 runs 288 lines, up from 264. Two ledger rows added and one renamed, since grilling now has a first and a second limit rather than *the* limit.
+
+## 102. Naming the two artifacts, and a term the book had never settled
+
+**Context.**
+The author's review of the reopened chapter 23 raised four tags, three of which were one fault: the passage described its artifacts abstractly — *that promotion*, *the same file*, *the log*, *a pointer*, *standing instructions* — where a reader needs to know which document holds what.
+
+> is the rule an entry on CLAUDE.md? File => Claude.md ? log => decision.md? pointer is confusing => reference to a decision log
+
+That is decision 26's fault one again, in a passage written for somebody who already knew the layout.
+
+**A term the book had never settled, delegated to the draft.**
+A survey found the asymmetry. **Decision log** is settled and consistent — chapters 03, 05, 16, 17, 19 and 22 all use it, with `docs/decisions.md` named where it helps. **The instructions file has no term at all**: `CLAUDE.md` is named in no chapter, and *standing instructions* appears only in the two sentences the author tagged.
+
+The author left the choice to the draft. Settled the same way decision 98 settled *AI coding agent* against *model*: **the generic thing carries the argument, the concrete file is named once for discoverability.** `CLAUDE.md` alone dates and is product-specific; a generic phrase alone is what the author had just flagged as unclear. The chapter now says the instructions file is the set of rules an agent is given at the start of every session, that FlowCore's is `CLAUDE.md`, and that tools differ on the filename rather than on the idea.
+
+**One vocabulary collision fixed while there.**
+The section used *slices* and *phases* for the same thing — FlowCore's word and the author's. Unified on *phases*, with one clause noting FlowCore calls them slices, so the quoted log lines still parse.
+
+**The author's rewrite of the closing paragraph, corrected.**
+Their version — *"**Slices are elusive with AI assisted development** The whole implementation can arrive in an afternoon… The discipline to clarify the phases before any implementation is needed to prevent the loosy compression of decisions"* — carried a bold lead-in with no terminal punctuation, an unhyphenated *AI assisted*, *loosy* for *lossy*, and a passive construction that buries its own subject.
+
+It also reached for **compression**, which the chapter had already spent eighty lines earlier on a different subject — an explanation compressing a computation. Rewritten to say what actually happens instead: settling the phases first is what keeps the decisions far enough apart to be asked about one at a time.
+
+**A cut of the draft's that the author was right to make.**
+They removed two sentences ending *"never surfaced is the same as never written down"*, noting they repeated the earlier section. They did — the claim had already been made twice by that point, and the paragraph was restating it a third time to land a rhythm rather than a fact.

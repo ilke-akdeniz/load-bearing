@@ -145,7 +145,9 @@ And disagreeing with them later requires that they were written down. The interv
 
 That closes the circuit, and it is worth seeing as one thing rather than three. The interview surfaces the decision, the log records what settled it, and a standing instructions file promotes the answers that keep recurring into constraints so the same question stops being asked. Grilling without that second step is a conversation rather than a record, and a conversation is exactly what does not survive the session.
 
-**What that promotion is worth depends on what the entry contains.** [-- what promotion?] FlowCore's rule about identifier names ends with a pointer rather than a restatement — *"Reasoning and worked examples: `docs/decisions.md`, decision 18"* — and the same file says the log is authoritative where the two disagree. So an unfamiliar case is decided by going back to the reasoning instead of guessing at the rule's edge. [-- needs more clarification, is the rule an entry on CLAUDE.md? File => Claude.md ? log => decision.md? pointer is confusing => reference to a decision log ] 
+**Whether promoting a rule into the instructions is worth anything depends on what the log entry behind it says.** Two documents are in play and they hold different things. The **decision log** is the reasoning, one entry per decision, kept in FlowCore as `docs/decisions.md`. The **instructions file** is the set of rules an agent is given at the start of every session, which for FlowCore is `CLAUDE.md`; tools differ on the filename and not on the idea.
+
+FlowCore's rule about identifier names lives in the instructions file, and it ends by referring to the log rather than restating it — *"Reasoning and worked examples: `docs/decisions.md`, decision 18"*. The same file adds that where the two disagree, the log wins. So a case the rule does not obviously cover gets settled by reading why the rule exists, instead of by guessing at its edge.
 
 That is what a record buys beyond recovery, and it generalises past this one project. **An entry is reusable exactly to the extent that it records why rather than what.** *Full-word identifiers everywhere* transfers nothing to a codebase with different readers; *abbreviations must be decoded rather than read, and the decoding does not get cheaper with familiarity* can be checked against those readers and kept or dropped on the evidence. A conclusion does not travel. A conclusion with its condition attached does, and arrives somewhere it can be argued with — which is chapter 15's mechanism running forwards for once, instead of a scope being lost in transmission.
 
@@ -157,7 +159,7 @@ Which means the technique surfaces contested choices and conceals settled ones, 
 
 **And a second limit, which is easier to walk into: the interview only reaches decisions at the granularity you asked at.** Ask for a whole application and you get an interview about a whole application. The questions are real, the answers are yours, the record is genuine. However, the decisions that could only surface in an interview focused on "failure handling" were not considered, because at the scale of the request they had not been separated out yet.
 
-FlowCore was built in slices for this reason, and the scope of each one is written into its standing instructions [-- clarify, claude.md or agenctic instruction file, you find the appropriate term] rather than left to intention:
+FlowCore was built in phases for this reason — it calls them slices — and the scope of each one is written into the instructions file rather than left to intention:
 
 ```text
 In scope: configure workflow, start workflow, get current step,
@@ -169,7 +171,7 @@ Do not build ahead into these.
 
 The decision log carries the same boundary throughout — *"full definition-side CRUD this slice"*, *"not precedent for building other concurrency machinery this slice"* — so a decision is scoped to the piece it was taken for, and the next piece gets its own interview rather than inheriting an answer.
 
-**Slices are elusive with AI assisted development** The whole implementation can arrive in an afternoon, and an afternoon does not feel like it needs a plan. The discipline to clarify the phases before any implementation is needed to prevent the loosy compression of decisions. [-- removed sentences that were a repetition of previous section in my opinion]
+**Phases are easy to skip in AI-assisted development.** The whole implementation can arrive in an afternoon, and an afternoon does not feel like it needs a plan. Settling the phases before any of it is written is what keeps the decisions far enough apart to be asked about one at a time.
 
 **Not every piece of work needs the phases.** A proof of concept, a script you will delete, an obvious fix with one option — the interview is overhead and the conventional answer is fine (Ch. 19). The risk is that the category is decided at the start and not revisited: the one-off that turns out to be the product, and the obvious fix that turns out to be three faults interacting.
 
