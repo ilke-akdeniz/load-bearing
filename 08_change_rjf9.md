@@ -91,7 +91,7 @@ go 1.26.5: ioutil compiled and ran, returned "still here"
 
 Five years after being declared obsolete, it compiles and works, because Go promised that code written for Go 1 keeps building. Across the standard library there are **175 declarations marked deprecated** — each one something its maintainers would remove and cannot.
 
-That is what the commitment costs when it is kept. Chapter 04 covers the other half of this problem: users depend on behaviour you never documented, so the surface you are committed to is larger than the one you published.
+That is what the commitment costs when it is kept. [Chapter 04](04_structure_agjy.md) covers the other half of this problem: users depend on behaviour you never documented, so the surface you are committed to is larger than the one you published.
 
 ### The organization ends up in the software
 
@@ -99,7 +99,7 @@ That is what the commitment costs when it is kept. Chapter 04 covers the other h
 
 > Organizations which design systems […] are constrained to produce designs which are copies of the communication structures of these organizations.
 
-It is a description, not advice — chapter 03 uses exactly this distinction, since a law describes what happens while a principle tells you to do something. Conway's Law tells nobody to do anything.
+It is a description, not advice — [chapter 03](03_grading-a-law_q5c6.md) uses exactly this distinction, since a law describes what happens while a principle tells you to do something. Conway's Law tells nobody to do anything.
 
 **"Communication structure" is easy to misread**, so it is worth taking from the same paper what Conway meant by it. He is not talking about how easily people can reach each other. He is talking about which groups have to agree with which:
 
@@ -161,7 +161,7 @@ The honest form: let the problem decide how many parts there are, then make sure
 
 **Brooks's Law**, from Fred Brooks in 1975: adding people to a late software project makes it later.
 
-The arithmetic underneath it is the same one behind chapter 07's reversal. Any two people on a team may need to coordinate, so the number of pairs is `n(n−1)/2`:
+The arithmetic underneath it is the same one behind [chapter 07](07_scale_637f.md)'s reversal. Any two people on a team may need to coordinate, so the number of pairs is `n(n−1)/2`:
 
 ```text
  people   pairs   paths the new person adds
@@ -232,7 +232,7 @@ The four results have one thing in common: **their feedback loops are longer tha
 
 You can test a function in seconds and a deployment in hours. You cannot test a schema decision, because the evidence arrives when the table has four years of rows in it. You cannot test a published interface, because the evidence arrives when other people's software depends on it. You cannot test an organizational structure, because the evidence arrives in the architecture a year later.
 
-That length is the entire difficulty. Everywhere else in engineering, being wrong is cheap because you find out quickly and try again. Here you find out after the cost is sunk, which is why these are the decisions worth slowing down for — and it is chapter 02's reversibility question, applied at the timescale where it bites hardest.
+That length is the entire difficulty. Everywhere else in engineering, being wrong is cheap because you find out quickly and try again. Here you find out after the cost is sunk, which is why these are the decisions worth slowing down for — and it is [chapter 02](02_forces_f4m5.md)'s reversibility question, applied at the timescale where it bites hardest.
 
 The compatibility rule follows from something narrower and worth stating separately: **you cannot deploy other people's software.** Every other constraint in this book can be fixed by changing code you control. This one cannot, because the code that has to change is on a machine you have no access to and belongs to someone who has no reason to hurry.
 
@@ -254,7 +254,7 @@ The dangerous version is a script that was going to be deleted and was not. That
 
 "Once published, forever" applies to what you cannot recompile. A function called only from inside one repository, deployed as one unit, is not published in this sense — rename it, fix the call sites, ship all of it together, and no compatibility problem exists.
 
-This is why the same change is trivial in one codebase and a six-month deprecation in another, and the difference is not code quality. It is chapter 02's control-of-callers Force, at its most consequential.
+This is why the same change is trivial in one codebase and a six-month deprecation in another, and the difference is not code quality. It is [chapter 02](02_forces_f4m5.md)'s control-of-callers Force, at its most consequential.
 
 The mistake in both directions is common. Teams version internal APIs that only they call, paying deprecation costs for nothing. Other teams treat a genuinely published interface as internal, and break customers.
 
@@ -262,7 +262,7 @@ The mistake in both directions is common. Teams version internal APIs that only 
 
 At three people the pair count is three, coordination is a conversation, and Conway's Law predicts a structure with no visible seams — which is correct, because there are none to have.
 
-Neither law is false at that size; they have nothing to act on (Ch. 01). The failure is a three-person team adopting the service boundaries of a fifty-person one, paying the coordination cost of an organization it does not have.
+Neither law is false at that size; they have nothing to act on ([Ch. 01](01_the-five-kinds_cjx4.md)). The failure is a three-person team adopting the service boundaries of a fifty-person one, paying the coordination cost of an organization it does not have.
 
 ---
 
@@ -276,7 +276,7 @@ Neither law is false at that size; they have nothing to act on (Ch. 01). The fai
 
 **Versioning multiplies your test surface.** Supporting v1 and v2 means every change is tested twice, every bug is fixed twice or triaged, and the paths diverge quietly until they behave differently in a case nobody covered.
 
-**Deferring a schema decision costs more the longer you wait**, which is the one cost here that grows on its own. Every day of rows makes the migration bigger and the reconciliation harder (Ch. 02 on decisions that expire).
+**Deferring a schema decision costs more the longer you wait**, which is the one cost here that grows on its own. Every day of rows makes the migration bigger and the reconciliation harder ([Ch. 02](02_forces_f4m5.md) on decisions that expire).
 
 ---
 

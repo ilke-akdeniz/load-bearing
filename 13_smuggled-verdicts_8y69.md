@@ -4,13 +4,13 @@
 
 **Some vocabulary arrives with its verdict attached, so accepting the word concedes the argument — and how much you have conceded depends on whether the word also names something you can go and check.**
 
-Part III has been about names. Chapter 09 asked what a name buys and answered in two tests, which it ran on `Manager` and `Helper` as readily as on Singleton — because the tests are about names, and patterns are only the richest supply of them. The three chapters since graded the catalogue's names against ownership, against Forces, and against the language you write them in.
+Part III has been about names. [Chapter 09](09_what-a-pattern-is-for_3xzc.md) asked what a name buys and answered in two tests, which it ran on `Manager` and `Helper` as readily as on Singleton — because the tests are about names, and patterns are only the richest supply of them. The three chapters since graded the catalogue's names against ownership, against Forces, and against the language you write them in.
 
-This is the last thing a name can do. Chapter 09's finding was that a name sits outside the five kinds: it picks out a shape, and a shape is not true or false. Some names are built to break that — using one asserts something — and they do it while keeping a name's exemption from ever having to be defended. Pattern culture produces the densest supply of those too, which is why the chapter sits in this part; the mechanism is not confined to patterns, which is why its boundary cases come from outside.
+This is the last thing a name can do. [Chapter 09](09_what-a-pattern-is-for_3xzc.md)'s finding was that a name sits outside the five kinds: it picks out a shape, and a shape is not true or false. Some names are built to break that — using one asserts something — and they do it while keeping a name's exemption from ever having to be defended. Pattern culture produces the densest supply of those too, which is why the chapter sits in this part; the mechanism is not confined to patterns, which is why its boundary cases come from outside.
 
 ## Two questions about any term
 
-Chapter 09 graded names on two independent properties and refused to put them on one line — a name can compress well and constrain nothing, and Facade is the case that proves it. The same discipline is needed here, because two different things are being asked and they come apart.
+[Chapter 09](09_what-a-pattern-is-for_3xzc.md) graded names on two independent properties and refused to put them on one line — a name can compress well and constrain nothing, and Facade is the case that proves it. The same discipline is needed here, because two different things are being asked and they come apart.
 
 **Does the term pick out something in the code?** Something you could open the file and confirm or deny.
 
@@ -117,7 +117,7 @@ And the article says so directly:
 
 So the argument is: *if* you bought the machinery, use it. Applied to the invoice above, the antecedent is absent. There is no mapping layer, no object graph, no identity map, no lazy loading — a struct, some functions, and a table. Nothing was paid, so nothing was wasted, and the cost-benefit argument has nothing to attach to.
 
-**The verdict travels and the condition does not.** *Incurring the costs of a domain model without the benefits* is nine words carrying a condition; *anemic* is one word carrying the conclusion. Chapter 14 is about why the second outlives the first in transmission. This chapter's interest is narrower and starts where that leaves off: the word that survived **convicts**, so a reply has to reject the vocabulary before it can reach the design.
+**The verdict travels and the condition does not.** *Incurring the costs of a domain model without the benefits* is nine words carrying a condition; *anemic* is one word carrying the conclusion. [Chapter 14](14_principle-loses-scope_b86v.md) is about why the second outlives the first in transmission. This chapter's interest is narrower and starts where that leaves off: the word that survived **convicts**, so a reply has to reject the vocabulary before it can reach the design.
 
 ### The third option the binary cannot see
 
@@ -138,7 +138,7 @@ Ask the question of any rule and it answers where the rule can live:
  and writers running now                      unique within a year
 ```
 
-The first two are preferences. The third is not: a rule about rows you have not read cannot be enforced by code that has not read them, and chapter 05 works through why the check-then-write version races. So the placement is a fact about what each layer can see rather than a doctrine anyone adopted.
+The first two are preferences. The third is not: a rule about rows you have not read cannot be enforced by code that has not read them, and [chapter 05](05_time_mdbn.md) works through why the check-then-write version races. So the placement is a fact about what each layer can see rather than a doctrine anyone adopted.
 
 Run it, and the uniqueness rule is enforced exactly where it has to be:
 
@@ -155,7 +155,7 @@ The first insert says nothing, because it worked. The second is refused by the i
 
 That constraint is a business rule, fully enforced, and it is behaviour by any definition that is not circular. It is invisible to a term whose only measure is how many methods hang off the entity. **The design is not short of behaviour; the term is short of places to look.**
 
-Chapter 04 reaches the same place from the structural side, where a `completed_at is null` gate makes the lower layer the more capable one and inverts layering doctrine. Here the point is narrower: a term that cannot see the third option will misclassify every design that uses it.
+[Chapter 04](04_structure_agjy.md) reaches the same place from the structural side, where a `completed_at is null` gate makes the lower layer the more capable one and inverts layering doctrine. Here the point is narrower: a term that cannot see the third option will misclassify every design that uses it.
 
 ### Off the map: when the word names nothing at all
 
@@ -169,7 +169,7 @@ Fowler's definition, crediting Kent Beck with the coinage:
 
 What the definition does not say, and what the word will not carry, is **whose state it reports**. *This smells* says that something in the file tripped an experienced reader's pattern-matching before they could say what. That is real evidence and worth having — compressed experience is why senior reviewers are worth their salary. But it is evidence about the reader, not a property of the file, and no amount of it can be checked by opening the file.
 
-The tell is that the book's own classification test has nothing to grip. Run chapter 01's five questions on *this smells* and it will not place: it is not a Law, a Force, a Principle, an Idiom, or a Style, because it is not a claim about software at all. **If the test cannot take it, you were not handed a design claim.**
+The tell is that the book's own classification test has nothing to grip. Run [chapter 01](01_the-five-kinds_cjx4.md)'s five questions on *this smells* and it will not place: it is not a Law, a Force, a Principle, an Idiom, or a Style, because it is not a claim about software at all. **If the test cannot take it, you were not handed a design claim.**
 
 So the practical difference is not whether the word gets used. It is whether it is marked as what it is:
 
@@ -177,7 +177,7 @@ So the practical difference is not whether the word gets used. It is whether it 
 
 > This part has code smells, but I can't work out what would go wrong. Can you walk me through why you chose this shape?
 
-The first goes from hunch to conclusion in one step with nothing checkable in between, so the only moves available are deference and refusal, and seniority decides which. The second declares its own status — *I can't work out what would go wrong* — which keeps the hunch labelled, and then converts it into a request for the reasoning. That second question is the one chapter 02 says should have been asked anyway: which Forces produced this shape.
+The first goes from hunch to conclusion in one step with nothing checkable in between, so the only moves available are deference and refusal, and seniority decides which. The second declares its own status — *I can't work out what would go wrong* — which keeps the hunch labelled, and then converts it into a request for the reasoning. That second question is the one [chapter 02](02_forces_f4m5.md) says should have been asked anyway: which Forces produced this shape.
 
 **A no-shape term is admissible when it is stated as the speaker's state and turned into a question.** Unmarked, it is a verdict with no subject, and there is no design discussion available until somebody supplies the missing shape.
 
@@ -193,9 +193,9 @@ A verdict noun bundles them, and the bundling is what makes it hard to answer. T
 
 Two properties follow, and they are why this is worth a chapter rather than a complaint.
 
-**It is not a claim, so it never has to be defended.** Chapter 09's point is that names sit outside the five kinds — they are not true or false. A verdict noun exploits that: it does the work of a claim while keeping a name's exemption. Nobody has to state the condition, because on the surface nothing has been asserted.
+**It is not a claim, so it never has to be defended.** [Chapter 09](09_what-a-pattern-is-for_3xzc.md)'s point is that names sit outside the five kinds — they are not true or false. A verdict noun exploits that: it does the work of a claim while keeping a name's exemption. Nobody has to state the condition, because on the surface nothing has been asserted.
 
-**It compresses well, which is why it spreads.** Run chapter 09's first test on it and *anemic domain model* passes easily — three words standing in for a paragraph. It is a good name by that measure. That is the uncomfortable part: the terms that travel furthest are the ones that compress best, and compressing well is what got this one into every code review it appears in (Ch. 14).
+**It compresses well, which is why it spreads.** Run [chapter 09](09_what-a-pattern-is-for_3xzc.md)'s first test on it and *anemic domain model* passes easily — three words standing in for a paragraph. It is a good name by that measure. That is the uncomfortable part: the terms that travel furthest are the ones that compress best, and compressing well is what got this one into every code review it appears in ([Ch. 14](14_principle-loses-scope_b86v.md)).
 
 ---
 
@@ -207,13 +207,13 @@ Some loaded terms are loaded correctly, and the test is whether the condition ca
 
 **A verdict noun naming a Law violation.** *SQL injection* — building a query by pasting user input into the text of it, so that input containing a quote can close the string and start a statement of its own. The judgment is in the name: *injection* is something done to you. And it is warranted, because there is no configuration of Forces that makes it right. Not on an internal tool, not on an admin page nobody outside can reach, not at any size of team or any latency budget. The condition attached to the verdict is *always*, so compressing it away costs nothing. *Data race* and *buffer overflow* work the same way.
 
-**A verdict noun naming a Principle violation.** *Premature optimization* — where the judgment is in the first word. Chapter 01 classifies the slogan it comes from as a Principle routinely quoted with its conditions removed; here the interest is the noun phrase, which asserts that the timing question is settled.
+**A verdict noun naming a Principle violation.** *Premature optimization* — where the judgment is in the first word. [Chapter 01](01_the-five-kinds_cjx4.md) classifies the slogan it comes from as a Principle routinely quoted with its conditions removed; here the interest is the noun phrase, which asserts that the timing question is settled.
 
-Whether an optimization is premature is a latency-budget question, and chapter 02 works that budget across four orders of magnitude — a page render with 200 milliseconds to spend, against an order matcher with 200 microseconds. Hand-tuning a loop on the first day is waste in the first case and is the entire job in the second.
+Whether an optimization is premature is a latency-budget question, and [chapter 02](02_forces_f4m5.md) works that budget across four orders of magnitude — a page render with 200 milliseconds to spend, against an order matcher with 200 microseconds. Hand-tuning a loop on the first day is waste in the first case and is the entire job in the second.
 
 Same work, same point in the schedule, opposite verdicts. So the term does not describe the code — it announces a conclusion about a Force it never asked anyone to measure, and somebody who disagrees has to reject the word before they can say which case they are in.
 
-That gives the claim's boundary a form the book already has: **a verdict noun is legitimate when it names a Law violation, and dangerous when it names a Principle violation.** A Law has no conditions that can fail (Ch. 01), so a term naming one loses nothing by compressing. A Principle is conditional by definition, so a term naming its violation drops exactly the part that mattered.
+That gives the claim's boundary a form the book already has: **a verdict noun is legitimate when it names a Law violation, and dangerous when it names a Principle violation.** A Law has no conditions that can fail ([Ch. 01](01_the-five-kinds_cjx4.md)), so a term naming one loses nothing by compressing. A Principle is conditional by definition, so a term naming its violation drops exactly the part that mattered.
 
 *Anemic domain model* fails on the same grounds as *premature optimization*: its condition — you already paid for a domain model — is a Force question, and the answer varies by project.
 
@@ -271,4 +271,4 @@ Two questions do the work, and they are the two axes.
 
 ---
 
-**Next:** chapter 14 opens Part IV with the mechanism behind this one — why the fragment that survives repetition is always the part telling you what to do, and never the part telling you when.
+**Next:** [chapter 14](14_principle-loses-scope_b86v.md) opens Part IV with the mechanism behind this one — why the fragment that survives repetition is always the part telling you what to do, and never the part telling you when.

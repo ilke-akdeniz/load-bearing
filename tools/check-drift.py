@@ -41,6 +41,17 @@ toc = read("00_toc.md")
 toc_lines = toc.split("\n")
 chapter_files = sorted(p.name for p in ROOT.glob("[0-9][0-9]_*.md") if p.name != "00_toc.md")
 
+# Every chapter carries a stable four-character id in its filename. References
+# are matched on the id rather than on the number, so renumbering the book
+# cannot silently repoint them. ids maps id -> number.
+ids = {}
+for _f in chapter_files:
+    _m = re.match(r"(\d\d)_[a-z0-9-]+_([a-z0-9]{4})\.md$", _f)
+    if _m:
+        ids[_m.group(2)] = _m.group(1)
+    else:
+        fail("chapter id", f"{_f} carries no four-character id in its filename")
+
 parts = [(n, l.split("—", 1)[1].strip())
          for n, l in enumerate(toc_lines, 1) if l.startswith("## Part ")]
 entries = [(n, m.group(1), m.group(2).strip())
@@ -138,18 +149,17 @@ for fname in live_docs:
                 fail("dangling ref",
                      f"{fname}:{n} refers to chapter {num}, which is not in the TOC")
 
-# 5c. The ledger's own columns must agree: a row owned by NN cites NN.
+# 5c. Every owner in the ledger is an id that names a chapter that exists.
+#     The ledger is the one place allowed to use bare ids instead of links.
 checked += 1
 for n, line in enumerate(read("docs/LEDGER.md").split("\n"), 1):
-    row = re.match(r"^\| [^|]* \| (\d\d) \| .* \| ([^|]*)\|\s*$", line)
-    if not row:
+    row = re.match(r"^\| [^|]* \| ([^|]*) \|", line)
+    if not row or row.group(1).strip() in ("Owner", "---"):
         continue
-    owner, cite_cell = row.group(1), row.group(2)
-    for kind, rx in (("cite", r"\bcite (\d\d)\b"), ("(Ch. NN)", r"\(Ch\. (\d\d)\)")):
-        for got in re.findall(rx, cite_cell):
-            if got != owner:
-                fail("ledger", f"docs/LEDGER.md:{n} row is owned by {owner} "
-                               f"but its {kind} says {got}")
+    for owner in re.findall(r"[a-z0-9]{4}", row.group(1)):
+        if owner not in ids:
+            fail("ledger id", f"docs/LEDGER.md:{n} is owned by '{owner}', "
+                              f"which is not a chapter id")
 
 # 5d. A markdown link to a chapter must resolve, and if its text names a
 #     chapter number that number must match the file it points at.
@@ -160,11 +170,15 @@ for fname in live_docs:
         continue
     base = path.parent
     for n, line in enumerate(path.read_text().split("\n"), 1):
-        for text, target in re.findall(r"\[([^\]]*)\]\((\d\d_[a-z0-9-]+\.md)\)", line):
+        for text, target in re.findall(r"\[([^\]]*)\]\((?:\.\./)*(\d\d_[a-z0-9-]+_[a-z0-9]{4}\.md)\)", line):
             if not (base / target).exists() and not (ROOT / target).exists():
                 fail("dead link", f"{fname}:{n} links to {target}, which does not exist")
                 continue
-            said = re.search(r"[Cc]hapter (\d\d)", text)
+            tid = re.search(r"_([a-z0-9]{4})\.md$", target).group(1)
+            if ids.get(tid) != target[:2]:
+                fail("link mismatch", f"{fname}:{n} links to {target}, but id "
+                                      f"'{tid}' belongs to chapter {ids.get(tid)}")
+            said = re.search(r"[Cc]h(?:apter|\.) (\d\d)", text)
             if said and said.group(1) != target[:2]:
                 fail("link mismatch", f"{fname}:{n} says chapter {said.group(1)} "
                                       f"but links to {target}")
@@ -174,14 +188,36 @@ for fname in live_docs:
 #     revisits table's number against its "next time NN is open".
 checked += 1
 for n, line in enumerate(toc_lines, 1):
-    row = re.match(r"^\| (\d\d) \| `(\d\d)_[a-z0-9-]+\.md` \|", line)
+    row = re.match(r"^\| (\d\d) \| `(\d\d)_[a-z0-9-]+_([a-z0-9]{4})\.md` \|", line)
     if row and row.group(1) != row.group(2):
         fail("toc table", f"00_toc.md:{n} status row says chapter {row.group(1)} "
                           f"but names file {row.group(2)}_...")
+    if row and ids.get(row.group(3)) != row.group(1):
+        fail("toc table", f"00_toc.md:{n} status row for chapter {row.group(1)} "
+                          f"names id '{row.group(3)}', which is not that chapter")
     row = re.match(r"^\| (\d\d) \| (?!`).*next time (\d\d) is open", line)
     if row and row.group(1) != row.group(2):
         fail("toc table", f"00_toc.md:{n} revisits row is for chapter {row.group(1)} "
                           f"but says 'next time {row.group(2)} is open'")
+
+# 5f. A cross-reference to a chapter is a link carrying that chapter's id.
+#     A bare "Ch. 04" survives a renumbering pointing at the wrong chapter,
+#     which is what the ids exist to prevent, so bare references are an error.
+#     Text inside quotes or backticks is illustration, not a reference.
+checked += 1
+LINK_SPAN = re.compile(r"\[[^\]]*\]\([^)]*\)")
+QUOTED = re.compile(r"[\"“][^\"”]*[\"”]|`[^`]*`")
+BARE_REF = re.compile(r"\b[Cc]h(?:apter|\.)\s*\d\d?\b")
+blank = lambda m: " " * len(m.group(0))
+for fname in live_docs:
+    path = ROOT / fname
+    if not path.exists():
+        continue
+    for n, line in enumerate(strip_fences(path.read_text()).split("\n"), 1):
+        masked = QUOTED.sub(blank, LINK_SPAN.sub(blank, line))
+        for m in BARE_REF.finditer(masked):
+            fail("bare ref", f"{fname}:{n} writes '{m.group(0)}' as plain text; "
+                             f"a cross-reference must be a link carrying the id")
 
 # 6. Terminology that a past sweep retired. DECISIONS.md is the historical
 #    record and is deliberately exempt.
@@ -210,7 +246,7 @@ if "four levels and five kinds" not in read("CLAUDE.md"):
 # 8. Every chapter past 'not started' owns at least one ledger row.
 checked += 1
 ledger = read("docs/LEDGER.md")
-owned = set(re.findall(r"\|\s*(\d\d)\s*\|", ledger))
+owned = {ids[i] for i in re.findall(r"\|\s*([a-z0-9]{4})\s*\|", ledger) if i in ids}
 for num, state in status_state.items():
     if state.replace("*", "").strip() != "not started" and num not in owned:
         fail("ledger", f"ch {num} is drafted but owns no row in docs/LEDGER.md")

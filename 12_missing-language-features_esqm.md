@@ -4,7 +4,7 @@
 
 **Much of the Gang of Four catalogue is scaffolding that mimics a language feature. Build the same design in a language that has the feature and the scaffold disappears while the design stays — and that difference is how you tell one from the other.**
 
-Chapter 11 claimed that patterns which answer a Force survive. This chapter claims that a pattern can be expressed as a scaffold or as a language feature. The two claims are independent: a shape can answer a real Force and still be assembled out of scaffolding that another language does not need.
+[Chapter 11](11_patterns-that-survive-translation_us2k.md) claimed that patterns which answer a Force survive. This chapter claims that a pattern can be expressed as a scaffold or as a language feature. The two claims are independent: a shape can answer a real Force and still be assembled out of scaffolding that another language does not need.
 
 ## What Norvig actually counted
 
@@ -311,7 +311,7 @@ func (d Directory) TotalBytes() int64 {
 }
 ```
 
-Both print `6700` for the same tree. The dispatch mechanism changed completely between the two and the containment did not, because the containment is not a mechanism. Directories contain files. That is a fact about filesystems, and no language feature has anything to say about it — which is chapter 11's category of patterns that answer the shape of the problem rather than a Force.
+Both print `6700` for the same tree. The dispatch mechanism changed completely between the two and the containment did not, because the containment is not a mechanism. Directories contain files. That is a fact about filesystems, and no language feature has anything to say about it — which is [chapter 11](11_patterns-that-survive-translation_us2k.md)'s category of patterns that answer the shape of the problem rather than a Force.
 
 So the test does not partition the catalogue into *real* and *fake*. It separates the patterns whose substance is a language workaround from the patterns whose substance is a claim about the domain, and the second group is untouched by anything a compiler does.
 
@@ -384,7 +384,7 @@ func (l loggingStore) List(prefix string) ([]string, error) { return l.inner.Lis
 func (l loggingStore) Count() (int, error)                  { return l.inner.Count() }
 ```
 
-Four forwarding methods that exist to be forwarded through. No language feature removes them, because they are not simulating anything — they are the price of the interface being five methods wide, which is a fact about the design rather than about the compiler. Chapter 04 works through where that leaves you.
+Four forwarding methods that exist to be forwarded through. No language feature removes them, because they are not simulating anything — they are the price of the interface being five methods wide, which is a fact about the design rather than about the compiler. [Chapter 04](04_structure_agjy.md) works through where that leaves you.
 
 Decorator therefore sits outside the claim from two directions at once, and Norvig's list was right to omit it.
 
@@ -392,7 +392,7 @@ Decorator therefore sits outside the claim from two directions at once, and Norv
 
 Norvig lists Observer as dissolved, and inside one process it is: a Go channel, a C# event, a callback list. The word adds nothing to `orders.Subscribe(handler)`.
 
-Move the observer to another machine and every part of that comes back, in a worse form. The notification can be lost, so somebody has to decide between at-least-once and at-most-once. It can arrive twice, so the handler needs to be idempotent. It can arrive out of order. The publisher now has to decide what happens when a subscriber is slow, and the answer is either unbounded buffering or dropping. None of these is a language question and no feature makes them go away — they are chapter 06's material, arriving because the shape crossed a boundary, which is chapter 10's.
+Move the observer to another machine and every part of that comes back, in a worse form. The notification can be lost, so somebody has to decide between at-least-once and at-most-once. It can arrive twice, so the handler needs to be idempotent. It can arrive out of order. The publisher now has to decide what happens when a subscriber is slow, and the answer is either unbounded buffering or dropping. None of these is a language question and no feature makes them go away — they are [chapter 06](06_distribution_49yh.md)'s material, arriving because the shape crossed a boundary, which is [chapter 10](10_patterns-that-cross_r8dw.md)'s.
 
 The lesson is about the test rather than about Observer. **The test is scoped, and running it at the wrong scope returns a confident wrong answer.** "Observer is just events" is true of the version that lives in one address space and false of the version that lives in two, and the sentence does not say which one it is talking about.
 
@@ -435,7 +435,7 @@ The rule that survives is about size rather than about patterns: a policy of thr
 
 **Erasing the construction erases the announcement.** An interface named `ShippingPolicy` with two implementations tells the next person that variation was anticipated here, where to add the third, and what the contract is. A field typed `func(int) int64` says the same thing to somebody reading that line and nothing to somebody searching the repository for extension points, because there is no name to search for. This is not only a documentation cost — it is reuse and maintenance. A named type is what an IDE lists implementations of, what a reviewer greps for before changing a signature, and what stops a fourth policy being written from scratch somewhere else because nobody knew the first three existed. Keeping the policies in one named place, as above, recovers most of this; keeping nothing recovers none of it.
 
-**Running the audit as a cleanup is a category error.** The catalogue is a description of shapes that occurred (Ch. 09). Finding that some entries were language workarounds is a fact about the languages of 1994, not a licence to remove those shapes from a codebase that still compiles with the compiler it has. The finding is worth having because it changes what you conclude when you meet the pattern, not because it generates work.
+**Running the audit as a cleanup is a category error.** The catalogue is a description of shapes that occurred ([Ch. 09](09_what-a-pattern-is-for_3xzc.md)). Finding that some entries were language workarounds is a fact about the languages of 1994, not a licence to remove those shapes from a codebase that still compiles with the compiler it has. The finding is worth having because it changes what you conclude when you meet the pattern, not because it generates work.
 
 ---
 
@@ -446,14 +446,14 @@ The rule that survives is about size rather than about patterns: a policy of thr
 - **An interface with one method and one implementation, injected as a field.** That is Strategy with the variation never having arrived. In a language with function values there is nothing left to name.
 - **`accept` methods on a type hierarchy in a language with pattern matching.** The double dispatch is being paid for and the compiler would do it.
 - **A `Factory` whose `create` method contains a single `new` with no branching.** The pattern is a workaround for languages where a class is not a value; if yours are, the factory is a function that could be the constructor.
-- **Per-method forwarding classes** — twenty methods, nineteen of which call straight through. Either the interface is too wide to decorate or the concern is not a decoration at all (Ch. 04).
+- **Per-method forwarding classes** — twenty methods, nineteen of which call straight through. Either the interface is too wide to decorate or the concern is not a decoration at all ([Ch. 04](04_structure_agjy.md)).
 - **Class names built from pattern names** — `PricingStrategyImpl`, `OrderVisitor`, `ConfigBuilderFactory`. When the pattern has dissolved, these are the residue: names describing apparatus that is no longer there.
 
 **In a conversation:**
 
 - **"We should use the Strategy pattern here."** In which language? If the answer is one with first-class functions, the proposal is "pass a function," and it should be said that way, because then someone can disagree with the actual design.
 - **"That's just a closure."** Frequently correct, and it is a claim about the implementation rather than about the design. The design question — should this vary at all, and who decides — is untouched by the observation.
-- **"Design patterns are obsolete."** The strong folk version of Norvig, and the seven patterns he did not list are the counter-evidence. So is every pattern in chapter 11 that answers a Force rather than a language gap.
+- **"Design patterns are obsolete."** The strong folk version of Norvig, and the seven patterns he did not list are the counter-evidence. So is every pattern in [chapter 11](11_patterns-that-survive-translation_us2k.md) that answers a Force rather than a language gap.
 - **A design document specifying patterns before specifying a language.** The catalogue is not language-independent, and half of it is a description of what you will have to build if you pick a language without the feature.
 
 The question that does the work: **if I wrote this in a language with first-class functions and sum types, what would be left?**
@@ -468,4 +468,4 @@ And *language* here does not have to mean a different one. Visitor changed statu
 
 ---
 
-**Next:** chapter 13 turns from names that describe a shape to names that arrive with a verdict already attached — vocabulary like *anemic domain model*, where accepting the word means accepting the conclusion, and the argument was over before anyone noticed it had started.
+**Next:** [chapter 13](13_smuggled-verdicts_8y69.md) turns from names that describe a shape to names that arrive with a verdict already attached — vocabulary like *anemic domain model*, where accepting the word means accepting the conclusion, and the argument was over before anyone noticed it had started.

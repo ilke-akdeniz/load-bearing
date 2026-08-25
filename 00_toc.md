@@ -10,7 +10,7 @@ Back to [README](README.md).
 ## Part I — Claims and Forces
 
 ### 01. The five kinds of claim
-`01_the-five-kinds.md`
+`01_the-five-kinds_cjx4.md`
 
 The book's premise, made precise, with a classification test you can run on any claim in under a minute.
 
@@ -19,7 +19,7 @@ Contents: the five kinds, named rather than numbered — four of them advice, fo
 *Where the model breaks down:* claims that genuinely span two kinds, and why forcing one label is worse than holding both; and the fact that this chapter offers a lens rather than a claim it can demonstrate.
 
 ### 02. Forces: the inputs nobody names
-`02_forces.md`
+`02_forces_f4m5.md`
 
 Forces, and the most underrated chapter in the book.
 
@@ -34,7 +34,7 @@ Each Force with a code demo of the same problem solved differently under differe
 ## Part II — The foundations
 
 ### 03. Three kinds of true
-`03_grading-a-law.md`
+`03_grading-a-law_q5c6.md`
 
 Not every Law has the same standing.
 Theorem, definition, and empirical law are three different kinds of true, and each admits exactly one move.
@@ -44,7 +44,7 @@ Contents: what makes Two Generals a different kind of claim from Conway's Law; w
 *Where the claim doesn't apply:* kind is not importance, so a theorem can be irrelevant at your scale — Amdahl on a single-threaded CLI — while an empirical number decides your architecture; one name covering both a theorem and a slogan; and claims that sit between kinds, where forcing one label loses the argument.
 
 ### 04. Structure: dependency and hiding
-`04_structure.md`
+`04_structure_agjy.md`
 
 The Direction Rule and its family.
 
@@ -53,7 +53,7 @@ Contents: acyclic dependency, and why it's a Law rather than a preference; layer
 *Where the claim doesn't apply:* the Law goes inert when nothing is ever separated, which is the boundary for acyclicity itself; ECS architectures, where the memory hierarchy inverts hiding; inversion of control, where the call goes up and the dependency does not; and the case where the lower layer is the more capable one.
 
 ### 05. Time: concurrency and clocks
-`05_time.md`
+`05_time_mdbn.md`
 
 The chapter that turns "be careful" into a rule you can apply.
 
@@ -62,7 +62,7 @@ Contents: check-then-act is not atomic (the TOCTOU family, with the same bug in 
 *Where the claim doesn't apply:* one writer, where the whole apparatus is dead weight (embedded loops, some game main-loops); windows that are cheaper to accept than to close; and single-machine ordering, which is often good enough.
 
 ### 06. Distribution: what's impossible
-`06_distribution.md`
+`06_distribution_49yh.md`
 
 Theorems, and the engineering that exists because of them.
 
@@ -73,7 +73,7 @@ Contents: every timeout is a guess; CAP and PACELC, where the else-branch is the
 *Where the claim doesn't apply:* one process and one database, where reaching for distributed-systems machinery is cargo cult; coordination you can simply afford; and correlated failures, where the p^N arithmetic assumes an independence you do not have.
 
 ### 07. Scale: queues, parallelism, memory
-`07_scale.md`
+`07_scale_637f.md`
 
 Where the arithmetic beats the intuition.
 
@@ -84,7 +84,7 @@ Contents: Amdahl's Law as a ceiling; the Universal Scalability Law and why throu
 *Where the claim doesn't apply:* small collections, where the constant factor wins and the asymptotically better algorithm loses; systems nowhere near the bend, where the arithmetic is real and inert; and cases where speed is not the constraint.
 
 ### 08. Change: evolution, organization, compatibility
-`08_change.md`
+`08_change_rjf9.md`
 
 The laws that operate on the timescale of years rather than milliseconds.
 
@@ -95,7 +95,7 @@ Contents: Lehman's Laws of Software Evolution; Conway's Law, and the inverse man
 ## Part III — Patterns, graded
 
 ### 09. What a pattern is for
-`09_what-a-pattern-is-for.md`
+`09_what-a-pattern-is-for_3xzc.md`
 
 Two tests, applied throughout the rest of Part III.
 
@@ -104,35 +104,35 @@ Contents: **compression** — does naming it save more words than it costs? **co
 *Where the claim doesn't apply:* a design too young to name, where a vague name is the honest one; local vocabulary that compresses for insiders and nobody else; and names kept because they are how you find the literature on a shape's failure modes.
 
 ### 10. Patterns that cross the line
-`10_patterns-that-cross.md`
+`10_patterns-that-cross_r8dw.md`
 
 The chapter that rescues the useful half of the GoF material.
 
 The core claim: **the same pattern name describes an afternoon's work or a permanent obligation, and what separates them is whether you can change the other side.**
-Usually called a question of scale; size only correlates, because systems acquire other owners as they grow. The axis is chapter 02's control-of-callers Force, read from the other end.
+Usually called a question of scale; size only correlates, because systems acquire other owners as they grow. The axis is [chapter 02](02_forces_f4m5.md)'s control-of-callers Force, read from the other end.
 
 Contents: one integration crossing the line, before and after; which rows of the pattern table are canonical and which are this book's reading; why most pattern arguments are two people answering different ownership questions.
 
 *Where the claim doesn't apply:* patterns unchanged by the crossing (Strategy, Template Method); partial ownership, where the alternatives are expensive rather than absent; and Singleton, which changes more than anything else in the chapter.
 
 ### 11. Patterns that survive translation
-`11_patterns-that-survive-translation.md`
+`11_patterns-that-survive-translation_us2k.md`
 
 Not a catalogue. The claim is that the patterns which last are answers to Forces, so grouping them by Force finds the name from the situation — which is the direction you actually need, and the one a catalogue organized by shape cannot serve.
 
-Fifty-four patterns sorted against chapter 02's seven Forces, in chapter 02's order: forty-nine fall into them, five refuse. Two worked per Force with code, the constraint, and the cost; the rest of each family listed one line each, so the grouping can be checked against the whole field rather than the chosen cases. Patterns another chapter owns are cited, not re-explained.
+Fifty-four patterns sorted against [chapter 02](02_forces_f4m5.md)'s seven Forces, in [chapter 02](02_forces_f4m5.md)'s order: forty-nine fall into them, five refuse. Two worked per Force with code, the constraint, and the cost; the rest of each family listed one line each, so the grouping can be checked against the whole field rather than the chosen cases. Patterns another chapter owns are cited, not re-explained.
 
-The Forces are chapter 02's, named and ordered as that chapter names them, so the grouping can be checked against the definition rather than against a fresh set of labels.
+The Forces are [chapter 02](02_forces_f4m5.md)'s, named and ordered as that chapter names them, so the grouping can be checked against the definition rather than against a fresh set of labels.
 
 *Where the claim doesn't apply:* the five that refuse to sort, which split into patterns answering a goal — a property you elected to want, and could decide to want less of — and patterns answering the shape of the problem (State Machine, Transaction Script); one Force with several answers, where only intensity decides; and the fact that a list places patterns without endorsing them.
 
 ### 12. Patterns that are missing language features
-`12_missing-language-features.md`
+`12_missing-language-features_esqm.md`
 
 The Gang of Four audit, worked rather than asserted.
 
 The claim: **much of the catalogue is scaffolding that mimics a language feature** — build the same design in a language that has the feature and the scaffold disappears while the design stays.
-Chapter 11 asked what a pattern answers; this asks what it is made of, and the two are independent.
+[Chapter 11](11_patterns-that-survive-translation_us2k.md) asked what a pattern answers; this asks what it is made of, and the two are independent.
 
 Contents: Norvig's 1996 count read from the slides rather than from its retelling — 16 of 23 "invisible **or simpler**", "for at least some uses of each pattern", and three levels rather than two, none of which survives the folk version.
 The centrepiece is Visitor written twice **in Java**: the 1994 double dispatch, and the same design in Java 26 with `sealed`, `record`, and pattern matching, which is a sum type in all but name.
@@ -142,13 +142,13 @@ Then Strategy in four languages, with the policies kept named on both sides so t
 *Where the claim doesn't apply:* the same feature that dissolves Visitor leaves **Composite** standing in the same file, because containment is a claim about the domain; **Decorator**, where the test returns no — measured in Go the function form is *longer*, and interface width rather than language decides what decoration costs; Observer, which dissolves in one process and returns across a machine, so the test is scoped; and the fact that the test names the language you moved *to*, so "Visitor is a workaround" is true and useless if your compiler lacks the feature.
 
 ### 13. Smuggled verdicts
-`13_smuggled-verdicts.md`
+`13_smuggled-verdicts_8y69.md`
 
 Vocabulary that arrives with its conclusion already attached.
 
 The claim: **some vocabulary arrives with its verdict attached, so accepting the word concedes the argument** — and how much you conceded depends on whether the word also names something you can go and check.
 
-Two independent questions, graded the way chapter 09 grades names rather than on a single ladder: does the term pick out something in the code, and does it carry a verdict.
+Two independent questions, graded the way [chapter 09](09_what-a-pattern-is-for_3xzc.md) grades names rather than on a single ladder: does the term pick out something in the code, and does it carry a verdict.
 All four cells are occupied, and the damaging one is **names a shape *and* convicts it** — the shape is checkable, so the term reads as description while the verdict rides along unexamined.
 
 Contents: one invoice described twice, accurately, as a Transaction Script and as an anemic domain model; what Fowler actually wrote in 2003, read from the source — *"they incur all of the costs of a domain model, without yielding any of the benefits"* — and the antecedent that does not travel with the verdict; the third option the term cannot see, which is behaviour **placed by what the rule must see**, with sqlite enforcing the rule no Go code could; and the cell where a word names no shape at all, where *this smells* is a fact about the reader rather than about the file.
@@ -158,7 +158,7 @@ Contents: one invoice described twice, accurately, as a Transaction Script and a
 ## Part IV — Methodologies versus principles
 
 ### 14. How a principle loses its scope
-`14_principle-loses-scope.md`
+`14_principle-loses-scope_b86v.md`
 
 The mechanism, stated once, so the case studies can be short.
 
@@ -176,15 +176,15 @@ Which exposes a control inside Pike's own list — four proverbs take a named pa
 *Where the claim doesn't apply:* a named situation is only a **proxy** for the conditions and can fit badly in either direction — syscall and cgo are two proverbs for one condition, so a third platform-specific case has none, and the test therefore measures whether you were given something checkable rather than whether the extent is right; advice with no scope to lose, where gofmt travelled intact; the domain gap between a fixed board game and software, which explains the lag without excusing it; and the fact that this chapter ends in repair rather than entrenchment, which is why the endpoint term belongs to 23.
 
 ### 15. Behaviour placement and OOP
-`15_behaviour-placement.md`
+`15_behaviour-placement_z47a.md`
 
 The first case study.
 
-**Chapter 14's mechanism, running on:** *behaviour belongs with the data it operates on.*
+**[Chapter 14](14_principle-loses-scope_b86v.md)'s mechanism, running on:** *behaviour belongs with the data it operates on.*
 The scope was written down and did not travel. Riel's heuristic 2.9 says *related* data and behaviour, and glosses it as one key abstraction split across two places — which excludes a rule reading two entities, since 2.8 makes those two abstractions. His introduction adds that all sixty are *warning bells*, that it is *perfectly valid to state that the heuristic does not apply*, and that they conflict; he wrote it to avoid what happened to *goto considered harmful*.
 The chapter shows the wide reading first and the source after it, so the exclusion arrives as a correction to something the reader has already watched go wrong.
 The wide reading puts each rule on the entity whose data it reads, which is right for each rule taken alone and leaves a reference pointing each way.
-The narrow reading already exists in this book — chapter 13's *what the rule must see*, where the location follows from how much data you must be looking at before you can tell whether a rule holds.
+The narrow reading already exists in this book — [chapter 13](13_smuggled-verdicts_8y69.md)'s *what the rule must see*, where the location follows from how much data you must be looking at before you can tell whether a rule holds.
 
 Contents: two rules over a customer and an order, each placed correctly, closing the cycle between them; the distinction the chapter turns on, between two classes that reference each other and a constructed value graph carrying a back-pointer; `HashSet.add` throwing `StackOverflowError`, with `json.Marshal`, `json.dumps` and a generated `equals` all refusing the same shape; and `isGold` as the control — a one-entity rule that does get moved into a service, often, but never by reading this sentence, which is what makes the pressure one-way.
 The alternative demonstrated: identifiers instead of references, and FlowCore's decision 3 priced both ways — offline construction and working serialization bought, a query per route and cross-definition integrity moved into composite foreign keys, paid.
@@ -192,11 +192,11 @@ The alternative demonstrated: identifiers instead of references, and FlowCore's 
 *Where the wide reading is right:* rules that read one entity, where the currency check belongs on the money value and moving it out puts it where a caller can skip it; and cycles nothing ever walks generically, where the exemption is structural unreachability rather than nothing having walked it yet.
 
 ### 16. TDD, mocks, and what testing actually buys
-`16_tdd-and-mocks.md`
+`16_tdd-and-mocks_u8eu.md`
 
 The second case study, kept fair.
 
-**Chapter 14's mechanism, running on two principles:** *write the test first*, and *mock your dependencies* — neither of which is the settled default it travels as.
+**[Chapter 14](14_principle-loses-scope_b86v.md)'s mechanism, running on two principles:** *write the test first*, and *mock your dependencies* — neither of which is the settled default it travels as.
 Fowler's definition names what test-first buys and does not claim the sequence improves the code; Beck's canon states the loop and mentions no mocking, no isolation and no speed requirement at all.
 *Mock your dependencies* is the mockist half of a disagreement Fowler named in 2007 and came down against, so the position this chapter argues is the classical one, which has had a name for two decades.
 
@@ -204,31 +204,31 @@ Contents: **mocks assert that your code calls your mocks** — a registration se
 The two principles are not separate: the loop runs at minutes, so the suite must answer in seconds, so the database leaves the test — which is where the test that cannot fail comes from.
 Costs are priced for both halves, the ordering's from the study's own adherence numbers: no session ran purely test-first, after ten hours of training.
 
-Not covered: the wider empirical literature, since the meta-analyses are paywalled and were not read; and interface-per-class and the DI container, which no chapter currently owns — chapter 17 reaches the testing half of it and no further.
+Not covered: the wider empirical literature, since the meta-analyses are paywalled and were not read; and interface-per-class and the DI container, which no chapter currently owns — [chapter 17](17_abstraction-as-insurance_4jk6.md) reaches the testing half of it and no further.
 
 *Where the wide reading is right:* dependencies that genuinely cannot be run in a test — payment gateways, hardware, third-party APIs — and the honest version of doubles for those; and a mock asserting a call where the call is the observable behaviour.
 
 ### 17. Abstraction as insurance
 
-`17_abstraction-as-insurance.md`
+`17_abstraction-as-insurance_4jk6.md`
 
 The third case study, and the one that survives *but what if we do need it*.
 
-**Chapter 14's mechanism, running on:** *depend on abstractions, not concretions.*
+**[Chapter 14](14_principle-loses-scope_b86v.md)'s mechanism, running on:** *depend on abstractions, not concretions.*
 Martin's 1994 paper names the test as **stability**, and gives plurality as the reason an abstraction is stable: the more implementations depend on it, the harder it is to change.
 The five words that travel keep the technique and drop the test, so an interface with one implementation carries the principle's name while failing it.
 The chapter shows the wide reading first and the source after it, so the stability test arrives as a correction to an interface the reader has already watched fail.
 
-Contents: the distinction everything rests on — **simultaneous plurality** (two implementations loaded at once, something dispatching between them) against **sequential replacement** (one engine, then another, forever), where only the first is a Force and the second is what people mean; **injection is not abstraction**, stated because chapter 04 otherwise refutes the claim in a sentence; four reasons the insurance cannot pay out, each leaning on a Law the book already owns; and the rollback objection answered with what actually does the job — replication, comparison, per-tenant cutover, a window where both engines run.
+Contents: the distinction everything rests on — **simultaneous plurality** (two implementations loaded at once, something dispatching between them) against **sequential replacement** (one engine, then another, forever), where only the first is a Force and the second is what people mean; **injection is not abstraction**, stated because [chapter 04](04_structure_agjy.md) otherwise refutes the claim in a sentence; four reasons the insurance cannot pay out, each leaning on a Law the book already owns; and the rollback objection answered with what actually does the job — replication, comparison, per-tenant cutover, a window where both engines run.
 
 Also the paper's own last paragraph, in print since 1994 and still lost: the standard may suit only certain applications, and its author would regret unconditional conformance.
 
-*Where the wide reading is right:* portability sold as a contract term, which is plurality and load-bearing; a funded and dated migration, where the objection changes from *this will never happen* to *this is not how to do it*; the testing case, which chapter 16 owns and answers; and the one-implementation interfaces chapter 04 defends for reasons that survive deleting the word *later*.
+*Where the wide reading is right:* portability sold as a contract term, which is plurality and load-bearing; a funded and dated migration, where the objection changes from *this will never happen* to *this is not how to do it*; the testing case, which [chapter 16](16_tdd-and-mocks_u8eu.md) owns and answers; and the one-implementation interfaces [chapter 04](04_structure_agjy.md) defends for reasons that survive deleting the word *later*.
 
 ## Part V — Contextual programming
 
 ### 18. The force-map method
-`18_force-map-method.md`
+`18_force-map-method_r37x.md`
 
 The practical procedure the whole book has been building toward, and the one thing about it that is checkable.
 
@@ -236,14 +236,14 @@ The practical procedure the whole book has been building toward, and the one thi
 Read in that direction each step takes an input from the one before and every claim has a falsifier. Read backwards from a convention, the chain comes out consistent and unfalsifiable, because it was assembled from the answer.
 
 Contents: the three steps, and then why step one is not instrument work — some forces are countable, most are judgements, and which facts count as forces depends on the decision in front of you, so all the method claims is that a force is the kind of thing that has an answer. Four systems given only as force readings — a migration script, a ledger, a published library, a real-time loop — with four pieces of the book's own advice run across them and changing verdict, every difference tracing to a cell.
-Then the map itself, worked on FlowCore's decision 12: forces with values, the principle they license, two idioms checked and rejected, and the three lines nothing else records — **forced, chosen, deferred** — plus the trigger that would reopen it. Chapter 11 owns the architecture decision record; what this adds to Nygard's template is forced-against-chosen and a trigger written before rather than a status marked after.
-Also: detecting an inherited principle by asking what would have to be true for it to be unnecessary; five moves for conflicting forces, ending in escalation with quantities named, which is chapter 02's debt discharged; and **grilling** under AI-assisted development — the frozen prompt in full, its provenance, a worked exchange where two corpus defaults are overridden by facts only the human has, and the limit that it surfaces contested choices and conceals settled ones.
+Then the map itself, worked on FlowCore's decision 12: forces with values, the principle they license, two idioms checked and rejected, and the three lines nothing else records — **forced, chosen, deferred** — plus the trigger that would reopen it. [Chapter 11](11_patterns-that-survive-translation_us2k.md) owns the architecture decision record; what this adds to Nygard's template is forced-against-chosen and a trigger written before rather than a status marked after.
+Also: detecting an inherited principle by asking what would have to be true for it to be unnecessary; five moves for conflicting forces, ending in escalation with quantities named, which is [chapter 02](02_forces_f4m5.md)'s debt discharged; and **grilling** under AI-assisted development — the frozen prompt in full, its provenance, a worked exchange where two corpus defaults are overridden by facts only the human has, and the limit that it surfaces contested choices and conceals settled ones.
 
 *Where the claim doesn't apply:* the conventional answer is good enough and the analysis costs more than the decision; the forces are not knowable yet, so reading them is guessing with a table attached; and a decision with one live option, where mapping is theatre.
 *What it costs:* it requires the expertise it appears to replace, most of which goes into step one.
 
 ### 19. Six profiles, six inversions
-`19_six-profiles.md`
+`19_six-profiles_dnkz.md`
 
 The longest chapter, and the payoff.
 Each force profile: which force sits outside its ordinary range, which standard advice inverts, and what it becomes instead.
@@ -251,14 +251,14 @@ Each force profile: which force sits outside its ordinary range, which standard 
 The demonstration runs both directions: three unrelated domains sharing one profile, and two sales systems — pizza ovens and marine-port security — with the same domain and opposite concurrency readings.
 The business supplies that reading, though not in answer to the question usually put to it.
 
-- **Line-of-business / data-durable** — durability, so *keep business rules out of the database* inverts because a rule enforced only in application code holds until the next application, *the database is a detail* inverts with it (Ch. 17), and the ORM question is argued from the force rather than from taste.
-- **Games and simulations** — chapter 04 owns the entity-component inversion, so this section takes the two it does not: allocate before the loop rather than when a profiler says so, and buy reproducibility with accuracy and speed.
+- **Line-of-business / data-durable** — durability, so *keep business rules out of the database* inverts because a rule enforced only in application code holds until the next application, *the database is a detail* inverts with it ([Ch. 17](17_abstraction-as-insurance_4jk6.md)), and the ORM question is argued from the force rather than from taste.
+- **Games and simulations** — [chapter 04](04_structure_agjy.md) owns the entity-component inversion, so this section takes the two it does not: allocate before the loop rather than when a profiler says so, and buy reproducibility with accuracy and speed.
 - **Embedded and real-time** — exceptions become status codes because unwinding has no worst case anyone can certify, buffers are sized at compile time because there may be no allocator, and dependency injection inverts since there is one sensor, one radio, one clock.
 - **Compilers and language tooling** — *nothing should be depended on by everything* inverts for the syntax tree, and the finding that generalises out of it is that fan-in alone is not the smell — fan-in with fan-out is.
 - **UI frameworks and libraries** — inversion of control is not a technique applied here but the product, since a framework whose control you kept would be a library, and its lifecycle is therefore a Force rather than a convention.
-- **Distributed services** — chapter 06 owns the mechanism, and what this adds is that nothing weakens by a little: transactions become sagas, foreign keys become reconciliations, rollbacks become compensating operations a customer can see.
+- **Distributed services** — [chapter 06](06_distribution_49yh.md) owns the mechanism, and what this adds is that nothing weakens by a little: transactions become sagas, foreign keys become reconciliations, rollbacks become compensating operations a customer can see.
 
-Then what the six have in common, which is chapter 01's distinction at scale: a Law holds throughout, a Principle turns over, and the inversion is predictable from the force reading alone.
+Then what the six have in common, which is [chapter 01](01_the-five-kinds_cjx4.md)'s distinction at scale: a Law holds throughout, a Principle turns over, and the inversion is predictable from the force reading alone.
 And an asymmetry worth stating because it decides what to ask someone arriving from a domain you do not share — profile knowledge transfers, domain knowledge does not.
 
 *Where the claim doesn't apply:* systems that straddle two profiles, which is most interesting systems, and where the seam goes; the ordinary case, where every force sits in its ordinary range — which is most software, and which the chapter treats as a finding with four consequences rather than a disappointment; a profile you are visiting rather than living in; and the domains not on the list, six being no enumeration.
@@ -266,7 +266,7 @@ And an asymmetry worth stating because it decides what to ask someone arriving f
 *What it costs:* moving between profiles costs judgement you do not know you are losing; *it's a different profile* becomes an unfalsifiable excuse unless it names a force and its value; and six labels invite a lookup table when the point was the derivation.
 
 ### 20. Idioms: why ecosystems diverge
-`20_idioms.md`
+`20_idioms_7nkn.md`
 
 Idioms, taken seriously rather than dismissed.
 The claim: **an Idiom rests on a condition about your surroundings rather than about your problem, and naming that condition is what separates deviating from an Idiom from merely ignoring one.**
@@ -276,7 +276,7 @@ The condition framing is this book's own rather than standard vocabulary.
 The demonstration runs the same package split in two languages, both executed.
 Go refuses to compile, and the only fix publishes the helper the split was meant to hide; Python reaches that helper across the boundary and runs, because a leading underscore is a request no machine enforces.
 C# is given as mechanism rather than output, the toolchain being unavailable.
-Then two more: where the Idiom/Style line falls in each language, since Go makes an identifier's case an access modifier and Python makes indentation syntax, so the two things everyone files under Style are structural there; and one decision under three sets of conditions, which is the explanation for a demonstration chapter 01 already owns.
+Then two more: where the Idiom/Style line falls in each language, since Go makes an identifier's case an access modifier and Python makes indentation syntax, so the two things everyone files under Style are structural there; and one decision under three sets of conditions, which is the explanation for a demonstration [chapter 01](01_the-five-kinds_cjx4.md) already owns.
 
 Why it holds: the condition does not travel, so an Idiom carried across arrives with nothing to check it against.
 Obedience is the default because it rests on a condition too — *other people will read this and expect the convention* is a fact about your surroundings of the same kind as the rest, so winning the argument about whether the convention is good does not touch it.
@@ -284,10 +284,10 @@ The worked deviation is Pike's early Go compiler in C: conditions named, kept to
 
 *Where the claim doesn't apply:* naming the condition is necessary and not sufficient, which Pike's interfaces show — Ian Taylor pushed the problem from early on, from inside, and the convention held for more than a decade anyway; and an Idiom can be a bad inference from a true condition, which `defer file.Close()` shows by discarding an error that *cleanup belongs next to acquisition* never implied throwing away.
 
-*What it costs:* most of the time the answer is obey, and the work of naming the condition returns nothing visible; *I can name the condition* becomes the licence chapter 19 records one level up; and deviations are individually cheap and collectively expensive.
+*What it costs:* most of the time the answer is obey, and the work of naming the condition returns nothing visible; *I can name the condition* becomes the licence [chapter 19](19_six-profiles_dnkz.md) records one level up; and deviations are individually cheap and collectively expensive.
 
 ### 21. Style: the level where being right doesn't matter
-`21_style.md`
+`21_style_9rng.md`
 
 Short chapter, deliberately.
 The claim: **a Style discussion has no fact that would settle it, so it ends only when a person who can enforce a style decides to act — and everything before that produces nothing.**
@@ -310,25 +310,25 @@ The rule covering both: before treating something as Style, check that both opti
 *What it costs:* the claim licenses deciding without thinking, which is nearly the point and fails when the second half, holding to it, is dropped; enforcing late rewrites files nobody edited and puts whoever ran the formatter on every `git blame`; and *it's only style* is available to close a real question before anyone has checked.
 
 ### 22. What was never written down
-`22_never-written-down.md`
+`22_never-written-down_at4r.md`
 
 The closing chapter, and the one the AI material was always going to need.
 The claim: **a decision nobody wrote down can be recovered only while someone still remembers it — and when the author was an AI coding agent that remembers nothing between sessions, that recovery window was never open.**
 Decision 96 records why decision 24's ruling against an AI chapter was reversed, and why this one is titled for its mechanism rather than for a technology.
 
 The demonstration is a transaction around two reads that looks like ceremony and is load-bearing, removed by somebody who could not have known: both versions run, and with an edit landing between the reads the simplified one returns revision 1 of a definition with three steps, which was never saved.
-Chapter 18 maps that same FlowCore decision as a log entry; this is the same decision in the code, where none of the reasoning is visible.
+[Chapter 18](18_force-map-method_r37x.md) maps that same FlowCore decision as a log entry; this is the same decision in the code, where none of the reasoning is visible.
 
 Why asking afterwards does not get it back: a forward pass discards its activations and every persistence mechanism an agentic coding tool has stores text, so there is never a replay.
 That gives three cases — the reasoning written out, which is real retrieval of what was said; nothing written but the session still open, which is a fresh computation on overlapping input and a correlation rather than a recollection; and a new session, which has only the artifact.
 The middle one does the damage, because it is right often enough to be trusted and nothing distinguishes it from the third.
 Two papers are cited on opposite sides of whether stated reasoning reflects computation, and the chapter says explicitly that it needs that argument settled either way.
 
-**Grilling**, moved here from chapter 18, as the only remedy there is — not an interview that extracts reasons, since there are none stored to extract, but a procedure that forces the decision into the open where a person makes it.
+**Grilling**, moved here from [chapter 18](18_force-map-method_r37x.md), as the only remedy there is — not an interview that extracts reasons, since there are none stored to extract, but a procedure that forces the decision into the open where a person makes it.
 It leaves two artifacts and the chapter counts both: the log, and a person who now holds the trade-off, which is the claim's own *while someone still remembers it*.
 It has two limits, and the second is easier to walk into: the interview only reaches decisions at the granularity of the request, so asking for a whole application never separates out the trade-offs inside its fourth piece — which is why FlowCore was built in phases with *do not build ahead into these* written into its instructions file, and why an afternoon does not feel like it needs a plan.
 The chapter also takes what a record buys beyond recovery: an entry is reusable exactly to the extent that it records why rather than what, so a conclusion with its condition attached travels where a bare conclusion cannot.
-Its first limit is where the **folk remedy** is defined, discharging chapter 14's forward reference: advice applied far outside the context it was made for, which stays misapplied because nobody rebuilds its scope — *depend on abstractions, not concretions* is the worked case, and a corpus default is the purest instance, since there nobody knows a scope existed.
+Its first limit is where the **folk remedy** is defined, discharging [chapter 14](14_principle-loses-scope_b86v.md)'s forward reference: advice applied far outside the context it was made for, which stays misapplied because nobody rebuilds its scope — *depend on abstractions, not concretions* is the worked case, and a corpus default is the purest instance, since there nobody knows a scope existed.
 
 Then what one lost decision becomes at volume: each guess adding a constraint nobody recorded either, until the requests can only be negative, and the honest options narrow to guessing or starting again.
 Which happens without these tools too, so what changed is the rate rather than the failure.
@@ -348,32 +348,32 @@ Which happens without these tools too, so what changed is the rate rather than t
 
 | Chapter | File | Status |
 |---|---|---|
-| 01 | `01_the-five-kinds.md` | **draft** |
-| 02 | `02_forces.md` | **draft** |
-| 03 | `03_grading-a-law.md` | **draft** |
-| 04 | `04_structure.md` | **draft** |
-| 05 | `05_time.md` | **draft** |
-| 06 | `06_distribution.md` | **draft** |
-| 07 | `07_scale.md` | **draft** |
-| 08 | `08_change.md` | **draft** |
-| 09 | `09_what-a-pattern-is-for.md` | **draft** |
-| 10 | `10_patterns-that-cross.md` | **draft** |
-| 11 | `11_patterns-that-survive-translation.md` | **draft** |
-| 12 | `12_missing-language-features.md` | **draft** |
-| 13 | `13_smuggled-verdicts.md` | **draft** |
-| 14 | `14_principle-loses-scope.md` | **draft** |
-| 15 | `15_behaviour-placement.md` | **draft** |
-| 16 | `16_tdd-and-mocks.md` | **draft** |
-| 17 | `17_abstraction-as-insurance.md` | **draft** |
-| 18 | `18_force-map-method.md` | **draft** |
-| 19 | `19_six-profiles.md` | **draft** |
-| 20 | `20_idioms.md` | **draft** |
-| 21 | `21_style.md` | **draft** |
-| 22 | `22_never-written-down.md` | **draft** |
+| 01 | `01_the-five-kinds_cjx4.md` | **draft** |
+| 02 | `02_forces_f4m5.md` | **draft** |
+| 03 | `03_grading-a-law_q5c6.md` | **draft** |
+| 04 | `04_structure_agjy.md` | **draft** |
+| 05 | `05_time_mdbn.md` | **draft** |
+| 06 | `06_distribution_49yh.md` | **draft** |
+| 07 | `07_scale_637f.md` | **draft** |
+| 08 | `08_change_rjf9.md` | **draft** |
+| 09 | `09_what-a-pattern-is-for_3xzc.md` | **draft** |
+| 10 | `10_patterns-that-cross_r8dw.md` | **draft** |
+| 11 | `11_patterns-that-survive-translation_us2k.md` | **draft** |
+| 12 | `12_missing-language-features_esqm.md` | **draft** |
+| 13 | `13_smuggled-verdicts_8y69.md` | **draft** |
+| 14 | `14_principle-loses-scope_b86v.md` | **draft** |
+| 15 | `15_behaviour-placement_z47a.md` | **draft** |
+| 16 | `16_tdd-and-mocks_u8eu.md` | **draft** |
+| 17 | `17_abstraction-as-insurance_4jk6.md` | **draft** |
+| 18 | `18_force-map-method_r37x.md` | **draft** |
+| 19 | `19_six-profiles_dnkz.md` | **draft** |
+| 20 | `20_idioms_7nkn.md` | **draft** |
+| 21 | `21_style_9rng.md` | **draft** |
+| 22 | `22_never-written-down_at4r.md` | **draft** |
 
 ### AI material
 
-Chapters 01, 02, 14 and 16 each still owe a piece of this, noted in their contents lines above; 21 and 22 have taken theirs.
+[Chapters 01](01_the-five-kinds_cjx4.md), 02, 14 and 16 each still owe a piece of this, noted in their contents lines above; 21 and 22 have taken theirs.
 The worked argument — findings, FlowCore evidence, the grilling text with its provenance, and the traps — is in **`docs/pending-tasks/ai-material.md`**.
 Read that rather than re-deriving it, so the seven mentions agree with each other.
 
@@ -383,7 +383,7 @@ Chapters already at **draft** that are owed an addition. Listed here because a d
 
 | Chapter | Owed | Do it when |
 |---|---|---|
-| 01 | corpus monoculture as a new instance of *monoculture makes Idioms look like physics* | chapter 22 exists, so the mention can point at the synthesis |
+| 01 | corpus monoculture as a new instance of *monoculture makes Idioms look like physics* | [chapter 22](22_never-written-down_at4r.md) exists, so the mention can point at the synthesis |
 | 02 | an AI coding agent cannot see your Forces; the team-size Force at its limit — no continuity, unbounded volume | as above |
 | 01 | Pike on arguments about language features being opinion argued with certainty — a witness for *tone does not vary with authority*, in `docs/pending-tasks/pike-retrospective.md` | next time 01 is open |
 | 08 | Pike pricing Go's compatibility promise: it costs, and it blocks feature-itis — the constraint adopted deliberately rather than suffered | next time 08 is open |
@@ -395,6 +395,6 @@ The worked argument is in `docs/pending-tasks/ai-material.md`; decision 24 recor
 
 **Build order.** The original plan was 02, then 05, then 13. What happened instead was 02, 05, 03, 04 — Part I first, then the foundations in order — and the reason to continue that way is that the drafted chapters have accumulated debts to specific unwritten ones.
 
-Forward references currently outstanding: **06** (six), **18** (five), **07** (four), **17** and **09** (two each). Chapter 05 is the most owed and the most immediate: chapter 02's concurrency Force defers its races to it, and chapter 04 defers the unclosable check-then-act window to it.
+Forward references currently outstanding: **06** (six), **18** (five), **07** (four), **17** and **09** (two each). [Chapter 05](05_time_mdbn.md) is the most owed and the most immediate: [chapter 02](02_forces_f4m5.md)'s concurrency Force defers its races to it, and [chapter 04](04_structure_agjy.md) defers the unclosable check-then-act window to it.
 
-Chapter 01 remains easier to write once the rest exists.
+[Chapter 01](01_the-five-kinds_cjx4.md) remains easier to write once the rest exists.

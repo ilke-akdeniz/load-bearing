@@ -4,7 +4,7 @@
 
 **A Style discussion has no fact that would settle it, so it ends only when a person who can enforce a style decides to act — and everything before that produces nothing.**
 
-Chapter 01 puts Style at the bottom of the ladder and gives the test that puts things there: the compiler or the runtime acts on an Idiom, and ignores a Style.
+[Chapter 01](01_the-five-kinds_cjx4.md) puts Style at the bottom of the ladder and gives the test that puts things there: the compiler or the runtime acts on an Idiom, and ignores a Style.
 
 ---
 
@@ -91,7 +91,7 @@ Neither could be automated, so both were written down instead. Which is this cha
 
 Every other kind in this book has something that ends an argument about it.
 
-A Law has a mechanical consequence: violate its preconditions and the program is wrong, and you can go and be wrong (Ch. 03). A Principle has a Force with a value, and the value can be looked up — the row count, the number of writers (Ch. 02). An Idiom has a compiler or a runtime that acts on the choice, so there is a machine you can ask (Ch. 01), and chapter 20 works out what that machine's answer costs.
+A Law has a mechanical consequence: violate its preconditions and the program is wrong, and you can go and be wrong ([Ch. 03](03_grading-a-law_q5c6.md)). A Principle has a Force with a value, and the value can be looked up — the row count, the number of writers ([Ch. 02](02_forces_f4m5.md)). An Idiom has a compiler or a runtime that acts on the choice, so there is a machine you can ask ([Ch. 01](01_the-five-kinds_cjx4.md)), and [chapter 20](20_idioms_7nkn.md) works out what that machine's answer costs.
 
 **Style is the only kind where no such thing exists.** Not that the evidence is hard to gather or expensive to measure — there is no evidence, because there is nothing for evidence to be about. Two spellings of the same program are the same program.
 
@@ -158,7 +158,7 @@ And that question has evidence behind it, which is what settles it. Show a colle
 
 Which gives the rule covering both cases: **before treating something as Style, check that both options do the job you are choosing between two ways of doing.** For the tuple that job is passing a sequence of parameters, and the driver says which option fails. For the name it is saying what the thing is, and a reader says. Where one option does not do the job there is a fact, the discussion can end on it, and the time is not wasted.
 
-Chapter 20 gives the systematic version of the same trap: the line between Style and Idiom is drawn in a different place by each language, so a decision that is arbitrary in one is structural in another.
+[Chapter 20](20_idioms_7nkn.md) gives the systematic version of the same trap: the line between Style and Idiom is drawn in a different place by each language, so a decision that is arbitrary in one is structural in another.
 
 ---
 
@@ -204,4 +204,4 @@ FlowCore decision log, decision 18, "Full-word identifiers over Go's short-name 
 
 ---
 
-**Next:** chapter 22 closes the book by putting the five kinds to work on the thing you actually meet — a blog post, a review comment, a colleague's strong opinion, and code a machine wrote that states no decisions at all.
+**Next:** [chapter 22](22_never-written-down_at4r.md) closes the book by putting the five kinds to work on the thing you actually meet — a blog post, a review comment, a colleague's strong opinion, and code a machine wrote that states no decisions at all.

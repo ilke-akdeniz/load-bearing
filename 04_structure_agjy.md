@@ -12,7 +12,7 @@ Say "we use a layered architecture" and you have made three claims at three diff
 
 | Claim | Kind | Standing |
 |---|---|---|
-| If A depends on B, then B must not depend on A — directly or through any chain | **Law** | true by definition (Ch. 03) |
+| If A depends on B, then B must not depend on A — directly or through any chain | **Law** | true by definition ([Ch. 03](03_grading-a-law_q5c6.md)) |
 | The parts can be stacked into layering ranks, each depending only on the rank beneath it | **Principle** | true when the graph is that shape, and often it isn't |
 | The ideal ranking, top to bottom, is `presentation → business → data`, and each rank becomes a physical boundary | **Idiom** | 1990s enterprise Java and C#, and arbitrary |
 
@@ -34,7 +34,7 @@ Two things follow, and they are the difference between the two claims:
 
 The second is a real constraint, most systems do not satisfy it, and Part three works through one that doesn't.
 
-Claim three is where the physical boundary arrives, and it varies by ecosystem in a way worth noticing. In Java and C# it was usually separate projects, assemblies, or shipped libraries; elsewhere it shows up as top-level directories or packages. What each of those forms actually enforces is not the same — a directory is a package in Go, carries no access meaning in C# until assemblies split, and enforces nothing in Python — and chapter 20 works through why ecosystems diverge like this.
+Claim three is where the physical boundary arrives, and it varies by ecosystem in a way worth noticing. In Java and C# it was usually separate projects, assemblies, or shipped libraries; elsewhere it shows up as top-level directories or packages. What each of those forms actually enforces is not the same — a directory is a package in Go, carries no access meaning in C# until assemblies split, and enforces nothing in Python — and [chapter 20](20_idioms_7nkn.md) works through why ecosystems diverge like this.
 
 Most real architecture damage is a violation of the first. Most harm done by *architecture advocacy* comes from the third, applied to a program whose graph does not have the shape claim two describes — which then generates pass-through classes and mapping code to fill out the ranks.
 
@@ -483,9 +483,9 @@ Two practical corollaries.
 
 **Your export surface is a liability inventory, not a feature list.** Every capital letter is a commitment you did not necessarily mean to make, and taking one back is a breaking change even if no document ever mentioned it.
 
-Worth noticing that two of the book's kinds are sitting side by side here, because the names invite confusion. Hyrum's Law is a **Law** in this book's sense — though an empirical regularity about what people do, not a theorem, which is a distinction chapter 03 grades. What to do about it is a different claim.
+Worth noticing that two of the book's kinds are sitting side by side here, because the names invite confusion. Hyrum's Law is a **Law** in this book's sense — though an empirical regularity about what people do, not a theorem, which is a distinction [chapter 03](03_grading-a-law_q5c6.md) grades. What to do about it is a different claim.
 
-That claim — hide what you cannot afford to commit to — is a **Principle**, and it has a sharp condition: *you do not control your callers.* When you do control every caller — a single application, one team, one repository, one deploy — the condition weakens, and hiding starts trading against convenience rather than against catastrophe. This is why library design and application design genuinely differ, and why advice from one arrives wrong in the other. (Chapter 02 takes control-of-callers seriously as a Force in its own right.)
+That claim — hide what you cannot afford to commit to — is a **Principle**, and it has a sharp condition: *you do not control your callers.* When you do control every caller — a single application, one team, one repository, one deploy — the condition weakens, and hiding starts trading against convenience rather than against catastrophe. This is why library design and application design genuinely differ, and why advice from one arrives wrong in the other. ([Chapter 02](02_forces_f4m5.md) takes control-of-callers seriously as a Force in its own right.)
 
 ---
 
@@ -551,7 +551,7 @@ The acyclicity claim follows from what a graph is. Its only precondition is that
 
 The hiding claim has a precondition about the world: whether you control your callers. Change that and the advice does not go quiet, it can reverse — the ECS case below is one where exposing the representation is the correct answer and hiding it is the mistake.
 
-That is the difference chapter 01 draws, arrived at from the mechanism rather than asserted: **a Law can be irrelevant but never wrong; a Principle can be wrong.**
+That is the difference [chapter 01](01_the-five-kinds_cjx4.md) draws, arrived at from the mechanism rather than asserted: **a Law can be irrelevant but never wrong; a Principle can be wrong.**
 
 ---
 
@@ -572,7 +572,7 @@ func parseTerm(p *parser) node { ... p.parseExpr() ... }
 
 Nobody sane calls this an architecture violation, and the reason is precise rather than a matter of degree. A cycle hurts because it forces two things you wanted to handle separately to be handled as one. Here there is nothing to force together: you were never going to read one without the other, test one without the other, or change one's signature without the other's. They were a single unit before the cycle existed, so the cycle takes nothing away.
 
-The same goes for two types in one file that reference each other, or a 200-line CLI that has one layer because there is nothing to order. This is a Law that is true and inert (Ch. 01), not a Law being bent.
+The same goes for two types in one file that reference each other, or a 200-line CLI that has one layer because there is nothing to order. This is a Law that is true and inert ([Ch. 01](01_the-five-kinds_cjx4.md)), not a Law being bent.
 
 The test is not "is there a cycle in the call graph." It is: **will these ever be understood, tested, or changed apart?** If the honest answer is no, the cycle is free. If the honest answer is "not today, but yes within a year," the cost has not been avoided — it has been postponed, and by then there will be more code depending on both.
 
@@ -611,15 +611,15 @@ for (int i = 0; i < count; i++) {
 }
 ```
 
-The second is not a worse-encapsulated version of the first. It is a different decomposition, and it wins by a margin that has nothing to do with taste: the first loop drags `tint` and every other unused field through cache on every iteration, and the second touches only the bytes it needs. (Chapter 07 owns the arithmetic and the benchmark; the span between cache and main memory is where the whole margin comes from.)
+The second is not a worse-encapsulated version of the first. It is a different decomposition, and it wins by a margin that has nothing to do with taste: the first loop drags `tint` and every other unused field through cache on every iteration, and the second touches only the bytes it needs. ([Chapter 07](07_scale_637f.md) owns the arithmetic and the benchmark; the span between cache and main memory is where the whole margin comes from.)
 
 Be exact about what was traded away. In the class version the field layout is private: you could reorder the fields, widen `lifetime` to a double, or delete `tint` entirely, and no other file would need editing. In the array version the layout *is* the interface — a dozen systems index those arrays directly, so changing the layout means editing every one of them.
 
 That is a genuine loss, accepted deliberately. You gave up the ability to change the representation quietly, and what you bought is the speed that comes from every system agreeing on it.
 
-The Force is the memory hierarchy. Where it dominates, "hide the representation" inverts: hiding it is precisely what you must not do. Chapter 19 works through the rest of what that force profile overturns.
+The Force is the memory hierarchy. Where it dominates, "hide the representation" inverts: hiding it is precisely what you must not do. [Chapter 19](19_six-profiles_dnkz.md) works through the rest of what that force profile overturns.
 
-Note carefully what has *not* inverted. The ECS dependency graph is still acyclic — systems depend on component arrays, and the arrays depend on nothing. The Law holds untouched while the Principle turns over completely, which is the difference chapter 01 draws, seen in the wild.
+Note carefully what has *not* inverted. The ECS dependency graph is still acyclic — systems depend on component arrays, and the arrays depend on nothing. The Law holds untouched while the Principle turns over completely, which is the difference [chapter 01](01_the-five-kinds_cjx4.md) draws, seen in the wild.
 
 ### Inversion of control: the call goes up, the dependency doesn't
 
@@ -661,7 +661,7 @@ update flowcore.step_visit
    and completed_at is null
 ```
 
-"A visit can be completed only once" is a business rule. Doctrine says it belongs in the service. Putting it in the service produces a read, then a write, with a window between them — and the audit history quietly corrupts under concurrency (Ch. 05 owns why that window is unclosable from above).
+"A visit can be completed only once" is a business rule. Doctrine says it belongs in the service. Putting it in the service produces a read, then a write, with a window between them — and the audit history quietly corrupts under concurrency ([Ch. 05](05_time_mdbn.md) owns why that window is unclosable from above).
 
 So the orthodoxy is wrong here, and it is wrong for a principled reason:
 
@@ -773,9 +773,9 @@ type Invoice struct {
 }
 ```
 
-*The bill:* `invoice.Merchant.Name` becomes a lookup that can fail and can be stale. "What if the merchant was deleted?" is now a question you answer explicitly, where the pointer answered it by existing. Chapter 15 works through the version of this that appears in object-oriented domain models, where the mutual pointers are the design rather than an accident.
+*The bill:* `invoice.Merchant.Name` becomes a lookup that can fail and can be stale. "What if the merchant was deleted?" is now a question you answer explicitly, where the pointer answered it by existing. [Chapter 15](15_behaviour-placement_z47a.md) works through the version of this that appears in object-oriented domain models, where the mutual pointers are the design rather than an accident.
 
-Pick deliberately. The failure is paying in interfaces by reflex — an interface at every boundary whether or not the boundary was real, which is how a codebase acquires forty interfaces with one implementation each (Ch. 16 traces where that reflex comes from).
+Pick deliberately. The failure is paying in interfaces by reflex — an interface at every boundary whether or not the boundary was real, which is how a codebase acquires forty interfaces with one implementation each ([Ch. 16](16_tdd-and-mocks_u8eu.md) traces where that reflex comes from).
 
 ### Hiding costs you the day you need what you hid
 
@@ -863,7 +863,7 @@ func (c *Catalog) Create(ctx context.Context, definition WorkflowDefinition) err
 }
 ```
 
-The second is right when the code has years ahead of it. On a migration script that gets deleted next month, the ten-minute version is the correct engineering call and the afternoon is waste (Ch. 08 owns the known-short-life case).
+The second is right when the code has years ahead of it. On a migration script that gets deleted next month, the ten-minute version is the correct engineering call and the afternoon is waste ([Ch. 08](08_change_rjf9.md) owns the known-short-life case).
 
 ### Enforced boundaries cost more than unenforced ones
 
@@ -910,7 +910,7 @@ The test from Part three applies unchanged: does this thing decide something, or
 
 - **Two modules that always appear in the same commits.** The directory structure says they are independent and the commit history says they are one unit. Trust the history — it is measuring the unit of change directly.
 - **A class whose every method forwards to one other object.** It was invented to fill a slot in a shape, and it charges a file edit on every change while deciding nothing.
-- **The same entity re-typed once per layer, with mappers between.** Every boundary that isn't a real dependency boundary still bills you a type and a mapper, plus the bug where someone adds a field to two of the three (Ch. 17).
+- **The same entity re-typed once per layer, with mappers between.** Every boundary that isn't a real dependency boundary still bills you a type and a mapper, plus the bug where someone adds a field to two of the three ([Ch. 17](17_abstraction-as-insurance_4jk6.md)).
 - **A test that has to construct half the system to exercise one function.** This is the cycle showing up as a fixture: the unit of test has grown to match the unit of dependency, and the fixture is measuring it for you.
 - **Two-phase construction** — `a := &A{}; b := &B{a}; a.b = b`. The constructor cannot express the graph, and there is a window in which a field is nil.
 - **"Partially initialized module" errors, or a static field holding zero.** The runtime version of the same cycle, and the one that reaches production.
@@ -932,4 +932,4 @@ The first question generates folders. The second finds the cycle.
 
 ---
 
-**Next:** chapter 05 does for concurrency what this chapter did for structure — turns "be careful with shared state" into a rule you can check, starting with the fact that check-then-act is not atomic.
+**Next:** [chapter 05](05_time_mdbn.md) does for concurrency what this chapter did for structure — turns "be careful with shared state" into a rule you can check, starting with the fact that check-then-act is not atomic.

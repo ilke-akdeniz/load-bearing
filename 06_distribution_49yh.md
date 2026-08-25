@@ -8,13 +8,13 @@ That single fact is not a limitation of your monitoring, your language, or your 
 
 There is one other fact, which is arithmetic rather than epistemics: **availabilities multiply, and every one of them is less than one.** Multiplying numbers below 1 makes them smaller, so a chain of dependencies is always less available than its weakest link — and enough individually excellent dependencies produce a system that is not.
 
-These are theorems, which means chapter 03's rule governs what you can do about them: not argue with the conclusion, but either **arrange for one of the assumptions not to hold**, so the theorem does not apply, or **stop needing the conclusion**, so it applies and costs nothing. Most of this chapter is the second.
+These are theorems, which means [chapter 03](03_grading-a-law_q5c6.md)'s rule governs what you can do about them: not argue with the conclusion, but either **arrange for one of the assumptions not to hold**, so the theorem does not apply, or **stop needing the conclusion**, so it applies and costs nothing. Most of this chapter is the second.
 
 ## When any of this applies to you
 
 Most chapters in this book put the limits of their claim at the end. This one puts them first, and the reason is that this particular material does more damage by being applied than by being ignored. Outboxes, idempotency keys, sagas, and eventual consistency get built into systems that have one process and one database, where every one of them is pure cost. So it is worth knowing whether any of this is yours before you read what it costs.
 
-You are in this chapter's territory when **two things that can fail independently must agree.** Two processes. A process and a queue. A service and somebody else's API. A database and a cache. If there is exactly one process and one database, almost nothing here binds, and the machinery below is cost with no purchase — chapter 05 is your chapter, and its coordination primitives are enough.
+You are in this chapter's territory when **two things that can fail independently must agree.** Two processes. A process and a queue. A service and somebody else's API. A database and a cache. If there is exactly one process and one database, almost nothing here binds, and the machinery below is cost with no purchase — [chapter 05](05_time_mdbn.md) is your chapter, and its coordination primitives are enough.
 
 The test for whether you are distributed is not *do we deploy several services* — plenty of multi-service systems still have one database holding every invariant that matters. It is: **can one part of this be alive while another part cannot reach it?** If nothing can, you are not distributed for the purposes of this chapter, whatever the deployment diagram says.
 
@@ -61,7 +61,7 @@ The two observations are the same string. The client has no instrument that dist
 
 That last line is the expensive part. **The slow peer completed the work.** So the client's two options are both wrong: retry, and the work happens twice; give up, and the client reports a failure that did not occur. There is no third option available at the client, which is why the fix is never at the client.
 
-This is the same shape as chapter 03's lost acknowledgement, generalized. There the reply was lost; here the reply is merely late. **The client cannot tell those apart either**, and it does not need to — from where it stands, silence is silence.
+This is the same shape as [chapter 03](03_grading-a-law_q5c6.md)'s lost acknowledgement, generalized. There the reply was lost; here the reply is merely late. **The client cannot tell those apart either**, and it does not need to — from where it stands, silence is silence.
 
 ### The theorems, and what each one assumes
 
@@ -108,7 +108,7 @@ func chargeIdempotent(ledger *Ledger, idempotencyKey string, cents int) {
 GOOD charges: [4200]
 ```
 
-Three deliveries, one charge. The delivery is still at-least-once — nothing fixed that, and nothing can. What changed is that **exactly-once *effect* no longer requires exactly-once *delivery***, which is the same move chapter 03 identified: the theorem holds, and you stopped needing its conclusion.
+Three deliveries, one charge. The delivery is still at-least-once — nothing fixed that, and nothing can. What changed is that **exactly-once *effect* no longer requires exactly-once *delivery***, which is the same move [chapter 03](03_grading-a-law_q5c6.md) identified: the theorem holds, and you stopped needing its conclusion.
 
 Two details decide whether this works in practice.
 
@@ -261,7 +261,7 @@ Reaching for this chapter's machinery there produces real harm rather than mere 
 - An outbox table where a single transaction already covers everything.
 - Idempotency keys on operations that only ever run once, adding a table and a lookup to every write.
 - Eventual consistency between two tables in the same database, which had strong consistency available for free.
-- Retries around an in-process function call, which cannot suffer a lost message (Ch. 05).
+- Retries around an in-process function call, which cannot suffer a lost message ([Ch. 05](05_time_mdbn.md)).
 
 The check is the one at the top: can one part be alive while another part cannot reach it? Within one process and one connection, no.
 
@@ -321,4 +321,4 @@ Every distributed defect in the list above is an answer to that question that no
 
 ---
 
-**Next:** chapter 07 turns from what is impossible to what is merely expensive — the arithmetic of queues, parallelism, and the memory hierarchy, where the numbers beat the intuition by several orders of magnitude.
+**Next:** [chapter 07](07_scale_637f.md) turns from what is impossible to what is merely expensive — the arithmetic of queues, parallelism, and the memory hierarchy, where the numbers beat the intuition by several orders of magnitude.

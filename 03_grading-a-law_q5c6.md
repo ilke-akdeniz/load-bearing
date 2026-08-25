@@ -24,7 +24,7 @@ They are named rather than lettered, and the reason is the book's own: a letter 
 
 ### Theorem: change the assumptions
 
-The theorem here is the **Two Generals Problem**: over a channel that can lose messages, no protocol can leave both parties certain that the other received what was sent. Its practical consequence is that exactly-once delivery is impossible — you get at-least-once, and you make repeating safe (chapter 06 owns the result and what gets built on top of it).
+The theorem here is the **Two Generals Problem**: over a channel that can lose messages, no protocol can leave both parties certain that the other received what was sent. Its practical consequence is that exactly-once delivery is impossible — you get at-least-once, and you make repeating safe ([chapter 06](06_distribution_49yh.md) owns the result and what gets built on top of it).
 
 That theorem rests on two assumptions, and both are worth having in front of you:
 
@@ -116,9 +116,9 @@ rate is edited in an admin screen   a bug: every process serves a stale
                                     value until someone restarts it
 ```
 
-**The move is not to argue with the claim. It is to find that its words do not describe you.** In the first case there is no cache in the strict sense — there is a precomputed value, and nothing can make it wrong. The claim is true and inert, which is chapter 01's distinction seen from underneath.
+**The move is not to argue with the claim. It is to find that its words do not describe you.** In the first case there is no cache in the strict sense — there is a precomputed value, and nothing can make it wrong. The claim is true and inert, which is [chapter 01](01_the-five-kinds_cjx4.md)'s distinction seen from underneath.
 
-This is why definitional claims feel unfalsifiable without being vacuous. "Dependencies must be acyclic" is one: a cycle makes two things a single unit of comprehension, test, and change, because that is what a cycle *is* (chapter 04 works it through). You cannot violate it. You can find that the two things were never separate units, in which case nothing was violated, because nothing was joined.
+This is why definitional claims feel unfalsifiable without being vacuous. "Dependencies must be acyclic" is one: a cycle makes two things a single unit of comprehension, test, and change, because that is what a cycle *is* ([chapter 04](04_structure_agjy.md) works it through). You cannot violate it. You can find that the two things were never separate units, in which case nothing was violated, because nothing was joined.
 
 ### Empirical law: measure, because the number moved
 
@@ -126,7 +126,7 @@ An empirical law describes the world rather than following from a proof, and the
 
 First, a distinction that is easy to lose. **A measurement is not a law.** "The 99th percentile of our search endpoint is 180 milliseconds" is empirical, and it is about one endpoint on one day on one deployment. Nothing generalizes. An empirical law has two parts: a **regularity** that holds across many systems, and a **magnitude** that varies between them. The regularity is what earns the word *law*; the magnitude is the part you have to measure locally, and the part people quote instead.
 
-Hyrum's Law is one. With enough users, every observable behaviour of your system ends up depended on, regardless of what you documented as public behavior. (chapter 04 owns the law and what to do about it). Nothing proves it. It is a regularity about what people do, observed across languages and decades, and what varies is how fast the dependency forms and how firmly it sets.
+Hyrum's Law is one. With enough users, every observable behaviour of your system ends up depended on, regardless of what you documented as public behavior. ([chapter 04](04_structure_agjy.md) owns the law and what to do about it). Nothing proves it. It is a regularity about what people do, observed across languages and decades, and what varies is how fast the dependency forms and how firmly it sets.
 
 Two languages met that regularity and moved in opposite directions.
 
@@ -167,9 +167,9 @@ The three are not flavours of one thing. They differ in **where the claim's auth
 
 There is a fourth possibility the naming exists to catch: **the claim is not a Law at all.**
 
-The test is chapter 01's, applied honestly. *Can circumstances make this bad advice?* A Law cannot become bad advice, because it is not advice — it describes what happens. "Prefer composition over inheritance" can certainly become bad advice, in a domain with a genuinely stable hierarchy and variation on a single axis. So it is a Principle, and calling it a law is how it gets applied where its Forces are absent.
+The test is [chapter 01](01_the-five-kinds_cjx4.md)'s, applied honestly. *Can circumstances make this bad advice?* A Law cannot become bad advice, because it is not advice — it describes what happens. "Prefer composition over inheritance" can certainly become bad advice, in a domain with a genuinely stable hierarchy and variation on a single axis. So it is a Principle, and calling it a law is how it gets applied where its Forces are absent.
 
-Conway's Law — that a system's structure tends to mirror the communication structure of the organization that built it — survives the same test, and the difference is worth stating exactly. It tells you to do nothing. It describes a tendency, which can be weak, strong, or deliberately countered, but which cannot be *bad advice*, because it is not advice (chapter 08 owns what it means and what to do about it). **A Law describes; a Principle prescribes.** That one question separates them faster than any amount of arguing about how universal something feels.
+Conway's Law — that a system's structure tends to mirror the communication structure of the organization that built it — survives the same test, and the difference is worth stating exactly. It tells you to do nothing. It describes a tendency, which can be weak, strong, or deliberately countered, but which cannot be *bad advice*, because it is not advice ([chapter 08](08_change_rjf9.md) owns what it means and what to do about it). **A Law describes; a Principle prescribes.** That one question separates them faster than any amount of arguing about how universal something feels.
 
 ---
 
@@ -254,4 +254,4 @@ Anything that cannot answer at all was never a Law.
 
 ---
 
-**Next:** chapter 04 takes the first family of Laws in detail — dependency direction and information hiding — and separates the part that is genuinely load-bearing from the two conventions travelling under the same name.
+**Next:** [chapter 04](04_structure_agjy.md) takes the first family of Laws in detail — dependency direction and information hiding — and separates the part that is genuinely load-bearing from the two conventions travelling under the same name.
