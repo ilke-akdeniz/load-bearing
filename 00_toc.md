@@ -319,22 +319,20 @@ The rule covering both: before treating something as Style, check that both opti
 
 *What it costs:* the claim licenses deciding without thinking, which is nearly the point and fails when the second half, holding to it, is dropped; enforcing late rewrites files nobody edited and puts whoever ran the formatter on every `git blame`; and *it's only style* is available to close a real question before anyone has checked.
 
-### 23. Reading advice at the right level
-`23_reading-advice.md`
+### 23. What was never written down
+`23_never-written-down.md`
 
-The field guide, and the closing.
+The closing chapter, and the one the AI material was always going to need.
+The claim: **a decision nobody stated can be recovered only while someone still remembers it — and when the author was a tool that remembers nothing between sessions, that window was never open.**
+Decision 96 records why decision 24's ruling against an AI chapter was reversed, and why this one is titled for its mechanism rather than for a technology.
 
-Contents: receiving a blog post; receiving a code review comment; receiving a book; receiving a colleague's strong opinion; receiving your own past decisions; **receiving generated code** — the sixth case, and the one the others rehearse for, where the artifact states no decisions at all because every branch was taken silently; the questions that do the work — *what forces does this assume? at what scale? what does it rule out? where does the author say it stops?*
-The final answer to "is this load-bearing" as a repeatable procedure rather than a judgement call.
+Contents: a design decision taken for a non-obvious but correct reason, never stated, then violated by someone who could not have known — worked in code rather than as a log entry, which is chapter 19's facet of the same FlowCore decision.
+Why asking afterwards does not recover it: a forward pass discards its activations and every persistence mechanism these tools have stores text, so there is never a replay — which gives three cases, and the middle one, where the session is still open and the answer is a correlation rather than a recollection, is the one that makes *ask it while the context is fresh* feel reliable.
+**Grilling**, moved here from chapter 19, as the only remedy there is: not an interview that extracts reasons, but a procedure that forces the decision into the open where a person makes it and it gets written down.
+The **folk remedy** — the author's term, promised by chapter 15 — defined here because a corpus default is its purest instance: advice applied far outside the context it was made for, where nobody rebuilds the scope because nobody knows a scope existed.
+Then what one lost decision becomes at volume: patching against a black box, and the rewrite arriving as the only remaining option — which happens without these tools too, so what changed is the rate rather than the failure.
 
-Also the **folk remedy** — the author's term, held back from chapter 15 because that chapter's evidence ends in repair rather than entrenchment.
-A folk remedy is advice applied far outside the context it was made for, which stays misapplied because nobody rebuilds its scope; *drink two litres of water a day* is the pattern.
-By 23 the Part IV case studies have supplied endpoints that earn the term, so this is where it belongs — and the receiving question it generates is *how wide is this advice, and who decided that?*
-
-Also **the book's own conditions**, cut from chapter 15 as pre-emptive there and belonging here, where the method is actually delivered.
-Two are not negotiable: chapter 02's classification model is a lens rather than a finding and cannot be proved, only used; and the review practice this book runs on requires the expertise it appears to replace, since a reviewer without depth in the material reads the same confident paragraph and approves it.
-
-*Where the claim doesn't apply:* when you don't have time to analyse and must simply pick the conventional answer — which is usually the correct move, and knowing that is part of the skill.
+*Where the claim doesn't apply:* to be worked when the chapter is drafted.
 
 ---
 
@@ -369,7 +367,7 @@ Two are not negotiable: chapter 02's classification model is a lens rather than 
 | 20 | `20_six-profiles.md` | **draft** |
 | 21 | `21_idioms.md` | **draft** |
 | 22 | `22_style.md` | **draft** |
-| 23 | `23_reading-advice.md` | not started |
+| 23 | `23_never-written-down.md` | **in progress** |
 
 ### AI material
 

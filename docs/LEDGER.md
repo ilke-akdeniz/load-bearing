@@ -260,9 +260,9 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | The generator cannot see your Forces | 03 | Forces are facts about your situation; a model has the prompt, so the groundwork is skipped by construction | cite 03; argument in `docs/pending-tasks/ai-material.md` |
 | The scope was never set | 15 | For generated design nobody ever fixed an extent, so there is no author to ask and no talk to re-watch | "no scope was set (Ch. 15)"; argument in `docs/pending-tasks/ai-material.md` |
 | The interview does not improve the answer | 19 | It makes the answer disagreeable-with. The same two decisions exist in generated code as a column default and a v4 constructor, taken by whatever is most common and unmarked; 23 owns that case | "answers somebody can disagree with (Ch. 19)" |
-| Fact and decision have different owners | 19 | Grilling's load-bearing line: facts get looked up, decisions get put to the human — steps one and two of the method, separated and given owners, which is what makes the output auditable | "fact or decision (Ch. 19)" |
-| Grilling | 19 | An interview that surfaces each decision, with a recommendation, before anything is written; the human supplies the Force that settles it | "grilling (Ch. 19)"; text, provenance and limits in `docs/pending-tasks/ai-material.md` |
-| Grilling's limit | 19 | It surfaces decisions the model recognizes as decisions, so it is weakest where the corpus is most uniform | cite 19; argument in `docs/pending-tasks/ai-material.md` |
+| Fact and decision have different owners | 23 | Grilling's load-bearing line: facts get looked up, decisions get put to the human — steps one and two of the method, separated and given owners, which is what makes the output auditable | "fact or decision (Ch. 19)" |
+| Grilling | 23 | An interview that surfaces each decision, with a recommendation, before anything is written; the human supplies the Force that settles it | "grilling (Ch. 19)"; text, provenance and limits in `docs/pending-tasks/ai-material.md` |
+| Grilling's limit | 23 | It surfaces decisions the model recognizes as decisions, so it is weakest where the corpus is most uniform | cite 19; argument in `docs/pending-tasks/ai-material.md` |
 | Silent defaults | 23 | Generated code states no decisions at all — a taken branch leaves no mark, so review cannot catch what it never suspected | "silent default (Ch. 23)"; argument in `docs/pending-tasks/ai-material.md` |
 
 ## Code examples
