@@ -2,7 +2,7 @@
 
 ## The claim
 
-**A decision nobody stated can be recovered only while someone still remembers it — and when the author was a tool that remembers nothing between sessions, that window was never open.**
+**A decision nobody stated can be recovered only while someone still remembers it — and when the author was an AI coding agent that remembers nothing between sessions, that window was never open.**
 
 Every chapter before this one works on a claim somebody made. A proverb, a review comment, a pattern name, a rule in a style guide — the technique throughout has been to find the condition behind the assertion and check whether it holds here. This chapter is about the case where there is no assertion, because the decision was taken without ever being said.
 
@@ -63,9 +63,9 @@ Chapter 19 maps this same decision as a log entry, with its forces named and the
 
 If the transaction was put there by a person, there is a period during which you can find out why. They remember, or they wrote it down, or somebody who was in the room remembers. The period is finite and it is longer than nothing.
 
-If it was put there by a tool, the intuition is that the same applies while the session is open — that you can ask, and the reason will come back. That intuition is wrong, and the reason is architectural rather than a matter of how good the tool is.
+If it was put there by an AI coding agent, the intuition is that the same applies while the session is open — that you can ask, and the reason will come back. That intuition is wrong, and the reason is architectural rather than a matter of how good the tool is.
 
-**A forward pass discards its activations.** Whatever computation selected the transaction over its absence produced a token and was not retained. The key-value cache holds values derived from tokens and exists to avoid recomputation; it is not a record of reasoning. Every mechanism these tools have for persisting anything — the context window, the transcript, a memory file, a project instructions file — stores **text**. So there is never a replay. There is only whatever was written.
+**A forward pass discards its activations.** Whatever computation selected the transaction over its absence produced a token and was not retained. The key-value cache holds values derived from tokens and exists to avoid recomputation; it is not a record of reasoning. Every mechanism an agentic coding tool has for persisting anything — the context window, the transcript, a memory file, a project instructions file — stores **text**. So there is never a replay. There is only whatever was written.
 
 Which gives three cases, and they are not equally bad.
 
@@ -89,7 +89,7 @@ There was a computation that produced this line rather than another one, and the
 
 **This is narrower than the research question it sits next to, deliberately.** Whether a model's stated reasoning reflects its computation is contested. Miles Turpin and colleagues showed that chain-of-thought explanations *"can systematically misrepresent the true reason for a model's prediction"* — bias the input, and models rationalise the biased answer without mentioning what moved them. Kerem Zaman and Shashank Srivastava argue the standard measure confuses unfaithfulness with **incompleteness**, *"the lossy compression needed to turn distributed transformer computation into a linear natural language narrative"*, and that unstated influences still act causally through the reasoning. Nothing in this chapter needs that argument settled. It rests on the narrower fact that what persists is text, so what can be recovered is what was recorded.
 
-And one thing does survive, which is worth separating out because it gets conflated with the other. **What the code does is re-derivable from the code**, by a person or by a tool, at any time. Asking for a description of behaviour is reading. Asking why this shape was chosen is not — that was never in the artifact, and no amount of freshness puts it there.
+And one thing does survive, which is worth separating out because it gets conflated with the other. **What the code does is re-derivable from the code**, by a person or by the agent, at any time. Asking for a description of behaviour is reading. Asking why this shape was chosen is not — that was never in the artifact, and no amount of freshness puts it there.
 
 ### The folk remedy
 
@@ -97,7 +97,7 @@ There is a name worth having for the thing that arrives instead of a decision.
 
 A **folk remedy** is advice applied far outside the context it was made for, which stays misapplied because nobody rebuilds its scope. *Drink two litres of water a day* is the pattern — a number from a context nobody can now name, repeated by people who did not take it from a source and cannot say what it was for. The term is this book's author's rather than standard vocabulary. Chapter 15 shows a principle losing its scope in transmission and then having it rebuilt three times; a folk remedy is what the same process produces when nobody writes the page.
 
-**A corpus default is the purest instance there is.** The convention arrives because it is what most code does, not because it answers anything about your situation, and nobody rebuilds the scope because nobody knows a scope existed — or that a choice was made. Chapter 02 names monoculture as the single most common source of confusion between the kinds and prescribes one cure: work in a second ecosystem long enough that its conventions stop feeling wrong and start feeling like conventions. That cure is unavailable to something with one training distribution.
+**A corpus default is the purest instance there is.** The convention arrives because it is what most code does, not because it answers anything about your situation, and nobody rebuilds the scope because nobody knows a scope existed — or that a choice was made. Chapter 02 names monoculture as the single most common source of confusion between the kinds and prescribes one cure: work in a second ecosystem long enough that its conventions stop feeling wrong and start feeling like conventions. That cure is unavailable to a model with one training distribution, and an agent built on it inherits the limit.
 
 ### Grilling: making the decision happen in the open
 
@@ -153,7 +153,7 @@ That closes the circuit, and it is worth seeing as one thing rather than three. 
 
 The upstream text has since changed in a way worth one line: it asks a round of questions at once where the frozen version asks one at a time. That is throughput against how much the reader has to hold in working memory, which is a force with a value, so neither version is a regression.
 
-**The limit, and it is severe. Grilling is weakest against folk remedies**, because a folk remedy does not present itself as a branch point. The interview surfaces the decisions the model treats *as* decisions, and that set comes from the same corpus, so a question settled uniformly across it is not offered at all — it is simply how things are done.
+**The limit, and it is severe. Grilling is weakest against folk remedies**, because a folk remedy does not present itself as a branch point. The interview surfaces the decisions the agent treats *as* decisions, and that set comes from the same corpus, so a question settled uniformly across it is not offered at all — it is simply how things are done.
 
 Which means the technique surfaces contested choices and conceals settled ones, and settled-in-the-corpus is the class most likely to be wrong outside the ecosystem it came from. This follows from chapter 02's mechanism rather than from any measurement, and it should be read as reasoning rather than as a finding.
 
@@ -177,7 +177,7 @@ Each unrecorded decision constrains the next change without saying so. Someone r
 
 What that looks like from outside is a system that works and cannot be changed. The requests to it become negative — *fix this, do not break that* — because the only thing anyone can specify is the observable behaviour they want preserved, which is another way of saying nobody knows which behaviour is intentional.
 
-**And the tool is in the same position.** This is the part that has no equivalent in the pre-AI version of the story. A codebase that people wrote and failed to document is still readable by people, slowly and expensively. Here the artifact is equally opaque to the thing that produced it, because it kept nothing either. There is no party to the situation who knows more than the code says.
+**And the agent is in the same position.** This is the part that has no equivalent in the pre-AI version of the story. A codebase that people wrote and failed to document is still readable by people, slowly and expensively. Here the artifact is equally opaque to the agent that produced it, because it kept nothing either. There is no party to the situation who knows more than the code says.
 
 From there the honest options narrow to guessing and starting again — and starting again with the processes that would have prevented it is often cheaper than it sounds, which is a sentence worth resisting the urge to soften.
 
@@ -228,7 +228,7 @@ Most code embodies no decision worth recovering. The name of a local variable, t
 
 **It requires you to hold opinions.** A person who accepts every recommendation has bought the silent defaults back with ceremony attached, and now has a record showing that each one was considered. That record is worse than none, because it looks like evidence.
 
-**The record is partial by construction.** The interview surfaces what the tool presents as a decision, and what it presents comes from the same place its recommendations do. A complete record is not on offer; a record of the contested decisions is.
+**The record is partial by construction.** The interview surfaces what the agent presents as a decision, and what it presents comes from the same place its recommendations do. A complete record is not on offer; a record of the contested decisions is.
 
 **And writing it down does not make it right.** A recorded decision is one somebody can disagree with later, which is all that is claimed for it. The chapters before this one are what tell you whether the decision was any good; this one only says that if it goes unwritten, that question stops being askable.
 

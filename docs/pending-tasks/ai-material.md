@@ -43,7 +43,7 @@ It cannot go and work somewhere else.
 
 This is the finding that makes the material non-obvious: it is not a claim about capability, it is a claim about what "idiomatic" can mean to something with one corpus.
 
-### 2. The generator cannot see your Forces — chapter 03
+### 2. An AI coding agent cannot see your Forces — chapter 03
 
 Chapter 03's claim is that evaluating the Forces is the groundwork.
 A model has the prompt.
@@ -54,7 +54,7 @@ The interview inverts the flow — the model surfaces the decision, the human su
 
 ### 3. Uniform confidence across all five kinds — chapter 02
 
-One generator produces Laws, Principles, Idioms, and Style in one voice.
+One agent produces Laws, Principles, Idioms, and Style in one voice.
 Chapter 02's first mechanism, with a single source behind it.
 
 Weaker than the other three, and should stay a clause rather than a section.

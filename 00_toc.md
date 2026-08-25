@@ -382,7 +382,7 @@ Chapters already at **draft** that are owed an addition. Listed here because a d
 | Chapter | Owed | Do it when |
 |---|---|---|
 | 02 | corpus monoculture as a new instance of *monoculture makes Idioms look like physics* | chapter 23 exists, so the mention can point at the synthesis |
-| 03 | the generator cannot see your Forces; the team-size Force at its limit — no continuity, unbounded volume | as above |
+| 03 | an AI coding agent cannot see your Forces; the team-size Force at its limit — no continuity, unbounded volume | as above |
 | 02 | Pike on arguments about language features being opinion argued with certainty — a witness for *tone does not vary with authority*, in `docs/pending-tasks/pike-retrospective.md` | next time 02 is open |
 | 09 | Pike pricing Go's compatibility promise: it costs, and it blocks feature-itis — the constraint adopted deliberately rather than suffered | next time 09 is open |
 | 13 | possibly the async/await aside and *coloured functions*; check the fit before using it, it may belong to 20 or nowhere | next time 13 is open |
