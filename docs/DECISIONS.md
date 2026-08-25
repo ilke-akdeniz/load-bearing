@@ -3862,3 +3862,68 @@ The author preferred *Decisions Nobody Stated*; the draft raised that it is chap
 Settled on **What Was Never Written Down**, which names the absence of a record rather than the absence of a decision, and is the distinction the verification established.
 
 **The folk remedy lands here after all**, in a paragraph rather than a section. Chapter 15 forward-references *"what chapter 23 calls a folk remedy"*, and the term's purest instance is a corpus default: advice applied far outside the context it was made for, where nobody rebuilds the scope because nobody knows a scope existed. The author noted the monoculture point already appears in grilling's limit passage, so the term is defined once early and the limit passage then *uses* it — which shortens the transplanted section and stops the observation appearing twice.
+
+## 97. How chapter 23 lost its planned identity, and a chapter outlined against a chapter nobody had read
+
+**Context.**
+Decision 96 records the second half of the chapter 23 grilling — the reversal of decision 24, the source verification, the claim and the title. It was written mid-session and stopped there. This entry records the first half, and one process failure that is the point of writing it down at all.
+
+**Sequencing: 23 before 01.**
+With only chapters 01 and 23 unwritten, the draft recommended 01 — it is the last item in the launch set, and an opener written now describes twenty-one finished chapters rather than a plan.
+
+The author overruled it:
+
+> stop, chapter 01 generation. Let's do the final chapter now, then formulating 01 will be easier.
+
+Which is right for a reason the draft had not weighed: chapter 01 promises what the book delivers, and the delivery was not finished. An opener written before the closing chapter exists would describe a method whose last chapter had not been settled.
+
+**Chapter 19 had absorbed chapter 23's planned job, and nobody had noticed.**
+
+The TOC gave 23 six receiving cases, four questions, the folk remedy, the book's own conditions, and *"the final answer to 'is this load-bearing' as a repeatable procedure rather than a judgement call."*
+
+A survey found:
+
+- **Chapter 19 already claims to be the procedure.** Its second line: *"Everything before this chapter was diagnosis. This is the procedure."*
+- **23's planned boundary was already spent.** The TOC assigned it *"when you don't have time to analyse and must simply pick the conventional answer"*; 19's boundary section opens with `### The conventional answer is good enough` and works it through blast radius.
+- **Four of the six receiving cases are worked elsewhere** — a review comment in 14, a colleague's strong opinion in 20, a book in 16, 17 and 18, a blog post in 15. Only *your own past decisions* and *generated code* were left.
+
+None of this was a defect in any chapter. Chapter 19 grew into the space while 23's entry sat unchanged from before 19 existed.
+
+**And then the failure that matters.**
+
+On that survey the draft proposed a claim for 23 built on reconstruction — *advice reaches you as a conclusion with its situation removed, so using it means rebuilding that situation* — and drew a full outline against it.
+
+The author:
+
+> I'm genuinely struggling to figure out the difference between the claims of chapter 19 and this outline's main claims. I'm guessing that you didn't read the chapter 19, read the chapter 19 from start to finish and then reassess the situation.
+
+They were right. The draft had worked from 19's claim sentence and two greps. Reading it end to end showed that **every item in the outline was already in 19**: the reconstruction move at its *How to notice a principle whose forces are absent*; the four questions collapsed into its *what would have to be true for this to be unnecessary*, pointed at incoming advice in its closing line; the decision log in full; and both of the book's own conditions the outline was going to introduce, including the thirty-eight entries for five thousand lines.
+
+The proposed claim was chapter 19's claim, pointed slightly differently, and the author detected it from the outline alone.
+
+**This is the same failure as the FlowCore decision 18 error earlier in the same session** — asserting the contents of a document from memory and a keyword search rather than reading it — committed within a few hours of recording that one. `CLAUDE.md` states the rule for primary sources; the finding here is that **it applies to this book's own chapters too**, which is not obvious, because the draft believes it knows what they contain.
+
+**The options that followed**, once the space was actually mapped: a narrow chapter of what 19 leaves; cutting 23 entirely and letting 22 close the book; or reconceiving it around emitting advice rather than receiving it, which the book has never covered. The draft leaned toward the third. The author proposed the AI chapter instead, which decision 96 takes up.
+
+**The demonstration, and why the FlowCore decision reappears.**
+Chapter 19 already uses FlowCore's decision 12 for its worked force map, so the draft flagged reusing it as a second appearance and offered two alternatives — a sorted map iteration and a schema constraint.
+
+The author took decision 12 and supplied the differentiation:
+
+> I read chapter 19's section again, there the situation is very briefly described and then the decision log is dissected. Here the example would probably look very different: code samples, explanations of the decisions and the reasons, problematic change...
+
+Which is the ledger's requirement for FlowCore appearances met exactly: 19 shows the decision being **mapped**, 23 shows it being **lost**, and the second is in code where none of the first is visible.
+
+**The rewrite material, kept out of the claim and kept in the chapter.**
+The author had simplified the claim by dropping *the only route back is a rewrite*, then returned to it:
+
+> I dropped the "only route back" to simplify the claim but I think that mini-story or detail of unrecoverable decisions forcing a whole rewrite of a system can still be used inside the chapter.
+
+It became the section that scales one lost decision to a system, with the author's own comparison as its safeguard — this happens without these tools too, so what changed is the rate rather than the failure. That framing is what keeps the passage a force reading rather than a verdict, which decision 24 requires and this chapter is the likeliest place in the book to breach.
+
+The draft flagged one register risk in advance: *point of no return*, *entropy takes over*, *futile* are the atmosphere the register rules exclude, and the mechanism — each guess adding a constraint nobody recorded either — has to carry it instead.
+
+**One duplication the author caught before it was written.**
+The draft planned to define the folk remedy by way of corpus defaults. The author pointed out that the monoculture observation already appears in grilling's limit passage, which was arriving in the same chapter.
+
+The fix improved the transplanted text rather than merely avoiding a repeat: the term is defined once, early, and the limit passage now **uses** it — *"grilling is weakest against folk remedies, because a folk remedy does not present itself as a branch point"* — where it previously rebuilt the observation longhand because the term did not exist where that passage was written.
