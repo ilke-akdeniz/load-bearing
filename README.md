@@ -25,8 +25,8 @@ Run that test on the names you use in code review and count how many survive it.
 Because both sides are arguing about the answer while disagreeing about the situation — and nobody wrote the situation down.
 → [Chapter 02 — Forces: The Inputs Nobody Names](02_forces.md)
 
-**Those are five of twenty-two.** Each chapter makes one claim and states where it stops.
-→ [All twenty-two chapters](00_toc.md)
+Those are five of twenty-two chapters. Each one makes a claim and states where it stops.
+→ [All chapters](00_toc.md)
 
 ## The premise
 
