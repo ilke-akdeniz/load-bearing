@@ -279,12 +279,14 @@ What you end up holding is not an answer but a position. Fixing Y changes Z; som
 
 ## Sources
 
-Matt Pocock, *skills* — `skills/productivity/grilling/SKILL.md`. <https://github.com/mattpocock/skills> The text quoted here is an earlier version, frozen; upstream has since changed.
-
-Jason Ku, on using the technique during development. <https://www.youtube.com/watch?v=ikGhv9kKFdU&t=356s>
-
 Miles Turpin, Julian Michael, Ethan Perez and Samuel R. Bowman, *Language Models Don't Always Say What They Think: Unfaithful Explanations in Chain-of-Thought Prompting*, NeurIPS 2023. <https://arxiv.org/abs/2305.04388>
 
 Kerem Zaman and Shashank Srivastava, *Is Chain-of-Thought Really Not Explainability? Chain-of-Thought Can Be Faithful without Hint Verbalization*, 28 December 2025. <https://arxiv.org/abs/2512.23032>
 
-FlowCore, `docs/decisions.md`, decision 12. <https://github.com/ilke-akdeniz/flowcore>
+Matt Pocock, *skills* — `skills/productivity/grilling/SKILL.md`. <https://github.com/mattpocock/skills> The text quoted here is an earlier version, frozen; upstream has since changed.
+
+Jason Ku, on using the technique during development. <https://www.youtube.com/watch?v=ikGhv9kKFdU&t=356s>
+
+FlowCore, `docs/decisions.md`, decisions 12 and 18. <https://github.com/ilke-akdeniz/flowcore>
+
+FlowCore, `CLAUDE.md` — the iteration scope, and the identifier rule's reference to the log. <https://github.com/ilke-akdeniz/flowcore>
