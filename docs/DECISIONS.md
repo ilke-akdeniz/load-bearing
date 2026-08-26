@@ -4357,3 +4357,89 @@ Three of these four read perfectly well and were wrong about the chapter next do
 No mechanical check is possible here — the failure is semantic and the handoffs are prose by design.
 What is possible is a rule about when to read them: **a handoff describes its neighbour, so changing a chapter's claim means checking the handoff that points at it.**
 Two of these four are traceable to exactly that — [chapter 02](../02_forces_f4m5.md)'s claim was rewritten and [chapter 22](../22_never-written-down_at4r.md) replaced a different chapter, and in both cases the sentence pointing at them was left alone.
+
+---
+
+## 110. Slice 1 of the final sweep: four pieces routed, three retired
+
+**Date.** 2026-08-26
+
+**Context.**
+Every chapter reached **draft**, and the author started the final sweep.
+Slice 1 is the pending material: `docs/pending-tasks/` names the chapters it is owed to, and every piece is either routed to its chapter or recorded as no longer fitting.
+Ten outstanding pieces across `ai-material.md`, `pike-retrospective.md` and `index.md`, owed to chapters 01, 02, 04, 08, 12, 14 and 16.
+
+**The root question, and the draft's recommendation did not survive.**
+Six of the seven chapters are at draft, so slice 1 is by construction the bolting-on that `pike-retrospective.md` warned against in its own deferral argument — *"a quotation bolted onto a finished chapter is the decoration the register rules exclude."*
+The draft recommended a **minimal footprint**: discharge each piece in the smallest form that still says the thing, attach to existing paragraphs, no new headings.
+
+The author chose the third option instead — **route only what strengthens the chapter, and formally retire the rest with reasons.**
+That is a higher bar than the draft proposed, and it changed four of the ten dispositions.
+Recorded because the difference matters: under the draft's answer every piece would have landed somewhere, which is the ledger-defect shape the anti-repetition protocol exists to prevent.
+
+**Three facts found during the interview that changed the questions being asked.**
+
+[Chapter 16](../16_tdd-and-mocks_u8eu.md) already carried FlowCore decision 37 in full — the count, the mutation, the comment above the weak fixture, the entry's verdict.
+So the mechanism and the evidence were never what it was owed, and the question narrowed to what the provenance adds.
+
+[Chapter 22](../22_never-written-down_at4r.md) already made the argument [chapter 14](../14_principle-loses-scope_b86v.md) was owed, at the line about a corpus default being the purest folk remedy.
+Meanwhile ledger row *The scope was never set* assigned that concept to `b86v`, and [chapter 14](../14_principle-loses-scope_b86v.md) contained no trace of it — so the ledger was asserting an ownership that did not exist.
+
+One of the two *known coverage gaps* was half stale.
+It said the dependency-injection container is owned by no chapter; [chapter 01](../01_the-five-kinds_cjx4.md) classifies it as an Idiom and separates it from the Principle it travels with, and [chapter 20](../20_idioms_7nkn.md) gives its conditions.
+It also said [chapter 17](../17_abstraction-as-insurance_4jk6.md) "reaches the testing half of the question and no further", which understates a chapter with six subsections on the swappability case.
+
+**Decision — the ten dispositions.**
+
+| Piece | Chapter | Disposition |
+|---|---|---|
+| Corpus monoculture | 01 | routed, with the uniform-confidence clause folded in |
+| Pike on certainty over trivial features | 01 | routed |
+| Cannot see your Forces | 02 | folded to one sentence inside the piece below |
+| Team-size Force at its extreme | 02 | routed |
+| Compatibility priced by the person who paid it | 08 | routed |
+| The scope was never set | 14 | **retired**; ledger row moved to `at4r` |
+| Generated tests that never reach their condition | 16 | **retired** from the FlowCore paragraph; the volume point routed to the costs section instead |
+| async/await and coloured functions | 12 | **retired** |
+| The 45-minute build | 04 | **retired** |
+| Known coverage gaps | — | kept in `index.md`, with the stale half corrected |
+
+**Why each retirement.**
+
+[Chapter 14](../14_principle-loses-scope_b86v.md) tracks scope lost **in transmission** — a compressed sentence that travelled without its conditions.
+Generated design has no sentence and no transmission, so 14's test (*does this advice say how wide it is?*) has no input rather than a wrong answer.
+`ai-material.md` had never worked the argument, and [chapter 22](../22_never-written-down_at4r.md) had already made it.
+The ledger row is reworded and moved to `at4r`, keeping the part that was distinctive — that 14's repair needs a source to go back to, and a corpus default has none.
+
+[Chapter 16](../16_tdd-and-mocks_u8eu.md)'s two paragraphs before the FlowCore case work specifically to close off the reader's escape — *"this could look like a rookie mistake, or an example built for the book"* — and then build a human account of how a test file arrives in that state.
+A provenance clause there hands the same dismissal back in AI form.
+What was genuinely new went to the costs section, where the chapter says the where-to-mutate decision has no rule to hand: spot-checking rests on the author's own list of assertions they were unsure about, and tests generated in bulk arrive without one.
+
+The last two were already dispositioned in `pike-retrospective.md` and are only being made final: coloured functions was ruled *nowhere* on 2026-08-23, and the 45-minute build is background [chapter 04](../04_structure_agjy.md) does not need.
+
+**An author correction, on what gets deleted.**
+The draft proposed deleting `docs/pending-tasks/` entirely and relocating the *known coverage gaps* to `docs/ABOUT.md`, and put the destination to the author as a question.
+
+> who told you to delete the folder pending-tasks? If there are still things to do in index.md keep index.md and the folder, you don't have to move those to other places.
+
+The draft had inferred the deletion from `CLAUDE.md`'s *delete a document once every piece in it has landed*, which decision 92 wrote for the worked-argument documents, and applied it to the index as well.
+The index is not that kind of document: it is the folder's own list, and the coverage gaps are recorded limits rather than landed arguments.
+`index.md` and the folder stay, the gaps stay where they are, and only `ai-material.md` and `pike-retrospective.md` are deleted, both fully discharged.
+
+**A splice found in a pending document, and corrected before it shipped.**
+`pike-retrospective.md` said Pike "lists *using upper case for export* alongside *where the newlines go* as perennial arguments", offered as the witness for [chapter 01](../01_the-five-kinds_cjx4.md).
+Reading the talk shows two separate sentences: one about the certainty with which people argue over trivial features, and — two sentences later, on a different subject — a list of topics the talk will skip because they have already been discussed at length.
+Pike never says those are the trivial features argued with certainty; the connection was the pending document's, presented as his.
+The first draft of the chapter 01 paragraph inherited it, including a point about the two examples landing in different kinds by the book's own test.
+Both were cut, and only what he said is quoted.
+
+This is the failure `CLAUDE.md` describes at [chapter 14](../14_principle-loses-scope_b86v.md)'s Pike material, in the same source, caught this time by the rule that came out of it: read the primary source rather than the excerpt document, even when the excerpt document is in this repo.
+
+**Consequence.**
+Chapters 01, 02, 08 and 16 are amended, one commit each.
+Ledger changes: two rows rewritten to the narrower claims that shipped, two added, one moved from `b86v` to `at4r`, one extended.
+Six ledger rows pointed at `docs/pending-tasks/ai-material.md` as the argument's home; all six pointers are spent and go with the file, three of them on chapter 22 rows whose material landed long ago.
+`docs/pending-tasks/` survives on `index.md` alone, which now holds nothing but the two coverage gaps.
+
+Chapter 08 gained a citation and has no `## Sources` section to put it in.
+That is slice 3's work and is deliberately left for it, which is what `CLAUDE.md` means by content added during a slice not having been through the slices already finished.
