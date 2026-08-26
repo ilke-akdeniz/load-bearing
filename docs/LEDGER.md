@@ -114,6 +114,7 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Lehman's ratchet | rjf9 | Complexity rises because adding a case is cheap and local while removing one needs a project | cite |
 | Compatibility is add-only | rjf9 | You may add optional things and relax constraints; you may not remove, rename, retype, or tighten | "add-only" |
 | A rename is a silent break | rjf9 | Removals and renames fail without an error; a type change at least fails loudly | cite |
+| Compatibility adopted rather than suffered | rjf9 | Pike prices Go's 1.0 lock-down from the inside: a real cost, and it blocks feature-itis. Taken early, while declining was still available, with what it prevents counted as part of the purchase — the deprecations are countable and the features it stopped are not | "bought rather than incurred" |
 | You cannot deploy other people's software | rjf9 | The one constraint in the book that cannot be fixed by changing code you control | cite |
 | Inverse Conway is a strategy, not a finding | rjf9 | The observation is established; driving architecture by reshaping teams is not | cite |
 | Conway detects mismatch | rjf9 | Neither tight coupling nor a firm interface is better in itself; the failure is seams landing where the work was divided rather than where the problem divides | cite |

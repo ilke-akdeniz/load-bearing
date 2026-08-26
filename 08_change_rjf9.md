@@ -91,7 +91,13 @@ go 1.26.5: ioutil compiled and ran, returned "still here"
 
 Five years after being declared obsolete, it compiles and works, because Go promised that code written for Go 1 keeps building. Across the standard library there are **175 declarations marked deprecated** — each one something its maintainers would remove and cannot.
 
-That is what the commitment costs when it is kept. [Chapter 04](04_structure_agjy.md) covers the other half of this problem: users depend on behaviour you never documented, so the surface you are committed to is larger than the one you published.
+That is what the commitment costs when it is kept.
+
+Those 175 were bought rather than incurred. Rob Pike lists locking the language down at 1.0 among the things the Go project got right, and prices it in a sentence: there is a cost in maintaining strong compatibility, but "it blocks feature-itis", and in a world where almost nothing else is stable, not having to worry about a new release breaking your project is worth having. He adds that he finds it puzzling most other projects have resisted doing the same.
+
+That is a different use of the constraint from the one this section has described. Above, it arrives with your first user and then cannot be got rid of. Here somebody adopted it early, at a point where they could still have declined, and counted what it prevents as part of what they were buying. The deprecated declarations are one side of that trade, and the features it stopped are the other.
+
+[Chapter 04](04_structure_agjy.md) covers the other half of this problem: users depend on behaviour you never documented, so the surface you are committed to is larger than the one you published.
 
 ### The organization ends up in the software
 
