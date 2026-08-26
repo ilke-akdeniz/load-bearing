@@ -247,7 +247,7 @@ Four mechanisms, none of them anyone's fault in particular.
 
 **Tone does not vary with authority.** Confidence is a personality trait and a rhetorical choice. Someone stating a proven theorem and someone stating a formatting preference can sound identical — and frequently the formatting preference sounds *more* certain, because there is less to qualify.
 
-Rob Pike, opening a retrospective on Go fourteen years in, gives this as his first reason for not spending the talk on the language's good and bad features: what is good and bad in a programming language is largely a matter of opinion rather than fact, "despite the certainty with which many people argue about even the most trivial features of Go or any other language." That is a designer describing arguments about his own language, sustained for over a decade, in which confidence was no guide to whether the question had a fact in it.
+Rob Pike, opening a retrospective on Go fourteen years in, gives this as his first reason for not spending the talk on the language's good and bad features: what is good and bad in a programming language is largely a matter of opinion rather than fact, "despite the certainty with which many people argue about even the most trivial features of Go or any other language." That is a designer describing arguments about his own language, in which confidence was no guide to whether the question had a fact in it.
 
 None of this requires two speakers. A generator trained on text covering all five kinds returns all five in one register, and the usual correction — learning whose confidence to discount — has nobody to attach to.
 
