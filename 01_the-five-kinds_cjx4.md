@@ -247,9 +247,15 @@ Four mechanisms, none of them anyone's fault in particular.
 
 **Tone does not vary with authority.** Confidence is a personality trait and a rhetorical choice. Someone stating a proven theorem and someone stating a formatting preference can sound identical — and frequently the formatting preference sounds *more* certain, because there is less to qualify.
 
+Rob Pike, opening a retrospective on Go fourteen years in, gives this as his first reason for not spending the talk on the language's good and bad features: what is good and bad in a programming language is largely a matter of opinion rather than fact, "despite the certainty with which many people argue about even the most trivial features of Go or any other language." That is a designer describing arguments about his own language, sustained for over a decade, in which confidence was no guide to whether the question had a fact in it.
+
+None of this requires two speakers. A generator trained on text covering all five kinds returns all five in one register, and the usual correction — learning whose confidence to discount — has nobody to attach to.
+
 **Advocacy compresses.** "Always do X" travels further than "do X when Y, unless Z." The conditions are the first thing lost, and they were the content. [Chapter 14](14_principle-loses-scope_b86v.md) traces this mechanism in detail.
 
 **Monoculture makes Idioms look like physics.** If you have only worked in one ecosystem, its conventions are indistinguishable from necessity. You have never seen the counter-example, so you conclude there isn't one. This is the single most common source of confusion here, and the only reliable cure is working in a second ecosystem long enough to be fluent — long enough that its conventions stop feeling wrong and start feeling like conventions.
+
+That cure has a precondition not every source of advice can meet. A generator has one training distribution and no way to acquire a second; it cannot go and work somewhere else for two years, which is the only remedy this paragraph has to offer. So the majority ecosystem's conventions arrive as defaults, and the correction that would mark them as conventions is unavailable by construction rather than by carelessness. This is not a claim about the quality of what comes out. It is a claim about what *idiomatic* can mean where there is one corpus: the most frequent answer, which is a fact about the corpus and not about your situation. [Chapter 22](22_never-written-down_at4r.md) is where that lands — a convention nobody recorded as a choice does not present itself as one.
 
 **Teaching leaves the training wheels on.** Beginners are given rules, because rules are teachable and judgment is not. "Never use global state." "Always write a test first." Nobody comes back later to say which parts were scaffolding.
 
@@ -321,6 +327,7 @@ That last one is the most expensive and the easiest to fix. When an architecture
 ## Sources
 
 - Brad Appleton, *Patterns and Software: Essential Concepts and Terminology* — [bradapp.com/docs/patterns-intro.html](https://www.bradapp.com/docs/patterns-intro.html). The account of the pattern form, and of *Forces* as one of its elements, is from here. Alexander's formulation is given as that paper reports it; *The Timeless Way of Building* was not consulted.
+- Rob Pike, *What We Got Right, What We Got Wrong* — GopherConAU, 10 November 2023. [Text and slides](https://commandcenter.blogspot.com/2024/01/what-we-got-right-what-we-got-wrong.html).
 
 ---
 

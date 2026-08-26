@@ -17,9 +17,7 @@ Decision 24 records what was decided and why.
 
 | Chapter | Owed | Do it when |
 |---|---|---|
-| 01 | corpus monoculture as a new instance of *monoculture makes Idioms look like physics* | now — [chapter 22](../../22_never-written-down_at4r.md) exists, so the mention can point at the synthesis |
 | 02 | an AI coding agent cannot see your Forces; the team-size Force at its limit — no continuity, unbounded volume | now, as above |
-| 01 | Pike on arguments about language features being opinion argued with certainty — a witness for *tone does not vary with authority*, in [pike-retrospective.md](pike-retrospective.md) | next time 01 is open |
 | 08 | Pike pricing Go's compatibility promise: it costs, and it blocks feature-itis — the constraint adopted deliberately rather than suffered | next time 08 is open |
 | 14 | that generated design never had a scope set, so 14's own test has nothing to check — ledger row *The scope was never set* cites [ai-material.md](ai-material.md), where **the argument is not yet worked** | next time 14 is open |
 | 16 | generated tests that never reach the condition they name, with FlowCore decision 37 — mutation is the only check that catches them, which 16 already owns | next time 16 is open |
