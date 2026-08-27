@@ -4689,3 +4689,49 @@ The judgement is that the risk is small — this section and the whole of [chapt
 **Consequence for slice 3.**
 [Chapter 01](../01_the-five-kinds_cjx4.md) now has **no `## Sources` section, deliberately**, because it cites no work.
 Slice 3's instruction is that every chapter lacking one gets one, and this chapter is the exception unless slice 3 finds a citation the chapter actually makes.
+
+---
+
+## 115. The claim of originality is cut, and decision 40 was wrong about why it was needed
+
+**Date.** 2026-08-26
+
+**Context.**
+Continuing the slice 2 review, the author cut [chapter 01](../01_the-five-kinds_cjx4.md)'s remaining opening paragraph — *"This premise, and the model attached to it, are this book's own. You will not find these five names used together this way elsewhere…"*
+
+> just delete this paragraph as well. This is like a door to door salesman pitch. Books don't say this thing is book's own, they point what is borrowed and put references for those which we already do.
+
+**The draft raised a conflict, and was wrong to treat it as one.**
+Decision 13 dropped provenance markers with the rule that *where a claim's standing could be mistaken, the sentence says so*.
+Decision 40 then removed the chapter epigraphs, and said of this one:
+
+> [Chapter 01](../01_the-five-kinds_cjx4.md)'s epigraph carried **the only statement** that the five-level model is this book's own rather than standard vocabulary — provenance that decision 13 requires be in the prose. It now sits in the claim section.
+
+So the paragraph existed because decision 40 put it there, and `CLAUDE.md` says to stop and say so when a change contradicts the log. The draft stopped and asked.
+
+The author's reply was to ask what they were missing.
+
+**Nothing, and the log is what was wrong.**
+Checking the chapter as it stood at decision 40's own commit shows *Vocabulary nobody shares* already present, in *What the model costs*:
+
+> "That's an Idiom, not a Law" means little to colleagues who haven't read this. The model is for your own thinking; in conversation, say the content.
+
+Decision 40's *the only statement* was false when written.
+The costs section already carried the same information and carries it better: it does not assert originality, it tells the reader what the vocabulary will and will not do for them, in the section about what the model costs — which is where a reader can act on it.
+
+**Decision.**
+The paragraph is deleted. Nothing replaces it.
+Decision 13's requirement is satisfied, at the site that was always satisfying it.
+
+**The general point, which is the author's and worth keeping.**
+Defining a term and stating the chapter's claim is the work. Announcing that the work is original is a separate move, and it is the book selling itself rather than saying something.
+The five other places where the book marks its own vocabulary — [chapters 03](../03_grading-a-law_q5c6.md), [04](../04_structure_agjy.md), [13](../13_smuggled-verdicts_8y69.md), [17](../17_abstraction-as-insurance_4jk6.md), [19](../19_six-profiles_dnkz.md) — are all the shape the author describes: a clause at the point the term is used, saying it is not standard vocabulary so the reader knows what a search will return. None of them claims credit, and none is a paragraph.
+
+**A note on the draft's error, since the log is where method gets recorded.**
+Raising the conflict was right; deferring to the log without checking its factual claim was not.
+A decision entry is evidence about what was decided, not about what was true, and *the only statement* is the kind of assertion that can be checked in one command against the commit the entry describes.
+Checking it first would have turned a question for the author into a finding.
+
+**Consequence.**
+[Chapter 01](../01_the-five-kinds_cjx4.md)'s opening is the claim, then the paragraph beginning *Both are assumed by the rest of the book*, whose *Both* now points directly at the two assertions in the claim sentence and is explained in the same paragraph.
+Decision 40 stands as the record of the epigraph removal; this entry corrects its statement about [chapter 01](../01_the-five-kinds_cjx4.md).
