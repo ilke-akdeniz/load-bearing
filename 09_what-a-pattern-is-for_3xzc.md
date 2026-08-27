@@ -87,9 +87,9 @@ func ApplyDiscount(ctx context.Context, db *sql.DB, orderID string, percent int)
 
 ```go
 // Forbidden: a persistent object model between the operation and the data.
-order := repo.Load(orderID)  // an entity with behaviour and identity
-order.ApplyDiscount(percent) // the rule lives on the object
-repo.Save(order)             // written back through a mapper
+order := repository.Load(orderID) // an entity with behaviour and identity
+order.ApplyDiscount(percent)      // the rule lives on the object
+repository.Save(order)            // written back through a mapper
 ```
 
 Also a real constraint. It tells you where the business rule is *not* — not on a loaded object graph — and that rules out an entire style.
