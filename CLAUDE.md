@@ -508,7 +508,7 @@ When every chapter is at draft, ask for confirmation rather than beginning, and 
 
 **Four slices, in this order, each followed by review.**
 The order is load-bearing — every slice inspects what the one before it produced.
-Work one chapter at a time inside a slice, commit per chapter, and stop for the author to review and amend before the next slice starts.
+Work one chapter at a time inside a slice, but **commit the slice once**, not once per chapter — a slice is one pass, and the history alternates by pass. Then stop for the author to review and amend before the next slice starts.
 
 1. **Pending material.** Every document in `docs/pending-tasks/`, and `docs/pending-tasks/index.md` in particular, names the chapters it is owed to. Route every piece to its chapter, or record that it no longer fits and why.
 2. **Rules.** Check each chapter against the rules in this file that postdate it. `git log CLAUDE.md` against the chapter's own history gives the candidates; a commit that changed this file *and* many chapters at once was already applied retroactively, and one that changed a single chapter was applied only there.
