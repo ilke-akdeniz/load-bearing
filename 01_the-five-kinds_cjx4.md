@@ -300,10 +300,11 @@ Until then, follow the local convention — not because it is a good proxy for c
 
 That last one is the most expensive and the easiest to fix. When an architecture argument will not converge, stop arguing about the Principle and ask what each side believes about the situation. The disagreement is usually not about the advice at all, but about the situation both sides are applying it to.
 
-## 
-The book assumes the five claim classification and the authority mapping are true and explores the implications. That is worth saying now, because every other chapter makes a claim and then demonstrates it, and this one did not. That the kind determines authority is true by construction, since the kinds are *defined* by their authority — there is nothing left to show. [-- I dont' understand the following sentence, remove it or put it more clearly.  ] That every claim falls into one of the five is an exhaustiveness claim, and it is not exhaustive: a fact about one program, an evaluative remark, a sociological observation about the industry are all claims about software that fit nowhere here.
+## What this chapter assumed
 
-So this chapter was a way of sorting rather than a proof, and it should be judged by what it lets you see. 
+The book assumes both halves of that claim and spends the rest of its chapters on what follows from them. That is worth saying now, because every other chapter makes a claim and then demonstrates it, and this one did not. That the kind determines authority is true by construction, since the kinds are *defined* by their authority — there is nothing left to show. The other half does not survive inspection: the model sorts advice, together with the one kind of input that decides where advice stands, so a fact about one program, an evaluative remark, or an observation about how the industry behaves is a claim about software with no place in it.
+
+So this chapter was a way of sorting rather than a proof, and it should be judged by what it lets you see.
 
 [Chapter 02](02_forces_f4m5.md) takes Forces seriously — the properties of a situation that decide which Laws bind and which Principles hold, and why naming one is not the same act as evaluating it.
 
