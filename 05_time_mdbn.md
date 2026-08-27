@@ -425,4 +425,12 @@ If the answer is *nothing, because nothing else writes here*, the Law is inert a
 
 ---
 
+## Sources
+
+- Python, `os` — [docs.python.org/3/library/os.html](https://docs.python.org/3/library/os.html).
+- PostgreSQL, unique indexes — [postgresql.org/docs/current/indexes-unique.html](https://www.postgresql.org/docs/current/indexes-unique.html).
+- Leslie Lamport, *Time, Clocks, and the Ordering of Events in a Distributed System* — Communications of the ACM 21(7), July 1978. [PDF](https://lamport.azurewebsites.net/pubs/time-clocks.pdf).
+
+---
+
 [← Ch. 04](04_structure_agjy.md)  ·  [Contents](00_toc.md)  ·  [Ch. 06 →](06_distribution_49yh.md)

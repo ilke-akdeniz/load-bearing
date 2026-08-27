@@ -273,4 +273,11 @@ Two questions do the work, and they are the two axes.
 
 ---
 
+## Sources
+
+- Martin Fowler, *AnemicDomainModel*, 25 November 2003 — [martinfowler.com/bliki/AnemicDomainModel.html](https://martinfowler.com/bliki/AnemicDomainModel.html).
+- Martin Fowler, *CodeSmell* — [martinfowler.com/bliki/CodeSmell.html](https://martinfowler.com/bliki/CodeSmell.html).
+
+---
+
 [← Ch. 12](12_missing-language-features_esqm.md)  ·  [Contents](00_toc.md)  ·  [Ch. 14 →](14_principle-loses-scope_b86v.md)

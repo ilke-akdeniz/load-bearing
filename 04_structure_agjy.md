@@ -936,4 +936,12 @@ The first question generates folders. The second finds the cycle.
 
 ---
 
+## Sources
+
+- David L. Parnas, *On the Criteria To Be Used in Decomposing Systems into Modules* — Communications of the ACM 15(12), December 1972. [PDF](https://wstomv.win.tue.nl/edu/2ip30/references/criteria_for_modularization.pdf).
+- FlowCore, `docs/decisions.md` — [github.com/ilke-akdeniz/flowcore](https://github.com/ilke-akdeniz/flowcore).
+- *Hyrum's Law* — [hyrumslaw.com](https://www.hyrumslaw.com/).
+
+---
+
 [← Ch. 03](03_grading-a-law_q5c6.md)  ·  [Contents](00_toc.md)  ·  [Ch. 05 →](05_time_mdbn.md)

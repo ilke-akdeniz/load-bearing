@@ -275,11 +275,9 @@ If the answer names a language feature, a tool, or a person who will read the co
 
 ## Sources
 
-Rob Pike, *What We Got Right, What We Got Wrong*, closing talk at GopherConAU, Sydney, 10 November 2023, published 4 January 2024. <https://commandcenter.blogspot.com/2024/01/what-we-got-right-what-we-got-wrong.html>
-
-*The Go Programming Language Specification*, "Exported identifiers". <https://go.dev/ref/spec#Exported_identifiers>
-
-FlowCore decision log, decision 1, "Single root package, not `internal/`". <https://github.com/ilke-akdeniz/flowcore>
+- Rob Pike, *What We Got Right, What We Got Wrong*, closing talk at GopherConAU, Sydney, 10 November 2023, published 4 January 2024. [Text and slides](https://commandcenter.blogspot.com/2024/01/what-we-got-right-what-we-got-wrong.html).
+- *The Go Programming Language Specification*, "Exported identifiers". [go.dev/ref/spec#Exported_identifiers](https://go.dev/ref/spec#Exported_identifiers).
+- FlowCore decision log, decision 1, "Single root package, not `internal/`". [github.com/ilke-akdeniz/flowcore](https://github.com/ilke-akdeniz/flowcore).
 
 ---
 

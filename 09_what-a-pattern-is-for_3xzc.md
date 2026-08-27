@@ -207,4 +207,11 @@ If the answer is a description you no longer have to write, the name compresses.
 
 ---
 
+## Sources
+
+- Martin Fowler, *Patterns of Enterprise Application Architecture* — Addison-Wesley, 2002. [martinfowler.com/books/eaa.html](https://martinfowler.com/books/eaa.html).
+- Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides, *Design Patterns: Elements of Reusable Object-Oriented Software* — Addison-Wesley, 1994.
+
+---
+
 [← Ch. 08](08_change_rjf9.md)  ·  [Contents](00_toc.md)  ·  [Ch. 10 →](10_patterns-that-cross_r8dw.md)

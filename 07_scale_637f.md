@@ -327,4 +327,12 @@ A ceiling means stop buying hardware and shrink the serial part. A reversal mean
 
 ---
 
+## Sources
+
+- Gene M. Amdahl, *Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities* — AFIPS Spring Joint Computer Conference, April 1967. [PDF](https://inst.eecs.berkeley.edu/~n252/paper/Amdahl.pdf).
+- Neil J. Gunther, *A General Theory of Computational Scalability Based on Rational Functions* — August 2008. [arXiv](https://arxiv.org/abs/0808.1431).
+- John D. C. Little, *A Proof for the Queuing Formula: L = λW* — Operations Research 9(3), May–June 1961.
+
+---
+
 [← Ch. 06](06_distribution_49yh.md)  ·  [Contents](00_toc.md)  ·  [Ch. 08 →](08_change_rjf9.md)

@@ -198,11 +198,9 @@ If they do, nothing further can be learned by discussing it, and the only useful
 
 ## Sources
 
-Rob Pike, *What We Got Right, What We Got Wrong*, closing talk at GopherConAU, Sydney, 10 November 2023, published 4 January 2024. <https://commandcenter.blogspot.com/2024/01/what-we-got-right-what-we-got-wrong.html>
-
-Joel Spolsky, *Making Wrong Code Look Wrong*, Joel on Software, 11 May 2005. <https://www.joelonsoftware.com/2005/05/11/making-wrong-code-look-wrong/>
-
-FlowCore decision log, decision 18, "Full-word identifiers over Go's short-name convention". <https://github.com/ilke-akdeniz/flowcore>
+- Rob Pike, *What We Got Right, What We Got Wrong*, closing talk at GopherConAU, Sydney, 10 November 2023, published 4 January 2024. [Text and slides](https://commandcenter.blogspot.com/2024/01/what-we-got-right-what-we-got-wrong.html).
+- Joel Spolsky, *Making Wrong Code Look Wrong*, Joel on Software, 11 May 2005. [joelonsoftware.com/2005/05/11/making-wrong-code-look-wrong](https://www.joelonsoftware.com/2005/05/11/making-wrong-code-look-wrong/).
+- FlowCore decision log, decision 18, "Full-word identifiers over Go's short-name convention". [github.com/ilke-akdeniz/flowcore](https://github.com/ilke-akdeniz/flowcore).
 
 ---
 

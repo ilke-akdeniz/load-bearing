@@ -323,4 +323,12 @@ Every distributed defect in the list above is an answer to that question that no
 
 ---
 
+## Sources
+
+- Michael J. Fischer, Nancy A. Lynch, Michael S. Paterson, *Impossibility of Distributed Consensus with One Faulty Process* — Journal of the ACM 32(2), April 1985. [PDF](https://groups.csail.mit.edu/tds/papers/Lynch/jacm85.pdf).
+- Seth Gilbert, Nancy Lynch, *Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services* — ACM SIGACT News 33(2), June 2002. [PDF](https://users.ece.cmu.edu/~adrian/731-sp04/readings/GL-cap.pdf).
+- Daniel J. Abadi, *Consistency Tradeoffs in Modern Distributed Database System Design* — IEEE Computer 45(2), February 2012. [PDF](https://www.cs.umd.edu/~abadi/papers/abadi-pacelc.pdf).
+
+---
+
 [← Ch. 05](05_time_mdbn.md)  ·  [Contents](00_toc.md)  ·  [Ch. 07 →](07_scale_637f.md)

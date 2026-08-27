@@ -470,4 +470,11 @@ And *language* here does not have to mean a different one. Visitor changed statu
 
 ---
 
+## Sources
+
+- Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides, *Design Patterns: Elements of Reusable Object-Oriented Software* — Addison-Wesley, 1994.
+- Peter Norvig, *Design Patterns in Dynamic Programming* — Object World, 5 May 1996. [Slides](https://www.norvig.com/design-patterns/), where the landing page carries the later title *Design Patterns in Dynamic Languages*.
+
+---
+
 [← Ch. 11](11_patterns-that-survive-translation_us2k.md)  ·  [Contents](00_toc.md)  ·  [Ch. 13 →](13_smuggled-verdicts_8y69.md)

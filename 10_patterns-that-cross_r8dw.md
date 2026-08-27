@@ -310,4 +310,11 @@ If yes, you are choosing between options, and following the pattern is rarely th
 
 ---
 
+## Sources
+
+- Eric Evans, *Domain-Driven Design: Tackling Complexity in the Heart of Software* — Addison-Wesley, 2003.
+- Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides, *Design Patterns: Elements of Reusable Object-Oriented Software* — Addison-Wesley, 1994.
+
+---
+
 [← Ch. 09](09_what-a-pattern-is-for_3xzc.md)  ·  [Contents](00_toc.md)  ·  [Ch. 11 →](11_patterns-that-survive-translation_us2k.md)

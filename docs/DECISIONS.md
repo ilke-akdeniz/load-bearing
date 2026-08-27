@@ -4735,3 +4735,54 @@ Checking it first would have turned a question for the author into a finding.
 **Consequence.**
 [Chapter 01](../01_the-five-kinds_cjx4.md)'s opening is the claim, then the paragraph beginning *Both are assumed by the rest of the book*, whose *Both* now points directly at the two assertions in the claim sentence and is explained in the same paragraph.
 Decision 40 stands as the record of the epigraph removal; this entry corrects its statement about [chapter 01](../01_the-five-kinds_cjx4.md).
+
+---
+
+## 116. Slice 3 of the final sweep: Sources
+
+**Date.** 2026-08-26
+
+**Context.**
+Slice 3 gives a `## Sources` section to every chapter lacking one, with links verified rather than recalled.
+Fourteen chapters lacked one at the start: 01 through 13, and 19.
+
+**Decision — ten chapters get one, four do not, and the four are the finding.**
+`CLAUDE.md` says Sources lists *every work the chapter cites, and nothing else*, and that it is **not a further-reading list**.
+Applying that literally, a chapter that names a standard result as a label — *Amdahl's Law is true of a single-threaded script* — is not citing a work. A chapter that states a result **with its assumptions**, presents someone's algorithm, or quotes them, is.
+
+On that test:
+
+- **[Chapter 01](../01_the-five-kinds_cjx4.md)** names Amdahl and Knuth as labels only, and after decision 114 removed the Appleton material it cites nothing. No section.
+- **[Chapter 03](../03_grading-a-law_q5c6.md)** discusses Two Generals, Hyrum's Law, Conway's Law and Amdahl's Law entirely as named results whose chapters own them, and quotes no work. No section.
+- **[Chapters 11](../11_patterns-that-survive-translation_us2k.md) and [19](../19_six-profiles_dnkz.md)** name no external work at all — they are synthesis chapters drawing on the rest of the book. No section.
+
+Adding sections to those four would have made them further-reading lists, which is the one thing the rule forbids.
+
+**[Chapter 07](../07_scale_637f.md) settled a question it had already answered.**
+Its *About the numbers* section states that *"every measurement here was taken on the machine this was written on — an Apple M4 laptop, Go 1.26.5"*, so none of its tables needs a source. What it cites is the three results it states and uses: Amdahl, Gunther's Universal Scalability Law, and Little's Law.
+
+**Verification found two things a recalled citation would have got wrong.**
+
+The first is why the rule says *verified*.
+`web.mit.edu/~sgraves/www/papers/Little's Law-Published.pdf` returns 200 and **redirects to a faculty homepage** — it is not the paper. It was dropped rather than listed.
+
+The second is more interesting, and it went the other way.
+[Chapter 12](../12_missing-language-features_esqm.md) cites Norvig's talk as *Design Patterns in Dynamic Programming*. The landing page at `norvig.com/design-patterns/` is headed *Design Patterns in Dynamic Languages*, which looked like a chapter error.
+The slide deck itself settles it — its title slide reads *Design Patterns in Dynamic Programming*, Peter Norvig, Chief Designer, Adaptive Systems, Harlequin Inc., **Object World, May 5, 1996**.
+The chapter was right and the landing page would have produced a wrong "correction". The entry now carries the verified venue and date and notes the page's later title, so a reader following the link does not think it is a different talk.
+
+**Books and unreachable papers get an entry without a link**, following [chapter 15](../15_behaviour-placement_z47a.md)'s Riel entry, which has none.
+That covers Brooks, the Gang of Four, Evans, Lehman, and Little, and it removes the pressure to attach a link that has not been checked.
+
+**A format split, settled.**
+The eight chapters that already had the section disagreed: [14](../14_principle-loses-scope_b86v.md), [15](../15_behaviour-placement_z47a.md), [16](../16_tdd-and-mocks_u8eu.md), [17](../17_abstraction-as-insurance_4jk6.md) and [18](../18_force-map-method_r37x.md) used a bulleted list with markdown links; [20](../20_idioms_7nkn.md), [21](../21_style_9rng.md) and [22](../22_never-written-down_at4r.md) used blank-line-separated paragraphs with bare `<url>`.
+A Sources section is a list, `CLAUDE.md`'s markdown conventions have a rule for lists, and the bulleted form is both the majority and the earlier convention. The three outliers were normalized.
+
+**Links.**
+All 50 unique URLs across every Sources section were checked, including the pre-existing ones.
+47 return 200. Three are bot-blocked rather than dead — IEEE, Reddit, and a university server — and two of those are pre-existing entries whose companion link works.
+[Chapter 17](../17_abstraction-as-insurance_4jk6.md)'s Robert C. Martin paper was moved off a mirror that blocks automation onto `objectmentor.com`, his own company's copy, which serves the PDF directly.
+
+**Consequence.**
+Ten new sections; three normalized; one link replaced.
+Slice 4 — reconciliation — is the last, and takes ledger rows against what each chapter now owns, then `tools/check-drift.py`.

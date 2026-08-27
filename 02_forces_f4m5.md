@@ -511,4 +511,11 @@ The remedy in each case is the same, and it is almost never applied — stop arg
 
 ---
 
+## Sources
+
+- Go, internal packages — [go.dev/doc/go1.4#internalpackages](https://go.dev/doc/go1.4#internalpackages).
+- FlowCore, `docs/decisions.md`, decision 1 — [github.com/ilke-akdeniz/flowcore](https://github.com/ilke-akdeniz/flowcore).
+
+---
+
 [← Ch. 01](01_the-five-kinds_cjx4.md)  ·  [Contents](00_toc.md)  ·  [Ch. 03 →](03_grading-a-law_q5c6.md)

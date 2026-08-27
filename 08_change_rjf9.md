@@ -316,4 +316,15 @@ Part III turns from laws to patterns, starting with the question the whole part 
 
 ---
 
+## Sources
+
+- Meir M. Lehman, *Programs, Life Cycles, and Laws of Software Evolution* — Proceedings of the IEEE 68(9), September 1980.
+- Frederick P. Brooks Jr., *The Mythical Man-Month* — Addison-Wesley, 1975.
+- Go, `io/ioutil` — [pkg.go.dev/io/ioutil](https://pkg.go.dev/io/ioutil).
+- *Go 1 and the Future of Go Programs* — [go.dev/doc/go1compat](https://go.dev/doc/go1compat).
+- Rob Pike, *What We Got Right, What We Got Wrong* — GopherConAU, 10 November 2023. [Text and slides](https://commandcenter.blogspot.com/2024/01/what-we-got-right-what-we-got-wrong.html).
+- Melvin E. Conway, *How Do Committees Invent?* — Datamation 14(4), April 1968. [melconway.com/Home/Committees_Paper.html](http://www.melconway.com/Home/Committees_Paper.html).
+
+---
+
 [← Ch. 07](07_scale_637f.md)  ·  [Contents](00_toc.md)  ·  [Ch. 09 →](09_what-a-pattern-is-for_3xzc.md)

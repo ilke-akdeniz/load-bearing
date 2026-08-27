@@ -235,7 +235,7 @@ Part V turns from diagnosis to method — [chapter 18](18_force-map-method_r37x.
 - SQLite, unsupported SQL — [sqlite.org/omitted.html](https://www.sqlite.org/omitted.html); upsert support — [sqlite.org/lang_upsert.html](https://www.sqlite.org/lang_upsert.html).
 - PostgreSQL, `SELECT … FOR UPDATE` — [postgresql.org/docs/current/sql-select.html#SQL-FOR-UPDATE-SHARE](https://www.postgresql.org/docs/current/sql-select.html#SQL-FOR-UPDATE-SHARE).
 - Go, `database/sql` — [pkg.go.dev/database/sql](https://pkg.go.dev/database/sql).
-- Robert C. Martin, *OO Design Quality Metrics: An Analysis of Dependencies*, October 1994 — [PDF](https://linux.ime.usp.br/~joaomm/mac499/arquivos/referencias/oodmetrics.pdf).
+- Robert C. Martin, *OO Design Quality Metrics: An Analysis of Dependencies*, October 1994 — [PDF](https://objectmentor.com/resources/articles/oodmetrc.pdf).
 
 ---
 
