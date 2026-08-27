@@ -91,6 +91,8 @@ func (c *Catalog) Create(ctx context.Context, definition WorkflowDefinition) err
 		return err
 	}
 
+	// defer runs this when the function returns, however it returns —
+	// so the rollback is a no-op once the commit below has succeeded.
 	defer func() { _ = tx.Rollback(ctx) }()
 
 	for _, step := range definition.Steps {
@@ -549,7 +551,7 @@ They share a cost model and they do not share a standing, which is worth being e
 
 The acyclicity claim follows from what a graph is. Its only precondition is that the two nodes are things you handle apart — and where that fails, the claim goes quiet rather than going wrong. No situation makes it false.
 
-The hiding claim has a precondition about the world: whether you control your callers. Change that and the advice does not go quiet, it can reverse — the ECS case below is one where exposing the representation is the correct answer and hiding it is the mistake.
+The hiding claim has a precondition about the world: whether you control your callers. Change that and the advice does not go quiet, it can reverse — the case below is one where exposing the representation is the correct answer and hiding it is the mistake. It comes from games, where an **entity-component-system** layout, ECS for short — state held in parallel arrays by field rather than in objects by entity — is the standard way to build a simulation with a hundred thousand moving things in it.
 
 That is the difference [chapter 01](01_the-five-kinds_cjx4.md) draws, arrived at from the mechanism rather than asserted: **a Law can be irrelevant but never wrong; a Principle can be wrong.**
 
@@ -815,6 +817,8 @@ Read it as: *you give me a function, and I will call it with the driver's own co
 
 ```go
 err := conn.Raw(func(driverConn any) error {
+	// The comma-ok form again: ok reports whether the value really was
+	// that type, instead of panicking when it was not.
 	pgxConn, ok := driverConn.(*pgx.Conn) // the driver's concrete type
 	if !ok {
 		return errors.New("not a pgx connection")
