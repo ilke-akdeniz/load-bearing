@@ -4651,3 +4651,41 @@ Nine chapters amended, one commit each or grouped where a group needed one chang
 Chapter statuses are unchanged; slice 2 is a rules pass, not a status transition.
 
 Slice 3 inherits a larger job than its description implies: **thirteen chapters have no `## Sources` section** — 02 through 13, and 19 — and two of slice 2's findings deferred to it, chapter 04's Parnas verification and chapter 08's Pike citation from slice 1.
+
+---
+
+## 114. *Force* is not a borrowed word, and the provenance paragraph is cut
+
+**Date.** 2026-08-26
+
+**Context.**
+Reviewing slice 2, the author cut [chapter 01](../01_the-five-kinds_cjx4.md)'s paragraph on where the word *Force* comes from — the pattern-writing literature, Alexander's formulation, and the note that the Gang of Four book does not use the term.
+Slice 2 had just strengthened that paragraph rather than questioning it, by moving the *Timeless Way of Building was not consulted* disclosure into it from `## Sources`.
+
+**The author's objection, in their own words.**
+
+> I don't think we borrowed this word, we didn't start by reading "Timeless Way of Building" and then thinking about forces and It doesn't seem that the way we use Forces and Appleton uses there are identical. I really don't think we need to be apolegitic about using such a common word and try to go such lengths to explain the provenance.
+
+**Decision.**
+The paragraph is deleted. The paragraph after it keeps only what it said about the book's own meaning, rewritten to stand alone: a Force is read before any pattern or technique is in view, and it is one of the five kinds in its own right, which is what lets it decide whether a Law binds and whether a Principle inverts.
+
+**Why the objection is right, stated in the book's own terms.**
+*Forces* in the pattern-writing literature is a **field in a template** — part of how a pattern is written up, describing the tensions that one pattern resolves.
+A Force in this book is a **kind of claim**. Those are not the same thing under one name, so the relationship was never a borrowing; it was a collision between a common word's two uses.
+Describing it as borrowed also contradicts what `CLAUDE.md` says about this model: *the five-kind model is the book's own, and every chapter that leans on it should read that way.* Two paragraphs of provenance for one of the five names read against that.
+
+**Three dependencies the cut had, found by survey rather than by the tag.**
+This is the *a wording problem found in one place is a survey* rule, and all three would have been left behind by a local deletion.
+
+- [Chapter 01](../01_the-five-kinds_cjx4.md)'s **opening paragraph forward-referenced it**: *"You will not find these five names used together this way elsewhere — with one exception, noted where that kind is defined below, because Force turns out to have a literature of its own."* The clause is now gone, and the sentence is stronger for it: the model is the book's own with no exception attached.
+- **Appleton was the chapter's only `## Sources` entry.** Nothing in the chapter cites him now, so the entry and the section went with the paragraph. Amdahl and Knuth are named in passing but no work is cited for either, and their chapters own them.
+- **`docs/LEDGER.md` had a row** — *Force is a borrowed word* — assigning the concept to `cjx4`. Deleted; no chapter carries it.
+
+**What is lost, recorded so the decision can be reversed knowingly.**
+A reader who searches for *forces* alongside *patterns* will find Alexander and Appleton, and will find the word used for something else.
+The deleted paragraph pre-empted that. Nothing does now.
+The judgement is that the risk is small — this section and the whole of [chapter 02](../02_forces_f4m5.md) define the book's sense at length, so a reader has no shortage of context — and that it does not justify two paragraphs of apology in the chapter that introduces the model.
+
+**Consequence for slice 3.**
+[Chapter 01](../01_the-five-kinds_cjx4.md) now has **no `## Sources` section, deliberately**, because it cites no work.
+Slice 3's instruction is that every chapter lacking one gets one, and this chapter is the exception unless slice 3 finds a citation the chapter actually makes.

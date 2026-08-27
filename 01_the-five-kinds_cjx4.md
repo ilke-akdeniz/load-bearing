@@ -4,7 +4,7 @@
 
 **Every claim you meet about software is one of five kinds, and the kind determines how much authority it has** — not the confidence of the person saying it, not their track record, not how widely it is repeated.
 
-This premise, and the model attached to it, are this book's own. You will not find these five names used together this way elsewhere — with one exception, noted where that kind is defined below, because *Force* turns out to have a literature of its own. What you should find, if the model is any good, is that the distinctions it draws were already familiar and mostly unnamed.
+This premise, and the model attached to it, are this book's own. You will not find these five names used together this way elsewhere. What you should find, if the model is any good, is that the distinctions it draws were already familiar and mostly unnamed.
 
 Both are assumed by the rest of the book rather than proved by this one, and that is worth saying, because every other chapter makes a claim and then demonstrates it. This chapter cannot, in two different ways. That the kind determines authority is true by construction, since the kinds are *defined* by their authority — there is nothing left to show. That every claim falls into one of the five is an exhaustiveness claim, and it is not exhaustive: a fact about one program, an evaluative remark, a sociological observation about the industry are all claims about software that fit nowhere here.
 
@@ -34,9 +34,7 @@ A **property of your situation**: is there concurrency, does the data outlive th
 
 Forces are not recommendations, and they are not negotiable by argument. They are facts about where you are standing. Most unresolvable architecture disagreements are two people holding different Forces in mind while arguing about Principles. ([Chapter 02](02_forces_f4m5.md) is entirely about them.)
 
-**This word is borrowed, and it is the one of the five you can go and look up** — though not where you would expect. In the literature on how to *write* patterns, *Forces* is a named element of the description, sitting alongside Problem, Context and Solution: the constraints and tensions a pattern has to resolve, and how they conflict with each other. The idea is Christopher Alexander's, whose formulation is that a pattern states a relationship between a context, a system of forces arising in that context, and a configuration that lets those forces resolve themselves — given here as Appleton's paper reports it, since *The Timeless Way of Building* was not consulted. The Gang of Four book, which is what most people mean by design patterns, does not use the term at all. 
-
-Two things differ here, and together they are why the word does a different job in this book. There, forces live *inside* a pattern's write-up and describe the tension that one pattern resolves; here they are properties of your situation, read before any pattern is in view. And there they are a field in a template; here a Force is one of the kinds of claim — which is what lets it decide whether a Law binds and whether a Principle inverts. [-- we might have our reasons to put the two previous paragraphs here back then, but as of now this first paragraph looks out of place to me. I don't think we borrowed this word, we didn't start by reading "Timeless Way of Building" and then thinking about forces and It doesn't seem that the way we use Forces and Appleton uses there are identical. I really don't think we need to be apolegitic about using such a common word and try to go such lengths to explain the provenance. I would just delete the first paragraph and then only use the parts that specify what we mean by force in this paragraph.]
+A Force is read before any pattern or technique is in view, and it is one of the five kinds in its own right — which is what lets it decide whether a Law binds and whether a Principle inverts.
 
 ### Principle
 
@@ -315,12 +313,6 @@ Until then, follow the local convention — not because it is a good proxy for c
 That last one is the most expensive and the easiest to fix. When an architecture argument will not converge, stop arguing about the Principle and ask what each side believes about the situation. The disagreement is usually not about the advice at all, but about the situation both sides are applying it to.
 
 [Chapter 02](02_forces_f4m5.md) takes Forces seriously — the properties of a situation that decide which Laws bind and which Principles hold, and why naming one is not the same act as evaluating it.
-
----
-
-## Sources
-
-- Brad Appleton, *Patterns and Software: Essential Concepts and Terminology* — [bradapp.com/docs/patterns-intro.html](https://www.bradapp.com/docs/patterns-intro.html).
 
 ---
 
