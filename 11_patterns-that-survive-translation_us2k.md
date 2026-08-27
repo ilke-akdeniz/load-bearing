@@ -409,7 +409,7 @@ cache.Set(key, value, ttl)
 
 - **Object pool** — reuse expensive-to-create things. [Chapter 07](07_scale_637f.md)'s warning applies: measure, because a pool can easily cost more than the allocation it avoids.
 - **Backpressure** — when the consumer cannot keep up, make the producer wait rather than growing a queue. The alternative is [chapter 07](07_scale_637f.md)'s queue curve, and it ends in memory exhaustion.
-- **CQRS** — separate the write model from the read model, so each can be shaped for its own access pattern. Its real cost is that they are now two models that can disagree.
+- **CQRS**, for Command Query Responsibility Segregation — separate the write model from the read model, so each can be shaped for its own access pattern. Its real cost is that they are now two models that can disagree.
 - **Materialised view** — precompute the answer, and accept that it lags.
 - **Data-oriented layout** — [chapters 03](03_grading-a-law_q5c6.md) and 07 own it; the 7× that comes from where the bytes sit rather than what the algorithm does.
 
