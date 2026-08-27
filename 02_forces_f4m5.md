@@ -146,9 +146,9 @@ Two conditions make the first row cheap, and both are worth naming because neith
 Now one function, and nothing careless about it:
 
 ```python
-def split(total, n):
-    """Divide a charge into n equal line items."""
-    return [round(total / n, 2)] * n
+def split(total, parts):
+    """Divide a charge into equal line items."""
+    return [round(total / parts, 2)] * parts
 ```
 
 Behind a dashboard that charts revenue per category, this is correct. The rounding error is smaller than the precision anyone reads off a chart, and no decision changes because of it.
@@ -165,12 +165,12 @@ The three line items add up to a penny more than the charge, because 8.03 ÷ 3 i
 In minor units the same split is exact, and the leftover has to be placed deliberately rather than silently:
 
 ```python
-def split_minor(total_cents, n):
-    base = total_cents // n     # 803 // 3 = 267 cents per line
-    remainder = total_cents % n # 803 %  3 =   2 cents left over
+def split_minor(total_cents, parts):
+    base = total_cents // parts     # 803 // 3 = 267 cents per line
+    remainder = total_cents % parts # 803 %  3 =   2 cents left over
 
     lines = []
-    for i in range(n):
+    for i in range(parts):
         # The leftover cannot be divided, so it is handed out one cent
         # at a time to the first `remainder` lines. Nothing is dropped
         # and nothing is invented — the lines always sum to the total.
@@ -304,7 +304,7 @@ The same operation — fetching a user's record — under three different budget
 ```python
 # A web page render with 200 ms latency budget. A database round trip is one percent
 # of it. Spend the round trip and think about something else.
-user = db.query("select * from users where id = %s", uid)
+user = db.query("select * from users where id = %s", user_id)
 ```
 
 ```go
@@ -312,7 +312,9 @@ user = db.query("select * from users where id = %s", uid)
 // page finishes loading, or the slot is sold to someone else. A round
 // trip now eats most of the budget, so the design question changes from
 // "how do I fetch this" to "how stale is this allowed to be."
-if user, ok := cache.Get(uid); ok {
+// The second result, ok, is Go's comma-ok idiom: it reports whether
+// the key was found.
+if user, ok := cache.Get(userID); ok {
 	return user
 }
 ```
@@ -322,7 +324,7 @@ if user, ok := cache.Get(uid); ok {
    millionths of a second, about the time a single main-memory read
    takes. There is no lookup at all. The data is already resident and
    indexed by id, and the memory layout is the design. */
-user_t *user = &users[uid];
+user_t *user = &users[user_id];
 ```
 
 **What changes with the Force:** what you are able to spend on abstraction. At 200 milliseconds an interface, a copy, and an allocation are all invisible against a database round trip, so buy them. At 200 microseconds those same three cost a measurable share of everything you have, and the code stops looking like the code in books — not because its authors are cleverer, but because they cannot afford what you can. [Chapter 07](07_scale_637f.md) owns the arithmetic underneath this; [chapter 04](04_structure_agjy.md)'s entity-component case is this Force pushed to its end.
