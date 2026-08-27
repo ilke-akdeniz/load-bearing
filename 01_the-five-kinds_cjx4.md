@@ -1,16 +1,6 @@
 # The Five Kinds of Claim
 
-## The book's model
-
-**Every claim you meet about software is one of five kinds, and the kind determines how much authority it has** — not the confidence of the person saying it, not their track record, not how widely it is repeated.
-
-The five are Law, Force, Principle, Idiom and Style. Throughout the book they are called by those names, never by number. The names carry the meaning; a number would be one more thing to decode.
-
-The claim above has two halves, and the rest of the book assumes both rather than proving them here. That is worth saying at the start, because every other chapter makes a claim and then demonstrates it, and this one does not. That the kind determines authority is true by construction, since the kinds are *defined* by their authority — there is nothing left to show. That every claim falls into one of the five is an exhaustiveness claim, and it is not exhaustive: a fact about one program, an evaluative remark, a sociological observation about the industry are all claims about software that fit nowhere here.
-
-So what follows is a way of sorting rather than a proof, and it is judged by what it lets you see. Its later sections ask *where the model breaks down* and *what the model costs* rather than the usual questions, because those are the honest ones to ask of a tool.
-
-## The five kinds
+**Every claim you meet about software is one of five kinds: Law, Force, Principle, Idiom, Style. And the kind of a claim determines how much authority it has** — not the confidence of the person saying it, not their track record, not how widely it is repeated.
 
 Four of them are advice, and those four form a ladder of authority:
 
@@ -20,13 +10,13 @@ The fifth, Force, is not advice at all. It is the input that decides where on th
 
 So the count is not five of one thing. **There are four levels and five kinds** — the levels are rungs on the ladder, and Force is the fifth kind precisely because it is not on it. That distinction matters more than it first appears, and the rest of the chapter turns on it.
 
-### Law
+## Law
 
 True by the mechanics of computation. Violating one produces a **wrong program**, and the wrongness does not depend on your language, your team, or your taste.
 
 You do not get to disagree with a Law. You only get to be in a situation where its preconditions are absent — which is a different thing, and the subject of the next section.
 
-### Force
+## Force
 
 A **property of your situation**: is there concurrency, does the data outlive the code, how large is the blast radius of a bug, do you control the callers, how often does this change.
 
@@ -34,13 +24,13 @@ Forces are not recommendations, and they are not negotiable by argument. They ar
 
 A Force is read before any pattern or technique is in view, and it is one of the five kinds in its own right — which is what lets it decide whether a Law binds and whether a Principle inverts.
 
-### Principle
+## Principle
 
 Advice that is **good given certain Forces** and stops being good — sometimes reverses outright — when those Forces change.
 
 The mark of a Principle is that it has conditions. A Principle stated without its conditions has been promoted, usually by accident, and that promotion is the failure this book exists to catch.
 
-### Idiom
+## Idiom
 
 An **ecosystem convention**. Locally correct, non-transferable, and usually traceable to a language feature that is present or absent.
 
@@ -50,7 +40,7 @@ An Idiom is not arbitrary — there is normally a real reason it grew where it d
 
 Dependency injection shows both halves. Wired by hand, the dependencies are constructor arguments, so getting one wrong is a type error and the program does not build. Through a container they are resolved at run time from a registration list, so the same mistake compiles and surfaces on the first request that needs the missing service. Two programs that are both correct serve identical responses; the one that is wrong fails at a different time and with a different amount of help.
 
-### Style
+## Style
 
 Naming, formatting, file layout. **Arbitrary, but worth being consistent about.**
 
@@ -309,6 +299,11 @@ Until then, follow the local convention — not because it is a good proxy for c
 - Two people making increasingly detailed arguments while disagreeing about a Force neither has stated.
 
 That last one is the most expensive and the easiest to fix. When an architecture argument will not converge, stop arguing about the Principle and ask what each side believes about the situation. The disagreement is usually not about the advice at all, but about the situation both sides are applying it to.
+
+## 
+The book assumes the five claim classification and the authority mapping are true and explores the implications. That is worth saying now, because every other chapter makes a claim and then demonstrates it, and this one did not. That the kind determines authority is true by construction, since the kinds are *defined* by their authority — there is nothing left to show. [-- I dont' understand the following sentence, remove it or put it more clearly.  ] That every claim falls into one of the five is an exhaustiveness claim, and it is not exhaustive: a fact about one program, an evaluative remark, a sociological observation about the industry are all claims about software that fit nowhere here.
+
+So this chapter was a way of sorting rather than a proof, and it should be judged by what it lets you see. 
 
 [Chapter 02](02_forces_f4m5.md) takes Forces seriously — the properties of a situation that decide which Laws bind and which Principles hold, and why naming one is not the same act as evaluating it.
 
