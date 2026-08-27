@@ -4513,3 +4513,73 @@ Row *Compatibility adopted rather than suffered* carries the mechanism the chapt
 
 [Chapter 01](../01_the-five-kinds_cjx4.md)'s `## Sources` entry for the Pike retrospective is removed with the paragraph that cited it; nothing in that chapter cites him now.
 [Chapter 08](../08_change_rjf9.md) still has no `## Sources` section and still needs one for the same talk, which remains slice 3's work.
+
+---
+
+## 112. `docs/ABOUT.md` reviewed before slice 2, and it was wrong about the book in six ways
+
+**Date.** 2026-08-26
+
+**Context.**
+`CLAUDE.md` requires `docs/ABOUT.md` to be reviewed before slice 2, on the grounds that slice 2 applies the chapter rubric to every chapter and measuring the book against an unchecked statement of that rubric is circular.
+The review found the document had drifted from the book on every count it makes.
+`README.md` names it as the home for the rubric, the language conventions, the running example, and the license, so its scope was never in question and this is a correction pass rather than a question about what the file is for.
+
+**The two findings that matter, because they are in the rubric itself.**
+
+**Part IV named the wrong chapters, and `CLAUDE.md` carried the same error.**
+Both documents said [chapters 14](../14_principle-loses-scope_b86v.md), 16 and 17 are the case studies.
+`CLAUDE.md`'s very next clause contradicts it — *"[chapter 14](../14_principle-loses-scope_b86v.md) makes the claim; they are three instances of it"* — and the files settle it.
+[Chapter 14](../14_principle-loses-scope_b86v.md) uses the general rubric, opening on `## The claim` and running through `## The demonstration`.
+[Chapters 15](../15_behaviour-placement_z47a.md), 16 and 17 all use the case-study shape, opening on `## The advice` and `## What the wide reading produces`.
+So the list should read 15, 16 and 17, and [chapter 15](../15_behaviour-placement_z47a.md) had been sitting under a rubric that does not describe it.
+Corrected in both files, and `CLAUDE.md` now also says explicitly that [chapter 14](../14_principle-loses-scope_b86v.md) keeps the general rubric, which is the fact that made the original sentence ambiguous.
+
+Caught only because this review is scheduled before slice 2 rather than after.
+Slice 2 is the pass that would have enforced the wrong rubric on [chapter 15](../15_behaviour-placement_z47a.md).
+
+**The back matter was described in the wrong order and missing a component.**
+`ABOUT.md` had it as *"a Sources section … and a line handing off to the next chapter."*
+The handoff is not back matter: it is the argument's last paragraph, before the divider, written as prose with no label.
+After the divider come Sources and then the navigation row, which the document never mentioned at all.
+
+**Four further corrections, each a claim about the book that had stopped being true.**
+
+*Languages.*
+`ABOUT.md` said Go, C# and Python carry most examples, with Rust, TypeScript, C and SQL where needed.
+Counting fenced blocks across the twenty-two chapters: Go 119, Python 25, SQL 14, **Java 10**, C# 6, C 2, Rust 1, JavaScript 1, **TypeScript 0**.
+Java is the third-heaviest language in the book and was named in neither document; TypeScript is named in both and appears nowhere.
+C# is lighter than Java and was billed as one of the three that carry the book.
+Rewritten to what the book contains, with Java placed where it actually sits — the chapters on missing language features and on behaviour placement, both of which need a class-based contrast.
+
+*The running example's range.*
+Both documents said FlowCore supplies examples in Parts II and V.
+It also carries [chapters 15](../15_behaviour-placement_z47a.md) and 16, at six and seven mentions, which is as heavy as anything in Part V.
+Corrected to Parts II, IV, and V in both.
+Parts I and III have one passing mention each and are not claimed.
+
+*The filename convention.*
+`ABOUT.md` still said `NN_slug.md`, from before decision 107 gave every chapter a permanent identifier.
+Now `NN_slug_ID.md`, with one line on why the identifier exists, since a reader looking at the repository will otherwise read the four characters as noise.
+
+*Two broken references.*
+The license linked to `LICENSE`, which from `docs/` resolves to a file that does not exist; now `../LICENSE`.
+And the Files section ended *"This README is the entry point"*, which `ABOUT.md` is not.
+
+**Also.**
+The working-documents list named only `DECISIONS.md` and `LEDGER.md`; `STATUS.md` and `docs/pending-tasks/` are added.
+`LEDGER.md` was described as *"one owner per chapter"*, which inverts it — the ledger assigns one owner per concept.
+
+**The Part IV exception is stated in one sentence, not reproduced.**
+Put to the author as the review's only real choice, since `ABOUT.md` could have carried the full seven-step alternate shape.
+The author took the compact form.
+The reason it is the right one is that two documents stating the same rubric in full is the drift class `tools/check-drift.py` exists to kill, and nothing checks `ABOUT.md` against `CLAUDE.md`.
+`CLAUDE.md` stays the operative checklist for slice 2; `ABOUT.md` tells a reader the shape is not uniform and why.
+
+**Consequence.**
+`docs/ABOUT.md` is rewritten.
+`CLAUDE.md` takes three corrections: the Part IV chapter list, FlowCore's range, and the language palette.
+
+The language palette is the one to look at again, because it is a rule rather than a description and changing it was the draft's call.
+It now reads *"Go and Python carry most examples, with Java and C# where a point needs a class-based contrast; SQL, C, Rust, and JavaScript appear where a point needs them."*
+The old wording was not wrong as guidance — it was a palette to reach for — but it named a language the finished book never used and omitted one it uses ten times, and slice 2 checks chapters against these rules.

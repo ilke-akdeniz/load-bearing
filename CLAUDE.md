@@ -135,7 +135,7 @@ Provenance stays in the prose where the claim is made, so the section adds no fo
 
 ### Part IV takes a different shape
 
-[Chapters 14](14_principle-loses-scope_b86v.md), 16 and 17 are case studies. [Chapter 14](14_principle-loses-scope_b86v.md) makes the claim; they are three instances of it, and they do not each get a claim of their own.
+[Chapters 15](15_behaviour-placement_z47a.md), [16](16_tdd-and-mocks_u8eu.md) and [17](17_abstraction-as-insurance_4jk6.md) are case studies. [Chapter 14](14_principle-loses-scope_b86v.md) makes the claim and keeps the general rubric; they are three instances of it, and they do not each get a claim of their own.
 
 Forcing the rubric on them produced manufactured claim sentences — each one two assertions welded with *and* or *neither/nor*, half reporting what a source said and half stating the chapter's technical finding. The author rejected all four. **A chapter whose job is to be evidence for another chapter's claim does not need a claim; it needs the case laid out.**
 
@@ -184,7 +184,7 @@ Where the name is initials of people — FLP is Fischer, Lynch, and Paterson —
 
 **A code demonstration for every major claim.**
 Not an illustration bolted on afterwards; the code should be the argument.
-Go, C#, and Python carry most examples; Rust, TypeScript, C, and SQL appear where a point needs them.
+Go and Python carry most examples, with Java and C# where a point needs a class-based contrast; SQL, C, Rust, and JavaScript appear where a point needs them.
 
 **Write for an engineer who is a tourist in this domain.**
 The reader is experienced, and experienced in *their* specialty rather than in all the ones this book crosses.
@@ -320,7 +320,7 @@ Then **write that into the sentence** — there is no tagging notation.
 The five-kind model is the book's own, and every chapter that leans on it should read that way.
 
 **Running example.**
-FlowCore — a Go workflow library at `~/s/flowcore` with a 38-entry decision log — supplies examples in Parts II and V, because its reasoning was recorded at the time rather than reconstructed afterwards.
+FlowCore — a Go workflow library at `~/s/flowcore` with a 38-entry decision log — supplies examples in Parts II, IV, and V, because its reasoning was recorded at the time rather than reconstructed afterwards.
 Each appearance must show a *different* facet. No chapter rests on FlowCore alone.
 
 ## Markdown conventions
