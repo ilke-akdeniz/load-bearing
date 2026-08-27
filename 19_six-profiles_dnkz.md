@@ -160,7 +160,7 @@ This is the common case rather than the exception, and it is where the chapter's
 
 A game with a persistent inventory is two profiles in one repository. The frame loop is games — arrays, no allocation, determinism. The inventory is line-of-business — it outlives the client build, it is worth money to the player, and a torn write is a support ticket. A trading system is real-time on one path and durable-audit on another. A browser is a UI framework hosting a compiler.
 
-The mistake is choosing one profile and applying it throughout. A game that treats its save file with frame-loop discipline loses inventories; an inventory service that treats the frame loop with LOB discipline misses frames.
+The mistake is choosing one profile and applying it throughout. A game that treats its save file with frame-loop discipline loses inventories; an inventory service that treats the frame loop with line-of-business discipline misses frames.
 
 **What to do is a boundary question, and the boundary is a real one: it goes where the force profile changes.** That is the same seam [chapter 04](04_structure_agjy.md) draws for dependency direction and [chapter 08](08_change_rjf9.md) draws for rate of change, arriving from a third direction. Concretely:
 

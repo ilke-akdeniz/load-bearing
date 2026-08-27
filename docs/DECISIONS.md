@@ -4583,3 +4583,71 @@ The reason it is the right one is that two documents stating the same rubric in 
 The language palette is the one to look at again, because it is a rule rather than a description and changing it was the draft's call.
 It now reads *"Go and Python carry most examples, with Java and C# where a point needs a class-based contrast; SQL, C, Rust, and JavaScript appear where a point needs them."*
 The old wording was not wrong as guidance — it was a palette to reach for — but it named a language the finished book never used and omitted one it uses ten times, and slice 2 checks chapters against these rules.
+
+---
+
+## 113. Slice 2 of the final sweep: rules applied to the chapters that predate them
+
+**Date.** 2026-08-26
+
+**Context.**
+Slice 2 checks each chapter against the rules in `CLAUDE.md` that postdate it, excluding rules that were already applied retroactively.
+The method `CLAUDE.md` prescribes is `git log CLAUDE.md` against each chapter's own history, and a commit touching this file *and* many chapters at once counts as already applied.
+
+**The timeline, built once and worth keeping.**
+Every chapter's most recent commits are the mechanical sweeps of 2026-08-25 — renumbering, identifiers, navigation — so the date that decides which rules a chapter was written under is its **creation** date, not its last touch.
+
+Two rules were never applied retroactively and reach the most chapters:
+
+| Rule | Added | Chapters predating it |
+|---|---|---|
+| Identifier naming in code samples | 2026-08-15 | 01–11 |
+| A source's register is not the book's | 2026-08-19 | 01–15 |
+
+Chapters 17–22 postdate every rule in the file, so slice 2's remit for them is empty.
+
+**What was found, by chapter.**
+
+[Chapter 01](../01_the-five-kinds_cjx4.md) — three, and the first is the one worth recording. The chapter establishes that *"the levels are rungs on the ladder, and Force is the fifth kind precisely because it is not on it"*, then closed by saying a disagreement about a Force sits *"one rung down from where it is being conducted."*
+That is the four-levels-five-kinds rule broken by the chapter that defines it, eleven days after the rule was written.
+Also `goroutine` unglossed in a code comment, which survived because automated checks skip fenced code; and a three-sentence annotation in `## Sources` whose real content — Alexander quoted via Appleton, *The Timeless Way of Building* unread — moved into the prose making the claim.
+
+[Chapter 02](../02_forces_f4m5.md) — `uid` across three samples in Python, Go and C, and `n` for a line-item count in two more. Both `split` samples were re-run after the rename rather than assumed; output unchanged. The comma-ok idiom had no gloss anywhere, though `CLAUDE.md` names it twice.
+
+[Chapter 04](../04_structure_agjy.md) — `defer` and comma-ok unglossed, and `ECS` used bare with its expansion arriving 47 lines later.
+Parnas was verified against the paper rather than trusted, because the chapter says *"Parnas proposed something narrower"*, which is the sentence shape that triggers reading the source. Both claims hold verbatim: *"it is almost always incorrect to begin the decomposition of a system into modules on the basis of a flowchart"*, and *"Every module … is characterized by its knowledge of a design decision which it hides from all others."*
+No change was needed, and the chapter has no `## Sources` section to record that in yet.
+
+[Chapter 06](../06_distribution_49yh.md) — CAP was stated as *"a linearizable register cannot also be available during a partition"*, with linearizability then listed among the assumptions, unexplained.
+This is exactly what the source-register rule is about: the sentence is CAP's formal statement in CAP's vocabulary, and the reader decodes rather than follows. Rewritten to lead with the situation and name the thing last, and to say that *Consistency* here is much narrower than the everyday word.
+
+[Chapter 09](../09_what-a-pattern-is-for_3xzc.md) — a repository called `repo`, in the chapter that examines the Repository name.
+
+[Chapter 11](../11_patterns-that-survive-translation_us2k.md) — `CQRS` bare, though it is on the must-expand list.
+
+**A ledger row that kept vocabulary its chapter had dropped.**
+The source-register rule was written *about* [chapter 16](../16_tdd-and-mocks_u8eu.md) carrying the `GRA / UNI / SEQ / REF` abbreviations from Fucci et al.
+The chapter was fixed. `docs/LEDGER.md`'s row for the same exhibit was not, and still read *"GRA, UNI, SEQ, REF and which survived model selection"* — the retired vocabulary preserved in the index that is read before drafting.
+This is the failure `CLAUDE.md` describes under *a wording problem found in one place is a survey*: the ledger carries the same vocabulary and goes stale silently.
+Rewritten in the chapter's own words, and a count corrected on the way — three of the four dimensions survived the analysis, not two.
+
+**Four chapters were checked and needed nothing, which is worth recording as a result rather than a silence.**
+
+[Chapter 07](../07_scale_637f.md) is the model `CLAUDE.md` cites for leading with the situation, and it earns it — *utilization* is given in the queueing sense at first use, a cache line is *"64 bytes on most machines"*, Coherency gets a full paragraph before the bare term reappears 130 lines later, and the Universal Scalability Law arrives with the caveat that its coefficients are fitted rather than derived.
+
+[Chapter 08](../08_change_rjf9.md) satisfies the no-splicing rule in the text itself: *"The negotiation mechanism is his. What this book adds is the asymmetry…"* and *"Conway states the homomorphism; drawing this consequence out of its direction is this book's."*
+
+[Chapter 15](../15_behaviour-placement_z47a.md) quotes Riel by heuristic number, gives his own gloss on *related*, and carries his standing instruction that the sixty are *"warning bells"* rather than rules.
+
+[Chapter 14](../14_principle-loses-scope_b86v.md)'s Pike comparison — the passage that produced the read-the-whole-source rule — now labels itself *"a structural claim rather than an empirical one"*, so the relationship between the two proverbs reads as the book's observation rather than as Pike's.
+
+**Two things fixed that no postdating rule required.**
+[Chapter 04](../04_structure_agjy.md) used *Part one* through *Part four* as its own section headings, colliding with the book's Parts I–V, so *"Part three works through one that doesn't"* read as a reference to Part III. Put to the author, who chose to rename; the headings were already descriptive after the colon, so the number was carrying nothing.
+[Chapter 19](../19_six-profiles_dnkz.md) spelled out *line-of-business* three times and abbreviated it to `LOB` once, between two spelled-out uses. One word.
+
+**Consequence.**
+Nine chapters amended, one commit each or grouped where a group needed one change between them.
+`docs/LEDGER.md` takes one row rewrite.
+Chapter statuses are unchanged; slice 2 is a rules pass, not a status transition.
+
+Slice 3 inherits a larger job than its description implies: **thirteen chapters have no `## Sources` section** — 02 through 13, and 19 — and two of slice 2's findings deferred to it, chapter 04's Parnas verification and chapter 08's Pike citation from slice 1.
