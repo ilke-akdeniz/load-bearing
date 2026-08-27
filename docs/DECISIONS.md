@@ -4944,3 +4944,31 @@ Roughly a hundred instances across [chapters 08](../08_change_rjf9.md), [14](../
 The book now runs 124 capital to 14 lower case on *Force*, 59 to 4 on *Principle*, and 42 to 0 on *Idiom* — and every survivor is an attributive compound on the keep-list above.
 
 [Chapter 18](../18_force-map-method_r37x.md)'s claim was the sentence that mattered most, and it now names the model's three rungs as the model names them: *Forces, then Principles, then Idioms.*
+
+---
+
+## 121. The book has no closing section, by decision
+
+**Date.** 2026-08-27
+
+**Context.**
+The end-to-end read reported that the book has no ending: [chapter 22](../22_never-written-down_at4r.md) closes its own argument and stops, so the last words of the book are a *How to recognize the failure* paragraph and nothing returns to the question `README.md` opens with.
+The author asked for an attempt at one.
+
+**What was tried.**
+A final section in [chapter 22](../22_never-written-down_at4r.md), after the rubric and before the back matter, in which the book ran its own test on itself — the five-kind model classified as a sorting scheme that sits outside the things it sorts, the three conditions the book's Principles carry stated in one place, and the observation that this book arrived as confident prose in one voice like the advice it examines, which is what the decision log exists to answer.
+
+Two shapes were ruled out before that one and are recorded so they are not tried again. A recap of the argument is excluded by the register rules, which put grand summaries out of bounds, and would also be [chapter 14](../14_principle-loses-scope_b86v.md)'s mechanism running on the book in its own final pages. A closing exhortation is worse on both counts.
+
+**Decision — reverted, and the book ends where it ended.**
+The author's judgement:
+
+> I read it and simply didn't like it, it's a dead end that can't be salvaged.
+
+Reverted in full; [chapter 22](../22_never-written-down_at4r.md) is byte-identical to its state before the attempt.
+
+**The point of recording it.**
+The absence is now a decision rather than an oversight, which matters because a later pass over a finished book will notice the missing ending exactly as this read did.
+The finding was correct and the remedy was not, and *the book stops on its last chapter's own last sentence* is the answer, not a gap waiting to be filled.
+
+No reason beyond the author's judgement is recorded here, because none was given and inventing one would misrepresent what happened.
