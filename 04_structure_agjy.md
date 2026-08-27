@@ -32,7 +32,7 @@ Two things follow, and they are the difference between the two claims:
 - **Claim one is exactly the condition that ranks can be assigned at all.** Try the rule on a cycle and it never terminates: A's rank needs B's, which needs A's. Acyclic and rankable are the same property.
 - **Claim two adds that every arrow crosses exactly one rank.** Rank 4 may use rank 3. It may not reach down to rank 1, even though nothing about acyclicity forbids that.
 
-The second is a real constraint, most systems do not satisfy it, and Part three works through one that doesn't.
+The second is a real constraint, most systems do not satisfy it, and *When the shape isn't a line*, below, works through one that doesn't.
 
 Claim three is where the physical boundary arrives, and it varies by ecosystem in a way worth noticing. In Java and C# it was usually separate projects, assemblies, or shipped libraries; elsewhere it shows up as top-level directories or packages. What each of those forms actually enforces is not the same — a directory is a package in Go, carries no access meaning in C# until assemblies split, and enforces nothing in Python — and [chapter 20](20_idioms_7nkn.md) works through why ecosystems diverge like this.
 
@@ -79,7 +79,7 @@ The one thing that does vary with size is whether the two nodes are ever handled
 
 ## The demonstration
 
-### Part one: a cycle, and what notices it
+### A cycle, and what notices it
 
 Two pieces of a workflow library. A store that writes rows, and a service that composes writes into a transaction.
 
@@ -266,7 +266,7 @@ type Billing struct{ plans PlanLookup }
 
 The difference is not that an interface appeared. It is **which module owns it.** An interface declared by `accounts` and handed to `billing` would leave the arrow pointing exactly where it was; what reverses the direction is `billing` declaring what it needs, in its own terms. That distinction is the whole of dependency inversion, and it is the reason `net/http` may call up into your handler without a violation.
 
-### Part two: layering, without directories
+### Layering, without directories
 
 FlowCore's dependency graph is a line — service, then store, then error mapping. It is also one flat Go package with no subdirectories, so nothing about the file system enforces it.
 
@@ -314,7 +314,7 @@ Two things follow, and they are the point of the example.
 
 So: **layer ≠ directory.** A layer is a rule about which direction calls may go. Nothing about that rule requires, implies, or is helped by a file hierarchy.
 
-### Part three: when the shape isn't a line
+### When the shape isn't a line
 
 FlowCore's graph happens to be a line. A compiler's is not, and it is worth walking through why, because this is the case where insisting on a line does visible damage.
 
@@ -414,7 +414,7 @@ Sharpened:
 
 > **Managed, acyclic dependency direction is the Law. Layering is its most common shape, not its definition.**
 
-### Part four: what you expose
+### What you expose
 
 Parts one to three were about which way the arrows point. This one is about how many arrows exist at all.
 
@@ -904,7 +904,7 @@ Add a method to `IOrderService` and you now edit two files, one of which forward
 mux.Handle("/orders", logging(ordersHandler))
 ```
 
-The test from Part three applies unchanged: does this thing decide something, or does it forward? Logging forwards. It is not a layer.
+The layering test applies unchanged: does this thing decide something, or does it forward? Logging forwards. It is not a layer.
 
 ---
 
