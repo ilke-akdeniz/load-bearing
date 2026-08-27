@@ -347,7 +347,7 @@ That is a legitimate use of a mock and it is not what this chapter argues agains
 
 **Mutation testing is expensive.** Catching a test that cannot fail means running the whole suite once for every deliberate break, which for a large suite is hours. It is worth it for load-bearing code and it is not worth it everywhere, which means somebody has to decide where — and that decision has no rule to hand.
 
-One input to that decision is whether you wrote the tests. An author has a list, even an informal one, of the assertions they were unsure about, and spot-checking works because that list exists. Tests generated in bulk arrive without it, and the ones worth mutating are the ones nobody formed an opinion about. Mutation is no cheaper there, and the cheap alternative to it is gone.
+One input to that decision is whether you wrote the tests. An author has a list, even an informal one, of the assertions they were unsure about, and spot-checking works because that list exists. Tests generated in bulk arrive without it, and the ones worth mutating are the ones nobody formed an opinion about. Mutation is no cheaper there, and the cheap alternative to it is gone. [-- let's remove previous two paragraphs, the late addition didn't mesh well]
 
 ---
 
