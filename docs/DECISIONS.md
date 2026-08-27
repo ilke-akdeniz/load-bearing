@@ -4786,3 +4786,45 @@ All 50 unique URLs across every Sources section were checked, including the pre-
 **Consequence.**
 Ten new sections; three normalized; one link replaced.
 Slice 4 — reconciliation — is the last, and takes ledger rows against what each chapter now owns, then `tools/check-drift.py`.
+
+---
+
+## 117. Slice 4 of the final sweep: reconciliation
+
+**Date.** 2026-08-26
+
+**Context.**
+The last slice: ledger rows against what each chapter now owns, then `tools/check-drift.py`.
+345 rows across 22 chapters, after three slices that changed nine chapters, deleted two working documents, and cut four paragraphs on the author's review.
+
+**Structural checks, all clean.**
+Every ledger owner id resolves to a real chapter, every chapter has rows, and no row points at `docs/pending-tasks/` now that the two discharged documents are gone.
+No row references material the sweep cut — the *Force is a borrowed word* row went with decision 114, and the two rows for the [chapter 01](../01_the-five-kinds_cjx4.md) and [16](../16_tdd-and-mocks_u8eu.md) additions went with decision 111.
+Every relative link in every chapter, the contents page and the README resolves to a file that exists.
+
+**One real drift, and it is the third instance of a claim fixed twice already.**
+`docs/LEDGER.md`'s *Deliberate repetition* section said FlowCore *"appears across Parts II and V"*.
+Decision 112 corrected that claim in `docs/ABOUT.md` and `CLAUDE.md` after counting — it also carries [chapters 15](../15_behaviour-placement_z47a.md) and [16](../16_tdd-and-mocks_u8eu.md), at six and seven mentions, so the range is Parts II, IV, and V.
+The ledger was not in that grep, which is exactly the failure `CLAUDE.md` describes: *the ledger carries the same vocabulary, goes stale silently.* Twice now in one sweep, counting the `GRA / UNI / SEQ / REF` row in slice 2.
+
+**Two rows that had fallen behind their chapters.**
+
+*Why the kinds get confused* listed three mechanisms; [chapter 01](../01_the-five-kinds_cjx4.md) states four and names the fourth, *teaching leaves the training wheels on*. Added.
+
+*CAP, FLP, Two Generals by assumption* predated slice 2's rewrite of the CAP statement, so the canonical line said nothing about what *Consistency* means there. It now carries the definition the chapter gives, since that is the part a reader is most likely to get wrong.
+
+**The anti-repetition scan found three candidates and all three were false alarms**, which is worth recording because a clean result here is the ledger doing its job.
+
+*Transaction Script* appears five times in [chapter 09](../09_what-a-pattern-is-for_3xzc.md) and five in [13](../13_smuggled-verdicts_8y69.md). The ledger assigns it to **09**, not to [15](../15_behaviour-placement_z47a.md) as the scan assumed, and [chapter 13](../13_smuggled-verdicts_8y69.md) links to 09 in its second paragraph. It uses the name as a neutral term against *anemic domain model*, which is its own subject, and never redefines it.
+
+*Idempotency key* appears twice in [chapter 09](../09_what-a-pattern-is-for_3xzc.md) with no link to [06](../06_distribution_49yh.md). Both are inside a table that counts words in names. The 22-word description is never written out, so nothing of [chapter 06](../06_distribution_49yh.md)'s material is repeated — the name is a specimen for 09's compression test, which is the legitimate use.
+
+**A note on the scan itself, since method belongs here.**
+The first mechanical check run in this slice was wrong and was discarded: it tested whether each row's *Others may say* column appears verbatim in the owning chapter, and reported 75 failures.
+That column is *how other chapters may refer to* a concept — a permitted shorthand, not a quotation from the owner. The check was measuring something the ledger never claimed.
+A mechanical check over a document's own format needs the format read first; 75 findings that all turn out to be the same misreading is the shape of that error.
+
+**Consequence.**
+`tools/check-drift.py`: 16 checks over 22 chapters, no drift. The twelve remaining notes are `text` fences wider than 72 columns, all terminal output rather than diagrams, which is what the note exists to distinguish.
+
+The four slices are complete. Every chapter remains at **draft**; nothing in this sweep moves a status, and **ready** is a separate decision that is the author's alone.

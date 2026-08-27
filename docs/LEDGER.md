@@ -21,7 +21,7 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 |---|---|---|---|
 | The five kinds of claim | cjx4 | A claim is one of five kinds — Law, Force, Principle, Idiom, Style — and the kind sets its authority. Four are advice and form a ladder; Force is not, so there are four levels and five kinds | "a Law / an Idiom" |
 | Classification test | cjx4 | Five questions that place a claim in one of the five kinds | "run the test" |
-| Why the kinds get confused | cjx4 | Tone doesn't vary with authority; advocacy compresses; monoculture makes Idioms feel universal | one clause, cite |
+| Why the kinds get confused | cjx4 | Four mechanisms: tone doesn't vary with authority; advocacy compresses; monoculture makes Idioms feel universal; teaching leaves the training wheels on | one clause, cite |
 | The Idiom/Style line is mechanical | cjx4 | The compiler or the runtime acts on an Idiom and neither can see a Style. What is held constant is narrow and named — what the program produces when it succeeds — so failure modes, setup effort and how much the compiler can check are all free to differ. Ecosystem-specificity does not discriminate, because plenty of Style is local. 7nkn owns the fact that the line falls in a different place in each language | "the machine can see it" |
 | Law inert vs Principle wrong | cjx4 | A Force decides whether a Law *binds*; it decides whether a Principle is *right* | one clause, cite |
 | Forces as inputs | f4m5 | Forces are properties of the situation, not advice | "the Force is X" |
@@ -94,7 +94,7 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Idempotency key rules | 49yh | The client generates it before the first attempt, and it commits in the same transaction as the effect | cite |
 | Two systems cannot share a transaction | 49yh | No ordering of two commits is safe; the outbox makes the obligation to publish durable state, turning a permanent loss into a delay | cite |
 | Publish-then-delete, never the reverse | 49yh | The drain loop chooses at-least-once over at-most-once, because duplicates are recoverable and a lost event is not | cite |
-| CAP, FLP, Two Generals by assumption | 49yh | The proofs are not the point; the assumptions are the only negotiable part | cite |
+| CAP, FLP, Two Generals by assumption | 49yh | The proofs are not the point; the assumptions are the only negotiable part. CAP's *Consistency* is linearizability — every read returns the most recent write, as though one copy had ever existed — which is much narrower than the everyday word | cite |
 | PACELC over CAP | 49yh | The else-branch — latency against consistency — applies every day; CAP's branch only during a partition | cite |
 | Availability is a product | 49yh | Availabilities multiply rather than average; ten dependencies at three nines gives two nines, and better components do not fix it | "p^N" |
 | Three ways to stop multiplying | 49yh | Remove the dependency, make it optional, or make it asynchronous | cite |
@@ -377,4 +377,4 @@ Only these ideas may appear more than once, because the book's structure depends
 
 - **The kind of the current material** — stated where it does work, in the claim or in *Why the claim holds*, not as a standing opener. Chapters no longer carry an epigraph.
 - **The mandatory boundary section** — every chapter has one. It is a section, not a repeated argument.
-- **FlowCore as running example** — appears across Parts II and V, but each appearance must show a *different* facet.
+- **FlowCore as running example** — appears across Parts II, IV, and V, but each appearance must show a *different* facet.
