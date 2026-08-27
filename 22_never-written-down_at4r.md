@@ -278,6 +278,20 @@ What you end up holding is not an answer but a position. Fixing Y changes Z; som
 
 ---
 
+## What kind of claim this book is
+
+Twenty-two chapters have asked what kind of claim something is. There is one place left to point the question.
+
+**The five kinds are not one of the five kinds.** [Chapter 01](01_the-five-kinds_cjx4.md) said so at the start — a way of sorting rather than a proof, judged by what it lets you see. A sorting scheme sits outside the things it sorts, which is why that chapter could not demonstrate its claim and told you so on the first page.
+
+What the book adds to that scheme is Principles, and a Principle carries conditions. Three hold here. The advice reaching you has to have dropped the situation it was written for, because where it arrives with its scope attached there is nothing here to do. The decision has to be worth the minutes, and most are not — running a five-question test on a variable name is worse than picking a name. And the Forces have to be readable, which they are not when the question turns out to be a risk instead ([Ch. 02](02_forces_f4m5.md)); there is no instrument here, and none anywhere else either.
+
+This book arrived the way the advice inside it did: as confident prose, in one voice, from someone you have no particular reason to trust. That was the condition the whole argument turned on, and it does not lift for the argument itself. The decision log in this repository is there for that rather than as a record of process — it says which options lost, and it names the places where a chapter was wrong and had to be pulled back.
+
+So the test gets one more use. Take what survives it where you are standing, and leave the rest.
+
+---
+
 ## Sources
 
 - Miles Turpin, Julian Michael, Ethan Perez and Samuel R. Bowman, *Language Models Don't Always Say What They Think: Unfaithful Explanations in Chain-of-Thought Prompting*, NeurIPS 2023. [arXiv](https://arxiv.org/abs/2305.04388).
