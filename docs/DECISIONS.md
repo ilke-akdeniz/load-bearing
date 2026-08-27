@@ -4828,3 +4828,75 @@ A mechanical check over a document's own format needs the format read first; 75 
 `tools/check-drift.py`: 16 checks over 22 chapters, no drift. The twelve remaining notes are `text` fences wider than 72 columns, all terminal output rather than diagrams, which is what the note exists to distinguish.
 
 The four slices are complete. Every chapter remains at **draft**; nothing in this sweep moves a status, and **ready** is a separate decision that is the author's alone.
+
+---
+
+## 118. [Chapter 01](../01_the-five-kinds_cjx4.md)'s opening is reorganized
+
+**Date.** 2026-08-26
+
+**Context.**
+Asked whether the book was ready to promote, the draft named [chapter 01](../01_the-five-kinds_cjx4.md)'s opening as the one thing to fix first.
+Decision 114 and decision 115 had removed two paragraphs from it, and what remained opened on a caveat: the first paragraph after the claim began *"Both are assumed by the rest of the book"*, a pronoun pointing at a paragraph that no longer existed, and its content was that this chapter cannot demonstrate its claim.
+
+**The draft's fix, and the author's, which is larger and better.**
+The draft reordered: it moved the paragraph naming the five kinds up beneath the claim, so a reader who has just been told there are five kinds learns what they are before meeting an epistemology note, and resolved the pronoun to *"The claim above has two halves."*
+
+The author then restructured the chapter, and the draft kept all of it:
+
+- `## The book's model` and `## The five kinds` are both gone. The chapter opens directly under its title on the claim.
+- The five names fold into the claim sentence itself, so the ladder paragraphs follow immediately.
+- `### Law`, `### Force`, `### Principle`, `### Idiom` and `### Style` are promoted to `##`, which is consistent once the section that contained them is removed.
+- **The caveat moves to the end of the chapter**, as a closing section before the handoff, with its tense changed to the past.
+
+That last move is the one that matters. The draft's version still opened the book's first chapter on what it could not prove; the author's opens it on the model and closes on the honest accounting. The draft's reorder was superseded rather than adopted.
+
+**What the draft repaired.**
+The new section carried an empty `## ` heading with no title and no blank line after it; it is now *What this chapter assumed*, which matches the register of the chapter's other closing headings.
+*"the five claim classification and the authority mapping are true"* was ungrammatical and became *"both halves of that claim"* — which the author rejected in turn, on the grounds that the claim is now three hundred lines away and *"what claim, what halves?"* is a fair question from a reader who has just read the whole chapter. Their replacement sentence is the one that shipped.
+
+**Two deviations from the rubric, raised and left standing as the author's choice.**
+The claim is now two sentences where the rubric asks for one.
+And [chapter 01](../01_the-five-kinds_cjx4.md) is the only chapter with no heading before its claim — every other opens `## The claim` or `## The advice`. Defensible here, since this claim is the book's premise rather than a chapter's and the title already names it.
+
+---
+
+## 119. The claim becomes *Many claims*, not *every*
+
+**Date.** 2026-08-26
+
+**Context.**
+Decision 118's closing section conceded that the model is not exhaustive.
+Reviewing it, the author refused the combination:
+
+> If it does not survive inspection we should be honest with ourselves. Then it becomes "Many claims you meet about software is one of five kinds"
+
+Either the claim is wrong or the concession is, and asserting *every* while conceding *not every* is neither.
+
+**The draft argued against it and proposed a third way.**
+`CLAUDE.md` says *a claim too vague to be false is not the safe fallback*, and *many* cannot be disproved or used.
+So the draft proposed narrowing what the claim ranges over instead, keeping a true universal over a smaller domain: *every claim that bears on a software decision*.
+The reasoning was that a claim which bears on a decision and is not advice is a property of your situation, which is a Force, so nothing qualifying would fall outside the five.
+
+**The author falsified it with one example**, and it is worth recording in full because the draft had no answer:
+
+> The government is planning to make it illegal to trade cryptocurrencies, we will have to change all our modules
+
+That bears on a software decision. It is not advice. And it is not a Force, by [chapter 02](../02_forces_f4m5.md)'s own test — *an unmeasured Force has an instrument … a risk has none, and no amount of thinking produces one.* A forecast about someone else's future decision has no instrument, and it is negotiable by argument, which is precisely what a Force is defined not to be.
+It is a **risk**, which [chapter 02](../02_forces_f4m5.md) separates from Forces in its own boundary section.
+
+So the narrowing fails: any domain wide enough to hold Forces also holds risks, forecasts and estimates, because those bear on decisions too. And the example is ordinary rather than contrived — it is the kind of sentence said in real meetings.
+
+**Decision — the author's original wording, reaffirmed after the argument.**
+
+> I'm fine with those five kinds and I see no reason to dig to other kinds in this book.
+
+The claim now reads *Many claims you meet about software are one of five kinds*. Whether the five are useful, and whether what falls outside them is a real gap, is left to the reader rather than answered by a chapter that would have to catalogue other kinds to answer it.
+`is` was corrected to `are`.
+
+**The sentence travels, so the change did too.**
+Three other sites carried it: `README.md`'s first hook, which had the claim verbatim and would otherwise have kept asserting what [chapter 01](../01_the-five-kinds_cjx4.md) had stopped asserting; `docs/LEDGER.md` row 22; and the closing section itself.
+
+**The concession is deleted rather than softened.**
+With coverage no longer claimed, there is nothing to concede, so *What this chapter assumed* keeps only that the five kinds and their authority are assumed and not proven here, and why — the authority half is true by construction.
+The line *"So this chapter was a way of sorting rather than a proof"* went with it, on the author's flag: the section now ends on *there is nothing left to show*, which is flatter and says the same thing.
