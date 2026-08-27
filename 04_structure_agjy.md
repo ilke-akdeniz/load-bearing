@@ -30,9 +30,7 @@ That is all a rank is. Not a folder, not a team, not a tier of importance — a 
 Two things follow, and they are the difference between the two claims:
 
 - **Claim one is exactly the condition that ranks can be assigned at all.** Try the rule on a cycle and it never terminates: A's rank needs B's, which needs A's. Acyclic and rankable are the same property.
-- **Claim two adds that every arrow crosses exactly one rank.** Rank 4 may use rank 3. It may not reach down to rank 1, even though nothing about acyclicity forbids that.
-
-The second is a real constraint, most systems do not satisfy it, and *When the shape isn't a line*, below, works through one that doesn't.
+- **Claim two adds that every arrow crosses exactly one rank.** Rank 4 may use rank 3. It may not reach down to rank 1, even though nothing about acyclicity forbids that. This rule is a real constraint and most systems do not satisfy it.
 
 Claim three is where the physical boundary arrives, and it varies by ecosystem in a way worth noticing. In Java and C# it was usually separate projects, assemblies, or shipped libraries; elsewhere it shows up as top-level directories or packages. What each of those forms actually enforces is not the same — a directory is a package in Go, carries no access meaning in C# until assemblies split, and enforces nothing in Python — and [chapter 20](20_idioms_7nkn.md) works through why ecosystems diverge like this.
 
