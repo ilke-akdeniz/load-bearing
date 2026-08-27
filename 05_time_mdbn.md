@@ -243,7 +243,7 @@ That is the cheap fix for one number. For the general case, the equation in the 
 
 **Remove the mutability.** Nobody writes to anything anyone else can see. Values go in, new values come out.
 
-The third term, concurrency, is usually the reason the program exists, so it is the one you cannot give up. That is why the practical advice is always about the other two — and why "just add a lock" is a fourth thing, which serializes the race rather than removing it, and brings the costs in the last section.
+The third term, concurrency, is usually the reason the program exists, so it is the one you cannot give up. That is why the practical advice is always about the other two — and why "just add a lock" is a fourth thing, which serializes the race rather than removing it, and brings the costs set out at the end of this chapter.
 
 ### Only the lock-holder can enforce
 

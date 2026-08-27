@@ -303,7 +303,7 @@ The weakness was noticed at the time and written down instead of fixed. The entr
 
 ## Where the wide reading is right
 
-Two situations sit outside everything above, and in both the compressed sentence gives the right answer.
+In two situations the compressed advice is simply correct, and needs no qualification at all.
 
 ### A dependency you genuinely cannot run
 

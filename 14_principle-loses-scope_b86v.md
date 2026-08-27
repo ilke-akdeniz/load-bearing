@@ -289,7 +289,7 @@ If the source can be reached, go and look. The scope is often still there, in th
 - Kensaku Segoe, *Go Proverbs Illustrated* — 1960. [Internet Archive](https://archive.org/details/goproverbsillust0000unse).
 - *Go Proverbs* — [go-proverbs.github.io](https://go-proverbs.github.io/).
 - *Don't communicate by sharing memory, share memory by communicating* — r/golang, December 2023. [Thread](https://www.reddit.com/r/golang/comments/18selrz/dont_communicate_by_sharing_memory_share_memory/).
-- Rob Pike, *What We Got Right, What We Got Wrong* — GopherConAU, 10 November 2023. [Text and slides](https://commandcenter.blogspot.com/2024/01/what-we-got-right-what-we-got-wrong.html).
+- Rob Pike, *What We Got Right, What We Got Wrong*, closing talk at GopherConAU, Sydney, 10 November 2023, published 4 January 2024. [Text and slides](https://commandcenter.blogspot.com/2024/01/what-we-got-right-what-we-got-wrong.html).
 - John Ousterhout, *Why Threads Are A Bad Idea (for most purposes)* — USENIX Annual Technical Conference, January 1996. [Slides](https://web.stanford.edu/~ouster/cgi-bin/papers/threads.pdf) dated September 1995.
 - Rob Pike, *Concurrency Is Not Parallelism* — Heroku Waza, January 2012. [Video and slides](https://go.dev/blog/waza-talk).
 - *Go Wiki: Use a sync.Mutex or a channel?* — [go.dev/wiki/MutexOrChannel](https://go.dev/wiki/MutexOrChannel).

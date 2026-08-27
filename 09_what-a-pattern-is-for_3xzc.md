@@ -194,7 +194,7 @@ The defensible version is narrow: a name a learner can search is a door into the
 **In a conversation:**
 
 - **"That should be a Repository."** Followed up with: what would that rule out that the current code does?
-- **"We're using the Strategy pattern here."** Sometimes real information. Sometimes a description of `if`, or of passing a function — [chapter 12](12_missing-language-features_esqm.md) works through the GoF names that turn out to be language features once the language has them, and Strategy is the clearest case.
+- **"We're using the Strategy pattern here."** Sometimes real information. Sometimes a description of `if`, or of passing a function — [chapter 12](12_missing-language-features_esqm.md) works through the Gang of Four names that turn out to be language features once the language has them, and Strategy is the clearest case.
 - **"This doesn't follow the pattern."** Which pattern, and what makes following it correct here rather than elsewhere?
 - **A design review scored against a catalogue**, where the finding is that a named shape is absent rather than that something concrete goes wrong.
 - **A name introduced in a meeting and used as a premise by the end of it.** The gap between naming a thing and having established anything about it is where most of this goes wrong.

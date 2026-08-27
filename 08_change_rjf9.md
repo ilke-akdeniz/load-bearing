@@ -97,7 +97,7 @@ Those 175 were bought rather than incurred. Rob Pike lists locking the language 
 
 **Feature-itis** is a language steadily accumulating features, each one defensible on its own and the total more than anyone wants to learn. The promise blocks it using the same irreversibility this section has been describing as a burden. Under a compatibility guarantee, anything added is added permanently: a feature that turns out to be a mistake cannot be withdrawn, and instead joins the list of things that must keep working. So a proposal has to be worth not merely having but keeping, for as long as the language exists, and most proposals are not.
 
-This does not contradict the section above, because it is the same rule. *Once published, it is forever* holds exactly as stated, and Pike is not arguing with it — he is reporting what happens when you accept it early. The difference is timing. A team that discovers the rule after it has users has no choice left to make. Go's team took it at 1.0, while declining was still available, wanting the effect that permanence has on what gets added in the first place. The 175 deprecations are what the promise cost them; a language that stayed small is what they were buying.
+This does not contradict the argument above, because it is the same rule. *Once published, it is forever* holds exactly as stated, and Pike is not arguing with it — he is reporting what happens when you accept it early. The difference is timing. A team that discovers the rule after it has users has no choice left to make. Go's team took it at 1.0, while declining was still available, wanting the effect that permanence has on what gets added in the first place. The 175 deprecations are what the promise cost them; a language that stayed small is what they were buying.
 
 [Chapter 04](04_structure_agjy.md) covers the other half of this problem: users depend on behaviour you never documented, so the surface you are committed to is larger than the one you published.
 
@@ -256,7 +256,7 @@ None of the four applies, and the reason is worth being precise about: **each of
 
 The failure here is not ignoring the laws — it is applying them. Versioning the output of a one-off report, or designing a spike for extension, spends the effort that these laws exist to justify on the one case where the justification is absent.
 
-The dangerous version is a script that was going to be deleted and was not. That is not a failure of judgment about the script; it is what happens when nobody records the death date. If the plan is that this disappears, write down when, and what should be true when it does.
+The dangerous version is a script that was going to be deleted and was not. That is not a failure of judgement about the script; it is what happens when nobody records the death date. If the plan is that this disappears, write down when, and what should be true when it does.
 
 ### Internal interfaces you can change atomically
 
@@ -322,7 +322,7 @@ Part III turns from laws to patterns, starting with the question the whole part 
 - Frederick P. Brooks Jr., *The Mythical Man-Month* — Addison-Wesley, 1975.
 - Go, `io/ioutil` — [pkg.go.dev/io/ioutil](https://pkg.go.dev/io/ioutil).
 - *Go 1 and the Future of Go Programs* — [go.dev/doc/go1compat](https://go.dev/doc/go1compat).
-- Rob Pike, *What We Got Right, What We Got Wrong* — GopherConAU, 10 November 2023. [Text and slides](https://commandcenter.blogspot.com/2024/01/what-we-got-right-what-we-got-wrong.html).
+- Rob Pike, *What We Got Right, What We Got Wrong*, closing talk at GopherConAU, Sydney, 10 November 2023, published 4 January 2024. [Text and slides](https://commandcenter.blogspot.com/2024/01/what-we-got-right-what-we-got-wrong.html).
 - Melvin E. Conway, *How Do Committees Invent?* — Datamation 14(4), April 1968. [melconway.com/Home/Committees_Paper.html](http://www.melconway.com/Home/Committees_Paper.html).
 
 ---

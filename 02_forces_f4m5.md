@@ -185,7 +185,7 @@ def split_minor(total_cents, parts):
 [268, 268, 267]           which sums to 803
 ```
 
-**`split` did not change. The blast radius did.** `split_minor` is what you write once you know the radius; the demonstration is what happened before you knew it. That is the point: `split` is not sloppy work that the dashboard tolerates and the invoice exposes — it is *correct* for one and *defective* for the other, and nothing you can see in the function tells you which.
+**`split` did not change. The blast radius did.** `split_minor` is what you write once you know the radius; the version above is what you write before you know it. That is the point: `split` is not sloppy work that the dashboard tolerates and the invoice exposes — it is *correct* for one and *defective* for the other, and nothing you can see in the function tells you which.
 
 **What changes with the Force:** how much prevention is worth buying. This is the Force that decides whether a defensive check is diligence or noise, and it is the one most often read from habit rather than from the situation.
 
@@ -396,7 +396,7 @@ Three mechanisms support this chapter's claim. The third is the one that catches
 
 **Forces are where the disagreement actually lives.** [Chapter 01](01_the-five-kinds_cjx4.md) records this as a failure symptom; the mechanism is that two people arguing about a Principle have usually already agreed about the Principle and are differing about the situation it is conditioned on. Stating the Force ends the argument or relocates it to something answerable.
 
-**Forces move on a different clock than code.** This is the part that does real damage. A team doubles. A service acquires a second client, then a client outside the company. A table crosses a hundred million rows. A batch job is called from a request handler for the first time. None of those are code changes, none show up in a diff, and every one of them can invalidate a Principle that was correctly derived years earlier. The code that was right is now wrong, and nothing in the repository records why it was ever right, arrived at without anyone making a mistake.
+**Forces move on a different clock than code.** This is the part that does real damage. A team doubles. A service acquires a second client, then a client outside the company. A table crosses a hundred million rows. A batch job is called from a request handler for the first time. None of those are code changes, none show up in a diff, and every one of them can invalidate a Principle that was correctly derived years earlier. The code that was right is now wrong, nothing in the repository records why it was ever right, and the whole thing happened without anyone making a mistake.
 
 ---
 

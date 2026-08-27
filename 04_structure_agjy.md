@@ -414,7 +414,7 @@ Sharpened:
 
 ### What you expose
 
-Parts one to three were about which way the arrows point. This one is about how many arrows exist at all.
+Everything so far has been about which way the arrows point. This section is about how many arrows exist at all.
 
 That is the connection between the chapter's two claims, and it is worth stating plainly because they are usually taught as separate subjects. A cycle is two arrows where there should be one. Information hiding is about not creating an arrow in the first place. Same graph, same cost: a dependency that was never created costs nothing to change, forever.
 

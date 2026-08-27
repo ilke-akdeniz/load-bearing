@@ -205,9 +205,9 @@ Two properties follow, and they are why this is worth a chapter rather than a co
 
 Some loaded terms are loaded correctly, and the test is whether the condition can fail.
 
-**A verdict noun naming a Law violation.** *SQL injection* — building a query by pasting user input into the text of it, so that input containing a quote can close the string and start a statement of its own. The judgment is in the name: *injection* is something done to you. And it is warranted, because there is no configuration of Forces that makes it right. Not on an internal tool, not on an admin page nobody outside can reach, not at any size of team or any latency budget. The condition attached to the verdict is *always*, so compressing it away costs nothing. *Data race* and *buffer overflow* work the same way.
+**A verdict noun naming a Law violation.** *SQL injection* — building a query by pasting user input into the text of it, so that input containing a quote can close the string and start a statement of its own. The judgement is in the name: *injection* is something done to you. And it is warranted, because there is no configuration of Forces that makes it right. Not on an internal tool, not on an admin page nobody outside can reach, not at any size of team or any latency budget. The condition attached to the verdict is *always*, so compressing it away costs nothing. *Data race* and *buffer overflow* work the same way.
 
-**A verdict noun naming a Principle violation.** *Premature optimization* — where the judgment is in the first word. [Chapter 01](01_the-five-kinds_cjx4.md) classifies the slogan it comes from as a Principle routinely quoted with its conditions removed; here the interest is the noun phrase, which asserts that the timing question is settled.
+**A verdict noun naming a Principle violation.** *Premature optimization* — where the judgement is in the first word. [Chapter 01](01_the-five-kinds_cjx4.md) classifies the slogan it comes from as a Principle routinely quoted with its conditions removed; here the interest is the noun phrase, which asserts that the timing question is settled.
 
 Whether an optimization is premature is a latency-budget question, and [chapter 02](02_forces_f4m5.md) works that budget across four orders of magnitude — a page render with 200 milliseconds to spend, against an order matcher with 200 microseconds. Hand-tuning a loop on the first day is waste in the first case and is the entire job in the second.
 
@@ -217,7 +217,7 @@ That gives the claim's boundary a form the book already has: **a verdict noun is
 
 *Anemic domain model* fails on the same grounds as *premature optimization*: its condition — you already paid for a domain model — is a Force question, and the answer varies by project.
 
-### Refusing all judgment-laden vocabulary is its own over-correction
+### Refusing all judgement-laden vocabulary is its own over-correction
 
 The reading to avoid is that technical language should be neutral. It should not, always. Some code is bad, some designs are mistakes, and a vocabulary with no way to say so is worse than one that occasionally says so wrongly.
 
@@ -243,7 +243,7 @@ Two consequences. **The tests measure a term in a community at a time**, so runn
 
 **Watching your own words is a tax on saying anything.** Stating the condition every time you use a compressed term is correct and it is slower, and in a review with forty comments it will not happen. The realistic version is to spend it on the load-bearing ones: the comment that will decide whether something gets rewritten.
 
-**A term with the verdict removed sometimes has nothing left.** Strip *anemic* of its judgment and what remains is *behaviour is not on the entities*, which is a neutral fact about a file and not worth a name. That is a real finding rather than a loss — the compression was doing the convicting — but it does mean the replacement is a sentence rather than a word, and sentences do not travel.
+**A term with the verdict removed sometimes has nothing left.** Strip *anemic* of its judgement and what remains is *behaviour is not on the entities*, which is a neutral fact about a file and not worth a name. That is a real finding rather than a loss — the compression was doing the convicting — but it does mean the replacement is a sentence rather than a word, and sentences do not travel.
 
 ---
 

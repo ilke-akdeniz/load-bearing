@@ -24,7 +24,7 @@ Consider two systems in the same business. One company sells high-end pizza oven
 
 Both are sales software. Ask a domain expert to describe either one and the vocabulary comes back identical — proposal, line item, discount, approval. And the concurrency reading is not close: one has a single writer and no contention worth naming, the other has a rule spanning rows that several people are editing at once, which is [chapter 05](05_time_mdbn.md)'s territory in full. The business does tell you which. It just does not answer the question people usually put to it. *What are the things called* gets the same reply from both companies; *who touches a proposal, and when* gets opposite ones.
 
-So domain and force profile vary independently. Unrelated domains can share a profile; one domain can contain opposite profiles. The six sections below are organised by profile, with the domain kept as the place you are most likely to meet it: the profile is what predicts the inversion, and the domain name on its own predicts almost nothing.
+So domain and force profile vary independently. Unrelated domains can share a profile; one domain can contain opposite profiles. The six sections below are organized by profile, with the domain kept as the place you are most likely to meet it: the profile is what predicts the inversion, and the domain name on its own predicts almost nothing.
 
 Six profiles follow. Each has at least one force outside its ordinary range, and each inverts something the mainstream states without qualification.
 

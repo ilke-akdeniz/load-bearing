@@ -275,6 +275,7 @@ The question that does the work: **what would tell us why this was done?**
 And if the answer is that somebody would read the code and work it out, that somebody is doing the job this chapter is about, so it is worth being exact about what the job is. Reading is rarely enough by itself. You read it, you test it, and you arrive at *this looks like it was written to support Y and Z*. Then you ask the people who might know, and they half-remember different things — A says one, B says another, and neither was there for the part that matters. Where the code came from an agent there is nobody in that position at all, which is the same predicament with a step removed.
 
 What you end up holding is not an answer but a position. Fixing Y changes Z; some customers depend on Z; leaving Y another month costs you a different customer. Nobody in that conversation is being unreasonable and nobody is going to win it, because **there is no fact available that settles it** — and one sentence, written at the time by whoever chose Y, is what would have.
+
 ---
 
 ## Sources

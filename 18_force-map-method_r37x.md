@@ -32,7 +32,7 @@ And a third thing decides more than either: **which facts count as forces depend
 
 And the seven are not a closed list. They are the forces that recur often enough to be worth naming, and a situation will sometimes hand you a fact that settles a question without appearing among them — what makes something a force is the property below rather than membership of a list.
 
-So step one is not instrument work, and this is where the expertise the last section of this chapter charges for actually goes. What the method claims is narrower than measurement and is still worth something: **a force is the kind of thing that has an answer.** Two people disagreeing about whether callers can be changed are disagreeing about a fact, and can go and find out. Two people disagreeing about whether a repository is good architecture are not, and cannot. Moving an argument from the second kind to the first does not win it. It makes it winnable.
+So step one is not instrument work, and this is where the expertise this chapter's costs section charges for actually goes. What the method claims is narrower than measurement and is still worth something: **a force is the kind of thing that has an answer.** Two people disagreeing about whether callers can be changed are disagreeing about a fact, and can go and find out. Two people disagreeing about whether a repository is good architecture are not, and cannot. Moving an argument from the second kind to the first does not win it. It makes it winnable.
 
 ### Four systems, read cold
 

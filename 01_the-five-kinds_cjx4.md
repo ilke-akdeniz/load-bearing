@@ -14,7 +14,7 @@ So the count is not five of one thing. **There are four levels and five kinds** 
 
 True by the mechanics of computation. Violating one produces a **wrong program**, and the wrongness does not depend on your language, your team, or your taste.
 
-You do not get to disagree with a Law. You only get to be in a situation where its preconditions are absent — which is a different thing, and the subject of the next section.
+You do not get to disagree with a Law. You only get to be in a situation where its preconditions are absent — which is a different thing, and the subject of *How Forces relate to each kind of advice*, below.
 
 ## Force
 
@@ -237,7 +237,7 @@ Four mechanisms, none of them anyone's fault in particular.
 
 **Monoculture makes Idioms look like physics.** If you have only worked in one ecosystem, its conventions are indistinguishable from necessity. You have never seen the counter-example, so you conclude there isn't one. This is the single most common source of confusion here, and the only reliable cure is working in a second ecosystem long enough to be fluent — long enough that its conventions stop feeling wrong and start feeling like conventions.
 
-**Teaching leaves the training wheels on.** Beginners are given rules, because rules are teachable and judgment is not. "Never use global state." "Always write a test first." Nobody comes back later to say which parts were scaffolding.
+**Teaching leaves the training wheels on.** Beginners are given rules, because rules are teachable and judgement is not. "Never use global state." "Always write a test first." Nobody comes back later to say which parts were scaffolding.
 
 ---
 
@@ -259,7 +259,7 @@ Nothing about the claim changed. The Force did: *someone is trying*. Treat secur
 
 **The model needs comparative experience it cannot supply.** This is the real limit, and it is uncomfortable.
 
-Running the test requires having seen the alternative. Question 4 — *would competent engineers elsewhere do the opposite?* — is unanswerable if you have only ever worked in one ecosystem. You will classify its conventions as Laws, not out of carelessness but because you have no counter-example available, and a rule with no visible exception is indistinguishable from a rule with none.
+Running the test requires having seen the alternative. Question 2 — *does violating it produce a wrong program in any language, on any team?* — is unanswerable if you have only ever worked in one ecosystem. You will classify its conventions as Laws, not out of carelessness but because you have no counter-example available, and a rule with no visible exception is indistinguishable from a rule with none.
 
 The trap is that a single-stack shop is where this failure does the **most** damage and is **hardest** to detect. Nobody arrives with a contradicting habit. Conventions accumulate for reasons that stop applying, and nothing in the environment surfaces that. "We've always done it this way" is not evidence of anything, and in a uniform context it is the only evidence available.
 
@@ -299,6 +299,8 @@ Until then, follow the local convention — not because it is a good proxy for c
 - Two people making increasingly detailed arguments while disagreeing about a Force neither has stated.
 
 That last one is the most expensive and the easiest to fix. When an architecture argument will not converge, stop arguing about the Principle and ask what each side believes about the situation. The disagreement is usually not about the advice at all, but about the situation both sides are applying it to.
+
+---
 
 ## What this chapter assumed
 
