@@ -4443,3 +4443,73 @@ Six ledger rows pointed at `docs/pending-tasks/ai-material.md` as the argument's
 
 Chapter 08 gained a citation and has no `## Sources` section to put it in.
 That is slice 3's work and is deliberately left for it, which is what `CLAUDE.md` means by content added during a slice not having been through the slices already finished.
+
+---
+
+## 111. Decision 110 in part reversed: the chapter 01 and 16 additions are cut
+
+**Date.** 2026-08-26
+
+**Context.**
+The author's review of slice 1, commit `d285001`.
+Four tags and one direct edit across the four amended chapters.
+Two of the four pieces the draft had routed are removed, one is rewritten under a direct edit, and one is kept but sent back for clarification.
+
+**Decision — the chapter 01 and chapter 16 additions are cut, permanently.**
+The author's reason, given identically on both:
+
+> let's remove previous two paragraphs, the late addition didn't mesh well
+
+And the standing instruction that came with the review:
+
+> those deleted materials were considered and the decision was to not use them anywhere in the book. We don't need to think about finding other places for those.
+
+So this is a retirement rather than a re-routing.
+The corpus-monoculture argument, the uniform-confidence clause, the Pike certainty witness, and the mutation-volume point are decided against for the book as a whole, and no chapter is owed them.
+[Chapter 01](../01_the-five-kinds_cjx4.md) and [chapter 16](../16_tdd-and-mocks_u8eu.md) are byte-identical to their pre-slice-1 state.
+
+**What the surviving two have in common, which is worth carrying into slice 2.**
+Decision 110's bar was *route only what strengthens the chapter*, applied by the draft to ten pieces; the author then cut two of the four that passed it.
+The two that survived attach to a question their section had already opened.
+[Chapter 02](../02_forces_f4m5.md)'s section is about a Force as a dial, and the addition is a value at the end of that dial.
+[Chapter 08](../08_change_rjf9.md)'s section argues a constraint and had only the victim's posture, so the designer's is the missing half.
+The two that were cut added a new subject to a section that had finished its argument — three extra paragraphs hung under two entries of [chapter 01](../01_the-five-kinds_cjx4.md)'s four-mechanism list, and a fifth consideration appended to [chapter 16](../16_tdd-and-mocks_u8eu.md)'s costs.
+**A late addition survives if the section was still asking something. It does not survive being another thing the section could also have said.**
+
+**The direct edit in [chapter 02](../02_forces_f4m5.md), which is an improvement, and two slips it introduced.**
+The author replaced the draft's *"One kind of contributor sits at the extreme of both halves"* with *"AI coding agents sit at the extreme of both halves"*, and *"generated code answers the second with none"* with *"for coding agents the answer to the second is nobody"*.
+That is better: the draft's phrasing was coy about its subject, and naming it costs nothing the dating rule protects, which is about capability claims and version numbers rather than about saying what is being discussed.
+
+The edit also moved the subject from generated code to the model, and two predicates were left behind.
+*"The model … arrives at a volume the review step was not sized for"* — the output arrives at volume, not the model.
+*"The agent can only reach it to the extent that some prompt happened to carry them"* — *it* has no antecedent; the thing being reached is the Forces, which *them* refers to in the same sentence.
+Both repaired, keeping every word of the author's that was doing work.
+
+**The [chapter 08](../08_change_rjf9.md) tag was a question, not a removal.**
+
+> this seems like an intersting point and good addition but I read it two times and couldn't get the exact meaning … what you mean by "feature-itis" and what is the trade-off here and why that is justified and doesn't contradict our chapter?
+
+Three things were missing and are now stated.
+*Feature-itis* is defined rather than quoted through — a language steadily accumulating features, each defensible on its own.
+The mechanism connecting it to compatibility is given: under the promise anything added is added permanently, so a proposal has to be worth keeping for the life of the language, which most are not.
+And the non-contradiction is stated outright, because the draft had left the reader to infer it: *once published, it is forever* is unchanged, Pike is not disputing it, and the difference is timing — a team that discovers the rule after it has users has no choice left, and Go's team took it at 1.0 while declining was still available.
+
+That the question had to be asked is the finding.
+The draft's version ended *"the deprecated declarations are one side of that trade, and the features it stopped are the other"*, which reads as though both were costs, when one is the cost and the other is what the cost bought.
+
+**A tag acted on by its reason rather than its count.**
+[Chapter 16](../16_tdd-and-mocks_u8eu.md)'s tag said *"remove previous two paragraphs"*, in the same wording as [chapter 01](../01_the-five-kinds_cjx4.md)'s, where two paragraphs were indeed the draft's.
+In [chapter 16](../16_tdd-and-mocks_u8eu.md) only one was: **Mutation testing is expensive** predates slice 1 and is present at `12faccb`.
+The stated reason — *the late addition didn't mesh well* — applies only to the added paragraph, so one paragraph was removed and the pre-existing cost item was left alone.
+Raised here rather than settled silently; if the author did want the costs item gone, it is one line to remove.
+
+**Consequence.**
+Slice 1's tally is two routed and five retired, not four and three.
+`docs/pending-tasks/index.md` is corrected to say so.
+
+Ledger: row *Why the kinds get confused* is reverted to its pre-slice-1 wording, and the rows *Corpus monoculture* (`cjx4`) and *Volume removes the cheap alternative to mutation* (`u8eu`) are deleted, both concepts now being owned by no chapter and owed to none.
+Row *The team-size Force at its extreme* is rewritten into the vocabulary the chapter now uses.
+Row *Compatibility adopted rather than suffered* carries the mechanism the chapter now spells out.
+
+[Chapter 01](../01_the-five-kinds_cjx4.md)'s `## Sources` entry for the Pike retrospective is removed with the paragraph that cited it; nothing in that chapter cites him now.
+[Chapter 08](../08_change_rjf9.md) still has no `## Sources` section and still needs one for the same talk, which remains slice 3's work.

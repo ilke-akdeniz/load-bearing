@@ -8,8 +8,8 @@ Permanent project state lives in [STATUS.md](../STATUS.md), not here.
 ## Pending revisits
 
 None.
-Slice 1 of the final sweep discharged the last of them — four routed, three retired.
-Decision 110 records each disposition and the reason.
+Slice 1 of the final sweep discharged the last of them — two routed, five retired.
+Decisions 110 and 111 record each disposition and the reason; 111 is the author's review, which cut two of the four the draft had routed.
 
 ## Known coverage gaps
 
