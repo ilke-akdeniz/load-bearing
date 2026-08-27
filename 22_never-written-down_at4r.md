@@ -57,7 +57,7 @@ The second row is revision 1 of a definition that has three steps. **No such def
 
 *(The interleaving is forced in the run above so that it happens every time. In a running system it happens when it happens, which is the part that makes it expensive to find.)*
 
-[Chapter 18](18_force-map-method_r37x.md) maps this same decision as a log entry, with its forces named and the transaction marked as forced rather than chosen. This is the same decision seen from the other end: in the code, where none of that is visible.
+[Chapter 18](18_force-map-method_r37x.md) maps this same decision as a log entry, with its Forces named and the transaction marked as forced rather than chosen. This is the same decision seen from the other end: in the code, where none of that is visible.
 
 ### Why asking afterwards does not get it back
 
@@ -95,9 +95,9 @@ Finally, one thing does survive without deliberate effort, and it is worth separ
 
 ### Grilling: making the decision happen in the open
 
-[Chapter 18](18_force-map-method_r37x.md)'s procedure assumes you can name the forces before the design exists. Usually you cannot — not because you are careless, but because you do not yet know which decisions are about to be made, so you do not know which facts about your situation are about to matter.
+[Chapter 18](18_force-map-method_r37x.md)'s procedure assumes you can name the Forces before the design exists. Usually you cannot — not because you are careless, but because you do not yet know which decisions are about to be made, so you do not know which facts about your situation are about to matter.
 
-One technique inverts the flow, and it is worth stating in full because it is [chapter 18](18_force-map-method_r37x.md)'s shape — forces, then principles, then idioms — with the roles swapped. Instead of supplying forces up front, you have the decisions surfaced one at a time and supply the fact that settles each one as it arrives. The prompt, quoted as the author of this book uses it:
+One technique inverts the flow, and it is worth stating in full because it is [chapter 18](18_force-map-method_r37x.md)'s shape — Forces, then Principles, then Idioms — with the roles swapped. Instead of supplying Forces up front, you have the decisions surfaced one at a time and supply the fact that settles each one as it arrives. The prompt, quoted as the author of this book uses it:
 
 > Interview me relentlessly about every aspect of this until we reach a shared understanding. Walk down each branch of the decision tree, resolving dependencies between decisions one-by-one. For each question, provide your recommended answer.
 >
@@ -133,7 +133,7 @@ Both recommendations were sensible, both were overridden, and the same kind of t
 
 The first is about how the library is used — a client builds a whole definition in memory before any part of it exists, so ids cannot come from a column default without splitting the call. The second is a latency-budget reading at volume: these are primary keys on a table that only grows, and v4 scatters inserts across the index.
 
-Only the second is one of [chapter 02](02_forces_f4m5.md)'s seven, which is [chapter 18](18_force-map-method_r37x.md)'s point that the seven are not a closed list. What makes both of them forces is that each is checkable, and each says what would have to change for the answer to change.
+Only the second is one of [chapter 02](02_forces_f4m5.md)'s seven, which is [chapter 18](18_force-map-method_r37x.md)'s point that the seven are not a closed list. What makes both of them Forces is that each is checkable, and each says what would have to change for the answer to change.
 
 And note who supplied them. In both cases the human, because both are facts about this situation — which is the one thing a recommendation drawn from what is common cannot contain. The recommendation is the majority ecosystem's convention arriving in the voice of an answer, which is an Idiom ([Ch. 01](01_the-five-kinds_cjx4.md)) with its locality stripped off.
 
@@ -151,7 +151,7 @@ FlowCore's rule about identifier names lives in the instructions file, and it en
 
 That is what a record buys beyond recovery, and it generalises past this one project. **An entry is reusable exactly to the extent that it records why rather than what.** *Full-word identifiers everywhere* transfers nothing to a codebase with different readers; *abbreviations must be decoded rather than read, and the decoding does not get cheaper with familiarity* can be checked against those readers and kept or dropped on the evidence. A conclusion does not travel. A conclusion with its condition attached does, and arrives somewhere it can be argued with — which is [chapter 14](14_principle-loses-scope_b86v.md)'s mechanism running forwards for once, instead of a scope being lost in transmission.
 
-The upstream text has since changed in a way worth one line: it asks a round of questions at once where the frozen version asks one at a time. That is throughput against how much the reader has to hold in working memory, which is a force with a value, so neither version is a regression.
+The upstream text has since changed in a way worth one line: it asks a round of questions at once where the frozen version asks one at a time. That is throughput against how much the reader has to hold in working memory, which is a Force with a value, so neither version is a regression.
 
 **The limit, and it is severe.** Grilling is weakest against what this book's author calls a **folk remedy** — advice applied far outside the context it was made for, which stays misapplied because nobody rebuilds its scope. *Depend on abstractions, not concretions* is one, and [chapter 17](17_abstraction-as-insurance_4jk6.md) is the case. A corpus default is the purest instance: there the scope is not merely unrebuilt, because nobody knows one existed. So it never presents itself as a branch point — it is simply how things are done, and the interview does not offer it.
 

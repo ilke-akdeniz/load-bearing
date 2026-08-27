@@ -6,7 +6,7 @@
 
 - *Domain* means what the software is about — payroll, ledgers, air traffic, imaging. It keeps that ordinary meaning here and everywhere else in the book.
 
-- **Force profile** is the reading of every force bearing on a system — and what makes a reading a *profile* is that at least one of those forces sits at an intensity outside the ordinary range ([Ch. 02](02_forces_f4m5.md)), and stays there. Unlike domain, force profile is this book's term and is not standard vocabulary.
+- **Force profile** is the reading of every Force bearing on a system — and what makes a reading a *profile* is that at least one of those Forces sits at an intensity outside the ordinary range ([Ch. 02](02_forces_f4m5.md)), and stays there. Unlike domain, force profile is this book's term and is not standard vocabulary.
 
 [Chapter 18](18_force-map-method_r37x.md) gave the force-map method for one decision. This chapter runs it at the scale of whole systems, six times, and the finding is that the answers cluster.
 
@@ -26,7 +26,7 @@ Both are sales software. Ask a domain expert to describe either one and the voca
 
 So domain and force profile vary independently. Unrelated domains can share a profile; one domain can contain opposite profiles. The six sections below are organized by profile, with the domain kept as the place you are most likely to meet it: the profile is what predicts the inversion, and the domain name on its own predicts almost nothing.
 
-Six profiles follow. Each has at least one force outside its ordinary range, and each inverts something the mainstream states without qualification.
+Six profiles follow. Each has at least one Force outside its ordinary range, and each inverts something the mainstream states without qualification.
 
 ```text
  where you meet it   the force profile
@@ -43,23 +43,23 @@ Six profiles follow. Each has at least one force outside its ordinary range, and
 
 The left column is where each profile is commonly met, not what the profile is. The two sales systems above share a domain and would not share a row.
 
-**Most of what follows is worked elsewhere in this book**, because the individual findings belong to the chapters that established them. What this chapter adds is the observation that they are not scattered. They cluster, one cluster per force that leaves its ordinary range.
+**Most of what follows is worked elsewhere in this book**, because the individual findings belong to the chapters that established them. What this chapter adds is the observation that they are not scattered. They cluster, one cluster per Force that leaves its ordinary range.
 
 ### Line-of-business: the schema outlives the code
 
-The force is durability. A payroll system's tables will be read by software nobody has written yet, in a language nobody has chosen, after every original author has left.
+The Force is durability. A payroll system's tables will be read by software nobody has written yet, in a language nobody has chosen, after every original author has left.
 
 **What inverts: keep business rules out of the database.** In most software this is sound — logic in the schema is hard to test, hard to version, invisible to the debugger. Here it turns over, because a rule enforced only in application code is a rule that holds until the next application. [Chapter 13](13_smuggled-verdicts_8y69.md) works the placement, and [chapter 16](16_tdd-and-mocks_u8eu.md) shows what a constraint catches that a test double cannot.
 
 **And a second one: the database is an implementation detail you can abstract away.** [Chapter 17](17_abstraction-as-insurance_4jk6.md) takes this apart in full. The profile-level version is shorter: the abstraction sits in the layer that changes fastest, and the thing it claims to insure sits in the layer that changes slowest, so the insurance is filed against the wrong asset.
 
-The ORM question follows from the same force and is worth stating plainly, because it is usually argued as taste. An ORM is a productivity trade whose bill comes due at exactly the point where this profile's force bites: the generated query, the migration, the constraint the mapping cannot express. It is not that ORMs are wrong here.
+The ORM question follows from the same Force and is worth stating plainly, because it is usually argued as taste. An ORM is a productivity trade whose bill comes due at exactly the point where this profile's Force bites: the generated query, the migration, the constraint the mapping cannot express. It is not that ORMs are wrong here.
 
 It is that an ORM chosen because it means you will not have to write SQL is chosen on a promise this profile breaks. You will read the SQL it generates — on the day a query is slow, a migration is wrong, or a constraint cannot be expressed through the mapping. That is an argument against one particular reason for picking one, not against the tool.
 
 ### Games and simulations: the memory layout is the interface
 
-The forces are the frame budget and the memory hierarchy, and [chapter 04](04_structure_agjy.md) works this profile's central inversion. *Hide the representation* turns over: in an entity-component system the order and grouping of fields in memory is what a dozen systems index directly, so it is the contract rather than a private detail, and changing it means changing all of them. [Chapter 07](07_scale_637f.md) owns the arithmetic underneath it.
+The Forces are the frame budget and the memory hierarchy, and [chapter 04](04_structure_agjy.md) works this profile's central inversion. *Hide the representation* turns over: in an entity-component system the order and grouping of fields in memory is what a dozen systems index directly, so it is the contract rather than a private detail, and changing it means changing all of them. [Chapter 07](07_scale_637f.md) owns the arithmetic underneath it.
 
 Two further inversions belong here rather than there.
 
@@ -73,7 +73,7 @@ The mainstream treats reproducibility as a testing convenience. In a simulation 
 
 ### Embedded and real-time: no allocator, no second chance
 
-The force is a deadline that is part of the specification rather than a target, on hardware with a fixed memory budget and often no heap at all.
+The Force is a deadline that is part of the specification rather than a target, on hardware with a fixed memory budget and often no heap at all.
 
 **What inverts: prefer exceptions to error codes.** Here it becomes: return a status from every call, and check it at every call site.
 
@@ -96,7 +96,7 @@ status_t read_sample(sensor_t *sensor, uint16_t *out) {
 
 ### Compilers and language tooling: one type touched by everything
 
-The force is the shape of change. A compiler's abstract syntax tree — the tree of nodes representing the parsed program — is read by the type checker, the optimizer, the code generator, the formatter and the language server. Every one of them depends on it.
+The Force is the shape of change. A compiler's abstract syntax tree — the tree of nodes representing the parsed program — is read by the type checker, the optimizer, the code generator, the formatter and the language server. Every one of them depends on it.
 
 **What inverts: nothing should be depended on by everything.** In most systems, a type with that many dependents is the god object [chapter 09](09_what-a-pattern-is-for_3xzc.md) warns about, and the advice to break it up is correct. Here it is exactly right that everything depends on the AST, and breaking it up produces a translation layer per consumer for no gain.
 
@@ -106,7 +106,7 @@ What this profile adds is that the property generalises: **a type depended on by
 
 ### UI frameworks: you are not the caller
 
-The force is control of the callers, at the third of the three intensities [chapter 02](02_forces_f4m5.md) gives it: you can neither see your callers nor change them. And it applies from both ends. As a framework author you cannot see your callers. As a framework *user* you are the callee, and the flow of control belongs to somebody else.
+The Force is control of the callers, at the third of the three intensities [chapter 02](02_forces_f4m5.md) gives it: you can neither see your callers nor change them. And it applies from both ends. As a framework author you cannot see your callers. As a framework *user* you are the callee, and the flow of control belongs to somebody else.
 
 **What inverts: your code should own the flow.** Structured programming, layering, most architectural advice, and every diagram with an arrow pointing downward assume your `main` is at the top. Under a framework it is not. The framework's loop calls your component, decides when to call it again, decides what happens between calls, and may discard and rebuild your state without asking.
 
@@ -116,11 +116,11 @@ Which has a practical consequence worth more than the definition: the framework'
 
 ### Distributed services: atomicity is gone, so everything downstream changes
 
-The force is concurrency across machines, and [chapter 06](06_distribution_49yh.md) owns this profile end to end: you cannot tell a slow peer from a dead one, exactly-once delivery is impossible, so at-least-once plus idempotency is the shape everything takes, and two systems cannot share a transaction.
+The Force is concurrency across machines, and [chapter 06](06_distribution_49yh.md) owns this profile end to end: you cannot tell a slow peer from a dead one, exactly-once delivery is impossible, so at-least-once plus idempotency is the shape everything takes, and two systems cannot share a transaction.
 
 The profile-level observation is what happens to the toolkit as a whole. Nothing here weakens by a little. A transaction becomes a saga with visible compensations. A foreign key becomes an eventual reconciliation. A unique constraint becomes an idempotency key generated by the client before the first attempt. A rollback becomes a compensating business operation a customer can see.
 
-**Which is the signature of a profile, and the reason this chapter groups by force rather than by domain.** A force outside its ordinary range does not overturn one piece of advice. It overturns the whole family that depended on it, because they all depended on the same thing — and here the thing is that a set of writes either all happen or none do.
+**Which is the signature of a profile, and the reason this chapter groups by Force rather than by domain.** A Force outside its ordinary range does not overturn one piece of advice. It overturns the whole family that depended on it, because they all depended on the same thing — and here the thing is that a set of writes either all happen or none do.
 
 ### What the six have in common
 
@@ -130,17 +130,17 @@ In every case the pattern is identical, and it is [chapter 01](01_the-five-kinds
 
 **A Principle turns over.** Hide the representation, keep rules out of the database, own your flow, avoid god objects — each is good advice with a condition, and each condition fails in exactly one of these profiles.
 
-**And the failure is predictable.** Not one of the six inversions is a surprise once the force reading is in front of you. That is the whole claim: you do not need to have worked under a profile to know which advice it overturns, if you know which force it pins.
+**And the failure is predictable.** Not one of the six inversions is a surprise once the Force reading is in front of you. That is the whole claim: you do not need to have worked under a profile to know which advice it overturns, if you know which force it pins.
 
 ---
 
 ## Why the claim holds
 
-A Principle is advice that is good given certain forces ([Ch. 01](01_the-five-kinds_cjx4.md)). Its condition is a force at a range of values, usually unstated because in most software that force sits in an ordinary range and the condition is quietly satisfied.
+A Principle is advice that is good given certain Forces ([Ch. 01](01_the-five-kinds_cjx4.md)). Its condition is a Force at a range of values, usually unstated because in most software that Force sits in an ordinary range and the condition is quietly satisfied.
 
-A profile is where at least one force leaves that ordinary range and stays there. So the condition fails not occasionally but structurally, for every system with that reading, all the time — which is why the failures cluster rather than scatter, and why the same six or seven pieces of advice come up every time practitioners from two profiles argue.
+A profile is where at least one Force leaves that ordinary range and stays there. So the condition fails not occasionally but structurally, for every system with that reading, all the time — which is why the failures cluster rather than scatter, and why the same six or seven pieces of advice come up every time practitioners from two profiles argue.
 
-**And it is why these particular arguments do not end.** Two people disagreeing about whether business logic belongs in the database are disagreeing about forces rather than about databases, which is [chapter 02](02_forces_f4m5.md)'s general finding. What a profile adds is that this one does not resolve. An ordinary force disagreement ends when somebody measures: the row count is what it is, and one side turns out to have been wrong about it. Here each side is reading a force that will not move in their own system — the schema really does outlive four rewrites where one of them works, and the application really does outlive its storage where the other works — so they will be just as far apart on the next question, and on the one after that.
+**And it is why these particular arguments do not end.** Two people disagreeing about whether business logic belongs in the database are disagreeing about Forces rather than about databases, which is [chapter 02](02_forces_f4m5.md)'s general finding. What a profile adds is that this one does not resolve. An ordinary force disagreement ends when somebody measures: the row count is what it is, and one side turns out to have been wrong about it. Here each side is reading a Force that will not move in their own system — the schema really does outlive four rewrites where one of them works, and the application really does outlive its storage where the other works — so they will be just as far apart on the next question, and on the one after that.
 
 The practical consequence is an asymmetry between the two axes, and it is worth stating because it decides what to ask a new colleague.
 
@@ -164,20 +164,20 @@ The mistake is choosing one profile and applying it throughout. A game that trea
 
 **What to do is a boundary question, and the boundary is a real one: it goes where the force profile changes.** That is the same seam [chapter 04](04_structure_agjy.md) draws for dependency direction and [chapter 08](08_change_rjf9.md) draws for rate of change, arriving from a third direction. Concretely:
 
-- **Name the two profiles.** Write down which force is outside its ordinary range on each side. If you cannot, there is one profile and the question is moot.
+- **Name the two profiles.** Write down which Force is outside its ordinary range on each side. If you cannot, there is one profile and the question is moot.
 - **Put the seam where the data crosses**, not where the code is organized. In the game, the seam is the point where component arrays become rows — and that point should be a small, explicit, boring piece of code that both sides understand, rather than a leak of either discipline into the other.
 - **Let each side keep its own rules.** The frame loop does not get to use the inventory's transactional habits, and the inventory does not get to be lock-free because it lives in a game.
 - **Expect the seam to be where the bugs are**, because it is the only place where two sets of assumptions meet, and each side is written by someone for whom the other side's rules look wrong.
 
-### The ordinary case, where every force sits in its ordinary range
+### The ordinary case, where every Force sits in its ordinary range
 
 Most software is here, and it is the largest boundary on the claim. Nothing is pinned, every condition the mainstream advice depends on is quietly satisfied, and that advice is simply correct. None of the six inversions applies.
 
 That is a finding about your system rather than a disappointment, and four things follow from it.
 
-**It licenses the conventional answer.** Following the mainstream because you checked and every force sits in its ordinary range is a different act from following it because it is what people do — the first can be defended and revisited, the second cannot. Converting the second into the first is most of what this book is for.
+**It licenses the conventional answer.** Following the mainstream because you checked and every Force sits in its ordinary range is a different act from following it because it is what people do — the first can be defended and revisited, the second cannot. Converting the second into the first is most of what this book is for.
 
-**Most systems have one path that leaves the ordinary case**, and it is rarely the whole system. The nightly report that outgrew memory, the table nobody can migrate any more, the one integration you do not control. Recognising the shape of a force leaving its ordinary range is what lets you notice the crossing, and the crossing is where the interesting bugs are.
+**Most systems have one path that leaves the ordinary case**, and it is rarely the whole system. The nightly report that outgrew memory, the table nobody can migrate any more, the one integration you do not control. Recognising the shape of a Force leaving its ordinary range is what lets you notice the crossing, and the crossing is where the interesting bugs are.
 
 **Most advice you meet was written from inside a profile.** Knowing the six lets you discount it correctly — *that is the distributed profile talking and I have no network*, *that is the frame budget talking and I have no budget*. Advice arrives without its profile stated for the same reason it arrives without its scope stated ([Ch. 14](14_principle-loses-scope_b86v.md)).
 
@@ -197,7 +197,7 @@ Six is not a complete enumeration and nothing in the argument requires it to be.
 
 **Moving between profiles costs you judgement you do not know you are losing.** If the inversions cluster by profile, then arriving under a new one means part of your accumulated judgement is wrong in a way that feels exactly like being right. Nothing in the experience of having been correct for ten years tells you which of your conclusions travelled and which were local.
 
-**"It's a different profile" becomes an excuse.** The claim is falsifiable and the excuse is not. The check is to name the force and its value: *the schema outlives the code, so the rule goes in the schema* can be argued with, and *we do things differently in fintech* cannot. Any use of the domain frame that does not name a force is [chapter 14](14_principle-loses-scope_b86v.md)'s mechanism, running on this chapter.
+**"It's a different profile" becomes an excuse.** The claim is falsifiable and the excuse is not. The check is to name the Force and its value: *the schema outlives the code, so the rule goes in the schema* can be argued with, and *we do things differently in fintech* cannot. Any use of the domain frame that does not name a Force is [chapter 14](14_principle-loses-scope_b86v.md)'s mechanism, running on this chapter.
 
 **Six labels invite a lookup table.** The point is the derivation, not the list — and a reader who takes the six as categories to sort systems into has taken the conclusion and left the method, which is precisely what this book spends Part IV describing.
 
@@ -217,13 +217,13 @@ Six is not a complete enumeration and nothing in the argument requires it to be.
 - **"That's over-engineered" and "that's reckless," about one design.** Two profiles in one room. Neither sentence is about the code; each is a reading of what a failure costs, and because both readings are stable the exchange has nowhere to go. Ask each side what happens when this is wrong and who finds out.
 - **"We need to be pragmatic about the database."** Ask what outlives what. Under the line-of-business profile the schema does, which settles it, and it is a fact rather than a preference.
 - **"Premature optimization."** True in the ordinary case, false under the frame-budget and hard-deadline profiles, where the budget was fixed before anyone wrote a line. The question is whether there is a *later* in which to optimize.
-- **"We're not Google."** Usually correct, and it is a claim about profiles rather than about modesty: it says the distributed profile's forces are not yours. What to watch is what the sentence gets used to close. It can be true of the system and false of the one path that crosses a network you do not own.
+- **"We're not Google."** Usually correct, and it is a claim about profiles rather than about modesty: it says the distributed profile's Forces are not yours. What to watch is what the sentence gets used to close. It can be true of the system and false of the one path that crosses a network you do not own.
 
-The question that does the work: **which force here is outside its ordinary range, and what does it hold still?**
+The question that does the work: **which Force here is outside its ordinary range, and what does it hold still?**
 
-Every inversion in this chapter is that question answered. If every force sits in its ordinary range, you are in the ordinary case, the mainstream advice applies, and the interesting thing about your system is somewhere other than its architecture.
+Every inversion in this chapter is that question answered. If every Force sits in its ordinary range, you are in the ordinary case, the mainstream advice applies, and the interesting thing about your system is somewhere other than its architecture.
 
-[Chapter 20](20_idioms_7nkn.md) turns from profiles to ecosystems — why two languages solving the same problem settle on conventions that contradict each other, and what an idiom is actually worth once you can see where it came from.
+[Chapter 20](20_idioms_7nkn.md) turns from profiles to ecosystems — why two languages solving the same problem settle on conventions that contradict each other, and what an Idiom is actually worth once you can see where it came from.
 
 ---
 

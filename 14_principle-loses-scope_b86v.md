@@ -2,11 +2,11 @@
 
 ## The claim
 
-**A compressed principle carries its scope only when it names the situation it applies to. Where it doesn't, the reader has to reconstruct that scope from the surrounding context. Without that context, only the widest reading is available.**
+**A compressed Principle carries its scope only when it names the situation it applies to. Where it doesn't, the reader has to reconstruct that scope from the surrounding context. Without that context, only the widest reading is available.**
 
 **A word on *scope*, because the book has used a different one for this.** Earlier chapters say a Principle has **conditions** — what must be true for it to hold, which is always some fact about your Forces. [Chapter 04](04_structure_agjy.md)'s information-hiding Principle has a sharp one: *you do not control your callers.*
 
-**Scope is the same boundary seen from the other side: the situations the advice reaches.** State the conditions and you have given the scope; name the situation and you have given it too. This chapter says *scope* rather than *conditions* because it tracks what the wording carries rather than what the advice requires — and a principle can carry that boundary either way. *Don't store money in a float* names a situation and states no condition, and it passes the test below regardless.
+**Scope is the same boundary seen from the other side: the situations the advice reaches.** State the conditions and you have given the scope; name the situation and you have given it too. This chapter says *scope* rather than *conditions* because it tracks what the wording carries rather than what the advice requires — and a Principle can carry that boundary either way. *Don't store money in a float* names a situation and states no condition, and it passes the test below regardless.
 
 Part IV is three case studies, and this chapter is the mechanism they share, stated once.
 
@@ -104,7 +104,7 @@ On concurrency, he says the use cases the team had in mind were mostly server so
 
 It also produced the third repair in this chapter. He gave an entire talk in 2012, *Concurrency is not Parallelism*, whose job was to supply the missing distinction, and says of it that it should have happened earlier.
 
-**This is not more evidence about the proverbs.** *Don't communicate by sharing memory* and *concurrency support in the language* are different artifacts, and nothing here says the proverb caused what Pike is describing. **But the mechanism is the same, and that is the whole of it: a principle arrives without its scope, the reader takes the widest reading available, and the damage follows from the reading rather than from the advice.** Ousterhout was not wrong about pthreads and the Go team were not wrong about concurrency — in both cases what did the harm was a reading neither of them wrote.
+**This is not more evidence about the proverbs.** *Don't communicate by sharing memory* and *concurrency support in the language* are different artifacts, and nothing here says the proverb caused what Pike is describing. **But the mechanism is the same, and that is the whole of it: a Principle arrives without its scope, the reader takes the widest reading available, and the damage follows from the reading rather than from the advice.** Ousterhout was not wrong about pthreads and the Go team were not wrong about concurrency — in both cases what did the harm was a reading neither of them wrote.
 
 ### The scope gets rebuilt by hand, more than once
 
@@ -120,9 +120,9 @@ Then it happens a third time, in the Reddit thread itself. One commenter, unprom
 
 And one reply reaches for a **meta-proverb** to bound the proverb, along the lines that a good developer follows the rules and a great one knows when to break them. That improvisation has an institutional form elsewhere. Sensei's Library, a wiki for go the board game rather than the language, sorts its proverbs into scope categories, italicizes the ones amateurs devised so you can see which have centuries behind them, and keeps a *Meta Proverbs* group whose entries include *don't follow proverbs blindly*. Its introduction says the proverbs apply often — and then that one must always evaluate whether they apply in a particular situation, and that sometimes they are contradictory.
 
-None of that apparatus in the game wiki was designed in, and the oldest collection did without it in a different way. The Tang-dynasty *Wei Qi Shi Jue* is ten rules of four Chinese characters each, and most of them spend part of that budget on the situation they apply to — *when in danger, sacrifice*; *against strong positions, play safely*; *take care of oneself when attacking*. The scope is inside the principle rather than around the collection.
+None of that apparatus in the game wiki was designed in, and the oldest collection did without it in a different way. The Tang-dynasty *Wei Qi Shi Jue* is ten rules of four Chinese characters each, and most of them spend part of that budget on the situation they apply to — *when in danger, sacrifice*; *against strong positions, play safely*; *take care of oneself when attacking*. The scope is inside the Principle rather than around the collection.
 
-Which is the more useful way to put the whole progression. **Scope lives either inside the principle or in an apparatus around the collection it belongs to, and where it is in neither, the reader reconstructs it — or fails to.** Segoe's book puts it in worked game diagrams beside each phrase. The game wiki puts it in categories, provenance marks, and a warning to evaluate before applying. The list of nineteen for the language has none of the three.
+Which is the more useful way to put the whole progression. **Scope lives either inside the Principle or in an apparatus around the collection it belongs to, and where it is in neither, the reader reconstructs it — or fails to.** Segoe's book puts it in worked game diagrams beside each phrase. The game wiki puts it in categories, provenance marks, and a warning to evaluate before applying. The list of nineteen for the language has none of the three.
 
 ### The same list contains proverbs this cannot happen to
 
@@ -146,11 +146,11 @@ This is a structural claim rather than an empirical one. It says the left column
 
 So the test gets sharper, and becomes something you can check rather than hope for. **Look at the grammatical subject.** If it names a package, a file format, a specific operation, the situation arrived with the proverb. If it names a style of programming, it did not, and reconstructing it is your job.
 
-### Past proverbs, to principles nobody wrote to be memorable
+### Past proverbs, to Principles nobody wrote to be memorable
 
 Everything above is a proverb, and a proverb is a special case — short and poetic on purpose, because Pike said those were his criteria. So the obvious objection is that the finding belongs to the genre rather than to advice in general.
 
-It does not, and the test settles it without leaving the page. Asking whether a principle names the situation it applies to is a question about its wording. It needs no history, no author to interview, and no claim about what anyone did with it.
+It does not, and the test settles it without leaving the page. Asking whether a Principle names the situation it applies to is a question about its wording. It needs no history, no author to interview, and no claim about what anyone did with it.
 
 Run it on advice nobody compressed for memorability:
 
@@ -169,11 +169,11 @@ Run it on advice nobody compressed for memorability:
  guard cgo with build tags      a file using cgo  —
 ```
 
-The top four are not proverbs. Nobody wrote the single responsibility principle to scan, and it does not. They fail the test anyway, and for the reason the Go proverb did: none of them says which situation it is about, so before you can apply one you have to answer a question it never asked. Two engineers who both accept the single responsibility principle can disagree about every class in the codebase and neither is misreading it — they answered *of what?* differently, and the principle does not arbitrate.
+The top four are not proverbs. Nobody wrote the single responsibility principle to scan, and it does not. They fail the test anyway, and for the reason the Go proverb did: none of them says which situation it is about, so before you can apply one you have to answer a question it never asked. Two engineers who both accept the single responsibility principle can disagree about every class in the codebase and neither is misreading it — they answered *of what?* differently, and the Principle does not arbitrate.
 
 The bottom two are not proverbs either, and they pass. *Money* and *cgo* name situations. There is nowhere to resolve them outward to.
 
-**So the property belongs to the wording, not to the genre.** Being built for memorability makes it more likely that the situation gets left out, because a situation is the longest part and the first to go. It is not what causes the omission. [Chapters 14](14_principle-loses-scope_b86v.md), 16 and 17 are three principles from the second column, each traced to what its wide reading produced.
+**So the property belongs to the wording, not to the genre.** Being built for memorability makes it more likely that the situation gets left out, because a situation is the longest part and the first to go. It is not what causes the omission. [Chapters 14](14_principle-loses-scope_b86v.md), 16 and 17 are three Principles from the second column, each traced to what its wide reading produced.
 
 **On what these sources are worth**, because they are not equal. Pike's talk is primary. The Go project's wiki page is an official artifact and the strongest evidence that the misreading was real enough to be worth correcting — though note that it attributes the over-use to enthusiasm rather than to the proverb, and this chapter does not claim the proverb caused it. The Reddit thread is community anecdote: one instance, dated, and useful only because the over-application is self-reported rather than attributed by somebody else. It shows the confusion exists and what shape it takes. It establishes nothing about how often, and nothing here claims otherwise.
 
@@ -189,7 +189,7 @@ Compression fixes the wording. It does not fix the scope.
 
 Different artifact, different missing piece — an antecedent there, a situation here — and the same selection running on both. **What survives is the part that tells you what to do. What goes is the part that tells you whether to do it.**
 
-Which explains why neither failure runs the other way. Nobody under-applies a principle they received without its scope, because the fragment that would have narrowed them is precisely the fragment that was dropped.
+Which explains why neither failure runs the other way. Nobody under-applies a Principle they received without its scope, because the fragment that would have narrowed them is precisely the fragment that was dropped.
 
 **The form causes this, and the form was chosen deliberately.** Pike sets out his criteria near the end: really short, kind of poetic, a little saying, something memorable. Those are constraints on shape, indifferent to whether the surviving proverb is complete. A statement of scope is longer, does not scan, and is useless to anyone not in the situation it names. It is the first thing that will not fit.
 
@@ -212,7 +212,7 @@ Some advice is unconditional, and then nothing is missing from the compressed fo
 
 ### A named situation is a proxy, and proxies fit badly
 
-The test above asks whether a principle names the situation it applies to. It does not ask whether that situation is the right one, and those come apart.
+The test above asks whether a Principle names the situation it applies to. It does not ask whether that situation is the right one, and those come apart.
 
 A named situation is a **proxy** for the conditions — cheaper to state, easier to recognize, and chosen for both of those rather than for fit. Pike's own list shows the seam. Two of the nineteen are the same instruction with a different noun in front:
 
@@ -227,7 +227,7 @@ Introducing the second, he says it is for exactly the same reason as the first. 
 
 It can also be wider. *Don't store money in a float* names money; the condition is that an exact decimal representation is authoritative and errors accumulate. A rough total on a dashboard, never summed and never reconciled, is inside the named situation and outside the condition. That direction is the milder failure, because obeying the proverb there costs almost nothing.
 
-**Which makes the chapter's test weaker than it reads, and worth restating honestly.** Passing it means the principle handed you something checkable, not that it handed you the right extent. With *guard cgo with build tags* you can ask what your case has in common with cgo and get an answer. With *clear is better than clever* there is nothing to compare against, because no situation was named at all.
+**Which makes the chapter's test weaker than it reads, and worth restating honestly.** Passing it means the Principle handed you something checkable, not that it handed you the right extent. With *guard cgo with build tags* you can ask what your case has in common with cgo and get an answer. With *clear is better than clever* there is nothing to compare against, because no situation was named at all.
 
 That is still a real difference, and it is the one the chapter is about. A proxy you can test beats an extent nobody stated.
 
@@ -239,7 +239,7 @@ So a proverb about the board can accumulate a stable scope, while a proverb abou
 
 ### The repair sometimes arrives
 
-This chapter ends in repair, which is why it does not claim that a principle stripped of its scope stays that way. The scope was rebuilt three times here: officially, in a wiki page with a table; informally, by strangers answering a question; and by the source himself, in a talk given to supply a distinction he had left out.
+This chapter ends in repair, which is why it does not claim that a Principle stripped of its scope stays that way. The scope was rebuilt three times here: officially, in a wiki page with a table; informally, by strangers answering a question; and by the source himself, in a talk given to supply a distinction he had left out.
 
 Where that does not happen — where the wide reading hardens and nobody writes the page — you get what [chapter 22](22_never-written-down_at4r.md) calls a folk remedy. [Chapters 14](14_principle-loses-scope_b86v.md), 16 and 17 are three cases that travelled further than this one did.
 
@@ -249,7 +249,7 @@ Where that does not happen — where the wide reading hardens and nobody writes 
 
 **Recovering a scope is slow, and sometimes there is nothing to recover.** Where the advice came from a conversation, a code review, or a mailing list that no longer resolves, no amount of looking will produce the conditions. You are reconstructing rather than reading, which is how a plausible mechanism gets attached to somebody else's words.
 
-**Having the source does not fix it.** Each of the three principles in the chapters that follow has one — in print, by the author, findable in minutes — and the compressed version travelled anyway. The reason is not that checking is hard. It is that the compressed version arrives complete enough to act on, so nothing prompts the check. Nobody stops to verify advice that has already told them what to do.
+**Having the source does not fix it.** Each of the three Principles in the chapters that follow has one — in print, by the author, findable in minutes — and the compressed version travelled anyway. The reason is not that checking is hard. It is that the compressed version arrives complete enough to act on, so nothing prompts the check. Nobody stops to verify advice that has already told them what to do.
 
 **The test rejects nearly everything.** Almost no advice states its own scope, because the scope was compressed out before it reached you. *Does this say how wide it is* discards most of what is true along with what is not. It sorts. It does not accept or reject.
 

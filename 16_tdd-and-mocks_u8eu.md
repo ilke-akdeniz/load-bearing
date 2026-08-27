@@ -173,7 +173,7 @@ Two limits of the design, which they also state: it is a single-group study with
 
 **Read those and the finding is narrower, and more useful, than either slogan.** It does not say the ritual is worthless. It says the ritual's value is in what it makes you do — small steps, evenly sized, with tests — and that you can have that without the ritual, if you actually do it. Which is a harder instruction than either *always write the test first* or *test-first is a myth*, and the only one of the three that tells you what to change on Monday.
 
-This is [chapter 14](14_principle-loses-scope_b86v.md)'s mechanism — a principle losing its scope — running on a peer-reviewed paper rather than a proverb. The conditions were published beside the finding, by the same authors, in the same section. What travelled was the finding.
+This is [chapter 14](14_principle-loses-scope_b86v.md)'s mechanism — a Principle losing its scope — running on a peer-reviewed paper rather than a proverb. The conditions were published beside the finding, by the same authors, in the same section. What travelled was the finding.
 
 ---
 

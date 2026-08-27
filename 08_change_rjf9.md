@@ -107,7 +107,7 @@ This does not contradict the argument above, because it is the same rule. *Once 
 
 > Organizations which design systems […] are constrained to produce designs which are copies of the communication structures of these organizations.
 
-It is a description, not advice — [chapter 03](03_grading-a-law_q5c6.md) uses exactly this distinction, since a law describes what happens while a principle tells you to do something. Conway's Law tells nobody to do anything.
+It is a description, not advice — [chapter 03](03_grading-a-law_q5c6.md) uses exactly this distinction, since a law describes what happens while a Principle tells you to do something. Conway's Law tells nobody to do anything.
 
 **"Communication structure" is easy to misread**, so it is worth taking from the same paper what Conway meant by it. He is not talking about how easily people can reach each other. He is talking about which groups have to agree with which:
 

@@ -145,7 +145,7 @@ Almost every repository interface is justified by the same sentence: *we might n
 
 *We need to support two databases* is the first. *We might need to switch databases* is the second, and it is the one that gets said in the meeting.
 
-Martin's example is the first. Keyboard and printer and disk file are readers and writers that exist at the same time, and the whole argument for `Copy` turns on being able to drive any of them. **The names for the two cases are this book's and are not standard vocabulary**, but the distinction is in the source; what the folk version dropped is that only one of the two produces the stability the principle asks for.
+Martin's example is the first. Keyboard and printer and disk file are readers and writers that exist at the same time, and the whole argument for `Copy` turns on being able to drive any of them. **The names for the two cases are this book's and are not standard vocabulary**, but the distinction is in the source; what the folk version dropped is that only one of the two produces the stability the Principle asks for.
 
 Everything demonstrated earlier in this chapter is the second case. The two are easy to conflate because the code they produce is identical — the same interface, the same constructor, the same dependency arrow — and only the run-time behaviour differs, which nobody looks at.
 

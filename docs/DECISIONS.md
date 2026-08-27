@@ -4900,3 +4900,47 @@ Three other sites carried it: `README.md`'s first hook, which had the claim verb
 **The concession is deleted rather than softened.**
 With coverage no longer claimed, there is nothing to concede, so *What this chapter assumed* keeps only that the five kinds and their authority are assumed and not proven here, and why — the authority half is true by construction.
 The line *"So this chapter was a way of sorting rather than a proof"* went with it, on the author's flag: the section now ends on *there is nothing left to show*, which is flatter and says the same thing.
+
+---
+
+## 120. The five kind names are capitalized when they name the kind
+
+**Date.** 2026-08-26
+
+**Context.**
+The end-to-end read found [chapters 18](../18_force-map-method_r37x.md), [19](../19_six-profiles_dnkz.md) and [22](../22_never-written-down_at4r.md) using *force*, *principle* and *idiom* in lower case where the rest of the book capitalizes them.
+In the identical position — *a Force* / *the Force* — the other nineteen chapters ran 68 capital to 0 lower case. [Chapter 02](../02_forces_f4m5.md) alone writes *the Force* 26 times for exactly what [chapter 18](../18_force-map-method_r37x.md) lower-cased, so there was no kind-versus-instance distinction hiding in it.
+
+**A wrong explanation, corrected by the author.**
+The draft argued that *Force* and *Idiom* needed fixing while *Law* and *Style* did not, because *"outside this book's model, a Force means nothing."*
+That is false — *force* and *idiom* are ordinary English words, and the author said so:
+
+> I see no difference between any of kind words regarding your statement.
+
+They were right. The counts differ because **this book rarely has occasion for the ordinary senses of *force* and *idiom***, not because a different rule governs them. It is not a physics book and it does not discuss figures of speech, while it discusses *an empirical law*, *Lehman's laws* and *a style guide* constantly. One rule, five words, and a cleaner sample for two of them.
+
+**The rule.**
+
+> Capitalize when the word names one of the five kinds. Lower case for the ordinary word, for a proper name, and where the word modifies a noun.
+
+The third clause is what handles the tail, and it was the part the draft underestimated. *Force map*, *force profile*, *force reading*, *force-mapping* stay lower case for the same reason *style guide* does: the word is modifying a noun rather than being one. So do *single responsibility principle* and *single-writer principle*, which are names, and *in principle*, which is an idiom of English.
+
+**[Chapter 14](../14_principle-loses-scope_b86v.md) settled itself.**
+The draft had held *principle* back as a genuine question, since [chapter 14](../14_principle-loses-scope_b86v.md) lower-cases it ten times and is arguably discussing advice-as-such rather than the kind.
+Its first seven lines answer it. The title is *How a **Principle** Loses Its Scope*; the claim is *"A compressed **principle**…"*; the very next paragraph is *"Earlier chapters say a **Principle** has conditions … [chapter 04](../04_structure_agjy.md)'s information-hiding **Principle**."*
+Capital, lower case, capital, capital, one referent, three paragraphs. A chapter that cannot hold the generic reading for two paragraphs running was not using one.
+
+**Execution, and what review caught.**
+The change was applied by script and reviewed as a word-level diff, which was necessary rather than cautious — the first pass was wrong in three ways.
+
+- The determiner list was case-sensitive, so sentence-initial *A principle* was skipped while *its principles* in the same sentence was not.
+- Bare plurals after a colon were missed, leaving [chapter 18](../18_force-map-method_r37x.md)'s claim reading *"forces, then Principles, then Idioms"* — worse than before the change.
+- The rule protecting the verb *forces you to* also matched the noun in *"A force you cannot measure is not a force you get to assume."*
+
+Five further mis-fires were found by listing every surviving lower-case instance and reading it, rather than by trusting the pass.
+
+**Consequence.**
+Roughly a hundred instances across [chapters 08](../08_change_rjf9.md), [14](../14_principle-loses-scope_b86v.md), [16](../16_tdd-and-mocks_u8eu.md), [17](../17_abstraction-as-insurance_4jk6.md), [18](../18_force-map-method_r37x.md), [19](../19_six-profiles_dnkz.md) and [22](../22_never-written-down_at4r.md).
+The book now runs 124 capital to 14 lower case on *Force*, 59 to 4 on *Principle*, and 42 to 0 on *Idiom* — and every survivor is an attributive compound on the keep-list above.
+
+[Chapter 18](../18_force-map-method_r37x.md)'s claim was the sentence that mattered most, and it now names the model's three rungs as the model names them: *Forces, then Principles, then Idioms.*
