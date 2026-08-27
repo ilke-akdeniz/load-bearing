@@ -71,7 +71,7 @@ Three results. Each is given with its assumptions rather than its proof, because
 
 **FLP impossibility**, named for Fischer, Lynch, and Paterson, who proved it in 1985. In an asynchronous system where even one process may crash, no deterministic protocol can guarantee that all correct processes reach agreement. *Assumes:* no bound on message delay, no clocks, and a deterministic algorithm. *Consequence:* consensus algorithms in real use (Raft, Paxos) do not evade FLP — they add timeouts, which means they give up guaranteed *termination* and keep guaranteed *safety*. They may take longer; they will not decide two different things.
 
-**CAP**, for Consistency, Availability, and Partition tolerance. In an asynchronous network, a linearizable register cannot also be available during a partition. *Assumes:* linearizability, and availability meaning every non-failed node answers. *Consequence:* during a partition you choose. Outside a partition you have both, which is why **PACELC** is the more useful statement: *if Partitioned, choose Availability or Consistency; Else, choose Latency or Consistency.* The second half applies every day, and the first half only during an outage.
+**CAP**, for Consistency, Availability, and Partition tolerance. Take a single value that clients read and write, and require that every read return the most recent write, as though only one copy had ever existed. That requirement is **linearizability**, and it is what *Consistency* means here — considerably narrower than the everyday word. In an asynchronous network, a value held to it cannot also be answered by every non-failed node during a partition. *Assumes:* linearizability, and availability meaning every non-failed node answers. *Consequence:* during a partition you choose. Outside a partition you have both, which is why **PACELC** is the more useful statement: *if Partitioned, choose Availability or Consistency; Else, choose Latency or Consistency.* The second half applies every day, and the first half only during an outage.
 
 All three share one root, which is the claim at the top. A lost message and a slow message look identical. A crashed process and a paused one look identical. A partitioned peer and a dead peer look identical. **The impossibility is always that you must act on information you cannot obtain.**
 
@@ -254,7 +254,7 @@ The arithmetic result is different and worth separating. p^N is not about knowle
 
 The important one, and the most frequently ignored.
 
-A single application server talking to a single Postgres has no partition to survive, no consensus to reach, and no cross-system atomicity problem, because the database provides atomicity and the application has nothing to coordinate with. Two Generals is true and inert; CAP has no register to make unavailable; FLP has no agreement to reach.
+A single application server talking to a single Postgres has no partition to survive, no consensus to reach, and no cross-system atomicity problem, because the database provides atomicity and the application has nothing to coordinate with. Two Generals is true and inert; CAP has no replicated value to make unavailable; FLP has no agreement to reach.
 
 Reaching for this chapter's machinery there produces real harm rather than mere waste:
 
