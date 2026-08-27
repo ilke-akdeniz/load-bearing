@@ -2,7 +2,7 @@
 
 *Which Software Principles Hold, and Where They Stop*
 
-**Every claim you meet about software is one of five kinds, and the kind determines how much authority it has** — not the confidence of the person saying it, not their track record, not how widely it is repeated.
+**Many claims you meet about software are one of five kinds, and the kind determines how much authority it has** — not the confidence of the person saying it, not their track record, not how widely it is repeated.
 The same wiring code is unremarkable in Go and gets sent back in review in C#, and neither version is more correct.
 → [Chapter 01 — The Five Kinds of Claim](01_the-five-kinds_cjx4.md)
 

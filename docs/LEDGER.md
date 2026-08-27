@@ -19,7 +19,7 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 
 | Concept | Owner | Canonical statement | Others may say |
 |---|---|---|---|
-| The five kinds of claim | cjx4 | A claim is one of five kinds — Law, Force, Principle, Idiom, Style — and the kind sets its authority. Four are advice and form a ladder; Force is not, so there are four levels and five kinds | "a Law / an Idiom" |
+| The five kinds of claim | cjx4 | Many claims about software are one of five kinds — Law, Force, Principle, Idiom, Style — and the kind sets its authority. Four are advice and form a ladder; Force is not, so there are four levels and five kinds | "a Law / an Idiom" |
 | Classification test | cjx4 | Five questions that place a claim in one of the five kinds | "run the test" |
 | Why the kinds get confused | cjx4 | Four mechanisms: tone doesn't vary with authority; advocacy compresses; monoculture makes Idioms feel universal; teaching leaves the training wheels on | one clause, cite |
 | The Idiom/Style line is mechanical | cjx4 | The compiler or the runtime acts on an Idiom and neither can see a Style. What is held constant is narrow and named — what the program produces when it succeeds — so failure modes, setup effort and how much the compiler can check are all free to differ. Ecosystem-specificity does not discriminate, because plenty of Style is local. 7nkn owns the fact that the line falls in a different place in each language | "the machine can see it" |

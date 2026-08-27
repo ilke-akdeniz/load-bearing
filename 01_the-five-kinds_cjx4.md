@@ -1,6 +1,6 @@
 # The Five Kinds of Claim
 
-**Every claim you meet about software is one of five kinds: Law, Force, Principle, Idiom, Style. And the kind of a claim determines how much authority it has** — not the confidence of the person saying it, not their track record, not how widely it is repeated.
+**Many claims you meet about software are one of five kinds: Law, Force, Principle, Idiom, Style. And the kind of a claim determines how much authority it has** — not the confidence of the person saying it, not their track record, not how widely it is repeated.
 
 Four of them are advice, and those four form a ladder of authority:
 
@@ -302,11 +302,7 @@ That last one is the most expensive and the easiest to fix. When an architecture
 
 ## What this chapter assumed
 
-The book assumes both halves of that claim and spends the rest of its chapters on what follows from them. That is worth saying now, because every other chapter makes a claim and then demonstrates it, and this one did not. That the kind determines authority is true by construction, since the kinds are *defined* by their authority — there is nothing left to show. The other half does not survive inspection: the model sorts advice, together with the one kind of input that decides where advice stands, so a fact about one program, an evaluative remark, or an observation about how the industry behaves is a claim about software with no place in it. [-- If it does not survive inspection we should be honest with ourselves. Then it becomes "Many claims you meet about software is one of five kinds" 
-
-you changed my start of the paragraph "The book assumes the five claim classification and the authority mapping" but this version is not ok. "halves of that claim" what claim, what halves? Here is my new suggestion: "Five kinds and their authority are assumed and not proven in this chapter. That is worth saying now, because every other chapter makes a claim and then demonstrates it." You decide if the rest of the paragraph still makes sense after this update.] 
-
-So this chapter was a way of sorting rather than a proof, and it should be judged by what it lets you see. [-- this is a candidate for deletion depending on the previous paragraph]
+Five kinds and their authority are assumed and not proven in this chapter. That is worth saying now, because every other chapter makes a claim and then demonstrates it. That the kind determines authority is true by construction, since the kinds are *defined* by their authority — there is nothing left to show.
 
 [Chapter 02](02_forces_f4m5.md) takes Forces seriously — the properties of a situation that decide which Laws bind and which Principles hold, and why naming one is not the same act as evaluating it.
 
