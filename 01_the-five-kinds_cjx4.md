@@ -34,7 +34,7 @@ A **property of your situation**: is there concurrency, does the data outlive th
 
 Forces are not recommendations, and they are not negotiable by argument. They are facts about where you are standing. Most unresolvable architecture disagreements are two people holding different Forces in mind while arguing about Principles. ([Chapter 02](02_forces_f4m5.md) is entirely about them.)
 
-**This word is borrowed, and it is the one of the five you can go and look up** — though not where you would expect. In the literature on how to *write* patterns, *Forces* is a named element of the description, sitting alongside Problem, Context and Solution: the constraints and tensions a pattern has to resolve, and how they conflict with each other. The idea is Christopher Alexander's, whose formulation is that a pattern states a relationship between a context, a system of forces arising in that context, and a configuration that lets those forces resolve themselves. The Gang of Four book, which is what most people mean by design patterns, does not use the term at all.
+**This word is borrowed, and it is the one of the five you can go and look up** — though not where you would expect. In the literature on how to *write* patterns, *Forces* is a named element of the description, sitting alongside Problem, Context and Solution: the constraints and tensions a pattern has to resolve, and how they conflict with each other. The idea is Christopher Alexander's, whose formulation is that a pattern states a relationship between a context, a system of forces arising in that context, and a configuration that lets those forces resolve themselves — given here as Appleton's paper reports it, since *The Timeless Way of Building* was not consulted. The Gang of Four book, which is what most people mean by design patterns, does not use the term at all.
 
 Two things differ here, and together they are why the word does a different job in this book. There, forces live *inside* a pattern's write-up and describe the tension that one pattern resolves; here they are properties of your situation, read before any pattern is in view. And there they are a field in a template; here a Force is one of the kinds of claim — which is what lets it decide whether a Law binds and whether a Principle inverts.
 
@@ -170,8 +170,8 @@ That is the signature of an Idiom. The rule is real, it is worth following, and 
 Take the seat-reservation code again, unchanged, and put it somewhere else:
 
 ```go
-// A one-off CLI tool. One process, one goroutine, run by one operator,
-// on a database nothing else is touching.
+// A one-off CLI tool. One process, one goroutine — Go's lightweight
+// thread — run by one operator, on a database nothing else is touching.
 func main() {
 	if err := Reserve(ctx, db, os.Args[1]); err != nil {
 		log.Fatal(err)
@@ -312,7 +312,7 @@ Until then, follow the local convention — not because it is a good proxy for c
 - Someone unable to answer *when would this rule be wrong?* — not because the answer is "never," but because the question has never come up.
 - Two people making increasingly detailed arguments while disagreeing about a Force neither has stated.
 
-That last one is the most expensive and the easiest to fix. When an architecture argument will not converge, stop arguing about the Principle and ask what each side believes about the situation. The disagreement is usually one rung down from where it is being conducted.
+That last one is the most expensive and the easiest to fix. When an architecture argument will not converge, stop arguing about the Principle and ask what each side believes about the situation. The disagreement is usually not about the advice at all, but about the situation both sides are applying it to.
 
 [Chapter 02](02_forces_f4m5.md) takes Forces seriously — the properties of a situation that decide which Laws bind and which Principles hold, and why naming one is not the same act as evaluating it.
 
@@ -320,7 +320,7 @@ That last one is the most expensive and the easiest to fix. When an architecture
 
 ## Sources
 
-- Brad Appleton, *Patterns and Software: Essential Concepts and Terminology* — [bradapp.com/docs/patterns-intro.html](https://www.bradapp.com/docs/patterns-intro.html). The account of the pattern form, and of *Forces* as one of its elements, is from here. Alexander's formulation is given as that paper reports it; *The Timeless Way of Building* was not consulted.
+- Brad Appleton, *Patterns and Software: Essential Concepts and Terminology* — [bradapp.com/docs/patterns-intro.html](https://www.bradapp.com/docs/patterns-intro.html).
 
 ---
 
