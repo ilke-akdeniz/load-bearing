@@ -4972,3 +4972,71 @@ The absence is now a decision rather than an oversight, which matters because a 
 The finding was correct and the remedy was not, and *the book stops on its last chapter's own last sentence* is the answer, not a gap waiting to be filled.
 
 No reason beyond the author's judgement is recorded here, because none was given and inventing one would misrepresent what happened.
+
+---
+
+## 122. Chapter 23, and the grilling that produced it
+
+**Date.** 2026-08-27
+
+**Context.**
+The author drafted an idea for a final, practical chapter in `docs/pending-tasks/last-chapter-idea.md` and asked for an evaluation before any drafting.
+That evaluation is kept verbatim beside it as `last-chapter-idea-claude-review.md`, at the author's instruction, so it does not follow the one-sentence-per-line convention for `docs/`.
+It offered two shapes: a derivation chapter, or the practical manifesto the notes reached for. The author chose the manifesto, with the derivation as its spine, and asked for the chapter to be worked through by grilling.
+
+**The interview, in the order the questions were asked.**
+
+**Q1 — how the new Forces relate to [chapter 02](../02_forces_f4m5.md)'s seven.**
+The author's opening proposal was to relabel the seven as *software forces*, move team size out, and call the new set *human forces*.
+Looking it up first changed the question. Every one of the seven ends with a *what changes with the Force* line, and every one names a **design** consequence — *whether a mistake is correctable*, *where the rule lives*, *what you can spend on abstraction*. So the seven are not software facts: team size is a fact about people and belongs there because reading it moves a rule into the type system, and two of the seven, blast radius and control of the callers, are organizational facts. The proposed label would have been false about the book, and the move would have cost *seven* becoming *six* in seven live places plus rehoming [chapter 11](../11_patterns-that-survive-translation_us2k.md)'s team-size family of six patterns.
+
+The author's answer took the recommended split — by **what the reading decides** — and improved on it with the naming: **design Forces** and **organization Forces**.
+Three checks made the retrofit free. [Chapter 02](../02_forces_f4m5.md)'s claim already says *design arguments*, so the label names something it has always said. [Chapter 18](../18_force-map-method_r37x.md) already says *the seven are not a closed list*. And [chapter 14](../14_principle-loses-scope_b86v.md)'s opening is the established move for introducing refined vocabulary late, in one paragraph. No earlier chapter changes.
+
+**Q2 — the claim, where the author's revision beat the draft's.**
+The draft proposed *"…and most standard process was chosen without reading any of them"*, which is an industry-wide assertion neither party can measure.
+The author's replacement removed that: *"Organization forces carve pathways for the development processes. Following a process template without reading the forces leads to inefficiencies."* It claims what happens rather than what people do, which is checkable against the reader's own situation.
+
+Two of its words did not survive the book's rules. *Carve pathways* is an image doing a mechanism's job, and it implies determinism where [chapter 18](../18_force-map-method_r37x.md) says a set of Forces **licenses** a set rather than determining one. *Inefficiencies* is the vague fallback the claim-sentence rule forbids. What shipped names the two failures the machinery actually predicts:
+
+> **Organization Forces decide which development processes can work. A process template adopted without reading them produces ceremony where no Force is acting, and surprises where one is acting unread.**
+
+That sentence also solved a problem the draft had raised separately: it **earns** the word *ceremony* by definition rather than asserting it, so the author's process criticism needed no retrospective hedging.
+
+**Q3 — what the organization Forces are.**
+Of the four in the notes, team size had moved to design Forces and *risks* is disqualified by [chapter 02](../02_forces_f4m5.md)'s instrument test, leaving two. Six were proposed with the test run on each, and the author took the set: skill spread, requirement volatility, decision latency, budget and runway, distribution, regulatory obligation. Three worked, three listed.
+
+**Ownership was deliberately kept off the list.** It is the strongest idea in the notes, and a Force is *read* rather than established — the notes' own wording, *"owner should be clear before every step"*, is a prescription. It belongs at the root of the artifact chain, which is a stronger position than being one of six.
+
+**Q4 — the shape.** [Chapter 11](../11_patterns-that-survive-translation_us2k.md)'s skeleton, with organization Forces where it has design Forces. Two placements do real work: the artifact chain is *why the claim holds*, because it is the mechanism; and the process criticism sits in *how to recognize the failure*, which conditions it structurally — that section is by definition about what it looks like when somebody got this wrong, so a standup with no blocker reads as a symptom rather than a verdict on standups.
+
+**Q5 — what it demonstrates with, and a correction from the author.**
+Decision 47 already settles half: *the book's process is not the book's subject*, so this book's own making is inadmissible.
+The draft then proposed presenting the examples as anonymized real cases, since the author has decades of them and naming real people would be gossip. The author refused the framing:
+
+> I don't think we should say something like those are real stories or these ideas came from someone that lived through all these. Those would be pointless. We make our points and tell our examples and if they sound reasonable and make sense they do, if they don't they don't.
+
+That is the book's own rule — *cite people for provenance, never as proof* — applied to the draft's suggestion. A claim of lived experience asks the reader to extend trust on the speaker's standing, which is what the book spends every chapter arguing against. So the examples work exactly as [chapter 02](../02_forces_f4m5.md)'s do: constructed, mechanism visible, no provenance note, and the draft's proposed *unverifiable by the reader* line in the costs section went with it. The draft had this wrong twice in a row.
+
+FlowCore appears once, for the per-slice scope rule, with its limit stated in the text: it is a single-developer project and can carry none of the Forces about several people.
+
+**Q6 — placement.** Part V, chapter 23. The chapter cannot be called *Contextual Programming*, which is Part V's own name, so it is *Organization Forces: What Decides the Process*. Adding it also dissolves the problem decision 121 recorded: the practical chapter is now the book's ending, which is a better close than a coda classifying the book.
+
+**Q7 — the counter-example, after a mistake.**
+The draft had put regulatory obligation on the Force list in Q3 and then offered it as the boundary in Q4. It cannot be both: if regulation is a Force, a process it mandates is the claim working. So the chapter had no boundary, which the counter-example rule treats as evidence the claim is too vague.
+
+The author's notes contained the first one — *"socially good to meet every week maybe but every day is theatre"* — a step answering no work Force that is right anyway, which yields the chapter's sharper test: **the reason given for a step has to be the reason it exists.**
+
+The author supplied the second, and it is the better of the two because it is self-applying:
+
+> With a team of highly talented engineers - managers who follow the forces instinctively and who have a track record of efficiency, our CP utopia would just be another set of ceremonies.
+
+The chapter's own remedy convicted by the chapter's own claim. Two conditions were added in the interview and both strengthen it: it holds only while the team is stable, since [chapter 22](../22_never-written-down_at4r.md) owns what the reasoning costs when people leave; and the instrument is the shipping record rather than the self-assessment, because every team believes it is this team.
+
+**Q8 — scope.** Five thousand words authorized. The draft came in at about 3,900 including back matter, and was not padded to the budget.
+
+**Consequence.**
+`23_organization-forces_i59b.md` at **in progress**. Chapter 22 gains a handoff and a next-chapter link.
+The count moves from twenty-two to twenty-three in `00_toc.md`, `README.md` three times, `CLAUDE.md`, and `tools/check-drift.py`'s number-word map.
+Nine concept rows and three example rows added to `docs/LEDGER.md`.
+No earlier chapter's text changes, which was the point of Q1's answer.

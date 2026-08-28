@@ -276,6 +276,8 @@ And if the answer is that somebody would read the code and work it out, that som
 
 What you end up holding is not an answer but a position. Fixing Y changes Z; some customers depend on Z; leaving Y another month costs you a different customer. Nobody in that conversation is being unreasonable and nobody is going to win it, because **there is no fact available that settles it** — and one sentence, written at the time by whoever chose Y, is what would have.
 
+[Chapter 23](23_organization-forces_i59b.md) closes the book on the arrangement around the code — the Forces that decide how the work itself is organised, and why a process adopted without reading them produces ceremony at one end and surprises at the other.
+
 ---
 
 ## Sources
@@ -289,4 +291,4 @@ What you end up holding is not an answer but a position. Fixing Y changes Z; som
 
 ---
 
-[← Ch. 21](21_style_9rng.md)  ·  [Contents](00_toc.md)
+[← Ch. 21](21_style_9rng.md)  ·  [Contents](00_toc.md)  ·  [Ch. 23 →](23_organization-forces_i59b.md)

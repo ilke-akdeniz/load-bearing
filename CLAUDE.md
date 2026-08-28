@@ -56,7 +56,7 @@ Always name the kinds — Law, Force, Principle, Idiom, Style.
 Read these before writing anything.
 
 - `README.md` — premise, the model, the chapter rubric, conventions, license. The landing page.
-- `00_toc.md` — the contents page: twenty-two chapters in five parts, each a number, a title and a link, and nothing else.
+- `00_toc.md` — the contents page: twenty-three chapters in five parts, each a number, a title and a link, and nothing else.
 - `docs/STATUS.md` — which chapter is at which status. Update it when a status changes.
 - `docs/LEDGER.md` — **concept and example ownership.** Which chapter owns which idea. Non-optional; see the protocol below.
 - `docs/DECISIONS.md` — editorial decisions, with reasoning and the options that lost. Consult before reversing anything.

@@ -273,6 +273,15 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Unrecorded decisions compound | at4r | Each one constrains the next change without saying so, and removing anything requires knowing what it was for — which ends in requests that can only be negative, *fix this, do not break that* | "fix this, don't break that" |
 | Self-enforcing beats recorded | at4r | Where a decision can be written into something that refuses to be violated, that is worth more than a record, because enforcement does not depend on anyone reading anything. Narrow: most design decisions are judgements, not invariants | "make it self-enforcing" |
 | Silent defaults | at4r | Generated code states no decisions at all — a taken branch leaves no mark, so review cannot catch what it never suspected | "silent default" |
+| Design Forces and organization Forces | i59b | The two sets are separated by what the reading decides, not by whether the fact is about software or people — f4m5's seven change the design, these change how the work is arranged. Team size is a fact about people and stays a design Force, because reading it moves a rule into the type system | "design Forces / organization Forces" |
+| Skill spread | i59b | How much can be left to judgement and how much must be specified — it decides where the specification stops, and how often the same one is issued again, because a document records a conclusion rather than the judgement that produced it | cite |
+| Requirement volatility | i59b | How often the goal moves and *who* moves it; the second half decides more. Whose horizon it is, not how long the horizon is, sets how far ahead a plan can be written before writing it stops being planning | "whose schedule the goal moves on" |
+| Decision latency | i59b | How long from a question asked to an answer arriving. Low latency means questions asked singly and nothing scheduled; high latency forces batching, and a recurring meeting is what a team builds when the latency is high and nobody has said so | "ask singly or batch" |
+| The artifact chain | i59b | Process is derived backwards, not chosen: software that survives its Forces moving needs code plus records, which need someone creating and maintaining them, which needs someone whose job it is. Every level is load-bearing for the one above and the bottom one is the one nobody assigns | "derive the process backwards" |
+| Ownership is the leaf | i59b | "Somebody" is not a committee and not "the team". Ownership supplies two things a shared assignment cannot — a defensible answer to why you were doing that instead of the ticket, and whose judgement settles it. rjf9's negotiation mechanism at smaller scale: where no group owns a piece there is nobody to negotiate with, so the seam is undrawn rather than badly drawn | "somebody, named" |
+| The stated reason is the test | i59b | A step is not judged by whether it answers a Force but by whether the reason given for it is the reason it exists. A Friday social meeting with its reason stated honestly is defensible; the same meeting held daily and defended as coordination is not | "the reason given is the reason it exists" |
+| The team that already reads them | i59b | Where the reading happens without being asked for, writing it down answers no Force and this chapter's own remedy becomes the ceremony its claim warns about. Holds only while the team is stable — at4r owns what the reasoning costs when people leave — and the instrument is the shipping record, not the self-assessment | "already reading them" |
+| A fitting process is invisible | i59b | A design Force produces code you can point at; an organization Force produces a process, and one that fits is one nobody notices. The people who do it well are described as having made things run smoothly, which is the description of an absence | cite |
 
 ## Code examples
 
@@ -370,6 +379,9 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | Unindented Python function body | 7nkn | `IndentationError` — formatting as syntax, against Go and C# where the formatter settles it |
 | `NewOrders(*sql.DB)` against `NewOrders(Repository)` | 4jk6 | Injection and abstraction as two separable decisions, with 05 arguing only for the first |
 | `select … for update` refused by SQLite | 4jk6 | `OperationalError: near "for": syntax error`, beside `on conflict` succeeding — the second implementation cannot satisfy the interface, and the lowest common denominator is not the obvious list |
+| The four-week goal drift | i59b | Requirement volatility: nobody made a mistake at any step, and four weeks produced nothing |
+| The artifact chain, read upward | i59b | Process derived from the end state rather than chosen; the bottom level is the unassigned one |
+| "The team is responsible for designing feature X" | i59b | One engineer's reasoning after a shared assignment, and why none of it is unreasonable |
 
 ## Deliberate repetition
 
