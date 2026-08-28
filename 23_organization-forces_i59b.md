@@ -112,32 +112,32 @@ The claim says a process answers Forces or it answers nothing. Processes get cho
 ### The chain, from the end
 
 Start at the end and ask what each level needs in order to exist.
-[-- I don't understand why you erased "levels" from this section. "The first, the second..." is definitely not acceptable. You stated level being used on other chapter, I don't see how that is a problem, level is such a generic and common word.]
+
 ```text
-1   software that is right for its context, and
-    survives its design Forces moving
-        ^
-        |  depends on
-        |
-2   code matching the design Forces, and records of
-    the rules, the Forces, and the decisions
-        ^
-        |  depends on
-        |
-3   somebody who creates and maintains both
-        ^
-        |  depends on
-        |
-4   clear individual ownership
+level 1   software that is right for its context, and
+          survives its design Forces moving
+              ^
+              |  depends on
+              |
+level 2   code matching the design Forces, and records
+          of the rules, the Forces, and the decisions
+              ^
+              |  depends on
+              |
+level 3   somebody who creates and maintains both
+              ^
+              |  depends on
+              |
+the leaf  clear individual ownership
 ```
 
-Read downward it is unremarkable. Read upward it is the whole argument, because each of the four is load-bearing for the one above it, and the last is the one nobody assigns.
+Read downward it is unremarkable. Read upward it is the whole argument, because each level is load-bearing for the one above it, and the leaf is the one nobody assigns.
 
-**The first is not "working software."** It is software that is still right after the Forces move, and [chapter 02](02_forces_f4m5.md) is explicit that they move without a commit: a team doubles, a service acquires a client outside the company, a table crosses a hundred million rows. Software that was right for a reading nobody wrote down cannot be checked against the new reading, because there is nothing to check against.
+**The top level is not "working software."** It is software that is still right after the Forces move, and [chapter 02](02_forces_f4m5.md) is explicit that they move without a commit: a team doubles, a service acquires a client outside the company, a table crosses a hundred million rows. Software that was right for a reading nobody wrote down cannot be checked against the new reading, because there is nothing to check against.
 
-**The second is why records are not documentation.** The code carries the decision; it does not carry the Forces the decision answered. [Chapter 18](18_force-map-method_r37x.md) owns what a record preserves — which decisions were forced and which were chosen — and [chapter 22](22_never-written-down_at4r.md) owns what happens when it does not exist. The chain adds only that both are prerequisites of the top level rather than good practice.
+**The second level is why records are not documentation.** The code carries the decision; it does not carry the Forces the decision answered. [Chapter 18](18_force-map-method_r37x.md) owns what a record preserves — which decisions were forced and which were chosen — and [chapter 22](22_never-written-down_at4r.md) owns what happens when it does not exist. The chain adds only that both are prerequisites of the top level rather than good practice.
 
-**The third is where most process lives**, and where most of it is invented rather than derived. Standups, retrospectives, planning sessions, review policies: every one of them is an answer to *how do these get created and maintained*, and almost none of them was chosen by asking that question.
+**The third level is where most process lives**, and where most of it is invented rather than derived. Standups, retrospectives, planning sessions, review policies: every one of them is an answer to *how do these get created and maintained*, and almost none of them was chosen by asking that question.
 
 ### Ownership is the leaf
 
@@ -216,7 +216,7 @@ Two conditions keep this from being the exception everybody claims.
 - **An estimate that came in exactly on time.** One of two things happened, and both are worth knowing. Either it was generously padded and the surplus went somewhere invisible, or the Forces were not read and the work will come back as bug-fixing and gap-filling at some multiple of the original number.
 - **A retrospective producing actions nobody owns.** The list is real, the observations are often good, and the leaf of the chain is missing, so none of it is discharged and the same items appear next month.
 - **A recurring meeting whose reason nobody can state**, other than that it has always been there. The test is not whether it is useful — it is whether anyone can say which Force it answers, or admit honestly that it answers a different kind of need.
-- **A design document describing only the happy path, or advice about a bug from somebody who has not reproduced it.** Neither is a Force misread — both are the result of broken ownership mechanism. An owner is expected to hold the most context on the subject, an interchangeable team member is not. Whoever wrote from the happy path never ran the system under load, under failure, or under an awkward customer, and whoever advises on an unseen bug is spending authority they have not earned.
+- **A design document describing only the happy path, or advice about a bug from somebody who has not reproduced it.** Neither is a Force misread — both are the result of a broken ownership mechanism. An owner is expected to hold the most context on the subject; an interchangeable team member is not. Whoever wrote from the happy path never ran the system under load, under failure, or under an awkward customer, and whoever advises on an unseen bug is spending authority they have not earned.
 
 **In a conversation:**
 
