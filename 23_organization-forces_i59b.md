@@ -112,7 +112,7 @@ The claim says a process answers Forces or it answers nothing. Processes get cho
 ### The chain, from the end
 
 Start at the end and ask what each level needs in order to exist.
-
+[-- I don't understand why you erased "levels" from this section. "The first, the second..." is definitely not acceptable. You stated level being used on other chapter, I don't see how that is a problem, level is such a generic and common word.]
 ```text
 1   software that is right for its context, and
     survives its design Forces moving
@@ -216,7 +216,7 @@ Two conditions keep this from being the exception everybody claims.
 - **An estimate that came in exactly on time.** One of two things happened, and both are worth knowing. Either it was generously padded and the surplus went somewhere invisible, or the Forces were not read and the work will come back as bug-fixing and gap-filling at some multiple of the original number.
 - **A retrospective producing actions nobody owns.** The list is real, the observations are often good, and the leaf of the chain is missing, so none of it is discharged and the same items appear next month.
 - **A recurring meeting whose reason nobody can state**, other than that it has always been there. The test is not whether it is useful — it is whether anyone can say which Force it answers, or admit honestly that it answers a different kind of need.
-- **A design document describing only the happy path, or advice about a bug from somebody who has not reproduced it.** Neither is a Force misread — both are the ownership mechanism running without the thing that justifies it. An owner's answer stands because they are expected to hold the most context; whoever wrote from the happy path never ran the system under load, under failure, or under an awkward customer, and whoever advises on an unseen bug is spending authority they have not earned on this one. It costs the person who *does* have it reproduced an afternoon to disprove.
+- **A design document describing only the happy path, or advice about a bug from somebody who has not reproduced it.** Neither is a Force misread — both are the result of broken ownership mechanism. An owner is expected to hold the most context on the subject, an interchangeable team member is not. Whoever wrote from the happy path never ran the system under load, under failure, or under an awkward customer, and whoever advises on an unseen bug is spending authority they have not earned.
 
 **In a conversation:**
 
