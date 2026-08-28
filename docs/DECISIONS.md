@@ -5040,3 +5040,37 @@ The chapter's own remedy convicted by the chapter's own claim. Two conditions we
 The count moves from twenty-two to twenty-three in `00_toc.md`, `README.md` three times, `CLAUDE.md`, and `tools/check-drift.py`'s number-word map.
 Nine concept rows and three example rows added to `docs/LEDGER.md`.
 No earlier chapter's text changes, which was the point of Q1's answer.
+
+---
+
+## 123. *Requirement volatility* becomes *priority churn*
+
+**Date.** 2026-08-27
+
+**Context.**
+Reviewing [chapter 23](../23_organization-forces_i59b.md), the author rejected the worked example for the second organization Force and, in doing so, questioned the Force itself:
+
+> did the client change his mind or did we get the requirement wrong the first time? My personal experience is that clients never change their mind on their business rules and invariants. Those are established facts about their business. … The example is a mix of focus - priority change, then bad requirement gathering, then budget constraint arriving suddenly. My point with creating this example was showcasing the price of bad decisions made by people outside the team.
+
+And the alternative, offered as a question rather than an instruction: *maybe this is something like "context change": how many contexts (projects) you handle concurrently, are the contexts brought to a closure or you jump from one skeleton to another?*
+
+**Decision — replace the Force.**
+The reading is now **priority churn**: *how often is work in flight displaced by a decision taken outside the team, and does what gets started reach closure?*
+
+**Why the author's version is better, on the book's own test.**
+It has an instrument and the old one barely did. *Count the pieces of work started in the last two quarters, and count how many reached a state somebody would call finished* is a measurement; *how volatile are the requirements* is a mood. [Chapter 02](../02_forces_f4m5.md)'s separation of a Force from a risk turns on exactly that, so the replacement is the chapter obeying a rule it was already citing.
+
+It also brings in material from the original notes that had not reached the chapter — *why context switch is brutal*, *people are not cogs, you can't swap them easily*.
+
+**The finding the change produced, which is the author's and is now the section's sharpest paragraph.**
+*Changing requirements* names the wrong thing. A company's invariants are facts about how it makes money — an invoice reconciles, a booking cannot double-sell a seat — and hold for years. What moves is which of them you were asked to serve this quarter. A second cause is indistinguishable from inside the team: rules never gathered properly surface later as *the requirements changed*, when nothing changed except who finally read them. Both arrive as churn and only one is anybody's mind altering.
+
+**Naming.**
+The author's word was *context*, which was unavailable: [chapter 23](../23_organization-forces_i59b.md) already uses *context* for the situation a system is right for, in its own chain diagram. *Layer* and *rank* belong to [chapter 04](../04_structure_agjy.md) and *level* is reserved for position on the five-kind ladder. *Priority churn* was free, and *context switch* is unused in the book if it is wanted later.
+
+**Consequence.**
+The section is rewritten around one failure rather than three: X stopped for Y, Y stopped for X, six weeks, nothing shipped, no estimate missed and nobody slow. What changes with the Force is now the **size of the unit of work** — enough must finish between displacements — rather than how far ahead a plan reaches, which is a better answer and follows from the reading.
+
+Two ledger rows rewritten and one added for the *changing requirements* finding.
+
+Also removed in the same review: the FlowCore paragraph, on the author's judgement that the book has enough of them and this one carried marginal value. [Chapter 23](../23_organization-forces_i59b.md) therefore cites no work and has no `## Sources` section, which puts it with [chapters 01](../01_the-five-kinds_cjx4.md), [11](../11_patterns-that-survive-translation_us2k.md) and [19](../19_six-profiles_dnkz.md).

@@ -27,7 +27,7 @@ That property is the one that decides membership here too, and it is worth resta
 | Force | The question that reads it |
 |---|---|
 | **Skill spread** | How much can be left to judgement, and how much has to be specified? |
-| **Requirement volatility** | How often does the goal move, and who moves it? |
+| **Priority churn** | How often is work in flight displaced from outside, and does it reach closure? |
 | **Decision latency** | How long from a question being asked to an answer arriving? |
 | **Budget and runway** | How much is there, and how much of it can go on records? |
 | **Team distribution** | Same room, same timezone, or neither? |
@@ -51,30 +51,33 @@ That last clause is where the reading is usually misread. Skill spread is read o
 
 **What changes with the Force:** where the specification stops, and how often the same specification has to be issued again.
 
-### Requirement volatility
+### Priority churn
 
-> **How often does the goal move, and who moves it?**
+> **How often is work in flight displaced by a decision taken outside the team, and does what gets started reach closure?**
 
-Two halves, and the second decides more than the first. A goal that moves twice a year because you learned something is a different Force from a goal that moves twice a month because somebody didn't read the goals correctly.
-
-The first is ordinary and cheap. The second produces the sequence every engineer recognises:
+Two halves: how many things are in flight at once, and what fraction of them finish.
 
 ```text
-week 1   we are building X for client A
-week 3   the focus is now Y for client B
-week 6   client B doesn't want Y, they need Z
-week 8   there is not enough budget left for Z
+week 1   the team is building X
+week 3   X is stopped; the team is moved to Y
+week 6   Y is stopped; the team is moved back to X
 ```
 
-Nobody in that sequence made a mistake, which is what makes it corrosive. Each move was a reasonable response to something that had genuinely changed, and the accumulation is four weeks of work that produced nothing and a team that has stopped believing the current goal.
+Six weeks, nothing shipped, and X now resumes from a codebase nobody has held in mind for three weeks. Notice what is *not* wrong with that sequence. No estimate was missed, nobody worked slowly, and each switch was decided by somebody entitled to decide it. What was skipped is that neither decision was made by reading anything — no reason was given for the move to Y, and no one asked what stopping X would cost.
 
-**When the goal moves on somebody else's schedule, write scope per slice and expect to throw slices away. When it moves on yours, write it once and hold people to it.**
+**The usual name for this is wrong, and the wrong name hides the cause.** It gets called *changing requirements*, which says the business rules moved. They rarely do. A company's invariants are facts about how it makes money — an invoice reconciles, a booking cannot double-sell a seat, a payment is applied once — and facts of that kind hold for years. What moves is which of them you were asked to serve this quarter.
 
-The distinction is not planning horizon, it is *whose* horizon. A team that controls its own goal can plan a quarter. A team whose goal is set by a client mid-quarter cannot plan past the next commitment it can actually get, and the planning apparatus it is asked to run — roadmaps, quarterly commitments, story maps reaching six months out — produces documents that are wrong before they are read.
+The second cause is indistinguishable from inside the team and is not the same thing at all. Rules that were never gathered properly surface months later as *the requirements changed*, when nothing changed except who finally read them. Both arrive at the team as churn, and only one of them is anybody's mind being altered.
 
-[-- And something worth condidering in "building X" example, did the client change his mind or did we get the requirement wrong the first time? My personal experience is that clients never change their mind on their business rules and invariants. Those are established facts about their business. I tried to fix this section by makind edits to reflect that incorrect read of requirements but there is still too much work left. The example is a mix of focus - priprity change, then bad requirement gathering, then budget contstraint arriving suddenly. My point with creating this examples was showcasing the price of bad decisions made by people outside the team, sabotaging all the teams efforts. Somebody decided that the team should switch from X to Y, no reasons, no input, just switch all work is gone to trash, then somebody got the requirements wrong, trash again, the somebody got the budget wrong, trash again. I don't know how all these fit into this "requirement volatility", maybe this is something like "context change": how many context (projects) you handle concurrently, are the contexts brought to a closure or you jump from one skeleton to another one?]
+So the reading is about displacement, not about the domain. It has an instrument, which is the point of preferring it: count the pieces of work started in the last two quarters, and count how many reached a state somebody would call finished.
 
-**What changes with the Force:** how far ahead a plan can be written before writing it stops being planning.
+**When displacement is frequent, size the work so that something reaches closure between displacements. When it is rare, size the work to the problem instead.**
+
+That is the whole of what the reading buys, and it is not a planning technique. A team displaced every three weeks and working in three-month units delivers nothing, ever, and the failure looks like slowness from outside. The same team in one-week units finishes two units out of every three and looks fast, having done no more work. What changed is only whether the unit fits inside the gap.
+
+The apparatus such a team is usually asked to run — roadmaps, quarterly commitments, story maps reaching six months out — is built for the opposite reading and produces documents that are wrong before they are read.
+
+**What changes with the Force:** the size of the unit of work. Not how far ahead you can plan, but how much has to finish before the next interruption.
 
 ### Decision latency
 
@@ -218,7 +221,7 @@ Two conditions keep this from being the exception everybody claims.
 **In a conversation:**
 
 - **"The team will decide X."** Nobody will. Ask which person, and watch whether the question is treated as pedantic.
-- **"We're an agile team, we don't do big design up front."** Sometimes a correct reading of requirement volatility, and sometimes a reason not to write down the invariants of a system where getting them wrong is expensive to correct. The two sound identical.
+- **"We're an agile team, we don't do big design up front."** Sometimes a correct reading of priority churn, and sometimes a reason not to write down the invariants of a system where getting them wrong is expensive to correct. The two sound identical.
 - **"How long will this take?"** asked before anyone has read the Forces. There is no answer at that point that is not a guess wearing a number, and the honest reply is a comparison — this looks like the last thing of its shape, which took a month under conditions that will not repeat exactly.
 - **"That's just process."** Usually true of the template, and used to dismiss the question underneath it, which is the one this chapter is about.
 
