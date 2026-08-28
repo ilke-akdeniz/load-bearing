@@ -35,7 +35,7 @@ Back to [the introduction](README.md).
 - 16. [TDD, Mocks, and What Testing Actually Buys](16_tdd-and-mocks_u8eu.md)
 - 17. [Abstraction as Insurance](17_abstraction-as-insurance_4jk6.md)
 
-## Part V — Contextual Programming
+## Part V — Programming With the Five Kinds
 
 - 18. [The Force-Map Method](18_force-map-method_r37x.md)
 - 19. [Six Profiles, Six Inversions](19_six-profiles_dnkz.md)

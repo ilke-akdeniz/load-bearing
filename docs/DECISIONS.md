@@ -5074,3 +5074,60 @@ The section is rewritten around one failure rather than three: X stopped for Y, 
 Two ledger rows rewritten and one added for the *changing requirements* finding.
 
 Also removed in the same review: the FlowCore paragraph, on the author's judgement that the book has enough of them and this one carried marginal value. [Chapter 23](../23_organization-forces_i59b.md) therefore cites no work and has no `## Sources` section, which puts it with [chapters 01](../01_the-five-kinds_cjx4.md), [11](../11_patterns-that-survive-translation_us2k.md) and [19](../19_six-profiles_dnkz.md).
+
+---
+
+## 124. A second chapter 23, on option A, and Part V is renamed
+
+**Date.** 2026-08-27
+
+**Context.**
+[Chapter 23](../23_organization-forces_i59b.md) shipped on option B — the manifesto with the artifact chain as its spine. The author's verdict after two review rounds:
+
+> the chapter is not bad but it's not good either. The Organization Forces we enumerated don't look genuine to me, they look "forced" they are not convincing as the design forces.
+
+They asked for a parallel draft on option A, to be judged against the first, and gave permission to reuse anything from it.
+
+**The draft's own diagnosis, recorded because it explains what went wrong.**
+The six organization Forces were invented rather than derived. [Chapter 02](../02_forces_f4m5.md)'s seven each have a consequence you can point at in code — concurrency yields four different implementations, blast radius yields the same function correct behind a dashboard and defective on an invoice. The six yielded assertions: *where the specification stops*, *ask singly or batch*. Nothing a reader can check. A table that needs six rows is how six of something appear.
+
+The draft also proposed, before the author corrected it, that what had been built was already option A. It was not — the process criticism survived as conditioned symptoms, which is B working as intended. The author's reading was right and the draft's was wrong.
+
+**The grilling, in order.**
+
+**Q1 — is there a force taxonomy at all? No.**
+Option A's claim does not name organization Forces as the deciding input, so the taxonomy is not load-bearing and is simply absent. [Chapter 02](../02_forces_f4m5.md) is untouched, there is no relabelling, and the thing the author found unconvincing is gone rather than disguised. The honest argument for dropping it: the author has decades of these facts and they do not form six clean categories, which is *why* the table read as manufactured.
+
+**Q2 — the claim.**
+Re-reading the notes moved ownership from the bottom of the chain to a condition on every step — *"Owner should be clear before every step"* — which changed the claim's shape:
+
+> **A development process is derived backwards from the software it has to produce. Every step of the derivation needs a name against it, because a step assigned to a team is discharged by nobody.**
+
+It also makes the estimate material claimable: *a meaningful estimate can only be made at this point* is a statement about position in a derivation, which follows from the claim rather than sitting beside it as an assertion.
+
+**Q3 — the steps, and the finding that made them derived rather than listed.**
+[Chapter 18](../18_force-map-method_r37x.md) already gives three steps — read the Forces, derive the Principles, check the Idioms — and **never says who runs them**. The chapter's sequence is that method with one step added at the front (clarify the rules), one in the middle (the estimate), and one at the end (settle the Styles), each addition with a stated reason. Three inherited, three added: derived, not assembled.
+
+Each step carries what it produces and **what its owner must be able to do**. Owners are never given by title, on the author's own note that *the title doesn't matter* — and because a chapter listing architect or tech lead would date faster than anything else in the book.
+
+**Q4 — the skeleton, and where the process-flow notes land.**
+Dropping the taxonomy improved them. *Meetings are for clarifications* had to hang off decision latency in the first draft, one of the Forces the author rejected; here it derives from the claim in one step — a meeting is a decision assigned to a room, and a decision assigned to a room is a step with no name against it. *Stages, transitions, deliverables* is the same mechanism applied to the flow of work rather than to a decision. Both sit under *why the claim holds* instead of needing a catalogue.
+
+**Q5 — the boundaries, one of which did not survive the new claim.**
+The Friday meeting still works: not derived from the artifact, right anyway, and it yields the chapter's test — *the reason given for a step has to be the reason it exists*.
+
+The second is new and comes from [chapter 08](../08_change_rjf9.md). Conway's interfaces exist where two design groups **negotiated and agreed upon** one, so a decision binding two teams cannot have a single owner. That is a direct counter-example to the claim's second half, derived from the book rather than invented.
+
+The instinctive team was demoted to a cost. Under [chapter 23](../23_organization-forces_i59b.md)'s Force claim it was a genuine boundary; under this claim it is not, because a team deriving instinctively is doing both things the claim asks and merely not writing them down — and the claim does not require writing. It argues with the chapter's artifacts, not with its claim.
+
+**Q6 — naming, and Part V.**
+The chapter is *Assigned to the Team, Owned by Nobody*, the author's own phrase and the claim's punchline. It names only the second half of the claim, which is the right trade: ownership is what a reader takes away and the derivation is the mechanism that gets them there.
+
+**Part V's name had to change** and the author's reasoning is recorded because it is right: *Contextual Programming* appears exactly once in the whole book, is never defined anywhere in it, and *context* already carries another meaning. Two proposals did not survive checking. **Load-Bearing Programming** inverts the book's own metaphor — everywhere else *load-bearing* describes a thing that carries weight, and Part V is about reading which things do. **Force-aware Programming** is contradicted by two of the chapters it would cover: [chapter 20](../20_idioms_7nkn.md) says an Idiom's condition is about your surroundings rather than your system, and [chapter 21](../21_style_9rng.md)'s claim is that a Style discussion has no fact that would settle it — the level Forces do not reach.
+
+The author's third proposal was *Programming With Five Claims*, which needed one correction: the five are **kinds**, not claims. Part V is now **Programming With the Five Kinds**, which the new chapter supports directly — its step sequence walks Forces, Principles, Idioms, Styles.
+
+**Consequence.**
+`23a_assigned-to-the-team_3fjx.md`, about 3,500 words. It is deliberately named `23a_` so that `tools/check-drift.py`'s `[0-9][0-9]_*.md` glob does not see it: the two drafts coexist with no TOC entry, no count change and no failing check, and promoting the winner is a rename. The losing draft's identifier retires with it, since these are two chapters competing for one slot rather than two versions of one chapter.
+
+Reused from [chapter 23](../23_organization-forces_i59b.md) with the author's permission: the chain, the ownership dialogue, the Friday-meeting boundary, much of the recognition section, and the *changing requirements names the wrong thing* finding, which moves under step one where clarifying the invariants is the work.
