@@ -30,7 +30,7 @@ That property is the one that decides membership here too, and it is worth resta
 | **Requirement volatility** | How often does the goal move, and who moves it? |
 | **Decision latency** | How long from a question being asked to an answer arriving? |
 | **Budget and runway** | How much is there, and how much of it can go on records? |
-| **Team Distribution** | Same room, same timezone, or neither? |
+| **Team distribution** | Same room, same timezone, or neither? |
 | **Regulatory obligation** | What has to be recorded whatever the other readings say? |
 
 The first three are worked below. The others are read the same way and are listed rather than argued, for the reason [chapter 11](11_patterns-that-survive-translation_us2k.md) lists most of its entries: by now the method is the point, not the inventory.
@@ -62,7 +62,7 @@ The first is ordinary and cheap. The second produces the sequence every engineer
 ```text
 week 1   we are building X for client A
 week 3   the focus is now Y for client B
-week 6   client B doesn't want Y, they need Z 
+week 6   client B doesn't want Y, they need Z
 week 8   there is not enough budget left for Z
 ```
 
@@ -73,8 +73,6 @@ Nobody in that sequence made a mistake, which is what makes it corrosive. Each m
 The distinction is not planning horizon, it is *whose* horizon. A team that controls its own goal can plan a quarter. A team whose goal is set by a client mid-quarter cannot plan past the next commitment it can actually get, and the planning apparatus it is asked to run — roadmaps, quarterly commitments, story maps reaching six months out — produces documents that are wrong before they are read.
 
 [-- And something worth condidering in "building X" example, did the client change his mind or did we get the requirement wrong the first time? My personal experience is that clients never change their mind on their business rules and invariants. Those are established facts about their business. I tried to fix this section by makind edits to reflect that incorrect read of requirements but there is still too much work left. The example is a mix of focus - priprity change, then bad requirement gathering, then budget contstraint arriving suddenly. My point with creating this examples was showcasing the price of bad decisions made by people outside the team, sabotaging all the teams efforts. Somebody decided that the team should switch from X to Y, no reasons, no input, just switch all work is gone to trash, then somebody got the requirements wrong, trash again, the somebody got the budget wrong, trash again. I don't know how all these fit into this "requirement volatility", maybe this is something like "context change": how many context (projects) you handle concurrently, are the contexts brought to a closure or you jump from one skeleton to another one?]
-
-FlowCore is the small case, and it is a single-developer project, so it can show this Force and none of the ones about several people. Its instructions file writes the scope of each slice down and then forbids working past it: *"A capability earns its place this slice only if it's the correctness condition of something being built now, not because it's on the roadmap."* The goal moves there too. What the written slice buys is that the move is visible as a move, rather than as work quietly appearing. [-- we already gave too many flowcore examples in the book and this one has marginal value with high risk of disappointment. Would just delete this.]
 
 **What changes with the Force:** how far ahead a plan can be written before writing it stops being planning.
 
@@ -98,7 +96,7 @@ A recurring meeting is what a team builds when decision latency is high and nobo
 
 **Budget and runway** is read as a number and decides how much of the work can go on records rather than on code. It is the Force most often read as a risk — *will the money last* has no instrument — when the readable version is *how much is committed, and what fraction of it is the recording costing*.
 
-**Team Distribution** decides the shape of every synchronous thing. One room supports interruption as the default channel; three timezones make interruption impossible and written asynchronous decisions mandatory rather than virtuous. Most advice about remote work is this Force read at one value and stated without it.
+**Team distribution** decides the shape of every synchronous thing. One room supports interruption as the default channel; three timezones make interruption impossible and written asynchronous decisions mandatory rather than virtuous. Most advice about remote work is this Force read at one value and stated without it.
 
 **Regulatory obligation** is the one Force that can override every other reading. Where an auditor requires a signed record of who approved a change, that record is produced whether or not any other Force asks for it, and the only question left is whether it is produced once properly or twice badly.
 
@@ -106,37 +104,37 @@ A recurring meeting is what a team builds when decision latency is high and nobo
 
 ## Why the claim holds
 
-The claim says a process answers Forces or it answers nothing. The reason is that a process is not chosen [-- we need an adjective here, "a working process" maybe? People choose processes without deriving it all the time.], it is **derived** — and the derivation runs backwards from the thing you want to end up with.
+The claim says a process answers Forces or it answers nothing. Processes get chosen all the time without any of this. The reason is that a process that *works* is not chosen, it is **derived** — and the derivation runs backwards from the thing you want to end up with.
 
 ### The chain, from the end
 
 Start at the end and ask what each level needs in order to exist.
 
 ```text
-level 1: software that is right for its context, and
-survives design Forces moving
+1   software that is right for its context, and
+    survives its design Forces moving
         ^
         |  depends on
         |
-level 2: code matching the design Forces  +  records of the rules,
-                             Forces and decisions
+2   code matching the design Forces, and records of
+    the rules, the Forces, and the decisions
         ^
         |  depends on
         |
-level 3: somebody who creates and maintains these
+3   somebody who creates and maintains both
         ^
         |  depends on
         |
-clear individual ownership 
+4   clear individual ownership
 ```
 
-Read downward it is unremarkable. Read upward it is the whole argument, because every level is load-bearing for the one above and the bottom level is the one nobody assigns.
+Read downward it is unremarkable. Read upward it is the whole argument, because each of the four is load-bearing for the one above it, and the last is the one nobody assigns.
 
-**The top level is not "working software."** It is software that is still right after the Forces move, and [chapter 02](02_forces_f4m5.md) is explicit that they move without a commit: a team doubles, a service acquires a client outside the company, a table crosses a hundred million rows. Software that was right for a reading nobody wrote down cannot be checked against the new reading, because there is nothing to check against.
+**The first is not "working software."** It is software that is still right after the Forces move, and [chapter 02](02_forces_f4m5.md) is explicit that they move without a commit: a team doubles, a service acquires a client outside the company, a table crosses a hundred million rows. Software that was right for a reading nobody wrote down cannot be checked against the new reading, because there is nothing to check against.
 
-**The second level is why records are not documentation.** The code carries the decision; it does not carry the Forces the decision answered. [Chapter 18](18_force-map-method_r37x.md) owns what a record preserves — which decisions were forced and which were chosen — and [chapter 22](22_never-written-down_at4r.md) owns what happens when it does not exist. The chain adds only that both are prerequisites of the top level rather than good practice.
+**The second is why records are not documentation.** The code carries the decision; it does not carry the Forces the decision answered. [Chapter 18](18_force-map-method_r37x.md) owns what a record preserves — which decisions were forced and which were chosen — and [chapter 22](22_never-written-down_at4r.md) owns what happens when it does not exist. The chain adds only that both are prerequisites of the top level rather than good practice.
 
-**The third level is where most process lives**, and where most of it is invented rather than derived. Standups, retrospectives, planning sessions, review policies: every one of them is an answer to *how do these get created and maintained*, and almost none of them was chosen by asking that question.
+**The third is where most process lives**, and where most of it is invented rather than derived. Standups, retrospectives, planning sessions, review policies: every one of them is an answer to *how do these get created and maintained*, and almost none of them was chosen by asking that question.
 
 ### Ownership is the leaf
 
@@ -190,7 +188,7 @@ Two conditions keep this from being the exception everybody claims.
 
 **It holds only while the team is stable.** The reading lives in the people, and [chapter 22](22_never-written-down_at4r.md) is the chapter about what that costs when they leave: the reasoning is the perishable half, and there is no interval in which it is available and undocumented. A team of five who have worked together for six years is genuinely in this case. The same team the month after two of them leave is not, and nothing warns you at the transition.
 
-**And the instrument is the record, not the self-assessment.** Many team believes it is "that" team. What distinguishes the ones that are is answerable: what did you ship, and what happened to it six months later. A team that cannot point at that is reading its own skill spread the way [chapter 02](02_forces_f4m5.md) warns Forces get read — from habit rather than from the situation.
+**And the instrument is the record, not the self-assessment.** Many teams believe they are that team. What distinguishes the ones that are is answerable: what did you ship, and what happened to it six months later. A team that cannot point at that is reading its own skill spread the way [chapter 02](02_forces_f4m5.md) warns Forces get read — from habit rather than from the situation.
 
 ---
 
@@ -202,9 +200,7 @@ Two conditions keep this from being the exception everybody claims.
 
 **The output is invisible when it works.** A design Force produces code you can point at. An organization Force produces a process, and a process that fits is one nobody notices, which makes it impossible to defend in the year somebody asks what the planning is for. The people who do this well are routinely described as having made things run smoothly, which is the description of an absence.
 
-**It can be used to refuse work.** *What Force is that meeting answering* is a real question and an excellent way to avoid a meeting you did not want to attend. The same objection [chapter 09](09_what-a-pattern-is-for_3xzc.md) records about its two tests applies here: ask it where a process step is carrying the weight of a decision, not about every recurring event in the calendar. [-- I would just delete this. Reads like martial court sentences. Work refusal is not the best topic to talk about casually.]
-
-**And the whole chapter is an ideal nobody occupies.** No team reads all of the forces, at intervals, with an owner named for each. The reason to describe the state anyway is that it's parts are still useful in isolation: naming one owner for one decision is available on Monday and does not require the rest, and a team that does only that is better off than one that adopted a template.
+**And the whole chapter is an ideal nobody occupies.** No team reads all of the Forces, at intervals, with an owner named for each. The reason to describe the state anyway is that its parts are still useful in isolation: naming one owner for one decision is available on Monday and does not require the rest, and a team that does only that is better off than one that adopted a template.
 
 ---
 
@@ -217,8 +213,7 @@ Two conditions keep this from being the exception everybody claims.
 - **An estimate that came in exactly on time.** One of two things happened, and both are worth knowing. Either it was generously padded and the surplus went somewhere invisible, or the Forces were not read and the work will come back as bug-fixing and gap-filling at some multiple of the original number.
 - **A retrospective producing actions nobody owns.** The list is real, the observations are often good, and the leaf of the chain is missing, so none of it is discharged and the same items appear next month.
 - **A recurring meeting whose reason nobody can state**, other than that it has always been there. The test is not whether it is useful — it is whether anyone can say which Force it answers, or admit honestly that it answers a different kind of need.
-- **A design or architecture document that only describes the happy path.** Whoever wrote it did not use the system under load, under failure, or under an awkward customer, so the constraints that decide the design were never met. [-- which organization force is in play here. How does this relate to the chapters claim?]
-- **Advice about a bug from somebody who has not reproduced it.** Confident, plausible, and untethered — and it costs the person who does have it reproduced an afternoon to disprove. [-- which organization force is in play here. How does this relate to the chapters claim?]
+- **A design document describing only the happy path, or advice about a bug from somebody who has not reproduced it.** Neither is a Force misread — both are the ownership mechanism running without the thing that justifies it. An owner's answer stands because they are expected to hold the most context; whoever wrote from the happy path never ran the system under load, under failure, or under an awkward customer, and whoever advises on an unseen bug is spending authority they have not earned on this one. It costs the person who *does* have it reproduced an afternoon to disprove.
 
 **In a conversation:**
 
@@ -230,12 +225,6 @@ Two conditions keep this from being the exception everybody claims.
 The question that does the work: **which Force is this step answering, and at what value?**
 
 If there is no answer, one of two things is true, and they are worth separating. Either the step is ceremony, in which case it can go. Or it is answering something real that nobody has named — which is the more common case, and the more useful finding, because a step defended by *it just works better this way* is usually a Force somebody has read correctly and never written down.
-
----
-
-## Sources
-
-- FlowCore, `CLAUDE.md` — the per-slice scope rule — [github.com/ilke-akdeniz/flowcore](https://github.com/ilke-akdeniz/flowcore).
 
 ---
 
