@@ -2,7 +2,7 @@
 
 ## The claim
 
-**A development process is derived backwards from the software it has to produce. Every step of the derivation needs a name against it, because a step assigned to a team is discharged by nobody.**
+**Software that is right for its context, and resilient to Force changes is the result of artifacts owned by the individuals with deep knowledge of the context**
 
 Every chapter so far has worked on a claim somebody made about software. This one works on the arrangement that produces the software, and it is the only chapter whose subject is people. It is here because the arrangement is derivable — not from a methodology, and not from what worked somewhere else, but from what has to exist before the software can be right.
 
@@ -12,60 +12,50 @@ Every chapter so far has worked on a claim somebody made about software. This on
 
 ### The chain, from the end
 
-Start at the end and ask what each level needs in order to exist.
+Start from the end goal and ask what each level needs in order to exist.
 
 ```text
-level 1   software that is right for its context, and
-          survives its Forces moving
-              ^
-              |  depends on
-              |
-level 2   code matching the Forces, and records of the
-          rules, the Forces, and the decisions
-              ^
-              |  depends on
-              |
-level 3   somebody who creates and maintains both
+end goal              software that is right for its context, and
+                      survives its Forces moving
+                        ^
+                        |  depends on
+                        |
+artifacts             code matching the Forces, and records of the
+                      rules, the Forces, and the decisions
+                        ^
+                        |  depends on
+                        |
+ownership             individuals who creates and maintains the artifacts
 ```
 
 Read downward it is unremarkable. Read upward it is the argument, because each level is load-bearing for the one above it.
 
-**The top level is not "working software."** It is software that is still right after the Forces move, and [chapter 02](02_forces_f4m5.md) is explicit that they move without a commit: a team doubles, a service acquires a client outside the company, a table crosses a hundred million rows. Software that was right for a reading nobody wrote down cannot be checked against the new reading, because there is nothing to check against.
+**The end goal is not "working software."** It is software that is still right after the Forces move. [chapter 02](02_forces_f4m5.md) is explicit that they move without a warning: a team doubles, a service acquires a client outside the company, a table crosses a hundred million rows. 
 
-**The second level is why records are not documentation.** The code carries the decision; it does not carry the Forces the decision answered. [Chapter 18](18_force-map-method_r37x.md) owns what a record preserves — which decisions were forced and which were chosen — and [chapter 22](22_never-written-down_at4r.md) owns what happens when it does not exist. The chain adds only that both are prerequisites of the top level rather than good practice.
+**The artifacts are not random meeting notes, powerpoint slides or chaos labeled as "documentation".** The code itself is an artifact. It applies the decisions that answer the Forces and enforces business rules. [Chapter 18](18_force-map-method_r37x.md) Pay attention to the words "apply, enforce". An ideal code reflects the decisions but it's not a record that tells what forces were present, what alternative options were available and why this specific option was chosen. [-- we talked about this on another chapter, I'm not usre if a chapter reference would be appropriata or too much here, between two existing references] Those records of decisions and business rules are separate artifacts to create and maintain. [chapter 22](22_never-written-down_at4r.md) owns what happens when these does not exist.
 
-**The third level is where process lives**, and where most of it is invented rather than derived. Standups, retrospectives, planning sessions, review policies: every one is an answer to *how do these get created and maintained*, and almost none was chosen by asking that question.
+**The ownership is where people and processes around them enter into picture**. Standups, retrospectives, planning sessions, review policies: every one carries a tension that seeks a resolution. That tension comes from the question: *Which artifacts we need to create and who will create what?* But for many teams, that question is never asked and answered clearly and the meetings turn into a ceremony.
 
-### The six steps, and where three of them come from
+### Pre-code artifacts
+Code is the most obvious artifact and the easiest to get the ownership right. Nobody will argue that code is not needed, nobody would say: "team will code this in next week's coding meeting." Letting indviduals work on development tickets assigned to their name is second nature. 
 
-Expand the third level and an order appears. Half of it is not new — [chapter 18](18_force-map-method_r37x.md) already gives three steps, in sequence, and never says who runs them:
+Problems start as you move to the artifacts that predate the code. Then you step on the land of chaos and ambiguity. You will hear statements like: "we don't need a list of the business rules we are agile." or "team will decide on the design of the feature X."  
 
-```text
-                          from                    added here
-  1  clarify the rules                            *
-  2  read the Forces      ch 18, step one
-  3  estimate                                     *
-  4  derive the Principles ch 18, step two
-  5  check the Idioms     ch 18, step three
-  6  settle the Styles                            *
-```
+We will focus on 4 artifact material that come before the code is written. Our claim is not that these are the most important ones or are the only ones. These are simply what following the advice of this book could land you on because 2-4 were already described as the force-map method on chapter 18.
 
-Three inherited, three added, and each addition has a reason rather than a slot to fill. What follows gives each step what [chapter 18](18_force-map-method_r37x.md) leaves out: what it produces, and what its owner has to be able to do.
-
-**Owners are described here by capability and never by title.** A title tells you what somebody is called in one company; the capability tells you whether the step will actually be discharged, and it is the same question in a startup of four and a bank of forty thousand.
-
-### Step one: clarify the rules and invariants
+### The rules and invariants
 
 The root, because everything after it is conditioned on it. What must always be true of this system — an invoice reconciles, a booking cannot double-sell a seat, a payment is applied once.
 
 Sometimes that is a hundred pages, sometimes one paragraph. **The length should reflect the rules that actually apply, not the prose style of whoever wrote it or the current mood of the team.** *We are an agile team* is not a reason to begin a medical scanner with a vague idea of what it does.
 
-**What it produces:** a statement of the invariants, in whatever length they take.
+**Format** a statement of the invariants, in whatever length they take.
+
 **What its owner must be able to do:** get a decision out of the business and refuse a vague answer. Not translate one — obtain one.
 
 **When the rules are not written, write them before anything else. When somebody says they cannot be, that is the finding, and it is about the business rather than about the software.**
 
-There is a myth that makes this step look optional, and it is worth naming because it is the reason it gets skipped. It is called *changing requirements*, which says the business rules move. They rarely do. A company's invariants are facts about how it makes money, and facts of that kind hold for years. What moves is which of them you were asked to serve this quarter — and rules that were never gathered properly surface months later as *the requirements changed*, when nothing changed except who finally read them. Both arrive at the team as churn, and only one of them is anybody's mind being altered.
+There is a myth that makes this step look optional, and it is worth naming because it is the reason it gets skipped. It is called *changing requirements*, which says the business rules move. They rarely do. A company's invariants are facts about how it makes money, and facts of that kind hold for years. What moves is which of them you were asked to serve this quarter — and rules that were never gathered properly surface months later as *the requirements changed*, when nothing changed except who finally read them. Both arrive at the team as churn, and only one of them is anybody's mind being altered. [-- I don't understand previous sentence, maybe just delete it]
 
 ### Step two: read the Forces
 
@@ -73,36 +63,18 @@ There is a myth that makes this step look optional, and it is worth naming becau
 
 Sometimes it takes two days. Sometimes it is an instinctive check that takes a minute and is still a reading — a bug fix in a path with one writer does not need a document to establish that concurrency is inert there.
 
-**What it produces:** values, not verdicts. *Two writers, same row, twice a second.* Not *concurrency is important*.
+**Artifact:** A written record of the force map, .
+
 **What its owner must be able to do:** price the options. [Chapter 18](18_force-map-method_r37x.md) is blunt that this is where the expertise goes, and a reading produced by somebody who cannot say what a mechanism costs is a confident document with the wrong values in it.
 
 **When the reading is instinctive, do it and move on. When two people read the same Force differently, stop — the disagreement is about a fact and somebody can go and check it.**
-
-### Step three: the estimate, and why it cannot come earlier
-
-An estimate is possible here and not before, and the reason is structural rather than cultural. Before step one you do not know what the thing must do. Before step two you do not know what presses on it. An estimate taken before either is a number about the room, not about the work.
-
-The useful form is a comparison rather than a duration:
-
-```text
-The mobile reporting module — these rules, these Force
-readings — is about the complexity of the booking feature
-we finished last spring. Booking took a month. If nothing
-in the middle differs much, this is comparable.
-```
-
-The last sentence is doing the load-bearing work and it is the one that gets cut. *If nothing in the middle differs much* is almost certain to fail, and saying so is what makes the rest honest rather than a promise.
-
-**What it produces:** a complexity comparison against something the team has finished, with the assumption that could break stated beside it.
-**What its owner must be able to do:** say *I do not know yet* to somebody who wants a date, and hold it.
-
-**When a date is demanded before steps one and two, give the comparison and name what would have to hold. When there is nothing finished to compare against, say that instead of inventing a number.**
 
 ### Step four: derive the Principles
 
 [Chapter 18](18_force-map-method_r37x.md)'s second step. With the Forces in hand the derivation runs one way and is close to mechanical: information hiding follows from not controlling your callers, idempotency follows from at-least-once delivery, a version column follows from concurrent writers and a rule spanning the read and the write.
 
 **What it produces:** the advice that actually applies here, with the Force it answers written beside it.
+
 **What its owner must be able to do:** recognise a Principle whose Forces are absent — which is [chapter 18](18_force-map-method_r37x.md)'s own test, and the reason this step is not a literature search.
 
 **When a Principle arrives without the Force that supports it, ask which reading licences it. When nobody can name one, it was inherited rather than derived.**
@@ -114,6 +86,7 @@ The last sentence is doing the load-bearing work and it is the one that gets cut
 An Idiom is a local convention, and [chapter 20](20_idioms_7nkn.md) owns why it is worth following even where you can out-argue it. What changes here is only how much of it has to be said out loud, and that depends on who is writing the code. Tell somebody the rule about money — amounts are minor units, never built from a float — and one team arrives at an unexported field and a constructor without being told which. Another produces a float somewhere, because knowing that a Principle implies a particular Idiom in this language is a separate piece of knowledge from holding the Principle.
 
 **What it produces:** either nothing, or the conventions that have to be stated because they will not otherwise be derived.
+
 **What its owner must be able to do:** tell the difference between the two cases, which is a judgement about people rather than about code.
 
 **When the Idiom will be derived, state the Principle and stop. When it will not, state the Idiom too — and expect to state it again next time, because a specification records a conclusion rather than the judgement that produced it.**
