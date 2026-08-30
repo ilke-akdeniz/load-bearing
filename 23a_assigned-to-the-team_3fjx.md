@@ -2,9 +2,9 @@
 
 ## The claim
 
-**Programming with the five kinds depends on individual ownership: every artifact has one name against it, and that name belongs to whoever holds the most context on it.** [-- context on what? artifact? that is not clear.]
+**Programming with the five kinds depends on individual ownership: every artifact has one name against it, and that name belongs to whoever holds the most context on the subject the artifact is about.**
 
-Every chapter so far has worked on a claim somebody made about software. This one works on the arrangement that produces the software, and it is the only chapter whose subject is people. It is here because the arrangement is derivable. [-- occam's razor]
+Every chapter so far has worked on a claim somebody made about software. This one works on the arrangement that produces the software, and it is the only chapter whose subject is people. It is here because the arrangement is derivable.
 
 ---
 
@@ -34,7 +34,7 @@ Read downward it is unremarkable. Read upward it is the argument, because each l
 
 **The artifacts are not meeting notes, slide decks, or chaos labelled documentation.** The code is one of them: it *applies* the decisions that answer the Forces and it *enforces* the business rules. Those two verbs are the limit of what it does. Code that reflects a decision perfectly still says nothing about which Forces were present, what the alternatives were, or why this one was chosen — so the records of the rules and the decisions are separate artifacts, separately created and separately maintained. [Chapter 22](22_never-written-down_at4r.md) owns what happens when they do not exist.
 
-**Ownership is where people enter.** Standups, retrospectives, planning sessions, review policies — every one of them carries a tension looking for a resolution, and the tension is always the same question: *which artifacts do we need, and who makes each one?* For many teams, that question is never asked and answered clearly, and the meetings turn into a ceremony. [-- I think my version of this sentence is more clear and direct then your cryptic, elusive ones and I value clarity and directness.]
+**Ownership is where people enter.** Standups, retrospectives, planning sessions, review policies — every one of them carries a tension looking for a resolution, and the tension is always the same question: *which artifacts do we need, and who makes each one?* For many teams, that question is never asked and answered clearly, and the meetings turn into a ceremony.
 
 ### The artifacts that come before code
 
@@ -63,15 +63,11 @@ The root, because everything after it is conditioned on it. What must always be 
 
 **What that owner must be able to do.** Get a decision out of the business and refuse a vague answer. Not translate a vague answer into a precise-sounding one — obtain a real one, which sometimes means going back three times.
 
-**When the rules are not written, write them before anything else. When somebody says they cannot be written, that is the finding, and it is about the business rather than about the software.** ]
-
-There is a myth that makes this artifact look optional, and it is the reason it gets skipped. It is called *changing requirements*, which says the business rules move. They rarely do. A company's invariants are facts about how it makes money, and facts of that kind hold for years. What moves is which of them you were asked to serve this quarter — and rules that were never gathered properly surface months later as *the requirements changed*, when nothing changed except who finally read them. Both arrive at the team as churn, and only one of them is anybody's mind being altered. [-- consider deleting previous two paragraphs. They look like side quests that dilute the value of the section.]
-
 ### 2. The force map
 
 [Chapter 18](18_force-map-method_r37x.md) owns the method and [chapter 02](02_forces_f4m5.md) owns the Forces themselves. What is added here is that its output is an artifact somebody owns, and that its size varies more than anything else in the list.
 
-**Form.** The Forces that bear on this, at values rather than as verdicts [-- this? What is this?] — *two writers, same row, twice a second*, not *concurrency is important* — and the Principles that follow, each with the Force that licenses it. Same rule as before: **the length should reflect the Forces that actually apply, not the prose style of whoever wrote it or the current mood of the team.**
+**Form.** The Forces bearing on the work in front of you, given as values rather than as verdicts — *two writers, same row, twice a second*, not *concurrency is important* — and the Principles that follow, each with the Force that licenses it. Same rule as before: **the length should reflect the Forces that actually apply, not the prose style of whoever wrote it or the current mood of the team.**
 
 Often that is a paragraph. Sometimes there is no separate document at all, because the feature is small and the whole thing fits in the ticket — and sometimes one person owns the rules and the map together, which is fine as long as both were considered and both were recorded where they mattered.
 
@@ -79,10 +75,15 @@ The size of the artifact is not the point. Whether the reading happened is the p
 
 ```text
 A ticket goes to a junior developer: "let users export
-their invoices."  Two weeks later it works, but the servers run out of memory, and clients complain that the exports crash their integrations.  
+their invoices." Two weeks later it works, and then the
+servers run out of memory and clients report that the
+exports are crashing their integrations.
 
 The same ticket, after ten minutes from somebody who can
-read the Forces, carries one added paragraph: exports run to fifty thousand rows so stream it; the caller retries on timeout so make it idempotent; users feed exports to their finance systems, invoice id column is not optional.
+read the Forces, carries one added paragraph: exports run
+to fifty thousand rows, so stream it; the caller retries on
+timeout, so make it idempotent; users feed these into their
+own finance systems, so the invoice id is not optional.
 
 Same developer, same two weeks, different software.
 ```
@@ -92,8 +93,6 @@ Nothing in that second version is a design. It is a set of constraints, and hand
 **Ideal owner.** Whoever holds the most context on the system as it actually runs — what it costs, where it breaks, what the last incident was about.
 
 **What that owner must be able to do.** Price the options. [Chapter 18](18_force-map-method_r37x.md) is blunt that this is where the expertise goes, and a reading produced by somebody who cannot say what a mechanism costs is a confident document with the wrong values in it.
-
-**When the reading is instinctive, do it and move on. When two people read the same Force differently, stop — the disagreement is about a fact, and somebody can go and check it.** [-- would just remove this, another "side quest" and is a repetition of previous chapters.]
 
 ### 3. The solution
 
@@ -143,17 +142,32 @@ Nothing in that is unreasonable, and none of it is fixed by asking harder or by 
 
 **It does not say whose judgement settles it.** An owner is expected to hold the most context on the subject; an interchangeable team member is not. So the owner's answer stands unless somebody produces a better reason.
 
-That second mechanism is key to understand why ownership works: *because* it tracks context. Give the artifact to somebody without the context and you have the name without the authority, which is a signature rather than an owner.
-
-This is [chapter 08](08_change_rjf9.md)'s mechanism at a smaller scale. Conway's interfaces exist where two design groups had to negotiate one — so where no group owns a piece, there is nobody to negotiate with, and the interface is not badly drawn. It is undrawn, and the seam turns up later wherever the code happened to be cut. [-- consider deleting this paragraph, reads like side quest] 
+That second mechanism is the key to why ownership works: *because* it tracks context. Give the artifact to somebody without the context and you have the name without the authority, which is a signature rather than an owner.
 
 ### What follows about meetings
 
-**A meeting is a decision assigned to a room.** By the claim, that is an artifact with no name against it, which is why the meeting called to decide something rarely decides it and why the same subject returns three weeks later. What a meeting does well is the opposite operation: getting one specific thing unblocked for somebody who already owns it, and then ending. [-- confusing: a meeting is a decision ... then what meeting does well ... What are we trying to say here? Could it be: a meeting without x is a decision... a meeting with x does well ... ?]
+The claim sorts meetings into two objects that look identical on a calendar.
 
-A meeting with no decision in it at all is a different object and can be perfectly sound — a team meets for fifteen minutes on Friday to stay in contact with each other, and that answers something this chapter does not model. What makes it defensible is that the reason given for the meeting is honest. [please don't replace honest with 3 other words that mean the same thing but less directly. Maybe you are trying to make the book sound "scientific" but let's be honest here :)] The same meeting held daily, called a standup and defended as coordination, is the failure. [--we need short examples for these cases: failed meeting, good meeting] 
+**A meeting called to decide something nobody owns is a decision assigned to a room.** Rooms do not decide. They produce the impression of having decided, which is why the subject comes back three weeks later and nobody can say what changed:
 
-**Stages, transitions, and who is called at two in the morning** are the same mechanism applied to the flow of work rather than to a single artifact. None of the automation matters — not the pipeline, not the checks — if nobody can say when development ends and testing begins, or who is paged and what they are permitted to do when they arrive. [ let's delete this paragraph, another out of the place, under-developed idea.]
+```text
+Six people meet to agree the export format. Everyone has
+an opinion, three of them are informed, and it ends with
+an action to circulate a document. The document is owned
+by the meeting.
+```
+
+**A meeting called to unblock somebody who already owns the decision does work**, and it stops when they are unblocked:
+
+```text
+One person owns the export format and is stuck on whether
+finance needs the tax column split out. Fifteen minutes is
+booked with the person who knows. It runs nine.
+```
+
+Same people, same slot in the calendar, different object — and what separates them is whether a name was against the thing before anybody sat down.
+
+A meeting with no decision in it at all is a third object and can be perfectly sound. A team meets for fifteen minutes on Friday to stay in contact with each other, and that answers something this chapter does not model. What makes it defensible is that the reason given for the meeting is honest. The same meeting held daily, called a standup and defended as coordination, is the failure.
 
 ---
 
@@ -181,15 +195,19 @@ There is no version of this chapter that resolves that, because it is not a fact
 
 Two conditions keep that from being the exception everybody claims. **It holds only while the team is stable**, because the context lives in the people and [chapter 22](22_never-written-down_at4r.md) is the chapter about what that costs when they leave. And **the instrument is the record, not the self-assessment**: many teams believe they are that team, and what distinguishes the ones that are is answerable — what did you ship, and what happened to it six months later.
 
-**Ownership by context concentrates.** If each artifact goes to whoever holds the most context, and context accumulates, the same two people end up owning everything and the team has built a bottleneck out of a principle. The correction is not to spread ownership thinner; it is to notice that context is transferable [-- this is a very dangerous statement. Everything is transferable in theory but my observation is that when a "knowledge transfer" or "hand-off" is requested, the goal is an impossible one. Ex: "senior engineer who maintained the legacy booking module is leaving, hand-off the module to Joe in two weeks." This concept of transfer assumes that every engineer is more or less interchangeable and ignores years of work senior engineer spent to get the context of the the booking module. It's a naive view where everybody can do a comparable work by just reading the correct documents are listening to the correct words. And the question of concentration is a deeper more old problem, clarified by Adam Smith in the Wealth of Nations. This is from memory but he basically explains how the division of labour has started and how it lead to the great advancements. The tendency to fight against the division of labour in software teams, out of the fear of redundancy is a big issue. If everybody is a generalist on a team, nobody is an expert on anything. And when you are afraid of losing a critical expert, maybe the answer is to grow another expert in the same subject. But growing one is hard while pretending that a "knowledge transfer" happened is quick.] that handing an artifact to somebody who will hold the most context *next year* costs something now and repays it.
+**Ownership by context concentrates, and that is division of labour rather than a defect.** If each artifact goes to whoever holds the most context, and context accumulates where it is used, the same few people end up owning the same few subjects. That is what an expert is. A team where everybody owns everything equally has no expert in anything, and the instinct to arrange one — out of a fear of depending on individuals — buys evenness at the price of there being nobody who knows.
+
+What the concentration does cost is real: one person leaves and a subject leaves with them. The standard remedy is a handoff. *Ana is leaving in a fortnight; hand the booking module over to Joe.* That remedy assumes context is a thing which can be passed across a table, and it is not. What Ana has is four years of having been wrong about that module and finding out why. What transfers in a fortnight is the file layout and the names of the tables.
+
+So there are two honest responses and the handoff is neither. Grow a second person into the same subject, which is slow, is mostly done by giving them artifacts to own while the first person is still there, and has to start long before anybody resigns. Or accept the concentration and price it. The fortnight handoff is quick, produces a document nobody opens, and its main output is the belief that the problem has been dealt with.
 
 **It demands the seniority it looks like it replaces.** Deciding who holds the most context is itself a judgement requiring context, and it is made by the person assigning the work — which is why an organisation that gets this wrong stays wrong, and why the correction almost never comes from inside the team.
-
-**And nobody occupies the whole of it.** No group runs four artifacts with a named owner for each, every time, at every scale. The reason to set it out anyway is that the parts are separable and the first is free: putting one name against one artifact is available on Monday, needs nobody's permission, and does more than adopting a template. [-- would just remove this, not clear, not a real cost...] 
 
 ---
 
 ## How to recognize the failure
+
+**In a codebase and its calendar:**
 
 - **A retrospective producing actions nobody owns.** The list is real, the observations are often good, and the same items appear next month. The claim in its plainest form.
 - **A design that keeps coming out wrong**, where every individual decision in it was defensible. Usually the third artifact was assigned to a room, so what shipped is the intersection of what nobody objected to.
@@ -197,14 +215,14 @@ Two conditions keep that from being the exception everybody claims. **It holds o
 - **A pointing session where nobody has read the tickets.** An estimate produced by a room rather than a person, which makes it a number about the room.
 - **A recurring meeting whose reason nobody can state**, other than that it has always been there. The test is not whether it is useful — it is whether anybody can name what it is for, or admit that it answers something other than the work.
 - **A design document describing only the happy path, or advice about a bug from somebody who has not reproduced it.** Both are ownership without the context that justifies it. Whoever wrote from the happy path never ran the system under load or under an awkward customer, and whoever advises on an unseen bug is spending authority they have not earned.
-- **Business rules that live only in the code.** Nobody owned the first artifact, so the invariants exist as an emergent property of whatever the code currently does, and the only way to answer *is this correct* is to ask the code what it does and agree with it, until an important user says that behavior is wrong.
+- **Business rules that live only in the code.** Nobody owned the first artifact, so the invariants exist as an emergent property of whatever the code currently does, and the only way to answer *is this correct* is to ask the code what it does and agree with it, until an important user says that behaviour is wrong.
 
 **In a conversation:**
 
 - **"The team will decide X."** Nobody will. Ask which person, and watch whether the question is treated as pedantic.
 - **"We're an agile team, we don't do big design up front."** Sometimes an accurate reading of how fast the goal moves. Sometimes a reason not to write down the invariants of a system where getting them wrong is expensive. The two sound identical, and the first artifact is where they separate.
 - **"Let's take it offline."** Often the right instinct — the room is not where it gets decided — and worth completing: offline with whom, by when.
-- **"Ask X, they know that system."** Said about somebody with no authority over it. That is the split named out loud by people who have noticed it and cannot fix it. [-- clarify: What's going on here? Somebody working on a feature Y designed and then Y says ask X,... ? "Said about somebody with no authority over it." is very cryptic.]
+- **"Ask X, they know that system."** Said by whoever was given the artifact, about whoever actually holds the context for it. It is an accurate description of the split and it changes nothing: the design is still made by the person who asked, out of an answer they are not equipped to check, because what moved was a reply and not the ownership.
 
 The question that does the work: **whose name is against this, and do they have the most context on it?**
 
