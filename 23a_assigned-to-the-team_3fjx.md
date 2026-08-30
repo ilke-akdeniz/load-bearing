@@ -2,7 +2,9 @@
 
 ## The claim
 
-**Software that is right for its context, and resilient to Force changes is the result of artifacts owned by the individuals with deep knowledge of the context**
+**Programming with five kinds depends on an individual ownership model where each person is responsible for the area he has the most context**
+
+[-- This is my attempt to rewrite the claim and remove what I basically saw as a repetition of previous chapters: "a redressing of force-mapping process in detail". I modified the rest of the chapter to match this new claim, but the work is not complete. I feel that it's possible to make a good chapter shat shows these two things: indivudual ownership is crucial and a good owner is somebody who has the most context of the subject. Also existing ]
 
 Every chapter so far has worked on a claim somebody made about software. This one works on the arrangement that produces the software, and it is the only chapter whose subject is people. It is here because the arrangement is derivable — not from a methodology, and not from what worked somewhere else, but from what has to exist before the software can be right.
 
@@ -53,64 +55,33 @@ Sometimes that is a hundred pages, sometimes one paragraph. **The length should 
 
 **What its owner must be able to do:** get a decision out of the business and refuse a vague answer. Not translate one — obtain one.
 
+**Ideal owner**: [-- we describe what type if context - knowledge the ideal ownwer should have. You decide what to do with the rest of the content in this section.] 
+
 **When the rules are not written, write them before anything else. When somebody says they cannot be, that is the finding, and it is about the business rather than about the software.**
 
-There is a myth that makes this step look optional, and it is worth naming because it is the reason it gets skipped. It is called *changing requirements*, which says the business rules move. They rarely do. A company's invariants are facts about how it makes money, and facts of that kind hold for years. What moves is which of them you were asked to serve this quarter — and rules that were never gathered properly surface months later as *the requirements changed*, when nothing changed except who finally read them. Both arrive at the team as churn, and only one of them is anybody's mind being altered. [-- I don't understand previous sentence, maybe just delete it]
+There is a myth that makes this step look optional, and it is worth naming because it is the reason it gets skipped. It is called *changing requirements*, which says the business rules move. They rarely do. A company's invariants are facts about how it makes money, and facts of that kind hold for years. What moves is which of them you were asked to serve this quarter — and rules that were never gathered properly surface months later as *the requirements changed*, when nothing changed except who finally read them. Both arrive at the team as churn, and only one of them is anybody's mind being altered. 
 
-### Step two: read the Forces
+### Design documents 
 
-[Chapter 18](18_force-map-method_r37x.md)'s first step, and [chapter 02](02_forces_f4m5.md) owns the Forces themselves. Nothing is added here except position: it comes after the rules, because a Force is read against something, and *how bad is it when this is wrong* has no answer until somebody has said what wrong means.
-
-Sometimes it takes two days. Sometimes it is an instinctive check that takes a minute and is still a reading — a bug fix in a path with one writer does not need a document to establish that concurrency is inert there.
-
-**Artifact:** A written record of the force map, .
+[-- This section coulde be in the same format as previous one. These docs are what force-map method produces. Forces, principles, idioms for the system - feature. Same as before: "The length should reflect the forces - principles that actually apply, not the prose style of whoever wrote it or the current mood of the team." Sometimes the feature is small, there is no dedicated design or businnes rule documents. There is only a ticket. And sometime one person owns both the business rules and the design for that small thing. That can be ok too, as long as the rules - forces, principles are always considered and always recorded when they are significant and the owner is clear. An example about handing off a seemingly easy ticket to a junior developer without anyone doing force mapping vs a senior dev does a quick force-mapping, that result on one paragraph on the ticket, junior dev takes it from there and does the implementation and the difference on the result is huge.]
 
 **What its owner must be able to do:** price the options. [Chapter 18](18_force-map-method_r37x.md) is blunt that this is where the expertise goes, and a reading produced by somebody who cannot say what a mechanism costs is a confident document with the wrong values in it.
 
 **When the reading is instinctive, do it and move on. When two people read the same Force differently, stop — the disagreement is about a fact and somebody can go and check it.**
 
-### Step four: derive the Principles
-
-[Chapter 18](18_force-map-method_r37x.md)'s second step. With the Forces in hand the derivation runs one way and is close to mechanical: information hiding follows from not controlling your callers, idempotency follows from at-least-once delivery, a version column follows from concurrent writers and a rule spanning the read and the write.
-
-**What it produces:** the advice that actually applies here, with the Force it answers written beside it.
-
-**What its owner must be able to do:** recognise a Principle whose Forces are absent — which is [chapter 18](18_force-map-method_r37x.md)'s own test, and the reason this step is not a literature search.
-
-**When a Principle arrives without the Force that supports it, ask which reading licences it. When nobody can name one, it was inherited rather than derived.**
-
-### Step five: check the Idioms, and decide how much to say
-
-[Chapter 18](18_force-map-method_r37x.md)'s third step, and the one whose ownership moves most.
-
-An Idiom is a local convention, and [chapter 20](20_idioms_7nkn.md) owns why it is worth following even where you can out-argue it. What changes here is only how much of it has to be said out loud, and that depends on who is writing the code. Tell somebody the rule about money — amounts are minor units, never built from a float — and one team arrives at an unexported field and a constructor without being told which. Another produces a float somewhere, because knowing that a Principle implies a particular Idiom in this language is a separate piece of knowledge from holding the Principle.
-
-**What it produces:** either nothing, or the conventions that have to be stated because they will not otherwise be derived.
-
-**What its owner must be able to do:** tell the difference between the two cases, which is a judgement about people rather than about code.
-
-**When the Idiom will be derived, state the Principle and stop. When it will not, state the Idiom too — and expect to state it again next time, because a specification records a conclusion rather than the judgement that produced it.**
-
-### Step six: settle the Styles and stop
-
-[Chapter 21](21_style_9rng.md) owns this and its finding is the whole of the step: there is no fact that settles a Style argument, so it ends when somebody who can enforce a style acts, and everything before that produces nothing.
-
-So the step is not *decide the styles*, it is *end the discussion*. Pick a formatter, run it, and spend no further attention.
-
-**What it produces:** a configuration file and no more meetings.
-**What its owner must be able to do:** decide without a consensus and take the complaints.
-
-**When a Style question is open, close it with a tool if one exists. When no tool exists — naming is the case — choose, write down why, and stop.**
-
 ---
+
+[-- I feel we are missing something here. Try to find - confirm it and see if we can expand that. We have business rules and force mapping but those are not enough to develop software. There is an intermediary step, step number 3: 1) get business rules - requirements 2) force-mapping 3) "Solutioning" (maybe there is a better word), saying "those are the rules, those are forces-principle, and this is how we are going to tackle this: we will have a grid to show xxx then a reminder sms..." 4) implementation ] 
+
+[-- I didn't touch the rest of the chapter too much, you decide what to do with it: discard, rewrite...] 
 
 ## Why the claim holds
 
 The chain says what has to exist. It does not say who makes it exist, and that is where the process fails, because every step above is work that somebody has to decide to do instead of something else.
 
-### A step with no name is discharged by nobody
+### An artifact with no name is cared by nobody
 
-**"Somebody" is the load-bearing word, and it is not a committee and not "the team."** Follow one engineer's reasoning after a shared assignment:
+**"Individual owner" is the load-bearing word, and it is not a committee and not "the team."** Follow one engineer's reasoning after a shared assignment:
 
 ```text
 "The team is responsible for designing feature X."
