@@ -222,7 +222,7 @@ So there are two honest responses and the handoff is neither. Grow a second pers
 - **"The team will decide X."** Nobody will. Ask which person, and watch whether the question is treated as pedantic.
 - **"We're an agile team, we don't do big design up front."** Sometimes an accurate reading of how fast the goal moves. Sometimes a reason not to write down the invariants of a system where getting them wrong is expensive. The two sound identical, and the first artifact is where they separate.
 - **"Let's take it offline."** Often the right instinct — the room is not where it gets decided — and worth completing: offline with whom, by when.
-- **"Ask X, he knows this system."** The answer from the owner of the current design for a question about the design. It is an accurate description of the split between the owner and the context.
+- **"Ask X, they know this system."** Said by whoever owns the current design, in answer to a question about it — an accurate description of the split between the owner and the context.
 
 The question that does the work: **whose name is against this, and do they have the most context on it?**
 
