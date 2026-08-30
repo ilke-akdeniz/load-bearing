@@ -98,9 +98,11 @@ Nothing in that second version is a design. It is a set of constraints, and hand
 
 This one is missing from the rest of the book, and [chapter 18](18_force-map-method_r37x.md) says so itself: **the output of a force map is not a design.** It is a record of what was forced and what was chosen. Constraints, not an answer.
 
-So there is a gap between the force-map and the code, and it is where most of the actual thinking happens. The rules say what must be true. The map says what presses on it. Neither of them says *what we are going to build* — a grid on this screen, a reminder sent by text the day before, a nightly job that reconciles and a queue for the failures.
+So there is a gap between the force map and the code, and it is where most of the actual thinking happens. The rules say what must be true. The map says what presses on it. Neither of them says *what we are going to build* — a grid on this screen, a reminder sent by text the day before, a nightly job that reconciles and a queue for the failures.
 
 **Form.** A description of the thing, short enough to read in one sitting, in whatever register the reader needs — a paragraph, a sketch, a screen, a sequence. It is the first artifact a non-engineer can check, and that is most of its value.
+
+This is what the word *architecture* is usually reaching for, and it is worth saying what it is not. It is not the diagram, and it is not the choice of stack; both of those are consequences, and either can be produced without anybody having decided anything. What makes it architecture is that the trade-offs were named, the Forces they answer were read, and one person is answerable for the choice.
 
 **Ideal owner.** Whoever holds the most context on both sides — enough of the business to know what would satisfy it, enough of the system to know what it will cost. This is the artifact with the smallest pool of possible owners, and it is the one most often assigned to a room.
 

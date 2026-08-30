@@ -11,6 +11,21 @@ None.
 Slice 1 of the final sweep discharged the last of them — two routed, five retired.
 Decisions 110 and 111 record each disposition and the reason; 111 is the author's review, which cut two of the four the draft had routed.
 
+## The last-chapter idea — discharged
+
+[last-chapter-idea.md](last-chapter-idea.md) produced [chapter 23](../../23_assigned-to-the-team_3fjx.md), and the four slices were run over that chapter on 2026-08-29.
+What landed: the artifact chain, ownership and its two mechanisms, the business rules as the root, the force map, people not being cogs, a senior engineer not being somebody with ten years' service, the brutality of a handoff, meetings, and the pointing-session and *we're agile* tells.
+Routed during the slice: *architecture is not diagrams or tech stack choices* — the notes' sharpest statement of the chapter's own thesis, which had not made it in.
+
+Retired, with the reason:
+
+- **The estimate**, and *time estimates are harmful games*. Cut by the author in the restructure from six steps to four artifacts. It is not an artifact the ownership claim governs; it was a consequence of sequence, and the sequence framing went with the six-step draft.
+- **1:1s and performance reviews as ceremony.** Not development artifacts, so outside the claim.
+- **Agile is overrated**, as a claim. It survives only as conditioned symptoms in *how to recognize the failure*, which is where a verdict has to live.
+- **Stages, transitions, deliverables, playbooks**, and **the utopia framing with its closing counsel.** Both cut by the author on review.
+
+Still open, and not a chapter matter: the note about changing the book's title.
+
 ## Known coverage gaps
 
 Recorded when the contents page was reduced to a table of contents, because these were the only statements in it that existed nowhere else.

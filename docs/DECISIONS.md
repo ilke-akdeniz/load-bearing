@@ -5165,3 +5165,37 @@ Rename done in a form git reads as a rename, so the review diff shows one file m
 `docs/LEDGER.md`: thirteen rows for the deleted chapter removed, ten concept rows and three example rows added for the surviving one.
 
 The author moved chapter 23 to **draft** in the same instruction. All twenty-three chapters are now at draft.
+
+---
+
+## 126. The four slices, run over chapter 23
+
+**Date.** 2026-08-29
+
+**Context.**
+[Chapter 23](../23_assigned-to-the-team_3fjx.md) was written after the final sweep, so it is the only chapter that never went through it.
+Slice 2's literal remit — rules that postdate the chapter — is empty here, since 23 postdates every rule in `CLAUDE.md`. It was audited against all of them instead, which is what the slice is actually for.
+
+**Slice 1 — pending material.**
+`docs/pending-tasks/last-chapter-idea.md` is discharged and its dispositions are recorded in that folder's index rather than here, since that is the list a later pass reads.
+One piece was routed rather than retired: *architecture is not diagrams or tech stack choices, it's about clarifying ownership, trade-offs, forces.* That is the notes' sharpest statement of the chapter's own thesis and it had not reached the chapter. It now sits under the solution artifact, saying what the word is reaching for and what it is not — the diagram and the stack are consequences, and either can be produced without anybody having decided anything.
+The estimate was retired rather than routed, and the reasoning is worth keeping: the author cut it themselves when they restructured six steps into four artifacts, and it is not an artifact the ownership claim governs. It was a consequence of position in a sequence, and the sequence framing went with the six-step draft.
+
+**Slice 2 — rules.**
+No abbreviations, no bare chapter references, no spelling that departs from the book's, and the two gendered pronouns are both correct — *his* for Conway, a named person, and *she* for Priya, a named individual introduced for that purpose.
+
+One fix. The chapter wrote the noun both ways: *force map* twice and *force-map* once. The convention was settled by reading [chapter 18](../18_force-map-method_r37x.md), which owns the term, rather than by counting book-wide: it writes the **noun** unhyphenated — *a force map*, *the force map* — and hyphenates only the modifier in its title and the gerund *force-mapping*. Raw counts would have given the wrong answer here, since the hyphenated form is commoner overall precisely because the modifier and gerund are commoner.
+
+**Slice 3 — sources.**
+The chapter cites no external work and gets no `## Sources` section, which puts it with [chapters 01](../01_the-five-kinds_cjx4.md), [11](../11_patterns-that-survive-translation_us2k.md) and [19](../19_six-profiles_dnkz.md).
+It quotes Conway — *negotiated and agreed upon* — but through [chapter 08](../08_change_rjf9.md), which owns that material and carries the citation. The rule that decided it is the one applied in slice 3 proper: a citation belongs where the material is owned, which is why [chapter 03](../03_grading-a-law_q5c6.md) needed a Turing entry (the halting-problem section is its own) and this chapter does not.
+
+**Slice 4 — reconciliation.**
+Fourteen ledger rows now own by `3fjx`, one added for the routed architecture line.
+
+The mechanical check produced four apparent mismatches and all four were the same false alarm recorded in decision 117: the *Others may say* column is a permitted shorthand for other chapters, not a quotation from the owning one. Running the same wrong check twice is worth noting — the entry exists so it can be recognised, and it was.
+
+`tools/check-drift.py`: 16 checks over 23 chapters, no drift.
+
+**Two files left in place rather than deleted, deliberately.**
+`CLAUDE.md` says a discharged document leaves the folder, and `last-chapter-idea.md` is now discharged. It was kept, along with the review beside it, because the author has twice given standing instructions about that folder — *leave pending tasks folder there, we might need it in the future, it's an organizational structure*, and the explicit request to save the review verbatim. Deleting either on the draft's own initiative is the error decision 111 records. They are flagged for the author instead.
