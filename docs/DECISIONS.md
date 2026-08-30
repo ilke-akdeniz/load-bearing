@@ -5131,3 +5131,37 @@ The author's third proposal was *Programming With Five Claims*, which needed one
 `23a_assigned-to-the-team_3fjx.md`, about 3,500 words. It is deliberately named `23a_` so that `tools/check-drift.py`'s `[0-9][0-9]_*.md` glob does not see it: the two drafts coexist with no TOC entry, no count change and no failing check, and promoting the winner is a rename. The losing draft's identifier retires with it, since these are two chapters competing for one slot rather than two versions of one chapter.
 
 Reused from [chapter 23](../23_organization-forces_i59b.md) with the author's permission: the chain, the ownership dialogue, the Friday-meeting boundary, much of the recognition section, and the *changing requirements names the wrong thing* finding, which moves under step one where clarifying the invariants is the work.
+
+---
+
+## 125. Chapter 23A wins the slot; the Forces draft is deleted
+
+**Date.** 2026-08-29
+
+**Context.**
+Two chapters were drafted for the same slot, on the two options recorded in decision 124 and in `docs/pending-tasks/last-chapter-idea-claude-review.md`.
+The author chose the second: `23a_assigned-to-the-team_3fjx.md` becomes chapter 23, and `23_organization-forces_i59b.md` is deleted.
+
+**Why the first one lost, in the author's words.**
+
+> the chapter is not bad but it's not good either. The Organization Forces we enumerated don't look genuine to me, they look "forced" they are not convincing as the design forces.
+
+That judgement held up on inspection and is worth keeping, because the failure is repeatable. [Chapter 02](../02_forces_f4m5.md)'s seven Forces each have a consequence a reader can point at in code — concurrency yields four implementations, blast radius yields the same function correct behind a dashboard and defective on an invoice. The six organization Forces yielded assertions: *where the specification stops*, *ask singly or batch*. **A set assembled to fill a table produces exactly six of something**, and no amount of conditioning afterwards makes it derived.
+
+The second draft needed no taxonomy at all, which is why it was never exposed to that failure.
+
+**What the surviving chapter kept from the losing one.**
+The chain read backwards, the ownership dialogue, and much of the recognition section. The author gave permission to reuse verbatim and it was used.
+
+**What is lost, recorded so it can be recovered deliberately.**
+The *changing requirements names the wrong thing* paragraph — that a company's invariants hold for years, that what moves is which of them you were asked to serve, and that rules never gathered properly surface later as a change when nothing changed except who read them. It was the sharpest paragraph in the deleted chapter, it was cut from 23A on review as a side quest, and it now exists only in git history at `23_organization-forces_i59b.md`. It is not in the book.
+
+**Consequence.**
+Rename done in a form git reads as a rename, so the review diff shows one file moved and one deleted rather than a rewrite.
+`00_toc.md`, `docs/STATUS.md`, and [chapter 22](../22_never-written-down_at4r.md)'s navigation row now point at the new file.
+
+**[Chapter 22](../22_never-written-down_at4r.md)'s handoff was rewritten**, and this is the case `CLAUDE.md` warns about: a handoff describes its neighbour, so replacing the neighbour makes it wrong silently. The old one described Forces deciding how work is organised, which is the claim of a chapter that no longer exists. It now describes the artifacts and the one name against each.
+
+`docs/LEDGER.md`: thirteen rows for the deleted chapter removed, ten concept rows and three example rows added for the surviving one.
+
+The author moved chapter 23 to **draft** in the same instruction. All twenty-three chapters are now at draft.

@@ -34,6 +34,6 @@ Only the author moves a chapter to **draft** or **ready**.
 | 20 | `20_idioms_7nkn.md` | **draft** |
 | 21 | `21_style_9rng.md` | **draft** |
 | 22 | `22_never-written-down_at4r.md` | **draft** |
-| 23 | `23_organization-forces_i59b.md` | **in progress** |
+| 23 | `23_assigned-to-the-team_3fjx.md` | **draft** |
 
 The contents page is [00_toc.md](../00_toc.md).

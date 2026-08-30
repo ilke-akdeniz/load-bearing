@@ -42,4 +42,4 @@ Back to [the introduction](README.md).
 - 20. [Idioms: Why Ecosystems Diverge](20_idioms_7nkn.md)
 - 21. [Style: The Level Where Being Right Doesn't Matter](21_style_9rng.md)
 - 22. [What Was Never Written Down](22_never-written-down_at4r.md)
-- 23. [Organization Forces: What Decides the Process](23_organization-forces_i59b.md)
+- 23. [Assigned to the Team, Owned by Nobody](23_assigned-to-the-team_3fjx.md)
