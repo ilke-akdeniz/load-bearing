@@ -467,7 +467,7 @@ A chapter is finished by alternating commits, and **both sides commit**, so that
 
 1. **Claude writes and commits.** One commit per pass, after the questions in *Grilling* above are settled.
 2. **The author reviews in the file itself.** Two kinds of change arrive together: direct edits to the prose, and notes to Claude written inline as `[-- …]` tags — questions, objections, requests, or a decision to apply.
-3. **The author commits, and says so.**
+3. **The author commits, and says so.** Review commits are titled `review ch NN`.
 4. **Claude reviews that commit, acts on all of it, and commits again.**
 5. **Repeat** until the author says the chapter is done.
 
@@ -479,6 +479,7 @@ Evaluate the direct edits first — they may have moved what the tags are asking
 Direct edits can alter the meaning of the text, including the claim sentence every tag is measured against.
 Reversing this order could yield unwanted results, and tags sometimes explain a direct edit, so the reading is whole-diff even though the acting is ordered.
 
+- **A deletion means the text was not earning its place.** When the author removes a sentence or a paragraph, the reason is that it repeated something already said or was words with nothing behind them — not that it was wrong, and not that the content needs a new home. So do not propose rehoming it, do not replace it with a shorter version of the same idea, and do not report it back as a loss. The one thing a deletion does need is a check for what it leaves behind: a cut paragraph can strand a *next section*, a count, or a pronoun with no antecedent, and those are silent.
 - **Review every direct edit on the merits, not only for grammar.** Ask whether it made the chapter better, and say so either way. Two failures a spellcheck cannot see: an edit that restates a concept another chapter *owns*, in different words, which is the drift `docs/LEDGER.md` exists to prevent; and an edit that weakens a claim while reading more smoothly. Check terms the ledger assigns elsewhere against their canonical wording.
 - **Proofread every direct edit** — grammar, and the book's own rules. A review edit is as subject to the register and the no-decoration rules as anything Claude wrote. Note that automated checks skip fenced code, so comments inside samples need reading by eye.
 - **Disagree when there is a reason to.** A tag is not always an instruction; some are questions and some are wrong. Say so, give the reason, propose the alternative. The author repeating it settles it.
