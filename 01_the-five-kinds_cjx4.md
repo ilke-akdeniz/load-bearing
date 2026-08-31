@@ -283,7 +283,7 @@ Until then, follow the local convention — not because it is a good proxy for c
 
 **In a codebase:**
 
-- Interfaces with exactly one implementation and no plausible second one — an Idiom followed where the Principle behind it does not reach ([Ch. 17](17_abstraction-as-insurance_4jk6.md)).
+- An interface at every boundary, added because that is what one does rather than because the boundary was real — an Idiom followed as though it were a Law ([Ch. 04](04_structure_agjy.md) prices it).
 - Layer directories where every feature change touches all of them.
 - A style guide with correctness rules mixed into formatting rules, at the same emphasis.
 - Defensive code guarding a condition the surrounding architecture makes impossible — an inert Law treated as live.
