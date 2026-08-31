@@ -229,7 +229,7 @@ The same holds wherever the method is run with an AI coding agent in the loop, w
 - **"That's the standard approach."** True and irrelevant until someone says which force it answers. The useful reply names one: *standard where the callers are strangers — are ours?*
 - **"We might need to scale."** *Scale* is not a Force; [chapter 02](02_forces_f4m5.md) splits it into steady load, bursts and data volume, which have different designs. The question is which one, at what number.
 - **"Let's keep it flexible."** Flexible against what? Flexibility is bought against a specific change, and a change nobody can name is not one you can prepare for ([Ch. 17](17_abstraction-as-insurance_4jk6.md)).
-- **A heated debate about a design for more than ten minutes.** Write the Forces down instead. It ends more of these arguments than continuing them does.
+- **A design debate still running after ten minutes.** Write the Forces down instead. It ends more of these arguments than continuing them does.
 
 The question that does the work: **which fact about our situation would have to change for this to be the wrong choice?**
 

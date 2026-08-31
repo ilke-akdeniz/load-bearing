@@ -247,7 +247,7 @@ Four mechanisms, none of them anyone's fault in particular.
 
 ## Where the model breaks down
 
-Four boundaries, and the last is the important one.
+Three boundaries, and the last is the important one.
 
 **Claims that genuinely span kinds.** "Validate at the boundary" is partly a security Law, partly a feedback-speed Principle, partly an Idiom about *which* boundary. Forcing a single label loses information. Hold two labels and say which part you mean.
 
