@@ -14,7 +14,7 @@ So the count is not five of one thing. **There are four levels and five kinds** 
 
 True by the mechanics of computation. Violating one produces a **wrong program**, and the wrongness does not depend on your language, your team, or your taste.
 
-**Example.** *Exactly-once delivery is impossible.* You can arrange for a message to arrive at least once, or at most once, and there is no third option — not in a better language, not with a larger budget, because the sender cannot find out whether a message it got no answer to was received.
+**Example:** *Exactly-once delivery is impossible.* You can arrange for a message to arrive at least once, or at most once, and there is no third option — not in a better language, not with a larger budget, because the sender cannot find out whether a message it got no answer to was received.
 
 You do not get to disagree with a Law. You only get to be in a situation where its preconditions are absent — which is a different thing, and the subject of *How Forces relate to each kind of advice*, below.
 
@@ -22,7 +22,7 @@ You do not get to disagree with a Law. You only get to be in a situation where i
 
 A **property of your situation**: is there concurrency, does the data outlive the code, how large is the blast radius of a bug, do you control the callers, how often does this change.
 
-**Example.** *This table will outlive three rewrites of the code that reads it.* That is not advice and you cannot disagree with it. It is either true where you are or it is not, and it decides whether a rule about the data belongs in the application or in the schema.
+**Example:** *This table will outlive three rewrites of the code that reads it.* That is not advice and you cannot disagree with it. It is either true where you are or it is not, and it decides whether a rule about the data belongs in the application or in the schema.
 
 Forces are not recommendations, and they are not negotiable by argument. They are facts about where you are standing. ([Chapter 02](02_forces_f4m5.md) is entirely about them.)
 
@@ -32,7 +32,7 @@ A Force is read before any pattern or technique is in view because that's the gr
 
 Advice that is **good given certain Forces** and stops being good — sometimes reverses outright — when those Forces change.
 
-**Example.** *Don't repeat yourself.* Sound where the two copies really are one idea, and actively harmful where they only look alike — deduplicating them couples two things that were free to change separately, and the next change to one breaks the other.
+**Example:** *Don't repeat yourself.* Sound where the two copies really are one idea, and actively harmful where they only look alike — deduplicating them couples two things that were free to change separately, and the next change to one breaks the other.
 
 The mark of a Principle is that it has conditions. A Principle stated without its conditions has been promoted, usually by accident, and that promotion is the failure this book exists to catch.
 
@@ -40,7 +40,7 @@ The mark of a Principle is that it has conditions. A Principle stated without it
 
 An **ecosystem convention**. Locally correct, non-transferable, and usually traceable to a language feature that is present or absent.
 
-**Example.** *Accept interfaces, return structs.* Good advice in Go and close to meaningless in Python, which has no compile-time interface to accept. Nothing about the problem changed on the way across; the language did.
+**Example:** *Accept interfaces, return structs.* Good advice in Go and close to meaningless in Python, which has no compile-time interface to accept. Nothing about the problem changed on the way across; the language did.
 
 An Idiom is not arbitrary — there is normally a real reason it grew where it did. But the reason is local, so the conclusion is local.
 
@@ -52,7 +52,7 @@ Dependency injection shows how the compiler and the runtime can act on an Idiom.
 
 Naming, formatting, file layout. **Arbitrary, but worth being consistent about.**
 
-**Example.** *Tabs or spaces.* The compiler cannot tell, the runtime cannot tell, and the program is the same program either way — which is why the argument has run for forty years without either side producing evidence.
+**Example:** *Tabs or spaces.* The compiler cannot tell, the runtime cannot tell, and the program is the same program either way — which is why the argument has run for forty years without either side producing evidence.
 
 Neither the compiler nor the runtime can tell which way you chose. Style has no authority at all, and the correct response to a Style argument is to pick one and stop discussing it.
 
