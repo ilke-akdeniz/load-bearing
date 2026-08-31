@@ -10,10 +10,11 @@ The fifth, Force, is not advice at all. It is the input that decides where on th
 
 So the count is not five of one thing. **There are four levels and five kinds** — the levels are rungs on the ladder, and Force is the fifth kind precisely because it is not on it. That distinction matters more than it first appears, and the rest of the chapter turns on it.
 
-[-- here we start to introduce five kinds, but it feels very dry to read them. I can berely keep reading because those are totally new concepts and there ere no illustrations or examples showing what they are or hinting why they are useful to think about. One strange thing after another is described. A way to fix this is to illustrate, give a striking example as soon as each kind is introduced. I know we have detailed examples later, I'm not asking to do the same here. Here we only need 1-2 sentence showing what a Law, Principle... look like. ]
 ## Law
 
 True by the mechanics of computation. Violating one produces a **wrong program**, and the wrongness does not depend on your language, your team, or your taste.
+
+*Exactly-once delivery is impossible.* You can arrange for a message to arrive at least once, or at most once, and there is no third option — not in a better language, not with a larger budget, because the sender cannot find out whether a message it got no answer to was received.
 
 You do not get to disagree with a Law. You only get to be in a situation where its preconditions are absent — which is a different thing, and the subject of *How Forces relate to each kind of advice*, below.
 
@@ -21,7 +22,9 @@ You do not get to disagree with a Law. You only get to be in a situation where i
 
 A **property of your situation**: is there concurrency, does the data outlive the code, how large is the blast radius of a bug, do you control the callers, how often does this change.
 
-Forces are not recommendations, and they are not negotiable by argument. They are facts about where you are standing. Most unresolvable architecture disagreements are two people holding different Forces in mind while arguing about Principles. ([Chapter 02](02_forces_f4m5.md) is entirely about them.)
+*This table will outlive three rewrites of the code that reads it.* That is not advice and you cannot disagree with it. It is either true where you are or it is not, and it decides whether a rule about the data belongs in the application or in the schema.
+
+Forces are not recommendations, and they are not negotiable by argument. They are facts about where you are standing. ([Chapter 02](02_forces_f4m5.md) is entirely about them.)
 
 A Force is read before any pattern or technique is in view because that's the groundwork to decide whether a Law binds and whether a Principle inverts.
 
@@ -29,21 +32,27 @@ A Force is read before any pattern or technique is in view because that's the gr
 
 Advice that is **good given certain Forces** and stops being good — sometimes reverses outright — when those Forces change.
 
+*Don't repeat yourself.* Sound where the two copies really are one idea, and actively harmful where they only look alike — deduplicating them couples two things that were free to change separately, and the next change to one breaks the other.
+
 The mark of a Principle is that it has conditions. A Principle stated without its conditions has been promoted, usually by accident, and that promotion is the failure this book exists to catch.
 
 ## Idiom
 
 An **ecosystem convention**. Locally correct, non-transferable, and usually traceable to a language feature that is present or absent.
 
+*Accept interfaces, return structs.* Good advice in Go and close to meaningless in Python, which has no compile-time interface to accept. Nothing about the problem changed on the way across; the language did.
+
 An Idiom is not arbitrary — there is normally a real reason it grew where it did. But the reason is local, so the conclusion is local.
 
 **What separates an Idiom from a Style is mechanical: the compiler or the runtime acts on an Idiom, and ignores a Style.** The visible behaviour of the software does not change because of an Idiom. *Visible behaviour* means what the program produces when it succeeds. That is a narrow definition on purpose, and it leaves out a great deal: failure modes, developer experience, maintainability.
 
-Dependency injection shows how the compiler and runtime can act on an idiom. Wired by hand, the dependencies are constructor arguments, so getting one wrong is a type error and the program does not build. Through a container they are resolved at run time from a registration list, so the same mistake compiles and surfaces on the first request that needs the missing service. 
+Dependency injection shows how the compiler and the runtime can act on an Idiom. Wired by hand, the dependencies are constructor arguments, so getting one wrong is a type error and the program does not build. Through a container they are resolved at run time from a registration list, so the same mistake compiles and surfaces on the first request that needs the missing service.
 
 ## Style
 
 Naming, formatting, file layout. **Arbitrary, but worth being consistent about.**
+
+*Tabs or spaces.* The compiler cannot tell, the runtime cannot tell, and the program is the same program either way — which is why the argument has run for forty years without either side producing evidence.
 
 Neither the compiler nor the runtime can tell which way you chose. Style has no authority at all, and the correct response to a Style argument is to pick one and stop discussing it.
 
@@ -53,7 +62,7 @@ Neither the compiler nor the runtime can tell which way you chose. Style has no 
 
 **A Force never makes a Law false.** Laws are true unconditionally. What a Force decides is whether a Law **has anything to act on** — whether it binds in your situation or sits inert.
 
-Amdahl's Law is true of a single-threaded script. It simply has nothing to constrain there, because there is no parallel speedup to bound. [-- tell bery briefly what is Amdahl's Law]
+Amdahl's Law bounds how much faster a program can get from more processors, given the fraction of it that cannot be split. It is true of a single-threaded script and has nothing to constrain there, because there is no parallel portion to bound ([Ch. 07](07_scale_637f.md) works the arithmetic).
 
 **A Force can make a Principle wrong.** This is a stronger relationship. Principles do not merely go quiet when their conditions vanish; they can invert, so that following them produces worse software than ignoring them.
 
@@ -244,11 +253,11 @@ Five boundaries, and the last is the important one.
 
 **Claims that genuinely span kinds.** "Validate at the boundary" is partly a security Law, partly a feedback-speed Principle, partly an Idiom about *which* boundary. Forcing a single label loses information. Hold two labels and say which part you mean.
 
-**Adversarial contexts collapse the distinction.** Ordinarily, "validate input at the boundary" is a Principle: you skip it for an internal helper whose only caller you wrote yesterday, and nothing bad happens. That reasoning depends on a hidden assumption — that the bad input is *unlikely*.
+**A Principle whose Force cannot be read has to be followed as though it were a Law.** *Validate input at the boundary* is conditional in form: what would settle it is whether hostile input arrives. For most Principles you read the Force and act. Here you cannot, because there is no instrument for *is somebody trying* — and a question with no instrument is a risk rather than a Force ([Ch. 02](02_forces_f4m5.md)).
 
-An attacker removes the assumption. They are not sampling from your expected inputs; they are searching for the one that breaks you. So the rare case becomes the case that actually arrives, and advice that was worth weighing against convenience becomes advice you follow every time.
+It is worse than merely unmeasured. An attacker is not sampling from your expected inputs; they are searching for the one that breaks you. So the frequency you would need in order to judge is the very thing being manipulated, and a reading taken today says nothing about tomorrow.
 
-Nothing about the claim changed. The Force did: *someone is trying*. Treat security Principles as if they were Laws, and be suspicious of any argument for skipping one that rests on how improbable the input is. [-- this part is not ok. We are basically saying that it's ok to discard security untul "someone is trying", that is absurd. If there is no way to salvage this part just remove it.]
+The classification is not wrong. *Validate at the boundary* really is a Principle, and there really are programs nothing hostile ever reaches. The classification is simply no use, because you cannot find out which program you have — and where the reading is unavailable and the cost of being wrong is unbounded, the only safe move is to drop the conditionality and treat it as absolute. That is the model failing in the most instructive way it can: correctly, and to no benefit.
 
 **Arguing about the classification is itself the failure.** The model is a thinking aid, not a taxonomy to litigate. Two people debating whether something is a Principle or an Idiom have already extracted the value — they have agreed it is not a Law — and everything after that is the sort of dispute this book exists to end, not to relocate.
 
@@ -282,10 +291,10 @@ Until then, follow the local convention — not because it is a good proxy for c
 
 **In a codebase:**
 
-- Interfaces with exactly one implementation [-- go ahead and search for "one implementation" in the book, this is a ledger failure that nees to be fixed.], and no plausible second one.
+- Interfaces with exactly one implementation and no plausible second one — an Idiom followed where the Principle behind it does not reach ([Ch. 17](17_abstraction-as-insurance_4jk6.md)).
 - Layer directories where every feature change touches all of them.
 - A style guide with correctness rules mixed into formatting rules, at the same emphasis.
-- Defensive code guarding a condition the surrounding architecture makes impossible — An inert Law treated as live.
+- Defensive code guarding a condition the surrounding architecture makes impossible — an inert Law treated as live.
 - A design document that cites an authority rather than a mechanism.
 
 **In a conversation:**
@@ -293,7 +302,7 @@ Until then, follow the local convention — not because it is a good proxy for c
 - "That's not best practice," offered as a complete argument.
 - "We always do it this way here," with no memory of why.
 - Someone unable to answer *when would this rule be wrong?* — not because the answer is "never," but because the question has never come up.
-- Two people making increasingly detailed arguments while disagreeing about a Force neither has stated.  [-- search for "two people" in the book, another ledger failure.]
+- Two people making increasingly detailed arguments while disagreeing about a Force neither has stated.
 
 That last one is the most expensive and the easiest to fix. When an architecture argument will not converge, stop arguing about the Principle and ask what each side believes about the situation. The disagreement is usually not about the advice at all, but about the situation both sides are applying it to.
 
