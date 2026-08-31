@@ -14,8 +14,7 @@ So the count is not five of one thing. **There are four levels and five kinds** 
 
 True by the mechanics of computation. Violating one produces a **wrong program**, and the wrongness does not depend on your language, your team, or your taste.
 
-[these examples appearing out of nowhere are not ok, reader will not get that those are examples. You have to signal somehow that those are examples. Either the old "Example: " or something else, try to find what would work.]
-*Exactly-once delivery is impossible.* You can arrange for a message to arrive at least once, or at most once, and there is no third option — not in a better language, not with a larger budget, because the sender cannot find out whether a message it got no answer to was received.
+**What one looks like.** *Exactly-once delivery is impossible.* You can arrange for a message to arrive at least once, or at most once, and there is no third option — not in a better language, not with a larger budget, because the sender cannot find out whether a message it got no answer to was received.
 
 You do not get to disagree with a Law. You only get to be in a situation where its preconditions are absent — which is a different thing, and the subject of *How Forces relate to each kind of advice*, below.
 
@@ -23,7 +22,7 @@ You do not get to disagree with a Law. You only get to be in a situation where i
 
 A **property of your situation**: is there concurrency, does the data outlive the code, how large is the blast radius of a bug, do you control the callers, how often does this change.
 
-*This table will outlive three rewrites of the code that reads it.* That is not advice and you cannot disagree with it. It is either true where you are or it is not, and it decides whether a rule about the data belongs in the application or in the schema.
+**What one looks like.** *This table will outlive three rewrites of the code that reads it.* That is not advice and you cannot disagree with it. It is either true where you are or it is not, and it decides whether a rule about the data belongs in the application or in the schema.
 
 Forces are not recommendations, and they are not negotiable by argument. They are facts about where you are standing. ([Chapter 02](02_forces_f4m5.md) is entirely about them.)
 
@@ -33,7 +32,7 @@ A Force is read before any pattern or technique is in view because that's the gr
 
 Advice that is **good given certain Forces** and stops being good — sometimes reverses outright — when those Forces change.
 
-*Don't repeat yourself.* Sound where the two copies really are one idea, and actively harmful where they only look alike — deduplicating them couples two things that were free to change separately, and the next change to one breaks the other.
+**What one looks like.** *Don't repeat yourself.* Sound where the two copies really are one idea, and actively harmful where they only look alike — deduplicating them couples two things that were free to change separately, and the next change to one breaks the other.
 
 The mark of a Principle is that it has conditions. A Principle stated without its conditions has been promoted, usually by accident, and that promotion is the failure this book exists to catch.
 
@@ -41,7 +40,7 @@ The mark of a Principle is that it has conditions. A Principle stated without it
 
 An **ecosystem convention**. Locally correct, non-transferable, and usually traceable to a language feature that is present or absent.
 
-*Accept interfaces, return structs.* Good advice in Go and close to meaningless in Python, which has no compile-time interface to accept. Nothing about the problem changed on the way across; the language did.
+**What one looks like.** *Accept interfaces, return structs.* Good advice in Go and close to meaningless in Python, which has no compile-time interface to accept. Nothing about the problem changed on the way across; the language did.
 
 An Idiom is not arbitrary — there is normally a real reason it grew where it did. But the reason is local, so the conclusion is local.
 
@@ -53,7 +52,7 @@ Dependency injection shows how the compiler and the runtime can act on an Idiom.
 
 Naming, formatting, file layout. **Arbitrary, but worth being consistent about.**
 
-*Tabs or spaces.* The compiler cannot tell, the runtime cannot tell, and the program is the same program either way — which is why the argument has run for forty years without either side producing evidence.
+**What one looks like.** *Tabs or spaces.* The compiler cannot tell, the runtime cannot tell, and the program is the same program either way — which is why the argument has run for forty years without either side producing evidence.
 
 Neither the compiler nor the runtime can tell which way you chose. Style has no authority at all, and the correct response to a Style argument is to pick one and stop discussing it.
 
@@ -63,7 +62,7 @@ Neither the compiler nor the runtime can tell which way you chose. Style has no 
 
 **A Force never makes a Law false.** Laws are true unconditionally. What a Force decides is whether a Law **has anything to act on** — whether it binds in your situation or sits inert.
 
-Amdahl's Law bounds how much faster a program can get from more processors, given the fraction of it that cannot be split. It has no use on a single-threaded script because it has nothing to constrain, there is no parallel portion to bound. However the law is still true and you can measure it's effects as soon as the script is not single-threaded anymore.
+Amdahl's Law bounds how much faster a program can get from more processors, given the fraction of it that cannot be split. It has no use on a single-threaded script, because there is no parallel portion for it to bound. The Law is still true, and its effects are measurable the moment that script stops being single-threaded ([Ch. 07](07_scale_637f.md) works the arithmetic).
 
 **A Force can make a Principle wrong.** This is a stronger relationship. Principles do not merely go quiet when their conditions vanish; they can invert, so that following them produces worse software than ignoring them.
 
@@ -213,7 +212,7 @@ Five questions, in order. Stop at the first that answers.
 | "We don't control our callers" | **Force** | the whole reason library design differs |
 | "Prefer composition over inheritance" | **Principle** | conditions: variation on multiple axes |
 | "Don't repeat yourself" | **Principle** | famously over-applied; duplication beats wrong coupling |
-| "Validate input at the boundary" | **Principle** | behaves like a Law under an adversarial Force |
+| "Validate input at the boundary" | **Principle** | and partly a Law — one of the claims that spans kinds |
 | "Functions should be short" | **Principle** | Force: working-memory limits |
 | "Push invariants to the layer that can enforce them" | **Principle** | conditions: a layer that *can* |
 | "Premature optimization is the root of all evil" | **Principle** | routinely quoted with Knuth's conditions removed |
@@ -229,8 +228,6 @@ Five questions, in order. Stop at the first that answers.
 One row is worth pausing on.
 
 **"Use dependency injection" and "use a DI container" are different claims of different kinds.** They get said in the same breath, and the Idiom is routinely defended with the Principle's arguments. Separating them dissolves most of the argument.
-
-(The "validate input" row is the one claim in the table whose kind depends on the situation. The next section but one explains why.)
 
 ---
 
@@ -250,11 +247,9 @@ Four mechanisms, none of them anyone's fault in particular.
 
 ## Where the model breaks down
 
-Five boundaries, and the last is the important one.
+Four boundaries, and the last is the important one.
 
 **Claims that genuinely span kinds.** "Validate at the boundary" is partly a security Law, partly a feedback-speed Principle, partly an Idiom about *which* boundary. Forcing a single label loses information. Hold two labels and say which part you mean.
-
-[-- deleted "A Principle whose Force cannot be read". Dont add it back, that thing is getting messier with each addition. You tried with no success.]
 
 **Arguing about the classification is itself the failure.** The model is a thinking aid, not a taxonomy to litigate. Two people debating whether something is a Principle or an Idiom have already extracted the value — they have agreed it is not a Law — and everything after that is the sort of dispute this book exists to end, not to relocate.
 
