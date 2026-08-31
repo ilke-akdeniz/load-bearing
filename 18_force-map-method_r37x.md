@@ -149,7 +149,7 @@ The failure has a shape worth naming. Inherited Principles cluster: a codebase d
 
 What the map does is make the decision smaller. Five moves, roughly in the order worth trying them.
 
-**Check that both Forces are at the values you assumed.** Conflicts dissolve under measurement more often than they get resolved. *Low latency* is a budget with a number; *durability* is a retention period someone can name. Two people arguing usually have different numbers in mind and have never said them out loud.
+**Check that both Forces are at the values you assumed.** Conflicts dissolve under measurement more often than they get resolved. *Low latency* is a budget with a number; *durability* is a retention period someone can name.
 
 **Look for the third option.** Most conflicts are between two implementations rather than two requirements. Durability against latency is irreconcilable if the choice is *write to disk synchronously* versus *do not*; it often dissolves at *write to a log and acknowledge*, which is [chapter 06](06_distribution_49yh.md)'s outbox reasoning applied one level down.
 
@@ -229,7 +229,7 @@ The same holds wherever the method is run with an AI coding agent in the loop, w
 - **"That's the standard approach."** True and irrelevant until someone says which force it answers. The useful reply names one: *standard where the callers are strangers — are ours?*
 - **"We might need to scale."** *Scale* is not a Force; [chapter 02](02_forces_f4m5.md) splits it into steady load, bursts and data volume, which have different designs. The question is which one, at what number.
 - **"Let's keep it flexible."** Flexible against what? Flexibility is bought against a specific change, and a change nobody can name is not one you can prepare for ([Ch. 17](17_abstraction-as-insurance_4jk6.md)).
-- **Two people arguing about a design for more than ten minutes.** Write the Forces down instead. It ends more of these arguments than continuing them does, for the reason [chapter 02](02_forces_f4m5.md) gives.
+- **A heated debate about a design for more than ten minutes.** Write the Forces down instead. It ends more of these arguments than continuing them does.
 
 The question that does the work: **which fact about our situation would have to change for this to be the wrong choice?**
 

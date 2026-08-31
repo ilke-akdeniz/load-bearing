@@ -299,7 +299,6 @@ An internal dependency that changes weekly and is called from forty places behav
 - **"We should put an adapter there."** Between what and what — and can we change either one?
 - **"It's just a facade."** Called by whom? If the answer includes anyone outside your deploy, it is not just anything.
 - **"We use that pattern elsewhere."** With the same answer to the ownership question? The same name on the other side of the line is a different decision.
-- **Two people disagreeing about a pattern with rising confidence.** Ask each what is on the other side of it. The disagreement often dissolves, because it was never about the pattern.
 
 The question that does the work: **can I change the other side?**
 

@@ -924,7 +924,7 @@ The layering test applies unchanged: does this thing decide something, or does i
 - **A design defended by the diagram it matches** rather than by what depends on what. Authority substituting for mechanism.
 - **"We can't change that, things depend on it."** True, and incomplete — ask how many. Two dependents is an afternoon's work. Forty is a project needing a plan, a deprecation window, and someone to own it. The sentence sounds identical in both cases; the number is the entire difference, and nobody has looked it up.
 - **Someone calling an inversion-of-control callback a layering violation.** The call goes up; the dependency does not.
-- **Two people arguing about folder structure** when neither has drawn the dependency graph. They are arguing about the Idiom while believing they are arguing about the Law.
+- **A discussion about folder structure** without the dependency graph in sight. The discussion is about an Idiom treated as a Law.
 
 The question that catches real damage is not *does this match the diagram?* It is: **can this piece be understood without that piece?**
 
