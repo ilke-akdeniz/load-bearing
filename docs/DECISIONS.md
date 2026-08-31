@@ -5177,7 +5177,11 @@ The author moved chapter 23 to **draft** in the same instruction. All twenty-thr
 Slice 2's literal remit — rules that postdate the chapter — is empty here, since 23 postdates every rule in `CLAUDE.md`. It was audited against all of them instead, which is what the slice is actually for.
 
 **Slice 1 — pending material.**
-`docs/pending-tasks/last-chapter-idea.md` is discharged and its dispositions are recorded in that folder's index rather than here, since that is the list a later pass reads.
+`docs/pending-tasks/last-chapter-idea.md` is discharged. What landed: the artifact chain, ownership and its two mechanisms, the business rules as the root, the force map, people not being cogs, a senior engineer not being somebody with ten years' service, the brutality of a handoff, meetings, and the pointing-session and *we're agile* tells.
+
+Retired, with the reason: **the estimate** and *time estimates are harmful games*, cut by the author in the restructure from six steps to four artifacts, and not an artifact the ownership claim governs; **1:1s and performance reviews**, which are not development artifacts; **Agile is overrated** as a claim, surviving only as conditioned symptoms in *how to recognize the failure*; and **stages, transitions and playbooks** together with **the utopia framing and its closing counsel**, both cut by the author on review.
+
+Still open and not a chapter matter: the note about changing the book's title.
 One piece was routed rather than retired: *architecture is not diagrams or tech stack choices, it's about clarifying ownership, trade-offs, forces.* That is the notes' sharpest statement of the chapter's own thesis and it had not reached the chapter. It now sits under the solution artifact, saying what the word is reaching for and what it is not — the diagram and the stack are consequences, and either can be produced without anybody having decided anything.
 The estimate was retired rather than routed, and the reasoning is worth keeping: the author cut it themselves when they restructured six steps into four artifacts, and it is not an artifact the ownership claim governs. It was a consequence of position in a sequence, and the sequence framing went with the six-step draft.
 
@@ -5197,5 +5201,5 @@ The mechanical check produced four apparent mismatches and all four were the sam
 
 `tools/check-drift.py`: 16 checks over 23 chapters, no drift.
 
-**Two files left in place rather than deleted, deliberately.**
-`CLAUDE.md` says a discharged document leaves the folder, and `last-chapter-idea.md` is now discharged. It was kept, along with the review beside it, because the author has twice given standing instructions about that folder — *leave pending tasks folder there, we might need it in the future, it's an organizational structure*, and the explicit request to save the review verbatim. Deleting either on the draft's own initiative is the error decision 111 records. They are flagged for the author instead.
+**Both files deleted, on the author's instruction.**
+The draft left `last-chapter-idea.md` and the review beside it in place and flagged them, rather than deleting them under `CLAUDE.md`'s rule that a discharged document leaves the folder — because the author had twice given standing instructions about that folder and had asked for the review to be saved verbatim. Asked, they said to delete both. The folder itself stays, as they directed earlier; it now holds `index.md` alone.
