@@ -226,7 +226,7 @@ type Rates interface {
 
 *The constraint:* the interface is declared by the consumer rather than the provider, which is what reverses the arrow — a provider-declared interface leaves the dependency pointing exactly where it was ([Ch. 04](04_structure_agjy.md)).
 
-*The cost:* an interface per boundary, and the reflex to add one wherever a boundary is drawn ([Ch. 04](04_structure_agjy.md) prices that reflex; [Ch. 16](16_tdd-and-mocks_u8eu.md) traces where it comes from).
+*The cost:* an interface per boundary, and the habit of adding one wherever a boundary is drawn ([Ch. 16](16_tdd-and-mocks_u8eu.md) traces where that habit comes from).
 
 **Pattern: Strangler fig** — route traffic through a facade, move one route at a time, delete the old system when the last route has moved.
 
