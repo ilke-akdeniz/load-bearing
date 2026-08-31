@@ -14,6 +14,7 @@ So the count is not five of one thing. **There are four levels and five kinds** 
 
 True by the mechanics of computation. Violating one produces a **wrong program**, and the wrongness does not depend on your language, your team, or your taste.
 
+[these examples appearing out of nowhere are not ok, reader will not get that those are examples. You have to signal somehow that those are examples. Either the old "Example: " or something else, try to find what would work.]
 *Exactly-once delivery is impossible.* You can arrange for a message to arrive at least once, or at most once, and there is no third option — not in a better language, not with a larger budget, because the sender cannot find out whether a message it got no answer to was received.
 
 You do not get to disagree with a Law. You only get to be in a situation where its preconditions are absent — which is a different thing, and the subject of *How Forces relate to each kind of advice*, below.
@@ -62,7 +63,7 @@ Neither the compiler nor the runtime can tell which way you chose. Style has no 
 
 **A Force never makes a Law false.** Laws are true unconditionally. What a Force decides is whether a Law **has anything to act on** — whether it binds in your situation or sits inert.
 
-Amdahl's Law bounds how much faster a program can get from more processors, given the fraction of it that cannot be split. It is true of a single-threaded script and has nothing to constrain there, because there is no parallel portion to bound ([Ch. 07](07_scale_637f.md) works the arithmetic).
+Amdahl's Law bounds how much faster a program can get from more processors, given the fraction of it that cannot be split. It has no use on a single-threaded script because it has nothing to constrain, there is no parallel portion to bound. However the law is still true and you can measure it's effects as soon as the script is not single-threaded anymore.
 
 **A Force can make a Principle wrong.** This is a stronger relationship. Principles do not merely go quiet when their conditions vanish; they can invert, so that following them produces worse software than ignoring them.
 
@@ -253,11 +254,7 @@ Five boundaries, and the last is the important one.
 
 **Claims that genuinely span kinds.** "Validate at the boundary" is partly a security Law, partly a feedback-speed Principle, partly an Idiom about *which* boundary. Forcing a single label loses information. Hold two labels and say which part you mean.
 
-**A Principle whose Force cannot be read has to be followed as though it were a Law.** *Validate input at the boundary* is conditional in form: what would settle it is whether hostile input arrives. For most Principles you read the Force and act. Here you cannot, because there is no instrument for *is somebody trying* — and a question with no instrument is a risk rather than a Force ([Ch. 02](02_forces_f4m5.md)).
-
-It is worse than merely unmeasured. An attacker is not sampling from your expected inputs; they are searching for the one that breaks you. So the frequency you would need in order to judge is the very thing being manipulated, and a reading taken today says nothing about tomorrow.
-
-The classification is not wrong. *Validate at the boundary* really is a Principle, and there really are programs nothing hostile ever reaches. The classification is simply no use, because you cannot find out which program you have — and where the reading is unavailable and the cost of being wrong is unbounded, the only safe move is to drop the conditionality and treat it as absolute. That is the model failing in the most instructive way it can: correctly, and to no benefit.
+[-- deleted "A Principle whose Force cannot be read". Dont add it back, that thing is getting messier with each addition. You tried with no success.]
 
 **Arguing about the classification is itself the failure.** The model is a thinking aid, not a taxonomy to litigate. Two people debating whether something is a Principle or an Idiom have already extracted the value — they have agreed it is not a Law — and everything after that is the sort of dispute this book exists to end, not to relocate.
 
