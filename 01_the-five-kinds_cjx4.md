@@ -2,7 +2,7 @@
 
 **Many claims you meet about software are one of five kinds: Law, Force, Principle, Idiom, Style. And the kind of a claim determines how much authority it has** — not the confidence of the person saying it, not their track record, not how widely it is repeated.
 
-Four of them are advice, and those four form a ladder of authority:
+Four of them are advice, and form a ladder of authority:
 
 > **Law → Principle → Idiom → Style**
 
@@ -10,6 +10,7 @@ The fifth, Force, is not advice at all. It is the input that decides where on th
 
 So the count is not five of one thing. **There are four levels and five kinds** — the levels are rungs on the ladder, and Force is the fifth kind precisely because it is not on it. That distinction matters more than it first appears, and the rest of the chapter turns on it.
 
+[-- here we start to introduce five kinds, but it feels very dry to read them. I can berely keep reading because those are totally new concepts and there ere no illustrations or examples showing what they are or hinting why they are useful to think about. One strange thing after another is described. A way to fix this is to illustrate, give a striking example as soon as each kind is introduced. I know we have detailed examples later, I'm not asking to do the same here. Here we only need 1-2 sentence showing what a Law, Principle... look like. ]
 ## Law
 
 True by the mechanics of computation. Violating one produces a **wrong program**, and the wrongness does not depend on your language, your team, or your taste.
@@ -22,7 +23,7 @@ A **property of your situation**: is there concurrency, does the data outlive th
 
 Forces are not recommendations, and they are not negotiable by argument. They are facts about where you are standing. Most unresolvable architecture disagreements are two people holding different Forces in mind while arguing about Principles. ([Chapter 02](02_forces_f4m5.md) is entirely about them.)
 
-A Force is read before any pattern or technique is in view, and it is one of the five kinds in its own right — which is what lets it decide whether a Law binds and whether a Principle inverts.
+A Force is read before any pattern or technique is in view because that's the groundwork to decide whether a Law binds and whether a Principle inverts.
 
 ## Principle
 
@@ -38,7 +39,7 @@ An Idiom is not arbitrary — there is normally a real reason it grew where it d
 
 **What separates an Idiom from a Style is mechanical: the compiler or the runtime acts on an Idiom, and ignores a Style.** The visible behaviour of the software does not change because of an Idiom. *Visible behaviour* means what the program produces when it succeeds. That is a narrow definition on purpose, and it leaves out a great deal: failure modes, developer experience, maintainability.
 
-Dependency injection shows both halves. Wired by hand, the dependencies are constructor arguments, so getting one wrong is a type error and the program does not build. Through a container they are resolved at run time from a registration list, so the same mistake compiles and surfaces on the first request that needs the missing service. Two programs that are both correct serve identical responses; the one that is wrong fails at a different time and with a different amount of help.
+Dependency injection shows how the compiler and runtime can act on an idiom. Wired by hand, the dependencies are constructor arguments, so getting one wrong is a type error and the program does not build. Through a container they are resolved at run time from a registration list, so the same mistake compiles and surfaces on the first request that needs the missing service. 
 
 ## Style
 
@@ -46,17 +47,13 @@ Naming, formatting, file layout. **Arbitrary, but worth being consistent about.*
 
 Neither the compiler nor the runtime can tell which way you chose. Style has no authority at all, and the correct response to a Style argument is to pick one and stop discussing it.
 
-**Where that line falls is decided by the language, not by the category the choice appears to belong to.** Go makes an identifier's case its visibility and Python makes indentation syntax, so a naming or formatting decision that is arbitrary everywhere else is structural there. [Chapter 20](20_idioms_7nkn.md) works out what that costs; [chapter 21](21_style_9rng.md) takes what is left, which is most of it.
-
 ---
 
 ## How Forces relate to each kind of advice
 
-This is the part to get exactly right, because a loose version of it is the most common way the model gets misused.
-
 **A Force never makes a Law false.** Laws are true unconditionally. What a Force decides is whether a Law **has anything to act on** — whether it binds in your situation or sits inert.
 
-Amdahl's Law is true of a single-threaded script. It simply has nothing to constrain there, because there is no parallel speedup to bound.
+Amdahl's Law is true of a single-threaded script. It simply has nothing to constrain there, because there is no parallel speedup to bound. [-- tell bery briefly what is Amdahl's Law]
 
 **A Force can make a Principle wrong.** This is a stronger relationship. Principles do not merely go quiet when their conditions vanish; they can invert, so that following them produces worse software than ignoring them.
 
@@ -251,7 +248,7 @@ Five boundaries, and the last is the important one.
 
 An attacker removes the assumption. They are not sampling from your expected inputs; they are searching for the one that breaks you. So the rare case becomes the case that actually arrives, and advice that was worth weighing against convenience becomes advice you follow every time.
 
-Nothing about the claim changed. The Force did: *someone is trying*. Treat security Principles as if they were Laws, and be suspicious of any argument for skipping one that rests on how improbable the input is.
+Nothing about the claim changed. The Force did: *someone is trying*. Treat security Principles as if they were Laws, and be suspicious of any argument for skipping one that rests on how improbable the input is. [-- this part is not ok. We are basically saying that it's ok to discard security untul "someone is trying", that is absurd. If there is no way to salvage this part just remove it.]
 
 **Arguing about the classification is itself the failure.** The model is a thinking aid, not a taxonomy to litigate. Two people debating whether something is a Principle or an Idiom have already extracted the value — they have agreed it is not a Law — and everything after that is the sort of dispute this book exists to end, not to relocate.
 
@@ -285,10 +282,10 @@ Until then, follow the local convention — not because it is a good proxy for c
 
 **In a codebase:**
 
-- Interfaces with exactly one implementation, and no plausible second one.
+- Interfaces with exactly one implementation [-- go ahead and search for "one implementation" in the book, this is a ledger failure that nees to be fixed.], and no plausible second one.
 - Layer directories where every feature change touches all of them.
 - A style guide with correctness rules mixed into formatting rules, at the same emphasis.
-- Defensive code guarding a condition the surrounding architecture makes impossible — an inert Law treated as live.
+- Defensive code guarding a condition the surrounding architecture makes impossible — An inert Law treated as live.
 - A design document that cites an authority rather than a mechanism.
 
 **In a conversation:**
@@ -296,7 +293,7 @@ Until then, follow the local convention — not because it is a good proxy for c
 - "That's not best practice," offered as a complete argument.
 - "We always do it this way here," with no memory of why.
 - Someone unable to answer *when would this rule be wrong?* — not because the answer is "never," but because the question has never come up.
-- Two people making increasingly detailed arguments while disagreeing about a Force neither has stated.
+- Two people making increasingly detailed arguments while disagreeing about a Force neither has stated.  [-- search for "two people" in the book, another ledger failure.]
 
 That last one is the most expensive and the easiest to fix. When an architecture argument will not converge, stop arguing about the Principle and ask what each side believes about the situation. The disagreement is usually not about the advice at all, but about the situation both sides are applying it to.
 
