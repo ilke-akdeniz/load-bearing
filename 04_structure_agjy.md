@@ -775,8 +775,6 @@ type Invoice struct {
 
 *The bill:* `invoice.Merchant.Name` becomes a lookup that can fail and can be stale. "What if the merchant was deleted?" is now a question you answer explicitly, where the pointer answered it by existing. [Chapter 15](15_behaviour-placement_z47a.md) works through the version of this that appears in object-oriented domain models, where the mutual pointers are the design rather than an accident.
 
-Pick deliberately. The failure is paying in interfaces by reflex — an interface at every boundary whether or not the boundary was real, which is how a codebase acquires forty interfaces with one implementation each ([Ch. 16](16_tdd-and-mocks_u8eu.md) traces where that reflex comes from).
-
 ### Hiding costs you the day you need what you hid
 
 Every decision you hide is a decision your users cannot reach when they turn out to need it. A library that exposes a connection pool but not the underlying socket has hidden the socket options too, and the user who needs `TCP_NODELAY` is stuck. This is a real and recurring cost, not a hypothetical one.

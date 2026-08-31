@@ -290,7 +290,6 @@ An internal dependency that changes weekly and is called from forty places behav
 
 - **A vendor's type in a signature far from the integration** — their status enum in a reporting query, their error type in domain logic. The spread already happened; the only question left is how many files.
 - **A translation layer around a library you could have forked**, where the option was never actually closed.
-- **An interface with one implementation, wrapping a type you own** — a pattern solving a problem you could have solved by editing the other file ([Ch. 16](16_tdd-and-mocks_u8eu.md) traces where the reflex comes from).
 - **An in-process event bus with retry logic**, where nothing can be lost because nothing leaves the process.
 - **A published API that grew by accretion**, because nobody noticed when it stopped being internal and no removal has been possible since.
 - **Version numbers on an interface with two callers, both yours.**

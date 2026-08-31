@@ -443,7 +443,6 @@ The rule that survives is about size rather than about patterns: a policy of thr
 
 **In a codebase:**
 
-- **An interface with one method and one implementation, injected as a field.** That is Strategy with the variation never having arrived. In a language with function values there is nothing left to name.
 - **`accept` methods on a type hierarchy in a language with pattern matching.** The double dispatch is being paid for and the compiler would do it.
 - **A `Factory` whose `create` method contains a single `new` with no branching.** The pattern is a workaround for languages where a class is not a value; if yours are, the factory is a function that could be the constructor.
 - **Per-method forwarding classes** — twenty methods, nineteen of which call straight through. Either the interface is too wide to decorate or the concern is not a decoration at all ([Ch. 04](04_structure_agjy.md)).
