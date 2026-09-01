@@ -5203,3 +5203,124 @@ The mechanical check produced four apparent mismatches and all four were the sam
 
 **Both files deleted, on the author's instruction.**
 The draft left `last-chapter-idea.md` and the review beside it in place and flagged them, rather than deleting them under `CLAUDE.md`'s rule that a discharged document leaves the folder — because the author had twice given standing instructions about that folder and had asked for the review to be saved verbatim. Asked, they said to delete both. The folder itself stays, as they directed earlier; it now holds `index.md` alone.
+
+---
+
+## 127. Two cleanups of repeated material, and what a deletion strands
+
+**Date.** 2026-08-30
+
+**Context.**
+Two symptoms had been restated across the book.
+An interface with a single implementation appeared in [chapters 01](../01_the-five-kinds_cjx4.md), [04](../04_structure_agjy.md), [10](../10_patterns-that-cross_r8dw.md), [11](../11_patterns-that-survive-translation_us2k.md), [12](../12_missing-language-features_esqm.md) and [17](../17_abstraction-as-insurance_4jk6.md); *two people arguing* appeared in [chapters 01](../01_the-five-kinds_cjx4.md), [02](../02_forces_f4m5.md), [04](../04_structure_agjy.md), [10](../10_patterns-that-cross_r8dw.md), [18](../18_force-map-method_r37x.md), [19](../19_six-profiles_dnkz.md) and [23](../23_assigned-to-the-team_3fjx.md).
+The draft was asked to survey the first and did not act on it.
+It edited chapter 01, wrote a ledger row asserting the remaining sites were differentiated, and did not read them.
+The author: *I don't get why you didn't do anything about all the repetitions.*
+
+**Options.**
+
+1. Differentiate each site, so that every appearance shows a facet the others do not.
+2. Keep one owner and delete the rest.
+
+**Decision.** Option 2, and the author ran both cleanups themselves.
+
+**Why.**
+Neither symptom was showing a different facet at each site.
+They were one observation in several wordings, which is the failure `docs/LEDGER.md` exists to prevent, and the ledger had a row for it that was wrong.
+
+**Consequence.**
+The interface material sits with chapter 17, which owns a substitution that never arrives, and chapter 11 cites it.
+The argument material sits with chapter 02, whose recognition list closes on *stop arguing about the Principle and ask each side what they believe about the situation*.
+
+**What a deletion strands, which is the reusable part.**
+The deletions were sound in both commits, and every defect found afterwards was in the apparatus that describes the text from outside it rather than in the text.
+The first cleanup left chapter 11 promising that chapter 04 *prices that reflex* when chapter 04 no longer contained the word, and left a ledger row quoting the deleted sentence — both written by the draft one commit earlier.
+The second left chapter 01 reading *Four boundaries* with three, and chapter 02 reading *Three mechanisms* with two.
+The draft caught the first count, said it would check counts automatically from then on, and missed the second in the next commit.
+`tools/check-drift.py` verifies neither a count stated in prose nor the ledger's canonical-phrase column, so both are read by hand after every review commit.
+
+---
+
+## 128. Review of chapter 02: reading intensity, and keeping the agent case inside the Force
+
+**Date.** 2026-08-31
+
+**Context.**
+The author's review carried seven direct edits and one tag.
+
+Three edits were precision gains and were kept as written: *how long does the medium outlive the code* for *how long does this*, *time budget* for *budget* in a section that also discusses cost in round trips, and *the Force decides how you can apply that fix* for *whether you can apply it*.
+The last is a correction rather than a smoothing — the third bullet does apply the fix, permanently and beside the old field, so *whether* was wrong.
+
+**The concurrency question.**
+The author rewrote it from *How many things can be doing this at once, and do they touch the same state?* to *Does the system have multiple threads or processes that modify the same state?*
+
+**Options.**
+
+1. Take the edit.
+2. Keep the original.
+3. Keep the edit's concreteness and restore the quantity.
+
+**Decision.** Option 3 — *How many threads or processes can be doing this at once, and do they touch the same state?*
+This is a draft disagreement with an author edit, and the reasoning is why it was not simply applied.
+
+**Why.**
+The line beneath the question reads *two things about the intensity dial are worth stating*, and both of them are about how far the dial is turned.
+The chapter's framing is *read the intensity, not merely the presence*, and a yes/no question reads presence.
+The author's own summary table, edited in the same commit, kept *how many threads or processes at once*, so the two disagreed with each other.
+What the edit got right is that *things* was vague; *threads or processes* now stands in both places.
+
+**The tagged paragraph.**
+The author: *I get this paragraph's general idea only after reading it 3 times. There to many cryptic sayings, unspecigic concepts (migration, middle, other half...)*
+Three referents were unnamed, and the third is what made the paragraph unreadable — *the other half* arrived two sentences after *both halves* meaning something else.
+
+The draft's rewrite named every referent and was then rejected on a ground the tag had not raised.
+It bolded *The rule has to be mechanically enforced from the start*, and the author: *It reads as if we are saying forget about what we just said, the force doesn't matter for this case, there is one right thing you have to do no matter what.*
+
+**Decision, joint.** The bolded claim states a Force reading rather than an instruction: **Two authors with an agent in the loop sit where twenty developers sit.**
+
+**Why.**
+The author's original bold, *the migration is forced harder and sooner*, was a statement about where the dial lands, and the draft lost that framing while fixing the referents.
+A chapter arguing that Forces decide cannot carry a sentence that reads like a Law.
+The replacement uses the two headcounts already in the code samples above it, so the comparison is between two positions the reader looked at thirty lines earlier.
+
+**Consequence.**
+The migration is named where it is referenced — comment, then review habit, then type system — the skipped middle is identified as the review habit, and *the other half* is gone.
+
+---
+
+## 129. Review of chapter 03: *law* against *claim*, and a bare *kind*
+
+**Date.** 2026-08-31
+
+**Context.**
+The author's review renamed *definitional claim* to *definitional law* in three places, deleted four passages, and left three tags, two of them the same complaint.
+
+**The rename.**
+
+**Decision.** Adopted, and extended to the three sites the review did not reach — the opening paragraph, *how to recognize the failure*, and a ledger row.
+
+**Why.**
+Inside chapter 03 the three are kinds of Law, while *claim* is the book's word for the general case, anything that can be true, false, or conditional.
+The extension is the survey rule: a word found doing the wrong job is checked everywhere before it is called fixed, and the count here was three of six.
+`docs/DECISIONS.md` keeps *definitional claim* in two earlier entries, which record what was decided when it was decided and are not edited to match later terminology.
+
+**The two heading tags.**
+*Kind is not importance* and *Some claims sit between kinds*, tagged for one reason: after chapter 01 owns *the five kinds*, a bare *kind* in chapter 03 is ambiguous with the three kinds of Law.
+The author: *Is it the five kinds of claim, or three kinds of law?*
+
+**Decision.** *Firmness is not relevance*, and *Between definition and observation*.
+
+**Why.**
+Neither heading said which set it meant, and both resolve without carrying a qualifier in the heading.
+The first also absorbs a line the author had tagged separately as cryptic, with instructions to delete it unless it could be unpacked into something of value — *firmness and relevance are separate axes*.
+It now names the section instead of trailing it.
+
+**The Amdahl paragraph.**
+The author: *Are you saying that the gap between a cache hit and ... is more important for the single threaded tool?*
+The reading was available and the paragraph was at fault: *Meanwhile* joined two sentences about two different programs, so they read as one.
+The section now works them as a labelled pair — a theorem that is inert, an empirical law that decides the design — and says in the text that they are two programs.
+
+**Two deletions that stranded ledger rows.**
+*Three kinds of Law* still described the *named, never lettered, and not ranked* paragraph the author cut.
+*Theorem and folk version share a name* still described the generalization cut with it, that a folk version has usually dropped a quantifier or a condition.
+That generalization is chapter 14's and is held there across eleven rows, so the deletion is the anti-repetition protocol working rather than a loss; the row now claims only the halting-problem case, which chapter 03 still works.
