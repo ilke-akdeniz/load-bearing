@@ -41,13 +41,13 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Shape of scale | f4m5 | "High scale" names no design — steady load, bursts, and data volume are different situations sharing a vocabulary | cite |
 | Forces move on their own clock | f4m5 | Team size, client count, and row count change without a commit, invalidating Principles nobody revisits | cite |
 | The disagreement is about the Force, not the Principle | f4m5 | The remedy when a Principle is being argued over: stop arguing about the Principle and ask each side what they believe about the situation. 02 states it once, in its recognition list; dnkz cites it as 02's general finding and adds only that a profile disagreement does not resolve | "ask each side what they believe about the situation" |
-| Three kinds of Law | q5c6 | Theorem, definition, empirical law — named, never lettered, and not ranked | "a theorem / a definitional claim" |
+| Three kinds of Law | q5c6 | Theorem, definition, empirical law — they differ in where the claim's authority sits, not in rank, and firmness is independent of whether the law bears on your program | "a theorem / a definitional law" |
 | One kind, its moves | q5c6 | Theorem: falsify an assumption, or stop needing the conclusion. Definition: check whether the words apply. Empirical: measure it where you are | cite |
 | Two escapes from a theorem | q5c6 | Arrange for one of its assumptions not to hold, or stop needing the theorem's conclusion — never argue with the conclusion | cite |
 | Regularity vs magnitude | q5c6 | A measurement is not a law; an empirical law is a regularity across systems whose magnitude varies between them | cite |
 | Kind is not importance | q5c6 | The kind says how firmly a claim is true, not how much it bears on your program | cite |
 | Describes vs prescribes | q5c6 | A Law describes what happens; a Principle prescribes. Only a Principle can become bad advice | "describes vs prescribes" |
-| Theorem and folk version share a name | q5c6 | The folk version has usually dropped a quantifier or a condition — halting problem forbids a universal decider, not any decision | cite |
+| Theorem and folk version share a name | q5c6 | Worked on the halting problem: the theorem forbids a universal decider, the slogan is used to end conversations, and the difference is all programs versus the ones your codebase contains. b86v owns the general form, that a compressed claim drops a condition | "a formal and a folk version" |
 | The falsification question | q5c6 | "What would have to be true for this to be false?" — nothing / nothing but it may not apply / a measurement | cite |
 | Acyclic dependency | agjy | A cycle makes two components one unit of comprehension, test, and change | "the Direction Rule" |
 | What a cycle actually costs | agjy | The damage is denominated in future change, not in wrong output — which is why it accumulates unnoticed | cite |
@@ -331,7 +331,7 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | Outbox table | 49yh | Cross-system atomicity is impossible, so you sequence + retry |
 | In-process channel vs lost ACK | q5c6 | Two Generals' two assumptions, and the two different escapes: in-process falsifies one, idempotency drops the requirement. 49yh owns the theorem |
 | Halting problem vs its folk version | q5c6 | The theorem forbids a universal decider; termination checking for particular programs is routine |
-| `rate` read once at startup | q5c6 | A definitional claim that either binds or has no cache to act on |
+| `rate` read once at startup | q5c6 | A definitional law that either binds or has no cache to act on |
 | Go map randomization vs Python dict order | q5c6 | One regularity, two opposite responses, and a magnitude that moved. agjy owns Hyrum's Law |
 | Summing one field across 2M order records vs one column | 637f | 7.1x from where the bytes sit; 120-byte record, 64-byte cache line, no algorithm change. agjy owns the encapsulation argument and keeps `Particle` |
 | Pointer-chase latency ladder | 637f | 1.94 ns to 196 ns across working-set sizes, same instruction |

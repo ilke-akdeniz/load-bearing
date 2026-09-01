@@ -4,7 +4,7 @@
 
 **Not all Laws are the same kind of true, and the kind decides what you can do about one.**
 
-Against a theorem you can work on its assumptions, or on what you actually need from it — never on the conclusion. Against a definitional claim you can only check whether its words describe you. Against an empirical law you can measure, because the number came from somebody else's system on some other day.
+Against a theorem you can work on its assumptions, or on what you actually need from it — never on the conclusion. Against a definitional law you can only check whether its words describe you. Against an empirical law you can measure, because the number came from somebody else's system on some other day.
 
 What no kind allows is arguing with the claim. The kind tells you where you are permitted to work instead.
 
@@ -171,13 +171,15 @@ Conway's Law — that a system's structure tends to mirror the communication str
 
 ## Where the claim doesn't apply
 
-### Kind is not importance
+### Firmness is not relevance
 
-Naming the kind tells you how to argue with a claim. It says nothing about whether the claim bears on your program, and the two are independent.
+Which of the three a law is tells you how to argue with it. It tells you nothing about whether it bears on your program, and the two vary independently.
 
-Amdahl's Law is a theorem: given the fraction of work that must run serially, it bounds the speedup available from any number of processors, and none of it is negotiable. Applied to a single-threaded tool that reads a file and prints a summary, it is also irrelevant — there is no parallel portion to bound. Meanwhile the gap between a cache hit and a main-memory read is empirical, drifting, and different on your machine than in whatever you read it in — and it decides the entire architecture of a physics engine. [-- I don't get the point of this paragraph and "kind" is confusing. Is it the five kinds of claim, or three kinds of law? Are you saying that the gap between a cache hit and ... is more important for th single threaded tool? ]
+**A theorem can be irrelevant.** Amdahl's Law bounds the speedup available from any number of processors, given the fraction of work that must run serially, and none of it is negotiable. Point it at a single-threaded tool that reads a file and prints a summary and it has nothing to say, because there is no parallel portion to bound.
 
-Firmness and relevance are separate axes. [-- very cryptic, delete it unless you can unpack this to something of value and fitting.]
+**An empirical law can decide the design.** The gap between a cache hit and a main-memory read is observed rather than proved, it has moved several times in forty years, and it is different on your machine than in whatever you read it in. It also decides the entire architecture of a physics engine.
+
+Those are two different programs, and that is the point. A law nothing could refute can sit inert in one, while a number that has drifted for decades sets the shape of the other. Grading a law tells you what would move it, not how much it matters where you are standing.
 
 ### One name over a theorem and a slogan
 
@@ -202,7 +204,7 @@ Termination checking is a working field. Proof assistants reject a recursive def
 
 The cost of confusing the two is that the slogan gets used to end conversations. "We can't detect that statically, halting problem" is sometimes correct and often is not, and the difference is whether you need an answer for *all* programs or for the ones your codebase actually contains. The second is usually a solvable problem that nobody attempted.
 
-### Some claims sit between kinds [-- same kind clarity is needed]
+### Between definition and observation
 
 "Adding people to a late project makes it later" can be read as near-definitional — new people consume the time of existing people, and communication paths grow faster than headcount — or as an empirical regularity with real exceptions, which is closer to how it behaves in practice. Both readings have support.
 
@@ -242,7 +244,7 @@ The honest response is to leave the question open rather than force an answer, b
 
 The question that does the work is short: **what would have to be true for this to be false?**
 
-A theorem answers *nothing, given its assumptions* — and then you go and read them. A definitional claim answers *nothing, but the words may not describe me*. An empirical law answers *a measurement*, which you can go and take.
+A theorem answers *nothing, given its assumptions* — and then you go and read them. A definitional law answers *nothing, but the words may not describe me*. An empirical law answers *a measurement*, which you can go and take.
 
 Anything that cannot answer at all was never a Law.
 
