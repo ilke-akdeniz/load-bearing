@@ -47,7 +47,7 @@ That is the shape of every Force in this chapter. Read the intensity, not merely
 
 ### Concurrency
 
-> **How many things can be doing this at once, and do they touch the same state?**
+> **Does the system have multiple threads or processes that modify the same state?**
 
 The demonstration is above. Two things about the intensity dial are worth stating.
 
@@ -79,7 +79,7 @@ published format    as long as any       nothing. You add a second
 
 The same act — adding one field — is a different decision at each position.
 
-**At the top of the dial**, nothing is at stake, because nothing has accumulated:
+**At the top of the dial**, nothing is at stake, because nothing has accumulated. "Tip" can be added to Order easily:
 
 ```go
 type Order struct {
@@ -293,11 +293,11 @@ The second version is not free: it costs a package boundary and a constructor ca
 
 **AI coding agents sit at the extreme of both halves.** The Force asks how many people must agree and how many will still be here, and for coding agents the answer to the second is *nobody*. The model was present for no conversation and keeps nothing between sessions, and its output arrives at a volume the review step was not sized for. The Forces that would settle the decisions inside that output are facts about your situation, held by you, and they reach the agent only as far as some prompt happened to carry them.
 
-So the prediction is specific. **The migration is forced harder and sooner.** A rule that was safe in a comment at two authors is not safe in a comment at any size here, because what a comment relies on is somebody remembering the argument it summarises. What still holds is what the compiler, a constraint, or a test enforces — the far end of the migration above, reached without passing through the middle. [Chapter 22](22_never-written-down_at4r.md) takes the other half: a decision nobody stated has nothing to migrate.
+So the prediction is specific. **The migration is forced harder and sooner.** A rule that was safe in a comment at two authors is not safe in a comment at any size here, because what a comment relies on is somebody remembering the argument it summarises. What still holds is what the compiler, a constraint, or a test enforces — the far end of the migration above, reached without passing through the middle. [Chapter 22](22_never-written-down_at4r.md) takes the other half: a decision nobody stated has nothing to migrate. [-- I get this paragraph's general idea only after reading it 3 times. There to many cryptic sayings, unspecigic concepts (migration, middle, other half...) I feel that this can be replaced with more clear 3-4 sentences.]
 
 ### Latency budget
 
-> **What is the budget for this operation, and what fraction of it does one mechanism cost?**
+> **What is the time budget for this operation, and what fraction of it does one mechanism cost?**
 
 The same operation — fetching a user's record — under three different budgets:
 
@@ -312,7 +312,7 @@ user = db.query("select * from users where id = %s", user_id)
 // page finishes loading, or the slot is sold to someone else. A round
 // trip now eats most of the budget, so the design question changes from
 // "how do I fetch this" to "how stale is this allowed to be."
-// The second result, ok, is Go's comma-ok idiom: it reports whether
+// "if user, ok" is Go's comma-ok idiom: it reports whether
 // the key was found.
 if user, ok := cache.Get(userID); ok {
 	return user
@@ -364,7 +364,7 @@ The fix is to send it as a string:
 {"id": "9007199254740993"}
 ```
 
-The Force decides whether you can apply it:
+The Force decides how you can apply that fix:
 
 - **You own every client.** Change both sides, deploy together, delete the old field the same afternoon.
 - **You can see your clients.** Ship both fields, log which one each caller reads, remove the number when the count reaches zero. Weeks, and a dashboard.
@@ -378,19 +378,17 @@ Same defect, same fix, three different projects. Nothing about the code told you
 
 | Force | The question that reads it |
 |---|---|
-| Concurrency | How many at once, and do they touch the same state? |
-| Durability of the medium | How long does this outlive the code that wrote it? |
+| Concurrency | How many threads or processes at once, and do they touch the same state? |
+| Durability of the medium | How long does the medium outlive the code that wrote it? |
 | Blast radius | When it is wrong, what happens and who finds out? |
-| Change frequency and shape | How often, and how many places at a time? |
+| Change frequency and shape | How often, and how many places change at a time? |
 | Team size and turnover | How many people must agree, and how many will still be here? |
-| Latency budget | What is the budget, and what does one mechanism cost of it? |
+| Latency budget | What is the time budget, and what does one mechanism cost of it? |
 | Control of the callers | Can I change every call site, and would I know if I broke one? |
 
 ---
 
 ## Why the claim holds
-
-Three mechanisms support this chapter's claim. The third is the one that catches working teams out, because it operates without anyone touching the code.
 
 **A Force that is not evaluated is just a mood.** "It needs to scale" cannot be verified, argued with, or revisited, because it names no Force and gives no intensity. "Twelve thousand requests a minute at peak, of which about thirty are writes to the same row" reads two of them: the concurrency intensity is the thirty colliding writes, not the twelve thousand requests, and the latency budget is whatever is left of a page render after the other work. Both can be looked up, both can be wrong, and both can be checked again next year. Evaluation converts a mood into a claim, and claims can be tested.
 
