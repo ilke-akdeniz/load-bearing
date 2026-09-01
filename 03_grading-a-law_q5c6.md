@@ -16,8 +16,6 @@ What no kind allows is arguing with the claim. The kind tells you where you are 
 | **Definition** | what the words mean | nothing; the words may simply not describe you | check whether they do |
 | **Empirical law** | observed to hold, again and again | a measurement | measure it where you are |
 
-They are named rather than lettered, and the reason is the book's own: a letter has to be decoded at every use and carries nothing, while *theorem* and *definition* say what they mean at the point they appear. An ordering would be worse still — it would suggest a theorem outranks a definitional claim, and it does not. Neither can be violated. They differ in why, not in how firmly.
-
 ---
 
 ## The demonstration
@@ -83,7 +81,7 @@ The fix is not in the client at all. It is to make the charge **idempotent** —
 
 Be exact about what that fix did, because it is not the same manoeuvre as the first one.
 
-**The in-process version made assumption one false.** Memory does not lose messages, so the theorem's precondition is absent and it has nothing to say about that code. This escape is only available when you can choose not to be distributed, which is most of the time and not all of it.
+**The in-process version made assumption one false.** Memory does not lose messages, so the theorem's precondition is absent and it has nothing to say about that code. This escape is only available when you can choose not to be distributed.
 
 **Idempotency changes neither assumption.** The channel still loses replies, the client still cannot tell what happened, and exactly-once *delivery* remains impossible. What changed is on your side of the problem: you stopped needing it. The requirement was never really exactly-once delivery — it was exactly-once *effect*, and the two were quietly assumed to be the same thing. Separate them and the theorem's conclusion stops being a problem you have.
 
@@ -92,11 +90,9 @@ So a theorem admits two escapes and no third:
 - **Arrange for one of its assumptions not to hold**, and the theorem does not apply to you.
 - **Stop needing the theorem's conclusion**, and the theorem applies but costs you nothing.
 
-What you cannot do is get the forbidden thing. And the assumptions are always written down, because a proof cannot exist without them — which is why reading them is the first move, not the last.
-
 ### Definition: check whether the words apply
 
-A definitional claim is not proved so much as unpacked. Its truth is already inside its terms, so reading it feels less like learning something than like noticing something.
+A definitional law is not proved so much as unpacked. Its truth is already inside its terms, so reading it feels like noticing something.
 
 > A cache needs an invalidation strategy.
 
@@ -116,9 +112,9 @@ rate is edited in an admin screen   a bug: every process serves a stale
                                     value until someone restarts it
 ```
 
-**The move is not to argue with the claim. It is to find that its words do not describe you.** In the first case there is no cache in the strict sense — there is a precomputed value, and nothing can make it wrong. The claim is true and inert, which is [chapter 01](01_the-five-kinds_cjx4.md)'s distinction seen from underneath.
+**The move is not to argue with the claim. It is to find that its words do not describe you.** In the first case there is no cache in the strict sense — there is a precomputed value, and nothing can make it wrong. The law is true and inert, which is [chapter 01](01_the-five-kinds_cjx4.md)'s distinction seen from underneath.
 
-This is why definitional claims feel unfalsifiable without being vacuous. "Dependencies must be acyclic" is one: a cycle makes two things a single unit of comprehension, test, and change, because that is what a cycle *is* ([chapter 04](04_structure_agjy.md) works it through). You cannot violate it. You can find that the two things were never separate units, in which case nothing was violated, because nothing was joined.
+This is why definitional laws feel unfalsifiable without being vacuous. "Dependencies must be acyclic" is one: a cycle makes two things a single unit of comprehension, test, and change, because that is what a cycle *is* ([chapter 04](04_structure_agjy.md) works it through). You cannot violate it. You can find that the two things were never separate units, in which case nothing was violated, because nothing was joined.
 
 ### Empirical law: measure, because the number moved
 
@@ -128,7 +124,7 @@ First, a distinction that is easy to lose. **A measurement is not a law.** "The 
 
 Hyrum's Law is one. With enough users, every observable behaviour of your system ends up depended on, regardless of what you documented as public behaviour. ([chapter 04](04_structure_agjy.md) owns the law and what to do about it). Nothing proves it. It is a regularity about what people do, observed across languages and decades, and what varies is how fast the dependency forms and how firmly it sets.
 
-Two languages met that regularity and moved in opposite directions.
+Two languages met Hyrum's Law and moved in opposite directions.
 
 Go randomizes the order of map iteration deliberately, so that no order can be depended upon:
 
@@ -161,7 +157,7 @@ The three are not flavours of one thing. They differ in **where the claim's auth
 
 **A theorem's authority is internal.** It follows from its assumptions and nothing else, which is why evidence cannot refute it and arguing with it is a category error. It is also why the assumptions are always stated — a proof that hid them would not be a proof. That is the crack, and it is deliberate: the theorem tells you exactly where to push.
 
-**A definitional claim's authority is in its terms.** It is true because of what its words pick out, so the only question it admits is whether those words pick out anything in your program. This is why such claims are the easiest to state and the hardest to argue with, and also why they can evaporate without ever having been wrong.
+**A definitional law's authority is in its terms.** It is true because of what its words pick out, so the only question it admits is whether those words pick out anything in your program. This is why such claims are the easiest to state and the hardest to argue with, and also why they can evaporate without ever having been wrong.
 
 **An empirical law's authority is accumulated observation.** It can therefore drift, and it does. The shape of the memory hierarchy has changed several times in forty years. Team communication overhead depends on tools that did not exist when it was first counted. Repeat an empirical number long enough and it starts to sound like a theorem, which is this kind's characteristic failure.
 
@@ -179,9 +175,9 @@ Conway's Law — that a system's structure tends to mirror the communication str
 
 Naming the kind tells you how to argue with a claim. It says nothing about whether the claim bears on your program, and the two are independent.
 
-Amdahl's Law is a theorem: given the fraction of work that must run serially, it bounds the speedup available from any number of processors, and none of it is negotiable. Applied to a single-threaded tool that reads a file and prints a summary, it is also irrelevant — there is no parallel portion to bound. Meanwhile the gap between a cache hit and a main-memory read is empirical, drifting, and different on your machine than in whatever you read it in — and it decides the entire architecture of a physics engine.
+Amdahl's Law is a theorem: given the fraction of work that must run serially, it bounds the speedup available from any number of processors, and none of it is negotiable. Applied to a single-threaded tool that reads a file and prints a summary, it is also irrelevant — there is no parallel portion to bound. Meanwhile the gap between a cache hit and a main-memory read is empirical, drifting, and different on your machine than in whatever you read it in — and it decides the entire architecture of a physics engine. [-- I don't get the point of this paragraph and "kind" is confusing. Is it the five kinds of claim, or three kinds of law? Are you saying that the gap between a cache hit and ... is more important for th single threaded tool? ]
 
-Firmness and relevance are separate axes.
+Firmness and relevance are separate axes. [-- very cryptic, delete it unless you can unpack this to something of value and fitting.]
 
 ### One name over a theorem and a slogan
 
@@ -206,13 +202,11 @@ Termination checking is a working field. Proof assistants reject a recursive def
 
 The cost of confusing the two is that the slogan gets used to end conversations. "We can't detect that statically, halting problem" is sometimes correct and often is not, and the difference is whether you need an answer for *all* programs or for the ones your codebase actually contains. The second is usually a solvable problem that nobody attempted.
 
-So the useful advice is not "say which version you mean," which nobody would say out loud. It is that when a claim has a formal version and a folk version, the folk one has usually dropped a quantifier or a condition, and that is exactly where the engineering was.
-
-### Some claims sit between kinds
+### Some claims sit between kinds [-- same kind clarity is needed]
 
 "Adding people to a late project makes it later" can be read as near-definitional — new people consume the time of existing people, and communication paths grow faster than headcount — or as an empirical regularity with real exceptions, which is closer to how it behaves in practice. Both readings have support.
 
-The honest response is to leave the question open rather than force an answer, because forcing it manufactures confidence in whichever direction you picked. A claim that resists classification is telling you something about the claim.
+The honest response is to leave the question open rather than force an answer, because forcing it manufactures confidence in whichever direction you picked.
 
 ---
 
