@@ -47,7 +47,7 @@ That is the shape of every Force in this chapter. Read the intensity, not merely
 
 ### Concurrency
 
-> **Does the system have multiple threads or processes that modify the same state?**
+> **How many threads or processes can be doing this at once, and do they touch the same state?**
 
 The demonstration is above. Two things about the intensity dial are worth stating.
 
@@ -79,7 +79,7 @@ published format    as long as any       nothing. You add a second
 
 The same act — adding one field — is a different decision at each position.
 
-**At the top of the dial**, nothing is at stake, because nothing has accumulated. "Tip" can be added to Order easily:
+**At the top of the dial**, nothing is at stake, because nothing has accumulated. a `Tip` field can be added to `Order` easily:
 
 ```go
 type Order struct {
@@ -293,7 +293,7 @@ The second version is not free: it costs a package boundary and a constructor ca
 
 **AI coding agents sit at the extreme of both halves.** The Force asks how many people must agree and how many will still be here, and for coding agents the answer to the second is *nobody*. The model was present for no conversation and keeps nothing between sessions, and its output arrives at a volume the review step was not sized for. The Forces that would settle the decisions inside that output are facts about your situation, held by you, and they reach the agent only as far as some prompt happened to carry them.
 
-So the prediction is specific. **The migration is forced harder and sooner.** A rule that was safe in a comment at two authors is not safe in a comment at any size here, because what a comment relies on is somebody remembering the argument it summarises. What still holds is what the compiler, a constraint, or a test enforces — the far end of the migration above, reached without passing through the middle. [Chapter 22](22_never-written-down_at4r.md) takes the other half: a decision nobody stated has nothing to migrate. [-- I get this paragraph's general idea only after reading it 3 times. There to many cryptic sayings, unspecigic concepts (migration, middle, other half...) I feel that this can be replaced with more clear 3-4 sentences.]
+So the prediction is specific. **The rule has to be mechanically enforced from the start.** A comment works only while somebody remembers the argument behind it, and a review habit is the same bet on memory made by a larger group — neither survives a contributor who was present for no conversation and keeps nothing between sessions. What still holds is what the compiler, a constraint, or a test enforces, so the migration named above — comment, then review habit, then type system — does not run in stages here but goes straight to its last position. [Chapter 22](22_never-written-down_at4r.md) turns to rules nobody wrote down at all, which have nothing to migrate.
 
 ### Latency budget
 
@@ -312,8 +312,8 @@ user = db.query("select * from users where id = %s", user_id)
 // page finishes loading, or the slot is sold to someone else. A round
 // trip now eats most of the budget, so the design question changes from
 // "how do I fetch this" to "how stale is this allowed to be."
-// "if user, ok" is Go's comma-ok idiom: it reports whether
-// the key was found.
+// "user, ok" is Go's comma-ok idiom: the second result reports
+// whether the key was found.
 if user, ok := cache.Get(userID); ok {
 	return user
 }

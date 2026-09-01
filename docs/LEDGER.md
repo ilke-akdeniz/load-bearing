@@ -27,7 +27,7 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Forces as inputs | f4m5 | Forces are properties of the situation, not advice | "the Force is X" |
 | A Force is a dial, not a switch | f4m5 | A Force has an **intensity** — how hard it presses on the design, which is not how large the number is; the design changes several times across the range, each answer discarding the last | "read the intensity" |
 | The seven Forces | f4m5 | Concurrency, durability of the medium, blast radius, change frequency and shape, team size and turnover, latency budget, control of callers | name the Force, cite |
-| Concurrency | f4m5 | How many at once, and do they touch the same state — it binds where writers collide, not where they coexist | cite; mdbn owns the races |
+| Concurrency | f4m5 | How many threads or processes at once, and do they touch the same state — it binds where writers collide, not where they coexist | cite; mdbn owns the races |
 | Durability of the medium | f4m5 | How long what this writes outlives the code that wrote it | cite; rjf9 owns published compatibility |
 | Blast radius | f4m5 | When it is wrong, what happens and who finds out — decides how much prevention is worth | cite |
 | Change frequency and shape | f4m5 | How often, and how many places must change with it | cite; agjy owns fan-in pricing |
