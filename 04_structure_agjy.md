@@ -1,48 +1,12 @@
 # Structure: Dependency and Hiding
 
-[--overall chapter review, this chapter has good material but it's too long. The introduction drags. The claim is not ideal. And the addition just comes after the claim, "everything else people say about architecture" is too ambitious. The chapter also feels fragmented: Fake layered architecture,  dependency ranking and cycles, hyrum's law. I feel that the focus should be on dependenct ranking and cycles, that's the most original and useful stuff. Fake layered architecture could maybe be integrated into it. The Hyrum law is probably the one to left ouy completely. Recreate this chapter after considering my ideas. Don't commit your changes.]
-
 ## The claim
 
-**The dependency graph must be acyclic**, and **what a module makes observable is what it has committed to** — everything else people say about architecture is a shape or a convention layered on top of those two.
+**A change costs in proportion to how many things depend on what you changed. A cycle makes that count irreducible; an exposed surface makes it uncountable.**
 
-The first is a Law. The second is a Principle with one sharp condition. Neither of them says anything about folders.
+Acyclicity is a Law. Hiding is a Principle with one sharp condition. Neither of them says anything about folders.
 
-## Three claims wearing one name
-
-Say "we use a layered architecture" and you have made three claims at three different levels. Splitting them this way is this book's, not standard vocabulary:
-
-| Claim | Kind | Standing |
-|---|---|---|
-| If A depends on B, then B must not depend on A — directly or through any chain | **Law** | true by definition ([Ch. 03](03_grading-a-law_q5c6.md)) |
-| The parts can be stacked into layering ranks, each depending only on the rank beneath it | **Principle** | true when the graph is that shape, and often it isn't |
-| The ideal ranking, top to bottom, is `presentation → business → data`, and each rank becomes a physical boundary | **Idiom** | 1990s enterprise Java and C#, and arbitrary |
-
-Claim two is the one that needs stating carefully, because it has a loose reading and a strict one and only the strict one says anything new. Loosely — "dependencies should flow downward" — it is claim one with a picture attached.
-
-The strict reading needs the word **rank**, so here it is precisely. A rank is a whole number attached to each part, assigned by the rules:
-
-> - Parts that depend on nothing are the **bottom** rank, 1.
-> - Every other part's rank is **the rank of the topmost part it depends on, plus 1**.
-
-The bottom rank is the foundation, depends on nothing, everything rests on it. The top rank is the entry points, carrying the largest number, depending on everything beneath. `main` is at the top; `money` is at the bottom.
-
-That is all a rank is. Not a folder, not a team, not a tier of importance — a number that falls out of the arrows.
-
-Two things follow, and they are the difference between the two claims:
-
-- **Claim one is exactly the condition that ranks can be assigned at all.** Try the rule on a cycle and it never terminates: A's rank needs B's, which needs A's. Acyclic and rankable are the same property.
-- **Claim two adds that every arrow crosses exactly one rank.** Rank 4 may use rank 3. It may not reach down to rank 1, even though nothing about acyclicity forbids that. This rule is a real constraint and most systems do not satisfy it.
-
-Claim three is where the physical boundary arrives, and it varies by ecosystem in a way worth noticing. In Java and C# it was usually separate projects, assemblies, or shipped libraries; elsewhere it shows up as top-level directories or packages. What each of those forms actually enforces is not the same — a directory is a package in Go, carries no access meaning in C# until assemblies split, and enforces nothing in Python — and [chapter 20](20_idioms_7nkn.md) works through why ecosystems diverge like this.
-
-Most real architecture damage is a violation of the first. Most harm done by *architecture advocacy* comes from the third, applied to a program whose graph does not have the shape claim two describes — which then generates pass-through classes and mapping code to fill out the ranks.
-
-They are usually taught together and defended together. Separating them is the whole content of this chapter.
-
-## Reading a dependency graph
-
-Two pieces of vocabulary, because the rest of the chapter leans on them and both are usually left implicit.
+## The number
 
 **An arrow from A to B means A depends on B.** A names B, A cannot be compiled or understood without B, and deleting B breaks A. The arrow points the way the *need* runs.
 
@@ -57,23 +21,23 @@ Two pieces of vocabulary, because the rest of the chapter leans on them and both
 
 **Fan-in** is how many arrows point at you — how many things break if you change. **Fan-out** is how many you point at — how much you need in order to work at all.
 
-"Bottom" means where the arrows terminate: high fan-in, low fan-out, like `money`. Everything needs it; it needs nothing. "Top" means the entry points: low fan-in, high fan-out, like `main`. This is the sense in which the rest of the chapter says *put stable things at the bottom* — it is a claim about fan-in, not about file layout or importance.
+Fan-in is the number in the claim. A leaf with fan-in zero is free to change: nothing else can notice. Fan-in forty costs forty inspections, and it is paid on *every* change, not once.
 
-One warning, because it causes the most confusion in review: **this graph is about source-level dependency, not about who calls whom at runtime.** The two usually agree. Where they disagree, the graph is what matters, and the boundary section on inversion of control works through the case.
+Both halves of this chapter are that one number, approached from two directions.
 
-### The nodes can be anything you handle separately
+**A cycle makes it irreducible.** If A and B point at each other, each is the other's dependent. Neither can be read, tested, built, or moved without the other, and nothing short of removing an arrow changes that.
 
-The claims in this chapter are often heard as being about "layers," or about services, or about whatever unit the reader's current architecture diagram happens to use. They are not. The graph exists at every size at once:
+**Exposure makes it uncountable.** Inside your repository `grep` gives you the count, and the count tells you what a change costs. Once something is published you cannot count at all, and the real number is larger than the documented one, because people depend on what they can observe rather than on what you wrote down.
 
-```text
-functions → types → files → packages → assemblies → libraries → services
-```
+That is why direction and hiding belong in one chapter. They are the two things you control about the graph — which way the arrows point, and how many of them there are — and both are priced the same way.
 
-A cycle between two functions is the same structural fact as a cycle between two services. What changes with size is **what detects the violation** and **how much it costs**, not whether the Law binds.
+"Bottom" means where the arrows terminate: high fan-in, low fan-out, like `money`. Everything needs it; it needs nothing. "Top" means the entry points: low fan-in, high fan-out, like `main`. This is the sense in which the rest of the chapter says *put stable things at the bottom* — a claim about fan-in, not about file layout or importance.
 
-Note that "layer" is absent from that list, deliberately. A layer is a *rule about which direction arrows may go*, not a size — a layer might be one function or forty packages. Treating it as a size is how the third of the three claims above gets smuggled in.
+Two warnings, because both cause confusion in review.
 
-The one thing that does vary with size is whether the two nodes are ever handled apart, and that turns out to be the whole question of when the Law goes quiet. The boundary section returns to it.
+**This graph is about source-level dependency, not about who calls whom at runtime.** The two usually agree. Where they disagree, the graph is what matters, and the boundary section on inversion of control works through the case.
+
+**The nodes can be anything you handle separately.** The graph exists at every size at once — functions, types, files, packages, assemblies, libraries, services — and a cycle between two functions is the same structural fact as a cycle between two services. What changes with size is what detects the violation and how much it costs, not whether the Law binds. Note that "layer" is not a size on that list: a layer is a rule about which direction arrows may go, and might be one function or forty packages.
 
 ---
 
@@ -136,17 +100,13 @@ two modules, CommonJS       silently produces wrong values
 
 Six outcomes for one structural fact. Go is the strictest of these and it is still partial: it rejects an import cycle between packages and an initialization cycle between package-level variables, but two mutually recursive *functions* in one file compile without comment. The detector runs where the language happened to put a boundary.
 
-The bottom two rows are the dangerous ones, and they are worth seeing run.
-
 The Law does not care about any of this. The compiler is a partial detector operating at whatever granularity that language happens to check. **The damage is the same at every granularity; only the detection varies.**
 
 ### What the damage actually is
 
-That sentence is worth cashing out, because "damage" is doing a lot of work and most of it is not what people expect.
+Most of it is not what people expect.
 
-**First, the small part: cycles that crash.**
-
-A cycle across module boundaries can break initialization, because something has to be built first and a cycle says nothing can be. Python shows it plainly:
+**The small part: cycles that crash.** A cycle across module boundaries can break initialization, because something has to be built first and a cycle says nothing can be. Python shows it plainly:
 
 ```python
 # a.py
@@ -165,19 +125,17 @@ Import `a` first and it works — `TIMEOUT` is 12. Import `b` first and it does 
 AttributeError: module 'b' has no attribute 'LIMIT'
 ```
 
-The asymmetry is worth seeing, because it is the whole reason this bug survives. Entering through `a` means `BASE` is already set by the time `b` runs and reaches back into the half-built `a`. Entering through `b` means `a` starts running immediately, gets to `b.LIMIT` before `b` has defined it, and fails. **Same code, same machine, and the outcome is decided by which module the process happened to touch first** — so it passes every test and fails in production, where the entry point is different.
+The asymmetry is the whole reason this bug survives. Entering through `a` means `BASE` is already set by the time `b` runs and reaches back into the half-built `a`. Entering through `b` means `a` starts running immediately, gets to `b.LIMIT` before `b` has defined it, and fails. **Same code, same machine, and the outcome is decided by which module the process happened to touch first** — so it passes every test and fails in production, where the entry point is different. Move `BASE` below the `import b` line and *both* orders fail: the behaviour depends on the order of lines within a file, which is not a property anyone tracks.
 
-Note also what makes the placement of `BASE` load-bearing: move it below the `import b` line and *both* orders fail. The bug's behaviour depends on the order of lines within a file, which is not a property anyone tracks.
-
-**A worse version: cycles that produce wrong values in silence.**
-
-Node's CommonJS modules do not raise at all. A module mid-initialization hands out a partially filled `exports` object, and reads of anything not yet assigned come back `undefined`:
+**A worse version: cycles that produce wrong values in silence.** Node's CommonJS modules do not raise at all. A module mid-initialization hands out a partially filled `exports` object, and reads of anything not yet assigned come back `undefined`:
 
 ```javascript
 // a.js
 const b = require('./b');
 exports.TIMEOUT = b.LIMIT * 2;
+```
 
+```javascript
 // b.js
 const a = require('./a');
 exports.LIMIT = 5;
@@ -191,15 +149,11 @@ require b first  →  a.TIMEOUT = NaN   b.DOUBLE = NaN
 
 No exception, no stack trace, a warning on stderr that nobody reads, and a number that is wrong in a different way depending on entry order. C# and Java have the same shape in static initializers: a type initializer that re-enters itself observes its own fields at their default values, so instead of an exception you get a field silently holding zero.
 
-That class of bug is real, and the silent version is genuinely nasty. It is also the *minority* of the damage, and if it were the whole argument, "avoid cycles" would be a tip rather than a Law.
+That class of bug is real. It is also the *minority* of the damage, and if it were the whole argument, "avoid cycles" would be a tip rather than a Law.
 
-**Second, the large part: cycles that never crash at all.**
+**The large part: cycles that never crash at all.** Assume the program is correct, fast, and stable. The cost still arrives, on every future change.
 
-Assume the program is correct, fast, and stable. The cost still arrives — not at runtime, but on every future change.
-
-Take a system with two modules that depend on each other. `billing` charges merchants and needs to read a merchant's plan, which `accounts` owns. `accounts` decides whether a merchant may be suspended and needs to ask `billing` whether that merchant is behind on payments. Each genuinely needs something the other has, so each imports the other. Nothing here is broken, and no test fails.
-
-Then a ticket arrives: *make the payment retry limit configurable per merchant.*
+`billing` charges merchants and needs to read a merchant's plan, which `accounts` owns. `accounts` decides whether a merchant may be suspended and needs to ask `billing` whether that merchant is behind on payments. Each genuinely needs something the other has, so each imports the other. Nothing is broken, and no test fails. Then a ticket arrives: *make the payment retry limit configurable per merchant.*
 
 - **The test you expected to write does not exist.** To test the new retry logic you need a merchant, which needs `accounts`, which needs `billing`, which needs a database. What should have been a unit test is now an integration test with fixtures, so it is slower, flakier, and less likely to be written at all.
 - **You cannot read one without the other.** The retry code calls into `accounts`, which calls back into `billing`. Following it means holding both in your head, so the fifteen-minute change becomes a morning.
@@ -207,32 +161,119 @@ Then a ticket arrives: *make the payment retry limit configurable per merchant.*
 - **You cannot delete it.** Six months later the plan lookup is dead code, but nothing proves that, because the call graph loops.
 - **The next person adds a second path.** They read `billing`, do not understand why it calls back into `accounts`, and write their own retry limit rather than disturb it. Now there are two, and they disagree.
 
-None of that is a bug report. It shows up as estimates being wrong by a factor of five, as a refactor that gets abandoned, as a service extraction that slips two quarters. **The damage is denominated in future change, not in incorrect output** — which is exactly why it accumulates unnoticed, and why no single commit in the history looks like the culprit.
+Every one of those is the same fact in a different costume: **the unit of comprehension, of test, and of change is now `billing`+`accounts`, whatever the file layout says.** That is why this is a Law rather than a strong opinion — it is a property of graphs, restated in the vocabulary of software, and nothing about a language, a team, or a decade changes it.
 
-### The mechanism, stated once
+None of it is a bug report. It shows up as estimates being wrong by a factor of five, as a refactor that gets abandoned, as a service extraction that slips two quarters. **The damage is denominated in future change, not in incorrect output** — which is why it accumulates unnoticed, and why no single commit looks like the culprit.
 
-If A depends on B and B depends on A, four things become true at once:
+One claim at this point is usually overstated, and the honest version is narrower. A cycle does **not** spawn further cycles by itself: a third module that needs both `billing` and `accounts` can simply take both, and creates nothing new. What is mechanical is that **weight is inherited** — every new dependent of `billing` also depends on `accounts`, transitively, whether or not it names it, and cannot be compiled, tested, or extracted without both. A missing test is a static cost that does not get worse on its own. A cycle is a cost re-paid by every future dependent. That is enough to justify the Law without claiming the graph rots unattended.
 
-- **You cannot understand A without understanding B.** The unit of comprehension is A+B, whatever the file layout says.
-- **You cannot test A without B.** The unit of test is A+B.
-- **You cannot change A's contract without changing B's, which changes A's.** The unit of change is A+B.
-- **You cannot always initialize or build one before the other.** Sometimes the toolchain refuses outright; sometimes, worse, it doesn't.
+### What layering actually claims
 
-That is the whole argument, and it is why this is a Law rather than a strong opinion: it is a property of graphs, restated in the vocabulary of software. Nothing about a language, a team, or a decade changes it.
+Say "we use a layered architecture" and you have made three claims at three different levels. Splitting them this way is this book's, not standard vocabulary:
 
-### Does the damage actually spread?
+| Claim | Kind | Standing |
+|---|---|---|
+| If A depends on B, then B must not depend on A — directly or through any chain | **Law** | true by definition ([Ch. 03](03_grading-a-law_q5c6.md)) |
+| The parts can be stacked into layering ranks, each depending only on the rank beneath it | **Principle** | true when the graph is that shape, and often it isn't |
+| The ideal ranking, top to bottom, is `presentation → business → data`, and each rank becomes a physical boundary | **Idiom** | 1990s enterprise Java and C#, and arbitrary |
 
-The usual claim at this point is that dependency damage compounds — that a cycle grows on its own until nothing can be moved. That claim needs splitting, because half of it is mechanical and half of it is a habit, and only the first half is this chapter's business.
+Claim two is the one that needs stating carefully, because it has a loose reading and a strict one and only the strict one says anything new. Loosely — "dependencies should flow downward" — it is claim one with a picture attached.
 
-The reasonable objection is: if `billing` and `accounts` are tangled, why should that spread? A third module `C` that needs both can simply take both, and no new cycle is created.
+The strict reading needs the word **rank**, so here it is precisely. A rank is a whole number attached to each part, assigned by the rules:
 
-That is correct. **A cycle does not spawn further cycles by itself, and injecting both into `C` creates nothing new.** The graph does not deteriorate unattended.
+> - Parts that depend on nothing are the **bottom** rank, 1.
+> - Every other part's rank is **the rank of the topmost part it depends on, plus 1**.
 
-What *is* mechanical is narrower and still expensive: **weight is inherited.** Every new dependent of `billing` also depends on `accounts`, transitively, whether or not it names it. `C` cannot be compiled, tested, extracted, or reasoned about without both — and neither can anything that depends on `C`. The cycle's cost is now paid at every one of those sites, and that follows from the graph rather than from anyone's discipline.
+That is all a rank is. Not a folder, not a team, not a tier of importance — a number that falls out of the arrows. `main` is at the top; `money` is at the bottom.
 
-What is *not* mechanical, but is common enough to be worth naming, is that the first cycle makes placement ambiguous. Once `billing` and `accounts` are effectively one unit, the question "which of these does this new code belong in?" has no principled answer, so it gets answered by convenience — and answers by convenience produce edges in whatever direction was handy. That is a tendency the first cycle creates, not a law it enforces. Discipline resists it. Discipline cannot do anything about the inherited weight.
+Two things follow, and they are the difference between the two claims:
 
-So the honest version: a missing test is a static cost that does not get worse on its own, and a cycle is a cost that is re-paid by every future dependent. That is enough to justify the Law without claiming the graph rots by itself.
+- **Claim one is exactly the condition that ranks can be assigned at all.** Try the rule on a cycle and it never terminates: A's rank needs B's, which needs A's. Acyclic and rankable are the same property.
+- **Claim two adds that every arrow crosses exactly one rank.** Rank 4 may use rank 3. It may not reach down to rank 1, even though nothing about acyclicity forbids that. This is a real constraint and most systems do not satisfy it.
+
+Claim three is where the physical boundary arrives, and it varies by ecosystem. In Java and C# it was usually separate projects, assemblies, or shipped libraries; elsewhere it shows up as top-level directories or packages. What each form actually enforces differs — a directory is a package in Go, carries no access meaning in C# until assemblies split, and enforces nothing in Python — and [chapter 20](20_idioms_7nkn.md) works through why ecosystems diverge like this.
+
+Most real architecture damage is a violation of the first. Most harm done by *architecture advocacy* comes from the third, applied to a program whose graph does not have the shape claim two describes — which then generates pass-through classes and mapping code to fill out the ranks.
+
+### When the shape isn't a line
+
+A compiler's graph is not a line, and it is worth walking through why, because this is the case where insisting on one does visible damage.
+
+| Part | Job | Needs |
+|---|---|---|
+| `ast` | the node types — `BinaryExpr`, `IfStmt`, `FuncDecl` | nothing |
+| `parser` | source text → tree | `ast` |
+| `printer` | tree → source text | `ast` |
+| `typecheck` | walk the tree, resolve types, report errors | `ast`, `printer` |
+| `codegen` | typed tree → output | `ast`, `typecheck` |
+
+Drawn with arrows pointing down at what is needed, beside a graph that *is* a line:
+
+```text
+A LINE                    NOT A LINE
+
+rank 3   service          rank 4   codegen
+            ↓                         ↓
+rank 2    store           rank 3   typecheck
+            ↓                         ↓
+rank 1   errmap           rank 2   printer     parser
+                                      ↓           ↓
+                          rank 1      └──→ ast ←──┘
+
+                          plus two arrows that skip ranks:
+                             codegen   ──→ ast   (4 to 1)
+                             typecheck ──→ ast   (3 to 1)
+```
+
+Read these as dependency arrows, not as the order things happen in. Source text flows *forward* through parser, typecheck, and codegen at runtime; the arrows run the other way, from each part to what it needs in order to compile. That is why `codegen` sits at the top rather than at the end.
+
+Two dependencies make the shape.
+
+**`printer` depends on `ast` and on nothing else.** It is the inverse of `parser` — one turns text into a tree, the other a tree into text. Neither calls the other. Ask which is above the other and the question is empty; they are peers over a shared type.
+
+**`typecheck` depends on `printer`.** To emit `cannot use name (string) as int`, the type checker has to render the offending expression back into source text. That is printing, and there is no reason to have two implementations of it.
+
+So `ast` sits at the bottom with four things depending on it and nothing below. That is the shape you want, because `ast` is the most stable part and everything else consumes it. Adding a sixth part later — a linter, a documentation generator, a language server — costs exactly one new edge into `ast` and changes nothing that exists.
+
+Be precise about what fails here, because the graph is acyclic and ranks *can* be assigned. What fails is claim two, which requires every arrow to cross exactly one rank. Two arrows do not: `typecheck` reaches from 3 down to `ast` at 1, and `codegen` from 4 down to 1. Those are not accidents you could refactor away — every part needs the node types, which is what it means for `ast` to be the shared vocabulary.
+
+The ranks also carry no meaning. Rank 2 holds `parser` and `printer`, which have nothing in common: one reads text, the other writes it, and neither touches the other. They share a number because they are the same distance from `ast`, which is a fact about counting arrows rather than a statement about abstraction, ownership, or rate of change. There is nothing to call rank 2 — and being unable to name a rank is how you know it is an artifact of the arithmetic.
+
+Force the line anyway, and each way of doing so costs something concrete.
+
+**Option A: move printing into `ast`.**
+
+```go
+// ast now knows about formatting.
+func (e *BinaryExpr) String() string {
+	return e.X.String() + " " + e.Op.String() + " " + e.Y.String()
+}
+```
+
+The line is restored, and `ast` now owns indentation, spacing, comment preservation, and line width. Every formatting change edits the node types, and the node types are the highest-fan-in thing in the system. You have taken the part that should change least and made it the part that changes on every formatting bug.
+
+**Option B: give `typecheck` its own small printer.** Now there are two printers, and they drift. The formatter emits `x + y*2`; the error message says `x+y*2`. Users report that the compiler suggests code the formatter immediately rewrites, and the fix requires keeping both implementations in sync forever.
+
+**Option C: invent a coordinator above both.**
+
+```csharp
+// The layer that exists to hold the thing that didn't fit.
+public class CompilationService {
+    public void Compile(string source) {
+        var tree = _parser.Parse(source);
+        _typecheck.Check(tree, _printer);   // printer threaded through
+        _codegen.Emit(tree);
+    }
+}
+```
+
+The printer is now a parameter passed down through `typecheck` into every function that might report an error — four call levels deep, in service of a diagram. Nobody set out to write this; it was the only way to satisfy a shape that was wrong.
+
+It also supplies the test that catches the type, here and later in the chapter: **does this thing decide something, or does it only forward?** `CompilationService` decides nothing — every line hands work to something else. A part that forwards is not a part.
+
+All three costs come from one mistake: the real graph was a directed acyclic graph, and a line was imposed on it. The failure is not sloppiness — it is discipline applied to the wrong claim.
+
+> **Managed, acyclic dependency direction is the Law. Layering is its most common shape, not its definition.**
 
 ### Breaking the cycle
 
@@ -247,7 +288,7 @@ billing := &Billing{accounts: accounts}
 accounts.billing = billing // two-phase construction: neither can be built first
 ```
 
-That last assignment is the tell. There is now a window in which `a.billing` is nil, and nothing in the type system says when the window closes — anything running during it sees a half-built object. Moving the wiring out to a caller does not help, because it changes who *constructs*, not who *depends*: `Billing`'s type still names `Accounts`, so the compiler still needs `Accounts` in hand, the test still has to build one, and the reader still has to know both.
+That last assignment is the tell. There is now a window in which `accounts.billing` is nil, and nothing in the type system says when the window closes. Moving the wiring out to a caller does not help, because it changes who *constructs*, not who *depends*: `Billing`'s type still names `Accounts`, so the compiler still needs `Accounts` in hand, the test still has to build one, and the reader still has to know both.
 
 What removes the edge is an interface **declared by the module that needs it**:
 
@@ -268,9 +309,7 @@ The difference is not that an interface appeared. It is **which module owns it.*
 
 ### Layering, without directories
 
-FlowCore's dependency graph is a line — service, then store, then error mapping. It is also one flat Go package with no subdirectories, so nothing about the file system enforces it.
-
-The enforcement is in the type system instead.
+FlowCore's dependency graph is a line — service, then store, then error mapping. It is also one flat Go package with no subdirectories, so nothing about the file system enforces it. The enforcement is in the type system instead.
 
 ```go
 // store.go — the interface the store helpers take.
@@ -281,7 +320,7 @@ type querier interface {
 }
 ```
 
-`Begin` is absent, deliberately. Both `*pgxpool.Pool` and `pgx.Tx` satisfy this interface, so a store helper composes into either — and no store helper can start a transaction, because the type it was handed has no method to start one. Transaction control lives in the service and cannot leak downward, and that is enforced by the compiler rather than by review.
+`Begin` is absent, deliberately. Both `*pgxpool.Pool` and `pgx.Tx` satisfy this interface, so a store helper composes into either — and no store helper can start a transaction, because the type it was handed has no method to start one. Transaction control lives in the service and cannot leak downward, enforced by the compiler rather than by review.
 
 A later revision added a second tier of the same trick:
 
@@ -306,125 +345,19 @@ argument to readState: *pgxpool.Pool does not implement txQuerier
 
 `Begin` is still absent from both. `txQuerier` does not let a helper start a transaction; it lets a helper *require that its caller already did*.
 
-Two things follow, and they are the point of the example.
-
 **The layering is real and checkable.** Ask whether the lower piece compiles without the upper one: delete `catalog.go`, and `insertStepDefinition` still builds — it needs `querier`, `StepDefinition`, and `mapInsertErr`, none of which live in the service. Delete the store, and `Catalog.Create` does not build. That asymmetry *is* the layering.
 
-**None of it is expressed as directories.** The boundary that matters — who may open a transaction — is a method that is not on an interface. A folder could not have enforced it, and would have introduced a different problem instead: two representations of every entity and a mapping layer between them.
-
-So: **layer ≠ directory.** A layer is a rule about which direction calls may go. Nothing about that rule requires, implies, or is helped by a file hierarchy.
-
-### When the shape isn't a line
-
-FlowCore's graph happens to be a line. A compiler's is not, and it is worth walking through why, because this is the case where insisting on a line does visible damage.
-
-Five parts, and what each one does:
-
-| Part | Job | Needs |
-|---|---|---|
-| `ast` | the node types — `BinaryExpr`, `IfStmt`, `FuncDecl` | nothing |
-| `parser` | source text → tree | `ast` |
-| `printer` | tree → source text | `ast` |
-| `typecheck` | walk the tree, resolve types, report errors | `ast`, `printer` |
-| `codegen` | typed tree → output | `ast`, `typecheck` |
-
-FlowCore's graph, for comparison, with arrows pointing down at what is needed:
-
-```text
-A LINE
-
-rank 3     service
-              ↓
-rank 2      store
-              ↓
-rank 1      errmap
-```
-
-The compiler's, drawn the same way:
-
-```text
-NOT A LINE
-
-rank 4     codegen
-              ↓
-rank 3    typecheck
-              ↓
-rank 2     printer        parser
-              ↓              ↓
-rank 1        └───→ ast ←────┘
-
-           plus two arrows that skip ranks:
-              codegen   ──→ ast    (4 to 1)
-              typecheck ──→ ast    (3 to 1)
-```
-
-Read these as dependency arrows, not as the order things happen in. Source text flows *forward* through parser, typecheck, and codegen at runtime; the arrows here run the other way, from each part to what it needs in order to compile. That is why `codegen` sits at the top rather than the end.
-
-The two skipping arrows are pulled out on their own because they are what the rest of this section is about. The two surprising ones in the main picture are what make the shape.
-
-**`printer` depends on `ast` and on nothing else.** It is the inverse of `parser` — one turns text into a tree, the other a tree into text. Neither calls the other. Ask which is above the other and the question is empty; they are peers over a shared type.
-
-**`typecheck` depends on `printer`.** To emit `cannot use name (string) as int`, the type checker has to render the offending expression back into source text. That is printing, and there is no reason to have two implementations of it.
-
-So `ast` sits at the bottom with four things depending on it and nothing below. That is not an accident of drawing — it is the shape you want, because `ast` is the most stable part and everything else is a consumer of it. Adding a sixth part later — a linter, a documentation generator, a language server — costs exactly one new edge into `ast` and changes nothing that already exists.
-
-Be precise about what fails here, because the graph is acyclic and ranks *can* be assigned.
-
-What fails is claim two. It requires every arrow to cross **exactly one** rank, and two arrows here do not: `typecheck` reaches from 3 down to `ast` at 1, and `codegen` reaches from 4 down to `ast` at 1. Those are the reaches strict layering forbids, and they are not accidents you could refactor away — every part needs the node types, which is what it means for `ast` to be the shared vocabulary.
-
-The ranks also turn out to carry no meaning. Rank 2 holds `parser` and `printer`, which have nothing in common: one reads text, the other writes it, and neither touches the other. They share a number because they happen to be the same distance from `ast`, which is a fact about counting arrows rather than a statement about abstraction, ownership, or rate of change. There is nothing to call rank 2 — and being unable to name a rank is how you know it is an artifact of the arithmetic rather than a real division.
-
-Now force it anyway, and each way of doing so costs something concrete.
-
-**Option A: move printing into `ast`.**
-
-```go
-// ast now knows about formatting.
-func (e *BinaryExpr) String() string {
-	return e.X.String() + " " + e.Op.String() + " " + e.Y.String()
-}
-```
-
-The line is restored — `ast` is at the bottom and everyone can print. But `ast` now owns indentation, spacing, comment preservation, and line width. Every formatting change edits the node types, and the node types are the highest-fan-in thing in the system. You have taken the one part that should change least and made it the part that changes on every formatting bug.
-
-**Option B: give `typecheck` its own small printer.**
-
-Now there are two printers, and they drift. The formatter emits `x + y*2`; the error message says `x+y*2`. Users report that the compiler suggests code the formatter immediately rewrites, and the fix requires finding both implementations and keeping them in sync forever.
-
-**Option C: invent a coordinator above both.**
-
-```csharp
-// The layer that exists to hold the thing that didn't fit.
-public class CompilationService {
-    public void Compile(string source) {
-        var tree = _parser.Parse(source);
-        _typecheck.Check(tree, _printer);   // printer threaded through
-        _codegen.Emit(tree);
-    }
-}
-```
-
-The printer is now a parameter passed down through `typecheck` into every function that might report an error — four call levels deep, in service of a diagram. This is the pass-through class, and nobody set out to write it — it was the only way to satisfy a shape that was wrong.
-
-It also supplies the test that catches the type, here and later in the chapter: **does this thing decide something, or does it only forward?** `CompilationService` decides nothing — every line of it hands work to something else. A part that forwards is not a part.
-
-All three costs come from the same mistake: the real graph was a DAG, and a line was imposed on it. The failure mode is not sloppiness — it is discipline applied to the wrong claim.
-
-Sharpened:
-
-> **Managed, acyclic dependency direction is the Law. Layering is its most common shape, not its definition.**
+**None of it is expressed as directories.** The boundary that matters — who may open a transaction — is a method that is not on an interface. A folder could not have enforced it, and would have introduced a different problem instead: two representations of every entity and a mapping layer between them. A layer is a rule about which direction calls may go, and nothing about that rule requires or is helped by a file hierarchy.
 
 ### What you expose
 
-Everything so far has been about which way the arrows point. This section is about how many arrows exist at all.
-
-That is the connection between the chapter's two claims, and it is worth stating plainly because they are usually taught as separate subjects. A cycle is two arrows where there should be one. Information hiding is about not creating an arrow in the first place. Same graph, same cost: a dependency that was never created costs nothing to change, forever.
+Everything so far has been about which way the arrows point. This is about how many exist at all — the second half of the same number. A cycle is two arrows where there should be one. Information hiding is about not creating an arrow in the first place. A dependency that was never created costs nothing to change, forever.
 
 Parnas, 1972 — the founding paper, and still the clearest statement: decompose a system by what each module *hides*, not by the steps of the process it performs. The value of a module is the decision it keeps to itself, because that is the decision you can change later without telling anyone.
 
-The mechanism is fan-in again. A decision that nothing can observe has a fan-in of zero and is therefore free to change. A decision that is visible has as many dependents as care to look, and nobody tells you when someone starts looking.
+The mechanism is fan-in again. A decision that nothing can observe has a fan-in of zero and is therefore free to change. A decision that is visible has as many dependents as care to look, and nobody tells you when someone starts looking. That last point is not a guess: with enough users, every observable behaviour of a system ends up depended on regardless of what was documented, which is Hyrum's Law — [chapter 03](03_grading-a-law_q5c6.md) grades it and works through what Go and Python each did about it.
 
-This is why the export surface, not the design document, is the real API:
+So **your export surface is a liability inventory, not a feature list.** Every capital letter is a commitment you did not necessarily mean to make, and taking one back is a breaking change even if no document mentioned it. The export surface, not the design document, is the real API:
 
 ```go
 // Go: privacy is per-package, and the marker is the first letter.
@@ -467,43 +400,13 @@ func NewBilling(plans PlanLookup) *Billing {
 
 Read this version as `billing` saying: *those were never my decisions. Where plans are stored, how they are fetched, what is configured — none of that is my business. I need exactly the operations in this interface in order to decide what I actually decide, which is what to charge.*
 
-That is the resolution. Hiding is about what a *module* is coupled to, and injection reduces that: `billing` unlearned four decisions and learned one interface. What grows is what the **composition root** knows, and the composition root is one file whose entire job is knowing how the pieces fit — the one place where knowing everything is correct.
+Hiding is about what a *module* is coupled to, and injection reduces that: `billing` unlearned four decisions and learned one interface. What grows is what the **composition root** knows, and the composition root is one file whose entire job is knowing how the pieces fit — the one place where knowing everything is correct.
 
 The contradiction only survives if you read hiding as "less information anywhere." Parnas proposed something narrower: each module hides a decision, and other modules stop depending on it. Injection is how a module *declines to hold* a decision that belongs elsewhere.
-
-### Hyrum's Law
-
-**With a sufficient number of users, every observable behaviour of your system will be depended upon by somebody, regardless of what you documented.** The name comes from Hyrum Wright at Google; the observation is standard and uncontroversial.
-
-Not the documented behaviour. The observable one. Iteration order of a map that you never promised was stable. The exact wording of an error message, parsed by someone's log alert. The fact that a call currently takes 40ms, which somebody's timeout was tuned against. Whether IDs happen to be sequential.
-
-A user testing against your implementation cannot distinguish your contract from your behaviour — the running system is the only specification they have direct access to. So they encode what they observe, and after enough users, every observable is encoded somewhere.
-
-Two practical corollaries.
-
-**Any behaviour you can't afford to keep, you must prevent from being observed.** Randomizing map iteration order, as Go does, is Hyrum's Law taken seriously: the only way to keep a freedom is to make its absence impossible to depend on.
-
-**Your export surface is a liability inventory, not a feature list.** Every capital letter is a commitment you did not necessarily mean to make, and taking one back is a breaking change even if no document ever mentioned it.
-
-Worth noticing that two of the book's kinds are sitting side by side here, because the names invite confusion. Hyrum's Law is a **Law** in this book's sense — though an empirical regularity about what people do, not a theorem, which is a distinction [chapter 03](03_grading-a-law_q5c6.md) grades. What to do about it is a different claim.
-
-That claim — hide what you cannot afford to commit to — is a **Principle**, and it has a sharp condition: *you do not control your callers.* When you do control every caller — a single application, one team, one repository, one deploy — the condition weakens, and hiding starts trading against convenience rather than against catastrophe. This is why library design and application design genuinely differ, and why advice from one arrives wrong in the other. ([Chapter 02](02_forces_f4m5.md) takes control-of-callers seriously as a Force in its own right.)
 
 ---
 
 ## Why the claim holds
-
-### Both halves are fan-in
-
-Changing something costs roughly in proportion to how many things depend on it. A leaf with fan-in zero is free to change: nothing else can notice. Fan-in forty costs forty inspections, and it is paid on *every* change, not once.
-
-Both halves of this chapter are that one number, approached from two directions.
-
-**A cycle makes the number mutual, and no discipline reduces it.** If A and B point at each other, each is the other's dependent. Neither can be read, tested, built, or moved without the other, and nothing short of removing an arrow changes that.
-
-**Exposure makes the number unknowable.** Inside your repository `grep` gives you the count, and the count tells you what a change costs. Once something is published you cannot count at all — and Hyrum's Law says the real number is larger than the documented one, because people depend on what they can observe rather than on what you wrote down.
-
-That is why direction and hiding belong in one chapter. They are the only two things you control about the graph — which way the arrows point, and how many there are — and both are priced the same way.
 
 ### Stability belongs at the bottom
 
@@ -791,7 +694,7 @@ The tempting answer is a disclaimer:
 func (c *Client) UnderlyingConn() net.Conn { return c.conn }
 ```
 
-**This does not work, and the reason is in this chapter.** Hyrum's Law does not read comments. Ship that method, and people call it; once they call it, removing it breaks them, and a disclaimer changes only whose fault that is. You have exported the field and written a note saying you didn't. The freedom the comment claims to preserve was already gone the moment the method existed.
+**This does not work, and the reason is the one above.** A comment cannot stop a behaviour from being observed. Ship that method, and people call it; once they call it, removing it breaks them, and a disclaimer changes only whose fault that is. You have exported the field and written a note saying you didn't. The freedom the comment claims to preserve was already gone the moment the method existed.
 
 So the honest options are three, and none of them is a disclaimer.
 
@@ -815,7 +718,7 @@ Read it as: *you give me a function, and I will call it with the driver's own co
 
 ```go
 err := conn.Raw(func(driverConn any) error {
-	// The comma-ok form again: ok reports whether the value really was
+	// The comma-ok form: ok reports whether the value really was
 	// that type, instead of panicking when it was not.
 	pgxConn, ok := driverConn.(*pgx.Conn) // the driver's concrete type
 	if !ok {
@@ -832,7 +735,7 @@ The cost is real and worth naming: your users now write type assertions against 
 
 **Three — say no.** If serving the need would commit you to something you cannot hold across versions, "we don't support that" is a legitimate answer and a more honest one than a method with a warning label. Users who genuinely cannot proceed will fork, and a fork costs you nothing you were entitled to: it is visible, it is theirs to maintain, and it does not constrain your next release.
 
-All three have the same property, and the disclaimer is the only option that lacks it: **what the package promises is what the package can deliver.** That is the whole difference, and it is why the warning label is a marketing answer rather than an engineering one.
+All three have the same property, and the disclaimer is the only option that lacks it: **what the package promises is what the package can deliver.**
 
 ### Acyclicity discipline slows some changes down
 
@@ -918,7 +821,7 @@ The layering test applies unchanged: does this thing decide something, or does i
 - **"Partially initialized module" errors, or a static field holding zero.** The runtime version of the same cycle, and the one that reaches production.
 - **An `import` at the top of a file that surprises you.** A leaf reaching for something it should not know exists — usually the first of the two edges.
 - **An `internal` or `impl` package that everything imports.** A wall with everything on the same side of it is not a wall; the real boundary is somewhere else, unmarked.
-- **A published API whose documented and observable behaviour differ.** Hyrum's Law is already running, callers depend on the observable one, and the document is now fiction.
+- **A published API whose documented and observable behaviour differ.** Callers depend on the observable one, and the document is now fiction.
 
 **In a conversation:**
 
@@ -940,7 +843,6 @@ The first question generates folders. The second finds the cycle.
 
 - David L. Parnas, *On the Criteria To Be Used in Decomposing Systems into Modules* — Communications of the ACM 15(12), December 1972. [PDF](https://wstomv.win.tue.nl/edu/2ip30/references/criteria_for_modularization.pdf).
 - FlowCore, `docs/decisions.md` — [github.com/ilke-akdeniz/flowcore](https://github.com/ilke-akdeniz/flowcore).
-- *Hyrum's Law* — [hyrumslaw.com](https://www.hyrumslaw.com/).
 
 ---
 

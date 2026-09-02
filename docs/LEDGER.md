@@ -62,7 +62,7 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Stability, not indirection | agjy | "Depend on abstractions" means put what changes least at the bottom; an interface is not automatically that | cite |
 | Internal vs external dependent count | agjy | Inside the repo `grep` gives you the number; once published it is unknown and growing | cite |
 | From direction to surface | agjy | Cycles are about which way edges point; hiding is about how many edges exist at all | cite |
-| Information hiding / Hyrum | agjy | What is observable will be depended upon | cite |
+| Export surface is what you committed to | agjy | What is observable will be depended upon, so the export surface is the real API; q5c6 owns Hyrum's Law itself and the two languages that answered it | cite |
 | DI does not contradict hiding | agjy | Injection is a module declining to hold decisions that belong elsewhere; the composition root holds them instead | cite |
 | Hiding's condition | agjy | Information hiding is a Principle conditional on not controlling your callers | cite; the Force itself is 03's |
 | Export surface as liability | agjy | Every exported identifier is a contract; the surface is an inventory of what you can no longer change | cite |
@@ -219,7 +219,7 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Insurance that cannot pay out | 4jk6 | An abstraction bought against a future swap is shaped by the engine it was written against, sits in the code layer while the migration is a data problem, and costs the features you already run | "the premium is paid daily" |
 | Legitimate uses of an interface | agjy | Narrowing what a consumer can reach — `querier` with `Begin` absent — breaking a cycle, and declaring a seam whose shape the consumer owns. 4jk6 says in its own text that agjy owns these, and that one implementation with no planned second can be right | cite |
 | One implementation is not speculative | 4jk6 | The claim is about interfaces justified by a future substitution, not about interfaces. One implementation and no planned second can be correct, and the test is whether the reason survives without the word *later* | "without the word later" |
-| Injection is not abstraction | 4jk6 | Passing a dependency in and hiding it behind an interface are two decisions; 05 argues for the first, and only the second is the speculative one | cite |
+| Injection is not abstraction | 4jk6 | Passing a dependency in and hiding it behind an interface are two decisions; agjy argues for the first, and only the second is the speculative one | cite |
 | The interface publishes a capability | 4jk6 | `GetForUpdate` is on the interface because Postgres has row locks; SQLite cannot implement it at all, so the abstraction promoted one engine's feature to a contract with its own callers | "the method names a capability" |
 | The lowest common denominator is unknown | 4jk6 | It is the intersection of feature sets for engines nobody has chosen, so it gets approximated by superstition — `for update` is absent from SQLite, `on conflict` is not | cite |
 | Premium continuous, payout singular | 4jk6 | The cost is paid daily in small amounts by people who do not know they are paying; the payout is one future event that mostly does not occur, so experience never disconfirms the practice | "the cost and the payout arrive apart" |
@@ -381,7 +381,7 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | One function, three formattings and two namings | 9rng | All print 1745; `gofmt` rewrites the hand-formatted one and reports nothing about `a` versus `amounts`. Binaries differ, because Go's line table records position — which is why 02's test is about behaviour |
 | `(order_id,)` versus `(order_id)` | 9rng | The same trailing comma that is Style in a list is the tuple in a one-element tuple; sqlite3 answers `ProgrammingError: parameters are of unsupported type`. The boundary: one of the two apparent options never existed |
 | Unindented Python function body | 7nkn | `IndentationError` — formatting as syntax, against Go and C# where the formatter settles it |
-| `NewOrders(*sql.DB)` against `NewOrders(Repository)` | 4jk6 | Injection and abstraction as two separable decisions, with 05 arguing only for the first |
+| `NewOrders(*sql.DB)` against `NewOrders(Repository)` | 4jk6 | Injection and abstraction as two separable decisions, with agjy arguing only for the first |
 | `select … for update` refused by SQLite | 4jk6 | `OperationalError: near "for": syntax error`, beside `on conflict` succeeding — the second implementation cannot satisfy the interface, and the lowest common denominator is not the obvious list |
 | The junior developer and the export ticket | 3fjx | Same developer, same two weeks, different software — ten minutes of Force reading handed over as one paragraph |
 | "The team is responsible for designing feature X" | 3fjx | One engineer's reasoning after a shared assignment, and why none of it is unreasonable |

@@ -57,7 +57,7 @@ OperationalError: near "for": syntax error
 
 SQLite has no row-level locking to offer, so `GetForUpdate` cannot be implemented — not implemented differently, not implemented slowly, but not implemented. The method is on the interface because Postgres has the feature. **The abstraction did not abstract over the engine; it published one of the engine's capabilities as a promise to its own callers.**
 
-This is Hyrum's Law ([Ch. 04](04_structure_agjy.md)) operating on an interface you own. What leaked through became part of the contract, and it leaked from the thing you were planning to replace. The same happens to error taxonomies, to isolation-level names that mean different things in different engines, to whether a returned id is populated before or after commit, and to every timeout whose value was tuned against one planner.
+This is Hyrum's Law ([Ch. 03](03_grading-a-law_q5c6.md)) operating on an interface you own. What leaked through became part of the contract, and it leaked from the thing you were planning to replace. The same happens to error taxonomies, to isolation-level names that mean different things in different engines, to whether a returned id is populated before or after commit, and to every timeout whose value was tuned against one planner.
 
 ### The premium is paid daily
 

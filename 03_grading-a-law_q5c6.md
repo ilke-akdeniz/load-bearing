@@ -122,7 +122,7 @@ An empirical law describes the world rather than following from a proof, and the
 
 First, a distinction that is easy to lose. **A measurement is not a law.** "The 99th percentile of our search endpoint is 180 milliseconds" is empirical, and it is about one endpoint on one day on one deployment. Nothing generalizes. An empirical law has two parts: a **regularity** that holds across many systems, and a **magnitude** that varies between them. The regularity is what earns the word *law*; the magnitude is the part you have to measure locally, and the part people quote instead.
 
-Hyrum's Law is one. With enough users, every observable behaviour of your system ends up depended on, regardless of what you documented as public behaviour. ([chapter 04](04_structure_agjy.md) owns the law and what to do about it). Nothing proves it. It is a regularity about what people do, observed across languages and decades, and what varies is how fast the dependency forms and how firmly it sets.
+Hyrum's Law is one. With enough users, every observable behaviour of your system ends up depended on, regardless of what you documented as public behaviour. ([chapter 04](04_structure_agjy.md) owns what to do about it). Nothing proves it. It is a regularity about what people do, observed across languages and decades, and what varies is how fast the dependency forms and how firmly it sets.
 
 Two languages met Hyrum's Law and moved in opposite directions.
 
@@ -254,6 +254,7 @@ Anything that cannot answer at all was never a Law.
 
 ## Sources
 
+- *Hyrum's Law* — [hyrumslaw.com](https://www.hyrumslaw.com/).
 - Alan M. Turing, *On Computable Numbers, with an Application to the Entscheidungsproblem* — Proceedings of the London Mathematical Society, 1936. [PDF](https://www.cs.virginia.edu/~robins/Turing_Paper_1936.pdf).
 
 ---

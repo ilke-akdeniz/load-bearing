@@ -5324,3 +5324,62 @@ The section now works them as a labelled pair — a theorem that is inert, an em
 *Three kinds of Law* still described the *named, never lettered, and not ranked* paragraph the author cut.
 *Theorem and folk version share a name* still described the generalization cut with it, that a folk version has usually dropped a quantifier or a condition.
 That generalization is chapter 14's and is held there across eleven rows, so the deletion is the anti-repetition protocol working rather than a loss; the row now claims only the halting-problem case, which chapter 03 still works.
+
+---
+
+## 130. Chapter 04 rebuilt on fan-in, and hiding stays
+
+**Date.** 2026-09-01
+
+**Context.**
+The author's review of [chapter 04](../04_structure_agjy.md) was one tag over the whole chapter rather than a set of local edits.
+In their words: *this chapter has good material but it's too long. The introduction drags. The claim is not ideal. And the addition just comes after the claim, "everything else people say about architecture" is too ambitious. The chapter also feels fragmented: Fake layered architecture, dependency ranking and cycles, hyrum's law. I feel that the focus should be on dependenct ranking and cycles, that's the most original and useful stuff. Fake layered architecture could maybe be integrated into it. The Hyrum law is probably the one to left ouy completely.*
+
+Four facts, found before the questions were put.
+
+The chapter was **9,630 words** against a book median of 3,842 and a next-longest of 5,840, so *too long* was the outlier of the book rather than an impression.
+The claim sentence was the shape `CLAUDE.md` names as a failure — two assertions welded with *and*, plus a third clause.
+Hyrum's Law was a ledger defect: [chapter 03](../03_grading-a-law_q5c6.md) already stated it *and* used Go's map randomization as the example, with verified command output and a Python contrast that chapter 04 did not have.
+And the chapter already contained its own unifying section, *Both halves are fan-in*, sitting at 60% under *Why the claim holds* — which reframed *fragmented* from two subjects welded together into one subject whose spine arrives 5,700 words late.
+
+**The root question, and the one the tag did not raise.**
+The tag names three strands and does not mention information hiding, which was half the claim, roughly 1,700 words, and the thing five chapters cite chapter 04 for.
+
+**Options.**
+
+1. Keep both halves and lead with fan-in, so direction and exposure become two consequences of one number.
+2. Amputate hiding, leaving a chapter on ranking and cycles alone, and rehome hiding in a twenty-fourth chapter.
+
+**Decision.** Option 1, chosen by the author: *hiding stays, lead with fan-in.*
+
+**Why.**
+The unification is real and is the chapter's best idea; what was wrong was where it sat.
+Chapters 17, 18, 20, 10 and 08 cite chapter 04 for hiding as a claim in its own right, and none of them is shaped to own it.
+
+**The claim.**
+The draft proposed **A change costs in proportion to how many things depend on what you changed. A cycle makes that count irreducible; an exposed surface makes it uncountable.**
+Two sentences, one claim, the second specifying the first.
+Accepted by the author as a starting point; the title was deferred and remains *Structure: Dependency and Hiding*.
+
+Two alternatives were put and rejected in the same exchange.
+*You control two things about a dependency graph* was closest to the buried section's own wording and was dropped because *the only two things you control* is a sufficiency claim the chapter asserts and never demonstrates.
+*The dependency graph must be acyclic* alone was rejected because it demotes hiding to a consequence, which is the option the author had just declined.
+
+**On length.**
+The draft proposed a cut plan landing near 6,000 words and asked whether to go further at the cost of material other chapters cite.
+The author declined the framing: *I don't care about the length if it's earned and the chapter is solid.*
+The rewrite therefore removed what could be named as not earning its place rather than trimming to a number, and lands at **8,515**.
+
+**Consequence.**
+*Reading a dependency graph* and *Both halves are fan-in* merged into one opening section, **The number**, so fan-in is defined and identified as the spine before either half.
+The three-claims table moved out of the introduction into the demonstration as *What layering actually claims*, which is the author's fake-layering strand integrated rather than cut.
+The four abstract damage bullets, which restated the five concrete ones, became a single sentence.
+
+**What the Hyrum cut stranded.**
+Chapter 03 credited chapter 04 with *the law and what to do about it*, and now credits it with the second half only.
+Chapter 17 cited chapter 04 for the law itself and now cites 03.
+One ledger row was split the same way.
+The fourth is the one worth recording: **chapter 03 names Hyrum's Law and had no `## Sources` entry for it**, because chapter 04 carried the link — so the cut left the citation nowhere in the book, and `hyrumslaw.com` now sits in chapter 03's Sources at its order of first appearance.
+Chapter 08's reference to chapter 04 still resolves and needed nothing.
+
+Two further ledger rows, unrelated to this review, said chapter **05** argues that injection and abstraction are separable, where chapter 17 says chapter **04**; chapter 05 is *Time: Concurrency and Clocks*, so both were left over from a renumbering and now name `agjy`.
