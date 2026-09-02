@@ -1,5 +1,7 @@
 # Structure: Dependency and Hiding
 
+[--overall chapter review, this chapter has good material but it's too long. The introduction drags. The claim is not ideal. And the addition just comes after the claim, "everything else people say about architecture" is too ambitious. The chapter also feels fragmented: Fake layered architecture,  dependency ranking and cycles, hyrum's law. I feel that the focus should be on dependenct ranking and cycles, that's the most original and useful stuff. Fake layered architecture could maybe be integrated into it. The Hyrum law is probably the one to left ouy completely. Recreate this chapter after considering my ideas. Don't commit your changes.]
+
 ## The claim
 
 **The dependency graph must be acyclic**, and **what a module makes observable is what it has committed to** — everything else people say about architecture is a shape or a convention layered on top of those two.
