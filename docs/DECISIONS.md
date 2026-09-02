@@ -5383,3 +5383,41 @@ The fourth is the one worth recording: **chapter 03 names Hyrum's Law and had no
 Chapter 08's reference to chapter 04 still resolves and needed nothing.
 
 Two further ledger rows, unrelated to this review, said chapter **05** argues that injection and abstraction are separable, where chapter 17 says chapter **04**; chapter 05 is *Time: Concurrency and Clocks*, so both were left over from a renumbering and now name `agjy`.
+
+---
+
+## 131. Chapter 04 splits in two, provisionally
+
+**Date.** 2026-09-01
+
+**Context.**
+Decision 130 rebuilt chapter 04 on fan-in and kept information hiding in it.
+The author then proposed splitting the result: dependency basics, cycles and hiding in one chapter, layering in another.
+
+**The evidence that settled it** was not length.
+Counting fan-in across the five layering sections found **one mention between all of them**, and that one incidental, while the cycle and hiding material is built on fan-in end to end.
+So the chapter stated a claim about a count and then spent 2,300 words on a claim about shape.
+That is a coherence defect rather than a size one, and it is what *fragmented* was pointing at.
+
+The draft's claim from decision 130 is what made the misfit visible, and the draft did not notice it at the time — the claim was written, accepted as a starting point, and excludes a quarter of the chapter it opens.
+
+Two further facts supported the split.
+The sizes land inside the book's existing range rather than outside it: 6,274 words against a next-longest of 5,840, and 3,408 against a median of 3,842 and a shortest of 2,380.
+And the layering material satisfies the rubric alone, including the mandatory counter-example.
+
+**Decision.** Split, on the author's instruction, and **without renaming anything yet.**
+The author set the sequence: build `04a` and `04b` alongside the existing chapter 04, review them, and only then delete 04, promote 04a to 04 and 04b to 05, and update every reference.
+
+**Why the staged form.**
+Nineteen files would be renamed and roughly 150 chapter references renumbered, and `CLAUDE.md` requires renames to be their own commit.
+Doing that before the two chapters are known to be good would mean either reverting a rename or reviewing new chapters through a diff that git cannot follow.
+
+**Identifiers.** `04a` keeps **agjy**.
+It inherits the claim, the ledger rows and the incoming cross-references, so it is chapter 04 continued rather than a new chapter; `04b` is new and takes **p2vk**.
+This also means 04b's links to `04_structure_agjy.md` resolve correctly both now and after promotion.
+
+**Consequence, and a thing to watch.**
+`tools/check-drift.py` globs `[0-9][0-9]_*.md` and therefore cannot see `04a_` or `04b_`.
+Both files were checked by hand instead — no bare chapter references, every link target carrying its identifier, no paragraph appearing in both — and the same blind spot hid `23a_` during decision 124.
+
+Still owed at promotion: the TOC and its chapter count, the README's count, Part II growing to seven chapters, every navigation row from 05 onward, the ledger's `agjy` rows split against `p2vk`, and chapter 20's reference to chapter 04 for enforced boundaries, which stays with 04a by design.
