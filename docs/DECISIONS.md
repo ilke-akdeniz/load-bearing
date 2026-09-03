@@ -5492,7 +5492,28 @@ The rank rule was stated abstractly and then applied to `main` and `money` with 
 The author asked for [chapter 04](../04_structure_agjy.md)'s graph repeated here with ranks on it.
 That is the same graph annotated differently — fan-in and fan-out there, rank numbers here — which is the permitted form of a repeated example, and the text cites chapter 04 for the graph rather than reintroducing it.
 
-**Left standing, and put back to the author.**
-The review deleted *Separating the three costs you a shared word*, which was the only section pricing **this chapter's own advice** rather than pricing layering done badly.
-The two surviving cost sections both price the failure mode.
-The draft has not restored it; the question of whether the costs section should price the claim is recorded here for the author to settle.
+**The deleted cost section stays deleted.**
+The review cut *Separating the three costs you a shared word*, and the draft raised it as possibly leaving the costs section pricing only layering done badly.
+The author rejected the section on its merits: *what I read didn't feel like real cost… I have never heard somebody say that's a "layering violation" in my 20 years of dev.*
+
+Both objections hold, and the second is the smaller one.
+The quoted sentence was dialogue the draft invented and then used as its own evidence.
+The larger defect is that the cost was self-refuting: the chapter asks you to know the term carries three claims, and knowing that does not stop you saying it, so the advice never charges the bill the section described.
+Making it sound like a bill required arguing that the term's ambiguity is worth preserving, which is what the chapter spends three thousand words identifying as the harm.
+
+A second attempt failed the same way — a team deleting an architecture test because the chapter told them the Idiom has no authority, when the chapter's own boundary section and [chapter 20](../20_idioms_7nkn.md) both say to follow the convention where it fits.
+The author: *this sounds made-up as well… Try to find a real cost or give up.*
+
+**Why giving up is the right answer here, rather than a failure to look.**
+[Chapter 01](../01_the-five-kinds_cjx4.md) is the book's other classification claim and does have a costs section, renamed *What the model costs*: analysis where a default would do, a licence to dismiss, vocabulary nobody shares, false precision.
+So the shape is findable when it exists.
+Every candidate for 04b turned out to be one of two things.
+*That's just the Three-Tier Idiom* used to refuse a constraint is 01's *licence to dismiss* with one term substituted, and running the rank test where the convention would have done is 01's *analysis where a default would do* — both recaps under the ledger.
+The one that is genuinely this chapter's — that its test needs the dependency graph while the doctrine needs only the folder tree — is already in the chapter, twelve paragraphs earlier, stated as the mechanism that causes the confusion, which is the better place for it.
+
+So 04b's costs section prices the two choices the chapter actually puts in front of a reader, keeping the vocabulary and building the wall, and the claim's own costs are owned by 01.
+
+**The reusable finding.**
+Both invented costs came from starting at the rubric slot and working backwards to fill it.
+`CLAUDE.md` says a counter-example that cannot be found is evidence the claim is too vague, and has no equivalent line for costs — so the draft manufactured twice where it should have reported that it could not find one.
+A cost section that has to argue for the value of an ambiguity the chapter is against is the tell.
