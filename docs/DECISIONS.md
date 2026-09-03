@@ -5421,3 +5421,39 @@ This also means 04b's links to `04_structure_agjy.md` resolve correctly both now
 Both files were checked by hand instead — no bare chapter references, every link target carrying its identifier, no paragraph appearing in both — and the same blind spot hid `23a_` during decision 124.
 
 Still owed at promotion: the TOC and its chapter count, the README's count, Part II growing to seven chapters, every navigation row from 05 onward, the ledger's `agjy` rows split against `p2vk`, and chapter 20's reference to chapter 04 for enforced boundaries, which stays with 04a by design.
+
+---
+
+## 132. A handoff signals the next chapter; it does not state its claim
+
+**Date.** 2026-09-02
+
+**Context.**
+Two review passes over `04a` in succession found the draft restoring text the author had removed.
+
+The first was the source-level-versus-runtime sentence, dropped when the author merged two warnings into one and put back by the draft as a repair, on the ground that it set up the inversion-of-control boundary section.
+The author: *don't add the sentence about source graph vs runtime here. It breaks the rhytm and doesn't offer much value.*
+Checked on the second pass rather than argued: the inversion-of-control section makes the distinction itself, and the recognition list states it again, so the setup carried nothing the chapter needed.
+
+The second was the handoff, and it is the one worth recording.
+The author had truncated the draft's handoff to *layering adds a further claim on top of both*, and the draft added a clause back describing what that claim was.
+The author: *don't add back what I removed unless you have very good reasons. This is the place tyo signal next chapter without telling the next chapters claim nearly in full form.*
+
+**Decision.** The handoff names what the next chapter takes up and stops there.
+Stating the next chapter's claim in the handoff is over-writing, not thoroughness — the next chapter opens on its claim, and a paraphrase arriving one page early spends it.
+
+**Why this is not already covered.**
+`CLAUDE.md` says the handoff gives *what it takes up and why it follows this one*, and warns that a handoff drifts silently because it is a paraphrase by design.
+It does not set an upper bound, and the clause the draft added satisfied the existing rule while pre-empting the chapter it pointed at.
+
+A survey found no other chapter doing this.
+The book's twenty-two handoffs run from 17 to 52 words with a median of 37, and 04a's now sits at the median.
+So this was a defect in what was added rather than a pattern to sweep, and the rule below is a guard rather than a repair.
+
+**Consequence.**
+The shorter handoff is also the one that resists drift: a sentence that names a subject cannot be falsified by a later change to the next chapter's claim, and a sentence that paraphrases the claim can.
+That is the same argument `CLAUDE.md` already makes for why handoffs need checking, arriving at a way to need it less.
+
+**Open, for the author.**
+Whether this goes into `CLAUDE.md`'s rubric section as a sentence, since the handoff rule lives there and this narrows it.
+The draft has not edited that file, because the rubric is the author's.
