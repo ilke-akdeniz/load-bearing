@@ -106,7 +106,7 @@ func (b *Billing) Charge(orderID string) error {
 
 Is that a Facade? Yes. Is anything that calls several things and exposes fewer methods a Facade? Also yes. **There is no code the name forbids**, which means being told something is a Facade tells you approximately nothing about what you will find when you open the file.
 
-That is not an argument against the word existing. It is an observation that it belongs in the vocabulary bucket, not the constraint bucket — and [chapter 10](10_patterns-that-cross_r8dw.md) shows that the answer changes once the other side stops being yours, which is a different question from this one.
+That is not an argument against the word existing. It is an observation that it belongs in the vocabulary bucket, not the constraint bucket — and [chapter 11](11_patterns-that-cross_r8dw.md) shows that the answer changes once the other side stops being yours, which is a different question from this one.
 
 ### The two tests are independent
 
@@ -163,7 +163,7 @@ Some names are worth using even where they compress poorly, because they are how
 
 If you are building something that periodically stops calling a failing service, calling it a *Circuit Breaker* buys you access to two decades of people writing about half-open states, failure thresholds, and what happens when the breaker itself becomes a single point of failure. The name is a mediocre description and an excellent search term. Use it, and do not pretend it is doing the other job.
 
-**This is also the whole of what a weak name gives a learner**, which is worth saying because the opposite is widely assumed. Telling a student *this is a Facade* does not teach them when a simplified interface is the right move, what it costs, or how to design one that is pleasant to use. It teaches them a word — and if the reason behind the shape is not given alongside it, the name can make things worse, because the student now has a label and believes they have an idea. The conditions under which the shape is wrong were never mentioned, which is the mechanism [chapter 14](14_principle-loses-scope_b86v.md) traces from compressed judgement to slogan.
+**This is also the whole of what a weak name gives a learner**, which is worth saying because the opposite is widely assumed. Telling a student *this is a Facade* does not teach them when a simplified interface is the right move, what it costs, or how to design one that is pleasant to use. It teaches them a word — and if the reason behind the shape is not given alongside it, the name can make things worse, because the student now has a label and believes they have an idea. The conditions under which the shape is wrong were never mentioned, which is the mechanism [chapter 15](15_principle-loses-scope_b86v.md) traces from compressed judgement to slogan.
 
 The defensible version is narrow: a name a learner can search is a door into the discussion of when the shape fails. A name without that discussion attached is a sound they can make in a meeting.
 
@@ -194,7 +194,7 @@ The defensible version is narrow: a name a learner can search is a door into the
 **In a conversation:**
 
 - **"That should be a Repository."** Followed up with: what would that rule out that the current code does?
-- **"We're using the Strategy pattern here."** Sometimes real information. Sometimes a description of `if`, or of passing a function — [chapter 12](12_missing-language-features_esqm.md) works through the Gang of Four names that turn out to be language features once the language has them, and Strategy is the clearest case.
+- **"We're using the Strategy pattern here."** Sometimes real information. Sometimes a description of `if`, or of passing a function — [chapter 13](13_missing-language-features_esqm.md) works through the Gang of Four names that turn out to be language features once the language has them, and Strategy is the clearest case.
 - **"This doesn't follow the pattern."** Which pattern, and what makes following it correct here rather than elsewhere?
 - **A design review scored against a catalogue**, where the finding is that a named shape is absent rather than that something concrete goes wrong.
 - **A name introduced in a meeting and used as a premise by the end of it.** The gap between naming a thing and having established anything about it is where most of this goes wrong.
@@ -203,7 +203,7 @@ The question that does the work: **what does this name let me stop wondering abo
 
 If the answer is a description you no longer have to write, the name compresses. If it is a set of implementations you no longer have to check, the name constrains. If it is neither, you have been told the author had a word for it.
 
-[Chapter 10](10_patterns-that-cross_r8dw.md) takes the pattern vocabulary the two tests just filtered and shows that the answer changes once the thing on the other side stops being yours to edit — the same name that costs nothing between your own files can be a permanent obligation across a boundary you do not own.
+[Chapter 11](11_patterns-that-cross_r8dw.md) takes the pattern vocabulary the two tests just filtered and shows that the answer changes once the thing on the other side stops being yours to edit — the same name that costs nothing between your own files can be a permanent obligation across a boundary you do not own.
 
 ---
 
@@ -214,4 +214,4 @@ If the answer is a description you no longer have to write, the name compresses.
 
 ---
 
-[← Ch. 08](08_change_rjf9.md)  ·  [Contents](00_toc.md)  ·  [Ch. 10 →](10_patterns-that-cross_r8dw.md)
+[← Ch. 09](09_change_rjf9.md)  ·  [Contents](00_toc.md)  ·  [Ch. 11 →](11_patterns-that-cross_r8dw.md)

@@ -4,7 +4,7 @@
 
 **A compressed Principle carries its scope only when it names the situation it applies to. Where it doesn't, the reader has to reconstruct that scope from the surrounding context. Without that context, only the widest reading is available.**
 
-**A word on *scope*, because the book has used a different one for this.** Earlier chapters say a Principle has **conditions** — what must be true for it to hold, which is always some fact about your Forces. [Chapter 04](04_structure_agjy.md)'s information-hiding Principle has a sharp one: *you do not control your callers.*
+**A word on *scope*, because the book has used a different one for this.** Earlier chapters say a Principle has **conditions** — what must be true for it to hold, which is always some fact about your Forces. [Chapter 04](04_dependency-and-hiding_agjy.md)'s information-hiding Principle has a sharp one: *you do not control your callers.*
 
 **Scope is the same boundary seen from the other side: the situations the advice reaches.** State the conditions and you have given the scope; name the situation and you have given it too. This chapter says *scope* rather than *conditions* because it tracks what the wording carries rather than what the advice requires — and a Principle can carry that boundary either way. *Don't store money in a float* names a situation and states no condition, and it passes the test below regardless.
 
@@ -173,7 +173,7 @@ The top four are not proverbs. Nobody wrote the single responsibility principle 
 
 The bottom two are not proverbs either, and they pass. *Money* and *cgo* name situations. There is nowhere to resolve them outward to.
 
-**So the property belongs to the wording, not to the genre.** Being built for memorability makes it more likely that the situation gets left out, because a situation is the longest part and the first to go. It is not what causes the omission. [Chapters 14](14_principle-loses-scope_b86v.md), 16 and 17 are three Principles from the second column, each traced to what its wide reading produced.
+**So the property belongs to the wording, not to the genre.** Being built for memorability makes it more likely that the situation gets left out, because a situation is the longest part and the first to go. It is not what causes the omission. [Chapters 15](15_principle-loses-scope_b86v.md), 16 and 17 are three Principles from the second column, each traced to what its wide reading produced.
 
 **On what these sources are worth**, because they are not equal. Pike's talk is primary. The Go project's wiki page is an official artifact and the strongest evidence that the misreading was real enough to be worth correcting — though note that it attributes the over-use to enthusiasm rather than to the proverb, and this chapter does not claim the proverb caused it. The Reddit thread is community anecdote: one instance, dated, and useful only because the over-application is self-reported rather than attributed by somebody else. It shows the confusion exists and what shape it takes. It establishes nothing about how often, and nothing here claims otherwise.
 
@@ -185,7 +185,7 @@ Compression fixes the wording. It does not fix the scope.
 
 *Sharing memory* is two words in Pike's sentence and about a paragraph in his explanation of it. The sentence survives repetition; the paragraph does not. So what circulates is a term whose boundary was set somewhere the reader cannot see — and the reader still has to act, so they resolve it. With no context to narrow it, the widest reading is the only one available. That is why the error has a direction. Nobody reads a proverb too narrowly.
 
-**The mechanism does not care what kind of vocabulary it works on.** [Chapter 13](13_smuggled-verdicts_8y69.md)'s case is not a proverb at all. *Anemic domain model* is a verdict noun, and its author gave it a clear antecedent — you already paid for a domain model and are collecting none of the return. That antecedent is absent from every use of the term, and what circulates is the conviction.
+**The mechanism does not care what kind of vocabulary it works on.** [Chapter 14](14_smuggled-verdicts_8y69.md)'s case is not a proverb at all. *Anemic domain model* is a verdict noun, and its author gave it a clear antecedent — you already paid for a domain model and are collecting none of the return. That antecedent is absent from every use of the term, and what circulates is the conviction.
 
 Different artifact, different missing piece — an antecedent there, a situation here — and the same selection running on both. **What survives is the part that tells you what to do. What goes is the part that tells you whether to do it.**
 
@@ -208,7 +208,7 @@ Which gives the test worth keeping: **does this advice say how wide it is?**
 
 Some advice is unconditional, and then nothing is missing from the compressed form.
 
-*Gofmt's style is no one's favorite, yet gofmt is everyone's favorite* is on the same list of nineteen, and it became a norm — mandatory automatic formatting, no configuration — without incident. There is no situation in which one consistent format is wrong, so a reader who receives only the proverb has received all of it. [Chapter 13](13_smuggled-verdicts_8y69.md) reached this boundary from the other side: a compressed statement is safe exactly when its condition is *always*. [Chapter 21](21_style_9rng.md) is the general case.
+*Gofmt's style is no one's favorite, yet gofmt is everyone's favorite* is on the same list of nineteen, and it became a norm — mandatory automatic formatting, no configuration — without incident. There is no situation in which one consistent format is wrong, so a reader who receives only the proverb has received all of it. [Chapter 14](14_smuggled-verdicts_8y69.md) reached this boundary from the other side: a compressed statement is safe exactly when its condition is *always*. [Chapter 22](22_style_9rng.md) is the general case.
 
 ### A named situation is a proxy, and proxies fit badly
 
@@ -241,7 +241,7 @@ So a proverb about the board can accumulate a stable scope, while a proverb abou
 
 This chapter ends in repair, which is why it does not claim that a Principle stripped of its scope stays that way. The scope was rebuilt three times here: officially, in a wiki page with a table; informally, by strangers answering a question; and by the source himself, in a talk given to supply a distinction he had left out.
 
-Where that does not happen — where the wide reading hardens and nobody writes the page — you get what [chapter 22](22_never-written-down_at4r.md) calls a folk remedy. [Chapters 14](14_principle-loses-scope_b86v.md), 16 and 17 are three cases that travelled further than this one did.
+Where that does not happen — where the wide reading hardens and nobody writes the page — you get what [chapter 23](23_never-written-down_at4r.md) calls a folk remedy. [Chapters 15](15_principle-loses-scope_b86v.md), 16 and 17 are three cases that travelled further than this one did.
 
 ---
 
@@ -271,7 +271,7 @@ Where that does not happen — where the wide reading hardens and nobody writes 
 **In a conversation:**
 
 - **A saying offered as the end of a discussion.** The useful follow-up is not *I disagree* but *how would we apply that here, concretely, and what would it improve?* — which is answerable from the code in front of you, where a dispute about the saying is not.
-- **"That's just how it's done here."** Sometimes a real Idiom with reasons behind it ([Ch. 20](20_idioms_7nkn.md)), sometimes a wide reading nobody has revisited. One question separates them.
+- **"That's just how it's done here."** Sometimes a real Idiom with reasons behind it ([Ch. 21](21_idioms_7nkn.md)), sometimes a wide reading nobody has revisited. One question separates them.
 - **An appeal to who said it.** The credibility is usually genuine and answers a question nobody asked: it suggests the original observation was sound, and says nothing about whether the version that reached you still contains it.
 - **Anyone, including this book, saying a practice always applies.**
 
@@ -279,7 +279,7 @@ The question that does the work: **what did the person who said this go on to sa
 
 If the source can be reached, go and look. The scope is often still there, in the forty seconds after the sentence, in the talk nobody re-watched.
 
-[Chapter 15](15_behaviour-placement_z47a.md) is the first of the three cases — object orientation's advice about where behaviour belongs, and the references that appear in both directions once two rules are placed by it.
+[Chapter 16](16_behaviour-placement_z47a.md) is the first of the three cases — object orientation's advice about where behaviour belongs, and the references that appear in both directions once two rules are placed by it.
 
 ---
 
@@ -298,4 +298,4 @@ If the source can be reached, go and look. The scope is often still there, in th
 
 ---
 
-[← Ch. 13](13_smuggled-verdicts_8y69.md)  ·  [Contents](00_toc.md)  ·  [Ch. 15 →](15_behaviour-placement_z47a.md)
+[← Ch. 14](14_smuggled-verdicts_8y69.md)  ·  [Contents](00_toc.md)  ·  [Ch. 16 →](16_behaviour-placement_z47a.md)

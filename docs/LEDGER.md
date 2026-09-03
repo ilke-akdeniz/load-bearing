@@ -54,9 +54,9 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Injection vs inversion | agjy | Injection decides who constructs; inversion decides who declares the interface, and only inversion turns an arrow around | cite |
 | Two-phase construction | agjy | `a := &A{}; b := &B{a}; a.b = b` is the construction site admitting the cycle | cite |
 | Cycle detection is granularity-bound | agjy | Each toolchain checks the boundaries it happens to have; the damage exists at all of them | cite |
-| "Layered" is three claims | agjy | Acyclicity (Law) + the line shape (Principle) + the folder taxonomy (Idiom), under one name | "the three claims" |
-| Layering as ranks | agjy | Strict layering assigns every part a rank and forbids reaching past the one beneath it | one clause, cite |
-| Layer ≠ directory | agjy | A layer is a rule about call direction; a folder is neither necessary nor sufficient for it | cite; 4jk6 owns what folders *cost*, and no chapter may say the physical forms enforce the same thing — 18's claim is that they do not |
+| "Layered" is three claims | p2vk | The Acyclicity Law, the Ranking Principle and the Three-Tier Idiom, under one name | "the three claims" |
+| Layering as ranks | p2vk | Strict layering assigns every part a rank and forbids reaching past the one beneath it | one clause, cite |
+| Layer ≠ directory | p2vk | A layer is a rule about call direction; a folder is neither necessary nor sufficient for it | cite; 4jk6 owns what folders *cost*, and no chapter may say the physical forms enforce the same thing — 18's claim is that they do not |
 | Cost of change scales with dependents | agjy | Change cost is proportional to fan-in, and is paid on every change | cite |
 | Stability, not indirection | agjy | "Depend on abstractions" means put what changes least at the bottom; an interface is not automatically that | cite |
 | Internal vs external dependent count | agjy | Inside the repo `grep` gives you the number; once published it is unknown and growing | cite |
@@ -66,12 +66,12 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Hiding's condition | agjy | Information hiding is a Principle conditional on not controlling your callers | cite; the Force itself is 03's |
 | Export surface as liability | agjy | Every exported identifier is a contract; the surface is an inventory of what you can no longer change | cite |
 | A disclaimer is not a boundary | agjy | An "unsupported" export is still an export — Hyrum's Law does not read comments | cite |
-| Claim two, loose vs strict | agjy | "Dependencies flow downward" is claim one restated; the strict rank rule is what most systems fail | cite |
+| The Ranking Principle, loose vs strict | p2vk | "Dependencies flow downward" is the Acyclicity Law restated; the strict rank rule is what most systems fail | cite |
 | Graph vocabulary | agjy | Arrow = depends on; fan-in = who breaks if you change; bottom = high fan-in, low fan-out | cite |
 | The graph exists at every size | agjy | Functions through services; size changes what detects a violation, not whether the Law binds | cite |
 | Four ways to break a cycle | agjy | Interface / event / third module / identifier — four different bills, chosen deliberately | cite |
 | Dependency inversion | agjy | The call may go up while the dependency goes down, because both parties point at an interface at the bottom | cite |
-| Lower layer more capable | agjy | Layering doctrine assumes the layer below is dumber; when it is more capable, "keep logic out" inverts | cite |
+| Lower layer more capable | p2vk | Layering doctrine assumes the layer below is dumber; when it is more capable, "keep logic out" inverts | cite |
 | There is no shared now | mdbn | A check reports the past; across machines there is no agreed ordering at all | "no shared now" |
 | Three conditions for a race | mdbn | Another writer, a decision that depends on the read, and a rule spanning data you did not hold still — all three, or nothing to fix | cite |
 | The three ordinary fixes | mdbn | One operation; let the data-holder enforce; or do not check and handle the failure | cite |
@@ -216,7 +216,7 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Stability comes from plurality | 4jk6 | The source's reason an abstraction is stable is that many implementations depend on it — so a one-implementation interface fails the principle's own test while carrying its name | "stability needs dependents" |
 | The caveat was printed and still lost | 4jk6 | Martin's last paragraph says the standard may suit only certain applications and that he would regret unconditional conformance — 15's mechanism on advice whose scope was written down, not merely spoken | cite |
 | Insurance that cannot pay out | 4jk6 | An abstraction bought against a future swap is shaped by the engine it was written against, sits in the code layer while the migration is a data problem, and costs the features you already run | "the premium is paid daily" |
-| Legitimate uses of an interface | agjy | Narrowing what a consumer can reach — `querier` with `Begin` absent — breaking a cycle, and declaring a seam whose shape the consumer owns. 4jk6 says in its own text that agjy owns these, and that one implementation with no planned second can be right | cite |
+| Legitimate uses of an interface | agjy | Narrowing what a consumer can reach — `PlanLookup` exposing one method — breaking a cycle, and declaring a seam whose shape the consumer owns. 4jk6 says in its own text that agjy owns these, and that one implementation with no planned second can be right  p2vk carries the `querier`/`txQuerier` version, where the narrowing is the layering | cite |
 | One implementation is not speculative | 4jk6 | The claim is about interfaces justified by a future substitution, not about interfaces. One implementation and no planned second can be correct, and the test is whether the reason survives without the word *later* | "without the word later" |
 | Injection is not abstraction | 4jk6 | Passing a dependency in and hiding it behind an interface are two decisions; agjy argues for the first, and only the second is the speculative one | cite |
 | The interface publishes a capability | 4jk6 | `GetForUpdate` is on the interface because Postgres has row locks; SQLite cannot implement it at all, so the abstraction promoted one engine's feature to a contract with its own callers | "the method names a capability" |
@@ -305,14 +305,14 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | `querier` / `txQuerier` | agjy | Dependency direction enforced by the type system rather than by directories; `Begin` absent by design |
 | Python partially-initialized module | agjy | The runtime face of a cycle: same code, outcome depends on which module was imported first |
 | `billing` ↔ `accounts` | agjy | The chapter's running cycle: the change-cost scenario, two-phase construction, `PlanLookup`, and the four currencies |
-| Compiler five parts, and three ways to force a line | agjy | An acyclic graph that is not a line; `ast` at the bottom with fan-in 4; and what options A/B/C each cost |
+| Compiler five parts, and three ways to force a line | p2vk | An acyclic graph that is not a line; `ast` at the bottom with fan-in 4; and what options A/B/C each cost |
 | `Money` vs `IUserService` | agjy | "Depend on abstractions" is about stability, not about the interface keyword |
 | `Conn.Raw` vs a disclaimed accessor | agjy | Hiding's bill: the scoped callback keeps a promise the package can hold; the disclaimer does not |
-| `LoggingOrderService` vs middleware | agjy | A cross-cutting concern made into a layer; per-method forwarding tax. esqm owns Decorator-as-composition |
+| `LoggingOrderService` vs middleware | p2vk | A cross-cutting concern made into a layer; per-method forwarding tax. esqm owns Decorator-as-composition |
 | Mutually recursive `parseExpr`/`parseTerm` | agjy | A cycle that costs nothing, because the two were never separate units |
 | `Particle` class vs ECS parallel arrays | agjy | Hiding inverted by cache layout — the Principle turns over while the Law holds. dnkz may cite for the domain, 637f owns the arithmetic |
 | `net/http` `Handler` | agjy | Call up, dependency down — the legitimate version of an apparent violation |
-| `completed_at is null` gate | agjy | The lower layer is more capable, so layering doctrine inverts. mdbn owns the race it closes |
+| `completed_at is null` gate | p2vk | The lower layer is more capable, so layering doctrine inverts. mdbn owns the race it closes |
 | Sign-up handler, 50 accounts for one email | mdbn | Check-then-act with realistic work in the window; every step individually locked |
 | 1000 increments producing 967 | mdbn | The lost-update race, and a different wrong answer each run |
 | `os.path.exists` then `open` | mdbn | TOCTOU in its original filesystem sense — same shape, no database involved |

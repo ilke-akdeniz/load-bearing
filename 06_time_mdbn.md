@@ -378,7 +378,7 @@ This is not permission to leave races in. It is the observation that "remove the
 
 Clocks do not order events *across machines*. Within one process, a monotonic counter, a mutex-protected sequence, or the database's own transaction ordering gives you a real order at negligible cost, and a great many systems need no more than that.
 
-The failure is importing distributed-systems machinery — vector clocks, causal metadata, conflict-free replicated types — into a system with one database that already provides ordering for free. [Chapter 06](06_distribution_49yh.md) works through where that machinery genuinely becomes necessary.
+The failure is importing distributed-systems machinery — vector clocks, causal metadata, conflict-free replicated types — into a system with one database that already provides ordering for free. [Chapter 07](07_distribution_49yh.md) works through where that machinery genuinely becomes necessary.
 
 ---
 
@@ -406,7 +406,7 @@ The failure is importing distributed-systems machinery — vector clocks, causal
 - **`select … for update` missing from a read whose value is about to be written back.**
 - **Last-write-wins on a wall-clock timestamp**, deciding which of two concurrent updates survives. The winner is whoever's clock was ahead.
 - **A timestamp column used to order events from more than one machine**, especially one populated by the application rather than the database.
-- **Retry logic without idempotency**, which turns one race into several ([Ch. 06](06_distribution_49yh.md)).
+- **Retry logic without idempotency**, which turns one race into several ([Ch. 07](07_distribution_49yh.md)).
 - **A mutex in a program with one goroutine**, which usually means the last person could not name the second writer either.
 
 **In a conversation:**
@@ -421,7 +421,7 @@ The question that does the work: **what could have changed between the moment I 
 
 If the answer is *nothing, because nothing else writes here*, the Law is inert and you are done. If it is *anything at all*, you do not have a check — you have a guess with good manners.
 
-[Chapter 06](06_distribution_49yh.md) takes the same problem across machines, where coordination stops being expensive and starts being impossible — and works through what has been proved unachievable, along with the engineering that exists because of it.
+[Chapter 07](07_distribution_49yh.md) takes the same problem across machines, where coordination stops being expensive and starts being impossible — and works through what has been proved unachievable, along with the engineering that exists because of it.
 
 ---
 
@@ -433,4 +433,4 @@ If the answer is *nothing, because nothing else writes here*, the Law is inert a
 
 ---
 
-[← Ch. 04](04_structure_agjy.md)  ·  [Contents](00_toc.md)  ·  [Ch. 06 →](06_distribution_49yh.md)
+[← Ch. 05](05_layering_p2vk.md)  ·  [Contents](00_toc.md)  ·  [Ch. 07 →](07_distribution_49yh.md)

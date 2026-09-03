@@ -99,7 +99,7 @@ Those 175 were bought rather than incurred. Rob Pike lists locking the language 
 
 This does not contradict the argument above, because it is the same rule. *Once published, it is forever* holds exactly as stated, and Pike is not arguing with it — he is reporting what happens when you accept it early. The difference is timing. A team that discovers the rule after it has users has no choice left to make. Go's team took it at 1.0, while declining was still available, wanting the effect that permanence has on what gets added in the first place. The 175 deprecations are what the promise cost them; a language that stayed small is what they were buying.
 
-[Chapter 04](04_structure_agjy.md) covers the other half of this problem: users depend on behaviour you never documented, so the surface you are committed to is larger than the one you published.
+[Chapter 04](04_dependency-and-hiding_agjy.md) covers the other half of this problem: users depend on behaviour you never documented, so the surface you are committed to is larger than the one you published.
 
 ### The organization ends up in the software
 
@@ -169,7 +169,7 @@ The honest form: let the problem decide how many parts there are, then make sure
 
 **Brooks's Law**, from Fred Brooks in 1975: adding people to a late software project makes it later.
 
-The arithmetic underneath it is the same one behind [chapter 07](07_scale_637f.md)'s reversal. Any two people on a team may need to coordinate, so the number of pairs is `n(n−1)/2`:
+The arithmetic underneath it is the same one behind [chapter 08](08_scale_637f.md)'s reversal. Any two people on a team may need to coordinate, so the number of pairs is `n(n−1)/2`:
 
 ```text
  people   pairs   paths the new person adds
@@ -312,7 +312,7 @@ The question that does the work: **how long am I going to live with this, and wh
 
 A day and nobody — do whatever is quickest. A decade and strangers — that is the other end of the range, and it is worth an afternoon of argument now, because there will not be a second chance to have it cheaply.
 
-Part III turns from laws to patterns, starting with the question the whole part depends on — [what a pattern is actually for](09_what-a-pattern-is-for_3xzc.md), and the two tests that separate a pattern name carrying real information from one that only sounds like it does.
+Part III turns from laws to patterns, starting with the question the whole part depends on — [what a pattern is actually for](10_what-a-pattern-is-for_3xzc.md), and the two tests that separate a pattern name carrying real information from one that only sounds like it does.
 
 ---
 
@@ -327,4 +327,4 @@ Part III turns from laws to patterns, starting with the question the whole part 
 
 ---
 
-[← Ch. 07](07_scale_637f.md)  ·  [Contents](00_toc.md)  ·  [Ch. 09 →](09_what-a-pattern-is-for_3xzc.md)
+[← Ch. 08](08_scale_637f.md)  ·  [Contents](00_toc.md)  ·  [Ch. 10 →](10_what-a-pattern-is-for_3xzc.md)

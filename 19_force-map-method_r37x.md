@@ -58,13 +58,13 @@ Nothing in that table is a design decision. Every cell is a fact somebody could 
 
 Now run advice the book has already graded across all four, and watch it change value.
 
-**Make illegal states unrepresentable** ([Ch. 11](11_patterns-that-survive-translation_us2k.md)). For the ledger this is worth a type and a constructor per rule: durability is decades, so a bad row outlives every engineer who could explain it, and being wrong costs money. For the script it is waste — an invalid state cannot outlive the afternoon, and the re-run is the recovery. The Force that moved is durability.
+**Make illegal states unrepresentable** ([Ch. 12](12_patterns-that-survive-translation_us2k.md)). For the ledger this is worth a type and a constructor per rule: durability is decades, so a bad row outlives every engineer who could explain it, and being wrong costs money. For the script it is waste — an invalid state cannot outlive the afternoon, and the re-run is the recovery. The Force that moved is durability.
 
-**Hide the representation** ([Ch. 04](04_structure_agjy.md)). For the library this is the central obligation: control of callers is *none*, so anything observable becomes a commitment you cannot withdraw. For the simulator it inverts — the memory layout *is* the design, and hiding it costs the frame budget, which is the entity-component case [chapter 04](04_structure_agjy.md) works through. The Force that moved is the latency budget, and it moved far enough to flip a Principle rather than weaken it.
+**Hide the representation** ([Ch. 04](04_dependency-and-hiding_agjy.md)). For the library this is the central obligation: control of callers is *none*, so anything observable becomes a commitment you cannot withdraw. For the simulator it inverts — the memory layout *is* the design, and hiding it costs the frame budget, which is the entity-component case [chapter 04](04_dependency-and-hiding_agjy.md) works through. The Force that moved is the latency budget, and it moved far enough to flip a Principle rather than weaken it.
 
-**Compatibility is add-only** ([Ch. 08](08_change_rjf9.md)). For the library this binds absolutely: you cannot deploy other people's software, so a removed field is a permanent break in code you will never see. For the ledger and the script it does not bind at all, because you control every caller and can change them in the same commit. The Force that moved is control of the callers, and note that it did not weaken the rule anywhere — it removed it, and a rule that does not apply is not a rule you get partial credit for following.
+**Compatibility is add-only** ([Ch. 09](09_change_rjf9.md)). For the library this binds absolutely: you cannot deploy other people's software, so a removed field is a permanent break in code you will never see. For the ledger and the script it does not bind at all, because you control every caller and can change them in the same commit. The Force that moved is control of the callers, and note that it did not weaken the rule anywhere — it removed it, and a rule that does not apply is not a rule you get partial credit for following.
 
-**One writer, no coordination** ([Ch. 05](05_time_mdbn.md)). For the simulator this is the design: each system owns its arrays, nothing else writes them, and the coordination cost falls to zero — which is the only way the frame budget survives extreme concurrency. For the ledger it is unavailable. Many clients write the same rows and none of them can be made to stop, so the concurrency has to be paid for rather than removed. Same Force at a similar value, opposite answers, because what differs is whether you control who writes.
+**One writer, no coordination** ([Ch. 06](06_time_mdbn.md)). For the simulator this is the design: each system owns its arrays, nothing else writes them, and the coordination cost falls to zero — which is the only way the frame budget survives extreme concurrency. For the ledger it is unavailable. Many clients write the same rows and none of them can be made to stop, so the concurrency has to be paid for rather than removed. Same Force at a similar value, opposite answers, because what differs is whether you control who writes.
 
 Every difference above traces to a cell in the table, which means each one can be checked instead of argued.
 
@@ -120,7 +120,7 @@ The *deferred* line is a decision, not a gap. Completion-path locking is not mis
 
 And *revisit if* is what makes the map outlive the decision. Forces move on their own clock, and a codebase does not announce it when they do. This line converts that into something a person can search for.
 
-**None of which is a new artifact.** [Chapter 11](11_patterns-that-survive-translation_us2k.md) lists the architecture decision record among the patterns that answer team size and turnover — the reasoning written down while it was fresh, for the people who were not in the room. A force map is what an ADR's first section already asks for, and the original template says so in the book's own vocabulary. Michael Nygard's, from 2011: the Context section *"describes the Forces at play, including technological, political, social, and project local."*
+**None of which is a new artifact.** [Chapter 12](12_patterns-that-survive-translation_us2k.md) lists the architecture decision record among the patterns that answer team size and turnover — the reasoning written down while it was fresh, for the people who were not in the room. A force map is what an ADR's first section already asks for, and the original template says so in the book's own vocabulary. Michael Nygard's, from 2011: the Context section *"describes the Forces at play, including technological, political, social, and project local."*
 
 His reason for the practice is this chapter's argument in different words. Without the rationale, whoever arrives later is left either accepting decisions that may no longer apply, or reversing them without knowing what they cost.
 
@@ -139,7 +139,7 @@ Most Principles in a codebase were not derived there. They arrived with a framew
 
 The test is one question, and it is the reverse of the derivation: **what would have to be true for this to be unnecessary?**
 
-If the answer comes back concrete — *if only one process ever wrote to this table* — you have found the Force, and you can go and look at whether it holds. If the answer is *nothing, it is just good practice*, the Principle arrived without its conditions and nobody in the room can say what it is for. That is [chapter 14](14_principle-loses-scope_b86v.md)'s mechanism, detected from inside your own codebase rather than in a talk.
+If the answer comes back concrete — *if only one process ever wrote to this table* — you have found the Force, and you can go and look at whether it holds. If the answer is *nothing, it is just good practice*, the Principle arrived without its conditions and nobody in the room can say what it is for. That is [chapter 15](15_principle-loses-scope_b86v.md)'s mechanism, detected from inside your own codebase rather than in a talk.
 
 The failure has a shape worth naming. Inherited Principles cluster: a codebase does not carry a single one, it carries the whole set that travelled together from similar sources. Finding one unforced principle is a reason to look at its neighbours.
 
@@ -151,7 +151,7 @@ What the map does is make the decision smaller. Five moves, roughly in the order
 
 **Check that both Forces are at the values you assumed.** Conflicts dissolve under measurement more often than they get resolved. *Low latency* is a budget with a number; *durability* is a retention period someone can name.
 
-**Look for the third option.** Most conflicts are between two implementations rather than two requirements. Durability against latency is irreconcilable if the choice is *write to disk synchronously* versus *do not*; it often dissolves at *write to a log and acknowledge*, which is [chapter 06](06_distribution_49yh.md)'s outbox reasoning applied one level down.
+**Look for the third option.** Most conflicts are between two implementations rather than two requirements. Durability against latency is irreconcilable if the choice is *write to disk synchronously* versus *do not*; it often dissolves at *write to a log and acknowledge*, which is [chapter 07](07_distribution_49yh.md)'s outbox reasoning applied one level down.
 
 **Ask which direction is reversible.** [Chapter 02](02_forces_f4m5.md)'s rule decides this: if one branch is cheap to walk back and the other is not, take the reversible one and buy information. That is not a compromise; it is choosing to decide later with more facts, which is a different thing.
 
@@ -205,7 +205,7 @@ Sometimes the platform, the contract, or the existing schema leaves one thing yo
 
 **It requires the expertise it appears to replace.** This is the condition to state most harshly, because the method reads like a substitute for experience and is the opposite. Most of that expertise goes into step one, for the reason given earlier: reading a Force is a judgement about which facts matter to the decision in front of you, not a measurement. Deriving *idempotency follows from at-least-once delivery* requires already knowing what at-least-once delivery implies. Reading a latency budget as a Force requires knowing what a mechanism costs. The method organizes knowledge you have; it does not supply knowledge you lack, and a force map produced by someone who cannot price the options is a confident-looking document with the wrong cells filled in.
 
-The same holds wherever the method is run with an AI coding agent in the loop, which [chapter 22](22_never-written-down_at4r.md) takes in full: overriding a recommendation is only possible for someone who can tell that it is a convention rather than a consequence, and that scales with depth in the specific domain.
+The same holds wherever the method is run with an AI coding agent in the loop, which [chapter 23](23_never-written-down_at4r.md) takes in full: overriding a recommendation is only possible for someone who can tell that it is a convention rather than a consequence, and that scales with depth in the specific domain.
 
 **It costs real time per decision, and pays only under specific Forces.** FlowCore carries thirty-eight recorded decisions for roughly five thousand lines. That ratio is justified by durability: those are schema decisions that outlive the code. On a script with a known death date the same ratio is waste, and saying so is not a hedge — it is the method applied to itself.
 
@@ -228,14 +228,14 @@ The same holds wherever the method is run with an AI coding agent in the loop, w
 
 - **"That's the standard approach."** True and irrelevant until someone says which force it answers. The useful reply names one: *standard where the callers are strangers — are ours?*
 - **"We might need to scale."** *Scale* is not a Force; [chapter 02](02_forces_f4m5.md) splits it into steady load, bursts and data volume, which have different designs. The question is which one, at what number.
-- **"Let's keep it flexible."** Flexible against what? Flexibility is bought against a specific change, and a change nobody can name is not one you can prepare for ([Ch. 17](17_abstraction-as-insurance_4jk6.md)).
+- **"Let's keep it flexible."** Flexible against what? Flexibility is bought against a specific change, and a change nobody can name is not one you can prepare for ([Ch. 18](18_abstraction-as-insurance_4jk6.md)).
 - **A design debate still running after ten minutes.** Write the Forces down instead. It ends more of these arguments than continuing them does.
 
 The question that does the work: **which fact about our situation would have to change for this to be the wrong choice?**
 
-Ask it of your own decisions and it produces the force map as a by-product. Ask it of advice arriving from outside and it is the same question [chapter 14](14_principle-loses-scope_b86v.md) ends on, pointed at the present rather than at a source. If there is no answer — if no fact about the situation could make the choice wrong — then what you are holding is not a design decision, and finding out which of the five kinds it actually is takes one pass through [chapter 01](01_the-five-kinds_cjx4.md).
+Ask it of your own decisions and it produces the force map as a by-product. Ask it of advice arriving from outside and it is the same question [chapter 15](15_principle-loses-scope_b86v.md) ends on, pointed at the present rather than at a source. If there is no answer — if no fact about the situation could make the choice wrong — then what you are holding is not a design decision, and finding out which of the five kinds it actually is takes one pass through [chapter 01](01_the-five-kinds_cjx4.md).
 
-[Chapter 19](19_six-profiles_dnkz.md) runs the method across six force profiles and finds that the Forces each one pins invert a piece of standard advice — not weaken it, invert it, so that the thing to do is the opposite of what the advice says.
+[Chapter 20](20_six-profiles_dnkz.md) runs the method across six force profiles and finds that the Forces each one pins invert a piece of standard advice — not weaken it, invert it, so that the thing to do is the opposite of what the advice says.
 
 ---
 
@@ -246,4 +246,4 @@ Ask it of your own decisions and it produces the force map as a by-product. Ask 
 
 ---
 
-[← Ch. 17](17_abstraction-as-insurance_4jk6.md)  ·  [Contents](00_toc.md)  ·  [Ch. 19 →](19_six-profiles_dnkz.md)
+[← Ch. 18](18_abstraction-as-insurance_4jk6.md)  ·  [Contents](00_toc.md)  ·  [Ch. 20 →](20_six-profiles_dnkz.md)

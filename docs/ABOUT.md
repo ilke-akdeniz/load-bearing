@@ -14,7 +14,7 @@ Each chapter follows this shape:
 6. **How to recognize the failure** — what it looks like in a real codebase when someone got this wrong.
 
 **Part IV is the exception.**
-[Chapters 15](../15_behaviour-placement_z47a.md), [16](../16_tdd-and-mocks_u8eu.md) and [17](../17_abstraction-as-insurance_4jk6.md) are case studies in [chapter 14](../14_principle-loses-scope_b86v.md)'s claim rather than claims of their own.
+[Chapters 16](../16_behaviour-placement_z47a.md), [17](../17_tdd-and-mocks_u8eu.md) and [18](../18_abstraction-as-insurance_4jk6.md) are case studies in [chapter 15](../15_principle-loses-scope_b86v.md)'s claim rather than claims of their own.
 So each opens on the advice as it actually travels and on what its source said, and its mandatory counter-example asks when following the compressed version is right — the same rule, framed for a chapter that makes no claim to bound.
 
 The argument's last paragraph hands off to the next chapter, written as prose with no label.

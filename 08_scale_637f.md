@@ -58,7 +58,7 @@ The result is a multiplier: how many times faster the whole job runs. As `N` gro
 
 The practical reading: **find the un-splittable fraction before you buy anything.** At 25% it barely matters what hardware you have.
 
-This is a theorem, so there are two moves and no others ([Ch. 03](03_grading-a-law_q5c6.md)). Falsify an assumption, or stop needing the conclusion. The assumption worth attacking is that `s` is fixed — usually it is a lock, a single writer, or a coordination step somebody chose ([Ch. 05](05_time_mdbn.md)), and making it smaller raises the ceiling in a way that hardware cannot.
+This is a theorem, so there are two moves and no others ([Ch. 03](03_grading-a-law_q5c6.md)). Falsify an assumption, or stop needing the conclusion. The assumption worth attacking is that `s` is fixed — usually it is a lock, a single writer, or a coordination step somebody chose ([Ch. 06](06_time_mdbn.md)), and making it smaller raises the ceiling in a way that hardware cannot.
 
 ### Reversal: when more workers make it slower
 
@@ -202,7 +202,7 @@ Summing two million orders took 3.4 milliseconds from the records and 0.48 milli
 
 Two things about this shape. It is a **step rather than a slope** — growing a struct from 40 bytes to 60 costs nothing, and crossing 64 costs you a second fetch per record. And the expensive fields are the ones the slow loop never names, which is why the cost is invisible at the place where it is paid.
 
-[Chapter 04](04_structure_agjy.md) uses the same underlying fact for a different argument: in an entity-component system the memory layout is deliberately made public, because hiding it would cost exactly the margin measured here.
+[Chapter 04](04_dependency-and-hiding_agjy.md) uses the same underlying fact for a different argument: in an entity-component system the memory layout is deliberately made public, because hiding it would cost exactly the margin measured here.
 
 ### Floor: distance
 
@@ -227,7 +227,7 @@ Each shape has a different cause, and applying the wrong fix is the common failu
 
 **Ceilings** come from work that cannot be divided. That is arithmetic on a fraction, needing no assumption about hardware, so no hardware changes it.
 
-**Reversals** come from pairs. Contention grows with the number of workers; coherency grows with the number of pairs of workers, which grows as the square. A quantity growing as the square eventually overtakes one growing in proportion, and where they cross is the peak. This is why the fix is never more workers — it is removing what they share, and [chapter 05](05_time_mdbn.md)'s single-writer design is that taken to its limit.
+**Reversals** come from pairs. Contention grows with the number of workers; coherency grows with the number of pairs of workers, which grows as the square. A quantity growing as the square eventually overtakes one growing in proportion, and where they cross is the peak. This is why the fix is never more workers — it is removing what they share, and [chapter 06](06_time_mdbn.md)'s single-writer design is that taken to its limit.
 
 **Queue cliffs** come from variation, not from load. Idle capacity is what absorbs a burst; near saturation there is none left. This is also why average latency is such a poor measure here — the system is not slow on average, it is slow precisely when it is busiest.
 
@@ -287,7 +287,7 @@ A batch job that must finish by 6 a.m. and takes two hours has seven hours of sl
 
 ## What the claim costs
 
-**Column layouts cost cohesion.** Splitting a record into parallel arrays scatters one concept across many places. Adding a field means touching every array and every loop that walks them together. The 7× is real; so is the maintenance bill, and [chapter 04](04_structure_agjy.md) works through what gets given up.
+**Column layouts cost cohesion.** Splitting a record into parallel arrays scatters one concept across many places. Adding a field means touching every array and every loop that walks them together. The 7× is real; so is the maintenance bill, and [chapter 04](04_dependency-and-hiding_agjy.md) works through what gets given up.
 
 **Measuring is slow and easy to get wrong.** Every number here took several attempts. A benchmark whose data fits entirely in cache, or whose result the compiler discards as unused, produces a confident figure that describes nothing. Expect to throw away your first two.
 
@@ -323,7 +323,7 @@ The question that does the work: **which shape am I on?**
 
 A ceiling means stop buying hardware and shrink the serial part. A reversal means stop adding workers and find what they share. A queue cliff means buy headroom rather than speed. A step means look at the layout. A floor means move the data or stop waiting for it.
 
-[Chapter 08](08_change_rjf9.md) moves to the timescale where the arithmetic is measured in years rather than milliseconds — how systems change, how the shape of an organization ends up in its software, and why a published interface is a decision you do not get to take back.
+[Chapter 09](09_change_rjf9.md) moves to the timescale where the arithmetic is measured in years rather than milliseconds — how systems change, how the shape of an organization ends up in its software, and why a published interface is a decision you do not get to take back.
 
 ---
 
@@ -335,4 +335,4 @@ A ceiling means stop buying hardware and shrink the serial part. A reversal mean
 
 ---
 
-[← Ch. 06](06_distribution_49yh.md)  ·  [Contents](00_toc.md)  ·  [Ch. 08 →](08_change_rjf9.md)
+[← Ch. 07](07_distribution_49yh.md)  ·  [Contents](00_toc.md)  ·  [Ch. 09 →](09_change_rjf9.md)

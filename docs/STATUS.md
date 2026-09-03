@@ -15,25 +15,26 @@ Only the author moves a chapter to **draft** or **ready**.
 | 01 | `01_the-five-kinds_cjx4.md` | **draft** |
 | 02 | `02_forces_f4m5.md` | **draft** |
 | 03 | `03_grading-a-law_q5c6.md` | **draft** |
-| 04 | `04_structure_agjy.md` | **draft** |
-| 05 | `05_time_mdbn.md` | **draft** |
-| 06 | `06_distribution_49yh.md` | **draft** |
-| 07 | `07_scale_637f.md` | **draft** |
-| 08 | `08_change_rjf9.md` | **draft** |
-| 09 | `09_what-a-pattern-is-for_3xzc.md` | **draft** |
-| 10 | `10_patterns-that-cross_r8dw.md` | **draft** |
-| 11 | `11_patterns-that-survive-translation_us2k.md` | **draft** |
-| 12 | `12_missing-language-features_esqm.md` | **draft** |
-| 13 | `13_smuggled-verdicts_8y69.md` | **draft** |
-| 14 | `14_principle-loses-scope_b86v.md` | **draft** |
-| 15 | `15_behaviour-placement_z47a.md` | **draft** |
-| 16 | `16_tdd-and-mocks_u8eu.md` | **draft** |
-| 17 | `17_abstraction-as-insurance_4jk6.md` | **draft** |
-| 18 | `18_force-map-method_r37x.md` | **draft** |
-| 19 | `19_six-profiles_dnkz.md` | **draft** |
-| 20 | `20_idioms_7nkn.md` | **draft** |
-| 21 | `21_style_9rng.md` | **draft** |
-| 22 | `22_never-written-down_at4r.md` | **draft** |
-| 23 | `23_assigned-to-the-team_3fjx.md` | **draft** |
+| 04 | `04_dependency-and-hiding_agjy.md` | **draft** |
+| 05 | `05_layering_p2vk.md` | *in progress* |
+| 06 | `06_time_mdbn.md` | **draft** |
+| 07 | `07_distribution_49yh.md` | **draft** |
+| 08 | `08_scale_637f.md` | **draft** |
+| 09 | `09_change_rjf9.md` | **draft** |
+| 10 | `10_what-a-pattern-is-for_3xzc.md` | **draft** |
+| 11 | `11_patterns-that-cross_r8dw.md` | **draft** |
+| 12 | `12_patterns-that-survive-translation_us2k.md` | **draft** |
+| 13 | `13_missing-language-features_esqm.md` | **draft** |
+| 14 | `14_smuggled-verdicts_8y69.md` | **draft** |
+| 15 | `15_principle-loses-scope_b86v.md` | **draft** |
+| 16 | `16_behaviour-placement_z47a.md` | **draft** |
+| 17 | `17_tdd-and-mocks_u8eu.md` | **draft** |
+| 18 | `18_abstraction-as-insurance_4jk6.md` | **draft** |
+| 19 | `19_force-map-method_r37x.md` | **draft** |
+| 20 | `20_six-profiles_dnkz.md` | **draft** |
+| 21 | `21_idioms_7nkn.md` | **draft** |
+| 22 | `22_style_9rng.md` | **draft** |
+| 23 | `23_never-written-down_at4r.md` | **draft** |
+| 24 | `24_assigned-to-the-team_3fjx.md` | **draft** |
 
 The contents page is [00_toc.md](../00_toc.md).

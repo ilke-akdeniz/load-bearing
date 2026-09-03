@@ -14,7 +14,7 @@ These are theorems, which means [chapter 03](03_grading-a-law_q5c6.md)'s rule go
 
 Most chapters in this book put the limits of their claim at the end. This one puts them first, and the reason is that this particular material does more damage by being applied than by being ignored. Outboxes, idempotency keys, sagas, and eventual consistency get built into systems that have one process and one database, where every one of them is pure cost. So it is worth knowing whether any of this is yours before you read what it costs.
 
-You are in this chapter's territory when **two things that can fail independently must agree.** Two processes. A process and a queue. A service and somebody else's API. A database and a cache. If there is exactly one process and one database, almost nothing here binds, and the machinery below is cost with no purchase — [chapter 05](05_time_mdbn.md) is your chapter, and its coordination primitives are enough.
+You are in this chapter's territory when **two things that can fail independently must agree.** Two processes. A process and a queue. A service and somebody else's API. A database and a cache. If there is exactly one process and one database, almost nothing here binds, and the machinery below is cost with no purchase — [chapter 06](06_time_mdbn.md) is your chapter, and its coordination primitives are enough.
 
 The test for whether you are distributed is not *do we deploy several services* — plenty of multi-service systems still have one database holding every invariant that matters. It is: **can one part of this be alive while another part cannot reach it?** If nothing can, you are not distributed for the purposes of this chapter, whatever the deployment diagram says.
 
@@ -261,7 +261,7 @@ Reaching for this chapter's machinery there produces real harm rather than mere 
 - An outbox table where a single transaction already covers everything.
 - Idempotency keys on operations that only ever run once, adding a table and a lookup to every write.
 - Eventual consistency between two tables in the same database, which had strong consistency available for free.
-- Retries around an in-process function call, which cannot suffer a lost message ([Ch. 05](05_time_mdbn.md)).
+- Retries around an in-process function call, which cannot suffer a lost message ([Ch. 06](06_time_mdbn.md)).
 
 The check is the one at the top: can one part be alive while another part cannot reach it? Within one process and one connection, no.
 
@@ -319,7 +319,7 @@ The question that does the work: **what does this code do when the reply never c
 
 Every distributed defect in the list above is an answer to that question that nobody wrote down. If the honest answer is *it retries and the work happens twice*, you need an idempotency key. If it is *it gives up and the work happened anyway*, you need reconciliation. And if the answer is *the reply always comes, we're in one process*, then none of this is yours and you should stop reading.
 
-[Chapter 07](07_scale_637f.md) turns from what is impossible to what is merely expensive — the arithmetic of queues, parallelism, and the memory hierarchy, where the numbers beat the intuition by several orders of magnitude.
+[Chapter 08](08_scale_637f.md) turns from what is impossible to what is merely expensive — the arithmetic of queues, parallelism, and the memory hierarchy, where the numbers beat the intuition by several orders of magnitude.
 
 ---
 
@@ -331,4 +331,4 @@ Every distributed defect in the list above is an answer to that question that no
 
 ---
 
-[← Ch. 05](05_time_mdbn.md)  ·  [Contents](00_toc.md)  ·  [Ch. 07 →](07_scale_637f.md)
+[← Ch. 06](06_time_mdbn.md)  ·  [Contents](00_toc.md)  ·  [Ch. 08 →](08_scale_637f.md)

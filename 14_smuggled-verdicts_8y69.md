@@ -4,13 +4,13 @@
 
 **Some vocabulary arrives with its verdict attached, so accepting the word concedes the argument — and how much you have conceded depends on whether the word also names something you can go and check.**
 
-Part III has been about names. [Chapter 09](09_what-a-pattern-is-for_3xzc.md) asked what a name buys and answered in two tests, which it ran on `Manager` and `Helper` as readily as on Singleton — because the tests are about names, and patterns are only the richest supply of them. The three chapters since graded the catalogue's names against ownership, against Forces, and against the language you write them in.
+Part III has been about names. [Chapter 10](10_what-a-pattern-is-for_3xzc.md) asked what a name buys and answered in two tests, which it ran on `Manager` and `Helper` as readily as on Singleton — because the tests are about names, and patterns are only the richest supply of them. The three chapters since graded the catalogue's names against ownership, against Forces, and against the language you write them in.
 
-This is the last thing a name can do. [Chapter 09](09_what-a-pattern-is-for_3xzc.md)'s finding was that a name sits outside the five kinds: it picks out a shape, and a shape is not true or false. Some names are built to break that — using one asserts something — and they do it while keeping a name's exemption from ever having to be defended. Pattern culture produces the densest supply of those too, which is why the chapter sits in this part; the mechanism is not confined to patterns, which is why its boundary cases come from outside.
+This is the last thing a name can do. [Chapter 10](10_what-a-pattern-is-for_3xzc.md)'s finding was that a name sits outside the five kinds: it picks out a shape, and a shape is not true or false. Some names are built to break that — using one asserts something — and they do it while keeping a name's exemption from ever having to be defended. Pattern culture produces the densest supply of those too, which is why the chapter sits in this part; the mechanism is not confined to patterns, which is why its boundary cases come from outside.
 
 ## Two questions about any term
 
-[Chapter 09](09_what-a-pattern-is-for_3xzc.md) graded names on two independent properties and refused to put them on one line — a name can compress well and constrain nothing, and Facade is the case that proves it. The same discipline is needed here, because two different things are being asked and they come apart.
+[Chapter 10](10_what-a-pattern-is-for_3xzc.md) graded names on two independent properties and refused to put them on one line — a name can compress well and constrain nothing, and Facade is the case that proves it. The same discipline is needed here, because two different things are being asked and they come apart.
 
 **Does the term pick out something in the code?** Something you could open the file and confirm or deny.
 
@@ -117,7 +117,7 @@ And the article says so directly:
 
 So the argument is: *if* you bought the machinery, use it. Applied to the invoice above, the antecedent is absent. There is no mapping layer, no object graph, no identity map, no lazy loading — a struct, some functions, and a table. Nothing was paid, so nothing was wasted, and the cost-benefit argument has nothing to attach to.
 
-**The verdict travels and the condition does not.** *Incurring the costs of a domain model without the benefits* is nine words carrying a condition; *anemic* is one word carrying the conclusion. [Chapter 14](14_principle-loses-scope_b86v.md) is about why the second outlives the first in transmission. This chapter's interest is narrower and starts where that leaves off: the word that survived **convicts**, so a reply has to reject the vocabulary before it can reach the design.
+**The verdict travels and the condition does not.** *Incurring the costs of a domain model without the benefits* is nine words carrying a condition; *anemic* is one word carrying the conclusion. [Chapter 15](15_principle-loses-scope_b86v.md) is about why the second outlives the first in transmission. This chapter's interest is narrower and starts where that leaves off: the word that survived **convicts**, so a reply has to reject the vocabulary before it can reach the design.
 
 ### The third option the binary cannot see
 
@@ -138,7 +138,7 @@ Ask the question of any rule and it answers where the rule can live:
  and writers running now                      unique within a year
 ```
 
-The first two are preferences. The third is not: a rule about rows you have not read cannot be enforced by code that has not read them, and [chapter 05](05_time_mdbn.md) works through why the check-then-write version races. So the placement is a fact about what each layer can see rather than a doctrine anyone adopted.
+The first two are preferences. The third is not: a rule about rows you have not read cannot be enforced by code that has not read them, and [chapter 06](06_time_mdbn.md) works through why the check-then-write version races. So the placement is a fact about what each layer can see rather than a doctrine anyone adopted.
 
 Run it, and the uniqueness rule is enforced exactly where it has to be:
 
@@ -155,7 +155,7 @@ The first insert says nothing, because it worked. The second is refused by the i
 
 That constraint is a business rule, fully enforced, and it is behaviour by any definition that is not circular. It is invisible to a term whose only measure is how many methods hang off the entity. **The design is not short of behaviour; the term is short of places to look.**
 
-[Chapter 04](04_structure_agjy.md) reaches the same place from the structural side, where a `completed_at is null` gate makes the lower layer the more capable one and inverts layering doctrine. Here the point is narrower: a term that cannot see the third option will misclassify every design that uses it.
+[Chapter 04](04_dependency-and-hiding_agjy.md) reaches the same place from the structural side, where a `completed_at is null` gate makes the lower layer the more capable one and inverts layering doctrine. Here the point is narrower: a term that cannot see the third option will misclassify every design that uses it.
 
 ### Off the map: when the word names nothing at all
 
@@ -193,9 +193,9 @@ A verdict noun bundles them, and the bundling is what makes it hard to answer. T
 
 Two properties follow, and they are why this is worth a chapter rather than a complaint.
 
-**It is not a claim, so it never has to be defended.** [Chapter 09](09_what-a-pattern-is-for_3xzc.md)'s point is that names sit outside the five kinds — they are not true or false. A verdict noun exploits that: it does the work of a claim while keeping a name's exemption. Nobody has to state the condition, because on the surface nothing has been asserted.
+**It is not a claim, so it never has to be defended.** [Chapter 10](10_what-a-pattern-is-for_3xzc.md)'s point is that names sit outside the five kinds — they are not true or false. A verdict noun exploits that: it does the work of a claim while keeping a name's exemption. Nobody has to state the condition, because on the surface nothing has been asserted.
 
-**It compresses well, which is why it spreads.** Run [chapter 09](09_what-a-pattern-is-for_3xzc.md)'s first test on it and *anemic domain model* passes easily — three words standing in for a paragraph. It is a good name by that measure. That is the uncomfortable part: the terms that travel furthest are the ones that compress best, and compressing well is what got this one into every code review it appears in ([Ch. 14](14_principle-loses-scope_b86v.md)).
+**It compresses well, which is why it spreads.** Run [chapter 10](10_what-a-pattern-is-for_3xzc.md)'s first test on it and *anemic domain model* passes easily — three words standing in for a paragraph. It is a good name by that measure. That is the uncomfortable part: the terms that travel furthest are the ones that compress best, and compressing well is what got this one into every code review it appears in ([Ch. 15](15_principle-loses-scope_b86v.md)).
 
 ---
 
@@ -269,7 +269,7 @@ Two questions do the work, and they are the two axes.
 
 **What would have to be true for this to be fine, and does the term let me say it?** If you can state the condition, you have a claim and can argue with it. If the word forbids the sentence, you have been handed a conclusion.
 
-[Chapter 14](14_principle-loses-scope_b86v.md) opens Part IV with the mechanism behind this one — why the fragment that survives repetition is always the part telling you what to do, and never the part telling you when.
+[Chapter 15](15_principle-loses-scope_b86v.md) opens Part IV with the mechanism behind this one — why the fragment that survives repetition is always the part telling you what to do, and never the part telling you when.
 
 ---
 
@@ -280,4 +280,4 @@ Two questions do the work, and they are the two axes.
 
 ---
 
-[← Ch. 12](12_missing-language-features_esqm.md)  ·  [Contents](00_toc.md)  ·  [Ch. 14 →](14_principle-loses-scope_b86v.md)
+[← Ch. 13](13_missing-language-features_esqm.md)  ·  [Contents](00_toc.md)  ·  [Ch. 15 →](15_principle-loses-scope_b86v.md)

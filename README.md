@@ -9,23 +9,23 @@ The same wiring code is unremarkable in Go and gets sent back in review in C#, a
 **Your clock cannot tell you what happened first.**
 Two consecutive reads of the system clock return the same number 95% of the time — on one machine, with nothing going wrong.
 That number is measured, not asserted.
-→ [Chapter 05 — Time: Concurrency and Clocks](05_time_mdbn.md)
+→ [Chapter 06 — Time: Concurrency and Clocks](06_time_mdbn.md)
 
 **You cannot tell a slow machine from a dead one.**
 Not that it is hard. You cannot — and most of what is impossible in distributed systems follows from it.
 Almost every retry, timeout, and health check you have written assumes otherwise.
-→ [Chapter 06 — Distribution: What's Impossible](06_distribution_49yh.md)
+→ [Chapter 07 — Distribution: What's Impossible](07_distribution_49yh.md)
 
 **"This should be a Repository." What would that rule out?**
 A pattern name earns its place by forbidding something.
 Run that test on the names you use in code review and count how many survive it.
-→ [Chapter 09 — What a Pattern Is For](09_what-a-pattern-is-for_3xzc.md)
+→ [Chapter 10 — What a Pattern Is For](10_what-a-pattern-is-for_3xzc.md)
 
 **Why design arguments don't get settled.**
 Because both sides are arguing about the answer while disagreeing about the situation — and nobody wrote the situation down.
 → [Chapter 02 — Forces: The Inputs Nobody Names](02_forces_f4m5.md)
 
-Those are five of twenty-three chapters. Each one makes a claim and states where it stops.
+Those are five of twenty-four chapters. Each one makes a claim and states where it stops.
 → [All chapters](00_toc.md)
 
 ## The premise
@@ -94,9 +94,9 @@ The decision log is there so that claim can be checked rather than taken on trus
 
 ## Contents
 
-All twenty-three chapters, in five parts, are listed in **[`00_toc.md`](00_toc.md)**.
+All twenty-four chapters, in five parts, are listed in **[`00_toc.md`](00_toc.md)**.
 Each chapter states its own claim and where that claim stops, so the contents page lists them and leaves the arguing to them.
 
 How the book is put together — the chapter rubric, the language conventions, the running example, the license and how to cite it — is in **[`docs/ABOUT.md`](docs/ABOUT.md)**.
 
-> **Status: complete draft.** All twenty-three chapters are written and under review.
+> **Status: complete draft.** All twenty-four chapters are written and under review.
