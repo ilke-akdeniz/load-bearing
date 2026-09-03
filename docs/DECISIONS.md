@@ -5454,6 +5454,6 @@ So this was a defect in what was added rather than a pattern to sweep, and the r
 The shorter handoff is also the one that resists drift: a sentence that names a subject cannot be falsified by a later change to the next chapter's claim, and a sentence that paraphrases the claim can.
 That is the same argument `CLAUDE.md` already makes for why handoffs need checking, arriving at a way to need it less.
 
-**Open, for the author.**
-Whether this goes into `CLAUDE.md`'s rubric section as a sentence, since the handoff rule lives there and this narrows it.
-The draft has not edited that file, because the rubric is the author's.
+**Into the rubric, on the author's instruction.**
+The draft raised whether this belonged in `CLAUDE.md` rather than editing the file, since the rubric is the author's; the author said to add it.
+It sits between the handoff's definition and the drift warning, so that the bound reads as the reason the warning is needed less often.

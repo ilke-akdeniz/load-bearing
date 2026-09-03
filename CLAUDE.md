@@ -124,6 +124,7 @@ Each chapter follows this shape:
 6. **How to recognize the failure** — what it looks like in a real codebase when someone got this wrong.
 
 The argument's last paragraph hands off to the next chapter — what it takes up and why it follows this one — written as prose, with no label.
+**Name what the next chapter takes up; do not state its claim.** The next chapter opens on its claim, and a paraphrase arriving a page early spends it — a handoff signals, it does not summarise. This also bounds the drift described below: a sentence that names a subject cannot be falsified by a later change to the next chapter's claim, and a sentence that paraphrases the claim can. The book's handoffs run from seventeen to fifty-two words, median thirty-seven.
 **A handoff describes the chapter next door, so changing a chapter's claim means checking the handoff that points at it.** This is the one piece of the book no check can verify: it is a paraphrase by design, and a paraphrase drifts silently and stays fluent, where a copy drifts visibly and fails a check. Four of twenty-one were wrong when first audited, two of them still describing claims that had been rewritten and one describing a chapter that had been cut.
 Then the back matter, after a `---`: a `## Sources` section, and last the navigation row, `[← Ch. NN](…)  ·  [Contents](00_toc.md)  ·  [Ch. NN →](…)`.
 The first chapter's back link is the introduction; the last chapter has no next slot.
