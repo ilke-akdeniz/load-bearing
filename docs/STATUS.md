@@ -16,7 +16,7 @@ Only the author moves a chapter to **draft** or **ready**.
 | 02 | `02_forces_f4m5.md` | **draft** |
 | 03 | `03_grading-a-law_q5c6.md` | **draft** |
 | 04 | `04_dependency-and-hiding_agjy.md` | **draft** |
-| 05 | `05_layering_p2vk.md` | *in progress* |
+| 05 | `05_layering_p2vk.md` | **draft** |
 | 06 | `06_time_mdbn.md` | **draft** |
 | 07 | `07_distribution_49yh.md` | **draft** |
 | 08 | `08_scale_637f.md` | **draft** |
