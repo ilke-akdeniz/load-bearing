@@ -29,7 +29,7 @@ That is why the dependency direction and information hiding belong in one chapte
 
 "Bottom" means where the arrows terminate: high fan-in, low fan-out, like `money`. Everything needs it; it needs nothing. "Top" means the entry points: low fan-in, high fan-out, like `main`. This is the sense in which the rest of the chapter says *put stable things at the bottom* — a claim about fan-in, not about file layout or importance.
 
-**The graph is source-level, and its nodes can be anything you handle separately.** It is not a record of who calls whom at runtime — the two usually agree, and where they disagree the graph is what matters, which the section on inversion of control works through. It exists at every size at once — functions, types, files, packages, assemblies, libraries, services — and a cycle between two functions is the same structural fact as a cycle between two services. What changes with size is what detects the violation and how much it costs, not whether the Law binds. Note that "layer" is not a size on that list: a layer is a rule about which direction arrows may go, and might be one function or forty packages.
+**The graph is source-level, and its nodes can be anything you handle separately.** [-- don't add the sentence about source graph vs runtime here. It breaks the rhytm and doesn't offer much value.] Nodes exist at every size at once — functions, types, files, packages, assemblies, libraries, services — and a cycle between two functions is the same structural fact as a cycle between two services. What changes with size is what detects the violation and how much it costs, not whether the Law binds. Note that "layer" is not a size on that list: a layer is a rule about which direction arrows may go, and might be one function or forty packages.
 
 ---
 
@@ -189,7 +189,7 @@ type Billing struct{ plans PlanLookup }
 
 The difference is not that an interface appeared. It is **which module owns it.** An interface declared by `accounts` and handed to `billing` would leave the arrow pointing exactly where it was; what reverses the direction is `billing` declaring what it needs, in its own terms. That distinction is the whole of dependency inversion, and it is the reason `net/http` may call up into your handler without a violation.
 
-### What you expose, anyone can depend on
+### Anyone can depend on what you expose 
 
 Everything so far has been about which way the arrows point. This is about how many exist at all — the second half of the same number. A cycle is two arrows where there should be one. Information hiding is about not creating an arrow in the first place. A dependency that was never created costs nothing to change, forever.
 
@@ -611,7 +611,7 @@ The question that catches real damage is not *does this match the diagram?* It i
 
 The first question is answered by a diagram. The second is answered by deleting something and seeing what stops compiling.
 
-The next chapter takes the shape most people mean when they say architecture. Everything here has been about which way arrows point and how many there are; layering adds a further claim on top of both — and the sentence it usually arrives in carries a Law and an Idiom as well, in one tone of voice.
+The next chapter takes the shape most people mean when they say architecture. Everything here has been about which way arrows point and how many there are; layering adds a further claim on top of both. [-- don't add back what I removed unless you have very good reasons. This is the place tyo signal next chapter without telling the next chapters claim nearly in full form.]
 
 ---
 
