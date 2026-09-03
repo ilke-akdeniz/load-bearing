@@ -1,10 +1,8 @@
-# Structure: Dependency and Hiding
+# Dependency and Hiding
 
 ## The claim
 
-**A change costs in proportion to how many things depend on what you changed. A cycle makes that count irreducible; an exposed surface makes it uncountable.**
-
-Acyclicity is a Law. Hiding is a Principle with one sharp condition. Neither of them says anything about folders.
+**A change is epxensive in proportion to how many things depend on what you are changing. A cycle makes that count irreducible; a publicly dependable surface makes it uncountable.**
 
 ## The number
 
@@ -19,25 +17,21 @@ Acyclicity is a Law. Hiding is a Principle with one sharp condition. Neither of 
                                    it needs nothing
 ```
 
-**Fan-in** is how many arrows point at you — how many things break if you change. **Fan-out** is how many you point at — how much you need in order to work at all.
+**Dependency fan-in** is how many arrows point at you — how many things break if you change. **Dependency fan-out** is how many you point at — how much you need in order to work at all.
 
-Fan-in is the number in the claim. A leaf with fan-in zero is free to change: nothing else can notice. Fan-in forty costs forty inspections, and it is paid on *every* change, not once.
+Dependency fan-in is the number in the claim. A leaf with fan-in zero is free to change: nothing else can notice the change. A fan-in of forty costs forty inspections, and it is paid on *every* change, not once.
 
-Both halves of this chapter are that one number, approached from two directions.
-
-**A cycle makes it irreducible.** If A and B point at each other, each is the other's dependent. Neither can be read, tested, built, or moved without the other, and nothing short of removing an arrow changes that.
+**A cycle makes fan-in irreducible.** If A and B point at each other, each is the other's dependent. Neither can be read, tested, built, or moved without the other, and nothing short of removing an arrow changes that.
 
 **Exposure makes it uncountable.** Inside your repository `grep` gives you the count, and the count tells you what a change costs. Once something is published you cannot count at all, and the real number is larger than the documented one, because people depend on what they can observe rather than on what you wrote down.
 
-That is why direction and hiding belong in one chapter. They are the two things you control about the graph — which way the arrows point, and how many of them there are — and both are priced the same way.
+That is why the dependency direction and information [-- is information correct here or is it something else?] hiding belong in one chapter. They are the two things you control about the graph — which way the arrows point, and how many of them there are — and both are priced the same way.
 
 "Bottom" means where the arrows terminate: high fan-in, low fan-out, like `money`. Everything needs it; it needs nothing. "Top" means the entry points: low fan-in, high fan-out, like `main`. This is the sense in which the rest of the chapter says *put stable things at the bottom* — a claim about fan-in, not about file layout or importance.
 
 Two warnings, because both cause confusion in review.
 
-**This graph is about source-level dependency, not about who calls whom at runtime.** The two usually agree. Where they disagree, the graph is what matters, and the boundary section on inversion of control works through the case.
-
-**The nodes can be anything you handle separately.** The graph exists at every size at once — functions, types, files, packages, assemblies, libraries, services — and a cycle between two functions is the same structural fact as a cycle between two services. What changes with size is what detects the violation and how much it costs, not whether the Law binds. Note that "layer" is not a size on that list: a layer is a rule about which direction arrows may go, and might be one function or forty packages.
+**The dependency we care is about source-level graph, and the nodes can be anything you handle separately.** The graph exists at every size at once — functions, types, files, packages, assemblies, libraries, services — and a cycle between two functions is the same structural fact as a cycle between two services. What changes with size is what detects the violation and how much it costs, not whether the Law binds. Note that "layer" is not a size on that list: a layer is a rule about which direction arrows may go, and might be one function or forty packages.
 
 ---
 
@@ -165,8 +159,6 @@ Every one of those is the same fact in a different costume: **the unit of compre
 
 None of it is a bug report. It shows up as estimates being wrong by a factor of five, as a refactor that gets abandoned, as a service extraction that slips two quarters. **The damage is denominated in future change, not in incorrect output** — which is why it accumulates unnoticed, and why no single commit looks like the culprit.
 
-One claim at this point is usually overstated, and the honest version is narrower. A cycle does **not** spawn further cycles by itself: a third module that needs both `billing` and `accounts` can simply take both, and creates nothing new. What is mechanical is that **weight is inherited** — every new dependent of `billing` also depends on `accounts`, transitively, whether or not it names it, and cannot be compiled, tested, or extracted without both. A missing test is a static cost that does not get worse on its own. A cycle is a cost re-paid by every future dependent. That is enough to justify the Law without claiming the graph rots unattended.
-
 ### Breaking the cycle
 
 The cycle shows up first at the construction site:
@@ -199,7 +191,7 @@ type Billing struct{ plans PlanLookup }
 
 The difference is not that an interface appeared. It is **which module owns it.** An interface declared by `accounts` and handed to `billing` would leave the arrow pointing exactly where it was; what reverses the direction is `billing` declaring what it needs, in its own terms. That distinction is the whole of dependency inversion, and it is the reason `net/http` may call up into your handler without a violation.
 
-### What you expose
+### What you expose is publicly dependable
 
 Everything so far has been about which way the arrows point. This is about how many exist at all — the second half of the same number. A cycle is two arrows where there should be one. Information hiding is about not creating an arrow in the first place. A dependency that was never created costs nothing to change, forever.
 
@@ -207,7 +199,7 @@ Parnas, 1972 — the founding paper, and still the clearest statement: decompose
 
 The mechanism is fan-in again. A decision that nothing can observe has a fan-in of zero and is therefore free to change. A decision that is visible has as many dependents as care to look, and nobody tells you when someone starts looking. That last point is not a guess: with enough users, every observable behaviour of a system ends up depended on regardless of what was documented, which is Hyrum's Law — [chapter 03](03_grading-a-law_q5c6.md) grades it and works through what Go and Python each did about it.
 
-So **your export surface is a liability inventory, not a feature list.** Every capital letter is a commitment you did not necessarily mean to make, and taking one back is a breaking change even if no document mentioned it. The export surface, not the design document, is the real API:
+So **your export surface is a liability inventory, not a feature list.** Every capital letter in Go or "public" identifier in C# is a commitment you did not necessarily mean to make, and taking one back is a breaking change even if no document mentioned it. The export surface, not the design document, is the real API:
 
 ```go
 // Go: privacy is per-package, and the marker is the first letter.
@@ -250,7 +242,7 @@ func NewBilling(plans PlanLookup) *Billing {
 
 Read this version as `billing` saying: *those were never my decisions. Where plans are stored, how they are fetched, what is configured — none of that is my business. I need exactly the operations in this interface in order to decide what I actually decide, which is what to charge.*
 
-Hiding is about what a *module* is coupled to, and injection reduces that: `billing` unlearned four decisions and learned one interface. What grows is what the **composition root** knows, and the composition root is one file whose entire job is knowing how the pieces fit — the one place where knowing everything is correct.
+Hiding is about what a *module* is coupled to, and injection reduces that: `billing` unlearned four decisions and learned one interface. What grows is what the **composition root** knows, and the composition root is one file whose entire job is knowing how the pieces fit — the one place where knowing everything is correct. [-- add this here: (composition root is "main" in ..., ... in Java)]
 
 The contradiction only survives if you read hiding as "less information anywhere." Parnas proposed something narrower: each module hides a decision, and other modules stop depending on it. Injection is how a module *declines to hold* a decision that belongs elsewhere.
 
@@ -621,7 +613,7 @@ The question that catches real damage is not *does this match the diagram?* It i
 
 The first question is answered by a diagram. The second is answered by deleting something and seeing what stops compiling.
 
-The next chapter takes the shape most people mean when they say architecture. Everything here has been about which way arrows point and how many there are; layering adds a further claim on top of both — that the parts stack into ranks, each resting on the one beneath — The sentence people say it in carries two more, a Law and an Idiom, in one tone of voice — and telling the three apart decides which of them you are entitled to enforce.
+The next chapter takes the shape most people mean when they say architecture. Everything here has been about which way arrows point and how many there are; layering adds a further claim on top of both.
 
 ---
 
