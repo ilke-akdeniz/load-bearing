@@ -1,36 +1,32 @@
-# Layering: A Shape, Not a Law
+# Layered architecture
 
 ## The claim
 
-**"We use a layered architecture" is three claims in one sentence: a Law, a Principle and an Idiom. Most of the harm done in layering's name is the third applied with the authority of the first.**
+**The term "layered architecture" can be used as a Law, a Principle or an Idiom. Most of the harm done in layering's name is the idiom applied with the authority of the law.**
 
-[Chapter 04](04_structure_agjy.md) established the graph — which way arrows point, and how many there are. Layering adds a claim on top of both: that the parts stack into ranks, each resting on the one beneath. That claim is worth separating from the two it arrives with.
-
-## The three claims, separated
-
-Say "we use a layered architecture" and you have made three claims at three different levels. Splitting them this way is this book's, not standard vocabulary:
+## The three layering claims, separated
 
 | Claim | Kind | Standing |
 |---|---|---|
-| If A depends on B, then B must not depend on A — directly or through any chain | **Law** | true by definition ([Ch. 03](03_grading-a-law_q5c6.md)) |
-| The parts can be stacked into layering ranks, each depending only on the rank beneath it | **Principle** | true when the graph is that shape, and often it isn't |
-| The ideal ranking, top to bottom, is `presentation → business → data`, and each rank becomes a physical boundary | **Idiom** | 1990s enterprise Java and C#, and arbitrary |
+| acyclicity law: If A depends on B, then B must not depend on A — directly or through any chain | **Law** | true by definition ([Ch. 03](03_grading-a-law_q5c6.md)) |
+| ranking principle: The parts can be stacked into layering ranks, each depending only on the rank beneath it | **Principle** | true when the graph is that shape, and often it isn't |
+| three tier idiom: The ideal ranking, top to bottom, is `presentation → business → data`, and each rank becomes a physical boundary | **Idiom** | 1990s enterprise Java and C# |
 
-Claim two is the one that needs stating carefully, because it has a loose reading and a strict one and only the strict one says anything new. Loosely — "dependencies should flow downward" — it is claim one with a picture attached.
+Ranking principle is the one that needs stating carefully, because it has a loose reading and a strict one and only the strict one says anything new. Loosely — "dependencies should flow downward" — it is claim one with a picture attached.
 
 The strict reading needs the word **rank**, so here it is precisely. A rank is a whole number attached to each part, assigned by the rules:
 
 > - Parts that depend on nothing are the **bottom** rank, 1.
 > - Every other part's rank is **the rank of the topmost part it depends on, plus 1**.
 
-That is all a rank is. Not a folder, not a team, not a tier of importance — a number that falls out of the arrows. `main` is at the top; `money` is at the bottom.
+That is all a rank is. Not a folder, not a team, not a tier of importance — a number that falls out of the arrows. `main` is at the top; `money` is at the bottom. [-- put the "main money" diagram from 04a here with rankings in it so that this paragraph makes sense.]
 
 Two things follow, and they are the difference between the first two claims:
 
-- **Claim one is exactly the condition that ranks can be assigned at all.** Try the rule on a cycle and it never terminates: A's rank needs B's, which needs A's. Acyclic and rankable are the same property.
-- **Claim two adds that every arrow crosses exactly one rank.** Rank 4 may use rank 3. It may not reach down to rank 1, even though nothing about acyclicity forbids that. This is a real constraint and most systems do not satisfy it.
+- **Acyclicity law is exactly the condition that ranks can be assigned at all.** Try the rule on a cycle and it never terminates: A's rank needs B's, which needs A's. Acyclic and rankable are the same property.
+- **Ranking principle adds that every arrow crosses exactly one rank.** Rank 4 may use rank 3. It may not reach down to rank 1, even though nothing about acyclicity forbids that. This is a real constraint and most systems do not satisfy it.
 
-Claim three is where the physical boundary arrives, and it varies by ecosystem. In Java and C# it was usually separate projects, assemblies, or shipped libraries; elsewhere it shows up as top-level directories or packages. What each form actually enforces differs — a directory is a package in Go, carries no access meaning in C# until assemblies split, and enforces nothing in Python — and [chapter 20](20_idioms_7nkn.md) works through why ecosystems diverge like this.
+Three tier idiom is where the physical boundary arrives, and it varies by ecosystem. In Java and C# it was usually separate projects, assemblies, or shipped libraries; elsewhere it shows up as top-level directories or packages. What each form actually enforces differs — a directory is a package in Go, carries no access meaning in C# until assemblies split, and enforces nothing in Python — and [chapter 20](20_idioms_7nkn.md) works through why ecosystems diverge like this.
 
 The three are taught together, defended together, and heard as one sentence. Separating them is what the rest of this chapter does.
 
@@ -40,7 +36,7 @@ The three are taught together, defended together, and heard as one sentence. Sep
 
 ### When the shape isn't a line
 
-A compiler's graph is not a line, and it is worth walking through why, because this is the case where insisting on one does visible damage.
+The graph for a compiler implementation [-- "compiler's graph" alone is very confusing: is it some type of runtime graph when the compiler complies? Is it the tokens? Is it the source code it compiles... ] is not a line, and it is worth walking through why, because this is the case where insisting on one does visible damage.
 
 | Part | Job | Needs |
 |---|---|---|
@@ -120,7 +116,7 @@ All three costs come from one mistake: the real graph was a directed acyclic gra
 
 ### Layering, without directories
 
-The previous case had claim two failing. This one has claim two holding and claim three absent, which is the combination that shows how little the physical boundary was doing.
+The previous case had ranking principle failing. This one has the principle holding and the three tier idiom absent, which is the combination that shows how little the physical boundary was doing.
 
 FlowCore's dependency graph is a line — service, then store, then error mapping. It is also one flat Go package with no subdirectories, so nothing about the file system enforces it. The enforcement is in the type system instead.
 
@@ -184,13 +180,13 @@ So the orthodoxy is wrong here, and it is wrong for a principled reason:
 
 Postgres is not dumber. It has capabilities — atomicity, row locking, constraint evaluation — that the layer above cannot replicate at all. When the lower layer is *more* capable along the axis that matters, "keep logic out of it" stops being good advice and becomes an instruction to reimplement a correct mechanism incorrectly.
 
-Claim one is untouched again: the dependency still points one way. What inverted is the taxonomy claim about what kind of thing belongs where — the Idiom, borrowed from an era when the bottom layer really was a file.
+Law is untouched again: the dependency still points one way. What inverted is the taxonomy claim about what kind of thing belongs where — the Idiom, borrowed from an era when the bottom layer really was a file.
 
 ---
 
 ## Why the claim holds
 
-Three claims arriving in one sentence would be harmless if they were heard as three. The mechanism by which they are not is worth stating, because it is the general shape this book is about, caught in one phrase.
+A law, a principle and idiom loaded in one sentence would be harmless if they were deciphered fully upon hearing. The mechanism by which they are not is worth stating in full detail.
 
 **The Law lends its authority to the other two, and nothing in the sentence marks the transfer.** "Dependencies must not be circular" is checkable, mechanical, and true everywhere. "Business logic goes in the business layer" is a convention of one ecosystem in one decade. Both arrive inside "we use a layered architecture," in the same tone, from the same person. A listener who agrees with the first has already agreed with the third without a separate decision having been made.
 
@@ -202,15 +198,15 @@ Three claims arriving in one sentence would be harmless if they were heard as th
 
 ## Where the claim doesn't apply
 
-The claim is that harm comes from the third claim borrowing the first's authority. The boundary is the case where the third claim is simply correct.
+The claim is that harm comes from the idiom borrowing the law's authority. The boundary is the case where the idiom is simply correct.
 
-### When the ranking is the right one
+### When the three tier idiom is the right one
 
 A form-over-data web application, with users, roles, invoices and a reporting page. Requests arrive at handlers, handlers call service functions that enforce rules, service functions read and write rows. The graph really is `presentation → business → data`, because that is what the program does.
 
 Here the Idiom is right, and it is right for reasons that have nothing to do with its being popular:
 
-- **The ranking matches the graph**, so claim two holds without anyone forcing it, and no pass-through class is needed to fill a rank.
+- **The ranking matches the graph**, so ranking principle holds without anyone forcing it, and no pass-through class is needed to fill a rank.
 - **The names are real.** Somebody can say what belongs in the service layer and what does not, which is the test the compiler's rank 2 failed.
 - **A new contributor already knows it.** The convention costs nothing to learn and answers the placement question the same way every time, which is worth more than a better arrangement nobody shares ([Ch. 20](20_idioms_7nkn.md) argues this at length — an Idiom you can out-argue is usually still the one to follow).
 
@@ -222,15 +218,9 @@ The test that separates the two takes one question: **can you name each rank, an
 
 ## What the claim costs
 
-### Separating the three costs you a shared word
+### Everything could start looking like a layer
 
-"We use a layered architecture" is one sentence that communicates a great deal quickly, and this chapter's answer to it is three sentences with different standings attached. That is more accurate and slower, and in a design discussion the slower thing sometimes loses.
-
-The bill is real: you can no longer say "that's a layering violation" and be understood. You have to say which claim was violated, and the reply is now an argument about the graph rather than an appeal to the diagram. That argument is the one worth having and it takes longer than the appeal did.
-
-### Everything starts looking like a layer
-
-Once a team owns the word "layer," everything becomes one, including things that are stages, cross-cutting concerns, or nothing at all. Logging is the usual one:
+Once a team owns the word "layer," everything tends to become a layer, including things that are stages, cross-cutting concerns, or nothing at all. Logging is the usual one:
 
 ```csharp
 // Logging as a layer. One method per method of the thing it wraps,
@@ -273,9 +263,9 @@ Expressing a rank as a package or assembly wall forces exports and mapping code.
 
 - **A class whose every method forwards to one other object.** It was invented to fill a slot in a shape, and it charges a file edit on every change while deciding nothing.
 - **The same entity re-typed once per layer, with mappers between.** Every boundary that isn't a real dependency boundary still bills you a type and a mapper, plus the bug where someone adds a field to two of the three ([Ch. 17](17_abstraction-as-insurance_4jk6.md)).
-- **A rank nobody can name.** `service`, `data` and `presentation` are names. "The things `typecheck` uses" is a description of an arrow count.
+- **A rank nobody can name.** `service`, `data` and `presentation` are names. "The things `typecheck` uses" is a description of an arrow count. [-- Why is this a failure? What being a "nameable rank" mean?]
 - **A folder tree that does not match the import graph.** The tree is the claim; the imports are what is true. Where they disagree, the tree is decoration and the review that checked it found nothing.
-- **A "core" or "domain" package that imports the framework.** The ranking says it is at the bottom and the imports say it is not, and the imports are correct.
+- **A "core" or "domain" package that imports the framework.** The ranking says it is at the bottom and the imports say it is not, and the imports are correct. [-- Hard to unpack this. What's wrong with myCoreLibForMyApp importing .NET threading or .NET collections?]
 
 **In a conversation:**
 
@@ -286,7 +276,7 @@ Expressing a rank as a package or assembly wall forces exports and mapping code.
 
 The question that does the work is not *which layer does this belong to?* It is: **what would break if this piece stopped existing?**
 
-[Chapter 05](05_time_mdbn.md) does for concurrency what these two chapters did for structure — turns "be careful with shared state" into a rule you can check, starting with the fact that check-then-act is not atomic.
+[Chapter 05](05_time_mdbn.md) does for concurrency what these two chapters did for structure.
 
 ---
 
