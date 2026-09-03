@@ -53,7 +53,6 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | What a cycle actually costs | agjy | The damage is denominated in future change, not in wrong output — which is why it accumulates unnoticed | cite |
 | Injection vs inversion | agjy | Injection decides who constructs; inversion decides who declares the interface, and only inversion turns an arrow around | cite |
 | Two-phase construction | agjy | `a := &A{}; b := &B{a}; a.b = b` is the construction site admitting the cycle | cite |
-| Dependency damage compounds | agjy | A missing test is a static cost; a cycle spreads to everything touching either end | one clause, cite |
 | Cycle detection is granularity-bound | agjy | Each toolchain checks the boundaries it happens to have; the damage exists at all of them | cite |
 | "Layered" is three claims | agjy | Acyclicity (Law) + the line shape (Principle) + the folder taxonomy (Idiom), under one name | "the three claims" |
 | Layering as ranks | agjy | Strict layering assigns every part a rank and forbids reaching past the one beneath it | one clause, cite |
