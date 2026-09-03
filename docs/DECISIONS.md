@@ -5457,3 +5457,42 @@ That is the same argument `CLAUDE.md` already makes for why handoffs need checki
 **Into the rubric, on the author's instruction.**
 The draft raised whether this belonged in `CLAUDE.md` rather than editing the file, since the rubric is the author's; the author said to add it.
 It sits between the handoff's definition and the drift warning, so that the bound reads as the reason the warning is needed less often.
+
+---
+
+## 133. The three layering claims get names
+
+**Date.** 2026-09-02
+
+**Context.**
+`04b` referred to its three claims by position — *claim one*, *claim two*, *claim three* — across eight sites, including two section transitions and a recognition bullet.
+The author replaced the positions with descriptive prefixes in the table: *acyclicity law*, *ranking principle*, *three tier idiom*.
+
+**Decision.** Adopted, and set as proper names: **the Acyclicity Law**, **the Ranking Principle**, **the Three-Tier Idiom**.
+
+**Why.**
+Position numbers carry nothing and have to be decoded at every use, which is the argument [chapter 03](../03_grading-a-law_q5c6.md) already makes for naming its three kinds of Law rather than lettering them.
+Capitalising the kind word follows the book-wide sweep in decision 120; capitalising the qualifier too makes each one read as a name rather than as a description that happens to contain a kind, which matters because they are referred to across sections.
+*Three-tier* takes a hyphen as a compound modifier.
+
+The author's version left the names without articles — *ranking principle is the one that needs stating*, *Law is untouched again* — at eight sites, which the draft repaired.
+
+**A correction from review, and the objection was right.**
+The recognition list carried *a "core" or "domain" package that imports the framework*.
+The author: *What's wrong with myCoreLibForMyApp importing .NET threading or .NET collections?*
+Nothing, and the bullet as written condemned it.
+The standard library sits below everything, so depending on it says nothing about rank; the tell is an import of something the ranking places **above** the package — an HTTP attribute, a controller base class, a request type.
+The bullet now says that, and names the standard library explicitly as not being the signal.
+
+**Two further tags.**
+*A rank nobody can name* asserted a failure without saying why one.
+The demonstration had the reasoning — an unnameable rank is an artifact of arithmetic — and the bullet now carries it: enforcing such a rank puts parts in one box that have nothing to do with each other, and then asks what belongs in the box.
+
+The rank rule was stated abstractly and then applied to `main` and `money` with no picture.
+The author asked for [chapter 04](../04_structure_agjy.md)'s graph repeated here with ranks on it.
+That is the same graph annotated differently — fan-in and fan-out there, rank numbers here — which is the permitted form of a repeated example, and the text cites chapter 04 for the graph rather than reintroducing it.
+
+**Left standing, and put back to the author.**
+The review deleted *Separating the three costs you a shared word*, which was the only section pricing **this chapter's own advice** rather than pricing layering done badly.
+The two surviving cost sections both price the failure mode.
+The draft has not restored it; the question of whether the costs section should price the claim is recorded here for the author to settle.
