@@ -382,7 +382,8 @@ These are read as diffs, not as prose, so sentence-level granularity is worth mo
 - Chapters at the repo root: `NN_slug_ID.md`, listed in `00_toc.md`.
 - Working documents in `docs/`, and in `docs/pending-tasks/` while they still owe material to a chapter.
 - `tools/check-drift.py` — the mechanical consistency checks. Run it before committing.
-- `docs/STATUS.md` carries the status table — update it when a chapter's status changes. The README is the book's introduction, and `00_toc.md` is the contents page; neither carries working material.
+- `docs/STATUS.md` carries the status table — update it when a chapter's status changes.
+It also carries a **Full read** column, which is a separate axis from status and must not be read by anything that depends on `draft`: it records the author's first complete pass over the finished book, chapter by chapter, and the date is the date of their review commit. The README is the book's introduction, and `00_toc.md` is the contents page; neither carries working material.
 
 ### Global drift
 

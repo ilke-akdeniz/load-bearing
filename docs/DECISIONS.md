@@ -5706,3 +5706,51 @@ Seven rows for `w8kq`, three of them written to disclaim neighbouring territory 
 
 **Status.**
 Chapter 01 is recorded at **in progress**. The author's confirmation was for the placement, not for the status, and that transition is theirs.
+
+---
+
+## 138. The full read gets a column, not a status
+
+**Date.** 2026-09-04
+
+**Context.**
+The author is reading the finished book straight through, chapter by chapter, and it is catching things no per-chapter review had: *obscure points, inconsistencies and things to remove.*
+It has already produced the chapter split recorded in [decision 131](#131-chapter-04-splits-in-two-provisionally) and the opening chapter in [decision 135](#135-a-chapter-01-after-all-and-what-decision-103-actually-forbade).
+Six chapters are done and twenty-five is the target, so it needs tracking.
+
+The author proposed a fifth status, *proofread*, with a constraint: *I don't want this to mess with things that depend on the status "draft".*
+
+**Options.**
+
+1. A fifth value in the status column, between **draft** and **ready**.
+2. A fourth column in the same table, orthogonal to status.
+3. A separate file.
+
+**Decision.** Option 2, a **Full read** column in `docs/STATUS.md`, holding a date.
+
+**Why not a fifth status.**
+The four states are a ladder — a chapter occupies exactly one rung — and having been read is not a rung.
+A chapter can be at draft and unread, or read and still not ready, and a single column cannot hold both facts.
+Making *proofread* a status would also have silently answered a question nobody asked: whether a full read is a prerequisite for **ready**.
+
+**Why not a separate file.**
+The resume point is the thing the author needs at a glance, and it is most useful beside the chapter list that already exists.
+
+**Two things checked before building it.**
+
+`tools/check-drift.py` reads status with `^\| (\d\d) \| \`[^\`]+\` \| (.+?) \|`, and the quantifier is **lazy**, so it stops at the first delimiter and still reads `**draft**` correctly with a column after it.
+A fourth column therefore needed no tooling change, which is why option 2 was cheap.
+
+The author said *chapters 1 to 6*, and that maps exactly onto today's numbering without a guess: their review commits were ch 01, 02, 03, 04a and 04b, and the candidate — which after the split and the seating of the new opener are chapters 01 through 06. Chapter 07, *Time*, is next.
+
+**The column holds a date rather than a tick**, and the date is taken from the author's review commit for that chapter rather than assigned.
+That makes it falsifiable: if a chapter has been changed substantially since the date beside it, the read no longer covers what is on the page.
+A tick could not be checked against anything.
+
+**Naming.** The author's word was *proofread*; the column says **Full read**.
+Proofreading names a surface check, and this pass produced a chapter split and a new opening chapter — a future session reading `docs/STATUS.md` should not conclude that these chapters have only had their spelling looked at.
+
+**Consequence.**
+`docs/STATUS.md` gains a section explaining the axis, including that nothing depending on `draft` should read the column, and that the numbers in it were mapped forward through two renumberings.
+`CLAUDE.md` gains one line, so the column is discoverable by a session that reads only that file.
+The `bare ref` check caught two chapter references in the draft's own explanatory prose, which is the rule applying to `docs/` as well as to chapters.
