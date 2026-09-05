@@ -12,7 +12,7 @@ Only the author moves a chapter to **draft** or **ready**.
 
 | Chapter | File | Status |
 |---|---|---|
-| 01 | `01_load-bearing_w8kq.md` | *in progress* |
+| 01 | `01_load-bearing_w8kq.md` | **draft** |
 | 02 | `02_the-five-kinds_cjx4.md` | **draft** |
 | 03 | `03_forces_f4m5.md` | **draft** |
 | 04 | `04_grading-a-law_q5c6.md` | **draft** |
