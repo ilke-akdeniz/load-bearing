@@ -113,7 +113,7 @@ func (s *Store) SignUpAtomic(email, password string) error {
 	passwordHash := hash(password) // slow work first, before taking the lock
 
 	s.mu.Lock()
-	defer s.mu.Unlock() // will release lock at func exit
+	defer s.mu.Unlock()
 
 	for _, user := range s.users { // CHECK
 		if user.Email == email {
@@ -295,7 +295,7 @@ smallest non-zero gap observed: 1000 ns
 
 Python agrees, to within a percent. **Ninety-five per cent of the time, two consecutive readings of the clock are the same number.** The wall clock on this machine advances in one-microsecond steps, and anything finer than that is invisible to it. Two events a hundred nanoseconds apart do not get an order — they get the same timestamp.
 
-That is just one machine, with nothing going wrong. Now add the things that do:
+That is one machine, with a working clock and nothing malfunctioning — and the ordering has already failed. Now add the things that can also break:
 
 - **Skew.** Two machines' clocks disagree, typically by milliseconds under NTP and by far more when NTP is broken, which it silently is more often than anyone assumes.
 - **Jumps.** The wall clock is corrected, and moves *backwards*. A timestamp taken after another can be smaller than it.
