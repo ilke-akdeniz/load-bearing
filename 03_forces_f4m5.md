@@ -258,7 +258,7 @@ That is not evidence of a careless team. It is a structure whose boundaries do n
 
 > **How many people must agree to change this, and how many of today's people will still be here in two years?**
 
-Turnover is the half that gets dropped, and it is the sharper one. A rule that lives in one person's head is free while they are there and worth nothing the week after they leave.
+Turnover is the one that gets dropped, and it is the sharper one. A rule that lives in one person's head is free while they are there and worth nothing the week after they leave.
 
 ```go
 // Two authors, both here since the first commit. A comment is enough:
@@ -291,7 +291,7 @@ func FromMinorUnits(amount int64, currency string) Money {
 
 The second version is not free: it costs a package boundary and a constructor call at every site, and it is worth that only at some sizes. [Chapter 13](13_patterns-that-survive-translation_us2k.md) catalogues the technique; the point here is that **the same rule needs a different mechanism at a different team size**, and neither mechanism is the better engineering in general.
 
-**AI coding agents sit at the extreme of both halves.** The Force asks how many people must agree and how many will still be here, and for coding agents the answer to the second is *nobody*. The model was present for no conversation and keeps nothing between sessions, and its output arrives at a volume the review step was not sized for. The Forces that would settle the decisions inside that output are facts about your situation, held by you, and they reach the agent only as far as some prompt happened to carry them.
+**AI coding agents sit at the extreme of both questions.** The Force asks how many people must agree and how many will still be here, and for coding agents the answer to the second is *nobody*. The model was present for no conversation and keeps nothing between sessions, and its output arrives at a volume the review step was not sized for. The Forces that would settle the decisions inside that output are facts about your situation, held by you, and they reach the agent only as far as some prompt happened to carry them.
 
 So the prediction is specific. **Two authors with an agent in the loop sit where twenty developers sit.** A comment works only while somebody remembers the argument behind it, and a review habit is the same bet on memory made by a larger group — neither survives a contributor who was present for no conversation and keeps nothing between sessions. The migration named above — comment, then review habit, then type system — stops tracking headcount, and what still holds is what the compiler, a constraint, or a test enforces. [Chapter 24](24_never-written-down_at4r.md) turns to rules nobody wrote down at all, which have nothing to migrate.
 

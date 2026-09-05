@@ -234,11 +234,11 @@ The invariant is the same on both sides, and stating it precisely is what makes 
 
 > **At most one holder of this role at a time, and everyone agrees which one it is.**
 
-In one process, both invariants are free. There is one memory space, so a single variable *is* the one instance, and "everyone agrees" is not a question anyone can ask — there is nothing that could disagree.
+In one process, both requirements are free. There is one memory space, so a single variable *is* the one instance, and "everyone agrees" is not a question anyone can ask — there is nothing that could disagree.
 
 Across machines the same sentence becomes hard. Note what is *not* being claimed: the cluster obviously has many machines, and nobody is trying to prevent that. The singleton is in the **role**, not the hardware — exactly one machine may be running the nightly billing job, holding the write lease, or acting as primary, while the others stand ready.
 
-Both invariants now cost something. "At most one" needs a mechanism that stops a second machine from starting when the first is merely slow — and [chapter 08](08_distribution_49yh.md) shows you cannot tell a slow machine from a dead one, so that mechanism is a lease with a timeout and a guess. "Everyone agrees" is consensus, which [chapter 08](08_distribution_49yh.md) shows cannot be guaranteed to terminate.
+Both requirements now cost something. "At most one" needs a mechanism that stops a second machine from starting when the first is merely slow — and [chapter 08](08_distribution_49yh.md) shows you cannot tell a slow machine from a dead one, so that mechanism is a lease with a timeout and a guess. "Everyone agrees" is consensus, which [chapter 08](08_distribution_49yh.md) shows cannot be guaranteed to terminate.
 
 So the name survives the crossing and its cost does not. In one process, `sync.Once` and a package variable. Across machines, a consensus protocol, a lease duration nobody is confident about, and a plan for what the old holder does when it wakes up believing it is still in charge.
 

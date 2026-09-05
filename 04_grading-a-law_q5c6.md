@@ -147,7 +147,7 @@ Neither is a mistake. Go judged the freedom worth more than the convenience and 
 
 **What makes this an empirical law rather than a theorem is that both outcomes were available.** No proof forced either. And notice what happened to the claim in Python's case: the observable behaviour that "will be depended upon" became documented behaviour, so the law's own prediction, taken seriously, changed the thing it was predicting. A theorem cannot do that.
 
-The practical form of the claim has two versions, and the second is the one that survives a successful measurement: **quoting somebody's number is not the same as knowing yours, and knowing yours does not mean you should be chasing their target.** A 40% cache miss rate is a fact about you; whether it should be 5% depends on what a miss costs you, which is a different measurement again.
+What survives a successful measurement is this: **quoting somebody's number is not the same as knowing yours, and knowing yours does not mean you should be chasing their target.** A 40% cache miss rate is a fact about you; whether it should be 5% depends on what a miss costs you, which is a different measurement again.
 
 ---
 

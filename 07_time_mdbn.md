@@ -269,7 +269,7 @@ The price is that the partition is now part of your design, permanently. Any ope
 
 ### Clocks do not order events
 
-The second half, and it surprises people who accept the first half easily.
+The second sentence, and it surprises people who accept the first easily.
 
 The intuition is that if event A has an earlier timestamp than event B, A happened first. Start with one machine — no network, no skew, one process — and ask whether the clock can even distinguish two adjacent events:
 
@@ -346,7 +346,7 @@ Both sentences reduce to one property of the world: **an observation is a statem
 
 The moment you read a value, that reading describes a state that may already be gone. Nothing about being careful changes this — the gap between reading and acting is where instructions execute, and instructions take time. A lock does not abolish the gap; it stops anyone else from using it, which is a different and more expensive thing.
 
-The clock half is the same property viewed from further away. To say two events happened in an order you need a shared reference, and a shared reference is exactly what independent machines lack. A clock is not a shared reference — it is a local approximation of one, and comparing two approximations gives you an answer that is usually right and fails in the case you built the comparison to handle.
+Ordering across machines is the same property viewed from further away. To say two events happened in an order you need a shared reference, and a shared reference is exactly what independent machines lack. A clock is not a shared reference — it is a local approximation of one, and comparing two approximations gives you an answer that is usually right and fails in the case you built the comparison to handle.
 
 This is why the material is definitional rather than empirical. There is no faster machine on which check-then-act becomes atomic, and no better NTP configuration that makes wall clocks order events. The claims follow from what "check," "act," and "clock" mean.
 

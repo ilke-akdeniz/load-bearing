@@ -191,7 +191,7 @@ The difference is not that an interface appeared. It is **which module owns it.*
 
 ### Anyone can depend on what you expose
 
-Everything so far has been about which way the arrows point. This is about how many exist at all — the second half of the same number. A cycle is two arrows where there should be one. Information hiding is about not creating an arrow in the first place. A dependency that was never created costs nothing to change, forever.
+Everything so far has been about which way the arrows point. This is about how many exist at all — the other way of losing control of the same number. A cycle is two arrows where there should be one. Information hiding is about not creating an arrow in the first place. A dependency that was never created costs nothing to change, forever.
 
 Parnas, 1972 — the founding paper, and still the clearest statement: decompose a system by what each module *hides*, not by the steps of the process it performs. The value of a module is the decision it keeps to itself, because that is the decision you can change later without telling anyone.
 

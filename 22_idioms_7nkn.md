@@ -234,7 +234,7 @@ func writeReport(path string, rows []Row) (err error) {
 }
 ```
 
-So the test has a second half. Name the condition, and then check that the convention actually follows from it — because *cleanup should be adjacent* does not imply *throw away the return value*, and the second rode in with the first. **An Idiom you merely dislike survives that check. An Idiom encoding a mistake fails it, and fails it in a way you can show someone**, which is the difference between a defect report and a preference.
+So the test has a second step. Name the condition, and then check that the convention actually follows from it — because *cleanup should be adjacent* does not imply *throw away the return value*, and the second rode in with the first. **An Idiom you merely dislike survives that check. An Idiom encoding a mistake fails it, and fails it in a way you can show someone**, which is the difference between a defect report and a preference.
 
 ---
 
