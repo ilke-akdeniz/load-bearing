@@ -5562,6 +5562,10 @@ It has been through a review pass, but `CLAUDE.md` reserves that transition for 
 
 **Date.** 2026-09-04
 
+**The chapter this produced** is [chapter 01](../01_load-bearing_w8kq.md), *Is This Load-Bearing?*, id `w8kq`.
+It was built and reviewed as `01_candidate_w8kq.md` alongside the existing chapter 01, and seated at 01 by [decision 137](#137-the-candidate-is-seated-at-01-and-the-book-runs-to-twenty-five) once the author confirmed.
+This entry and [decision 136](#136-four-cuts-in-the-candidate-and-one-rule-about-the-reader) call it *the candidate* throughout, which is what it was called at the time.
+
 **Context.**
 The author proposed a light opening chapter expanding the load-bearing metaphor, and supplied a structural-engineering article to draw on.
 
@@ -5659,3 +5663,46 @@ Accepted as a deliberate exception rather than an oversight: this chapter hands 
 The draft, removing a generic *he*, had also cut *Software* from *Software developer*.
 The author: *"Developer" alone is confusing in a passage about buildings and builders without "Software" before it.*
 Correct — the paragraph names a builder in the next clause. The pronoun removal stands; the noun is back, with its article.
+
+---
+
+## 137. The candidate is seated at 01, and the book runs to twenty-five
+
+**Date.** 2026-09-04
+
+**Context.**
+With the candidate written and reviewed, the author weighed three placements and named the misgiving behind all of them: *it reads like an "introduction". It's so short for a chapter and doesn't follow the standard format.*
+
+1. `00_introduction.md` — front matter rather than a chapter.
+2. Appended to the top of the existing chapter 01, so no new file and no renumbering.
+3. Its own chapter at 01, with 01 through 24 shifting up.
+
+**Decision.** Option 3, on the author's word. The file is `01_load-bearing_w8kq.md`; the slug was the draft's choice and the author did not specify one.
+
+**Why the first two were rejected on concrete grounds rather than preference.**
+
+**Appending breaks a rule this book wrote down.** The rubric's first point is *"one sentence, and the chapter opens on it. No epigraph, no framing paragraph before it — a reader who does not yet know the subject cannot use a note about the subject's standing."* Twelve hundred words in front of chapter 01's claim is that rule violated at scale, and it produces a 4,520-word chapter doing two unrelated jobs, in a book that had just spent a week splitting one chapter for exactly that reason.
+
+**`00_introduction.md` contradicts [decision 103](#103-there-is-no-chapter-01-the-readme-is-the-introduction-and-0223-become-0122)**, which established the README *as* the introduction after three failed attempts at an opening chapter — so it puts a second introduction in front of the first. It also needs tool surgery: `tools/check-drift.py` excludes `00_toc.md` by name, so a second `00_` file would be read as a chapter, fail the identifier check and fail the contents check, leaving a permanent special case in the checker to accommodate one file.
+
+**The argument that decided it is about what mode the reader is in.**
+A README is read by somebody deciding whether to bother; a chapter is read by somebody who has decided.
+This chapter's opening only works on the second reader — it puts them inside a review comment, has them comply against their own judgement, and then shows them a trade that solved that problem.
+In front matter it is skimmed on the way to the contents page, which is the wrong mode for it.
+
+**Two costs were named before the decision rather than discovered after it.**
+
+At 1,240 words it is **half the book's shortest chapter** — the range was 2,380 to 6,130 and is now roughly 5×. Deviating from the rubric has precedent, since Part IV's cases dropped the claim requirement and that is recorded; being this short does not.
+
+**Part I is now three chapters**, and *Claims and Forces* opens with a chapter about neither, exactly. It fits loosely — the subject is how claims arrive without their standing — and the part name is worth revisiting now that the contents page shows the three together.
+
+**Mechanics.**
+Two commits, renames first with no content edits, as the rule requires.
+1,168 filename references rewritten and 1,106 link numbers re-derived from their own targets rather than incremented; the contents page and all twenty-five navigation rows regenerated from the chapter files.
+The chapter's own forward references needed no edit: it was written citing chapter 02 for the five kinds and chapter 03 for Forces, and after the shift both the targets and the numbers are correct.
+
+**Ledger.**
+Seven rows for `w8kq`, three of them written to disclaim neighbouring territory rather than only to claim their own — the three kinds of load point at `f4m5` for Forces themselves and keep only the observation that the building trade separates them and software does not; walking a claim back to its supports is provenance, explicitly not `agjy`'s code dependency graph; and load-bearing-by-circumstance credits `cjx4` with the software statement of the same idea.
+
+**Status.**
+Chapter 01 is recorded at **in progress**. The author's confirmation was for the placement, not for the status, and that transition is theirs.
