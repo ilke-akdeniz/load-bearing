@@ -87,19 +87,19 @@ func (s *Store) append(user User) {
 }
 ```
 
-Neither can corrupt the slice. Both are correct.
+Neither can corrupt the users slice. Code seems correct.
 
-Fifty concurrent registrations for the same address:
+However, a test with fifty concurrent registrations for the same address reveals it is not:
 
 ```text
 BAD  accounts for ada@example.com: 50
 ```
 
-Not two. Fifty. Every request checked, every request found the address free, and every request was right at the moment it looked. Then each spent two milliseconds hashing a password, and by the time the first record was appended, the other forty-nine had already made their decision.
+Every request checked for already registered email invariant and found no issue at the moment it looked. Then each spent two milliseconds hashing a password, and by the time the first user was appended, the other forty-nine had already made their decision.
 
 Three things are worth taking from that number.
 
-**Locking each step protects each step and nothing else.** The slice was never corrupted. What broke was a rule that spans two operations, and no amount of locking inside them can span them.
+**Locking each step protects each step and nothing else.** The users slice was never corrupted. What broke was a rule that spans two operations, and no amount of locking inside them can span them.
 
 **The window is as wide as the work you do in it.** Remove the password hashing and the same code produces one row on this machine, most of the time — which is worse, not better, because the bug is still there and now it only appears under load, in production, when the machine is busy.
 
@@ -113,7 +113,7 @@ func (s *Store) SignUpAtomic(email, password string) error {
 	passwordHash := hash(password) // slow work first, before taking the lock
 
 	s.mu.Lock()
-	defer s.mu.Unlock()
+	defer s.mu.Unlock() // will release lock at func exit
 
 	for _, user := range s.users { // CHECK
 		if user.Email == email {
@@ -247,11 +247,13 @@ That is the cheap fix for one number. For the general case, the equation in the 
 
 **Remove the mutability.** Nobody writes to anything anyone else can see. Values go in, new values come out.
 
-The third term, concurrency, is usually the reason the program exists, so it is the one you cannot give up. That is why the practical advice is always about the other two — and why "just add a lock" is a fourth thing, which serializes the race rather than removing it, and brings the costs set out at the end of this chapter.
+**Remove the concurrency.** Just use a plain loop to count, without any workers. This looks like the best option for this hypothetical teaching code but in real life it's usually unfeasible. Concurrency is often the reason the program exists, so you cannot just remove it. 
+
+"Just add a lock" is a fourth option, which serializes the race rather than removing it, and brings the costs set out at the end of this chapter.
 
 ### Only the lock-holder can enforce
 
-The registration fix above works because one mutex covered both steps. Two processes cannot share a mutex, so raise the same move up a level:
+The registration fix above works because one mutex covered both steps. Two processes cannot share a mutex, so you have to raise the same move up a level:
 
 ```sql
 create unique index ux_account_email on account (lower(email));
@@ -259,7 +261,7 @@ create unique index ux_account_email on account (lower(email));
 
 The rule is now checked by the component that holds the row locks, at the instant of the write. There is no window, because there is no separate check — the decision and the write are one statement, and the loser of a race gets an error rather than a duplicate row.
 
-**The general rule, and it is the useful one:** a rule about data can only be enforced by whatever can see all of that data and stop it changing. Application code cannot enforce uniqueness across rows it has not read and cannot hold still. It is not that the database is a *better* place for the rule — it is the only place the rule can be true.
+**The general rule, and it is the useful one:** a rule about data can only be enforced by whatever can see all of that data and stop it changing. Application code cannot enforce uniqueness across rows it has not read and cannot hold still. It is not that the database is a *better* place for the rule — it is the only place the rule can be enforced reliably.
 
 There is a corollary worth stating separately, because it is the part people resist: **an application-level check is not wrong, but it is not the enforcement.** Keep it, because it produces a good error message and saves a round trip in the common case. Do not count it as the guarantee, and do not remove the constraint because the check is there.
 
@@ -267,13 +269,13 @@ There is a corollary worth stating separately, because it is the part people res
 
 The strongest version of removing the sharing. If exactly one thread, process, or partition ever writes a piece of state, then no write can interleave with another, and the entire apparatus above becomes unnecessary — no locks, no atomics, no constraint to enforce.
 
-This is why partitioned designs are fast. A queue consumer that owns its partition, an actor that owns its state, a shard that owns its key range — each is a single writer, and the coordination cost is zero because there is nothing to coordinate with.
+This is why partitioned designs are fast. A queue consumer that owns its partition, an actor that owns its state, a shard that owns its key range — each is a single writer, and the coordination cost is zero because there is nothing to coordinate with. [-- add no-partitioned design in the same manner here so that we can better contrast the benefit of the partitionaed one.]
 
 The price is that the partition is now part of your design, permanently. Any operation spanning two partitions is back to needing coordination, and the boundaries are difficult to move once data has accumulated behind them ([Ch. 03](03_forces_f4m5.md), on why that decision expires).
 
-### Clocks do not order events
+### No clock can tell you what happened first.
 
-The second sentence, and it surprises people who accept the first easily.
+The second sentence of the claim, and it even surprises people who accept the first easily.
 
 The intuition is that if event A has an earlier timestamp than event B, A happened first. Start with one machine — no network, no skew, one process — and ask whether the clock can even distinguish two adjacent events:
 
@@ -291,7 +293,7 @@ smallest non-zero gap observed: 1000 ns
 
 Python agrees, to within a percent. **Ninety-five per cent of the time, two consecutive readings of the clock are the same number.** The wall clock on this machine advances in one-microsecond steps, and anything finer than that is invisible to it. Two events a hundred nanoseconds apart do not get an order — they get the same timestamp.
 
-That is on one machine, before anything has gone wrong. Now add the things that do go wrong:
+That is the simple failure on just one machine, now add more things that can go wrong:
 
 - **Skew.** Two machines' clocks disagree, typically by milliseconds under NTP and by far more when NTP is broken, which it silently is more often than anyone assumes.
 - **Jumps.** The wall clock is corrected, and moves *backwards*. A timestamp taken after another can be smaller than it.
