@@ -1,26 +1,26 @@
 # Is This Load-Bearing?
 
-"AccountRepository needs an interface - Depend on abstractions" 
+> **AccountRepository needs an interface — depend on abstractions.**
 
 Says the code review for your latest commit.
 
-On one hand, the advice sounds reasonable. Everybody knows the maxim "Depend on abstractions", and adding an interface wouldn't hurt anything right? Still, something in your gut tells that the interface for this commit would be pure drudgery, without any benefit. But it's very hard to establish that fact in a convincing manner. So you oblige with the request and move on. 
+On one hand, the advice sounds reasonable. Everybody knows the maxim "Depend on abstractions", and adding an interface would not hurt anything, right? Still, something in your gut says the interface would be pure drudgery here, with no benefit at all. But that is hard to establish in a convincing way, so you comply with the request and move on.
 
-Notice that review carries no information you can object. It arrives finished with a confident tone, similar to *don't repeat yourself*, *dependencies must not be circular*, or *put braces on the same line*.
+Notice that the review carries nothing you can object to. It arrives finished with a confident tone, similar to *don't repeat yourself*, *dependencies must not be circular*, or *put braces on the same line*.
 
-This is an uncomfortable perspective about software claims. It feels like as developers, we are sometimes drill-sergeants, sometimes privates, giving and following clear orders with minimal room for interpretation. But maybe, military is not the right field in search for clues about software claims.
+This is an uncomfortable position to be in. It feels like as developers, we are sometimes drill-sergeants, sometimes privates, giving and following clear orders with minimal room for interpretation. But maybe, military is not the right field in search for clues about software claims.
 
-## Builders don't guess if a wall is safe to demolish or not
+## Builders do not guess whether a wall can come out
 
-A builder opening up a kitchen faces a similar dilemma shape, with worse consequences. Software developer was trying to gauge if he can safely ignore the advice given, the builder is trying to gauge if he can ignore the wall. Is it safe to demolish or is it actually holding the building up?
+A builder opening up a kitchen faces the same dilemma with worse consequences. The developer was trying to gauge whether the advice could safely be ignored; the builder is trying to gauge whether the wall can. Is it safe to demolish or is it actually holding the building up?
 
 Nothing about the wall answers that. Plastered and painted, a wall carrying the floor above looks exactly like one put there to divide two rooms. Same thickness, near enough. Same sound when you knock.
 
 So the builder does not examine the wall. They look at what rests on it.
 
-Which way do the floor joists run — parallel to the wall, or across it? Do they end on top of it, or pass over and land somewhere else? Is there a beam or a foundation wall directly below, in line and so on. Not one of those questions is about the wall. Every one is about the wall's surroundings.
+Which way do the floor joists run — parallel to the wall, or across it? Do they end on top of it, or pass over and land somewhere else? Is there a beam or a foundation wall directly below, in line? And so on. Not one of those questions is about the wall. Every one is about the wall's surroundings.
 
-Which is usually the part with no software equivalent. When a claim arrives in review, there is no inspection to perform. There is the sentence, and there is the confidence of the person who said it — and confidence is a fact about the speaker, not about the claim. The builder has a procedure that does not care about the confidence of mason who erected the wall.
+Which is the part with no software equivalent. When a claim arrives in review, there is no inspection to perform. There is the sentence, and there is the confidence of the person who said it — and confidence is a fact about the speaker, not about the claim. The builder has a procedure that does not care about the confidence of the mason who built the wall.
 
 **A wall is not load-bearing by nature. It is load-bearing by circumstance.**
 
@@ -33,7 +33,7 @@ The software version of that sentence is the first thing this book demonstrates:
 Ask a builder what a wall carries and you do not get a number, you get three answers, because the loads are different in kind.
 
 - **Dead load** is the permanent weight — the structure, the roof, the floors, the pipes that will still be there in fifty years.
-- **Live load** is everything temporary and variable: people, furniture, snow, a room somebody filled with filing cabinets without asking. 
+- **Live load** is everything temporary and variable: people, furniture, snow, a room somebody filled with filing cabinets without asking.
 - **Lateral load** arrives sideways rather than downward, from wind or from ground movement in an earthquake, and it is the one people picture last, because gravity is intuitive and horizontal force is not.
 
 Those are three separate questions with three separate answers, and a wall can be adequate for two of them.
@@ -54,7 +54,7 @@ It is also where the method ran out. Going higher meant thicker walls still, and
 
 The proof is in the same building. The south half, finished two years later on a steel frame, delivered **fifteen percent more rentable space at fifteen percent less weight**. One address, two structural strategies, and a measurement of the difference between them.
 
-That is the shape most software advice takes and almost none of it admits to. Not *this is wrong*, but *this was right and has stopped paying*, with nothing marking the moment it turned. 
+That is the shape most software advice takes and almost none of it admits to. Not *this is wrong*, but *this was right and has stopped paying*, with nothing marking the moment it turned.
 
 ## The part where the analogy runs out
 
@@ -62,9 +62,9 @@ A builder who cannot tell calls a structural engineer. There is a qualification,
 
 There is nobody to call about *the repository needs an interface*. There is no test that settles it, no register of who is qualified to say, and no consequence for whoever is wrong. Which is why the question has to be one you can run yourself, on the spot, in a review comment, with no tape measure.
 
-The rest of this book is an attempt to build that. Not a set of rules to follow — the trade already has plenty of those, and their arriving all in one voice is the problem rather than the solution. What follows is a way of telling what kind of claim you are holding, what it is resting on, and where it stops. The goal is the be able to inquire more systematically with the question:
+The rest of this book is an attempt to build that. Not a set of rules to follow — the trade already has plenty of those, and their arriving all in one voice is the problem rather than the solution. What follows is a way of telling what kind of claim you are holding, what it is resting on, and where it stops. The goal is to be able to ask, and to answer:
 
-"Is this wall of claim load-bearing?"
+**Is this claim load-bearing?**
 
 ---
 
