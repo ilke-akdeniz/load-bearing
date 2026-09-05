@@ -5555,3 +5555,107 @@ What moved is the *example*, not the ownership, and the row now says so.
 **Status.**
 Chapter 05 is recorded at **in progress**, not draft.
 It has been through a review pass, but `CLAUDE.md` reserves that transition for the author's word rather than the draft's judgement that a chapter looks finished, and the author's go-ahead was for the promotion rather than for the status.
+
+---
+
+## 135. A chapter 01 after all, and what decision 103 actually forbade
+
+**Date.** 2026-09-04
+
+**Context.**
+The author proposed a light opening chapter expanding the load-bearing metaphor, and supplied a structural-engineering article to draw on.
+
+Two recorded decisions bore on it, pulling opposite ways, and both were surfaced before any writing.
+
+[Decision 1](#1-title-load-bearing), which chose the title, ends: *"The load-bearing metaphor is now the book's spine and should recur as the reader's question, not as decoration."*
+A survey found it does not.
+It appears in `README.md` once and in `CLAUDE.md` once; across twenty-four chapters it never appears as the reader's question, only as an ordinary adjective — *the load-bearing line*, *the load-bearing phrase*, *the name is load-bearing for search*.
+That is the metaphor demoted to vocabulary, which is what the no-decoration rule exists to catch.
+So the spine was declared and never grown, and the author's instinct was already the book's own unmet commitment.
+
+**Decision 103 is the one that had to be cleared**, having killed an opening chapter after three attempts.
+Its reason is specific: each attempt failed because *"it cannot be given a claim that is not already somebody else's."*
+This proposal is explicitly not claim-shaped, so it does not meet that test — and the book already has a precedent for a chapter with a different shape, since Part IV's cases dropped the claim requirement on the ground that a chapter whose job is not to make a claim does not need one.
+Recorded as consciously revisiting 103 rather than forgetting it.
+
+**The options, enumerated by the author.**
+
+1. New chapter 01, nothing else in the book changes.
+2. New chapter 01, plus sentences and analogies placed through the book where they improve a chapter.
+3. No new chapter; the material distributed to existing chapters.
+
+**Decision.** Option 1.
+
+**Why, and the reason emerged from a survey rather than from taste.**
+Twenty-two of the twenty-four chapters already end on the same structural slot — *"The question that does the work: …"* — handing the reader a question rather than a rule.
+The recurrence decision 1 asked for already exists as a mechanism; what was missing was anything connecting it to the title.
+That makes option 2's sprinkling redundant, and redundant decoration is the worst kind.
+Option 3 was ruled out on the ledger's own logic: a concept distributed across twenty-four chapters with no owning chapter is the failure the ledger exists to prevent, and the Monadnock material, the load taxonomy and the factor of safety belong to no existing chapter's subject.
+
+One limit was checked rather than assumed: those closing questions are **not** all versions of *is this load-bearing?*
+Roughly two-thirds are; [chapter 07](../07_distribution_49yh.md)'s *what does this code do when the reply never comes?* is not.
+Claiming otherwise would have been the overclaim that turns the metaphor back into decoration.
+
+**Where the chapter starts, given the README.**
+The README's premise section already runs the same sequence — software problem, the acyclic-versus-repository pair, then the builder's question — and this is precisely how decision 103's third attempt died.
+The author's ruling: *keep the README as is, chapter starts where it stops.*
+The README asks the question and drops it; the chapter is the answer the README has no room for, which is how the other trade actually tells.
+
+**On the analogy, where the draft was wrong.**
+The draft first wrote the chapter as contrast rather than analogy, out of reluctance about the no-decoration rule.
+The author: *the title is an analogy and this chapter itself is essentially an analogy, that limitation would not make sense for this chapter.*
+That is right, and the draft's reluctance was not the rulebook's.
+The line worth keeping is narrower and both parties drew it: **building facts frame the question; they are never evidence about software.** *Engineers separate three kinds of load and we separate none* is an observation; *software has dead and live loads* would be invented precision.
+
+**Structure, after a misread.**
+The author's objection to the first draft was that it read like a construction-engineering book until halfway through — *a person can pickup the book and really think "oh I picked the wrong book this is not about software."*
+The draft answered with a proposal to cut building material, and was corrected: *I didn't ask for a selection and didn't object to engineering… it's about being the first thing in the chapter, uninterrupted.*
+Placement, not size.
+The fix is per-idea alternation — every building fact cashed out in software before the next arrives — and nothing was cut.
+
+**The source the chapter is built on was wrong, and reading a better one fixed it.**
+The supplied article dates the Monadnock Building's six-foot masonry walls to 1893.
+1893 is the *steel* half; the masonry half is 1891.
+The better source also carries the fact that makes the example: both halves are one building, and the steel half delivered fifteen percent more rentable space at fifteen percent less weight.
+And it gives the sharper reason — *"greater height would have required walls of such thickness that they would have reduced the rentable space too greatly"* — so masonry did not fail structurally, it stopped paying, which is the book's shape exactly.
+
+---
+
+## 136. Four cuts in the candidate, and one rule about the reader
+
+**Date.** 2026-09-04
+
+**Context.**
+Reviewing the candidate, the author replaced the opening and made four cuts.
+The draft raised all four rather than restoring any, and the author ruled on each.
+The rulings are recorded because three of them generalise.
+
+**The opening is the author's and is better than the draft's.**
+The draft opened on an abstraction about tone of voice.
+The author opened on a code review comment — *AccountRepository needs an interface — depend on abstractions* — and on complying with it against your own judgement: *something in your gut says the interface would be pure drudgery here… so you comply with the request and move on.*
+That is the experience the book is about, and it also earns the later line that these arguments *either do not start or do not end*, since the argument in the opening never starts.
+
+**The factor-of-safety section: cut because it was unclear, not because it was unnecessary.**
+The draft argued it was the only piece where the other trade wrote its own uncertainty down as a number.
+The author: *it was a confusing stretch of metaphor, I had problems deciphering it myself.*
+That outranks the draft's argument. A passage the author cannot follow is not saved by being conceptually apt, and the draft's case was for the idea rather than for the paragraphs on the page.
+
+**The paragraph naming the book's own structure: cut, and the reason is a general rule.**
+The draft had ended the chapter by observing that every chapter closes on a question, listing three of them, and had defended it as the thing that makes the title's question recur.
+The author: *maybe it relates to an important decision for us but it's not relateable to the reader. The reader won't care about how future chapters end.*
+
+**This is the rule, and it is worth stating beyond this chapter: the book's internal architecture is not the reader's business.**
+Decision 135's survey — that twenty-two chapters end on a handed-over question — is a sound reason for the draft to have recommended option 1.
+It is not a thing to tell the reader about.
+A reason for a structural decision and a passage in a chapter are different artifacts, and the draft conflated them.
+
+**No formal handoff, by decision.**
+The chapter ends on **Is this claim load-bearing?** with nothing after it.
+`CLAUDE.md` requires the argument's last paragraph to hand off to the next chapter, and [decision 132](#132-a-handoff-signals-the-next-chapter-it-does-not-state-its-claim) had just narrowed how.
+The author: *the last paragraph is a handoff to the rest of the book and the last question would lose it's effect if a handoff follows it.*
+Accepted as a deliberate exception rather than an oversight: this chapter hands off to the whole book rather than to the chapter next door, which is what an opening chapter does, and a pointer to chapter 02 placed after the book's own question would deflate it.
+
+**"Software developer", restored by the author over the draft's edit.**
+The draft, removing a generic *he*, had also cut *Software* from *Software developer*.
+The author: *"Developer" alone is confusing in a passage about buildings and builders without "Software" before it.*
+Correct — the paragraph names a builder in the next clause. The pronoun removal stands; the noun is back, with its article.

@@ -12,7 +12,7 @@ This is an uncomfortable position to be in. It feels like as developers, we are 
 
 ## Builders do not guess whether a wall can come out
 
-A builder opening up a kitchen faces the same dilemma with worse consequences. Software developer was trying to gauge whether the advice could safely be ignored; the builder is trying to gauge whether the wall can. Is it safe to demolish or is it actually holding the building up?
+A builder opening up a kitchen faces the same dilemma with worse consequences. The software developer was trying to gauge whether the advice could safely be ignored; the builder is trying to gauge whether the wall can. Is it safe to demolish or is it actually holding the building up?
 
 Nothing about the wall answers that. Plastered and painted, a wall carrying the floor above looks exactly like one put there to divide two rooms. Same thickness, near enough. Same sound when you knock.
 
