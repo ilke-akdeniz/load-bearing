@@ -2,9 +2,9 @@
 
 ## The claim
 
-**The patterns that last are answers to Forces, or answers to the shape of the problem — and grouping them by the Force they answer tells you which one you need, where a catalogue organized by pattern shape cannot.**
+**The patterns that last are answers to Forces, or answers to the shape of the problem. Grouping patterns by the Force they answer tells you which one you need, where a catalogue organized by pattern shape cannot.**
 
-Two halves, and the second is the practical one. A catalogue is arranged by what patterns look like, so it can only be searched by a name you already have. Arranged by Force, the same material can be searched from the situation, which is the direction you are actually travelling.
+The claim has two halves, and the second is the practical one. A catalogue is arranged by what patterns look like, so it can only be searched by a name you already have. Arranged by Force, the same material can be searched from the situation, which is the direction you are actually travelling.
 
 So this chapter sorts the field against [chapter 03](03_forces_f4m5.md)'s seven Forces, in [chapter 03](03_forces_f4m5.md)'s order. Forty-nine patterns fall into them, and a handful answer the shape of the problem instead — a state machine is right when the domain has states, which is a fact about the business rather than about your circumstances. What is left over after both is the interesting residue, and it is dealt with in the boundary section.
 

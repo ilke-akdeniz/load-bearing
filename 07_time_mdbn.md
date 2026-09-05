@@ -4,7 +4,7 @@
 
 **A check tells you what was true, not what is true. And no clock tells you what happened first.**
 
-Both halves are the same fact wearing different clothes: **there is no shared now.** Inside one machine that means your observation is already stale when you act on it. Across machines it means there is no agreed ordering of events at all, and the timestamps you would use to build one are not up to the job.
+Both sentences are the same fact wearing different clothes: **there is no shared now.** Inside one machine that means your observation is already stale when you act on it. Across machines it means there is no agreed ordering of events at all, and the timestamps you would use to build one are not up to the job.
 
 This is the chapter that turns *be careful with shared state* into something you can check.
 
@@ -342,7 +342,7 @@ What a Lamport clock does *not* give you is the reverse reading: a smaller numbe
 
 ## Why the claim holds
 
-Both halves reduce to one property of the world: **an observation is a statement about the past.**
+Both sentences reduce to one property of the world: **an observation is a statement about the past.**
 
 The moment you read a value, that reading describes a state that may already be gone. Nothing about being careful changes this — the gap between reading and acting is where instructions execute, and instructions take time. A lock does not abolish the gap; it stops anyone else from using it, which is a different and more expensive thing.
 

@@ -138,7 +138,7 @@ What makes the partition stick is an asymmetry in who can change what.
 
 So internal boundaries stay fluid and shared ones calcify — not because anyone is tempted into bad design, but because one kind of correction is free and the other needs a meeting, a quarter, and somebody's agreement.
 
-This is why good engineers do not escape it. Two excellent engineers who own the two halves of a badly split problem will each build their half well. Neither is in a position to notice that the split itself was wrong, and if one does notice, fixing it is not an engineering decision they are allowed to make.
+This is why good engineers do not escape it. Two excellent engineers who own the two parts of a badly split problem will each build their part well. Neither is in a position to notice that the split itself was wrong, and if one does notice, fixing it is not an engineering decision they are allowed to make.
 
 **Neither shape is better in itself**, and this is where the law is most often misread. Tight coupling between two things that genuinely are one thing is right — splitting them adds ceremony to something indivisible. A firm interface between things that genuinely are separate is also right. The law does not say that distance improves design.
 
@@ -147,7 +147,7 @@ What it says is that **your software gets its seams where the work was divided**
 Both directions of mismatch are common.
 
 - **One owner, two natural parts.** A team that owns what should be two separable things builds them as one. Nothing is broken and every test passes, so nobody notices — until the day the two need to ship on different schedules, or scale differently, or one has to be replaced, and it turns out they share state, types, and a deployment.
-- **Two owners, one natural unit.** Two teams owning halves of something indivisible put a network call, a queue, or a versioned interface through the middle of it. Every change that should be one commit becomes two releases and a coordination meeting.
+- **Two owners, one natural unit.** Two teams owning parts of something indivisible put a network call, a queue, or a versioned interface through the middle of it. Every change that should be one commit becomes two releases and a coordination meeting.
 
 *(The quotations are from Conway's 1968 paper, "How Do Committees Invent?" The negotiation mechanism is his. What this book adds is the asymmetry that makes a partition stick — free to change inside an owner, expensive across — and the reading of "communication structure" as ownership, which is how his design-group argument lands in an organization that has teams rather than committees.)*
 
