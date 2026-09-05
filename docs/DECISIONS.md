@@ -5754,3 +5754,79 @@ Proofreading names a surface check, and this pass produced a chapter split and a
 `docs/STATUS.md` gains a section explaining the axis, including that nothing depending on `draft` should read the column, and that the numbers in it were mapped forward through two renumberings.
 `CLAUDE.md` gains one line, so the column is discoverable by a session that reads only that file.
 The `bare ref` check caught two chapter references in the draft's own explanatory prose, which is the rule applying to `docs/` as well as to chapters.
+
+---
+
+## 139. *Two halves* was doing too much work
+
+**Date.** 2026-09-05
+
+**Context.**
+The author found the phrase wearing out: *it becomes annoying and in some places it's better to be more specific about the subject instead of alluding to it with "two halves".*
+Five sites were edited in [chapters 04](../04_grading-a-law_q5c6.md), [07](../07_time_mdbn.md), [10](../10_change_rjf9.md), [12](../12_patterns-that-cross_r8dw.md) and [13](../13_patterns-that-survive-translation_us2k.md).
+
+**Decision.** Adopted, and surveyed — the rule in `CLAUDE.md` is that a wording problem found in one place is a survey rather than a fix.
+
+**The criterion, which is the author's and is narrower than "remove the phrase".**
+Replace it where *half* is alluding to a subject that could be named; leave it where it is ordinary English.
+So Monadnock's north and south halves stay, along with *half an hour*, *half the capacity*, *half the system*.
+[Chapter 10](../10_change_rjf9.md)'s two remaining uses stay as well, because a colon names the subject immediately afterwards in both.
+
+**Six further sites were changed**, none of which the original commit reached: two in [chapter 03](../03_forces_f4m5.md), one in [05](../05_dependency-and-hiding_agjy.md), two in [07](../07_time_mdbn.md), one in [22](../22_idioms_7nkn.md).
+The sharpest was *a number does not have halves* — [chapter 05](../05_dependency-and-hiding_agjy.md) described exposure as "the second half of the same number", where the number is fan-in and the two things are ways of losing control of it.
+
+**Two defects the edits introduced, both found by reading the surrounding lines rather than the diff.**
+
+[Chapter 12](../12_patterns-that-cross_r8dw.md) became *"both invariants are free"* four lines after *"The invariant is the same on both sides"* — singular, then plural, for one invariant carrying two requirements. Now *both requirements*.
+
+[Chapter 04](../04_grading-a-law_q5c6.md) became *"The practical form of the claim has two versions"*, but the two things are successive statements rather than alternatives: quoting somebody's number is not knowing yours, and knowing yours is not chasing their target. The count was dropped rather than renamed, since announcing a count and then delivering it is a tic this file already lists.
+
+**One inconsistency left standing.**
+[Chapter 07](../07_time_mdbn.md) now says *both sentences* of a two-sentence claim; [chapter 13](../13_patterns-that-survive-translation_us2k.md) says *the claim has two halves* of a two-sentence claim.
+The author edited that line and kept the phrase, so it is deliberate rather than missed.
+
+---
+
+## 140. Review of chapter 07, and what a striking claim is worth
+
+**Date.** 2026-09-05
+
+**Context.**
+Two review passes over [chapter 07](../07_time_mdbn.md), the first chapter of the full read to be worked in the ordinary way.
+
+**The claim, and a general preference the author stated while settling it.**
+It became **You can never read the current value of anything — all you get is a past value. No clock can tell you what happened first.**
+The draft observed that the previous version — *a check tells you what was true, not what is true* — was tighter and named the mechanism in six words, and put it back to the author.
+
+> claim is fine as it is, I like simpler and more striking claims rather than the ones that try to over-explain.
+
+**This governs every claim sentence in the book, so it is recorded beyond this chapter.**
+`CLAUDE.md` already constrains claims in two directions — assert only what the chapter demonstrates, and do not retreat into a claim too vague to be false.
+It says nothing about the third axis, and the author's position on it is that a claim earns its place by being *held*, not by being complete.
+Explanation belongs in the paragraphs under it.
+
+**The price scenario is the author's and is the best addition of the pass.**
+The claim was abstract; a reader can now test it against two lines of their own code — read `price`, get `20`, act on the next line, and ask whether *the price is 20* is something they are entitled to assume.
+
+**A condition names a property, not a mechanism.**
+The author changed the third condition for a race to *the rule spans data you did not lock*, and asked whether *lock* was the better word.
+It is not, and the paragraph directly underneath proves it: that paragraph calls reading a value only you ever write, and reading anything immutable, safe — neither of which is locked, so *data you did not lock* would classify both as problems two sentences before the text calls them safe.
+*Hold still* is also the ledger's canonical wording, and the chapter's own general rule later says *stop it changing* rather than naming a lock, because a lock is one way to achieve the property rather than the property.
+
+**A reversion that was wrong, and the failure mode is worth naming.**
+The author rewrote *"That is on one machine, before anything has gone wrong"* to *"That is the simple failure on just one machine"*.
+The draft treated this as a wording change, corrected the comma splice, and restored the original meaning.
+The author's objection: *"nothing going wrong" is misleading. It reads like with one machine, the clock can tell you the ordering but the failure of the clock telling you the ordering even happens in one machine and that's what we just showed.*
+
+Correct, and the original line carried the same defect — it had survived the final sweep and every review since.
+**The failure mode is treating a substantive correction as a wording change**: the draft asked whether the new wording was clean instead of asking whether the old meaning was right.
+`CLAUDE.md` names two ways of misreading a direct edit — restating another chapter's concept, and weakening a claim while reading more smoothly. This is a third, and it runs the other way: reverting a fix while keeping only its grammar.
+
+The line now says the clock is working and nothing is malfunctioning and the ordering has already failed, which is the sharper form of the author's point, since a broken clock would be the easy case.
+
+**Two smaller reversions, both for meaning rather than grammar.**
+*"Every request found no issue at the moment it looked"* lost the paragraph's point — no check was mistaken, every one was **right**, which is why locking each step cannot help. The author's naming of what was checked is kept.
+*"The only place the rule can be enforced reliably"* hedged a sentence whose previous line says application code **cannot** enforce it; now *at all*.
+
+**Written to a tag.**
+The partitioned-design section gained its contrast: four workers appending to one shared slice, each write waiting behind three others, a fifth adding contention rather than throughput — landing on the point that partitioning does not make coordination cheaper, it removes the need for it.
