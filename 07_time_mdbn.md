@@ -87,7 +87,7 @@ func (s *Store) append(user User) {
 }
 ```
 
-Neither can corrupt the users slice. Code seems correct.
+Neither can corrupt the users slice. The code seems correct.
 
 However, a test with fifty concurrent registrations for the same address reveals it is not:
 
@@ -95,7 +95,7 @@ However, a test with fifty concurrent registrations for the same address reveals
 BAD  accounts for ada@example.com: 50
 ```
 
-Every request checked for already registered email invariant and found no issue at the moment it looked. Then each spent two milliseconds hashing a password, and by the time the first user was appended, the other forty-nine had already made their decision.
+Every request checked whether the address was already taken, found it free, and was right at the moment it looked. Then each spent two milliseconds hashing a password, and by the time the first user was appended, the other forty-nine had already made their decision.
 
 Three things are worth taking from that number.
 
@@ -247,7 +247,7 @@ That is the cheap fix for one number. For the general case, the equation in the 
 
 **Remove the mutability.** Nobody writes to anything anyone else can see. Values go in, new values come out.
 
-**Remove the concurrency.** Just use a plain loop to count, without any workers. This looks like the best option for this hypothetical teaching code but in real life it's usually unfeasible. Concurrency is often the reason the program exists, so you cannot just remove it. 
+**Remove the concurrency.** Just use a plain loop to count, without any workers. This looks like the best option for this hypothetical teaching code but in real life it is usually infeasible. Concurrency is often the reason the program exists, so you cannot just remove it.
 
 "Just add a lock" is a fourth option, which serializes the race rather than removing it, and brings the costs set out at the end of this chapter.
 
@@ -261,7 +261,7 @@ create unique index ux_account_email on account (lower(email));
 
 The rule is now checked by the component that holds the row locks, at the instant of the write. There is no window, because there is no separate check — the decision and the write are one statement, and the loser of a race gets an error rather than a duplicate row.
 
-**The general rule, and it is the useful one:** a rule about data can only be enforced by whatever can see all of that data and stop it changing. Application code cannot enforce uniqueness across rows it has not read and cannot hold still. It is not that the database is a *better* place for the rule — it is the only place the rule can be enforced reliably.
+**The general rule, and it is the useful one:** a rule about data can only be enforced by whatever can see all of that data and stop it changing. Application code cannot enforce uniqueness across rows it has not read and cannot hold still. It is not that the database is a *better* place for the rule — it is the only place the rule can be enforced at all.
 
 There is a corollary worth stating separately, because it is the part people resist: **an application-level check is not wrong, but it is not the enforcement.** Keep it, because it produces a good error message and saves a round trip in the common case. Do not count it as the guarantee, and do not remove the constraint because the check is there.
 
@@ -269,11 +269,13 @@ There is a corollary worth stating separately, because it is the part people res
 
 The strongest version of removing the sharing. If exactly one thread, process, or partition ever writes a piece of state, then no write can interleave with another, and the entire apparatus above becomes unnecessary — no locks, no atomics, no constraint to enforce.
 
-This is why partitioned designs are fast. A queue consumer that owns its partition, an actor that owns its state, a shard that owns its key range — each is a single writer, and the coordination cost is zero because there is nothing to coordinate with. [-- add no-partitioned design in the same manner here so that we can better contrast the benefit of the partitionaed one.]
+This is why partitioned designs are fast. A queue consumer that owns its partition, an actor that owns its state, a shard that owns its key range — each is a single writer, and the coordination cost is zero because there is nothing to coordinate with.
+
+The contrast is the same work without the partition. Four workers appending to one shared `users` slice all take the same mutex, so every write waits behind the other three, and a fifth worker adds contention rather than throughput. Nothing is incorrect — the mutex does its job — but each writer now pays for the existence of the others, and the payment grows with the number of them. Partitioning does not make that coordination cheaper. It removes the need for it.
 
 The price is that the partition is now part of your design, permanently. Any operation spanning two partitions is back to needing coordination, and the boundaries are difficult to move once data has accumulated behind them ([Ch. 03](03_forces_f4m5.md), on why that decision expires).
 
-### No clock can tell you what happened first.
+### No clock can tell you what happened first
 
 The second sentence of the claim, and it even surprises people who accept the first easily.
 
@@ -293,7 +295,7 @@ smallest non-zero gap observed: 1000 ns
 
 Python agrees, to within a percent. **Ninety-five per cent of the time, two consecutive readings of the clock are the same number.** The wall clock on this machine advances in one-microsecond steps, and anything finer than that is invisible to it. Two events a hundred nanoseconds apart do not get an order — they get the same timestamp.
 
-That is the simple failure on just one machine, now add more things that can go wrong:
+That is just one machine, with nothing going wrong. Now add the things that do:
 
 - **Skew.** Two machines' clocks disagree, typically by milliseconds under NTP and by far more when NTP is broken, which it silently is more often than anyone assumes.
 - **Jumps.** The wall clock is corrected, and moves *backwards*. A timestamp taken after another can be smaller than it.
