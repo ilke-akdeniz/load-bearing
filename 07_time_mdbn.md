@@ -2,25 +2,25 @@
 
 ## The claim
 
-**You can never read the current value of a thing, all you get is a past value. No clock can tell you what happened first.**
+**You can never read the current value of anything — all you get is a past value. No clock can tell you what happened first.**
 
-This claim sounds like a clickbait but it is not. It appears counter-intuitive to most people but still holds on many different levels. 
+This claim sounds like clickbait, but it is not. It appears counter-intuitive to most people but still holds on many different levels.
 
-Let's start with the most simple scenario, imagine your program executes a statement that reads a value of the variable "price" from memory as "20" and on the very next line acts on that value. Strictly speaking, are you allowed to assume "the price is now 20" on the second line? Most of the time, we code as that is guaranteed all the time, without even thinking about it. Sometimes that guarantee breaks, and we apply a concurrency mechanism to fix the "exceptional" case in out code, but this chapter's point is that there is a deeper latent issue on all reads stemming from this fact: **there is no shared now.**    
+Start with the simplest scenario. Your program reads the variable `price` from memory, gets `20`, and acts on that value on the very next line. Strictly speaking, are you allowed to assume *the price is 20* on that second line? Most of the time we write code as though that were guaranteed, without thinking about it. Sometimes the guarantee breaks, and we reach for a concurrency mechanism to fix the exceptional case — but this chapter's point is that the same issue sits underneath every read: **there is no shared now.**
 
 Inside one machine that means your observation is already stale when you act on it, no matter how quickly the act follows the read. Across machines it means there is no agreed ordering of events at all, and the timestamps you would use to build one are not up to the job.
 
 ## When this is actually a problem
 
-So for it looks like every line of code is in danger. It is not, and it is worth fixing that before the alarming part, because the alarm is what makes people either ignore this material or over-apply it.
+So far it looks like every line of code is in danger. It is not, and it is worth fixing that before the alarming part, because the alarm is what makes people either ignore this material or over-apply it.
 
 Reading state and then acting on it is only a problem when **all three** of these hold:
 
 1. **Something else can write that state** between your read and your act.
 2. **Your decision depends on what you read** — you are not just reporting it.
-3. **The rule spans data you did not lock** [--is lock more less = hold still? If so, lock is better here.] — other rows, other keys, other files.
+3. **The rule spans data you did not hold still** — other rows, other keys, other files.
 
-If your situation is missing any of above and there is nothing for you to fix. Reading configuration at startup in a single-threaded process, reading a row you already hold a lock on, reading a value only you ever write, reading anything immutable — all safe, and all extremely common. 
+If any one of them is missing, there is nothing here to fix. Reading configuration at startup in a single-threaded process, reading a row you already hold a lock on, reading a value only you ever write, reading anything immutable — all safe, and all extremely common.
 
 When all three do hold, the fix is almost always one of three ordinary moves:
 
@@ -36,7 +36,7 @@ None of those is exotic, and none costs much. The reason this chapter is long is
 
 ### Check-then-act is not atomic
 
-Check-then-act is the commin name for reading [... complete with a simple explanation] 
+Check-then-act is the common name for the shape: read a value, decide something on the strength of it, then act — where the act quietly assumes the value has not changed since the read.
 
 A sign-up handler holding user records. It refuses an email that already has an account, and the code says so plainly:
 

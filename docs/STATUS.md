@@ -18,7 +18,7 @@ Only the author moves a chapter to **draft** or **ready**.
 | 04 | `04_grading-a-law_q5c6.md` | **draft** | 2026-08-31 |
 | 05 | `05_dependency-and-hiding_agjy.md` | **draft** | 2026-09-02 |
 | 06 | `06_layering_p2vk.md` | **draft** | 2026-09-02 |
-| 07 | `07_time_mdbn.md` | **draft** | — |
+| 07 | `07_time_mdbn.md` | **draft** | 2026-09-05 |
 | 08 | `08_distribution_49yh.md` | **draft** | — |
 | 09 | `09_scale_637f.md` | **draft** | — |
 | 10 | `10_change_rjf9.md` | **draft** | — |

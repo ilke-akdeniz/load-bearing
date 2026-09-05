@@ -81,7 +81,7 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Lower layer more capable | p2vk | Layering doctrine assumes the layer below is dumber; when it is more capable, "keep logic out" inverts | cite |
 | There is no shared now | mdbn | A check reports the past; across machines there is no agreed ordering at all | "no shared now" |
 | Three conditions for a race | mdbn | Another writer, a decision that depends on the read, and a rule spanning data you did not hold still — all three, or nothing to fix | cite |
-| The three ordinary fixes | mdbn | One operation; let the data-holder enforce; or do not check and handle the failure | cite |
+| The three ordinary fixes | mdbn | One operation; let the data-holder enforce; or do not rely on a read — attempt it and handle the failure | cite |
 | Lock the span, not the steps | mdbn | The fix is not more locking but locking the right span | cite |
 | One authority beats many clocks | mdbn | Optimistic concurrency on a version counter needs no clock; the database is the single source of order | cite |
 | Check-then-act / TOCTOU | mdbn | Between the check and the act, the world moved | "TOCTOU" |
