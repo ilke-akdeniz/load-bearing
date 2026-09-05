@@ -19,6 +19,13 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 
 | Concept | Owner | Canonical statement | Others may say |
 |---|---|---|---|
+| The book's question | w8kq | *Is this claim load-bearing?* — the title stated as the question a reader carries, and the only place the building analogy is worked | cite |
+| Load-bearing by circumstance, not by nature | w8kq | Turn the joists ninety degrees and the same bricks stop carrying anything; a wall's status is a fact about its surroundings. cjx4 owns the software statement of this, that the kind of a claim is not a property of the sentence | cite |
+| The builder inspects the surroundings, not the wall | w8kq | Joist direction, what sits underneath, whether it is an exterior wall — a procedure that does not care about the confidence of whoever built it. The software absence is that no such inspection exists | cite |
+| Three kinds of load | w8kq | Dead, live and lateral are three separate questions, and software has one undifferentiated word for all of them. f4m5 owns Forces themselves; this is only the observation that the other trade separates them and we do not | one clause, cite |
+| Walking a claim back to its supports | w8kq | A load path can be traced roof to soil in either direction; *the repository needs an interface* cannot, because the supports were stripped off before it arrived. Provenance, not the code dependency graph, which is agjy's | cite |
+| Monadnock, where masonry stopped paying | w8kq | Sixteen storeys on six-foot walls, 1891, and the steel half two years later at fifteen percent more rentable space and fifteen percent less weight. Not a principle proved false — one that stopped being worth its cost, with nothing marking the turn | cite |
+| Nobody to call | w8kq | A builder who cannot tell calls a structural engineer, with a qualification and liability behind the stamp; software has no equivalent, which is why the question has to be one you can run yourself | cite |
 | The five kinds of claim | cjx4 | Many claims about software are one of five kinds — Law, Force, Principle, Idiom, Style — and the kind sets its authority. Four are advice and form a ladder; Force is not, so there are four levels and five kinds | "a Law / an Idiom" |
 | Classification test | cjx4 | Five questions that place a claim in one of the five kinds | "run the test" |
 | Why the kinds get confused | cjx4 | Four mechanisms: tone doesn't vary with authority; advocacy compresses; monoculture makes Idioms feel universal; teaching leaves the training wheels on | one clause, cite |

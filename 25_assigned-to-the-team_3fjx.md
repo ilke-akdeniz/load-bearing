@@ -30,9 +30,9 @@ ownership    individuals who create and maintain the artifacts
 
 Read downward it is unremarkable. Read upward it is the argument, because each level is load-bearing for the one above it.
 
-**The end goal is not "working software."** It is software that is still right after the Forces move, and [chapter 02](02_forces_f4m5.md) is explicit that they move without warning: a team doubles, a service acquires a client outside the company, a table crosses a hundred million rows.
+**The end goal is not "working software."** It is software that is still right after the Forces move, and [chapter 03](03_forces_f4m5.md) is explicit that they move without warning: a team doubles, a service acquires a client outside the company, a table crosses a hundred million rows.
 
-**The artifacts are not meeting notes, slide decks, or chaos labelled documentation.** The code is one of them: it *applies* the decisions that answer the Forces and it *enforces* the business rules. Those two verbs are the limit of what it does. Code that reflects a decision perfectly still says nothing about which Forces were present, what the alternatives were, or why this one was chosen — so the records of the rules and the decisions are separate artifacts, separately created and separately maintained. [Chapter 23](23_never-written-down_at4r.md) owns what happens when they do not exist.
+**The artifacts are not meeting notes, slide decks, or chaos labelled documentation.** The code is one of them: it *applies* the decisions that answer the Forces and it *enforces* the business rules. Those two verbs are the limit of what it does. Code that reflects a decision perfectly still says nothing about which Forces were present, what the alternatives were, or why this one was chosen — so the records of the rules and the decisions are separate artifacts, separately created and separately maintained. [Chapter 24](24_never-written-down_at4r.md) owns what happens when they do not exist.
 
 **Ownership is where people enter.** Standups, retrospectives, planning sessions, review policies — every one of them carries a tension looking for a resolution, and the tension is always the same question: *which artifacts do we need, and who makes each one?* For many teams, that question is never asked and answered clearly, and the meetings turn into a ceremony.
 
@@ -42,7 +42,7 @@ Code is the obvious artifact and the easiest to own correctly. Nobody argues tha
 
 The trouble starts with everything upstream of it. There the same question produces *we don't need a list of the business rules, we're agile*, and *the team will decide on the design of feature X*.
 
-Four artifacts sit between a request and the code. The claim here is not that these are the only ones or the most important ones — they are what following this book's advice lands you on, and two of the four are [chapter 19](19_force-map-method_r37x.md)'s method under a different description.
+Four artifacts sit between a request and the code. The claim here is not that these are the only ones or the most important ones — they are what following this book's advice lands you on, and two of the four are [chapter 20](20_force-map-method_r37x.md)'s method under a different description.
 
 ```text
 1  the rules      what must always be true
@@ -65,7 +65,7 @@ The root, because everything after it is conditioned on it. What must always be 
 
 ### 2. The force map
 
-[Chapter 19](19_force-map-method_r37x.md) owns the method and [chapter 02](02_forces_f4m5.md) owns the Forces themselves. What is added here is that its output is an artifact somebody owns, and that its size varies more than anything else in the list.
+[Chapter 20](20_force-map-method_r37x.md) owns the method and [chapter 03](03_forces_f4m5.md) owns the Forces themselves. What is added here is that its output is an artifact somebody owns, and that its size varies more than anything else in the list.
 
 **Form.** The Forces bearing on the work in front of you, given as values rather than as verdicts — *two writers, same row, twice a second*, not *concurrency is important* — and the Principles that follow, each with the Force that licenses it. Same rule as before: **the length should reflect the Forces that actually apply, not the prose style of whoever wrote it or the current mood of the team.**
 
@@ -92,11 +92,11 @@ Nothing in that second version is a design. It is a set of constraints, and hand
 
 **Ideal owner.** Whoever holds the most context on the system as it actually runs — what it costs, where it breaks, what the last incident was about.
 
-**What that owner must be able to do.** Price the options. [Chapter 19](19_force-map-method_r37x.md) is blunt that this is where the expertise goes, and a reading produced by somebody who cannot say what a mechanism costs is a confident document with the wrong values in it.
+**What that owner must be able to do.** Price the options. [Chapter 20](20_force-map-method_r37x.md) is blunt that this is where the expertise goes, and a reading produced by somebody who cannot say what a mechanism costs is a confident document with the wrong values in it.
 
 ### 3. The solution
 
-This one is missing from the rest of the book, and [chapter 19](19_force-map-method_r37x.md) says so itself: **the output of a force map is not a design.** It is a record of what was forced and what was chosen. Constraints, not an answer.
+This one is missing from the rest of the book, and [chapter 20](20_force-map-method_r37x.md) says so itself: **the output of a force map is not a design.** It is a record of what was forced and what was chosen. Constraints, not an answer.
 
 So there is a gap between the force map and the code, and it is where most of the actual thinking happens. The rules say what must be true. The map says what presses on it. Neither of them says *what we are going to build* — a grid on this screen, a reminder sent by text the day before, a nightly job that reconciles and a queue for the failures.
 
@@ -177,7 +177,7 @@ A meeting with no decision in it at all is a third object and can be perfectly s
 
 ### An artifact that needs two names
 
-[Chapter 09](09_change_rjf9.md) has Conway's mechanism in his own vocabulary: an interface exists where two design groups **negotiated and agreed upon** one. An interface binding two teams cannot have a single owner, because a single owner is one team imposing on the other, and what comes back is not agreement but compliance followed by a workaround.
+[Chapter 10](10_change_rjf9.md) has Conway's mechanism in his own vocabulary: an interface exists where two design groups **negotiated and agreed upon** one. An interface binding two teams cannot have a single owner, because a single owner is one team imposing on the other, and what comes back is not agreement but compliance followed by a workaround.
 
 So it has two names against it and the work is the negotiation between them. What does not change is that both names are individuals. *The platform team and the payments team will agree an interface* fails exactly as the dialogue above fails; two developers, one from each side, each able to commit their own, does not.
 
@@ -195,7 +195,7 @@ There is no version of this chapter that resolves that, because it is not a fact
 
 **Where the derivation already happens, the artifacts are ceremony.** Take a small team who have shipped several systems together, who reach for the version column and the idempotency key without the reasoning being spoken aloud, and whose record over some years is that the surprises did not arrive. Ask them for a written map per feature and most of it answers nothing — they are doing the work, they are simply not writing it down, and this claim is about ownership rather than about writing.
 
-Two conditions keep that from being the exception everybody claims. **It holds only while the team is stable**, because the context lives in the people and [chapter 23](23_never-written-down_at4r.md) is the chapter about what that costs when they leave. And **the instrument is the record, not the self-assessment**: many teams believe they are that team, and what distinguishes the ones that are is answerable — what did you ship, and what happened to it six months later.
+Two conditions keep that from being the exception everybody claims. **It holds only while the team is stable**, because the context lives in the people and [chapter 24](24_never-written-down_at4r.md) is the chapter about what that costs when they leave. And **the instrument is the record, not the self-assessment**: many teams believe they are that team, and what distinguishes the ones that are is answerable — what did you ship, and what happened to it six months later.
 
 **Ownership by context concentrates, and that is division of labour rather than a defect.** If each artifact goes to whoever holds the most context, and context accumulates where it is used, the same few people end up owning the same few subjects. That is what an expert is. A team where everybody owns everything equally has no expert in anything, and the instinct to arrange one — out of a fear of depending on individuals — buys evenness at the price of there being nobody who knows.
 
@@ -232,4 +232,4 @@ Two answers fail, and they fail differently. If the name is a team, the artifact
 
 ---
 
-[← Ch. 23](23_never-written-down_at4r.md)  ·  [Contents](00_toc.md)
+[← Ch. 24](24_never-written-down_at4r.md)  ·  [Contents](00_toc.md)

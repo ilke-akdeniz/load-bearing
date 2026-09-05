@@ -173,7 +173,7 @@ Two limits of the design, which they also state: it is a single-group study with
 
 **Read those and the finding is narrower, and more useful, than either slogan.** It does not say the ritual is worthless. It says the ritual's value is in what it makes you do — small steps, evenly sized, with tests — and that you can have that without the ritual, if you actually do it. Which is a harder instruction than either *always write the test first* or *test-first is a myth*, and the only one of the three that tells you what to change on Monday.
 
-This is [chapter 15](15_principle-loses-scope_b86v.md)'s mechanism — a Principle losing its scope — running on a peer-reviewed paper rather than a proverb. The conditions were published beside the finding, by the same authors, in the same section. What travelled was the finding.
+This is [chapter 16](16_principle-loses-scope_b86v.md)'s mechanism — a Principle losing its scope — running on a peer-reviewed paper rather than a proverb. The conditions were published beside the finding, by the same authors, in the same section. What travelled was the finding.
 
 ---
 
@@ -339,7 +339,7 @@ That is a legitimate use of a mock and it is not what this chapter argues agains
 
 ## What taking the alternative costs
 
-**Real dependencies make the suite slower and more fragile.** A test that starts a database is orders of magnitude slower than one that does not, and [chapter 08](08_scale_637f.md)'s arithmetic applies to test suites like anything else. Once the suite is slow enough to skip, it stops being run, and a test nobody runs is worth less than a weak one.
+**Real dependencies make the suite slower and more fragile.** A test that starts a database is orders of magnitude slower than one that does not, and [chapter 09](09_scale_637f.md)'s arithmetic applies to test suites like anything else. Once the suite is slow enough to skip, it stops being run, and a test nobody runs is worth less than a weak one.
 
 **They need infrastructure that must exist everywhere the suite runs.** A developer laptop, a CI runner, and a container image that all agree. FlowCore's answer is to truncate rather than recreate between tests and to run against a pre-migrated database, which is cheap per test and pushes the setup cost to once per suite — but somebody built that, and it is a real cost that a fake repository does not have.
 
@@ -372,7 +372,7 @@ Broken the way code actually breaks, not deleted in the abstract: someone drops 
 
 The wider version is worth asking before a release: **if this behaviour is broken in production tomorrow, can we say the cause is not in our code, because these tests would have caught it?** That one reaches what the narrow question misses — the dependency that is faked in every environment below production, the fixture data that is tidier than anything real. The honest answer is usually more specific, and less comfortable, than a coverage number.
 
-[Chapter 18](18_abstraction-as-insurance_4jk6.md) takes the last of the cases — an abstraction bought as insurance against a change that has not been scheduled, and shaped by the thing it was insuring against.
+[Chapter 19](19_abstraction-as-insurance_4jk6.md) takes the last of the cases — an abstraction bought as insurance against a change that has not been scheduled, and shaped by the thing it was insuring against.
 
 ---
 
@@ -388,4 +388,4 @@ The wider version is worth asking before a release: **if this behaviour is broke
 
 ---
 
-[← Ch. 16](16_behaviour-placement_z47a.md)  ·  [Contents](00_toc.md)  ·  [Ch. 18 →](18_abstraction-as-insurance_4jk6.md)
+[← Ch. 17](17_behaviour-placement_z47a.md)  ·  [Contents](00_toc.md)  ·  [Ch. 19 →](19_abstraction-as-insurance_4jk6.md)

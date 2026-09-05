@@ -8,7 +8,7 @@
 
 | Claim | Kind | Standing |
 |---|---|---|
-| **Acyclicity Law**: If A depends on B, then B must not depend on A — directly or through any chain | **Law** | true by definition ([Ch. 03](03_grading-a-law_q5c6.md)) |
+| **Acyclicity Law**: If A depends on B, then B must not depend on A — directly or through any chain | **Law** | true by definition ([Ch. 04](04_grading-a-law_q5c6.md)) |
 | **Ranking Principle**: The parts can be stacked into layering ranks, each depending only on the rank beneath it | **Principle** | true when the graph is that shape, and often it isn't |
 | **Three-Tier Idiom**: The ideal ranking, top to bottom, is `presentation → business → data`, and each rank becomes a physical boundary | **Idiom** | 1990s enterprise Java and C# |
 
@@ -19,7 +19,7 @@ The strict reading needs the word **rank**, so here it is precisely. A rank is a
 > - Parts that depend on nothing are the **bottom** rank, 1.
 > - Every other part's rank is **the rank of the topmost part it depends on, plus 1**.
 
-That is all a rank is. Not a folder, not a team, not a tier of importance — a number that falls out of the arrows. Run the rule on the graph from [chapter 04](04_dependency-and-hiding_agjy.md) and the numbers assign themselves:
+That is all a rank is. Not a folder, not a team, not a tier of importance — a number that falls out of the arrows. Run the rule on the graph from [chapter 05](05_dependency-and-hiding_agjy.md) and the numbers assign themselves:
 
 ```text
 rank 3           main            depends on both below it
@@ -36,7 +36,7 @@ Two things follow, and they are the difference between the first two claims:
 - **The Acyclicity Law is exactly the condition that ranks can be assigned at all.** Try the rule on a cycle and it never terminates: A's rank needs B's, which needs A's. Acyclic and rankable are the same property.
 - **The Ranking Principle adds that every arrow crosses exactly one rank.** Rank 4 may use rank 3. It may not reach down to rank 1, even though nothing about acyclicity forbids that. This is a real constraint and most systems do not satisfy it.
 
-The Three-Tier Idiom is where the physical boundary arrives, and it varies by ecosystem. In Java and C# it was usually separate projects, assemblies, or shipped libraries; elsewhere it shows up as top-level directories or packages. What each form actually enforces differs — a directory is a package in Go, carries no access meaning in C# until assemblies split, and enforces nothing in Python — and [chapter 21](21_idioms_7nkn.md) works through why ecosystems diverge like this.
+The Three-Tier Idiom is where the physical boundary arrives, and it varies by ecosystem. In Java and C# it was usually separate projects, assemblies, or shipped libraries; elsewhere it shows up as top-level directories or packages. What each form actually enforces differs — a directory is a package in Go, carries no access meaning in C# until assemblies split, and enforces nothing in Python — and [chapter 22](22_idioms_7nkn.md) works through why ecosystems diverge like this.
 
 The three are taught together, defended together, and heard as one sentence. Separating them is what the rest of this chapter does.
 
@@ -182,7 +182,7 @@ update flowcore.step_visit
    and completed_at is null
 ```
 
-"A visit can be completed only once" is a business rule. Doctrine says it belongs in the service. Putting it in the service produces a read, then a write, with a window between them — and the audit history quietly corrupts under concurrency ([Ch. 06](06_time_mdbn.md) owns why that window is unclosable from above).
+"A visit can be completed only once" is a business rule. Doctrine says it belongs in the service. Putting it in the service produces a read, then a write, with a window between them — and the audit history quietly corrupts under concurrency ([Ch. 07](07_time_mdbn.md) owns why that window is unclosable from above).
 
 So the orthodoxy is wrong here, and it is wrong for a principled reason:
 
@@ -218,7 +218,7 @@ Here the Idiom is right, and it is right for reasons that have nothing to do wit
 
 - **The ranking matches the graph**, so the Ranking Principle holds without anyone forcing it, and no pass-through class is needed to fill a rank.
 - **The names are real.** Somebody can say what belongs in the service layer and what does not, which is the test the compiler's rank 2 failed.
-- **A new contributor already knows it.** The convention costs nothing to learn and answers the placement question the same way every time, which is worth more than a better arrangement nobody shares ([Ch. 21](21_idioms_7nkn.md) argues this at length — an Idiom you can out-argue is usually still the one to follow).
+- **A new contributor already knows it.** The convention costs nothing to learn and answers the placement question the same way every time, which is worth more than a better arrangement nobody shares ([Ch. 22](22_idioms_7nkn.md) argues this at length — an Idiom you can out-argue is usually still the one to follow).
 
 This is the common case, and saying so matters. Most applications that call themselves layered are layered, and their teams are not making the mistake this chapter describes. The failure is not in using the ranking. It is in carrying it into a program whose graph has a different shape, and defending it there with the Law's certainty.
 
@@ -263,7 +263,7 @@ The test applies unchanged: does this thing decide something, or does it forward
 
 ### The physical boundary bills you whether or not it was needed
 
-Expressing a rank as a package or assembly wall forces exports and mapping code. Where the wall matches a real dependency boundary, that is a price for something. Where it was drawn to complete a diagram, you pay the same amount for nothing, and the bill recurs on every change that crosses it ([Ch. 04](04_dependency-and-hiding_agjy.md) prices the export half).
+Expressing a rank as a package or assembly wall forces exports and mapping code. Where the wall matches a real dependency boundary, that is a price for something. Where it was drawn to complete a diagram, you pay the same amount for nothing, and the bill recurs on every change that crosses it ([Ch. 05](05_dependency-and-hiding_agjy.md) prices the export half).
 
 ---
 
@@ -272,7 +272,7 @@ Expressing a rank as a package or assembly wall forces exports and mapping code.
 **In a codebase:**
 
 - **A class whose every method forwards to one other object.** It was invented to fill a slot in a shape, and it charges a file edit on every change while deciding nothing.
-- **The same entity re-typed once per layer, with mappers between.** Every boundary that isn't a real dependency boundary still bills you a type and a mapper, plus the bug where someone adds a field to two of the three ([Ch. 18](18_abstraction-as-insurance_4jk6.md)).
+- **The same entity re-typed once per layer, with mappers between.** Every boundary that isn't a real dependency boundary still bills you a type and a mapper, plus the bug where someone adds a field to two of the three ([Ch. 19](19_abstraction-as-insurance_4jk6.md)).
 - **A rank nobody can name.** A real rank has a job you can state: `presentation` renders, `service` enforces rules, `data` persists. Where the best available description is *the things two hops from `ast`*, the rank is a count of arrows rather than a division of work — and enforcing it puts parts in one box that have nothing to do with each other, then asks what belongs in that box.
 - **A folder tree that does not match the import graph.** The tree is the claim; the imports are what is true. Where they disagree, the tree is decoration and the review that checked it found nothing.
 - **A `core` or `domain` package that imports the *web framework*.** The standard library is not the tell: `System.Collections`, `System.Threading` and Go's `sync` are part of the platform and sit below everything, so depending on them says nothing. The tell is an import of something the ranking places *above* this package — an HTTP attribute, a controller base class, a request type. The ranking says it is at the bottom; the import says it is not, and the import is the one the compiler acts on.
@@ -286,7 +286,7 @@ Expressing a rank as a package or assembly wall forces exports and mapping code.
 
 The question that does the work is not *which layer does this belong to?* It is: **what would break if this piece stopped existing?**
 
-[Chapter 06](06_time_mdbn.md) does for concurrency what these two chapters did for structure.
+[Chapter 07](07_time_mdbn.md) does for concurrency what these two chapters did for structure.
 
 ---
 
@@ -296,4 +296,4 @@ The question that does the work is not *which layer does this belong to?* It is:
 
 ---
 
-[← Ch. 04](04_dependency-and-hiding_agjy.md)  ·  [Contents](00_toc.md)  ·  [Ch. 06 →](06_time_mdbn.md)
+[← Ch. 05](05_dependency-and-hiding_agjy.md)  ·  [Contents](00_toc.md)  ·  [Ch. 07 →](07_time_mdbn.md)

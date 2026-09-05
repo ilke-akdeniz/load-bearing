@@ -26,7 +26,7 @@ Which is the part with no software equivalent. When a claim arrives in review, t
 
 Take the structural wall and turn the floor above it ninety degrees, so the joists now run parallel and land on the two walls at the ends instead. Nothing has been touched. Same bricks, same mortar, same thickness. It is now a partition, and you could take it out on a Saturday.
 
-The software version of that sentence is the first thing this book demonstrates: the same structural advice is wrong in Go but the default shape in C#, and neither version is more correct than the other ([chapter 02](01_the-five-kinds_cjx4.md) works it through). The code did not change. What it was resting on did.
+The software version of that sentence is the first thing this book demonstrates: the same structural advice is wrong in Go but the default shape in C#, and neither version is more correct than the other ([chapter 02](02_the-five-kinds_cjx4.md) works it through). The code did not change. What it was resting on did.
 
 ## What is actually pressing down, and where it goes
 
@@ -42,7 +42,7 @@ Software has one word for the whole category. *Requirements* covers the load tha
 
 Then there is where the weight goes. Roofing and flooring rest on joists; joists span between beams; beams carry into girders and so on all the way to the foundation. Every part holds up what is above it and hands the total down. The chain can be walked, one connection at a time, in either direction.
 
-Now try to walk the chain backwards from *the repository needs an interface*. What is that resting on? Somebody's experience, from some codebase, at some size, in an ecosystem where the testing tools worked a particular way. None of which came with the sentence. The advice arrived as a finished conclusion with its supports removed, and there is nowhere to look them up — which is the actual reason these arguments either do not start or do not end. ([Chapter 03](02_forces_f4m5.md) is about the supports, and about how rarely anyone names them.)
+Now try to walk the chain backwards from *the repository needs an interface*. What is that resting on? Somebody's experience, from some codebase, at some size, in an ecosystem where the testing tools worked a particular way. None of which came with the sentence. The advice arrived as a finished conclusion with its supports removed, and there is nowhere to look them up — which is the actual reason these arguments either do not start or do not end. ([Chapter 03](03_forces_f4m5.md) is about the supports, and about how rarely anyone names them.)
 
 ## Where a principle stops paying
 
@@ -75,4 +75,4 @@ The rest of this book is an attempt to build that. Not a set of rules to follow 
 
 ---
 
-[← Introduction](README.md)  ·  [Contents](00_toc.md)  ·  [Ch. 02 →](01_the-five-kinds_cjx4.md)
+[← Introduction](README.md)  ·  [Contents](00_toc.md)  ·  [Ch. 02 →](02_the-five-kinds_cjx4.md)

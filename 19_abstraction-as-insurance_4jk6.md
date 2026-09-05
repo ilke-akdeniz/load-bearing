@@ -14,14 +14,14 @@ Take the sentence as an instruction to put an interface between your code and an
 
 ### Injection is not abstraction
 
-One thing has to be separated out first, or [chapter 04](04_dependency-and-hiding_agjy.md) refutes this chapter in a sentence.
+One thing has to be separated out first, or [chapter 05](05_dependency-and-hiding_agjy.md) refutes this chapter in a sentence.
 
 Two decisions travel under one word, and they are separable:
 
 1. **Is the dependency passed in, or does the component construct it?**
 2. **Is it passed in behind an interface, or as a concrete type?**
 
-[Chapter 04](04_dependency-and-hiding_agjy.md) argues for the first, for a reason with nothing to do with substitution: a component reaching for `os.Getenv("DATABASE_URL")` is holding decisions that were never its to make. That argument stands and this chapter does not touch it.
+[Chapter 05](05_dependency-and-hiding_agjy.md) argues for the first, for a reason with nothing to do with substitution: a component reaching for `os.Getenv("DATABASE_URL")` is holding decisions that were never its to make. That argument stands and this chapter does not touch it.
 
 ```go
 func NewOrders(database *sql.DB) *Orders     // injected, concrete
@@ -43,7 +43,7 @@ type Accounts interface {
 }
 ```
 
-`GetForUpdate` is there because somewhere a balance is read and then written, and [chapter 06](06_time_mdbn.md) owns why that needs the row held still. Against Postgres it is one clause:
+`GetForUpdate` is there because somewhere a balance is read and then written, and [chapter 07](07_time_mdbn.md) owns why that needs the row held still. Against Postgres it is one clause:
 
 ```sql
 select balance from account where id = ? for update
@@ -57,7 +57,7 @@ OperationalError: near "for": syntax error
 
 SQLite has no row-level locking to offer, so `GetForUpdate` cannot be implemented — not implemented differently, not implemented slowly, but not implemented. The method is on the interface because Postgres has the feature. **The abstraction did not abstract over the engine; it published one of the engine's capabilities as a promise to its own callers.**
 
-This is Hyrum's Law ([Ch. 03](03_grading-a-law_q5c6.md)) operating on an interface you own. What leaked through became part of the contract, and it leaked from the thing you were planning to replace. The same happens to error taxonomies, to isolation-level names that mean different things in different engines, to whether a returned id is populated before or after commit, and to every timeout whose value was tuned against one planner.
+This is Hyrum's Law ([Ch. 04](04_grading-a-law_q5c6.md)) operating on an interface you own. What leaked through became part of the contract, and it leaked from the thing you were planning to replace. The same happens to error taxonomies, to isolation-level names that mean different things in different engines, to whether a returned id is populated before or after commit, and to every timeout whose value was tuned against one planner.
 
 ### The premium is paid daily
 
@@ -75,7 +75,7 @@ So the lowest common denominator is not a list anyone knows in advance. It is th
 
 ### The swap is a data problem and the abstraction is in the code layer
 
-[Chapter 09](09_change_rjf9.md)'s rate layers put the schema below the code and moving more slowly. The interface lives in the fast layer. What has to move on migration day — rows, types, constraints, indexes, the queries a planner was tuned for, the operational runbook — lives in the slow one.
+[Chapter 10](10_change_rjf9.md)'s rate layers put the schema below the code and moving more slowly. The interface lives in the fast layer. What has to move on migration day — rows, types, constraints, indexes, the queries a planner was tuned for, the operational runbook — lives in the slow one.
 
 Counting what a repository interface covers in an engine migration is a short exercise. It covers the call sites. It does not cover the schema translation, the data copy, the verification, the cutover, or the rollback. The insurance was filed against the smallest line item on the invoice.
 
@@ -95,12 +95,12 @@ Rollback for an engine migration is operational rather than architectural:
 
 - Logical replication or change data capture into the new engine, running for weeks before anything moves.
 - Both engines serving reads, results compared, until the diff is empty.
-- Cutting over per-tenant or per-route rather than all at once — [chapter 12](12_patterns-that-survive-translation_us2k.md)'s strangler fig.
+- Cutting over per-tenant or per-route rather than all at once — [chapter 13](13_patterns-that-survive-translation_us2k.md)'s strangler fig.
 - Keeping the old engine running and receiving writes for a defined window.
 
 You roll back by pointing at a database that is still there and still current. A repository interface enables none of that, and none of it can usefully be built in advance, because every part of it is specific to the pair of engines and to the shape of the data on the day.
 
-That is [chapter 02](02_forces_f4m5.md)'s reversibility rule doing its work: this is cheap to do at migration time and expensive to do speculatively, so deferring it is a plan rather than a bet.
+That is [chapter 03](03_forces_f4m5.md)'s reversibility rule doing its work: this is cheap to do at migration time and expensive to do speculatively, so deferring it is a plan rather than a bet.
 
 ---
 
@@ -118,7 +118,7 @@ Then he gives the criterion, and it is not *use an interface*:
 
 > a "Good Dependency" is a dependency upon something that is very stable. The more stable the target of the dependency, the more "Good" the dependency is.
 
-An interface is a means. Stability is the test — which is [chapter 04](04_dependency-and-hiding_agjy.md)'s reading of this same sentence, arrived at there from the mechanism and confirmed here by the source.
+An interface is a means. Stability is the test — which is [chapter 05](05_dependency-and-hiding_agjy.md)'s reading of this same sentence, arrived at there from the mechanism and confirmed here by the source.
 
 **And his argument for why `Reader` and `Writer` are stable is the part that decides this chapter.** He gives two reasons. They depend on nothing, so nothing can ripple up into them. And:
 
@@ -134,7 +134,7 @@ Now apply that test to a repository interface written against one database, for 
 
 > Thus, I would deeply regret it if anybody suddenly decided that all their designs must unconditionally be conformant to "The Martin Metrics".
 
-That is a scope statement written down by the author in the original paper. [Chapter 15](15_principle-loses-scope_b86v.md)'s case was a scope given aloud once, in a talk, and lost because nobody re-watched it. This one has been in print since 1994.
+That is a scope statement written down by the author in the original paper. [Chapter 16](16_principle-loses-scope_b86v.md)'s case was a scope given aloud once, in a talk, and lost because nobody re-watched it. This one has been in print since 1994.
 
 ### Two implementations at once, or one after another
 
@@ -153,7 +153,7 @@ Everything demonstrated earlier in this chapter is the second case. The two are 
 
 **What was dropped is not the scope but the criterion.** The five words that travel — *depend on abstractions, not concretions* — name the technique and omit the test the technique was supposed to pass. Read alone they are an instruction to introduce an interface on every seam. Read with the paper, they are an instruction to depend on something stable, of which an interface is one way and not a guarantee.
 
-That is [chapter 04](04_dependency-and-hiding_agjy.md)'s reading, which arrives at the same place from the mechanism: put what changes least at the bottom, and an interface is not automatically the thing that changes least. A repository interface over an evolving schema changes every time the schema does, and now changes in two files rather than one.
+That is [chapter 05](05_dependency-and-hiding_agjy.md)'s reading, which arrives at the same place from the mechanism: put what changes least at the bottom, and an interface is not automatically the thing that changes least. A repository interface over an evolving schema changes every time the schema does, and now changes in two files rather than one.
 
 The compressed form survives because the technique is checkable and the criterion is not. Whether a file contains an interface can be seen in review. Whether that interface is stable is a claim about the future, which nobody can settle at the moment the decision is made — so the half that can be enforced is the half that gets enforced.
 
@@ -173,7 +173,7 @@ Four situations sit outside the argument above, and in each the interface earns 
 
 If you sell software customers install against their own database, supporting three engines is something you have promised. That is simultaneous plurality: the implementations both load, the dispatch is real, and the interface is exercised on every deployment.
 
-The Force is [chapter 02](02_forces_f4m5.md)'s *control of the callers* pointed at the substrate instead — you do not control the environment your code runs in. Everything above assumes you do, and that there is one production database whose name you chose.
+The Force is [chapter 03](03_forces_f4m5.md)'s *control of the callers* pointed at the substrate instead — you do not control the environment your code runs in. Everything above assumes you do, and that there is one production database whose name you chose.
 
 Note what this boundary also buys: because the interface is exercised, the lowest-common-denominator restriction stops being a cost with no benefit and becomes the actual product requirement. You are not giving up `for update` speculatively. You are giving it up because a customer runs something that lacks it.
 
@@ -185,19 +185,19 @@ Once the move is decided, scheduled, and staffed, the abstraction stops being sp
 
 The honest reason most repository interfaces exist is not a future engine. It is that the test suite wants something the production code does not, and Postgres in production with a fake in tests *is* simultaneous plurality by the definition above.
 
-[Chapter 17](17_tdd-and-mocks_u8eu.md) owns that argument and answers it: test against the real database, and reserve doubles for dependencies you cannot run. This chapter does not reopen it. But the dependency runs the other way — if you reject 17's position, the interface has a justification that has nothing to do with insurance, and none of this chapter reaches it.
+[Chapter 18](18_tdd-and-mocks_u8eu.md) owns that argument and answers it: test against the real database, and reserve doubles for dependencies you cannot run. This chapter does not reopen it. But the dependency runs the other way — if you reject 17's position, the interface has a justification that has nothing to do with insurance, and none of this chapter reaches it.
 
 ### One implementation is not the same as speculative
 
-The claim is about interfaces justified by a future substitution, not about interfaces. [Chapter 04](04_dependency-and-hiding_agjy.md) owns the legitimate uses and they are common: narrowing what a consumer can reach, breaking a cycle, declaring a seam whose shape the consumer owns. Any of those can be right with exactly one implementation and no plan for a second — and the test is whether you can state the reason without using the word *later*.
+The claim is about interfaces justified by a future substitution, not about interfaces. [Chapter 05](05_dependency-and-hiding_agjy.md) owns the legitimate uses and they are common: narrowing what a consumer can reach, breaking a cycle, declaring a seam whose shape the consumer owns. Any of those can be right with exactly one implementation and no plan for a second — and the test is whether you can state the reason without using the word *later*.
 
 ---
 
 ## What taking the alternative costs
 
-**A library name appears in signatures that are not about that library.** `func NewOrders(database *sql.DB)` puts `database/sql` in the constructor of something that is about orders, and every component doing the same makes the dependency visible everywhere. That is the honest bill, and [chapter 04](04_dependency-and-hiding_agjy.md)'s question prices it: how many things break when it changes.
+**A library name appears in signatures that are not about that library.** `func NewOrders(database *sql.DB)` puts `database/sql` in the constructor of something that is about orders, and every component doing the same makes the dependency visible everywhere. That is the honest bill, and [chapter 05](05_dependency-and-hiding_agjy.md)'s question prices it: how many things break when it changes.
 
-**You give up a seam you might have wanted for something else.** The interface you did not write for the swap was also the one you did not have when you wanted caching, or metrics, or a read replica, or a second-level audit. Those are real uses, they are [chapter 04](04_dependency-and-hiding_agjy.md)'s rather than this chapter's, and adding the seam later is a change rather than a configuration.
+**You give up a seam you might have wanted for something else.** The interface you did not write for the swap was also the one you did not have when you wanted caching, or metrics, or a read replica, or a second-level audit. Those are real uses, they are [chapter 05](05_dependency-and-hiding_agjy.md)'s rather than this chapter's, and adding the seam later is a change rather than a configuration.
 
 **Deciding needs information the moment does not supply.** *Is this plurality or replacement* is answerable, but answering it means knowing what the product promises customers, and the person who knows that is often not in the room when the layout is chosen.
 
@@ -213,20 +213,20 @@ The claim is about interfaces justified by a future substitution, not about inte
 - **A method that names a capability rather than a need.** `GetForUpdate`, `Upsert`, `BulkCopy`. Each is an engine feature promoted to a contract, and each is a thing the second implementation must have.
 - **The interface changes in the same commit as the schema, every time.** Then it is not insulating code from the database; it is a second file that must agree with the first.
 - **A "we don't use that here" convention with no written reason.** Ask which engine the avoidance was protecting against, and whether anyone checked the feature is actually unsupported there.
-- **A second implementation that exists only in tests.** That is [chapter 17](17_tdd-and-mocks_u8eu.md)'s subject, and it means the insurance framing was never the real reason.
+- **A second implementation that exists only in tests.** That is [chapter 18](18_tdd-and-mocks_u8eu.md)'s subject, and it means the insurance framing was never the real reason.
 
 **In a conversation:**
 
 - **"We might need to switch databases."** The question that separates the cases: *would two of them ever be running at once?* If no, it is sequential replacement and the interface is a shape, not a decision.
 - **"It's just an interface, it's cheap."** The interface is cheap. The feature set it commits you to is not, and that is the part nobody prices.
 - **"This way we're not coupled to Postgres."** Ask what happens when a query needs `for update`.
-- **"We'll swap it out later if we need to."** *Later* is the tell. An interface with a reason that survives deleting that word is one [chapter 04](04_dependency-and-hiding_agjy.md) would defend.
+- **"We'll swap it out later if we need to."** *Later* is the tell. An interface with a reason that survives deleting that word is one [chapter 05](05_dependency-and-hiding_agjy.md) would defend.
 
 The question that does the work: **if the swap happened next quarter, which of its steps would this interface remove?**
 
 Answer it by listing the steps — schema translation, data copy, verification, cutover, rollback, retuning — and marking the ones the abstraction touches. The usual answer is the call sites, which were never the expensive part, and the usual reaction to seeing the list is more useful than any argument in this chapter.
 
-Part V turns from diagnosis to method — [chapter 19](19_force-map-method_r37x.md) sets out how to read the Forces in front of you, derive the Principles they support, and check the Idioms of the language you are writing in, in that order.
+Part V turns from diagnosis to method — [chapter 20](20_force-map-method_r37x.md) sets out how to read the Forces in front of you, derive the Principles they support, and check the Idioms of the language you are writing in, in that order.
 
 ---
 
@@ -239,4 +239,4 @@ Part V turns from diagnosis to method — [chapter 19](19_force-map-method_r37x.
 
 ---
 
-[← Ch. 17](17_tdd-and-mocks_u8eu.md)  ·  [Contents](00_toc.md)  ·  [Ch. 19 →](19_force-map-method_r37x.md)
+[← Ch. 18](18_tdd-and-mocks_u8eu.md)  ·  [Contents](00_toc.md)  ·  [Ch. 20 →](20_force-map-method_r37x.md)

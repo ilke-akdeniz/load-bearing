@@ -195,7 +195,7 @@ Everything so far has been about which way the arrows point. This is about how m
 
 Parnas, 1972 — the founding paper, and still the clearest statement: decompose a system by what each module *hides*, not by the steps of the process it performs. The value of a module is the decision it keeps to itself, because that is the decision you can change later without telling anyone.
 
-The mechanism is fan-in again. A decision that nothing can observe has a fan-in of zero and is therefore free to change. A decision that is visible has as many dependents as care to look, and nobody tells you when someone starts looking. That last point is not a guess: with enough users, every observable behaviour of a system ends up depended on regardless of what was documented, which is Hyrum's Law — [chapter 03](03_grading-a-law_q5c6.md) grades it and works through what Go and Python each did about it.
+The mechanism is fan-in again. A decision that nothing can observe has a fan-in of zero and is therefore free to change. A decision that is visible has as many dependents as care to look, and nobody tells you when someone starts looking. That last point is not a guess: with enough users, every observable behaviour of a system ends up depended on regardless of what was documented, which is Hyrum's Law — [chapter 04](04_grading-a-law_q5c6.md) grades it and works through what Go and Python each did about it.
 
 So **your export surface is a liability inventory, not a feature list.** Every exported identifier — a capital letter in Go, `public` in C# — is a commitment you did not necessarily mean to make, and taking one back is a breaking change even if no document mentioned it. The export surface, not the design document, is the real API:
 
@@ -240,7 +240,7 @@ func NewBilling(plans PlanLookup) *Billing {
 
 Read this version as `billing` saying: *those were never my decisions. Where plans are stored, how they are fetched, what is configured — none of that is my business. I need exactly the operations in this interface in order to decide what I actually decide, which is what to charge.*
 
-Hiding is about what a *module* is coupled to, and injection reduces that: `billing` unlearned four decisions and learned one interface. What grows is what the **composition root** knows, and the composition root is one file whose entire job is knowing how the pieces fit — the one place where knowing everything is correct. It is `func main` in Go, `Program.cs` in a .NET application, and the `@Configuration` class in a Spring one. Which of those needs a container to do the assembling, and which does it by hand, varies by ecosystem for reasons [chapter 21](21_idioms_7nkn.md) works through.
+Hiding is about what a *module* is coupled to, and injection reduces that: `billing` unlearned four decisions and learned one interface. What grows is what the **composition root** knows, and the composition root is one file whose entire job is knowing how the pieces fit — the one place where knowing everything is correct. It is `func main` in Go, `Program.cs` in a .NET application, and the `@Configuration` class in a Spring one. Which of those needs a container to do the assembling, and which does it by hand, varies by ecosystem for reasons [chapter 22](22_idioms_7nkn.md) works through.
 
 The contradiction only survives if you read hiding as "less information anywhere." Parnas proposed something narrower: each module hides a decision, and other modules stop depending on it. Injection is how a module *declines to hold* a decision that belongs elsewhere.
 
@@ -296,7 +296,7 @@ The acyclicity claim follows from what a graph is. Its only precondition is that
 
 The hiding claim has a precondition about the world: whether you control your callers. Change that and the advice does not go quiet, it can reverse — the case below is one where exposing the representation is the correct answer and hiding it is the mistake. It comes from games, where an **entity-component-system** layout, ECS for short — state held in parallel arrays by field rather than in objects by entity — is the standard way to build a simulation with a hundred thousand moving things in it.
 
-That is the difference [chapter 01](01_the-five-kinds_cjx4.md) draws, arrived at from the mechanism rather than asserted: **a Law can be irrelevant but never wrong; a Principle can be wrong.**
+That is the difference [chapter 02](02_the-five-kinds_cjx4.md) draws, arrived at from the mechanism rather than asserted: **a Law can be irrelevant but never wrong; a Principle can be wrong.**
 
 ---
 
@@ -317,7 +317,7 @@ func parseTerm(p *parser) node { ... p.parseExpr() ... }
 
 Nobody sane calls this an architecture violation, and the reason is precise rather than a matter of degree. A cycle hurts because it forces two things you wanted to handle separately to be handled as one. Here there is nothing to force together: you were never going to read one without the other, test one without the other, or change one's signature without the other's. They were a single unit before the cycle existed, so the cycle takes nothing away.
 
-The same goes for two types in one file that reference each other, or a 200-line CLI that has one layer because there is nothing to order. This is a Law that is true and inert ([Ch. 01](01_the-five-kinds_cjx4.md)), not a Law being bent.
+The same goes for two types in one file that reference each other, or a 200-line CLI that has one layer because there is nothing to order. This is a Law that is true and inert ([Ch. 02](02_the-five-kinds_cjx4.md)), not a Law being bent.
 
 The test is not "is there a cycle in the call graph." It is: **will these ever be understood, tested, or changed apart?** If the honest answer is no, the cycle is free. If the honest answer is "not today, but yes within a year," the cost has not been avoided — it has been postponed, and by then there will be more code depending on both.
 
@@ -356,15 +356,15 @@ for (int i = 0; i < count; i++) {
 }
 ```
 
-The second is not a worse-encapsulated version of the first. It is a different decomposition, and it wins by a margin that has nothing to do with taste: the first loop drags `tint` and every other unused field through cache on every iteration, and the second touches only the bytes it needs. ([Chapter 08](08_scale_637f.md) owns the arithmetic and the benchmark; the span between cache and main memory is where the whole margin comes from.)
+The second is not a worse-encapsulated version of the first. It is a different decomposition, and it wins by a margin that has nothing to do with taste: the first loop drags `tint` and every other unused field through cache on every iteration, and the second touches only the bytes it needs. ([Chapter 09](09_scale_637f.md) owns the arithmetic and the benchmark; the span between cache and main memory is where the whole margin comes from.)
 
 Be exact about what was traded away. In the class version the field layout is private: you could reorder the fields, widen `lifetime` to a double, or delete `tint` entirely, and no other file would need editing. In the array version the layout *is* the interface — a dozen systems index those arrays directly, so changing the layout means editing every one of them.
 
 That is a genuine loss, accepted deliberately. You gave up the ability to change the representation quietly, and what you bought is the speed that comes from every system agreeing on it.
 
-The Force is the memory hierarchy. Where it dominates, "hide the representation" inverts: hiding it is precisely what you must not do. [Chapter 20](20_six-profiles_dnkz.md) works through the rest of what that force profile overturns.
+The Force is the memory hierarchy. Where it dominates, "hide the representation" inverts: hiding it is precisely what you must not do. [Chapter 21](21_six-profiles_dnkz.md) works through the rest of what that force profile overturns.
 
-Note carefully what has *not* inverted. The ECS dependency graph is still acyclic — systems depend on component arrays, and the arrays depend on nothing. The Law holds untouched while the Principle turns over completely, which is the difference [chapter 01](01_the-five-kinds_cjx4.md) draws, seen in the wild.
+Note carefully what has *not* inverted. The ECS dependency graph is still acyclic — systems depend on component arrays, and the arrays depend on nothing. The Law holds untouched while the Principle turns over completely, which is the difference [chapter 02](02_the-five-kinds_cjx4.md) draws, seen in the wild.
 
 ### Inversion of control: the call goes up, the dependency doesn't
 
@@ -494,7 +494,7 @@ type Invoice struct {
 }
 ```
 
-*The bill:* `invoice.Merchant.Name` becomes a lookup that can fail and can be stale. "What if the merchant was deleted?" is now a question you answer explicitly, where the pointer answered it by existing. [Chapter 16](16_behaviour-placement_z47a.md) works through the version of this that appears in object-oriented domain models, where the mutual pointers are the design rather than an accident.
+*The bill:* `invoice.Merchant.Name` becomes a lookup that can fail and can be stale. "What if the merchant was deleted?" is now a question you answer explicitly, where the pointer answered it by existing. [Chapter 17](17_behaviour-placement_z47a.md) works through the version of this that appears in object-oriented domain models, where the mutual pointers are the design rather than an accident.
 
 ### Hiding costs you the day you need what you hid
 
@@ -584,7 +584,7 @@ func (c *Catalog) Create(ctx context.Context, definition WorkflowDefinition) err
 }
 ```
 
-The second is right when the code has years ahead of it. On a migration script that gets deleted next month, the ten-minute version is the correct engineering call and the afternoon is waste ([Ch. 09](09_change_rjf9.md) owns the known-short-life case).
+The second is right when the code has years ahead of it. On a migration script that gets deleted next month, the ten-minute version is the correct engineering call and the afternoon is waste ([Ch. 10](10_change_rjf9.md) owns the known-short-life case).
 
 ### Enforced boundaries cost more than unenforced ones
 
@@ -622,4 +622,4 @@ The next chapter takes the shape most people mean when they say architecture. Ev
 
 ---
 
-[← Ch. 03](03_grading-a-law_q5c6.md)  ·  [Contents](00_toc.md)  ·  [Ch. 05 →](05_layering_p2vk.md)
+[← Ch. 04](04_grading-a-law_q5c6.md)  ·  [Contents](00_toc.md)  ·  [Ch. 06 →](06_layering_p2vk.md)

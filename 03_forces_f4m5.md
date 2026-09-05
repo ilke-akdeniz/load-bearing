@@ -55,7 +55,7 @@ The demonstration is above. Two things about the intensity dial are worth statin
 
 **The intensity is usually lower than the vocabulary suggests.** A web service is described as concurrent, and it is — but if two requests never touch the same row, the Force is inert for that code path. Concurrency binds where writers *collide*, not where they merely coexist.
 
-[Chapter 06](06_time_mdbn.md) owns the races themselves; [chapter 07](07_distribution_49yh.md) owns why redelivery cannot be eliminated and idempotency is the answer.
+[Chapter 07](07_time_mdbn.md) owns the races themselves; [chapter 08](08_distribution_49yh.md) owns why redelivery cannot be eliminated and idempotency is the answer.
 
 ### Durability of the medium
 
@@ -120,7 +120,7 @@ Notice that the mistake is not detectable later. Both migrations succeed, both a
 
 **What changes with the Force:** whether a mistake is correctable, and therefore how much care the decision is worth. That is the general form, and the tip column is one instance of it. Two others follow from the same reading.
 
-**Where an invariant should be enforced.** If the rows outlive every version of the code that writes them, then a rule enforced only in application code is a rule that holds for as long as one code path remembers it. A constraint in the schema holds for the `psql` session at 2am, the data-fix script, the bulk import, and the admin tool written next year by someone who has never read your service layer. The durability of the medium is the reason that argument is not merely a preference ([Ch. 06](06_time_mdbn.md) owns the class of invariants application code *cannot* enforce at all).
+**Where an invariant should be enforced.** If the rows outlive every version of the code that writes them, then a rule enforced only in application code is a rule that holds for as long as one code path remembers it. A constraint in the schema holds for the `psql` session at 2am, the data-fix script, the bulk import, and the admin tool written next year by someone who has never read your service layer. The durability of the medium is the reason that argument is not merely a preference ([Ch. 07](07_time_mdbn.md) owns the class of invariants application code *cannot* enforce at all).
 
 **Whether "we'll clean it up later" is available.** At the top of the dial it always is. At the bottom it is available only while the wrong state is small, and the window closes silently as rows accumulate.
 
@@ -250,7 +250,7 @@ public interface IPaymentRepository { Task Save(PaymentMethodEntity entity); }
 
 Adding *direct debit* means a new case, or a new field, in each of the six — and the mapper twice, once per direction. None of the six decides anything about direct debit that the others do not already know.
 
-That is not evidence of a careless team. It is a structure whose boundaries do not line up with the way change actually arrives, so every change crosses all of them. [Chapter 04](04_dependency-and-hiding_agjy.md) owns why fan-in sets the price of a change; [chapter 18](18_abstraction-as-insurance_4jk6.md) owns what these particular boundaries cost.
+That is not evidence of a careless team. It is a structure whose boundaries do not line up with the way change actually arrives, so every change crosses all of them. [Chapter 05](05_dependency-and-hiding_agjy.md) owns why fan-in sets the price of a change; [chapter 19](19_abstraction-as-insurance_4jk6.md) owns what these particular boundaries cost.
 
 **What changes with the Force:** whether structure that makes adding cheap is worth having. Frequency alone does not decide it — a thing that changes monthly in one file needs nothing.
 
@@ -289,11 +289,11 @@ func FromMinorUnits(amount int64, currency string) Money {
 
 **What changes with the Force:** where the rule lives. It migrates from a comment, to a review habit, to the type system, as the number of people who must know it rises and the chance that any of them was present for the original conversation falls.
 
-The second version is not free: it costs a package boundary and a constructor call at every site, and it is worth that only at some sizes. [Chapter 12](12_patterns-that-survive-translation_us2k.md) catalogues the technique; the point here is that **the same rule needs a different mechanism at a different team size**, and neither mechanism is the better engineering in general.
+The second version is not free: it costs a package boundary and a constructor call at every site, and it is worth that only at some sizes. [Chapter 13](13_patterns-that-survive-translation_us2k.md) catalogues the technique; the point here is that **the same rule needs a different mechanism at a different team size**, and neither mechanism is the better engineering in general.
 
 **AI coding agents sit at the extreme of both halves.** The Force asks how many people must agree and how many will still be here, and for coding agents the answer to the second is *nobody*. The model was present for no conversation and keeps nothing between sessions, and its output arrives at a volume the review step was not sized for. The Forces that would settle the decisions inside that output are facts about your situation, held by you, and they reach the agent only as far as some prompt happened to carry them.
 
-So the prediction is specific. **Two authors with an agent in the loop sit where twenty developers sit.** A comment works only while somebody remembers the argument behind it, and a review habit is the same bet on memory made by a larger group — neither survives a contributor who was present for no conversation and keeps nothing between sessions. The migration named above — comment, then review habit, then type system — stops tracking headcount, and what still holds is what the compiler, a constraint, or a test enforces. [Chapter 23](23_never-written-down_at4r.md) turns to rules nobody wrote down at all, which have nothing to migrate.
+So the prediction is specific. **Two authors with an agent in the loop sit where twenty developers sit.** A comment works only while somebody remembers the argument behind it, and a review habit is the same bet on memory made by a larger group — neither survives a contributor who was present for no conversation and keeps nothing between sessions. The migration named above — comment, then review habit, then type system — stops tracking headcount, and what still holds is what the compiler, a constraint, or a test enforces. [Chapter 24](24_never-written-down_at4r.md) turns to rules nobody wrote down at all, which have nothing to migrate.
 
 ### Latency budget
 
@@ -327,7 +327,7 @@ if user, ok := cache.Get(userID); ok {
 user_t *user = &users[user_id];
 ```
 
-**What changes with the Force:** what you are able to spend on abstraction. At 200 milliseconds an interface, a copy, and an allocation are all invisible against a database round trip, so buy them. At 200 microseconds those same three cost a measurable share of everything you have, and the code stops looking like the code in books — not because its authors are cleverer, but because they cannot afford what you can. [Chapter 08](08_scale_637f.md) owns the arithmetic underneath this; [chapter 04](04_dependency-and-hiding_agjy.md)'s entity-component case is this Force pushed to its end.
+**What changes with the Force:** what you are able to spend on abstraction. At 200 milliseconds an interface, a copy, and an allocation are all invisible against a database round trip, so buy them. At 200 microseconds those same three cost a measurable share of everything you have, and the code stops looking like the code in books — not because its authors are cleverer, but because they cannot afford what you can. [Chapter 09](09_scale_637f.md) owns the arithmetic underneath this; [chapter 05](05_dependency-and-hiding_agjy.md)'s entity-component case is this Force pushed to its end.
 
 ### Control of the callers
 
@@ -372,7 +372,7 @@ The Force decides how you can apply that fix:
 
 Same defect, same fix, three different projects. Nothing about the code told you which one you were in.
 
-**What changes with the Force:** not the design, the *plan*. This is the Force that decides how much a mistake costs to correct, which is why it belongs in the room before the API is designed rather than after. [Chapter 04](04_dependency-and-hiding_agjy.md) owns what this implies for what you expose in the first place.
+**What changes with the Force:** not the design, the *plan*. This is the Force that decides how much a mistake costs to correct, which is why it belongs in the room before the API is designed rather than after. [Chapter 05](05_dependency-and-hiding_agjy.md) owns what this implies for what you expose in the first place.
 
 ### The seven Forces, as questions
 
@@ -476,7 +476,7 @@ That is the reversibility question again, and it is the only one that still work
 
 **A written force-map goes stale, and a stale one is worse than none**, because it looks authoritative and nobody re-derives what a document already answers. Date them, and treat an undated one as unsigned.
 
-**This chapter does not resolve conflicts.** Low latency pulls against durability. A small team pulls against a large blast radius. Naming both does not tell you which wins, and the honest answer is that trade-offs are decided rather than computed. [Chapter 19](19_force-map-method_r37x.md) works through what to do when Forces point in opposite directions.
+**This chapter does not resolve conflicts.** Low latency pulls against durability. A small team pulls against a large blast radius. Naming both does not tell you which wins, and the honest answer is that trade-offs are decided rather than computed. [Chapter 20](20_force-map-method_r37x.md) works through what to do when Forces point in opposite directions.
 
 ---
 
@@ -485,8 +485,8 @@ That is the reversibility question again, and it is the only one that still work
 **In a codebase:**
 
 - **Retry with exponential backoff around a call to a function in the same binary.** A distribution Force imported wholesale from somewhere it was real. Read the intensity and there is nothing to retry: an in-process call does not suffer packet loss or a slow node, so a failure is a bug in your own code and calling it three times more slowly just delays the report by six seconds.
-- **A read-modify-write in a request handler.** A concurrency Force present and unread, and the symptom is silent data loss: two requests read the same value, both write, and the second overwrites the first with no error anywhere ([Ch. 06](06_time_mdbn.md)).
-- **Retry logic with no idempotency key.** Half of a Force read: the failure was anticipated, the redelivery it causes was not ([Ch. 07](07_distribution_49yh.md)).
+- **A read-modify-write in a request handler.** A concurrency Force present and unread, and the symptom is silent data loss: two requests read the same value, both write, and the second overwrites the first with no error anywhere ([Ch. 07](07_time_mdbn.md)).
+- **Retry logic with no idempotency key.** Half of a Force read: the failure was anticipated, the redelivery it causes was not ([Ch. 08](08_distribution_49yh.md)).
 - **A `not null default` in a migration** that quietly asserts something false about every row that predates it. The durability Force went unread: the author was thinking about the code, where a zero value is a harmless placeholder, and not about the rows, where it is a claim that this never happened — permanently indistinguishable from a claim that nobody recorded it.
 - **A cache with no invalidation rule.** The latency Force was read and the change-frequency Force was not, so the design answers one question and ignores the one that decides whether it is correct.
 - **An invariant enforced by a comment, in a codebase with forty contributors** and a third of them new this year.
@@ -503,7 +503,7 @@ That is the reversibility question again, and it is the only one that still work
 
 The remedy in each case is the same, and it is almost never applied — stop arguing about the Principle and ask each side what they believe about the situation.
 
-[Chapter 03](03_grading-a-law_q5c6.md) turns to Laws, and to the fact that they do not all have the same standing — a proven theorem, a near-tautology, and an empirical regularity are three different kinds of true.
+[Chapter 04](04_grading-a-law_q5c6.md) turns to Laws, and to the fact that they do not all have the same standing — a proven theorem, a near-tautology, and an empirical regularity are three different kinds of true.
 
 ---
 
@@ -514,4 +514,4 @@ The remedy in each case is the same, and it is almost never applied — stop arg
 
 ---
 
-[← Ch. 01](01_the-five-kinds_cjx4.md)  ·  [Contents](00_toc.md)  ·  [Ch. 03 →](03_grading-a-law_q5c6.md)
+[← Ch. 02](02_the-five-kinds_cjx4.md)  ·  [Contents](00_toc.md)  ·  [Ch. 04 →](04_grading-a-law_q5c6.md)

@@ -6,7 +6,7 @@
 
 Two halves, and the second is the practical one. A catalogue is arranged by what patterns look like, so it can only be searched by a name you already have. Arranged by Force, the same material can be searched from the situation, which is the direction you are actually travelling.
 
-So this chapter sorts the field against [chapter 02](02_forces_f4m5.md)'s seven Forces, in [chapter 02](02_forces_f4m5.md)'s order. Forty-nine patterns fall into them, and a handful answer the shape of the problem instead — a state machine is right when the domain has states, which is a fact about the business rather than about your circumstances. What is left over after both is the interesting residue, and it is dealt with in the boundary section.
+So this chapter sorts the field against [chapter 03](03_forces_f4m5.md)'s seven Forces, in [chapter 03](03_forces_f4m5.md)'s order. Forty-nine patterns fall into them, and a handful answer the shape of the problem instead — a state machine is right when the domain has states, which is a fact about the business rather than about your circumstances. What is left over after both is the interesting residue, and it is dealt with in the boundary section.
 
 ## How to read this chapter
 
@@ -14,11 +14,11 @@ Two kinds of pattern entry, and the difference matters.
 
 **Worked patterns** — two per Force, with code, the constraint the pattern imposes, and what it costs. These carry the argument.
 
-**Listed patterns** — the rest of each family, one line each. These are not explained, only placed. By now you have [chapter 10](10_what-a-pattern-is-for_3xzc.md)'s tests, so a one-line entry is something you can evaluate rather than something you have to accept.
+**Listed patterns** — the rest of each family, one line each. These are not explained, only placed. By now you have [chapter 11](11_what-a-pattern-is-for_3xzc.md)'s tests, so a one-line entry is something you can evaluate rather than something you have to accept.
 
 Each worked pattern carries two labelled lines, and they answer different questions.
 
-- ***The constraint*** — what the pattern **forbids** once you adopt it. This is [chapter 10](10_what-a-pattern-is-for_3xzc.md)'s second test applied: a name that rules nothing out carries no information, so a pattern with no constraint is not a pattern. It is not a list of prerequisites; it is what you may no longer do.
+- ***The constraint*** — what the pattern **forbids** once you adopt it. This is [chapter 11](11_what-a-pattern-is-for_3xzc.md)'s second test applied: a name that rules nothing out carries no information, so a pattern with no constraint is not a pattern. It is not a list of prerequisites; it is what you may no longer do.
 - ***The cost*** — what you pay for the constraint, in work, in performance, or in something you can no longer see.
 
 Patterns another chapter owns appear with a pointer instead of a definition.
@@ -31,7 +31,7 @@ Patterns another chapter owns appear with a pointer instead of a definition.
 
 > **Can two of these run at the same time and touch the same state?**
 
-[Chapter 06](06_time_mdbn.md) owns the Law here and [chapter 07](07_distribution_49yh.md) owns what happens across machines. These are the shapes that answer them.
+[Chapter 07](07_time_mdbn.md) owns the Law here and [chapter 08](08_distribution_49yh.md) owns what happens across machines. These are the shapes that answer them.
 
 The Force splits into two questions, and the patterns split with it. **What has to change together?** — and, separately, **what stops two writers changing it at once?** The first must be answered before the second can be applied, because you cannot lock a boundary you have not drawn.
 
@@ -60,7 +60,7 @@ func (o *Order) AddLine(sku string, quantity int) error {
 
 *The cost:* draw the boundary too large and every operation contends on one row; too small and invariants leak out to the caller, where they cannot be enforced at all.
 
-**It answers the first question only, and this is worth being exact about.** Two requests that both load order 42, both check the credit limit, and both add a line will both succeed — the aggregate did not stop them, and nothing in the pattern claims it would. That is [chapter 06](06_time_mdbn.md)'s lost update, and it needs a mechanism: a version column that refuses the stale writer, or a lock held across the read and the write.
+**It answers the first question only, and this is worth being exact about.** Two requests that both load order 42, both check the credit limit, and both add a line will both succeed — the aggregate did not stop them, and nothing in the pattern claims it would. That is [chapter 07](07_time_mdbn.md)'s lost update, and it needs a mechanism: a version column that refuses the stale writer, or a lock held across the read and the write.
 
 What the aggregate contributes is the thing that mechanism needs. It says **order 42 and its lines are one unit**, so there is exactly one row to version and one boundary to lock. Without it you are left asking which of eleven tables to lock and in what order, which is how deadlocks are made.
 
@@ -100,17 +100,17 @@ billing.Total() // 3500 — includes the line shipping just added
 
 One round trip, and no way for the two to disagree about what order 42 currently is.
 
-*The constraint:* two parts of one operation cannot hold divergent copies of the same row, which is a lost-update race ([Ch. 06](06_time_mdbn.md)) that no amount of care at the call sites removes.
+*The constraint:* two parts of one operation cannot hold divergent copies of the same row, which is a lost-update race ([Ch. 07](07_time_mdbn.md)) that no amount of care at the call sites removes.
 
 *The cost:* it is a cache, so it needs a lifetime — and the lifetime must be the unit of work rather than the process, or it quietly becomes a source of stale data.
 
 **The rest of this family**
 
-- **Optimistic offline lock** — a version column; the writer whose version is stale is refused. [Chapter 06](06_time_mdbn.md) works it through.
+- **Optimistic offline lock** — a version column; the writer whose version is stale is refused. [Chapter 07](07_time_mdbn.md) works it through.
 - **Pessimistic offline lock** — take the lock for the duration; correct, and it holds a row across think-time, which is usually unaffordable.
-- **Single writer** — remove the contention rather than manage it. [Chapter 06](06_time_mdbn.md) owns this, and [chapter 08](08_scale_637f.md) shows what it does to throughput.
-- **Idempotency key** — [chapter 07](07_distribution_49yh.md) owns it; it is what makes at-least-once delivery survivable.
-- **Saga** — [chapter 07](07_distribution_49yh.md) owns it; the answer when the unit of consistency spans systems and no transaction can.
+- **Single writer** — remove the contention rather than manage it. [Chapter 07](07_time_mdbn.md) owns this, and [chapter 09](09_scale_637f.md) shows what it does to throughput.
+- **Idempotency key** — [chapter 08](08_distribution_49yh.md) owns it; it is what makes at-least-once delivery survivable.
+- **Saga** — [chapter 08](08_distribution_49yh.md) owns it; the answer when the unit of consistency spans systems and no transaction can.
 
 ### Force: Durability of the medium
 
@@ -160,7 +160,7 @@ values ($1, -100, 'withdrawal', now());
 - **Bitemporal modelling** — two timelines, what was true and when you learned it, so corrections do not rewrite history.
 - **Table Data Gateway** — one object per table, holding the SQL; the minimum structure that keeps schema knowledge in one place.
 - **Data Mapper** — the object model and the tables are allowed to differ, and something translates. Its cost is the translation; its benefit is that neither side constrains the other.
-- **Transactional Outbox** — [chapter 07](07_distribution_49yh.md) owns this one, and it is what you reach for when Unit of Work's constraint cannot be met.
+- **Transactional Outbox** — [chapter 08](08_distribution_49yh.md) owns this one, and it is what you reach for when Unit of Work's constraint cannot be met.
 
 ### Force: Blast radius
 
@@ -199,8 +199,8 @@ func ParseAmount(text string) (Money, error)
 
 **The rest of this family**
 
-- **Circuit breaker** — stop calling a failing dependency, so its slowness stops consuming your capacity. [Chapter 10](10_what-a-pattern-is-for_3xzc.md) uses the name as its example of a term that is a mediocre description and an excellent search key.
-- **Timeout with backoff and jitter** — bound the wait, and spread the retries so recovery does not arrive as a synchronized stampede ([Ch. 07](07_distribution_49yh.md)).
+- **Circuit breaker** — stop calling a failing dependency, so its slowness stops consuming your capacity. [Chapter 11](11_what-a-pattern-is-for_3xzc.md) uses the name as its example of a term that is a mediocre description and an excellent search key.
+- **Timeout with backoff and jitter** — bound the wait, and spread the retries so recovery does not arrive as a synchronized stampede ([Ch. 08](08_distribution_49yh.md)).
 - **Dead-letter queue** — a message that cannot be processed goes somewhere a human will find it, instead of blocking the queue or vanishing.
 - **Parse, don't validate** — worked under team size, where its distinctive value is; it belongs here too, because a value that cannot be invalid cannot spread an invalid one.
 - **Make illegal states unrepresentable** — the same move in the type system: if the invalid combination has no representation, no code path can produce it.
@@ -209,7 +209,7 @@ func ParseAmount(text string) (Money, error)
 
 > **Which parts of this move at different rates?**
 
-Every pattern here is a seam placed where two things move at different speeds — [chapter 09](09_change_rjf9.md)'s rate-of-change layers, made structural.
+Every pattern here is a seam placed where two things move at different speeds — [chapter 10](10_change_rjf9.md)'s rate-of-change layers, made structural.
 
 **Pattern: Ports and adapters** — the application defines the interfaces it needs; the outside world implements them.
 
@@ -224,9 +224,9 @@ type Rates interface {
 // The adapter lives elsewhere and depends on billing, not the reverse.
 ```
 
-*The constraint:* the interface is declared by the consumer rather than the provider, which is what reverses the arrow — a provider-declared interface leaves the dependency pointing exactly where it was ([Ch. 04](04_dependency-and-hiding_agjy.md)).
+*The constraint:* the interface is declared by the consumer rather than the provider, which is what reverses the arrow — a provider-declared interface leaves the dependency pointing exactly where it was ([Ch. 05](05_dependency-and-hiding_agjy.md)).
 
-*The cost:* an interface per boundary, and the habit of adding one wherever a boundary is drawn ([Ch. 17](17_tdd-and-mocks_u8eu.md) traces where that habit comes from).
+*The cost:* an interface per boundary, and the habit of adding one wherever a boundary is drawn ([Ch. 18](18_tdd-and-mocks_u8eu.md) traces where that habit comes from).
 
 **Pattern: Strangler fig** — route traffic through a facade, move one route at a time, delete the old system when the last route has moved.
 
@@ -243,17 +243,17 @@ type Rates interface {
 
 **The rest of this family**
 
-- **Pipes and filters** — stages that transform and hand on, each replaceable without the others. [Chapter 04](04_dependency-and-hiding_agjy.md) notes these are not layers, and the difference matters.
+- **Pipes and filters** — stages that transform and hand on, each replaceable without the others. [Chapter 05](05_dependency-and-hiding_agjy.md) notes these are not layers, and the difference matters.
 - **Parameter object** — one struct instead of a growing argument list, so adding a field is not a signature change at every call site.
-- **Repository** — a collection-like interface over storage. Worth [chapter 10](10_what-a-pattern-is-for_3xzc.md)'s tests before adopting: it compresses well, and what it rules out is thinner than its reputation suggests.
+- **Repository** — a collection-like interface over storage. Worth [chapter 11](11_what-a-pattern-is-for_3xzc.md)'s tests before adopting: it compresses well, and what it rules out is thinner than its reputation suggests.
 - **Feature toggle** — separate deploying code from enabling it, so the two can move at different rates. Its cost is that every live toggle doubles the paths under test.
-- **Anti-corruption layer** — [chapter 11](11_patterns-that-cross_r8dw.md) owns it: what a translation boundary becomes when the thing on the other side is not yours to change.
+- **Anti-corruption layer** — [chapter 12](12_patterns-that-cross_r8dw.md) owns it: what a translation boundary becomes when the thing on the other side is not yours to change.
 
 ### Force: Team size and turnover
 
 > **How many people must agree to change this, and how many of today's people will still be here in two years?**
 
-This Force is the odd one, and the shape of its answer is worth noticing. It does not change the invariants of the system: *amounts are in minor units, never floats*; *these two columns are set together or not at all*; *a visit may be completed once*. What the Force changes is **where the invariants are held**, along [chapter 02](02_forces_f4m5.md)'s migration from a comment, to a review habit, to the type system.
+This Force is the odd one, and the shape of its answer is worth noticing. It does not change the invariants of the system: *amounts are in minor units, never floats*; *these two columns are set together or not at all*; *a visit may be completed once*. What the Force changes is **where the invariants are held**, along [chapter 03](03_forces_f4m5.md)'s migration from a comment, to a review habit, to the type system.
 
 So team size produces fewer patterns of its own than the others; mostly it relocates invariants the other Forces produced.
 
@@ -358,7 +358,7 @@ The languages this pattern comes from do not have the hole. A Rust `enum` or an 
 **The rest of this family**
 
 - **Architecture decision record** — the reasoning written down when it was fresh, for the people who were not in the room. Its entire value is turnover; on a stable team of two it is overhead.
-- **Composition root** — one place where the object graph is assembled, so a newcomer reads one file rather than tracing a graph ([Ch. 04](04_dependency-and-hiding_agjy.md)).
+- **Composition root** — one place where the object graph is assembled, so a newcomer reads one file rather than tracing a graph ([Ch. 05](05_dependency-and-hiding_agjy.md)).
 - **Golden test** — assert a whole recorded artifact rather than picked-out fields. Worth it where the output is too large or too structured to assert piecemeal — a rendered invoice, a generated migration — and where you want changes nobody anticipated to show up as a diff. It over-constrains by design, which is the trade.
 - **Contract tests** — also a control-of-callers pattern, worked there. Same double duty: an agreement written down rather than remembered.
 
@@ -366,7 +366,7 @@ The languages this pattern comes from do not have the hole. A Rust `enum` or an 
 
 > **What is the budget, and what does one mechanism cost of it?**
 
-[Chapter 08](08_scale_637f.md) supplies the arithmetic underneath all of these.
+[Chapter 09](09_scale_637f.md) supplies the arithmetic underneath all of these.
 
 **Pattern: Batching** — replace N round trips with one.
 
@@ -401,23 +401,23 @@ value := source.Get(key)
 cache.Set(key, value, ttl)
 ```
 
-*The constraint:* the cached copy may be stale, so the design is not the lookup — it is the invalidation. A copy with no invalidation strategy is a copy that is allowed to be wrong ([Ch. 03](03_grading-a-law_q5c6.md)).
+*The constraint:* the cached copy may be stale, so the design is not the lookup — it is the invalidation. A copy with no invalidation strategy is a copy that is allowed to be wrong ([Ch. 04](04_grading-a-law_q5c6.md)).
 
 *The cost:* a second source of truth, a stampede when a popular key expires and every request misses at once, and a debugging surface where the answer depends on what happened earlier.
 
 **The rest of this family**
 
-- **Object pool** — reuse expensive-to-create things. [Chapter 08](08_scale_637f.md)'s warning applies: measure, because a pool can easily cost more than the allocation it avoids.
-- **Backpressure** — when the consumer cannot keep up, make the producer wait rather than growing a queue. The alternative is [chapter 08](08_scale_637f.md)'s queue curve, and it ends in memory exhaustion.
+- **Object pool** — reuse expensive-to-create things. [Chapter 09](09_scale_637f.md)'s warning applies: measure, because a pool can easily cost more than the allocation it avoids.
+- **Backpressure** — when the consumer cannot keep up, make the producer wait rather than growing a queue. The alternative is [chapter 09](09_scale_637f.md)'s queue curve, and it ends in memory exhaustion.
 - **CQRS**, for Command Query Responsibility Segregation — separate the write model from the read model, so each can be shaped for its own access pattern. Its real cost is that they are now two models that can disagree.
 - **Materialised view** — precompute the answer, and accept that it lags.
-- **Data-oriented layout** — [chapters 03](03_grading-a-law_q5c6.md) and 07 own it; the 7× that comes from where the bytes sit rather than what the algorithm does.
+- **Data-oriented layout** — [chapters 04](04_grading-a-law_q5c6.md) and 07 own it; the 7× that comes from where the bytes sit rather than what the algorithm does.
 
 ### Force: Control of the callers
 
 > **Who else depends on this, and can I change them?**
 
-[Chapter 09](09_change_rjf9.md)'s compatibility rule and [chapter 11](11_patterns-that-cross_r8dw.md)'s ownership line both land here. The patterns are ways of making a boundary survivable.
+[Chapter 10](10_change_rjf9.md)'s compatibility rule and [chapter 12](12_patterns-that-cross_r8dw.md)'s ownership line both land here. The patterns are ways of making a boundary survivable.
 
 **Pattern: Tolerant reader** — read only the fields you need, and ignore everything else.
 
@@ -432,7 +432,7 @@ var view OrderView
 err := decoder.Decode(&view) // the day they add "currency", this starts failing
 ```
 
-Adding a field is the one change [chapter 09](09_change_rjf9.md) says is always safe, so a reader that fails on it has turned their safe change into your outage. The tolerant version simply does not look:
+Adding a field is the one change [chapter 10](10_change_rjf9.md) says is always safe, so a reader that fails on it has turned their safe change into your outage. The tolerant version simply does not look:
 
 ```go
 // Only these three. Any other field in the payload is discarded silently.
@@ -448,7 +448,7 @@ err := json.Unmarshal(body, &view) // unknown fields are skipped
 
 *The constraint:* you may not fail on an unrecognized field, which means you cannot use strict schema validation on the inbound side.
 
-*The cost:* a field that disappears reads as its zero value rather than as an error, which is the silent failure of [chapter 09](09_change_rjf9.md) and the price of the tolerance.
+*The cost:* a field that disappears reads as its zero value rather than as an error, which is the silent failure of [chapter 10](10_change_rjf9.md) and the price of the tolerance.
 
 **Pattern: Consumer-driven contracts** — each consumer records the subset of your interface it actually uses, and your build replays those recordings against the real implementation.
 
@@ -481,13 +481,13 @@ The payoff is knowing what is safe to change:
 
 *The constraint:* the contract set becomes the real interface, and it is smaller than the published one. You may change anything nobody recorded.
 
-*The cost:* both sides must adopt the tooling, and a broker is one more piece of infrastructure to run. More seriously, **a consumer who does not participate is invisible** — the green build says "no recorded expectation broke," not "nobody broke." The pattern is exactly as good as its coverage, and it converts [chapter 04](04_dependency-and-hiding_agjy.md)'s unknowable dependency set into a known-but-incomplete one.
+*The cost:* both sides must adopt the tooling, and a broker is one more piece of infrastructure to run. More seriously, **a consumer who does not participate is invisible** — the green build says "no recorded expectation broke," not "nobody broke." The pattern is exactly as good as its coverage, and it converts [chapter 05](05_dependency-and-hiding_agjy.md)'s unknowable dependency set into a known-but-incomplete one.
 
 **The rest of this family**
 
-- **Bounded context** — one model per context, with translation between them, rather than one model everyone must agree on. [Chapter 09](09_change_rjf9.md)'s Conway material is why the boundaries end up where they do.
-- **Composition root** — one place where the object graph is assembled, so nothing else needs to know how anything is built ([Ch. 04](04_dependency-and-hiding_agjy.md)).
-- **Expand and contract** — add the new field, migrate readers, then remove the old one, in three deploys rather than one. [Chapter 09](09_change_rjf9.md)'s add-only rule is what forces the shape.
+- **Bounded context** — one model per context, with translation between them, rather than one model everyone must agree on. [Chapter 10](10_change_rjf9.md)'s Conway material is why the boundaries end up where they do.
+- **Composition root** — one place where the object graph is assembled, so nothing else needs to know how anything is built ([Ch. 05](05_dependency-and-hiding_agjy.md)).
+- **Expand and contract** — add the new field, migrate readers, then remove the old one, in three deploys rather than one. [Chapter 10](10_change_rjf9.md)'s add-only rule is what forces the shape.
 - **Contract tests** — verify both sides against the same shared expectation, rather than trusting a document.
 
 ---
@@ -496,7 +496,7 @@ The payoff is knowing what is safe to change:
 
 Two questions worth separating: why do these patterns last, and why does the grouping work?
 
-**They last because a Force outlives a language.** Concurrency was a problem in 1970 and is a problem now. Data outlives code in COBOL and in Rust. Someone else always depends on your interface. A pattern answering one of those describes the shape of the problem rather than a gap in a toolchain — which is why it is still recognizable after being carried into a language its author never used. [Chapter 13](13_missing-language-features_esqm.md) takes the converse: a name that disappears when the language changes was answering the language, not the problem.
+**They last because a Force outlives a language.** Concurrency was a problem in 1970 and is a problem now. Data outlives code in COBOL and in Rust. Someone else always depends on your interface. A pattern answering one of those describes the shape of the problem rather than a gap in a toolchain — which is why it is still recognizable after being carried into a language its author never used. [Chapter 14](14_missing-language-features_esqm.md) takes the converse: a name that disappears when the language changes was answering the language, not the problem.
 
 **The grouping works because a pattern is a Force with a shape attached.** If two patterns answer the same Force, they are alternatives, and knowing the Force tells you which question you are choosing between. Optimistic and pessimistic locking are not two techniques to learn; they are two answers to *how often do writers collide*, and the intensity of that Force picks one.
 
@@ -512,23 +512,23 @@ Sorting the field left five patterns that do not answer a Force, and they fail i
 
 **Some answer a goal rather than a situation.** Property-based testing, the test-double taxonomy, and functional core / imperative shell all answer *how will I know this works*, and a goal is a property you have decided to want in the system: testability, observability, portability, a particular standard of code review. The test that separates it from a Force is whether you can decide to want less of it and stay honest. You cannot decide that four teams will stop needing to agree, or that the network will stop dropping packets — those are true whatever you want. You can decide that a prototype does not need to be portable, or that a script does not need tests, and nothing has been denied.
 
-That is a real gap in this chapter's method, not a defect in the patterns. [Chapter 17](17_tdd-and-mocks_u8eu.md) covers the testing material, and it is organized by what the techniques actually buy rather than by Force, for exactly this reason.
+That is a real gap in this chapter's method, not a defect in the patterns. [Chapter 18](18_tdd-and-mocks_u8eu.md) covers the testing material, and it is organized by what the techniques actually buy rather than by Force, for exactly this reason.
 
-**Some answer what the problem is rather than what the situation is.** A state machine is the right shape when the domain genuinely has states and transitions — an order that is placed, then paid, then shipped. That is a fact about the business, not about your concurrency or your latency budget. The same goes for Transaction Script, which [chapter 10](10_what-a-pattern-is-for_3xzc.md) uses as its compression example: it is what you write when *no* Force is pushing you anywhere else, and it is right far more often than its reputation suggests.
+**Some answer what the problem is rather than what the situation is.** A state machine is the right shape when the domain genuinely has states and transitions — an order that is placed, then paid, then shipped. That is a fact about the business, not about your concurrency or your latency budget. The same goes for Transaction Script, which [chapter 11](11_what-a-pattern-is-for_3xzc.md) uses as its compression example: it is what you write when *no* Force is pushing you anywhere else, and it is right far more often than its reputation suggests.
 
 Confusing the Forces, goals, and problem shapes in play is one way people end up applying machinery to a question they were not asking: reaching for an event-sourced log because durability sounds important, when what the domain actually has is a state machine; or adopting a testing technique because it is rigorous, rather than because anything about the situation called for it.
 
 ### One Force, several answers, and no way to choose from here
 
-Knowing the Force narrows the field; it rarely closes it. *Writers collide* gives you optimistic locking, pessimistic locking, single-writer partitioning, and a serializable transaction, and choosing between them needs the Force's **intensity** — [chapter 02](02_forces_f4m5.md)'s dial — plus what you are willing to pay.
+Knowing the Force narrows the field; it rarely closes it. *Writers collide* gives you optimistic locking, pessimistic locking, single-writer partitioning, and a serializable transaction, and choosing between them needs the Force's **intensity** — [chapter 03](03_forces_f4m5.md)'s dial — plus what you are willing to pay.
 
-This chapter sorts. It does not decide. [Chapter 19](19_force-map-method_r37x.md) is the one that turns a set of Forces into a design.
+This chapter sorts. It does not decide. [Chapter 20](20_force-map-method_r37x.md) is the one that turns a set of Forces into a design.
 
 ### The listed entries are not endorsements
 
 The one-line entries above place each pattern; they do not recommend it. Repository and Active Record are both listed, and they are alternatives with opposite trade-offs. CQRS is listed and is wrong for most systems that adopt it.
 
-Run [chapter 10](10_what-a-pattern-is-for_3xzc.md)'s tests before using any of them, and [chapter 11](11_patterns-that-cross_r8dw.md)'s question before believing the cost estimate. A list is a map of what exists, which is a different thing from a set of instructions.
+Run [chapter 11](11_what-a-pattern-is-for_3xzc.md)'s tests before using any of them, and [chapter 12](12_patterns-that-cross_r8dw.md)'s question before believing the cost estimate. A list is a map of what exists, which is a different thing from a set of instructions.
 
 ---
 
@@ -536,9 +536,9 @@ Run [chapter 10](10_what-a-pattern-is-for_3xzc.md)'s tests before using any of t
 
 **The grouping is a lens, and lenses distort.** Several patterns answer two Forces — an outbox is both durability and concurrency, a bounded context is both change frequency and ownership — and filing each under one is a simplification. Where a pattern appears matters less than that it appears somewhere; do not read the placement as a claim about its essence.
 
-**Naming the Force is genuinely hard, and this chapter makes it look easy.** In a real design the Forces arrive tangled, and half of them are estimates about the future ([Ch. 02](02_forces_f4m5.md)). The neat question at the head of each section is the output of the analysis, not the input.
+**Naming the Force is genuinely hard, and this chapter makes it look easy.** In a real design the Forces arrive tangled, and half of them are estimates about the future ([Ch. 03](03_forces_f4m5.md)). The neat question at the head of each section is the output of the analysis, not the input.
 
-**A grouped list still invites shopping.** [Chapter 10](10_what-a-pattern-is-for_3xzc.md)'s warning about catalogues applies here too: six well-organized shelves are still shelves, and *we should use a Saga* is as available a sentence after reading this as before. The defence is the same — say which Force, and at what intensity.
+**A grouped list still invites shopping.** [Chapter 11](11_what-a-pattern-is-for_3xzc.md)'s warning about catalogues applies here too: six well-organized shelves are still shelves, and *we should use a Saga* is as available a sentence after reading this as before. The defence is the same — say which Force, and at what intensity.
 
 **Fifty names is more vocabulary than most systems need.** A great deal of good software uses four or five of these and nothing else. Breadth here is for recognizing what somebody else built, not a target to work through.
 
@@ -556,16 +556,16 @@ Run [chapter 10](10_what-a-pattern-is-for_3xzc.md)'s tests before using any of t
 **In a conversation:**
 
 - **"We should use X."** Which Force, and how intense? If neither can be answered, the proposal is a shape looking for a problem.
-- **"That's the standard pattern for this."** Standard where, and answering which Force? [Chapter 11](11_patterns-that-cross_r8dw.md)'s question applies to the recommendation too.
-- **"We'll need CQRS eventually."** Eventually is [chapter 02](02_forces_f4m5.md)'s territory: does the decision expire, and is it cheap today? For CQRS, both answers are unfavourable.
+- **"That's the standard pattern for this."** Standard where, and answering which Force? [Chapter 12](12_patterns-that-cross_r8dw.md)'s question applies to the recommendation too.
+- **"We'll need CQRS eventually."** Eventually is [chapter 03](03_forces_f4m5.md)'s territory: does the decision expire, and is it cheap today? For CQRS, both answers are unfavourable.
 - **Someone reciting a list of patterns as a design.** A list of shapes is not a design until each one is attached to a Force.
 
 The question that does the work: **which Force is this answering, and how strongly?**
 
 A pattern with a Force behind it can be argued about on the merits — you can disagree about the intensity, and the disagreement is resolvable. A pattern with no Force behind it can only be argued about on taste, which is the argument this book exists to end.
 
-[Chapter 13](13_missing-language-features_esqm.md) takes the converse of this chapter's test. If a pattern survives translation because it answers a Force, then a pattern that *disappears* when you change language was answering the language — and a surprising share of the best-known catalogue turns out to be exactly that.
+[Chapter 14](14_missing-language-features_esqm.md) takes the converse of this chapter's test. If a pattern survives translation because it answers a Force, then a pattern that *disappears* when you change language was answering the language — and a surprising share of the best-known catalogue turns out to be exactly that.
 
 ---
 
-[← Ch. 11](11_patterns-that-cross_r8dw.md)  ·  [Contents](00_toc.md)  ·  [Ch. 13 →](13_missing-language-features_esqm.md)
+[← Ch. 12](12_patterns-that-cross_r8dw.md)  ·  [Contents](00_toc.md)  ·  [Ch. 14 →](14_missing-language-features_esqm.md)

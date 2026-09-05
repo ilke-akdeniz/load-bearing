@@ -57,7 +57,7 @@ The second row is revision 1 of a definition that has three steps. **No such def
 
 *(The interleaving is forced in the run above so that it happens every time. In a running system it happens when it happens, which is the part that makes it expensive to find.)*
 
-[Chapter 19](19_force-map-method_r37x.md) maps this same decision as a log entry, with its Forces named and the transaction marked as forced rather than chosen. This is the same decision seen from the other end: in the code, where none of that is visible.
+[Chapter 20](20_force-map-method_r37x.md) maps this same decision as a log entry, with its Forces named and the transaction marked as forced rather than chosen. This is the same decision seen from the other end: in the code, where none of that is visible.
 
 ### Why asking afterwards does not get it back
 
@@ -95,9 +95,9 @@ Finally, one thing does survive without deliberate effort, and it is worth separ
 
 ### Grilling: making the decision happen in the open
 
-[Chapter 19](19_force-map-method_r37x.md)'s procedure assumes you can name the Forces before the design exists. Usually you cannot — not because you are careless, but because you do not yet know which decisions are about to be made, so you do not know which facts about your situation are about to matter.
+[Chapter 20](20_force-map-method_r37x.md)'s procedure assumes you can name the Forces before the design exists. Usually you cannot — not because you are careless, but because you do not yet know which decisions are about to be made, so you do not know which facts about your situation are about to matter.
 
-One technique inverts the flow, and it is worth stating in full because it is [chapter 19](19_force-map-method_r37x.md)'s shape — Forces, then Principles, then Idioms — with the roles swapped. Instead of supplying Forces up front, you have the decisions surfaced one at a time and supply the fact that settles each one as it arrives. The prompt, quoted as the author of this book uses it:
+One technique inverts the flow, and it is worth stating in full because it is [chapter 20](20_force-map-method_r37x.md)'s shape — Forces, then Principles, then Idioms — with the roles swapped. Instead of supplying Forces up front, you have the decisions surfaced one at a time and supply the fact that settles each one as it arrives. The prompt, quoted as the author of this book uses it:
 
 > Interview me relentlessly about every aspect of this until we reach a shared understanding. Walk down each branch of the decision tree, resolving dependencies between decisions one-by-one. For each question, provide your recommended answer.
 >
@@ -109,7 +109,7 @@ One technique inverts the flow, and it is worth stating in full because it is [c
 
 The technique is not this book's. It comes from Matt Pocock's skills repository, as `skills/productivity/grilling/SKILL.md`, and this book's author encountered this use of it through a video by Jason Ku. The version quoted above is an earlier one, frozen here because the upstream text has since changed.
 
-**The split between fact and decision is the load-bearing line.** Facts get looked up; decisions get put to the human. That is [chapter 19](19_force-map-method_r37x.md)'s step one and step two, separated and given owners — and the separation is what makes the output auditable, because every decision arrives with a recommendation you either took or overrode.
+**The split between fact and decision is the load-bearing line.** Facts get looked up; decisions get put to the human. That is [chapter 20](20_force-map-method_r37x.md)'s step one and step two, separated and given owners — and the separation is what makes the output auditable, because every decision arrives with a recommendation you either took or overrode.
 
 The recommendation attached to each question is where the value is, and it takes an example to see why. Two questions from the start of a real library, with the answers that were actually given:
 
@@ -133,15 +133,15 @@ Both recommendations were sensible, both were overridden, and the same kind of t
 
 The first is about how the library is used — a client builds a whole definition in memory before any part of it exists, so ids cannot come from a column default without splitting the call. The second is a latency-budget reading at volume: these are primary keys on a table that only grows, and v4 scatters inserts across the index.
 
-Only the second is one of [chapter 02](02_forces_f4m5.md)'s seven, which is [chapter 19](19_force-map-method_r37x.md)'s point that the seven are not a closed list. What makes both of them Forces is that each is checkable, and each says what would have to change for the answer to change.
+Only the second is one of [chapter 03](03_forces_f4m5.md)'s seven, which is [chapter 20](20_force-map-method_r37x.md)'s point that the seven are not a closed list. What makes both of them Forces is that each is checkable, and each says what would have to change for the answer to change.
 
-And note who supplied them. In both cases the human, because both are facts about this situation — which is the one thing a recommendation drawn from what is common cannot contain. The recommendation is the majority ecosystem's convention arriving in the voice of an answer, which is an Idiom ([Ch. 01](01_the-five-kinds_cjx4.md)) with its locality stripped off.
+And note who supplied them. In both cases the human, because both are facts about this situation — which is the one thing a recommendation drawn from what is common cannot contain. The recommendation is the majority ecosystem's convention arriving in the voice of an answer, which is an Idiom ([Ch. 02](02_the-five-kinds_cjx4.md)) with its locality stripped off.
 
 The alternative is not that these two decisions go unmade. Without the interview both would still have been taken — a column default and a call to a v4 constructor, chosen by whatever is most common, with nothing in the file showing that anything was chosen at all. That is the case this chapter is about.
 
 The narrower point here is the one worth keeping: **grilling does not produce better answers. It produces answers somebody can disagree with.**
 
-And disagreeing with them later requires that they were written down. The interview produces a sequence of decisions with the reasoning attached, and the reasoning is the perishable half: an hour afterwards the code is still there and the override is not. So the last step of the loop is that each settled decision goes into the log — [chapter 19](19_force-map-method_r37x.md)'s artifact, and the reason FlowCore's decision 12 was available to be mapped months after anyone made it.
+And disagreeing with them later requires that they were written down. The interview produces a sequence of decisions with the reasoning attached, and the reasoning is the perishable half: an hour afterwards the code is still there and the override is not. So the last step of the loop is that each settled decision goes into the log — [chapter 20](20_force-map-method_r37x.md)'s artifact, and the reason FlowCore's decision 12 was available to be mapped months after anyone made it.
 
 That closes the circuit, and it is worth seeing as one thing rather than three. The interview surfaces the decision, the log records what settled it, and a standing instructions file promotes the answers that keep recurring into constraints so the same question stops being asked. Grilling without that second step is a conversation rather than a record, and a conversation is exactly what does not survive the session.
 
@@ -149,13 +149,13 @@ That closes the circuit, and it is worth seeing as one thing rather than three. 
 
 FlowCore's rule about identifier names lives in the instructions file, and it ends by referring to the log rather than restating it — *"Reasoning and worked examples: `docs/decisions.md`, decision 18"*. The same file adds that where the two disagree, the log wins. So a case the rule does not obviously cover gets settled by reading why the rule exists, instead of by guessing at its edge.
 
-That is what a record buys beyond recovery, and it generalises past this one project. **An entry is reusable exactly to the extent that it records why rather than what.** *Full-word identifiers everywhere* transfers nothing to a codebase with different readers; *abbreviations must be decoded rather than read, and the decoding does not get cheaper with familiarity* can be checked against those readers and kept or dropped on the evidence. A conclusion does not travel. A conclusion with its condition attached does, and arrives somewhere it can be argued with — which is [chapter 15](15_principle-loses-scope_b86v.md)'s mechanism running forwards for once, instead of a scope being lost in transmission.
+That is what a record buys beyond recovery, and it generalises past this one project. **An entry is reusable exactly to the extent that it records why rather than what.** *Full-word identifiers everywhere* transfers nothing to a codebase with different readers; *abbreviations must be decoded rather than read, and the decoding does not get cheaper with familiarity* can be checked against those readers and kept or dropped on the evidence. A conclusion does not travel. A conclusion with its condition attached does, and arrives somewhere it can be argued with — which is [chapter 16](16_principle-loses-scope_b86v.md)'s mechanism running forwards for once, instead of a scope being lost in transmission.
 
 The upstream text has since changed in a way worth one line: it asks a round of questions at once where the frozen version asks one at a time. That is throughput against how much the reader has to hold in working memory, which is a Force with a value, so neither version is a regression.
 
-**The limit, and it is severe.** Grilling is weakest against what this book's author calls a **folk remedy** — advice applied far outside the context it was made for, which stays misapplied because nobody rebuilds its scope. *Depend on abstractions, not concretions* is one, and [chapter 18](18_abstraction-as-insurance_4jk6.md) is the case. A corpus default is the purest instance: there the scope is not merely unrebuilt, because nobody knows one existed. So it never presents itself as a branch point — it is simply how things are done, and the interview does not offer it.
+**The limit, and it is severe.** Grilling is weakest against what this book's author calls a **folk remedy** — advice applied far outside the context it was made for, which stays misapplied because nobody rebuilds its scope. *Depend on abstractions, not concretions* is one, and [chapter 19](19_abstraction-as-insurance_4jk6.md) is the case. A corpus default is the purest instance: there the scope is not merely unrebuilt, because nobody knows one existed. So it never presents itself as a branch point — it is simply how things are done, and the interview does not offer it.
 
-Which means the technique surfaces contested choices and conceals settled ones, and settled-in-the-corpus is the class most likely to be wrong outside the ecosystem it came from. This follows from [chapter 01](01_the-five-kinds_cjx4.md)'s mechanism rather than from any measurement, and it should be read as reasoning rather than as a finding.
+Which means the technique surfaces contested choices and conceals settled ones, and settled-in-the-corpus is the class most likely to be wrong outside the ecosystem it came from. This follows from [chapter 02](02_the-five-kinds_cjx4.md)'s mechanism rather than from any measurement, and it should be read as reasoning rather than as a finding.
 
 **And a second limit, which is easier to walk into: the interview only reaches decisions at the granularity you asked at.** Ask for a whole application and you get an interview about a whole application. The questions are real, the answers are yours, the record is genuine. However, the decisions that could only surface in an interview focused on "failure handling" were not considered, because at the scale of the request they had not been separated out yet.
 
@@ -173,7 +173,7 @@ The decision log carries the same boundary throughout — *"full definition-side
 
 **Phases are easy to skip in AI-assisted development.** The whole implementation can arrive in an afternoon, and an afternoon does not feel like it needs a plan. Settling the phases before any of it is written is what keeps the decisions far enough apart to be asked about one at a time.
 
-**Not every piece of work needs the phases.** A proof of concept, a script you will delete, an obvious fix with one option — the interview is overhead and the conventional answer is fine ([Ch. 19](19_force-map-method_r37x.md)). The risk is that the category is decided at the start and not revisited: the one-off that turns out to be the product, and the obvious fix that turns out to be three faults interacting.
+**Not every piece of work needs the phases.** A proof of concept, a script you will delete, an obvious fix with one option — the interview is overhead and the conventional answer is fine ([Ch. 20](20_force-map-method_r37x.md)). The risk is that the category is decided at the start and not revisited: the one-off that turns out to be the product, and the obvious fix that turns out to be three faults interacting.
 
 ---
 
@@ -181,7 +181,7 @@ The decision log carries the same boundary throughout — *"full definition-side
 
 The claim rests on one asymmetry: a decision is a thing that happened, and a record is a thing that exists.
 
-Code preserves the outcome perfectly and the reason not at all. The transaction is still there in the file, byte for byte, years later. What is not there — and was never there — is the sentence saying that concurrency and blast radius together left no alternative. [Chapter 19](19_force-map-method_r37x.md) calls that distinction forced against chosen, and it is the one thing you cannot reconstruct from the artifact, because both kinds of decision compile to the same bytes.
+Code preserves the outcome perfectly and the reason not at all. The transaction is still there in the file, byte for byte, years later. What is not there — and was never there — is the sentence saying that concurrency and blast radius together left no alternative. [Chapter 20](20_force-map-method_r37x.md) calls that distinction forced against chosen, and it is the one thing you cannot reconstruct from the artifact, because both kinds of decision compile to the same bytes.
 
 For a human author, memory covers the gap for a while. It is unreliable and it fades, but it exists, and the fading is what makes *write it down while it is fresh* good advice rather than ceremony.
 
@@ -228,13 +228,13 @@ IntegrityError: UNIQUE constraint failed: revisions.definition_id, revisions.act
 
 **Nobody needs to remember why.** The constraint states the decision, enforces it, and objects on its own behalf when a change contradicts it — and the objection arrives at the moment of the change rather than in production, which is the only feedback that reliably survives a hand-off to somebody who was not there.
 
-So the claim has a corollary that is more useful than the claim: where a decision can be made self-enforcing, that is worth more than recording it, because the enforcement does not depend on anybody reading anything. [Chapter 12](12_patterns-that-survive-translation_us2k.md) works the general technique as making illegal states unrepresentable, and [chapter 20](20_six-profiles_dnkz.md) shows the line-of-business profile pushing rules into the schema for the related reason that the schema outlives the code.
+So the claim has a corollary that is more useful than the claim: where a decision can be made self-enforcing, that is worth more than recording it, because the enforcement does not depend on anybody reading anything. [Chapter 13](13_patterns-that-survive-translation_us2k.md) works the general technique as making illegal states unrepresentable, and [chapter 21](21_six-profiles_dnkz.md) shows the line-of-business profile pushing rules into the schema for the related reason that the schema outlives the code.
 
 The boundary is real and it is narrow. Most design decisions cannot be expressed as a constraint — *four queries rather than one join, because a join fans out to fifteen rows to dedupe* is a judgement, not an invariant. For those the record is the only mechanism there is.
 
 ### A decision nobody needs
 
-Most code embodies no decision worth recovering. The name of a local variable, the order of two independent statements, which of two equivalent library calls got used — there is nothing behind these, and treating every line as a lost decision produces a log nobody reads and a review that never ends. [Chapter 19](19_force-map-method_r37x.md)'s test applies: what does being wrong here cost, and who finds out.
+Most code embodies no decision worth recovering. The name of a local variable, the order of two independent statements, which of two equivalent library calls got used — there is nothing behind these, and treating every line as a lost decision produces a log nobody reads and a review that never ends. [Chapter 20](20_force-map-method_r37x.md)'s test applies: what does being wrong here cost, and who finds out.
 
 ---
 
@@ -276,7 +276,7 @@ And if the answer is that somebody would read the code and work it out, that som
 
 What you end up holding is not an answer but a position. Fixing Y changes Z; some customers depend on Z; leaving Y another month costs you a different customer. Nobody in that conversation is being unreasonable and nobody is going to win it, because **there is no fact available that settles it** — and one sentence, written at the time by whoever chose Y, is what would have.
 
-[Chapter 24](24_assigned-to-the-team_3fjx.md) closes the book on the arrangement that produces the software — the artifacts that have to exist before the code, and why each of them needs one person's name against it rather than a team's.
+[Chapter 25](25_assigned-to-the-team_3fjx.md) closes the book on the arrangement that produces the software — the artifacts that have to exist before the code, and why each of them needs one person's name against it rather than a team's.
 
 ---
 
@@ -291,4 +291,4 @@ What you end up holding is not an answer but a position. Fixing Y changes Z; som
 
 ---
 
-[← Ch. 22](22_style_9rng.md)  ·  [Contents](00_toc.md)  ·  [Ch. 24 →](24_assigned-to-the-team_3fjx.md)
+[← Ch. 23](23_style_9rng.md)  ·  [Contents](00_toc.md)  ·  [Ch. 25 →](25_assigned-to-the-team_3fjx.md)

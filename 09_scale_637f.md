@@ -18,7 +18,7 @@ Intuition says the relationship is a straight line: twice the servers, twice the
 
 Every measurement here was taken on the machine this was written on — an Apple M4 laptop, Go 1.26.5, 128 KB of L1 data cache, 16 MB of L2, 32 GB of memory.
 
-**Yours will differ, and that is the point.** The formulas are exact and hold everywhere. The measurements are empirical ([Ch. 03](03_grading-a-law_q5c6.md)), which means the *pattern* transfers and the *number* does not. Someone else's benchmark tells you a shape exists; only your own tells you where you are on it.
+**Yours will differ, and that is the point.** The formulas are exact and hold everywhere. The measurements are empirical ([Ch. 04](04_grading-a-law_q5c6.md)), which means the *pattern* transfers and the *number* does not. Someone else's benchmark tells you a shape exists; only your own tells you where you are on it.
 
 ---
 
@@ -58,7 +58,7 @@ The result is a multiplier: how many times faster the whole job runs. As `N` gro
 
 The practical reading: **find the un-splittable fraction before you buy anything.** At 25% it barely matters what hardware you have.
 
-This is a theorem, so there are two moves and no others ([Ch. 03](03_grading-a-law_q5c6.md)). Falsify an assumption, or stop needing the conclusion. The assumption worth attacking is that `s` is fixed — usually it is a lock, a single writer, or a coordination step somebody chose ([Ch. 06](06_time_mdbn.md)), and making it smaller raises the ceiling in a way that hardware cannot.
+This is a theorem, so there are two moves and no others ([Ch. 04](04_grading-a-law_q5c6.md)). Falsify an assumption, or stop needing the conclusion. The assumption worth attacking is that `s` is fixed — usually it is a lock, a single writer, or a coordination step somebody chose ([Ch. 07](07_time_mdbn.md)), and making it smaller raises the ceiling in a way that hardware cannot.
 
 ### Reversal: when more workers make it slower
 
@@ -111,7 +111,7 @@ items inside = arrival rate × time each one spends inside
 
 At 500 requests per second with 200 ms average response time, there are 100 requests inside your system at any moment. That number is worth having, because if your connection pool holds 50, then half of those requests are queuing for a connection and the pool is your bottleneck — a thing you can check this afternoon.
 
-The law assumes essentially nothing, which makes it true by definition ([Ch. 03](03_grading-a-law_q5c6.md)) for any queue that is not growing without limit.
+The law assumes essentially nothing, which makes it true by definition ([Ch. 04](04_grading-a-law_q5c6.md)) for any queue that is not growing without limit.
 
 **Then the part that surprises people.** *Utilization* is the fraction of time a server is busy: 0.8 means busy 80% of the time, idle 20%. For a single server handling irregular traffic, the time a request spends waiting grows as `1 / (1 − utilization)`:
 
@@ -202,7 +202,7 @@ Summing two million orders took 3.4 milliseconds from the records and 0.48 milli
 
 Two things about this shape. It is a **step rather than a slope** — growing a struct from 40 bytes to 60 costs nothing, and crossing 64 costs you a second fetch per record. And the expensive fields are the ones the slow loop never names, which is why the cost is invisible at the place where it is paid.
 
-[Chapter 04](04_dependency-and-hiding_agjy.md) uses the same underlying fact for a different argument: in an entity-component system the memory layout is deliberately made public, because hiding it would cost exactly the margin measured here.
+[Chapter 05](05_dependency-and-hiding_agjy.md) uses the same underlying fact for a different argument: in an entity-component system the memory layout is deliberately made public, because hiding it would cost exactly the margin measured here.
 
 ### Floor: distance
 
@@ -217,7 +217,7 @@ Light travels through fibre at about two-thirds of its speed in vacuum. That giv
 
 Real measurements run one and a half to two times these, because cables do not follow great circles and routers take time. A synchronous call from London to Sydney inside a request handler has a floor of 167 ms, and no profiler will ever show you why.
 
-The moves are [chapter 03](03_grading-a-law_q5c6.md)'s two. Change an assumption: put a copy of the data near the user. Or stop needing the conclusion: make the operation asynchronous, so nobody is waiting for the round trip to finish.
+The moves are [chapter 04](04_grading-a-law_q5c6.md)'s two. Change an assumption: put a copy of the data near the user. Or stop needing the conclusion: make the operation asynchronous, so nobody is waiting for the round trip to finish.
 
 ---
 
@@ -227,7 +227,7 @@ Each shape has a different cause, and applying the wrong fix is the common failu
 
 **Ceilings** come from work that cannot be divided. That is arithmetic on a fraction, needing no assumption about hardware, so no hardware changes it.
 
-**Reversals** come from pairs. Contention grows with the number of workers; coherency grows with the number of pairs of workers, which grows as the square. A quantity growing as the square eventually overtakes one growing in proportion, and where they cross is the peak. This is why the fix is never more workers — it is removing what they share, and [chapter 06](06_time_mdbn.md)'s single-writer design is that taken to its limit.
+**Reversals** come from pairs. Contention grows with the number of workers; coherency grows with the number of pairs of workers, which grows as the square. A quantity growing as the square eventually overtakes one growing in proportion, and where they cross is the peak. This is why the fix is never more workers — it is removing what they share, and [chapter 07](07_time_mdbn.md)'s single-writer design is that taken to its limit.
 
 **Queue cliffs** come from variation, not from load. Idle capacity is what absorbs a burst; near saturation there is none left. This is also why average latency is such a poor measure here — the system is not slow on average, it is slow precisely when it is busiest.
 
@@ -265,7 +265,7 @@ That failure is the more useful result. The same test with integer keys:
 
 Scanning wins up to about eleven integers, and never wins for strings. So the crossover point is **not a property of the two algorithms.** It is set by how expensive one comparison is against one hash, and comparing strings is expensive enough to move the crossing off the chart entirely.
 
-Which makes the familiar advice — *use a list under about twenty items* — a number quoted without the conditions that produced it, exactly the failure [chapter 03](03_grading-a-law_q5c6.md) describes — the pattern holds, but the threshold belongs to somebody else's data type and machine.
+Which makes the familiar advice — *use a list under about twenty items* — a number quoted without the conditions that produced it, exactly the failure [chapter 04](04_grading-a-law_q5c6.md) describes — the pattern holds, but the threshold belongs to somebody else's data type and machine.
 
 In practice, at these sizes the difference is nanoseconds. Use the map and spend the attention elsewhere.
 
@@ -275,7 +275,7 @@ Every curve here is flat at the left-hand end.
 
 At 20% utilization, requests wait 1.25 times the service time and no capacity planning is visible. On four cores, the difference between 1% and 5% un-splittable work is a rounding error. A program touching 10 MB, run once a day, does not need a layout decision.
 
-The mistake is not ignoring the arithmetic when small. It is building for the right-hand end of a curve you are nowhere near — [chapter 02](02_forces_f4m5.md)'s case of a decision that both expires and is expensive, where the cost is paid now and the benefit arrives only in a future that may not come.
+The mistake is not ignoring the arithmetic when small. It is building for the right-hand end of a curve you are nowhere near — [chapter 03](03_forces_f4m5.md)'s case of a decision that both expires and is expensive, where the cost is paid now and the benefit arrives only in a future that may not come.
 
 ### When speed is not the constraint
 
@@ -287,7 +287,7 @@ A batch job that must finish by 6 a.m. and takes two hours has seven hours of sl
 
 ## What the claim costs
 
-**Column layouts cost cohesion.** Splitting a record into parallel arrays scatters one concept across many places. Adding a field means touching every array and every loop that walks them together. The 7× is real; so is the maintenance bill, and [chapter 04](04_dependency-and-hiding_agjy.md) works through what gets given up.
+**Column layouts cost cohesion.** Splitting a record into parallel arrays scatters one concept across many places. Adding a field means touching every array and every loop that walks them together. The 7× is real; so is the maintenance bill, and [chapter 05](05_dependency-and-hiding_agjy.md) works through what gets given up.
 
 **Measuring is slow and easy to get wrong.** Every number here took several attempts. A benchmark whose data fits entirely in cache, or whose result the compiler discards as unused, produces a confident figure that describes nothing. Expect to throw away your first two.
 
@@ -323,7 +323,7 @@ The question that does the work: **which shape am I on?**
 
 A ceiling means stop buying hardware and shrink the serial part. A reversal means stop adding workers and find what they share. A queue cliff means buy headroom rather than speed. A step means look at the layout. A floor means move the data or stop waiting for it.
 
-[Chapter 09](09_change_rjf9.md) moves to the timescale where the arithmetic is measured in years rather than milliseconds — how systems change, how the shape of an organization ends up in its software, and why a published interface is a decision you do not get to take back.
+[Chapter 10](10_change_rjf9.md) moves to the timescale where the arithmetic is measured in years rather than milliseconds — how systems change, how the shape of an organization ends up in its software, and why a published interface is a decision you do not get to take back.
 
 ---
 
@@ -335,4 +335,4 @@ A ceiling means stop buying hardware and shrink the serial part. A reversal mean
 
 ---
 
-[← Ch. 07](07_distribution_49yh.md)  ·  [Contents](00_toc.md)  ·  [Ch. 09 →](09_change_rjf9.md)
+[← Ch. 08](08_distribution_49yh.md)  ·  [Contents](00_toc.md)  ·  [Ch. 10 →](10_change_rjf9.md)
