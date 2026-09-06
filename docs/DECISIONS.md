@@ -5830,3 +5830,46 @@ The line now says the clock is working and nothing is malfunctioning and the ord
 
 **Written to a tag.**
 The partitioned-design section gained its contrast: four workers appending to one shared slice, each write waiting behind three others, a fifth adding contention rather than throughput — landing on the point that partitioning does not make coordination cheaper, it removes the need for it.
+
+---
+
+## 141. Chapter 08 rebuilt on shared fate and recoverable uncertainty
+
+**Date.** 2026-09-06
+
+**Context.**
+The author's full read reached [chapter 08](../08_distribution_49yh.md) and opened with a question rather than an edit: given that Two Generals is stated with *assumes: messages can be lost*, does it follow that the result is inert over a channel that cannot lose messages, and do such channels exist?
+
+Both answers are yes, and working them out produced enough material to rebuild the chapter.
+The author's brief: define the terms people get wrong first, give each important point a real example, say what a term means *in consequences* rather than in definition, and rewrite freely.
+
+**What the questions turned up, before any writing.**
+
+The escape is real and the book already relies on it — [chapter 04](../04_grading-a-law_q5c6.md)'s *"memory does not lose messages, so the theorem's precondition is absent."*
+What the exchange added is the reason it is structural rather than a matter of degree: **Two Generals needs the channel to fail independently of the parties**, and in one process there is no state where both parties survive and the message vanished.
+
+Beyond in-process there is one further case and three near-misses.
+**Two processes on one machine over shared memory** genuinely qualifies — two parties, each able to crash alone, and no delivery step to fail.
+**TCP does not**, and it is the escape a reader reaches for first: it converts loss into connection failure, relocating the uncertainty.
+**Kafka's exactly-once** does not; it is an idempotent producer plus transactional dedup, which is this chapter's own second escape with a product name.
+**A durable shared medium** does not escape either, but it changes the kind of uncertainty — from permanent to recoverable — which turned out to be the chapter's second organizing idea.
+
+**A defect the questions exposed.**
+The boundary section closed on *"Within one process and one connection, no."*
+The connection half is false: an application and a database are two failure domains joined by a channel that can fail while both survive. Send `COMMIT`, lose the connection, and the application cannot tell whether it committed.
+That is Two Generals in the least distributed system anyone builds, and the section had been claiming exemption from it.
+
+**Four decisions, taken by interview.**
+
+**The spine is the test**, not the boundary check it used to be: *can the channel fail while both parties survive?* It answers in-process, shared memory, TCP, and one-database in a single move, and it makes the terms section load-bearing rather than preamble — defining *distributed* correctly **is** the test.
+
+**The claim is unchanged and stays single.** *You cannot tell a slow machine from a dead one* is the consequence the reader feels; shared fate is the mechanism, and the rubric puts mechanism under *why the claim holds*. This follows [decision 140](#140-review-of-chapter-07-and-what-a-striking-claim-is-worth) — striking over complete.
+
+**The availability half stays and stops being a second claim.** The chapter had been carrying *availabilities multiply* as a welded co-claim and then explicitly denying the connection: *"the arithmetic result is different and worth separating."* It is not. Both results need one property — **parts that fail independently** — and the unification holds at the boundary, because shared fate collapses the product: in one process N is 1 and p^N is p. The two boundary sections, which had been unrelated exceptions to unrelated claims, are now one graded axis: total, partial, none.
+
+**Permanent versus recoverable uncertainty becomes the second thread.** The chapter already had the line — *"a permanent loss became a delay"* — and used it once, on the outbox. Generalised, it says what every fix here does: none acquires the missing information, each arranges for it to stop being final. That gives the reader a test the previous wording did not: *after this fix, is the thing I cannot confirm something I can find out later, or is it gone?* It settles the drain order on its own.
+
+**Consequence.**
+3,842 words to 4,840. Twelve ledger rows added.
+Four terms open the chapter — *distributed*, *partition*, *network*, *eventual consistency* — each stated as the wrong reading, the right one, and what it costs.
+CAP's *available* and *consistent* get the same treatment where CAP is, rather than up front, because they are CAP's vocabulary and mean nothing away from it.

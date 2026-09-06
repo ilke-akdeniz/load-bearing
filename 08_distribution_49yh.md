@@ -4,19 +4,23 @@
 
 **You cannot tell a slow machine from a dead one.**
 
-That single fact is not a limitation of your monitoring, your language, or your budget. It is a property of asking questions over a network, and most of the impossibility results in distributed systems are consequences of it. The rest of the chapter is what people build because of it.
+That is not a limitation of your monitoring, your language, or your budget. It is a property of asking a question over a channel that can fail, and most of the impossibility results in distributed systems are consequences of it. The rest of this chapter is what people build because of it.
 
-There is one other fact, which is arithmetic rather than epistemics: **availabilities multiply, and every one of them is less than one.** Multiplying numbers below 1 makes them smaller, so a chain of dependencies is always less available than its weakest link — and enough individually excellent dependencies produce a system that is not.
+These are theorems, so [chapter 04](04_grading-a-law_q5c6.md)'s rule governs what you can do about them: not argue with the conclusion, but either **arrange for one of the assumptions not to hold**, so the theorem does not apply, or **stop needing the conclusion**, so it applies and costs nothing. Most of this chapter is the second.
 
-These are theorems, which means [chapter 04](04_grading-a-law_q5c6.md)'s rule governs what you can do about them: not argue with the conclusion, but either **arrange for one of the assumptions not to hold**, so the theorem does not apply, or **stop needing the conclusion**, so it applies and costs nothing. Most of this chapter is the second.
+## Four words people get wrong
 
-## When any of this applies to you
+This material does more damage by being misapplied than by being ignored. Outboxes, idempotency keys, sagas and eventual consistency get built into systems that have one process and one database, where every one of them is pure cost. Four words decide whether any of it is yours, and all four are used more loosely than they can bear.
 
-Most chapters in this book put the limits of their claim at the end. This one puts them first, and the reason is that this particular material does more damage by being applied than by being ignored. Outboxes, idempotency keys, sagas, and eventual consistency get built into systems that have one process and one database, where every one of them is pure cost. So it is worth knowing whether any of this is yours before you read what it costs.
+**Distributed** is not *we run several services*. **You are distributed when two parts of your system can fail independently of each other** — when one can be alive while another cannot reach it. Three services sharing one database are mostly not distributed, because the database holds every invariant that matters and there is nothing to coordinate. One application server reading from a replicated database is distributed, whatever the deployment diagram says, because the replica can be behind and nothing in the reader tells it so. Count failure domains, not processes.
 
-You are in this chapter's territory when **two things that can fail independently must agree.** Two processes. A process and a queue. A service and somebody else's API. A database and a cache. If there is exactly one process and one database, almost nothing here binds, and the machinery below is cost with no purchase — [chapter 07](07_time_mdbn.md) is your chapter, and its coordination primitives are enough.
+**A partition** is not a cut cable. **It is any period in which one part cannot reach another while both are alive**, and cables are the rarest cause. A garbage collector that stops the world for four seconds produces a partition. So does an exhausted connection pool, a thread pool with no free workers, a machine that has begun swapping, and a peer that is merely busy. To the caller these are indistinguishable from a severed cable, because the observable in every case is silence. This matters because *partition tolerance* sounds like insurance against a rare catastrophe, and it is really a description of Tuesday. If you have ever seen a service time out under load, you have seen a partition.
 
-The test for whether you are distributed is not *do we deploy several services* — plenty of multi-service systems still have one database holding every invariant that matters. It is: **can one part of this be alive while another part cannot reach it?** If nothing can, you are not distributed for the purposes of this chapter, whatever the deployment diagram says.
+**The network**, for this chapter's purposes, is not Ethernet. **It is any channel that can fail while both of its endpoints survive.** A Unix socket between two processes on one machine is a network. Shared memory between those same two processes is not, because there is no delivery step to fail — if the memory is gone, both parties are gone with it.
+
+That distinction is where most people expect to escape and do not, because they reach for TCP. TCP gives you *delivered in order, or the connection breaks*. It converts message loss into connection failure, which relocates the uncertainty instead of removing it: a client whose connection drops after sending a request does not know whether the server processed it. That is the Two Generals' position exactly, with more machinery underneath it.
+
+**Eventual consistency** does not mean *consistent soon*. **It means consistent if writes stop** — the system converges once nothing new arrives, which is a guarantee about a state a production system never reaches. What you actually have is a window whose width is replication lag, and the useful questions are how wide it gets under load and what a reader is allowed to do inside it. A system where nothing reconciles is not eventually consistent. It is eventually wrong.
 
 ---
 
@@ -69,11 +73,21 @@ Three results. Each is given with its assumptions rather than its proof, because
 
 **Two Generals.** Over a channel that can lose messages, no protocol can leave both parties certain the other received what was sent. *Assumes:* messages can be lost. *Consequence:* exactly-once delivery is impossible.
 
+That assumption is not decoration. Over a channel that genuinely cannot lose messages the result is true and inert, and one message is enough — which is the escape the boundary section below is built on.
+
 **FLP impossibility**, named for Fischer, Lynch, and Paterson, who proved it in 1985. In an asynchronous system where even one process may crash, no deterministic protocol can guarantee that all correct processes reach agreement. *Assumes:* no bound on message delay, no clocks, and a deterministic algorithm. *Consequence:* consensus algorithms in real use (Raft, Paxos) do not evade FLP — they add timeouts, which means they give up guaranteed *termination* and keep guaranteed *safety*. They may take longer; they will not decide two different things.
 
-**CAP**, for Consistency, Availability, and Partition tolerance. Take a single value that clients read and write, and require that every read return the most recent write, as though only one copy had ever existed. That requirement is **linearizability**, and it is what *Consistency* means here — considerably narrower than the everyday word. In an asynchronous network, a value held to it cannot also be answered by every non-failed node during a partition. *Assumes:* linearizability, and availability meaning every non-failed node answers. *Consequence:* during a partition you choose. Outside a partition you have both, which is why **PACELC** is the more useful statement: *if Partitioned, choose Availability or Consistency; Else, choose Latency or Consistency.* The second half applies every day, and the first half only during an outage.
+**CAP**, for Consistency, Availability, and Partition tolerance. Take a single value that clients read and write, and require that every read return the most recent write, as though only one copy had ever existed. That requirement is **linearizability**, and it is what *Consistency* means here — considerably narrower than the everyday word. In an asynchronous network, a value held to it cannot also be answered by every non-failed node during a partition.
 
-All three share one root, which is the claim at the top. A lost message and a slow message look identical. A crashed process and a paused one look identical. A partitioned peer and a dead peer look identical. **The impossibility is always that you must act on information you cannot obtain.**
+Both of CAP's other words are narrower than they sound, and the practical difference is worth being exact about.
+
+**Available** means every non-failed node answers every request. Not *the system is up*: a node that returns an error, blocks until it can reach a peer, or redirects you to a leader has failed the test. Choose availability during a partition and every node keeps answering from whatever it last knew — nothing gets slower, no request is refused, and two clients on opposite sides of the partition can be told different things about the same key, with neither told that this happened. What you are buying is response time and what you are paying is that some answers are wrong and unmarked.
+
+**Choose consistency instead** and the minority side stops answering. Reads and writes there hang or fail until the partition heals, so latency for those clients becomes unbounded or the request errors outright — and no client is ever handed a value that was untrue at the moment it was served. What you are buying is that every answer is correct and what you are paying is that some clients get no answer at all.
+
+*Consequence:* during a partition you choose. Outside a partition you have both, which is why **PACELC** is the more useful statement: *if Partitioned, choose Availability or Consistency; Else, choose Latency or Consistency.* The second half applies every day, and the first half only during an outage.
+
+All three results share one root, which is the claim at the top. A lost message and a slow message look identical. A crashed process and a paused one look identical. A partitioned peer and a dead peer look identical. **The impossibility is always that you must act on information you cannot obtain.**
 
 ### Exactly-once is impossible, so stop wanting it
 
@@ -115,6 +129,8 @@ Two details decide whether this works in practice.
 **The key must come from the client**, generated once before the first attempt and reused on every retry. A key the server generates identifies the *delivery*, which is precisely the thing you cannot count.
 
 **The record of applied keys must be written in the same transaction as the effect.** If the charge commits and the key does not, the next retry charges again, and you have moved the bug rather than fixed it.
+
+Kafka's *exactly-once semantics* is the objection usually raised at this point, and it is worth being precise rather than dismissive. The producer is given an ID and a sequence number, the broker discards a duplicate it has already seen, and a transaction makes the write and the consumer's offset commit atomic. That is at-least-once delivery with duplicates removed on arrival — this chapter's second escape, with a product name on it. Which is why the guarantee holds inside Kafka's own boundary and stops at the edge of it: the moment a consumer writes to a database Kafka does not control, the atomicity is gone and you need your own key again.
 
 ### Two systems cannot share a transaction
 
@@ -203,13 +219,11 @@ That is the whole difference. Before, a crash destroyed information: nothing any
 
 **A permanent loss became a delay.** And what remains outside the transaction is the delivery itself, which can fail, retry, and duplicate — a problem an idempotent consumer already solves.
 
-The impossibility is untouched by all of this. You still cannot tell a slow machine from a dead one, and the publisher still cannot know whether the queue received what it sent. What the outbox does is arrange for that ignorance to be survivable: the thing you cannot confirm is now the thing you can safely repeat.
-
 **Sagas** are the same manoeuvre for a longer sequence. When five services must each do a thing and there is no transaction across them, you do them in order and give each step a compensating action that undoes it. There is no rollback, because there was never a transaction; there is a sequence of forward steps and a sequence of undo steps, and the undo steps are ordinary business operations — refund, cancel, release — with all the visibility that implies. A customer may see a charge and then a refund rather than never seeing a charge.
 
 ### Availability is a product, not an average
 
-The arithmetic one, and it is worth being slow about because the intuition is wrong.
+The same independence has a second bill, and this one is arithmetic. Parts that can fail independently are parts that must all be working at once, and that multiplies.
 
 Ask most people what happens to availability when you add dependencies, and they average: three services at 99.9% feel like a system at about 99.9%. Availability does not average, it multiplies — each dependency must be up *at the same time* as all the others, so you multiply their probabilities, and multiplying numbers below 1 always gives you something smaller than any of them.
 
@@ -242,28 +256,41 @@ Every result above is the same shape: **an actor must decide, and the informatio
 
 The reason no cleverness escapes it is that the missing information is not merely absent, it is *unobtainable in principle*. To know whether a peer is dead you would have to distinguish "no message yet" from "no message ever," and those differ only in the future. No protocol reads the future, so every practical system substitutes a timeout, which is a guess with a number attached.
 
-That is also why the successful patterns share a structure. Idempotency keys, outboxes, sagas, and consensus with timeouts do not acquire the missing information. They **rearrange the system so the missing information stops mattering** — by making repetition harmless, by making one commit stand for two, by making a partial sequence recoverable, by preferring to stall over deciding wrongly.
+That is also why every fix in this chapter has the same shape, and it is worth naming, because it is the test for whether a fix is any good. **They convert uncertainty you can never resolve into uncertainty you can resolve later.**
 
-The arithmetic result is different and worth separating. p^N is not about knowledge; it is about independent events. You cannot rearrange your way out of multiplication, only remove terms from the product.
+- **An idempotency key.** You still cannot know whether the charge landed. You can ask again, and asking costs nothing.
+- **The outbox.** You still cannot know whether the publish succeeded. The row is still there, so the next pass finds out.
+- **A retry.** You cannot know, so you stop trying to know and find out by asking.
+- **Consensus with timeouts.** You cannot know, so you stall rather than decide wrongly, and decide when you can.
+
+None of these acquires the missing information. Each one arranges for the missing information to stop being final. So the question to ask of your own design is not *have I handled the failure* but: **after this fix, is the thing I cannot confirm something I can find out later, or is it gone?**
+
+That test decides the outbox's drain order on its own. Publish-then-delete leaves a row you can retry. Delete-then-publish leaves nothing anywhere that records the event was owed, and no amount of monitoring recovers information that was never written down.
 
 ---
 
 ## Where the claim doesn't apply
 
-### One process and one database
+The exemptions below are one scale rather than three categories, and the scale is **how much fate two parts share**. Where a channel cannot fail without taking both parties with it, none of this chapter binds. Where fate is partly shared, the arithmetic overstates. Where nothing is shared, everything here applies.
+
+### One machine
 
 The important one, and the most frequently ignored.
 
-A single application server talking to a single Postgres has no partition to survive, no consensus to reach, and no cross-system atomicity problem, because the database provides atomicity and the application has nothing to coordinate with. Two Generals is true and inert; CAP has no replicated value to make unavailable; FLP has no agreement to reach.
+The obvious case is a single process, where a function call cannot suffer a lost message. The sharper case is **two separate processes on one machine, communicating through shared memory** — genuinely two parties, each able to crash without the other, and Two Generals is still inert there. A write to the shared segment is not a delivery that can fail. The reader acknowledges by writing back, and that cannot be lost either, so mutual certainty is reachable in a finite exchange, which is exactly what the theorem forbids over a lossy channel.
 
-Reaching for this chapter's machinery there produces real harm rather than mere waste:
+One machine escapes the other half as well, and this is the part usually left out. The claim at the top of this chapter is that you cannot tell a slow process from a dead one. Within one machine you can, because the kernel knows. `waitpid` reports that a child has died. A robust mutex returns `EOWNERDEAD` to the next process that takes it when its previous holder died while holding it. **The operating system is a perfect failure detector for the processes it owns.** Both preconditions are absent, which is why one machine is not a smaller distributed system but a different situation.
+
+So a single application server with a single Postgres has no partition to survive, no consensus to reach, and no cross-system atomicity problem. Reaching for this chapter's machinery there produces real harm rather than mere waste:
 
 - An outbox table where a single transaction already covers everything.
-- Idempotency keys on operations that only ever run once, adding a table and a lookup to every write.
 - Eventual consistency between two tables in the same database, which had strong consistency available for free.
 - Retries around an in-process function call, which cannot suffer a lost message ([Ch. 07](07_time_mdbn.md)).
+- Idempotency keys on an operation nothing ever retries — a job with one trigger, rather than a request a client can send twice.
 
-The check is the one at the top: can one part be alive while another part cannot reach it? Within one process and one connection, no.
+**One connection is not the same exemption, and this is where the boundary gets drawn wrongly.** The application and the database are two failure domains joined by a channel that can fail while both survive, which is the definition above. Send a `COMMIT`, lose the connection before the reply arrives, and the transaction may have committed or may not have; the application cannot tell from where it stands. That is Two Generals, in the least distributed system most people will ever build.
+
+What saves it is not that the uncertainty is absent but that it is **recoverable**: the database is durable and can be asked. Reconnect and read the row. That is the whole difference between this case and a lost message to a peer that keeps no record — and it is why the last bullet above says *nothing ever retries* rather than *runs once*. A client that resubmits after a lost connection is the case where a key is correct, in one process, against one database.
 
 ### Coordination you can afford
 
@@ -273,9 +300,9 @@ So the honest statement is not "you cannot have cross-system atomicity." It is t
 
 ### Failures that are not independent
 
-The p^N arithmetic assumes dependencies fail independently. Often they do not, and the assumption fails in both directions.
+The p^N arithmetic assumes dependencies fail independently, which is the same assumption from the other end. Often they do not.
 
-Two services in the same rack, on the same power, behind the same load balancer, sharing a certificate that expires on the same day, are not independent. Their combined availability is worse than the arithmetic suggests when the shared thing fails, and better when it does not, because they fail together rather than separately.
+Two services in the same rack, on the same power, behind the same load balancer, sharing a certificate that expires on the same day, are partly fate-shared. Their combined availability is worse than the arithmetic suggests when the shared thing fails, and better when it does not, because they fail together rather than separately.
 
 Which means p^N is a *lower bound on the problem* rather than a prediction. Use it to notice that ten dependencies is a different system from two. Do not use it to promise a number to anyone.
 
@@ -312,14 +339,15 @@ Which means p^N is a *lower bound on the problem* rather than a prediction. Use 
 - **"We'll just make it exactly-once."** The correct response is to ask what happens on the retry, since there will be one.
 - **"The timeout must be too short."** Sometimes. But if the peer completes the work after the timeout fires, no timeout is long enough, and the problem is the missing idempotency key.
 - **"We need distributed transactions for this"** — said about two tables in one database.
-- **"It's eventually consistent"** used as a description of a system where nothing reconciles, which makes it eventually wrong.
+- **"It's eventually consistent"** used to describe a system where nothing reconciles, which makes it eventually wrong.
+- **"We're not distributed, it's a monolith"** — said by a team reading from a replica.
 - **"Each service is 99.9%"**, offered as though the product were also 99.9%.
 
 The question that does the work: **what does this code do when the reply never comes?**
 
 Every distributed defect in the list above is an answer to that question that nobody wrote down. If the honest answer is *it retries and the work happens twice*, you need an idempotency key. If it is *it gives up and the work happened anyway*, you need reconciliation. And if the answer is *the reply always comes, we're in one process*, then none of this is yours and you should stop reading.
 
-[Chapter 09](09_scale_637f.md) turns from what is impossible to what is merely expensive — the arithmetic of queues, parallelism, and the memory hierarchy, where the numbers beat the intuition by several orders of magnitude.
+[Chapter 09](09_scale_637f.md) turns from what is impossible to what is merely expensive — the arithmetic of queues, parallelism, and the memory hierarchy.
 
 ---
 

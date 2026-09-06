@@ -94,6 +94,18 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Clocks do not order events | mdbn | Wall clocks lack the resolution locally and agreement globally; counters order, clocks do not | cite |
 | Lamport vs vector clocks | mdbn | Lamport preserves causality but cannot detect concurrency; vector clocks can, at a cost that grows with nodes | cite |
 | Coordination does not compose | mdbn | Two correct locked operations are not one correct operation | cite |
+| Distributed means independent failure | 49yh | Not "we run several services" — two parts that can fail independently, so three services on one database mostly are not and one server on a replicated database is | cite |
+| A partition is not a cut cable | 49yh | Any period in which one part cannot reach another while both are alive — a GC pause, an exhausted connection pool, a saturated thread pool. Partition tolerance describes Tuesday, not a catastrophe | cite |
+| The network is any channel that can fail alone | 49yh | A Unix socket between two local processes is a network; shared memory between them is not, because there is no delivery step to fail | cite |
+| TCP relocates the uncertainty | 49yh | Delivered in order, or the connection breaks — loss becomes connection failure, and a client whose connection drops still does not know whether the server acted | cite |
+| Eventual consistency means if writes stop | 49yh | Not "consistent soon" — a guarantee about a state production never reaches; what you have is a window whose width is replication lag | cite |
+| CAP's words, in consequences | 49yh | Available means every non-failed node answers every request, so choosing it keeps latency flat and serves stale answers unmarked; choosing consistency stops the minority side answering at all | cite |
+| Kafka's exactly-once is the second escape | 49yh | Producer ID plus sequence number plus transactional offset commit — at-least-once with duplicates discarded, holding inside Kafka's boundary and stopping at its edge | cite |
+| Two local processes over shared memory | 49yh | Genuinely two parties, each able to crash alone, and Two Generals is still inert — the write is not a delivery that can fail, so mutual certainty is finite | cite |
+| The OS is a perfect failure detector | 49yh | `waitpid` reports a dead child and a robust mutex returns `EOWNERDEAD`, so one machine escapes the slow-versus-dead half as well as the messaging half | cite |
+| One connection is not exempt | 49yh | Send COMMIT, lose the connection, and the application cannot tell whether it committed — Two Generals in the least distributed system anyone builds | cite |
+| Permanent uncertainty becomes recoverable | 49yh | No fix acquires the missing information; each arranges for it to stop being final, which is why publish-then-delete is right and delete-then-publish is not | cite |
+| Shared fate is one scale, not three exemptions | 49yh | One machine is total, a shared rack or certificate is partial and makes p^N overstate, separate regions is none | cite |
 | Slow is indistinguishable from dead | 49yh | The root of the impossibility results: you must decide on information you cannot obtain | "slow vs dead" |
 | Exactly-once impossible | 49yh | Two Generals ⇒ at-least-once plus idempotency | cite |
 | Every timeout is a guess | 49yh | The observation is identical whether the peer is slow or dead, and the slow one may have committed | cite |
