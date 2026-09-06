@@ -2,21 +2,19 @@
 
 ## The claim
 
-**Waiting for a message, you cannot tell late from never.**
+**You cannot tell a late reply from one that is never coming**
 
 That is not a limitation of your monitoring, your language, or your budget. Silence has two explanations — the answer is still coming, or it is never coming — and nothing available to you separates them.
 
-The instinct at this point is to ask. Send a second message: *are you still there?* It does not help, and the reason is worth being exact about, because a great deal of health-checking is built on the hope that it does. A reply to your probe tells you the channel is working **now**. It tells you nothing about whether the first message was received, or acted on, or is about to arrive. And if nothing comes back from the probe either, you are in the position you started in, one message poorer. **Probing reports the present; your question is about the past.**
+The instinct at this point is to ask. Send a second message: *are you still there?* It does not help. A reply to your probe tells you the channel is working **now**. It tells you nothing about whether the first message was received, or acted on, or is about to arrive. And if nothing comes back from the probe either, you are in the position you started in, one message poorer. **Probing reports the present; your question is about the past.**
 
-These are theorems, so [chapter 04](04_grading-a-law_q5c6.md)'s rule governs what you can do about them: not argue with the conclusion, but either **arrange for one of the assumptions not to hold**, so the theorem does not apply, or **stop needing the conclusion**, so it applies and costs nothing. Most of this chapter is the second.
+[-- don't add the paragraphs I just deleted unless you can tell me why putting it back is better. I know why I deleted it, it's either a repetition of a previous thing or a next more detailed take in the chapter, a word salad with not much substance, stating the obvious, a leftover that previous edits made redundant or out of place, or a detail that takes more from the flow of the chapter then adds any value to it.]
 
 ## Four words people get wrong
 
-This material does more damage by being misapplied than by being ignored. Outboxes, idempotency keys and sagas get built into systems that had no use for them, at real cost. Four words decide how much of it is yours, and all four are used more loosely than they can bear.
-
 **A part** is anything that can stop working while the rest keeps going. A process, a machine, a database, a queue, somebody else's API. Not a class, not a module, not a layer — the test is whether it can be down on its own.
 
-**The network** is not Ethernet. **It is any channel between two parts that can fail while both parts are still running.** A Unix socket between two processes on the same machine is a network by this definition. Shared memory between those same two processes is not, because there is no delivery step that can fail: if the memory is gone, both parts are gone with it.
+**The network** is not Ethernet. **It is any channel between two parts that can fail while both parts are still running.** A Unix socket between two processes on the same machine is a network by this definition. Shared memory between those same two processes is not, because there is no delivery step that can fail: if the memory is gone, both parts are gone with it. [-- I'm ok with this definition but is it alright to abuse a well known cs term such as network like this? Why not simply use channel instead?]
 
 **Distributed** means you have two parts joined by such a channel — and that is almost everyone, including a single application server talking to a single database. Saying so is more useful than the usual test, because what varies between systems is not *whether* this chapter applies but *how much of it does*:
 
@@ -25,7 +23,7 @@ This material does more damage by being misapplied than by being ignored. Outbox
 
 The mistake worth avoiding is not "thinking you are distributed when you aren't." It is reaching for the machinery of the second case while living in the first.
 
-**A partition** is not a cut cable. **It is a period in which one part cannot reach another within the time the waiter is willing to wait** — which means the word has no meaning without a deadline attached. A garbage collector that stops the world for four microseconds partitions nothing, because nobody's timeout is four microseconds. The same collector pausing for four seconds partitions a caller whose deadline is one second, and does not partition a batch job happy to wait a minute. Cables are the rarest cause: exhausted connection pools, saturated thread pools, a machine that has started swapping and a peer that is merely busy all produce partitions, and all are indistinguishable from a severed cable, because the observable in every case is silence.
+**A partition** is not necessarily a cut network cable or failed machine. **It is a period in which one part cannot reach another within the time the waiter is willing to wait** — which means the word has no meaning without a deadline attached. A garbage collector that stops the world for four microseconds partitions nothing, because nobody's timeout is four microseconds. The same collector pausing for four seconds partitions a caller whose deadline is one second, and does not partition a batch job happy to wait a minute. Cables are the rarest cause: exhausted connection pools, saturated thread pools, a machine that has started swapping and a peer that is merely busy all produce partitions, and all are indistinguishable from a severed cable, because the observable in every case is silence.
 
 So *partition tolerance* is not insurance against a rare catastrophe. If you have ever seen a service time out under load, you have seen a partition.
 
@@ -84,7 +82,7 @@ Everything in this chapter is built out of four responses to that silence. There
 
 **Ask again — retry.** The only option that can turn out well, and the only one that can make things worse. If the first attempt succeeded and its reply was lost, the retry does the work twice.
 
-So retry is the option you want, and it is unsafe as it stands. What makes it safe is on the other end: **the effect must be repeatable without repeating.**
+So retry is the option you want, and it is unsafe as it stands. What makes it safe is on the other end: **the answerer should detect retry attempts for already received messages and should not act on them.**
 
 ```go
 // BAD implementation on the server: three deliveries of one request charge three times.
@@ -129,17 +127,17 @@ Those four options belong to whoever is waiting. Stand on the other side — you
 
 With one copy there is nothing to decide. The copy is reachable or it is not.
 
-Replicate it and a choice arrives, and it arrives only during a partition. Some of your nodes can no longer reach the others, each side is still running, and each is still being asked questions it could answer from what it last knew. You can let them answer, or you can stop them.
+Replicate it and a choice arrives, and it arrives only during a **partition**. Some of your nodes can no longer reach the others, each side is still running, and each is still being asked questions it could answer from what it last knew. You can let them answer, or you can stop them.
 
 **Answer from any node.** Nothing gets slower, no request is refused, and every node serves whatever it last saw. Two clients on opposite sides of the partition can be told different things about the same key, and neither is told that this happened. You are buying response time and paying in answers that are wrong and unmarked.
 
 **Refuse on the minority side.** Reads and writes there hang or fail until the partition heals, so those clients get latency they cannot bound or an error. No client is ever handed a value that was untrue when it was served. You are buying correctness and paying in clients who get nothing.
 
-That is the whole of CAP, and the words in it are narrower than they sound. **Consistency** there means **linearizability** — every read returns the most recent write, as though only one copy had ever existed — which is considerably narrower than the everyday word. **Availability** means every non-failed node answers every request: a node that returns an error, blocks until it can reach a peer, or redirects you to a leader has failed the test, whatever your dashboard says.
+That is the whole of CAP, and the words in it are narrower than they sound. **Consistency** there means **linearizability** — every read returns the most recent write, as though only one copy had ever existed — which is considerably narrower than the everyday word. **Availability** means every non-failed node answers every request: a node that returns an error, blocks until it can reach a peer, or redirects you to a leader has failed the test, whatever your dashboard says. [-- are you sure about this last sentence? Don't bs check the sources, I remember reading in some place that even returning an error counts as an answer but I'm not sure.]
 
-The choice only exists during a partition, which is why **PACELC** is the more useful statement: *if Partitioned, choose Availability or Consistency; Else, choose Latency or Consistency.* The second half applies every day and the first half only during an outage.
+The choice only exists during a partition, which is why **PACELC** is the more useful statement: *if Partitioned, choose Availability or Consistency; Else, choose Latency or Consistency.* The second half applies every day and the first half only during an outage. [-- can we expand this second part with 1-2 sentences? So partitioned, serve stale data or slow down; not partitioned ... wait a minute Latency is also about slowing down so what's the difference!?]
 
-**Eventual consistency** is what the first option is usually called, and it does not mean *consistent soon*. **It means consistent if writes stop** — the copies converge once nothing new arrives, which is a guarantee about a state a production system never reaches. What you actually have is a window whose width is replication lag, and the useful questions are how wide it gets under load and what a reader is allowed to do inside it. A system where nothing reconciles is not eventually consistent. It is eventually wrong.
+**Eventual consistency** is what the first option is usually called, and it does not mean *consistent soon*. **It means consistent if writes stop** — the copies converge once nothing new arrives, which is a guarantee about a state a production system never reaches. What you actually have is a window whose width is replication lag, and the useful questions are how wide it gets under load and what a reader is allowed to do inside it. A system where nothing reconciles is not eventually consistent. It is eventually wrong. [-- I don't understand this paragraph, it's soe dense that it probably needs to be unpacked at least 3x more. I'm not sure if that is worthy. You decide what to to with it.]
 
 ### Two systems cannot share a transaction
 
@@ -257,13 +255,17 @@ The fix is not better components — chase 99.99% on all fifty and you still lan
 
 ## Why the claim holds
 
-Three theorems sit underneath everything above. They are not derived from one another, but they escalate — each takes a larger situation and forbids something larger in it — and each is given here with its assumptions rather than its proof, because the assumptions are the only negotiable part.
+The claim rests on three CS theorems. *CAP* was already named previously here we cite the other two along with their assumptions rather than their proof, for brevity. 
 
-**Two Generals** is the smallest case: two parties, one exchange. Over a channel that can lose messages, no protocol can leave both parties certain the other received what was sent. *Assumes:* messages can be lost. *Consequence:* exactly-once delivery is impossible, so at-least-once plus a repeatable effect is the best available. The assumption is not decoration — over a channel that genuinely cannot lose messages the result is true and inert, and one message is enough.
+[-- with the rewrites we have done, this section now reads like a repetition, most of what is said here is already explained prevously, only the relation, attribution to the theorems should be done here. I'm gonna attempt to do it with direct edits, you check it and correct it.]
 
-**FLP impossibility**, named for Fischer, Lynch, and Paterson, who proved it in 1985, takes many processes trying to agree on one value. In an asynchronous system where even one process may crash, no deterministic protocol can guarantee that all correct processes reach agreement. *Assumes:* no bound on message delay, no clocks, and a deterministic algorithm. *Consequence, and it is the primary one:* **no consensus system can promise that it will decide.** In practice that is a cluster which cannot elect a leader and makes no progress, while every node is running and nothing is permanently broken. Raft and Paxos do not evade this — they add timeouts, which trades guaranteed *termination* for guaranteed *safety*. They may take longer; they will not decide two different things.
+**Two Generals** Over a channel that can lose messages, no protocol can leave both parties certain the other received what was sent
+- *Assumes:* messages can be lost. 
+- *Consequence:* exactly-once delivery is impossible, so at-least-once plus a repeatable effect is the best available. 
 
-**CAP** takes a replicated value with clients waiting on it, which is the situation the previous section described, and says the choice there is forced: a value held to linearizability cannot also be answered by every non-failed node during a partition. *Assumes:* linearizability, and availability meaning every non-failed node answers. *Consequence:* during a partition you choose; outside one you have both.
+**FLP impossibility** In an asynchronous system where even one process may crash, no deterministic protocol can guarantee that all correct processes reach agreement. 
+- *Assumes:* no bound on message delay, no clocks, and a deterministic algorithm. 
+- *Consequence:* **no consensus system can promise that it will decide.** In practice that is a cluster which cannot elect a leader and makes no progress, while every node is running and nothing is permanently broken. Raft and Paxos do not evade this — they add timeouts, which trades guaranteed *termination* for guaranteed *safety*. They may take longer; they will not decide two different things.
 
 All three share one root, which is the claim at the top. A lost message and a late message look identical. A crashed process and a paused one look identical. A partitioned peer and a dead peer look identical. **The impossibility is always that you must act on information you cannot obtain**, and no protocol reads the future.
 
@@ -282,7 +284,7 @@ That test settles the outbox's drain order by itself. Publish-then-delete leaves
 
 ## Where the claim doesn't apply
 
-The exemptions below are one scale rather than three categories, and the scale is **how much fate two parts share**. Where a channel cannot fail without taking both parts with it, none of this binds. Where fate is partly shared, the arithmetic overstates. Where nothing is shared, all of it applies.
+The exemptions below are one scale rather than three categories [--what are the three categories ], and the scale is **how much fate two parts share**. [-- wording of this scale is problematic: "sharing a fate" and I don't understand it clearly. What matters, channeld that brings down all parts or parts that fail because they are dependent, not very clear... Then there is the arithmetic which looks like an add-on, see next tag.] Where a channel cannot fail without taking both parts with it, none of this binds. Where fate is partly shared, the arithmetic overstates. Where nothing is shared, all of it applies.
 
 ### One machine
 
@@ -294,7 +296,7 @@ One machine escapes the waiting problem as well, and this is the part usually le
 
 Which is why **one connection is not an exemption**, and it is where the boundary gets drawn wrongly most often. An application and its database are two parts joined by a channel that can fail while both survive. Send a `COMMIT`, lose the connection before the reply arrives, and the transaction may have committed or may not have; the application cannot tell from where it stands. That is Two Generals, in the least distributed system anyone builds.
 
-What saves that case is not that the uncertainty is absent but that it is **recoverable**: the database is durable and can be asked. Reconnect and read the row. Which is the difference between it and a lost message to a peer that kept no record — and the reason an idempotency key can be right in one process against one database, whenever a client can resubmit.
+What saves that case is not that the uncertainty is absent but that it is **recoverable**: the database is durable and can be asked. Reconnect and read the row. Which is the difference between it and a lost message to a peer that kept no record — and the reason an idempotency key can be right in one process against one database, whenever a client can resubmit. [-- I'm suspicious about this interpretation. Let's say the nodes on the distributed system with multiple nodes are also durable, they keep records, so is the case saved? My interpretation for one connection db case is that if the single db is down, usually the entire app is down. So everything stops until that single db is back. When everything stops, there is no point caring about a late message, you give up that message and try to heal the more pressing issue. And when everything is back, you can go and read your "reply" or data again. Also there is no replica so no consistency problems to deal with. A small tought experiment: you have a single db and regular backups. Db fails. You restore a backup, you see that backup has some stale data, you somehow restore correct data from the transaction logs. What just happened: "manual eventual consistency"?]
 
 ### Coordination you can afford
 
@@ -308,7 +310,7 @@ The p^N arithmetic assumes dependencies fail independently, which is the same as
 
 Two services in the same rack, on the same power, behind the same load balancer, sharing a certificate that expires on the same day, are partly fate-shared. Their combined availability is worse than the arithmetic suggests when the shared thing fails, and better when it does not, because they fail together rather than separately.
 
-Which means p^N is a *lower bound on the problem* rather than a prediction. Use it to notice that ten dependencies is a different system from two. Do not use it to promise a number to anyone.
+Which means p^N is a *lower bound on the problem* rather than a prediction. Use it to notice that ten dependencies is a different system from two. Do not use it to promise a number to anyone. [-- this third category sounds like hair splitting about a side quest. A deletion candidate]
 
 ---
 
