@@ -5968,3 +5968,41 @@ That is the deletion rule in `CLAUDE.md` stated by the author in their own terms
 **Consequence.**
 5,067 words to 5,059. Four ledger rows rewritten.
 The claim's wording changed again, so the README hook was re-synced — the hook rule requires it to be cashable by the chapter it links to, and it is the third time this chapter's claim has moved it.
+
+---
+
+## 144. The definitions chapter had three wrong definitions
+
+**Date.** 2026-09-06
+
+**Context.**
+[Chapter 08](../08_distribution_49yh.md) was rebuilt around definitions because the author asked for exactly that — *start the chapter by describing the terms that seem obvious but where most people don't get it right*.
+Across four review passes the author challenged three of those definitions and was right about all three.
+They are recorded together because the pattern matters more than any one of them.
+
+**One.** *Availability* in CAP was given as *"a node that returns an error… has failed the test."*
+Gilbert and Lynch define it as every request received by a non-failing node resulting in a response, unbounded in time, and their own aside settles it: a system that always returns the initial value is trivially available. A stale answer is available. Corrected in [decision 143](#143-a-source-check-that-went-against-the-draft-and-the-term-network-retired).
+
+**Two.** *Eventual consistency* was given as **consistent if writes stop**, with the gloss that this is *"a state a production system never reaches."*
+The author: *"I don't get this 'if writes stop' argument. It seems absurd to me… Is there any real application where writes stop, except a dead one that is used by nobody?"*
+
+Vogels' definition is *"if no new updates are made to **the object**, eventually all accesses will return the last updated value."*
+The draft dropped *the object* and rendered a per-object guarantee as a system-wide one — which is absurd, exactly as the author said.
+Per object it is ordinary: systems never go quiet, rows go quiet constantly, and for most data most of the time the guarantee comes due and is met. Where it does not is the row under continuous write load, which is usually the row that prompted the question — so the useful object is the gap, and Vogels already names it the **inconsistency window**. The paragraph that followed had been measuring that window without knowing it had a name.
+
+**Three, and it is a mis-framing rather than a wrong definition.** The in-doubt commit was presented as a case whose repair is to *reconnect and read the row*.
+The author: *"seems either a hallucination or a very fringe case… I have never seen a bug caused by this case, never seen code dealing with this case. Research this before settling it with a guess."*
+
+Researched, and both halves turned out true at once. The case is documented — PostgreSQL's position is that once `COMMIT` is sent and the connection drops there is no way to tell whether it succeeded; Entity Framework documents it and ships a handler; the mitigation vendors recommend where certainty is needed is a client-generated identifier written inside the transaction under a unique constraint, which is the idempotency key the paragraph claimed.
+And the author's observation is also correct, because **most teams handle it by avoidance**: the familiar rule not to blindly retry a write after a connection error *is* this problem, resolved by giving up the write and leaving a human to sort out the outcome. That is why it seldom appears as a bug and seldom appears as code.
+The passage now says so, which makes it recognisable rather than fringe, and prices avoidance — affordable at one write, not at ten thousand. *Reconnect and read the row* was dropped: it is possible, and it is not what people do.
+
+**The finding, which is the reason these are one entry.**
+All three were written from memory in the part of the chapter whose entire premise is that these words are used loosely. The draft used them loosely.
+Two of the three were settled by going to the primary source, and the third by going to vendor documentation; none needed judgement once the source was in hand.
+
+**The author's method is worth recording alongside it.** Each of the three arrived as a question with a stated uncertainty — *are you sure*, *I could be wrong*, *research this before settling it with a guess* — rather than as an edit. That is what made them cheap to check and impossible to wave away, and it caught three errors that had survived a full rewrite and two review passes.
+
+**Consequence.**
+Vogels and the Entity Framework documentation are both now in the chapter's `## Sources`, since it cites them.
+Two ledger rows rewritten. The chapter stands at 5,268 words.
