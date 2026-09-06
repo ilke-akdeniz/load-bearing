@@ -143,7 +143,7 @@ It does not mean *consistent soon*. The standard definition is Werner Vogels': *
 
 The condition is per object, and that is what makes it sensible rather than absurd. Whole systems never go quiet. Individual rows go quiet constantly — a customer changes their address once and nothing touches that row for a month, so it has converged long before anybody reads it again. For most of your data most of the time, the guarantee comes due and is met.
 
-Where it does not come due is the row under continuous write load, which is usually the row you were worried about. There the quiet moment never arrives and the promise is never tested. So the useful thing is not the guarantee but the gap it leaves, which Vogels names the **inconsistency window**: the period after a write during which two readers can be told different things, and whose width is your replication lag. That turns the useful questions into measurable ones: how wide does the window get under load, and what is a reader allowed to do inside it. A system where nothing ever reconciles has not chosen eventual consistency. It is wrong, on a delay.
+Where it does not come due is the row under continuous write load, which is usually the row you were worried about. There the quiet moment never arrives and the promise is never tested. So the useful thing is not the guarantee but the gap it leaves, which Vogels names the **inconsistency window**, which is Vogels' term for the period between an update and the moment any observer is guaranteed to see it. Under lazy replication that is simply how long it takes every replica to catch up. That turns the useful questions into measurable ones: how wide does the window get under load, and what is a reader allowed to do inside it. A system where nothing ever reconciles has not chosen eventual consistency. It is wrong, on a delay.
 
 ### Two systems cannot share a transaction
 
@@ -270,7 +270,7 @@ Three theorems sit underneath all of it. CAP is the one already worked through a
 - *Consequence:* exactly-once delivery is impossible, so at-least-once plus a repeatable effect is the best available.
 
 **FLP impossibility.** In an asynchronous system where even one process may crash, no deterministic protocol can guarantee that all correct processes reach agreement.
-- *Assumes:* no bound on message delay, no clocks, and a deterministic algorithm.
+- *Assumes:* no bound on message delay, no clocks, a deterministic algorithm — and, worth noticing, **a channel that delivers every message**. FLP does not need lost messages. It needs only that a message can be arbitrarily slow and that one process can crash, which is why a perfect network is no rescue.
 - *Consequence:* **no consensus system can promise that it will decide.** In practice that is a cluster which cannot elect a leader and makes no progress, while every node is running and nothing is permanently broken. Raft and Paxos do not evade this — they add timeouts, which trades guaranteed *termination* for guaranteed *safety*. They may take longer; they will not decide two different things.
 
 **CAP.** A replicated value held to linearizability cannot also be answered by every non-failing node during a partition.
@@ -315,7 +315,7 @@ What makes even avoidance possible is that the uncertainty here is **recoverable
 
 ### Coordination you can afford
 
-Distributed transactions are not impossible. Two-phase commit — 2PC — exists, works, and is used — in payment networks, in some databases, wherever the cost is justified. What it costs is availability. Each participant is asked to vote first and commit second, and between those two steps it is holding its locks and has promised to be able to finish. A participant that fails in that gap blocks every other participant until it comes back or an operator intervenes.
+Distributed transactions are not impossible. Two-phase commit — 2PC — exists, works, and is used — in payment networks, in some databases, wherever the cost is justified. What it costs is availability. Each participant is asked to vote first and commit second, and between those two steps it is holding its locks and has promised to be able to finish. If the **coordinator** fails in that gap, every participant that voted yes is stuck: it cannot commit, because the coordinator may have told the others to abort, and it cannot abort, because it promised to commit if asked. They hold their locks until the coordinator returns or an operator intervenes. A participant failing is the easy case by comparison — the coordinator aborts, tells everyone else, and the absentee learns the outcome when it comes back.
 
 So the honest statement is not "you cannot have cross-system atomicity." It is that you can, and the price is that a failure anywhere stops everything, which for most systems is a worse outcome than the inconsistency they were avoiding. When it is not — few enough participants, high enough stakes, an operator on call — 2PC is the right answer and the sagas are the cargo cult.
 
@@ -370,7 +370,7 @@ Every defect in the list above is an answer to that question that nobody wrote d
 - Michael J. Fischer, Nancy A. Lynch, Michael S. Paterson, *Impossibility of Distributed Consensus with One Faulty Process* — Journal of the ACM 32(2), April 1985. [PDF](https://groups.csail.mit.edu/tds/papers/Lynch/jacm85.pdf).
 - Seth Gilbert, Nancy Lynch, *Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services* — ACM SIGACT News 33(2), June 2002. [PDF](https://users.ece.cmu.edu/~adrian/731-sp04/readings/GL-cap.pdf).
 - Daniel J. Abadi, *Consistency Tradeoffs in Modern Distributed Database System Design* — IEEE Computer 45(2), February 2012. [PDF](https://www.cs.umd.edu/~abadi/papers/abadi-pacelc.pdf).
-- Werner Vogels, *Eventually Consistent* — Communications of the ACM 52(1), January 2009. [queue.acm.org](https://queue.acm.org/detail.cfm?id=1466448).
+- Werner Vogels, *Eventually Consistent* — allthingsdistributed.com, December 2007; later in Communications of the ACM 52(1), January 2009. [allthingsdistributed.com](https://www.allthingsdistributed.com/2007/12/eventually_consistent.html).
 - *Handling transaction commit failures* — Entity Framework 6 documentation, Microsoft Learn. [learn.microsoft.com](https://learn.microsoft.com/en-us/ef/ef6/fundamentals/connection-resiliency/commit-failures).
 
 ---
