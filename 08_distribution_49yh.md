@@ -12,7 +12,7 @@ The instinct at this point is to ask. Send a second message: *are you still ther
 
 **A part** is anything that can stop working while the rest keeps going. A process, a machine, a database, a queue, somebody else's API. Not a class, not a module, not a layer — the test is whether it can be down on its own.
 
-**A channel** is whatever carries messages between two parts, and the property that decides everything below is whether **it can fail while both parts are still running.** A Unix socket between two processes on the same machine is such a channel. Shared memory between those same two processes is not, because there is no delivery step that can fail: if the memory is gone, both parts are gone with it. *Channel* rather than *network* deliberately — nothing here depends on Ethernet, and the theorems below are all stated over channels.
+**A channel** is whatever carries messages between two parts. The property that decides everything below is whether **the channel can fail while both parts are still running.** A Unix socket between two processes on the same machine is such a channel. Shared memory between those same two processes is not, because there is no delivery step that can fail: if the memory is gone, both parts are gone with it. *Channel* rather than *network* deliberately — nothing here depends on Ethernet, and the theorems below are all stated over channels.
 
 **Distributed** means you have two parts joined by such a channel — and that is almost everyone, including a single application server talking to a single database. Saying so is more useful than the usual test, because what varies between systems is not *whether* this chapter applies but *how much of it does*:
 
@@ -131,7 +131,7 @@ Replicate it and a choice arrives, and it arrives only during a **partition**. S
 
 **Refuse on the minority side.** Reads and writes there hang or fail until the partition heals, so those clients get latency they cannot bound or an error. No client is ever handed a value that was untrue when it was served. You are buying correctness and paying in clients who get nothing.
 
-That is the whole of CAP, and the words in it are narrower than they sound. **Consistency** there means **linearizability** — every read returns the most recent write, as though only one copy had ever existed — which is considerably narrower than the everyday word. **Availability** means every request received by a non-failing node results in a response, with no bound on how long that takes. A stale answer satisfies it: Gilbert and Lynch note that a system always returning the initial value is trivially available. What fails the test is a node that blocks until it can reach a peer, because nothing comes back at all. Whether an *error* counts as a response the paper does not settle — treating it as one makes availability trivial to claim, which is why in practice a node answering *I cannot serve this right now* is understood to have chosen consistency.
+That is the whole of CAP, and the words in it are narrower than they sound. **Consistency** there means **linearizability** — every read returns the most recent write, as though only one copy had ever existed — which is considerably narrower than the everyday word. **Availability** means every request received by a non-failing node results in a response, with no bound on how long that takes. A stale answer satisfies it.
 
 The choice only exists during a partition, which is why **PACELC** is the more useful statement: *if Partitioned, choose Availability or Consistency; Else, choose Latency or Consistency.* The second half applies every day and the first half only during an outage.
 
@@ -139,7 +139,7 @@ The two branches are not the same trade, which is the part that confuses. During
 
 **Eventual consistency** is what the first option is usually called, and the name promises less than people hear in it.
 
-It does not mean *consistent soon*. **It means consistent if writes stop.** The copies converge once nothing new arrives — and nothing new arriving is a state a production system never reaches. Read strictly, the guarantee is about a situation you will not be in.
+It does not mean *consistent soon*. **It means consistent if writes stop.** The copies converge once nothing new arrives — and nothing new arriving is a state a production system never reaches. Read strictly, the guarantee is about a situation you will not be in. [-- I don't get this "if writes stop" argument. It seems absurd to me. What does count as a stop? An arbitrary delay between write requests? Is there any real application where writes stop, except a dead one that is used by nobody?]
 
 What you have instead is a window during which two readers can be told different things, and its width is your replication lag. That turns the useful questions into measurable ones: how wide does the window get under load, and what is a reader allowed to do inside it. A system where nothing ever reconciles has not chosen eventual consistency. It is wrong, on a delay.
 
