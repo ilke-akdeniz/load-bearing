@@ -139,9 +139,11 @@ The two branches are not the same trade, which is the part that confuses. During
 
 **Eventual consistency** is what the first option is usually called, and the name promises less than people hear in it.
 
-It does not mean *consistent soon*. **It means consistent if writes stop.** The copies converge once nothing new arrives — and nothing new arriving is a state a production system never reaches. Read strictly, the guarantee is about a situation you will not be in. [-- I don't get this "if writes stop" argument. It seems absurd to me. What does count as a stop? An arbitrary delay between write requests? Is there any real application where writes stop, except a dead one that is used by nobody?]
+It does not mean *consistent soon*. The standard definition is Werner Vogels': **if no new updates are made to a given object, all accesses to that object eventually return the last value written.**
 
-What you have instead is a window during which two readers can be told different things, and its width is your replication lag. That turns the useful questions into measurable ones: how wide does the window get under load, and what is a reader allowed to do inside it. A system where nothing ever reconciles has not chosen eventual consistency. It is wrong, on a delay.
+The condition is per object, and that is what makes it sensible rather than absurd. Whole systems never go quiet. Individual rows go quiet constantly — a customer changes their address once and nothing touches that row for a month, so it has converged long before anybody reads it again. For most of your data most of the time, the guarantee comes due and is met.
+
+Where it does not come due is the row under continuous write load, which is usually the row you were worried about. There the quiet moment never arrives and the promise is never tested. So the useful thing is not the guarantee but the gap it leaves, which Vogels names the **inconsistency window**: the period after a write during which two readers can be told different things, and whose width is your replication lag. That turns the useful questions into measurable ones: how wide does the window get under load, and what is a reader allowed to do inside it. A system where nothing ever reconciles has not chosen eventual consistency. It is wrong, on a delay.
 
 ### Two systems cannot share a transaction
 
@@ -368,6 +370,7 @@ Every defect in the list above is an answer to that question that nobody wrote d
 - Michael J. Fischer, Nancy A. Lynch, Michael S. Paterson, *Impossibility of Distributed Consensus with One Faulty Process* — Journal of the ACM 32(2), April 1985. [PDF](https://groups.csail.mit.edu/tds/papers/Lynch/jacm85.pdf).
 - Seth Gilbert, Nancy Lynch, *Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services* — ACM SIGACT News 33(2), June 2002. [PDF](https://users.ece.cmu.edu/~adrian/731-sp04/readings/GL-cap.pdf).
 - Daniel J. Abadi, *Consistency Tradeoffs in Modern Distributed Database System Design* — IEEE Computer 45(2), February 2012. [PDF](https://www.cs.umd.edu/~abadi/papers/abadi-pacelc.pdf).
+- Werner Vogels, *Eventually Consistent* — Communications of the ACM 52(1), January 2009. [queue.acm.org](https://queue.acm.org/detail.cfm?id=1466448).
 - *Handling transaction commit failures* — Entity Framework 6 documentation, Microsoft Learn. [learn.microsoft.com](https://learn.microsoft.com/en-us/ef/ef6/fundamentals/connection-resiliency/commit-failures).
 
 ---
