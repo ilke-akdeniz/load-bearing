@@ -270,7 +270,9 @@ Three theorems sit underneath all of it. CAP is the one already worked through a
 - *Consequence:* exactly-once delivery is impossible, so at-least-once plus a repeatable effect is the best available.
 
 **FLP impossibility.** In an asynchronous system where even one process may crash, no deterministic protocol can guarantee that all correct processes reach agreement.
-- *Assumes:* no bound on message delay, no clocks, a deterministic algorithm — and, worth noticing, **a channel that delivers every message**. FLP does not need lost messages. It needs only that a message can be arbitrarily slow and that one process can crash, which is why a perfect network is no rescue.
+- *Assumes:* no bound on message delay, no clocks, a deterministic algorithm — and, worth noticing, **a channel that delivers every message**. FLP does not need lost messages. It needs only that a message can be arbitrarily slow and that one process can crash.
+
+That last point looks like it contradicts the definitions above, and it is worth seeing why it does not. A message that can be delayed without bound produces exactly what this chapter calls a partition — the waiter cannot reach the other part within the time it is willing to wait — without a single message being lost. FLP's channel is reliable only in the sense of *eventually*, and *eventually* with no bound on it is the thing the claim says you cannot tell from *never*. A perfect network is no rescue because perfection here means delivery, not punctuality.
 - *Consequence:* **no consensus system can promise that it will decide.** In practice that is a cluster which cannot elect a leader and makes no progress, while every node is running and nothing is permanently broken. Raft and Paxos do not evade this — they add timeouts, which trades guaranteed *termination* for guaranteed *safety*. They may take longer; they will not decide two different things.
 
 **CAP.** A replicated value held to linearizability cannot also be answered by every non-failing node during a partition.
