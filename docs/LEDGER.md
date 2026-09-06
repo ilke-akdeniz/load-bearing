@@ -94,21 +94,26 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Clocks do not order events | mdbn | Wall clocks lack the resolution locally and agreement globally; counters order, clocks do not | cite |
 | Lamport vs vector clocks | mdbn | Lamport preserves causality but cannot detect concurrency; vector clocks can, at a cost that grows with nodes | cite |
 | Coordination does not compose | mdbn | Two correct locked operations are not one correct operation | cite |
-| Distributed means independent failure | 49yh | Not "we run several services" — two parts that can fail independently, so three services on one database mostly are not and one server on a replicated database is | cite |
-| A partition is not a cut cable | 49yh | Any period in which one part cannot reach another while both are alive — a GC pause, an exhausted connection pool, a saturated thread pool. Partition tolerance describes Tuesday, not a catastrophe | cite |
+| Distributed is almost everyone | 49yh | Two parts joined by a channel that can fail while both keep running, which includes one server and one database; what varies is how much of the chapter applies, not whether it does | cite |
+| A partition needs a deadline | 49yh | Not a cut cable but a period in which one part cannot reach another *within the time the waiter will wait* — a four-microsecond pause partitions nothing, a four-second one partitions a one-second caller | cite |
 | The network is any channel that can fail alone | 49yh | A Unix socket between two local processes is a network; shared memory between them is not, because there is no delivery step to fail | cite |
 | TCP relocates the uncertainty | 49yh | Delivered in order, or the connection breaks — loss becomes connection failure, and a client whose connection drops still does not know whether the server acted | cite |
 | Eventual consistency means if writes stop | 49yh | Not "consistent soon" — a guarantee about a state production never reaches; what you have is a window whose width is replication lag | cite |
 | CAP's words, in consequences | 49yh | Available means every non-failed node answers every request, so choosing it keeps latency flat and serves stale answers unmarked; choosing consistency stops the minority side answering at all | cite |
-| Kafka's exactly-once is the second escape | 49yh | Producer ID plus sequence number plus transactional offset commit — at-least-once with duplicates discarded, holding inside Kafka's boundary and stopping at its edge | cite |
 | Two local processes over shared memory | 49yh | Genuinely two parties, each able to crash alone, and Two Generals is still inert — the write is not a delivery that can fail, so mutual certainty is finite | cite |
-| The OS is a perfect failure detector | 49yh | `waitpid` reports a dead child and a robust mutex returns `EOWNERDEAD`, so one machine escapes the slow-versus-dead half as well as the messaging half | cite |
+| The OS is a perfect failure detector | 49yh | `waitpid` reports a dead child and a robust mutex returns `EOWNERDEAD`, so within one machine you can tell late from never | cite |
 | One connection is not exempt | 49yh | Send COMMIT, lose the connection, and the application cannot tell whether it committed — Two Generals in the least distributed system anyone builds | cite |
 | Permanent uncertainty becomes recoverable | 49yh | No fix acquires the missing information; each arranges for it to stop being final, which is why publish-then-delete is right and delete-then-publish is not | cite |
 | Shared fate is one scale, not three exemptions | 49yh | One machine is total, a shared rack or certificate is partial and makes p^N overstate, separate regions is none | cite |
-| Slow is indistinguishable from dead | 49yh | The root of the impossibility results: you must decide on information you cannot obtain | "slow vs dead" |
+| Late is indistinguishable from never | 49yh | Waiting for a message, silence has two explanations and nothing separates them; the root of the impossibility results | "late from never" |
+| Probing reports the present | 49yh | A reply to *are you still there* proves the channel works now and says nothing about whether the earlier message was received or acted on | cite |
+| A part is what can fail alone | 49yh | Anything that can stop working while the rest keeps going — a process, a machine, a database, someone else's API. Not a class or a layer | cite |
+| Four things a waiter can do | 49yh | Wait forever, wait bounded, do not wait, ask again — and only the last can turn out well, which is what idempotency exists to make safe | cite |
+| Two things an answerer can do | 49yh | Only once replicated, and only during a partition: answer from any node and serve stale unmarked, or refuse on the minority side and serve nothing | cite |
+| The three theorems escalate | 49yh | Two parties and one exchange, then many processes agreeing, then a replicated value with clients waiting — not derived from each other, each forbidding something larger | cite |
+| FLP's primary consequence | 49yh | No consensus system can promise it will decide; in practice a cluster that cannot elect a leader while every node is running and nothing is broken | cite |
 | Exactly-once impossible | 49yh | Two Generals ⇒ at-least-once plus idempotency | cite |
-| Every timeout is a guess | 49yh | The observation is identical whether the peer is slow or dead, and the slow one may have committed | cite |
+| Every timeout is a guess | 49yh | When the timer fires you know only that you stopped waiting; the peer may have finished, and the slow one committed | cite |
 | Idempotency key rules | 49yh | The client generates it before the first attempt, and it commits in the same transaction as the effect | cite |
 | Two systems cannot share a transaction | 49yh | No ordering of two commits is safe; the outbox makes the obligation to publish durable state, turning a permanent loss into a delay | cite |
 | Publish-then-delete, never the reverse | 49yh | The drain loop chooses at-least-once over at-most-once, because duplicates are recoverable and a lost event is not | cite |
@@ -342,7 +347,7 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | Version-column optimistic update | mdbn | Ordering from one authority instead of comparing clocks |
 | Lamport counter exchange | mdbn | What does order events, and what it still cannot tell you |
 | Unique index vs application check | mdbn | Only the enforcing layer closes the window |
-| Timeout: slow peer vs dead peer | 49yh | Identical observations, and the slow peer committed |
+| Timeout: slow peer vs dead peer | 49yh | Identical observations from a peer that answered late and one that never will, and the late one committed |
 | Retry without vs with an idempotency key | 49yh | Three deliveries, three charges; three deliveries, one charge |
 | Order row then queue publish, vs outbox | 49yh | The crash between two commits, and the write that removes the gap |
 | p^N availability table | 49yh | Ten dependencies at three nines is two nines |

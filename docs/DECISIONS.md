@@ -5873,3 +5873,57 @@ That is Two Generals in the least distributed system anyone builds, and the sect
 3,842 words to 4,840. Twelve ledger rows added.
 Four terms open the chapter — *distributed*, *partition*, *network*, *eventual consistency* — each stated as the wrong reading, the right one, and what it costs.
 CAP's *available* and *consistent* get the same treatment where CAP is, rather than up front, because they are CAP's vocabulary and mean nothing away from it.
+
+---
+
+## 142. Chapter 08 rebuilt again, on the reader's options
+
+**Date.** 2026-09-06
+
+**Context.**
+[Decision 141](#141-chapter-08-rebuilt-on-shared-fate-and-recoverable-uncertainty) rebuilt the chapter on shared fate. The author's review of that rebuild carried seven tags, two of which were larger than the rest.
+
+**The contradiction, found by the author and worth recording because it was self-inflicted.**
+The terms section said three services sharing one database *"are mostly not distributed."*
+The same rewrite had just added a section explaining that an application and its database are two parts joined by a failable channel — Two Generals in the least distributed system anyone builds.
+The author: *"why 3 services sharing db is not distributed, you just said 'distributed is when two parts can fail' and services can stop working no!?"*
+
+Both cannot be true. The definition was right and the example was wrong.
+**So the chapter no longer tries to rule anyone out.** Distributed is almost everyone, including one server and one database, and what varies is *how much of the chapter applies*: one part holding all the state gives you atomicity and ordering free and leaves the waiting problem; two parts holding state leaves you everything.
+The author's wider objection was that the paragraph *"rounds around with mediocre allegories, loaded with more terms"* — four framings, none reconciled. One definition and a scale replaced them.
+
+**The reframing, which is the author's and is better than what it replaced.**
+
+> While waiting for a message, you can never tell if it's delayed or it will never arrive. […] All distributed machinery is built on top of following options you have as a result of that impossibility: Don't wait for the message, "fire and forget". | Wait for the message for a reasonable amount of time: "timeout". | Ask for the message again: "retry". Previous options were for the message recipient, CAP is what is possible for the message author.
+
+Three things in that are new to the chapter and all three were adopted.
+
+**The claim.** *You cannot tell a slow machine from a dead one* is subtly wrong — the machine can be healthy and the network down. The author's version covers every cause; the draft tightened it to **Waiting for a message, you cannot tell late from never.**
+
+**Probing reports the present.** Sending *are you still there?* cannot answer *was my message received*, because a reply proves only that the channel works now. This is why health checks feel as though they should help. The chapter had not said it, and it is now the paragraph under the claim.
+
+**The waiter/answerer split becomes the spine.** Wait forever, wait bounded, do not wait, ask again are what the party waiting can do — four, and close to exhaustive, with idempotency reframed as what makes the fourth safe rather than as a topic of its own. CAP is not a third theorem in a list; it is the *other* side of the same table, and only exists once you have replicas. The three theorems move under *Why the claim holds*, supplying the mechanism rather than being the structure.
+
+Shared fate and recoverable uncertainty survive from 141, demoted from spine to two checks: *is this mine* and *is my fix any good*.
+
+**Five smaller tags.**
+
+*Partition* had no threshold, so a four-microsecond pause qualified. The author: *"are we splitting hairs here?"* It now needs a deadline — a partition is failing to reach a part **within the time the waiter will wait** — which makes it relative to the caller rather than to the wire, and dissolves the hair-splitting.
+
+*Part* was used throughout and never defined, which the author identified as the missing first definition. It is now the first: anything that can stop working while the rest keeps going.
+
+*Network* moved to second, on the author's instruction, since *distributed* and *partition* both depend on it.
+
+*TCP* left the terms section — *"it doesn't earn a place at the top of the chapter"* — and now sits in the boundary section beside the exemptions that do work, where the contrast does something.
+
+*Eventual consistency* left the terms section too and now sits where CAP introduces consistency, which reverses an earlier instruction to put it up front and is better for the reason the author gave.
+
+*Kafka's exactly-once* was cut. The author doubted both its value and its placement, and the draft's case for it — that readers would raise the objection — is a weak reason in a book that is not a FAQ. What survives is one clause: systems advertising exactly-once are discarding duplicates on arrival, and the guarantee stops at their boundary.
+
+*FLP* gave only its secondary consequence. Its primary one is now stated: **no consensus system can promise it will decide** — in practice a cluster that cannot elect a leader while every node is running.
+
+*The three theorems* were presented as a list. They are now stated as escalating — two parties and one exchange, then many processes agreeing, then a replicated value with clients waiting — with an explicit note that they are not derived from one another.
+
+**Consequence.**
+4,840 words to 5,067. Six ledger rows added, six rewritten, one dropped with the Kafka aside.
+The claim change reached three places outside the chapter: the README hook, which the hook rule requires to be cashable by the chapter it links to, and paraphrases in [chapters 12](../12_patterns-that-cross_r8dw.md) and [21](../21_six-profiles_dnkz.md).

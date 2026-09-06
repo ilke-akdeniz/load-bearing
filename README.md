@@ -11,9 +11,9 @@ Two consecutive reads of the system clock return the same number 95% of the time
 That number is measured, not asserted.
 → [Chapter 07 — Time: Concurrency and Clocks](07_time_mdbn.md)
 
-**You cannot tell a slow machine from a dead one.**
+**Waiting for a message, you cannot tell late from never.**
 Not that it is hard. You cannot — and most of what is impossible in distributed systems follows from it.
-Almost every retry, timeout, and health check you have written assumes otherwise.
+Asking *are you still there?* does not help either: a reply proves the channel works now, and your question was about the past.
 → [Chapter 08 — Distribution: What's Impossible](08_distribution_49yh.md)
 
 **"This should be a Repository." What would that rule out?**
