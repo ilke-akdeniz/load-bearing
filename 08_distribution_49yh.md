@@ -305,7 +305,7 @@ Which is why **one connection is not an exemption**, and it is where the boundar
 
 Be precise about when this bites, because it is narrower than it sounds. If the database is genuinely down, there is no decision to make — the request fails and you say so. The awkward case is the other one: **the database is fine and the connection is not**, so the write may well have committed while the application sits there unable to find out.
 
-What saves it is that the uncertainty is **recoverable**. The database is durable and can be asked: reconnect and read the row. That is the whole difference between this and a lost message to a peer that kept no record, and it is why an idempotency key can be right in one process against one database — not because the database might vanish, but because a client can resubmit.
+What saves it is that the uncertainty is **recoverable**. The database is durable and can be asked: reconnect and read the row. That is the whole difference between this and a lost message to a peer that kept no record, and it is why an idempotency key can be right in one process against one database — not because the database might vanish, but because a client can resubmit. [-- "The awkward case ..." until here seems either a hallucination or a very fringe case not worthy of mentioning here to me but I could be wrong, maybe I worked with the wrong codebases. I have never seen a bug caused by this case, never seen code dealing with this case. Db client connection timouts and retries exist but never seen a code that checks the row on reconenct or idempotency keys on a single db connection. Research this before settling it with a guess.]
 
 ### Coordination you can afford
 
