@@ -147,7 +147,7 @@ Two caveats before anyone plans capacity with this. It assumes irregular arrival
 
 The results above are about time. This one is about layout, and it can cost a factor of seven in code that looks fine.
 
-Start with the hardware fact. Memory is not read a byte at a time. The processor always fetches a fixed-size block — a **cache line**, 64 bytes on most machines — and keeps recently used blocks in a small fast store near the core. Reading one byte that is already in that store takes about a nanosecond. Reading one that is not takes a hundred times longer, because the whole 64-byte block has to come from main memory.
+Start with the hardware fact. Memory is not read a byte at a time. The processor always fetches a fixed-size block — a **cache line** — and keeps recently used blocks in a small fast store near the core. The line is 64 bytes on x86-64 and 128 on Apple Silicon, including the machine every measurement here was taken on. Reading one byte that is already in that store takes about a nanosecond. Reading one that is not takes a hundred times longer, because the whole block has to come from main memory.
 
 That difference is the whole of this section:
 
@@ -200,7 +200,7 @@ for i := range totals { // totals is just []int64
 ```
 Summing two million orders took 3.4 milliseconds from the records and 0.48 milliseconds from the column — **seven times faster**, from where the bytes sit. This is also why analytics databases store data in columns rather than rows: a query that sums one column should not have to read the other twenty.
 
-Two things about this shape. It is a **step rather than a slope** — growing a struct from 40 bytes to 60 costs nothing, and crossing 64 costs you a second fetch per record. And the expensive fields are the ones the slow loop never names, which is why the cost is invisible at the place where it is paid.
+Two things about this shape. It is a **step rather than a slope** — growing a struct from 40 bytes to 60 costs nothing, and crossing the line size costs you a second fetch per record. And the expensive fields are the ones the slow loop never names, which is why the cost is invisible at the place where it is paid.
 
 [Chapter 05](05_dependency-and-hiding_agjy.md) uses the same underlying fact for a different argument: in an entity-component system the memory layout is deliberately made public, because hiding it would cost exactly the margin measured here.
 
@@ -231,7 +231,7 @@ Each shape has a different cause, and applying the wrong fix is the common failu
 
 **Queue cliffs** come from variation, not from load. Idle capacity is what absorbs a burst; near saturation there is none left. This is also why average latency is such a poor measure here — the system is not slow on average, it is slow precisely when it is busiest.
 
-**Steps** come from the fixed fetch size. The machine moves 64 bytes whether you wanted 8 or 64, so the question is never how much data you need but how much of each fetched block you use. That is decided by layout, not by algorithm.
+**Steps** come from the fixed fetch size. The machine moves a whole line whether you wanted eight bytes of it or all of it, so the question is never how much data you need but how much of each fetched block you use. That is decided by layout, not by algorithm.
 
 **Floors** come from physics, and there is no mechanism to explain.
 
@@ -303,7 +303,7 @@ A batch job that must finish by 6 a.m. and takes two hours has seven hours of sl
 
 **In a codebase:**
 
-- **A struct that has grown past 64 bytes**, walked by a hot loop that reads one or two of its fields. Whoever appended the last field paid nothing; the loop pays every time it runs.
+- **A struct that has grown past one cache line**, walked by a hot loop that reads one or two of its fields. Whoever appended the last field paid nothing; the loop pays every time it runs.
 - **A worker count that was raised each time the system felt slow**, with no measurement of whether throughput rose too.
 - **A connection pool smaller than arrival rate times response time.** Little's Law gives the number of in-flight requests; if the pool is smaller, requests are queuing somewhere you are not watching.
 - **Capacity planned on average utilization**, which says nothing about the wait at peak.

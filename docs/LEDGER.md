@@ -356,7 +356,7 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | Halting problem vs its folk version | q5c6 | The theorem forbids a universal decider; termination checking for particular programs is routine |
 | `rate` read once at startup | q5c6 | A definitional law that either binds or has no cache to act on |
 | Go map randomization vs Python dict order | q5c6 | One regularity, two opposite responses, and a magnitude that moved. agjy owns Hyrum's Law |
-| Summing one field across 2M order records vs one column | 637f | 7.1x from where the bytes sit; 120-byte record, 64-byte cache line, no algorithm change. agjy owns the encapsulation argument and keeps `Particle` |
+| Summing one field across 2M order records vs one column | 637f | 7.2x from where the bytes sit; 120-byte record, 128-byte cache line on the measuring machine, no algorithm change. agjy owns the encapsulation argument and keeps `Particle` |
 | Pointer-chase latency ladder | 637f | 1.94 ns to 196 ns across working-set sizes, same instruction |
 | Nightly report, 20 of 100 minutes un-splittable | 637f | Amdahl worked concretely: a 5x ceiling, and 1024 cores beating 16 by 20% |
 | Shared counter vs private counters, 1–64 workers | 637f | Negative scaling measured: throughput falls 4x between two workers and four |
