@@ -5927,3 +5927,44 @@ Shared fate and recoverable uncertainty survive from 141, demoted from spine to 
 **Consequence.**
 4,840 words to 5,067. Six ledger rows added, six rewritten, one dropped with the Kafka aside.
 The claim change reached three places outside the chapter: the README hook, which the hook rule requires to be cashable by the chapter it links to, and paraphrases in [chapters 12](../12_patterns-that-cross_r8dw.md) and [21](../21_six-profiles_dnkz.md).
+
+---
+
+## 143. A source check that went against the draft, and the term *network* retired
+
+**Date.** 2026-09-06
+
+**Context.**
+The author's second review of the rebuilt [chapter 08](../08_distribution_49yh.md) carried nine tags. Three changed something beyond the chapter.
+
+**The draft was wrong about CAP availability, and the author caught it from memory.**
+The chapter said *"a node that returns an error, blocks until it can reach a peer, or redirects you to a leader has failed the test."*
+The author: *"are you sure about this last sentence? Don't bs check the sources, I remember reading in some place that even returning an error counts as an answer but I'm not sure."*
+
+The source could not be read the obvious way — the linked PDF uses a subset font whose extracted bytes are glyph indices rather than text — so it was reached through a plain-text transcription of the same paper.
+
+Gilbert and Lynch define availability as **every request received by a non-failing node resulting in a response**, with no bound on how long that takes. The paper's own aside settles the question the author raised: *"trivially, a system which always returns the initial value is available and partition-tolerant."* **A stale answer is available.** So *returns an error* did not belong in a list of things that fail the test.
+
+What the paper does not settle is whether an error counts as a response, and the chapter now says so rather than picking a side: treating an error as a response makes availability trivial to claim, which is why practitioners read a node saying *I cannot serve this* as having chosen consistency. Blocking is the unambiguous failure, because nothing comes back at all.
+
+**This is the second time a source check has reversed a draft claim in this chapter**, after the Two Generals exchange that produced [decision 141](#141-chapter-08-rebuilt-on-shared-fate-and-recoverable-uncertainty). Both times the author's prompt was a question rather than an edit, and both times the answer was in the primary source.
+
+***Network* is retired as this chapter's term.**
+The author: *"is it alright to abuse a well known cs term such as network like this? Why not simply use channel instead?"*
+Right on both counts. The chapter had been redefining a word every reader already has, and *channel* is the word the theorems themselves are stated over — Two Generals is over a channel that can lose messages. The Go collision was checked and is negligible: `chan` appears once in the book, in [chapter 04](../04_grading-a-law_q5c6.md), glossed as a queue.
+
+**A framing that was wrong rather than unclear.**
+The boundary sections opened *"the exemptions below are one scale rather than three categories, and the scale is how much fate two parts share."*
+The author asked what the three categories were and said the scale was unclear. Checking it, the sentence was simply false: one machine, affordable coordination, and non-independent failure are three different boundaries, not three points on one axis — 2PC is about what you can pay for, not about shared fate. The framing is deleted rather than reworded.
+
+**Four smaller ones.** PACELC's two branches were not distinguished, and now are: during a partition you cannot reach the replicas, so the choice is answer or refuse; outside one you can, so the choice is whether to wait. Eventual consistency was one dense paragraph and is now three short ones. The one-connection case is narrowed to the situation that actually bites — the database fine and the connection not — which was the author's objection that a genuinely dead database leaves no decision to make. And *failures that are not independent* stopped being a boundary section and became a caveat inside the arithmetic it qualifies.
+
+**A standing instruction, recorded because it is general.**
+
+> don't add the paragraphs I just deleted unless you can tell me why putting it back is better. I know why I deleted it, it's either a repetition of a previous thing or a next more detailed take in the chapter, a word salad with not much substance, stating the obvious, a leftover that previous edits made redundant or out of place, or a detail that takes more from the flow of the chapter than adds any value to it.
+
+That is the deletion rule in `CLAUDE.md` stated by the author in their own terms, and it follows two occasions where the draft restored cut text without flagging it ([decision 132](#132-a-handoff-signals-the-next-chapter-it-does-not-state-its-claim), [decision 140](#140-review-of-chapter-07-and-what-a-striking-claim-is-worth)). Nothing was restored in this pass.
+
+**Consequence.**
+5,067 words to 5,059. Four ledger rows rewritten.
+The claim's wording changed again, so the README hook was re-synced — the hook rule requires it to be cashable by the chapter it links to, and it is the third time this chapter's claim has moved it.
