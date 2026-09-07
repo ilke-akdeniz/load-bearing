@@ -1,10 +1,12 @@
 # Scale: Queues, Parallelism, Memory
 
+[-- check each demonstration cases against chapter 04's law kinds: theorem | definition | empirical. Don't bs from memory, read the chapter 04's statements first. Then inside each case, after the demonstration is done, state the law kind and the general resolution for the law. I already did this partially so see these first. Don't create repetition, if two cases are of the same law kind explain the second case more succintly.]
+
 ## The claim
 
-**Adding more of a resource has an arithmetic shape you can work out before you build. The shape is a law and transfers everywhere; the number is a measurement and transfers nowhere.**
+**What you could gain by increasing resources has unintuitive arithmetic shapes. These shapes are laws and determine if more resources will help or make things worse.**
 
-Intuition says the relationship is a straight line: twice the servers, twice the throughput; twice the traffic, twice the wait. It never is. This chapter works through five shapes, and the skill is recognizing **which one you are on**, because that is what decides whether the fix is more hardware, less sharing, or a different design.
+Intuition says the relationship is a straight line: twice the servers, twice the throughput; twice the traffic, twice the wait. It never is. This chapter works through five shapes, and the skill is recognizing **which one you are on**, because that is what decides whether the fix is more hardware, less sharing, or a different design.  
 
 | Shape | You will meet it as | The fix |
 |---|---|---|
@@ -14,13 +16,11 @@ Intuition says the relationship is a straight line: twice the servers, twice the
 | **Step** | one extra struct field costs 7× | change the memory layout |
 | **Floor** | latency you cannot optimize away | move the data, or stop waiting for it |
 
-It is also the chapter where [chapter 04](04_grading-a-law_q5c6.md)'s three kinds of Law turn up together, which is what decides the claim's second sentence. Amdahl's ceiling is a **theorem** — it follows from arithmetic, binds on any hardware anyone will ever build, and is not going to be repealed. Little's Law is **true by definition**, assuming so little that denying it is incoherent. The latency figures are **empirical**: observed, drifting, and different on your machine from the one that measured them. Three standings in one chapter, and the standing is what tells you whether you may quote a number or are obliged to go and take one.
-
 ## About the numbers
 
 Every measurement here was taken on the machine this was written on — an Apple M4 laptop, Go 1.26.5, 128 KB of L1 data cache, 16 MB of L2, 32 GB of memory.
 
-**Yours will differ, and that is the point.** The formulas are exact and hold everywhere. The measurements are empirical ([Ch. 04](04_grading-a-law_q5c6.md)), which means the *pattern* transfers and the *number* does not. Someone else's benchmark tells you a shape exists; only your own tells you where you are on it.
+**Your measurements will differ, and that is the point.** The formulas are exact and hold everywhere. The measurements are empirical ([Ch. 04](04_grading-a-law_q5c6.md)), which means the *pattern* described by the law transfers and the *number* does not. Someone else's benchmark tells you a shape exists; only your own tells you where you are on it.
 
 ---
 
@@ -60,7 +60,7 @@ The result is a multiplier: how many times faster the whole job runs. As `N` gro
 
 The practical reading: **find the un-splittable fraction before you buy anything.** At 25% it barely matters what hardware you have.
 
-This is a theorem, so there are two moves and no others ([Ch. 04](04_grading-a-law_q5c6.md)). Falsify an assumption, or stop needing the conclusion. The assumption worth attacking is that `s` is fixed — usually it is a lock, a single writer, or a coordination step somebody chose ([Ch. 07](07_time_mdbn.md)), and making it smaller raises the ceiling in a way that hardware cannot.
+This law is a theorem, so there are two moves and no others ([Ch. 04](04_grading-a-law_q5c6.md)). Falsify an assumption, or stop needing the conclusion. The assumption worth attacking is that `s` is fixed — usually it is a lock, a single writer, or a coordination step somebody chose ([Ch. 07](07_time_mdbn.md)), and making it smaller raises the ceiling in a way that hardware cannot.
 
 ### Reversal: when more workers make it slower
 
@@ -113,7 +113,7 @@ items inside = arrival rate × time each one spends inside
 
 At 500 requests per second with 200 ms average response time, there are 100 requests inside your system at any moment. That number is worth having, because if your connection pool holds 50, then half of those requests are queuing for a connection and the pool is your bottleneck — a thing you can check this afternoon.
 
-The law assumes essentially nothing, which makes it true by definition ([Ch. 04](04_grading-a-law_q5c6.md)) for any queue that is not growing without limit.
+The law assumes essentially nothing, which makes it true by **definition** ([Ch. 04](04_grading-a-law_q5c6.md)) for any queue that is not growing without limit.
 
 **Then the part that surprises people.** *Utilization* is the fraction of time a server is busy: 0.8 means busy 80% of the time, idle 20%. For a single server handling irregular traffic, the time a request spends waiting grows as `1 / (1 − utilization)`:
 
@@ -150,8 +150,6 @@ Two caveats before anyone plans capacity with this. It assumes irregular arrival
 The results above are about time. This one is about layout, and it can cost a factor of seven in code that looks fine.
 
 Start with the hardware fact. Memory is not read a byte at a time. The processor always fetches a fixed-size block — a **cache line** — and keeps recently used blocks in a small fast store near the core. The line is 64 bytes on x86-64 and 128 on Apple Silicon, including the machine every measurement here was taken on. Reading one byte that is already in that store takes about a nanosecond. Reading one that is not takes a hundred times longer, because the whole block has to come from main memory.
-
-That difference is the whole of this section:
 
 ```text
  total data being touched      time per read
@@ -321,11 +319,11 @@ A batch job that must finish by 6 a.m. and takes two hours has seven hours of sl
 - **"It's O(1), so it's faster."** At what size, and against what constant?
 - **"We optimized the algorithm"** — on a workload whose cost was memory layout, where the algorithm was never the problem.
 
-The question that does the work: **which shape am I on?**
+The question that does the work: **which resource shape am I on?**
 
 A ceiling means stop buying hardware and shrink the serial part. A reversal means stop adding workers and find what they share. A queue cliff means buy headroom rather than speed. A step means look at the layout. A floor means move the data or stop waiting for it.
 
-[Chapter 10](10_change_rjf9.md) moves to the timescale where the arithmetic is measured in years rather than milliseconds — how systems change, how the shape of an organization ends up in its software, and why a published interface is a decision you do not get to take back.
+[Chapter 10](10_change_rjf9.md) moves to the timescale where the arithmetic is measured in years rather than milliseconds — how systems change, how the shape of an organization ends up in its software.
 
 ---
 
