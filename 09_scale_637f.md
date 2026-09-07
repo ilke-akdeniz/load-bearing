@@ -54,7 +54,9 @@ So there are two moves and no others ([Ch. 04](04_grading-a-law_q5c6.md)). Falsi
 
 ### Gustafson's Law
 
-**A theorem, and — this is the part usually got wrong — the same one as Amdahl's.** If the job grows with the machine, speedup approaches the number of cores, because what is being held fixed is the time you are willing to wait rather than the size of the work.
+**A theorem:** If the job grows with the machine, speedup approaches the number of cores, because what is being held fixed is the time you are willing to wait rather than the size of the work. 
+
+[-- I read this section, I think your interpretation has serious holes. Right now this reads like: "Find more jobs of the same nature and Amdahl is not a problem for you." You have a report with 20 + 80. Let's say that's monthly report. Make the same report yearly, same job, same ratio of work that can't be split but the data is 12X. Boom, magically Amdahl is not a problem. I guess that's not what Gustafson says. My guess is that the task has to grow without the overhead, so maybe yearly data is not stored on file but on an OLAP db. But then if that's the case I don't see how Gustafson is even a law, that result should be very obvious: more work without fixed part, more parallelization. Think about those issues and don't make bs assumptions from memory, check resources.]
 
 Amdahl held the report at 100 minutes and asked how much faster it finishes. Ask the other question — the report takes 100 minutes and always will, so how much more can it cover? — and the twenty un-splittable minutes stop being a ceiling and become an overhead:
 
