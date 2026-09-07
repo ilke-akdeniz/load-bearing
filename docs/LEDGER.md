@@ -122,16 +122,15 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Availability is a product | 49yh | Availabilities multiply rather than average; ten dependencies at three nines gives two nines, and better components do not fix it | "p^N" |
 | Three ways to stop multiplying | 49yh | Remove the dependency, make it optional, or make it asynchronous | cite |
 | Saga is not rollback | 49yh | Compensations are business operations and are visible to customers | cite |
-| Six laws of scaling, five shapes | 637f | Amdahl, the Universal Scalability Law, Little's Law, the queueing curve, the memory hierarchy, the speed of light. Five produce a shape — ceiling, reversal, cliff, step, floor — and Little's Law is the identity underneath rather than a curve. The law is the axis; the shape is what it produces | "which law am I on" |
+| Five laws of scaling, three shapes | 637f | Amdahl, Gustafson, the Universal Scalability Law, Little's Law, the queueing curve. Three produce a shape — ceiling, reversal, cliff — while Gustafson is Amdahl re-measured and Little's Law is the identity underneath | "which law am I up against" |
 | Shapes travel, numbers do not | 637f | The formulas are exact everywhere; the measurements are of one machine. Someone else's benchmark tells you a shape exists, only yours tells you where on it you are — which is q5c6's theorem-versus-empirical distinction applied to performance figures | cite |
 | Three kinds of Law in one chapter | 637f | Amdahl is a theorem, Little's Law is true by definition, the latency figures are empirical and drift. q5c6 owns the grading; 637f is where all three appear together and the standing decides whether a number may be quoted or must be measured | cite |
 | Amdahl: a ceiling | 637f | The serial fraction bounds speedup regardless of core count; shrink s rather than buying cores | cite |
+| Gustafson is Amdahl, differently measured | 637f | Not a refutation: Karbowski derives Gustafson-Barsis from Amdahl and calls the overthrow claim a mistake. The two serial fractions are different quantities — Amdahl's measured on the sequential run, Gustafson's on the parallel run, so it shrinks as the problem grows | cite |
+| Fixed job or growing job | 637f | The test deciding which law applies: given a machine twice the size, would you run the same job or a bigger one? Last night's orders are fixed; a simulation run at whatever resolution finishes by morning is not | cite |
 | USL: returns go negative | 637f | Contention grows with workers and coherency with pairs, so past a peak each added worker lowers throughput | cite |
 | Little's Law | 637f | L = λW, near-definitional, true of any stable queue; two knowns give the third | cite |
 | Utilization is superlinear | 637f | Wait scales as 1/(1−ρ); there is no cliff at 85%, only a marginal cost that rises from the start | cite |
-| Memory hierarchy ~6 orders | 637f | Register to network spans about a million-fold | cite |
-| The cache line is the transfer unit | 637f | Cost is set by how much of each fetched line you use, which is layout not algorithm | cite |
-| Speed of light as a floor | 637f | Cross-region round trips have a floor no profiling removes; change geography or stop waiting | cite |
 | The crossover is not a property of the algorithms | 637f | Where O(n) loses to O(1) is set by comparison cost against hash cost — measure yours | cite |
 | Rate of change layers | rjf9 | Code, schema, published interface, organization — each slower than the last, and the slow ones set the terms | "rate layers" |
 | Conway / Brooks / Lehman | rjf9 | Structure mirrors org; adding people to a late project; systems must change | cite |
@@ -358,7 +357,6 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | Halting problem vs its folk version | q5c6 | The theorem forbids a universal decider; termination checking for particular programs is routine |
 | `rate` read once at startup | q5c6 | A definitional law that either binds or has no cache to act on |
 | Go map randomization vs Python dict order | q5c6 | One regularity, two opposite responses, and a magnitude that moved. agjy owns Hyrum's Law |
-| Summing one field across 2M order records vs one column | 637f | 7.2x from where the bytes sit; 120-byte record, 128-byte cache line on the measuring machine, no algorithm change. agjy owns the encapsulation argument and keeps `Particle` |
 | Pointer-chase latency ladder | 637f | 1.94 ns to 196 ns across working-set sizes, same instruction |
 | Nightly report, 20 of 100 minutes un-splittable | 637f | Amdahl worked concretely: a 5x ceiling, and 1024 cores beating 16 by 20% |
 | Shared counter vs private counters, 1–64 workers | 637f | Negative scaling measured: throughput falls 4x between two workers and four |

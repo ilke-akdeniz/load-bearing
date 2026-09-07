@@ -356,7 +356,7 @@ for (int i = 0; i < count; i++) {
 }
 ```
 
-The second is not a worse-encapsulated version of the first. It is a different decomposition, and it wins by a margin that has nothing to do with taste: the first loop drags `tint` and every other unused field through cache on every iteration, and the second touches only the bytes it needs. ([Chapter 09](09_scale_637f.md) owns the arithmetic and the benchmark; the span between cache and main memory is where the whole margin comes from.)
+The second is not a worse-encapsulated version of the first. It is a different decomposition, and it wins by a margin that has nothing to do with taste: the first loop drags `tint` and every other unused field through cache on every iteration, and the second touches only the bytes it needs. The span between cache and main memory is where the whole margin comes from.
 
 Be exact about what was traded away. In the class version the field layout is private: you could reorder the fields, widen `lifetime` to a double, or delete `tint` entirely, and no other file would need editing. In the array version the layout *is* the interface — a dozen systems index those arrays directly, so changing the layout means editing every one of them.
 

@@ -363,7 +363,7 @@ The question that does the work: **what does this code do when the reply never c
 
 Every defect in the list above is an answer to that question that nobody wrote down. If the honest answer is *it retries and the work happens twice*, you need an idempotency key. If it is *it gives up and the work happened anyway*, you need reconciliation. And if it is *the reply always comes, we are in one process*, then none of this is yours.
 
-[Chapter 09](09_scale_637f.md) turns from what is impossible to what is merely expensive — the arithmetic of queues, parallelism, and the memory hierarchy.
+[Chapter 09](09_scale_637f.md) turns from what is impossible to what is merely expensive — the arithmetic of queues, parallelism, and contention.
 
 ---
 

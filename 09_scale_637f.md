@@ -1,4 +1,4 @@
-# Scale: Queues, Parallelism, Memory
+# Scale: Queues and Parallelism
 
 ## The claim
 
@@ -6,7 +6,7 @@
 
 Intuition says the relationship is a straight line: twice the servers, twice the throughput; twice the traffic, twice the wait. In reality, you never get that perfect line. The shape is mostly a curve determined by the underlying laws.
 
-This chapter works through six laws and the five shapes they produce.
+This chapter works through five laws and the three shapes they produce.
 
 Each law's grade is stated too, in the sense [chapter 04](04_grading-a-law_q5c6.md) defines. Which law you are up against, and what grade it carries, decides whether the fix is more hardware, less sharing, or a different design.
 
@@ -51,6 +51,31 @@ The result is a multiplier: how many times faster the whole job runs. As `N` gro
 The practical reading: **find the un-splittable fraction before you buy anything.** At 25% it barely matters what hardware you have.
 
 So there are two moves and no others ([Ch. 04](04_grading-a-law_q5c6.md)). Falsify an assumption, or stop needing the conclusion. The assumption worth attacking is that `s` is fixed — usually it is a lock, a single writer, or a coordination step somebody chose ([Ch. 07](07_time_mdbn.md)), and making it smaller raises the ceiling in a way that hardware cannot.
+
+### Gustafson's Law
+
+**A theorem, and — this is the part usually got wrong — the same one as Amdahl's.** If the job grows with the machine, speedup approaches the number of cores, because what is being held fixed is the time you are willing to wait rather than the size of the work.
+
+Amdahl held the report at 100 minutes and asked how much faster it finishes. Ask the other question — the report takes 100 minutes and always will, so how much more can it cover? — and the twenty un-splittable minutes stop being a ceiling and become an overhead:
+
+```text
+                 work done in the same 100 minutes
+   1 core        20 + 80        =  100 min of work    1.0x
+   4 cores       20 + 80x4      =  340 min of work    3.4x
+  16 cores       20 + 80x16     = 1300 min of work   13.0x
+```
+
+Sixteen cores gave Amdahl 4.0x and gives this 13.0x, on the same machine, with the same twenty minutes of serial work. Written out, with `s` the serial fraction and `N` the cores:
+
+```text
+speedup = s + N(1 − s)
+```
+
+**The two are not in competition, and the popular reading that Gustafson overturned Amdahl is wrong.** Karbowski derives the Gustafson-Barsis law directly from Amdahl's and puts it plainly: it *"is nothing but a different form of Amdahl's law"*, and the claim that it overthrows Amdahl *"is a mistake"*. The reason the numbers differ is that the two serial fractions are not the same quantity. Amdahl's is measured on the sequential run and is a property of the program. Gustafson's is measured on the parallel run, so it depends on the problem size and the core count together — and as the problem grows it shrinks, which is the whole effect.
+
+So this is [chapter 04](04_grading-a-law_q5c6.md)'s first escape, performed by one famous law on another. Amdahl's assumption is that the work is fixed. Gustafson does not argue with the conclusion; he declines the assumption. Gustafson's own objection, in his words, is that *"the assumptions underlying Amdahl's 1967 argument are inappropriate for the current approach to massive ensemble parallelism"*.
+
+Which of the two applies to you is a question about your situation rather than your hardware, and it has a clean test: **if you were given a machine twice the size, would you run the same job or a bigger one?** Last night's orders are last night's orders — that is Amdahl, and the ceiling is real. A simulation run at whatever resolution finishes before morning, or an index rebuilt over whatever corpus you have by then, grows to fill whatever you buy — that is Gustafson, and there is no ceiling to hit.
 
 ### The Universal Scalability Law
 
@@ -143,106 +168,15 @@ Two caveats before anyone plans capacity with this. It assumes irregular arrival
 
 Those caveats are the theorem's assumptions showing through: the curve is exactly true of the queue it describes, so the only question it admits is whether that queue is yours. Little's Law asks even less of you — only that its words describe your system, which for any queue not growing without limit they do.
 
-### The memory hierarchy
-
-**This law has no famous name, and it is empirical:** The machine moves memory in fixed-size blocks, so what a loop costs is decided by how much of each block it actually uses.
-
-The results above are about time. This one is about layout, and it can cost a factor of seven in code that looks fine.
-
-Start with the hardware fact. Memory is not read a byte at a time. The processor always fetches a fixed-size block — a **cache line** — and keeps recently used blocks in a small fast store near the core. The line is 64 bytes on x86-64 and 128 on Apple Silicon, including the machine every measurement here was taken on. Reading one byte that is already in that store takes about a nanosecond. Reading one that is not takes a hundred times longer, because the whole block has to come from main memory.
-
-```text
- total data being touched      time per read
-        16 KB                    1.94 ns      fits in the fastest cache
-       256 KB                    7.61 ns      fits in the second-level cache
-     4,096 KB                   14.79 ns      still cached, mostly
-   262,144 KB                  196.55 ns      main memory
-```
-
-Same instruction, hundredfold difference, decided only by how much memory the program is touching. Add a network call and the range from processor register to remote service spans roughly six orders of magnitude.
-
-Now the consequence for ordinary code. Here is an order record of the kind any commerce system accumulates:
-
-```go
-type Order struct {
-	ID            [16]byte
-	CustomerID    [16]byte
-	TotalMinor    int64      // the only field the loop below reads
-	TaxMinor      int64
-	ShippingMinor int64
-	PlacedAt      time.Time
-	ShippedAt     time.Time
-	Currency      [3]byte
-	Status        uint8
-	Channel       uint8
-	WarehouseID   int32
-}
-```
-
-That is 120 bytes. Now total up two million of them:
-
-```go
-var sum int64
-for i := range orders {
-	sum += orders[i].TotalMinor
-}
-```
-
-The loop needs 8 bytes from each order. The machine fetches 120 — every field, including two timestamps and a warehouse ID that this loop never mentions. **Fifteen times more memory crosses the bus than the calculation requires.**
-
-Store that one field on its own and the arithmetic is unchanged:
-
-```go
-var sum int64
-for i := range totals { // totals is just []int64
-	sum += totals[i]
-}
-```
-Summing two million orders took 3.4 milliseconds from the records and 0.48 milliseconds from the column — **seven times faster**, from where the bytes sit. This is also why analytics databases store data in columns rather than rows: a query that sums one column should not have to read the other twenty.
-
-Two things about this shape. It is a **step rather than a slope** — growing a struct from 40 bytes to 60 costs nothing, and crossing the line size costs you a second fetch per record. And the expensive fields are the ones the slow loop never names, which is why the cost is invisible at the place where it is paid.
-
-[Chapter 05](05_dependency-and-hiding_agjy.md) uses the same underlying fact for a different argument: in an entity-component system the memory layout is deliberately made public, because hiding it would cost exactly the margin measured here.
-
-Even more machine-specific than the reversal: the line size, the cache sizes and every latency above are facts about one machine in one year. [Chapter 04](04_grading-a-law_q5c6.md) uses this material as its own example of a law that drifts. Seven times is not a constant you may quote — it is what this layout cost on this hardware.
-
-### The speed of light
-
-**A theorem.** A round trip cannot take less than twice the distance divided by the signal's speed — which in fibre is about two-thirds of light speed in vacuum.
-
-Some latency is not an engineering problem at all.
-
-Light travels through fibre at about two-thirds of its speed in vacuum. That gives a hard minimum for a round trip, before any router, queue, handshake, or line of code:
-
-```text
- London  <-> New York      5,570 km       54.6 ms round trip
- London  <-> Sydney       16,990 km      166.6 ms round trip
-```
-
-Real measurements run one and a half to two times these, because cables do not follow great circles and routers take time. A synchronous call from London to Sydney inside a request handler has a floor of 167 ms, and no profiler will ever show you why.
-
-So the available moves are again the two:
-- Change an assumption: put a copy of the data near the user.
-- Stop needing the conclusion: make the operation asynchronous, so nobody is waiting for the round trip to finish.
-
-Why does this one still feel like the other kind? Because the section is thick with measured numbers. Look at where they sit. The distances and the two-thirds are what you **feed into** the law; the law itself is a division, and no amount of measuring changes a division. In the reversal the numbers **were** the law — the coefficients were fitted to observations, so a better observation changes the law itself.
-
-So when a law arrives with numbers attached, the question is: **are the numbers what you feed it, or what it is made of?** ([Chapter 04](04_grading-a-law_q5c6.md) makes the neighbouring point, that a measurement on its own is not a law at all.)
----
-
 ## Why the claim holds
 
-Five of the six laws produce a shape — Little's Law is the exception, being an identity rather than a curve — and each shape has a different cause. Applying the wrong fix is the common failure.
+Three of the five laws produce a shape — Little's Law is the exception, being an identity rather than a curve — and each shape has a different cause. Applying the wrong fix is the common failure.
 
 **Amdahl's ceiling** comes from work that cannot be divided. That is arithmetic on a fraction, needing no assumption about hardware, so no hardware changes it.
 
 **The Universal Scalability Law's reversal** comes from pairs. Contention grows with the number of workers; coherency grows with the number of pairs of workers, which grows as the square. A quantity growing as the square eventually overtakes one growing in proportion, and where they cross is the peak. This is why the fix is never more workers — it is removing what they share, and [chapter 07](07_time_mdbn.md)'s single-writer design is that taken to its limit.
 
 **The queueing curve's cliff** comes from variation, not from load. Idle capacity is what absorbs a burst; near saturation there is none left. This is also why average latency is such a poor measure here — the system is not slow on average, it is slow precisely when it is busiest.
-
-**The memory hierarchy's step** comes from the fixed fetch size. The machine moves a whole line whether you wanted eight bytes of it or all of it, so the question is never how much data you need but how much of each fetched block you use. That is decided by layout, not by algorithm.
-
-**The speed-of-light floor** comes from physics, and there is no mechanism to explain for the scope of this book.
 
 ---
 
@@ -312,13 +246,11 @@ A batch job that must finish by 6 a.m. and takes two hours has seven hours of sl
 
 **In a codebase:**
 
-- **A struct that has grown past one cache line**, walked by a hot loop that reads one or two of its fields. Whoever appended the last field paid nothing; the loop pays every time it runs.
 - **A worker count that was raised each time the system felt slow**, with no measurement of whether throughput rose too.
 - **A connection pool smaller than arrival rate times response time.** Little's Law gives the number of in-flight requests; if the pool is smaller, requests are queuing somewhere you are not watching.
 - **Capacity planned on average utilization**, which says nothing about the wait at peak.
-- **A synchronous cross-region call in a request path**, where the distance alone exceeds the latency budget.
 - **A performance constant copied from an article**, with no measurement on the machine that runs the code.
-- **A hash map holding six items**, chosen because it is `O(1)`, costing a hash and an allocation to avoid a scan that would fit in one cache line.
+- **A hash map holding six items**, chosen because it is `O(1)`, costing a hash and an allocation to avoid a scan that would have been faster.
 
 **In a conversation:**
 
@@ -326,11 +258,10 @@ A batch job that must finish by 6 a.m. and takes two hours has seven hours of sl
 - **"It's only at 90%."** That is ten times the service time spent waiting. The graph looks fine until it does not.
 - **"Average latency is fine."** Averages hide exactly the tail that queueing produces.
 - **"It's O(1), so it's faster."** At what size, and against what constant?
-- **"We optimized the algorithm"** — on a workload whose cost was memory layout, where the algorithm was never the problem.
 
 The question that does the work: **which law am I up against?**
 
-A ceiling means stop buying hardware and shrink the serial part. A reversal means stop adding workers and find what they share. A queue cliff means buy headroom rather than speed. A step means look at the layout. A floor means move the data or stop waiting for it.
+A ceiling means stop buying hardware and shrink the serial part. A reversal means stop adding workers and find what they share. A queue cliff means buy headroom rather than speed.
 
 [Chapter 10](10_change_rjf9.md) moves to the timescale where the arithmetic is measured in years rather than milliseconds — how systems change, how the shape of an organization ends up in its software.
 
@@ -338,7 +269,7 @@ A ceiling means stop buying hardware and shrink the serial part. A reversal mean
 
 ## About the numbers
 
-Every measurement in this chapter was taken on the machine it was written on — an Apple M4 laptop, Go 1.26.5, 128 KB of L1 data cache, 16 MB of L2, 32 GB of memory.
+Every measurement in this chapter was taken on the machine it was written on — an Apple M4 laptop, Go 1.26.5, ten cores and 32 GB of memory.
 
 **Your numbers will differ, and that is the point.** The formulas are exact and hold everywhere. The measurements are empirical ([Ch. 04](04_grading-a-law_q5c6.md)), which means the *pattern* described by the law transfers and the *number* does not. Someone else's benchmark tells you a shape exists; only your own tells you where you are on it.
 
@@ -348,6 +279,8 @@ Every measurement in this chapter was taken on the machine it was written on —
 
 - Gene M. Amdahl, *Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities* — AFIPS Spring Joint Computer Conference, April 1967. [PDF](https://inst.eecs.berkeley.edu/~n252/paper/Amdahl.pdf).
 - Neil J. Gunther, *A General Theory of Computational Scalability Based on Rational Functions* — August 2008. [arXiv](https://arxiv.org/abs/0808.1431).
+- John L. Gustafson, *Reevaluating Amdahl's Law* — Communications of the ACM 31(5), May 1988. [dl.acm.org](https://dl.acm.org/doi/10.1145/42411.42415).
+- Andrzej Karbowski, *Amdahl's and Gustafson-Barsis laws revisited* — arXiv:0809.1177, September 2008. [arXiv](https://arxiv.org/abs/0809.1177).
 - John D. C. Little, *A Proof for the Queuing Formula: L = λW* — Operations Research 9(3), May–June 1961.
 
 ---
