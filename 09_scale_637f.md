@@ -25,6 +25,8 @@ Every measurement here was taken on the machine this was written on — an Apple
 
 ### Ceiling: the part you cannot split
 
+**Amdahl's Law, a theorem.** The fraction of the work that cannot be split sets a ceiling on how much faster the whole job can get, whatever the core count.
+
 A nightly report takes 100 minutes on one machine. Twenty of those minutes are spent reading one file from start to finish — that part cannot be split, because you cannot read the second half before the first. The remaining eighty minutes process rows independently, so that part splits perfectly.
 
 Add cores and only the eighty minutes shrink:
@@ -57,9 +59,11 @@ The result is a multiplier: how many times faster the whole job runs. As `N` gro
 
 The practical reading: **find the un-splittable fraction before you buy anything.** At 25% it barely matters what hardware you have.
 
-This law is a theorem, so there are two moves and no others ([Ch. 04](04_grading-a-law_q5c6.md)). Falsify an assumption, or stop needing the conclusion. The assumption worth attacking is that `s` is fixed — usually it is a lock, a single writer, or a coordination step somebody chose ([Ch. 07](07_time_mdbn.md)), and making it smaller raises the ceiling in a way that hardware cannot.
+So there are two moves and no others ([Ch. 04](04_grading-a-law_q5c6.md)). Falsify an assumption, or stop needing the conclusion. The assumption worth attacking is that `s` is fixed — usually it is a lock, a single writer, or a coordination step somebody chose ([Ch. 07](07_time_mdbn.md)), and making it smaller raises the ceiling in a way that hardware cannot.
 
 ### Reversal: when more workers make it slower
+
+**The Universal Scalability Law, an empirical law.** Past some number of workers, adding more *reduces* throughput, because each worker contends with every other for whatever they share.
 
 Amdahl says extra workers stop helping. The next result is worse: they can start actively hurting, because workers do not merely fail to help each other — they get in each other's way.
 
@@ -98,9 +102,11 @@ The **Universal Scalability Law** is Amdahl with that second term added. Its coe
 
 The practical reading: when a system is slow and adding workers does not help, adding more is not an incomplete fix — it may be the cause. Find what they all touch.
 
-Amdahl's ceiling was a theorem; this one is an **empirical law**. Its coefficients are fitted to observations rather than derived, so they are falsifiable by your measurement. Where your peak sits is a property of your contention, and nobody else's benchmark can find it for you.
+The coefficients being fitted rather than derived is what decides how much of this transfers. A measurement can falsify them, which means the shape is worth trusting and the location is not: where your peak sits is a property of your contention, and nobody else's benchmark can find it for you.
 
 ### Cliff-edge curve: what queues do near capacity
+
+**Little's Law, true by definition, and the queueing curve, a theorem.** The first says how many things are inside a system at once; the second says that as a server approaches fully busy, the waiting rises without limit.
 
 Two results, and the first applies to everything.
 
@@ -144,9 +150,11 @@ The curve is smooth. What rises is the price of each additional point, continuou
 
 Two caveats before anyone plans capacity with this. It assumes irregular arrivals — a system with perfectly steady traffic queues far less, and a bursty one far more. And it describes one server; a pool of them degrades more gently. Use it for the shape.
 
-Those caveats are a **theorem**'s assumptions showing through: the curve is exactly true of the queue it describes, so the only question it admits is whether that queue is yours. Little's Law above is the other kind — **definitional** — and the move there is not to argue but to check that its words describe your system. For any queue that is not growing without limit they do.
+Those caveats are the theorem's assumptions showing through: the curve is exactly true of the queue it describes, so the only question it admits is whether that queue is yours. Little's Law asks even less of you — only that its words describe your system, which for any queue not growing without limit they do.
 
 ### Step: what the machine actually fetches
+
+**This one has no famous name, and it is empirical.** The machine moves memory in fixed-size blocks, so what a loop costs is decided by how much of each block it actually uses.
 
 The results above are about time. This one is about layout, and it can cost a factor of seven in code that looks fine.
 
@@ -205,9 +213,11 @@ Two things about this shape. It is a **step rather than a slope** — growing a 
 
 [Chapter 05](05_dependency-and-hiding_agjy.md) uses the same underlying fact for a different argument: in an entity-component system the memory layout is deliberately made public, because hiding it would cost exactly the margin measured here.
 
-**Empirical law**, like the reversal, and more plainly so: the line size, the cache sizes and every latency above are facts about one machine in one year. [Chapter 04](04_grading-a-law_q5c6.md) uses this material as its own example of a law that drifts. Seven times is not a constant you may quote — it is what this layout cost on this hardware.
+Even more machine-specific than the reversal: the line size, the cache sizes and every latency above are facts about one machine in one year. [Chapter 04](04_grading-a-law_q5c6.md) uses this material as its own example of a law that drifts. Seven times is not a constant you may quote — it is what this layout cost on this hardware.
 
 ### Floor: distance
+
+**The distance floor, a theorem.** A round trip cannot take less than twice the distance divided by the signal's speed — which in fibre is about two-thirds of light speed in vacuum.
 
 Some latency is not an engineering problem at all.
 
@@ -220,15 +230,13 @@ Light travels through fibre at about two-thirds of its speed in vacuum. That giv
 
 Real measurements run one and a half to two times these, because cables do not follow great circles and routers take time. A synchronous call from London to Sydney inside a request handler has a floor of 167 ms, and no profiler will ever show you why.
 
-A distance divided by a propagation speed is a **theorem**, so the available moves are again the two:
+So the available moves are again the two:
 - Change an assumption: put a copy of the data near the user.
 - Stop needing the conclusion: make the operation asynchronous, so nobody is waiting for the round trip to finish.
 
-It is worth saying why this one resists the label, because the reflex is to call it empirical. The section is full of measured quantities — the distances, the two-thirds, the round-trip figures — and measurement is what an empirical law is made of. But these numbers are the law's **inputs**, not its source. Measure a different distance and you get a different answer out of the same unchanged relation. Compare the reversal, where the coefficients *are* the relation and were fitted to data, so better data can change the law itself. That is the test whenever a law arrives with numbers attached: **did the measurements go into it, or did they come out of it?** ([Chapter 04](04_grading-a-law_q5c6.md) makes the neighbouring point, that a measurement on its own is not a law at all.) 
+Why does this one still feel like the other kind? Because the section is thick with measured numbers. Look at where they sit. The distances and the two-thirds are what you **feed into** the law; the law itself is a division, and no amount of measuring changes a division. In the reversal the numbers **were** the law — the coefficients were fitted to observations, so a better observation changes the law itself.
 
-[-- I'm not sure about the above interpretation. It's too complicated and obscure to understand. "unchanged relation, relation fitted to data, measurements go into it..." A more clear interpretation with less ambigous words is needed.
-
-Another major issue with the chapter in general, we say that the shapes are law, and each section describes the shape but most sections don't have a clear 1 sentence description of the law and that causes lots of confusion. Reader has to construct what the law is from that section by himself. Ceiling is Amdahl's law, clearly stated, no problem. | Reversal is Universal Scalability Law but that's buried deep in the section and I couldn't see a clear 1 sentence description of the law. | cliff-edge is ok | step is problematic | floor, is the law: "Light travels through fibre at about two-thirds of its speed in vacuum."? If that is maybe the reason for the confusion with the empirical is that the law is not clearly labeled. => I recommend a standard format for all shape sections: State what the law is with one sentence and the type of the law at the beginning. Then let the reader experience how that distinction helps with the remainder of the section.]
+So when a law arrives with numbers attached, the question is: **are the numbers what you feed it, or what it is made of?** ([Chapter 04](04_grading-a-law_q5c6.md) makes the neighbouring point, that a measurement on its own is not a law at all.)
 ---
 
 ## Why the claim holds
