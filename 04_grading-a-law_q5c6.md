@@ -177,7 +177,7 @@ Which of the three a law is tells you how to argue with it. It tells you nothing
 
 **A theorem can be irrelevant.** Amdahl's Law bounds the speedup available from any number of processors, given the fraction of work that must run serially, and none of it is negotiable. Point it at a single-threaded tool that reads a file and prints a summary and it has nothing to say, because there is no parallel portion to bound.
 
-**An empirical law can decide the design.** The gap between a cache hit and a main-memory read is observed rather than proved, it has moved several times in forty years, and it is different on your machine than in whatever you read it in. It also decides the entire architecture of a physics engine.
+**An empirical law can decide the design.** The gap between a cache hit and a main-memory read is observed rather than proved — around two nanoseconds against two hundred on one current laptop, a hundredfold — and it has moved several times in forty years, so it is different on your machine from whatever you read it in. It also decides the entire architecture of a physics engine.
 
 Those are two different programs, and that is the point. A law nothing could refute can sit inert in one, while a number that has drifted for decades sets the shape of the other. Grading a law tells you what would move it, not how much it matters where you are standing.
 

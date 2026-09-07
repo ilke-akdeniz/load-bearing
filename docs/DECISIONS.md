@@ -6083,3 +6083,43 @@ The draft's *more resources never pay off in a straight line* was rejected by th
 **One test came out of the exchange and is worth keeping.** The author reported that the distance floor read as empirical to them despite being a theorem, and asked why. Because the section is thick with measured numbers — but those numbers are the law's **inputs**, not its source. So: *are the numbers what you feed the law, or what it is made of?* Amdahl passes the same way, since the serial fraction is measured and the formula is not.
 
 **Still open**, raised by the draft and reserved by the author: the claim is about *more resources*, and two of the six sections — the memory hierarchy and the speed of light — are about layout and distance rather than about a resource you add.
+
+---
+
+## 147. Where the memory hierarchy landed, and what did not survive the move
+
+**Date.** 2026-09-07
+
+**Context.**
+[Decision 146](#146-chapter-09-was-nearly-cut-and-came-back-on-a-different-axis) ended with the memory hierarchy and the speed of light cut from [chapter 09](../09_scale_637f.md) and the memory material parked in `docs/pending-tasks/`.
+The author's reason for the cut is the one that governs the placement: the memory hierarchy is a **Force**, not a Law, and every attempt to keep it in a chapter of laws required either bending the claim or having the section explain why the chapter's other laws did not apply.
+
+**The obvious move was wrong, and seeing why decided the shape.**
+The plan had been to move the section to [chapter 05](../05_dependency-and-hiding_agjy.md), whose entity-component-system section already made the claim and deferred the evidence.
+But the `Order`-versus-column benchmark and the `Particle`-versus-parallel-arrays example **are the same demonstration** — one field read from a wide record, dragging every neighbouring field through cache. Moving one next to the other would have given chapter 05 two examples of a single point.
+
+So the material was not moved. It was **used to fill two gaps that were already there**, and the rest was retired.
+
+**Chapter 05 was missing two things, and only one of them was the number.**
+It asserted *"a margin that has nothing to do with taste"* and never measured it — that gap was known.
+The one that was not: the chapter says the loop *"drags `tint` and every other unused field through cache"* and **never explains that memory moves in fixed blocks**. `cache line` appeared zero times in it. The mechanism was gestured at, so a reader who did not already know why an unread field costs anything could not follow the argument that hiding inverts.
+
+Both are now supplied in two short paragraphs: the cache line as the unit of transfer, and 3.5 ms against 0.5 ms summing one `int64` across two million 120-byte records.
+
+**Chapter 04 took one clause.** Its example of an empirical law that decides a design — the gap between a cache hit and a main-memory read — now carries the number, around two nanoseconds against two hundred. It had been an assertion about a gap with no size.
+
+**Retired, with reasons.**
+
+The **latency ladder**, 16 KB to 256 MB across four cache levels, was chapter 09's setup for a section that no longer exists. Chapter 05 needs one comparison rather than a hierarchy, and chapter 04 needs a single number rather than a table.
+
+The **`Order` struct and its two Go loops**, because they duplicate chapter 05's `Particle` example. The measurement survives; the second code sample does not.
+
+The **empirical-law framing** — *this law has no famous name* — which belonged to chapter 09's law axis and was the draft's invention in the first place.
+
+A **second measurement, taken while testing whether the section could be made to fit chapter 09's resource claim**, is also retired: the record loop is bandwidth-bound and gains 1.03x at four workers where the column loop gains 2.32x. It is good evidence and it belongs to an argument about parallelism that chapter 05 is not making.
+
+**`docs/pending-tasks/memory-hierarchy-rehome.md` is deleted**, since every piece in it has either landed or been retired with a reason, which is what that folder's rule requires.
+
+**Consequence.**
+Two ledger rows under `agjy` — the cache line as transfer unit in the concepts table, the measurement in code examples.
+Chapter 09 keeps nothing of it, and its handoff and title no longer promise memory.
