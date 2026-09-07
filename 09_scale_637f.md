@@ -6,7 +6,7 @@
 
 Intuition says the relationship is a straight line: twice the servers, twice the throughput; twice the traffic, twice the wait. In reality, you never get that perfect line. The shape is mostly a curve determined by the underlying laws.
 
-This chapter works through five laws and the three shapes they produce.
+This chapter works through four laws and the three shapes they produce.
 
 Each law's grade is stated too, in the sense [chapter 04](04_grading-a-law_q5c6.md) defines. Which law you are up against, and what grade it carries, decides whether the fix is more hardware, less sharing, or a different design.
 
@@ -52,32 +52,11 @@ The practical reading: **find the un-splittable fraction before you buy anything
 
 So there are two moves and no others ([Ch. 04](04_grading-a-law_q5c6.md)). Falsify an assumption, or stop needing the conclusion. The assumption worth attacking is that `s` is fixed — usually it is a lock, a single writer, or a coordination step somebody chose ([Ch. 07](07_time_mdbn.md)), and making it smaller raises the ceiling in a way that hardware cannot.
 
-### Gustafson's Law
+**The famous attempt at the other assumption is worth knowing about, and worth being careful with.** Amdahl also assumes the *work* is fixed — the same report, run faster. Decline that, let the job grow with the machine, and the twenty minutes stops being a ceiling and becomes an overhead: sixteen cores then get through 1300 minutes of work in the same 100, a speedup of 13 rather than 4. That is **Gustafson's Law**, `speedup = s + N(1 − s)`, and it is usually introduced as the result that overturned Amdahl.
 
-**A theorem:** If the job grows with the machine, speedup approaches the number of cores, because what is being held fixed is the time you are willing to wait rather than the size of the work. 
+It did not, and the condition it rests on is the part that gets dropped. Gustafson assumes the serial time **does not grow with the problem** — his own examples are program loading, vector startup and I/O setup, which are fixed cost per run. Take a monthly report to a yearly one and that assumption fails immediately: reading twelve times the data is serial work proportional to the data, `s` is unchanged, and the ceiling sits exactly where it was. Growing the job helps only if the parallel part grows faster than the serial part does.
 
-[-- I read this section, I think your interpretation has serious holes. Right now this reads like: "Find more jobs of the same nature and Amdahl is not a problem for you." You have a report with 20 + 80. Let's say that's monthly report. Make the same report yearly, same job, same ratio of work that can't be split but the data is 12X. Boom, magically Amdahl is not a problem. I guess that's not what Gustafson says. My guess is that the task has to grow without the overhead, so maybe yearly data is not stored on file but on an OLAP db. But then if that's the case I don't see how Gustafson is even a law, that result should be very obvious: more work without fixed part, more parallelization. Think about those issues and don't make bs assumptions from memory, check resources.]
-
-Amdahl held the report at 100 minutes and asked how much faster it finishes. Ask the other question — the report takes 100 minutes and always will, so how much more can it cover? — and the twenty un-splittable minutes stop being a ceiling and become an overhead:
-
-```text
-                 work done in the same 100 minutes
-   1 core        20 + 80        =  100 min of work    1.0x
-   4 cores       20 + 80x4      =  340 min of work    3.4x
-  16 cores       20 + 80x16     = 1300 min of work   13.0x
-```
-
-Sixteen cores gave Amdahl 4.0x and gives this 13.0x, on the same machine, with the same twenty minutes of serial work. Written out, with `s` the serial fraction and `N` the cores:
-
-```text
-speedup = s + N(1 − s)
-```
-
-**The two are not in competition, and the popular reading that Gustafson overturned Amdahl is wrong.** Karbowski derives the Gustafson-Barsis law directly from Amdahl's and puts it plainly: it *"is nothing but a different form of Amdahl's law"*, and the claim that it overthrows Amdahl *"is a mistake"*. The reason the numbers differ is that the two serial fractions are not the same quantity. Amdahl's is measured on the sequential run and is a property of the program. Gustafson's is measured on the parallel run, so it depends on the problem size and the core count together — and as the problem grows it shrinks, which is the whole effect.
-
-So this is [chapter 04](04_grading-a-law_q5c6.md)'s first escape, performed by one famous law on another. Amdahl's assumption is that the work is fixed. Gustafson does not argue with the conclusion; he declines the assumption. Gustafson's own objection, in his words, is that *"the assumptions underlying Amdahl's 1967 argument are inappropriate for the current approach to massive ensemble parallelism"*.
-
-Which of the two applies to you is a question about your situation rather than your hardware, and it has a clean test: **if you were given a machine twice the size, would you run the same job or a bigger one?** Last night's orders are last night's orders — that is Amdahl, and the ceiling is real. A simulation run at whatever resolution finishes before morning, or an index rebuilt over whatever corpus you have by then, grows to fill whatever you buy — that is Gustafson, and there is no ceiling to hit.
+So this is not a second law standing beside the first. Karbowski derives it from Amdahl in a page and concludes that it *"is nothing but a different form of Amdahl's law"*, and that the popular claim it overthrows Amdahl *"is a mistake"*. What is sold as a law is the theorem re-measured, resting on an empirical bet about your workload — advice that is good given certain Forces and wrong without them, which in this book's vocabulary makes it a **Principle** wearing a Law's name. The test before taking the bet: **is your serial part startup, or is it work proportional to the data?**
 
 ### The Universal Scalability Law
 
@@ -172,7 +151,7 @@ Those caveats are the theorem's assumptions showing through: the curve is exactl
 
 ## Why the claim holds
 
-Three of the five laws produce a shape — Little's Law is the exception, being an identity rather than a curve — and each shape has a different cause. Applying the wrong fix is the common failure.
+Three of the four laws produce a shape — Little's Law is the exception, being an identity rather than a curve — and each shape has a different cause. Applying the wrong fix is the common failure.
 
 **Amdahl's ceiling** comes from work that cannot be divided. That is arithmetic on a fraction, needing no assumption about hardware, so no hardware changes it.
 
