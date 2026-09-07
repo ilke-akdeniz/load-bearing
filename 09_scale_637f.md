@@ -1,12 +1,9 @@
 # Scale: Queues, Parallelism, Memory
-
-[-- check each demonstration cases against chapter 04's law kinds: theorem | definition | empirical. Don't bs from memory, read the chapter 04's statements first. Then inside each case, after the demonstration is done, state the law kind and the general resolution for the law. I already did this partially so see these first. Don't create repetition, if two cases are of the same law kind explain the second case more succintly.]
-
 ## The claim
 
-**What you could gain by increasing resources has unintuitive arithmetic shapes. These shapes are laws and determine if more resources will help or make things worse.**
+**What you could gain by increasing resources has unintuitive arithmetic shapes. These shapes are laws and determine whether more resources will help or make things worse.**
 
-Intuition says the relationship is a straight line: twice the servers, twice the throughput; twice the traffic, twice the wait. It never is. This chapter works through five shapes, and the skill is recognizing **which one you are on**, because that is what decides whether the fix is more hardware, less sharing, or a different design.  
+Intuition says the relationship is a straight line: twice the servers, twice the throughput; twice the traffic, twice the wait. It never is. This chapter works through five shapes, and the skill is recognizing **which one you are on**, because that is what decides whether the fix is more hardware, less sharing, or a different design.
 
 | Shape | You will meet it as | The fix |
 |---|---|---|
@@ -101,6 +98,8 @@ The **Universal Scalability Law** is Amdahl with that second term added. Its coe
 
 The practical reading: when a system is slow and adding workers does not help, adding more is not an incomplete fix — it may be the cause. Find what they all touch.
 
+**The kind, and what follows from it.** Amdahl's ceiling was a theorem. This is not. The Universal Scalability Law's coefficients are fitted to observations rather than derived, which makes it an **empirical law** ([Ch. 04](04_grading-a-law_q5c6.md)) — falsifiable by a measurement, and admitting only one move: measure it where you are. So trust the shape and distrust the location. That a peak exists is reliable; where your peak sits is a property of your contention, and nobody else's benchmark can find it for you.
+
 ### Cliff-edge curve: what queues do near capacity
 
 Two results, and the first applies to everything.
@@ -144,6 +143,8 @@ The reason is idle time. At 50% utilization, half the capacity is spare, so a su
 The curve is smooth. What rises is the price of each additional point, continuously, from the beginning. 85% is a convention marking roughly where that price becomes obvious to a human watching a graph.
 
 Two caveats before anyone plans capacity with this. It assumes irregular arrivals — a system with perfectly steady traffic queues far less, and a bursty one far more. And it describes one server; a pool of them degrades more gently. Use it for the shape.
+
+Those caveats are a **theorem**'s assumptions showing through: the curve is exactly true of the queue it describes, so the only question it admits is whether that queue is yours. Little's Law above is the other kind again — **definitional** — and the move there is not to argue but to check that its words describe you, which for any queue that is not growing without limit they do.
 
 ### Step: what the machine actually fetches
 
@@ -204,6 +205,8 @@ Two things about this shape. It is a **step rather than a slope** — growing a 
 
 [Chapter 05](05_dependency-and-hiding_agjy.md) uses the same underlying fact for a different argument: in an entity-component system the memory layout is deliberately made public, because hiding it would cost exactly the margin measured here.
 
+**Empirical**, like the reversal, and more plainly so: the line size, the cache sizes and every latency above are facts about one machine in one year. [Chapter 04](04_grading-a-law_q5c6.md) uses this material as its own example of a law that drifts. Seven times is not a constant you may quote — it is what this layout cost on this hardware.
+
 ### Floor: distance
 
 Some latency is not an engineering problem at all.
@@ -217,7 +220,7 @@ Light travels through fibre at about two-thirds of its speed in vacuum. That giv
 
 Real measurements run one and a half to two times these, because cables do not follow great circles and routers take time. A synchronous call from London to Sydney inside a request handler has a floor of 167 ms, and no profiler will ever show you why.
 
-The moves are [chapter 04](04_grading-a-law_q5c6.md)'s two. Change an assumption: put a copy of the data near the user. Or stop needing the conclusion: make the operation asynchronous, so nobody is waiting for the round trip to finish.
+A distance divided by a propagation speed is a **theorem**, so the moves are [chapter 04](04_grading-a-law_q5c6.md)'s two and there are no others. Change an assumption: put a copy of the data near the user. Or stop needing the conclusion: make the operation asynchronous, so nobody is waiting for the round trip to finish.
 
 ---
 
