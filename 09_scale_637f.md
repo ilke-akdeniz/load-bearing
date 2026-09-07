@@ -1,31 +1,20 @@
-# Scale: Queues, Parallelism, Memory
+# Laws That Shape Scaling
+
 ## The claim
 
-**What you could gain by increasing resources has unintuitive arithmetic shapes. These shapes are laws and determine whether more resources will help or make things worse.**
+**What you could gain by increasing resources has unintuitive arithmetic shapes that emerge from the underlying laws.**
 
-Intuition says the relationship is a straight line: twice the servers, twice the throughput; twice the traffic, twice the wait. It never is. This chapter works through five shapes, and the skill is recognizing **which one you are on**, because that is what decides whether the fix is more hardware, less sharing, or a different design.
+Intuition says the relationship is a straight line: twice the servers, twice the throughput; twice the traffic, twice the wait. It never is. This chapter works through five laws and their arithmetic shapes. The skill is recognizing **which one you are on**, because that is what decides whether the fix is more hardware, less sharing, or a different design.
 
-| Shape | You will meet it as | The fix |
-|---|---|---|
-| **Ceiling** | more cores stop helping | make the un-parallelizable part smaller |
-| **Reversal** | more workers make it *slower* | remove the shared thing they contend on |
-| **Cliff-edge curve** | fine at 80% load, unusable at 95% | leave headroom |
-| **Step** | one extra struct field costs 7× | change the memory layout |
-| **Floor** | latency you cannot optimize away | move the data, or stop waiting for it |
-
-## About the numbers
-
-Every measurement here was taken on the machine this was written on — an Apple M4 laptop, Go 1.26.5, 128 KB of L1 data cache, 16 MB of L2, 32 GB of memory.
-
-**Your measurements will differ, and that is the point.** The formulas are exact and hold everywhere. The measurements are empirical ([Ch. 04](04_grading-a-law_q5c6.md)), which means the *pattern* described by the law transfers and the *number* does not. Someone else's benchmark tells you a shape exists; only your own tells you where you are on it.
+[-- this is my incomplete attempt to move the axis of the chapter from shapes to the laws. Laws should be the primary axis because they are what the book is about. Shapes are secondary because they only make sense in the scope of laws, otherwise they can be found anywhere. Try to complete this change. The contents of the shape table I removed could be dispersed into each section if it fits, don't force it if it looks awkward.]
 
 ---
 
 ## The demonstration
 
-### Ceiling: the part you cannot split
+### Amdahl's law
 
-**Amdahl's Law, a theorem.** The fraction of the work that cannot be split sets a ceiling on how much faster the whole job can get, whatever the core count.
+**A theorem**: the fraction of the work that cannot be split sets a ceiling on how much faster the whole job can get, whatever the core count.
 
 A nightly report takes 100 minutes on one machine. Twenty of those minutes are spent reading one file from start to finish — that part cannot be split, because you cannot read the second half before the first. The remaining eighty minutes process rows independently, so that part splits perfectly.
 
@@ -40,7 +29,7 @@ Add cores and only the eighty minutes shrink:
 
 Twenty minutes never goes away, so the whole job can never take less than that — and 100 minutes divided by 20 is a ceiling of **five times, forever.** Buying a thousand cores instead of sixteen improves this job by 20%.
 
-That is **Amdahl's Law**. Written out, with `s` as the fraction that cannot be split and `N` as the number of cores:
+**Amdahl's Law** as a formula, with `s` as the fraction that cannot be split and `N` as the number of cores:
 
 ```text
 speedup ≤ 1 / (s + (1 − s)/N)
@@ -61,9 +50,9 @@ The practical reading: **find the un-splittable fraction before you buy anything
 
 So there are two moves and no others ([Ch. 04](04_grading-a-law_q5c6.md)). Falsify an assumption, or stop needing the conclusion. The assumption worth attacking is that `s` is fixed — usually it is a lock, a single writer, or a coordination step somebody chose ([Ch. 07](07_time_mdbn.md)), and making it smaller raises the ceiling in a way that hardware cannot.
 
-### Reversal: when more workers make it slower
+### The Universal Scalability Law
 
-**The Universal Scalability Law, an empirical law.** Past some number of workers, adding more *reduces* throughput, because each worker contends with every other for whatever they share.
+**Empirical law:** Past some number of workers, adding more *reduces* throughput, because each worker contends with every other for whatever they share.
 
 Amdahl says extra workers stop helping. The next result is worse: they can start actively hurting, because workers do not merely fail to help each other — they get in each other's way.
 
@@ -104,9 +93,9 @@ The practical reading: when a system is slow and adding workers does not help, a
 
 The coefficients being fitted rather than derived is what decides how much of this transfers. A measurement can falsify them, which means the shape is worth trusting and the location is not: where your peak sits is a property of your contention, and nobody else's benchmark can find it for you.
 
-### Cliff-edge curve: what queues do near capacity
+### Little's Law
 
-**Little's Law, true by definition, and the queueing curve, a theorem.** The first says how many things are inside a system at once; the second says that as a server approaches fully busy, the waiting rises without limit.
+**Definition law:** The first says how many things are inside a system at once; the second says that as a server approaches fully busy, the waiting rises without limit.
 
 Two results, and the first applies to everything.
 
@@ -120,7 +109,9 @@ At 500 requests per second with 200 ms average response time, there are 100 requ
 
 The law assumes essentially nothing, which makes it true by **definition** ([Ch. 04](04_grading-a-law_q5c6.md)) for any queue that is not growing without limit.
 
-**Then the part that surprises people.** *Utilization* is the fraction of time a server is busy: 0.8 means busy 80% of the time, idle 20%. For a single server handling irregular traffic, the time a request spends waiting grows as `1 / (1 − utilization)`:
+### Utilization law [-- may need better name]
+
+**Theorem:** *Utilization* is the fraction of time a server is busy: 0.8 means busy 80% of the time, idle 20%. For a single server handling irregular traffic, the time a request spends waiting grows as `1 / (1 − utilization)`:
 
 ```text
  busy      requests waiting     a request takes
@@ -154,7 +145,7 @@ Those caveats are the theorem's assumptions showing through: the curve is exactl
 
 ### Step: what the machine actually fetches
 
-**This one has no famous name, and it is empirical.** The machine moves memory in fixed-size blocks, so what a loop costs is decided by how much of each block it actually uses.
+**This law has no famous name, and it is empirical:** The machine moves memory in fixed-size blocks, so what a loop costs is decided by how much of each block it actually uses.
 
 The results above are about time. This one is about layout, and it can cost a factor of seven in code that looks fine.
 
@@ -215,9 +206,9 @@ Two things about this shape. It is a **step rather than a slope** — growing a 
 
 Even more machine-specific than the reversal: the line size, the cache sizes and every latency above are facts about one machine in one year. [Chapter 04](04_grading-a-law_q5c6.md) uses this material as its own example of a law that drifts. Seven times is not a constant you may quote — it is what this layout cost on this hardware.
 
-### Floor: distance
+### Latency law [-- not sure about the name may or may not work]
 
-**The distance floor, a theorem.** A round trip cannot take less than twice the distance divided by the signal's speed — which in fibre is about two-thirds of light speed in vacuum.
+**Theorem.** A round trip cannot take less than twice the distance divided by the signal's speed — which in fibre is about two-thirds of light speed in vacuum.
 
 Some latency is not an engineering problem at all.
 
@@ -242,6 +233,7 @@ So when a law arrives with numbers attached, the question is: **are the numbers 
 ## Why the claim holds
 
 Each shape has a different cause, and applying the wrong fix is the common failure.
+[-- this section might need a total rewrite if the main axis not the shape but laws. I'm not sure, you evaluate.]
 
 **Ceilings** come from work that cannot be divided. That is arithmetic on a fraction, needing no assumption about hardware, so no hardware changes it.
 
@@ -342,6 +334,14 @@ The question that does the work: **which resource shape am I on?**
 A ceiling means stop buying hardware and shrink the serial part. A reversal means stop adding workers and find what they share. A queue cliff means buy headroom rather than speed. A step means look at the layout. A floor means move the data or stop waiting for it.
 
 [Chapter 10](10_change_rjf9.md) moves to the timescale where the arithmetic is measured in years rather than milliseconds — how systems change, how the shape of an organization ends up in its software.
+
+---
+
+## About the numbers
+
+Every measurement in this chapter was taken on the machine it was written on — an Apple M4 laptop, Go 1.26.5, 128 KB of L1 data cache, 16 MB of L2, 32 GB of memory.
+
+**Your numbers will differ, and that is the point.** The formulas are exact and hold everywhere. The measurements are empirical ([Ch. 04](04_grading-a-law_q5c6.md)), which means the *pattern* described by the law transfers and the *number* does not. Someone else's benchmark tells you a shape exists; only your own tells you where you are on it.
 
 ---
 
