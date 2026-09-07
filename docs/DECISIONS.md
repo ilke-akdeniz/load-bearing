@@ -6006,3 +6006,80 @@ Two of the three were settled by going to the primary source, and the third by g
 **Consequence.**
 Vogels and the Entity Framework documentation are both now in the chapter's `## Sources`, since it cites them.
 Two ledger rows rewritten. The chapter stands at 5,268 words.
+
+---
+
+## 145. Two fact-checks, run on request, and what each kind of error looked like
+
+**Date.** 2026-09-07
+
+**Context.**
+After [decision 144](#144-the-definitions-chapter-had-three-wrong-definitions), the author asked for a systematic check rather than another round of spot corrections: *"I'm concerned that more factual errors can still exist in this chapter as it is very technical and loaded with definitions… don't rely on your memory but check primary sources as much as possible."*
+Run over [chapter 08](../08_distribution_49yh.md), and then over [chapter 09](../09_scale_637f.md) before the author read it.
+
+**Chapter 08: two errors, both structural rather than numeric.**
+
+**FLP's assumption list omitted that the paper assumes a reliable message system** — every message delivered, correctly, exactly once, with delay unbounded. That is not a footnote. It means FLP needs no lost messages at all: unbounded delay plus a single crash is enough. Stating it makes FLP say something the other two theorems do not, and it corrects an implication the chapter was carrying, that all three results come from channels which can fail.
+
+**Two-phase commit was backwards.** The chapter blamed blocking on a *participant* failing. It is **coordinator** failure that blocks: participants that voted yes can neither commit, since the coordinator may have told the others to abort, nor abort, since they promised to commit if asked, so they sit holding locks. A participant failing is the easy case — the coordinator aborts and tells everyone else.
+
+A third item was a citation mismatch: Vogels was cited as *Communications of the ACM* and linked to *ACM Queue*, which now returns 403. It now cites the version actually read, the author's own site, with the CACM printing noted.
+
+**The reconciliation the FLP fix then required, which the author caught.**
+Adding *a channel that delivers every message* to FLP's assumptions appeared to contradict the chapter's own definition of a channel as one that can fail while both parts survive.
+It does not, and saying why strengthened the section: **a message that can be delayed without bound produces exactly what this chapter calls a partition**, since the waiter cannot reach the other part within the time it will wait, with nothing lost. FLP's channel is reliable only in the sense of *eventually*, and *eventually* with no bound is the thing the claim says cannot be told from *never*. A perfect network is no rescue because perfection there means delivery, not punctuality.
+
+**Chapter 09: one error, and a different kind of one.**
+
+The cache line was given as *64 bytes on most machines*, and every measurement in the chapter was taken on a machine reporting **128**. `hw.cachelinesize` on the author's Apple M4 is 128; 64 is the x86-64 figure. The argument survives — a longer line means more waste, not less — but the constant was wrong for the hardware that produced the numbers, and it appeared at four sites plus a ledger row, so it was a survey rather than a line fix.
+
+**Everything else verified, and the verification is worth recording because it was not all source-reading.**
+
+Every piece of arithmetic is exact: the Amdahl worked example and its table, every M/M/1 figure, the 85%-rule deltas, Little's Law. `sizeof(Order)` is 120 bytes, confirmed with the toolchain rather than computed by hand. **The seven-times claim was reproduced** — the benchmark rebuilt and run on the same machine, giving 3.46 ms from records against 0.48 ms from the column, a ratio of 7.20 against the chapter's 3.4 and 0.48. The distance figures imply 204,000 km/s in both city pairs, which is the two-thirds of *c* the section claims.
+
+**One check nearly produced a false positive, and that is the part worth remembering.** Plain `sysctl` reports 64 KB of L1 data cache and 4 MB of L2, which contradicts the chapter's 128 KB and 16 MB. Those are the *efficiency* cores. `hw.perflevel0` gives the performance-core figures, which match the chapter exactly. A check run one command shallower would have "found" two errors that are not there.
+
+**The reusable finding: the two chapters failed differently.**
+Chapter 08's errors were **definitions rendered from memory** in a chapter whose subject is that these words are used loosely.
+Chapter 09's single error was a **hardware constant that was true in general and false for the specific machine that produced the numbers**, which is a different failure and is caught by asking the machine rather than by reading a paper.
+
+---
+
+## 146. Chapter 09 was nearly cut, and came back on a different axis
+
+**Date.** 2026-09-07
+
+**Context.**
+Reading [chapter 09](../09_scale_637f.md), the author raised removing it: *"I'm struggling to fit in this book conceptually. It's not related to 5 kinds of software claims. It's more hardware - paralellism - resource insights, fitted loosely on our claim format. I'm considering removing this chapter completely."*
+
+**The draft's first answer was measured wrongly and has to be recorded as such.**
+It counted the five kind-names across Part II, found four in chapter 09 and none in chapter 08, and presented a table that made both look disconnected.
+The count measured vocabulary rather than use. Chapter 09 engages the model **five times** through [chapter 04](../04_grading-a-law_q5c6.md)'s sublanguage instead — *this is a theorem, so there are two moves and no others*, *true by definition*, *the measurements are empirical*, *the moves are chapter 04's two*, and a closing reference to quoting a number without its conditions.
+
+**And the dependency runs the other way, harder.** Chapter 04 uses chapter 09's material for three of its own worked examples: the memory hierarchy as a law that drifts, the cache-versus-main-memory gap as an empirical law that decides a design, and **Amdahl as the worked case in *Firmness is not relevance***, which is chapter 04's mandatory boundary section. Cutting chapter 09 would leave chapter 04 arguing from material with no home.
+
+**Decision.** Keep it, and write the connection into the claim and the opening, since the fit was real and merely unstated.
+
+**Then the author changed the axis, which is the larger decision.**
+
+> this is my incomplete attempt to move the axis of the chapter from shapes to the laws. Laws should be the primary axis because they are what the book is about. Shapes are secondary because they only make sense in the scope of laws, otherwise they can be found anywhere.
+
+That reasoning is right and is the test that settles it: ceilings and cliffs can be found in any systems book; laws with a *grade* attached are this book's. The draft completed the change.
+
+**Six sections, each named for its law**, and two of them have no eponym. The draft did not invent one. *Utilization law* became **the queueing curve**, and *latency law* became **the speed of light** — the law itself rather than a coinage. The one section still named for its shape, *Step: what the machine actually fetches*, became **the memory hierarchy**, which is chapter 04's own term for it.
+
+**The re-axis exposed a muddle the shape-axis had hidden.** Little's Law and the queueing curve had been sharing one section as "two results". They are different laws of different kinds — one definitional, one a theorem — and separating them is a real gain rather than a consequence of the renaming.
+
+**Six laws, five shapes**, because Little's Law is an identity rather than a curve. The discrepancy is now stated, since it would otherwise read as an error.
+
+**Each section opens the same way**, on the author's instruction: the law in one sentence, with its kind, before the demonstration. Adding those openings meant every section named its kind twice, so the later classification was cut back to the *move* the kind allows and never re-announces the label.
+
+**The title did not survive, and the draft argued against it.**
+The author retitled the chapter *Laws That Shape Scaling*. The draft's objection, put when asked directly whether the change was an improvement: it claims as distinctive something true of the whole book, since every Part II chapter is about laws and chapter 04 uses the grading vocabulary twenty-six times; it is the only title in the book with that grammar, where the rest are `Topic` or `Topic: subtopics`; and *shape* does double duty as the chapter's own technical term and as the verb. The author reverted to *Scale: Queues, Parallelism, Memory*.
+
+**The claim went through three versions and the author's is the best of them.**
+The draft's *more resources never pay off in a straight line* was rejected by the author for promising a payoff at all: *"sometimes you even lose money."* Correct — the Universal Scalability Law section measures throughput falling from 72 M/s to 16 M/s as workers go from two to four. What stands is **More resources can degrade performance, and when they do help the gain is not linear**, which leads with the reversal, the finding a reader is least likely to arrive holding.
+
+**One test came out of the exchange and is worth keeping.** The author reported that the distance floor read as empirical to them despite being a theorem, and asked why. Because the section is thick with measured numbers — but those numbers are the law's **inputs**, not its source. So: *are the numbers what you feed the law, or what it is made of?* Amdahl passes the same way, since the serial fraction is measured and the formula is not.
+
+**Still open**, raised by the draft and reserved by the author: the claim is about *more resources*, and two of the six sections — the memory hierarchy and the speed of light — are about layout and distance rather than about a resource you add.
