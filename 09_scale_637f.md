@@ -2,9 +2,9 @@
 
 ## The claim
 
-**More resources can degrade the performance and when they improve the gain is not linear.**
+**More resources can degrade performance, and when they do help the gain is not linear.**
 
-Intuition says the relationship is a straight line: twice the servers, twice the throughput; twice the traffic, twice the wait. In reality, you never get that perfect line. The shape is mostly a curve determined by the underlying laws. This chapter works through six laws and the five shapes they produce. Each law's grade is also stated as defined on ([Chapter 04](04_grading-a-law_q5c6.md). Which law you are up against and what grade is that decides whether the fix is more hardware, less sharing, or a different design.
+Intuition says the relationship is a straight line: twice the servers, twice the throughput; twice the traffic, twice the wait. In reality, you never get that perfect line. The shape is mostly a curve determined by the underlying laws. This chapter works through six laws and the five shapes they produce. Each law's grade is stated too, in the sense [chapter 04](04_grading-a-law_q5c6.md) defines. Which law you are up against, and what grade it carries, decides whether the fix is more hardware, less sharing, or a different design.
 
 ---
 
