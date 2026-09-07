@@ -12,11 +12,13 @@ Each law's grade is stated too, in the sense [chapter 04](04_grading-a-law_q5c6.
 
 ---
 
-## The demonstration
+## Four Laws
 
 ### Amdahl's Law
 
-**A theorem**: the fraction of the work that cannot be split sets a ceiling on how much faster the whole job can get, whatever the core count.
+First a clarification for two key terms: we use "parallel part" and "serial part" to denote splittable and no-splittable portions of a work.
+
+**A theorem**: the fraction of the serial part sets a ceiling on how much faster the whole job can get, whatever the core count.
 
 A nightly report takes 100 minutes on one machine. Twenty of those minutes are spent reading one file from start to finish — that part cannot be split, because you cannot read the second half before the first. The remaining eighty minutes process rows independently, so that part splits perfectly.
 
@@ -31,13 +33,13 @@ Add cores and only the eighty minutes shrink:
 
 Twenty minutes never goes away, so the whole job can never take less than that — and 100 minutes divided by 20 is a ceiling of **five times, forever.** Buying a thousand cores instead of sixteen improves this job by 20%.
 
-**Amdahl's Law** is also expressed as a formula, with `s` for the fraction that cannot be split and `N` for the number of cores:
+**Amdahl's Law** is also expressed as a formula, with `s` for the serial part and `N` for the number of cores:
 
 ```text
 speedup ≤ 1 / (s + (1 − s)/N)
 ```
 
-The result is a multiplier: how many times faster the whole job runs. As `N` grows the second term vanishes, leaving `1/s` — so the ceiling is set entirely by the part you could not split.
+The result is a multiplier: how many times faster the whole job runs. As `N` grows the second term vanishes, leaving `1/s` — so the ceiling is set entirely by the serial part.
 
 ```text
  fraction that      ceiling,        what you actually
@@ -52,11 +54,12 @@ The practical reading: **find the un-splittable fraction before you buy anything
 
 So there are two moves and no others ([Ch. 04](04_grading-a-law_q5c6.md)). Falsify an assumption, or stop needing the conclusion. The assumption worth attacking is that `s` is fixed — usually it is a lock, a single writer, or a coordination step somebody chose ([Ch. 07](07_time_mdbn.md)), and making it smaller raises the ceiling in a way that hardware cannot.
 
-**The famous attempt at the other assumption is worth knowing about, and worth being careful with.** Amdahl also assumes the *work* is fixed — the same report, run faster. Decline that, let the job grow with the machine, and the twenty minutes stops being a ceiling and becomes an overhead: sixteen cores then get through 1300 minutes of work in the same 100, a speedup of 13 rather than 4. That is **Gustafson's Law**, `speedup = s + N(1 − s)`, and it is usually introduced as the result that overturned Amdahl.
 
-It did not, and the condition it rests on is the part that gets dropped. Gustafson assumes the serial time **does not grow with the problem** — his own examples are program loading, vector startup and I/O setup, which are fixed cost per run. Take a monthly report to a yearly one and that assumption fails immediately: reading twelve times the data is serial work proportional to the data, `s` is unchanged, and the ceiling sits exactly where it was. Growing the job helps only if the parallel part grows faster than the serial part does.
+**The famous attempt at the other assumption is worth knowing about, and worth being careful with.**  Amdahl assumes the *parallel part* is fixed. Decline that, let the parallel part grow with the machine, and the twenty minutes stops being a ceiling and becomes an overhead: sixteen cores then get through 1300 minutes of work in the same 100, a speedup of 13 rather than 4. That is **Gustafson's Law**, `speedup = s + N(1 − s)`, and it is usually introduced as the result that overturned Amdahl.
 
-So this is not a second law standing beside the first. Karbowski derives it from Amdahl in a page and concludes that it *"is nothing but a different form of Amdahl's law"*, and that the popular claim it overthrows Amdahl *"is a mistake"*. What is sold as a law is the theorem re-measured, resting on an empirical bet about your workload — advice that is good given certain Forces and wrong without them, which in this book's vocabulary makes it a **Principle** wearing a Law's name. The test before taking the bet: **is your serial part startup, or is it work proportional to the data?**
+It did not, and the condition it rests on is the part that gets dropped. Gustafson assumes the serial part **does not grow with the problem** — his own examples are program loading, vector startup and I/O setup, which are fixed cost per run. Take a monthly report to a yearly one and that assumption fails immediately: reading twelve times the data from the file is 12x unsplittable work, `s` is unchanged, and the ceiling sits exactly where it was. Growing the job helps only if the parallel part grows faster than the serial part does.
+
+So this is not a second law standing beside the first. Karbowski derives it from Amdahl in a page and concludes that it *"is nothing but a different form of Amdahl's law"*, and that the popular claim it overthrows Amdahl *"is a mistake"*. What is sold as a law is the theorem re-measured, resting on an empirical bet about your workload — advice that is good given certain Forces and wrong without them, which in this book's vocabulary makes it a **Principle** wearing a Law's name. The test before taking the bet: **is your serial part fixed like a startup, or is it work proportional to the data?**
 
 ### The Universal Scalability Law
 
