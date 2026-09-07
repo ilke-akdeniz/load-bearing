@@ -98,7 +98,7 @@ The **Universal Scalability Law** is Amdahl with that second term added. Its coe
 
 The practical reading: when a system is slow and adding workers does not help, adding more is not an incomplete fix — it may be the cause. Find what they all touch.
 
-Amdahl's ceiling was a theorem this one is an **empirical law**. Coefficients are fitted to observations rather than derived so they are  falsifiable by your measurement. Where your peak sits is a property of your contention, and nobody else's benchmark can find it for you.
+Amdahl's ceiling was a theorem; this one is an **empirical law**. Its coefficients are fitted to observations rather than derived, so they are falsifiable by your measurement. Where your peak sits is a property of your contention, and nobody else's benchmark can find it for you.
 
 ### Cliff-edge curve: what queues do near capacity
 
@@ -144,7 +144,7 @@ The curve is smooth. What rises is the price of each additional point, continuou
 
 Two caveats before anyone plans capacity with this. It assumes irregular arrivals — a system with perfectly steady traffic queues far less, and a bursty one far more. And it describes one server; a pool of them degrades more gently. Use it for the shape.
 
-Those caveats are a **theorem**'s assumptions showing through: the curve is exactly true of the queue it describes, so the only question it admits is whether that queue is yours. Little's Law above is — **definitional** — and the move there is not to argue but to check that its words describes your system. For any queue that is not growing without limit they do.
+Those caveats are a **theorem**'s assumptions showing through: the curve is exactly true of the queue it describes, so the only question it admits is whether that queue is yours. Little's Law above is the other kind — **definitional** — and the move there is not to argue but to check that its words describe your system. For any queue that is not growing without limit they do.
 
 ### Step: what the machine actually fetches
 
@@ -220,12 +220,11 @@ Light travels through fibre at about two-thirds of its speed in vacuum. That giv
 
 Real measurements run one and a half to two times these, because cables do not follow great circles and routers take time. A synchronous call from London to Sydney inside a request handler has a floor of 167 ms, and no profiler will ever show you why.
 
-A distance divided by a propagation speed is a **theorem**, so available moves are again: 
+A distance divided by a propagation speed is a **theorem**, so the available moves are again the two:
 - Change an assumption: put a copy of the data near the user.
 - Stop needing the conclusion: make the operation asynchronous, so nobody is waiting for the round trip to finish.
 
-[-- I agree that this is a theorem but this one is very tricky: My brain first told me that this should be an empricial law as it's all about measurements. Maybe dissecting a little bit why that happens can add something of value here.]
-
+It is worth saying why this one resists the label, because the reflex is to call it empirical. The section is full of measured quantities — the distances, the two-thirds, the round-trip figures — and measurement is what an empirical law is made of. But these numbers are the law's **inputs**, not its source. Measure a different distance and you get a different answer out of the same unchanged relation. Compare the reversal, where the coefficients *are* the relation and were fitted to data, so better data can change the law itself. That is the test whenever a law arrives with numbers attached: **did the measurements go into it, or did they come out of it?** ([Chapter 04](04_grading-a-law_q5c6.md) makes the neighbouring point, that a measurement on its own is not a law at all.)
 ---
 
 ## Why the claim holds
