@@ -4,9 +4,9 @@
 
 **More resources can degrade performance, and when they do help the gain is not linear.**
 
-Intuition says the relationship is a straight line: twice the servers, twice the throughput; twice the traffic, twice the wait. In reality, you never get that perfect line. The shape is mostly a curve determined by the underlying laws. 
+Intuition says the relationship is a straight line: twice the servers, twice the throughput; twice the traffic, twice the wait. In reality, you never get that perfect line. The shape is mostly a curve determined by the underlying laws.
 
-This chapter works through six laws and the five shapes they produce. 
+This chapter works through six laws and the five shapes they produce.
 
 Each law's grade is stated too, in the sense [chapter 04](04_grading-a-law_q5c6.md) defines. Which law you are up against, and what grade it carries, decides whether the fix is more hardware, less sharing, or a different design.
 
