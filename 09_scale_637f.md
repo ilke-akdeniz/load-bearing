@@ -1,5 +1,7 @@
 # Scale: Queues, Parallelism, Memory
 
+[-- this is an interesting chapter but I'm struggling to fit in this book conceptually. It's not related to 5 kinds of software claims. It's more hardware - paralellism - resource insights, fitted loosely on our claim format. I'm considering removing this chapter completely, what do you think? ]
+
 ## The claim
 
 **Adding more of a resource has an arithmetic shape you can work out before you build.**
