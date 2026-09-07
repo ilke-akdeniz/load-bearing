@@ -98,7 +98,7 @@ The **Universal Scalability Law** is Amdahl with that second term added. Its coe
 
 The practical reading: when a system is slow and adding workers does not help, adding more is not an incomplete fix — it may be the cause. Find what they all touch.
 
-**The kind, and what follows from it.** Amdahl's ceiling was a theorem. This is not. The Universal Scalability Law's coefficients are fitted to observations rather than derived, which makes it an **empirical law** ([Ch. 04](04_grading-a-law_q5c6.md)) — falsifiable by a measurement, and admitting only one move: measure it where you are. So trust the shape and distrust the location. That a peak exists is reliable; where your peak sits is a property of your contention, and nobody else's benchmark can find it for you.
+Amdahl's ceiling was a theorem this one is an **empirical law**. Coefficients are fitted to observations rather than derived so they are  falsifiable by your measurement. Where your peak sits is a property of your contention, and nobody else's benchmark can find it for you.
 
 ### Cliff-edge curve: what queues do near capacity
 
@@ -144,7 +144,7 @@ The curve is smooth. What rises is the price of each additional point, continuou
 
 Two caveats before anyone plans capacity with this. It assumes irregular arrivals — a system with perfectly steady traffic queues far less, and a bursty one far more. And it describes one server; a pool of them degrades more gently. Use it for the shape.
 
-Those caveats are a **theorem**'s assumptions showing through: the curve is exactly true of the queue it describes, so the only question it admits is whether that queue is yours. Little's Law above is the other kind again — **definitional** — and the move there is not to argue but to check that its words describe you, which for any queue that is not growing without limit they do.
+Those caveats are a **theorem**'s assumptions showing through: the curve is exactly true of the queue it describes, so the only question it admits is whether that queue is yours. Little's Law above is — **definitional** — and the move there is not to argue but to check that its words describes your system. For any queue that is not growing without limit they do.
 
 ### Step: what the machine actually fetches
 
@@ -205,7 +205,7 @@ Two things about this shape. It is a **step rather than a slope** — growing a 
 
 [Chapter 05](05_dependency-and-hiding_agjy.md) uses the same underlying fact for a different argument: in an entity-component system the memory layout is deliberately made public, because hiding it would cost exactly the margin measured here.
 
-**Empirical**, like the reversal, and more plainly so: the line size, the cache sizes and every latency above are facts about one machine in one year. [Chapter 04](04_grading-a-law_q5c6.md) uses this material as its own example of a law that drifts. Seven times is not a constant you may quote — it is what this layout cost on this hardware.
+**Empirical law**, like the reversal, and more plainly so: the line size, the cache sizes and every latency above are facts about one machine in one year. [Chapter 04](04_grading-a-law_q5c6.md) uses this material as its own example of a law that drifts. Seven times is not a constant you may quote — it is what this layout cost on this hardware.
 
 ### Floor: distance
 
@@ -220,7 +220,11 @@ Light travels through fibre at about two-thirds of its speed in vacuum. That giv
 
 Real measurements run one and a half to two times these, because cables do not follow great circles and routers take time. A synchronous call from London to Sydney inside a request handler has a floor of 167 ms, and no profiler will ever show you why.
 
-A distance divided by a propagation speed is a **theorem**, so the moves are [chapter 04](04_grading-a-law_q5c6.md)'s two and there are no others. Change an assumption: put a copy of the data near the user. Or stop needing the conclusion: make the operation asynchronous, so nobody is waiting for the round trip to finish.
+A distance divided by a propagation speed is a **theorem**, so available moves are again: 
+- Change an assumption: put a copy of the data near the user.
+- Stop needing the conclusion: make the operation asynchronous, so nobody is waiting for the round trip to finish.
+
+[-- I agree that this is a theorem but this one is very tricky: My brain first told me that this should be an empricial law as it's all about measurements. Maybe dissecting a little bit why that happens can add something of value here.]
 
 ---
 
@@ -236,7 +240,7 @@ Each shape has a different cause, and applying the wrong fix is the common failu
 
 **Steps** come from the fixed fetch size. The machine moves a whole line whether you wanted eight bytes of it or all of it, so the question is never how much data you need but how much of each fetched block you use. That is decided by layout, not by algorithm.
 
-**Floors** come from physics, and there is no mechanism to explain.
+**Floors** come from physics, and there is no mechanism to explain for the scope of this book.
 
 ---
 
