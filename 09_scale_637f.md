@@ -4,15 +4,13 @@
 
 **What you could gain by increasing resources has unintuitive arithmetic shapes that emerge from the underlying laws.**
 
-Intuition says the relationship is a straight line: twice the servers, twice the throughput; twice the traffic, twice the wait. It never is. This chapter works through five laws and their arithmetic shapes. The skill is recognizing **which one you are on**, because that is what decides whether the fix is more hardware, less sharing, or a different design.
-
-[-- this is my incomplete attempt to move the axis of the chapter from shapes to the laws. Laws should be the primary axis because they are what the book is about. Shapes are secondary because they only make sense in the scope of laws, otherwise they can be found anywhere. Try to complete this change. The contents of the shape table I removed could be dispersed into each section if it fits, don't force it if it looks awkward.]
+Intuition says the relationship is a straight line: twice the servers, twice the throughput; twice the traffic, twice the wait. It never is. This chapter works through six laws and the five shapes they produce. The skill is recognizing **which one you are on**, because that is what decides whether the fix is more hardware, less sharing, or a different design.
 
 ---
 
 ## The demonstration
 
-### Amdahl's law
+### Amdahl's Law
 
 **A theorem**: the fraction of the work that cannot be split sets a ceiling on how much faster the whole job can get, whatever the core count.
 
@@ -95,11 +93,9 @@ The coefficients being fitted rather than derived is what decides how much of th
 
 ### Little's Law
 
-**Definition law:** The first says how many things are inside a system at once; the second says that as a server approaches fully busy, the waiting rises without limit.
+**A definitional law:** the number of things inside a system at once is the arrival rate multiplied by the average time each one spends there.
 
-Two results, and the first applies to everything.
-
-**Little's Law.** For any system where things arrive, spend time inside, and leave:
+It applies to everything — a queue, a thread pool, a warehouse, a motorway. For any system where things arrive, spend time inside, and leave:
 
 ```text
 items inside = arrival rate × time each one spends inside
@@ -109,9 +105,9 @@ At 500 requests per second with 200 ms average response time, there are 100 requ
 
 The law assumes essentially nothing, which makes it true by **definition** ([Ch. 04](04_grading-a-law_q5c6.md)) for any queue that is not growing without limit.
 
-### Utilization law [-- may need better name]
+### The queueing curve
 
-**Theorem:** *Utilization* is the fraction of time a server is busy: 0.8 means busy 80% of the time, idle 20%. For a single server handling irregular traffic, the time a request spends waiting grows as `1 / (1 − utilization)`:
+**A theorem.** *Utilization* is the fraction of time a server is busy: 0.8 means busy 80% of the time, idle 20%. For a single server handling irregular traffic, the time a request spends waiting grows as `1 / (1 − utilization)`:
 
 ```text
  busy      requests waiting     a request takes
@@ -143,7 +139,7 @@ Two caveats before anyone plans capacity with this. It assumes irregular arrival
 
 Those caveats are the theorem's assumptions showing through: the curve is exactly true of the queue it describes, so the only question it admits is whether that queue is yours. Little's Law asks even less of you — only that its words describe your system, which for any queue not growing without limit they do.
 
-### Step: what the machine actually fetches
+### The memory hierarchy
 
 **This law has no famous name, and it is empirical:** The machine moves memory in fixed-size blocks, so what a loop costs is decided by how much of each block it actually uses.
 
@@ -206,9 +202,9 @@ Two things about this shape. It is a **step rather than a slope** — growing a 
 
 Even more machine-specific than the reversal: the line size, the cache sizes and every latency above are facts about one machine in one year. [Chapter 04](04_grading-a-law_q5c6.md) uses this material as its own example of a law that drifts. Seven times is not a constant you may quote — it is what this layout cost on this hardware.
 
-### Latency law [-- not sure about the name may or may not work]
+### The speed of light
 
-**Theorem.** A round trip cannot take less than twice the distance divided by the signal's speed — which in fibre is about two-thirds of light speed in vacuum.
+**A theorem.** A round trip cannot take less than twice the distance divided by the signal's speed — which in fibre is about two-thirds of light speed in vacuum.
 
 Some latency is not an engineering problem at all.
 
@@ -232,18 +228,17 @@ So when a law arrives with numbers attached, the question is: **are the numbers 
 
 ## Why the claim holds
 
-Each shape has a different cause, and applying the wrong fix is the common failure.
-[-- this section might need a total rewrite if the main axis not the shape but laws. I'm not sure, you evaluate.]
+Five of the six laws produce a shape — Little's Law is the exception, being an identity rather than a curve — and each shape has a different cause. Applying the wrong fix is the common failure.
 
-**Ceilings** come from work that cannot be divided. That is arithmetic on a fraction, needing no assumption about hardware, so no hardware changes it.
+**Amdahl's ceiling** comes from work that cannot be divided. That is arithmetic on a fraction, needing no assumption about hardware, so no hardware changes it.
 
-**Reversals** come from pairs. Contention grows with the number of workers; coherency grows with the number of pairs of workers, which grows as the square. A quantity growing as the square eventually overtakes one growing in proportion, and where they cross is the peak. This is why the fix is never more workers — it is removing what they share, and [chapter 07](07_time_mdbn.md)'s single-writer design is that taken to its limit.
+**The Universal Scalability Law's reversal** comes from pairs. Contention grows with the number of workers; coherency grows with the number of pairs of workers, which grows as the square. A quantity growing as the square eventually overtakes one growing in proportion, and where they cross is the peak. This is why the fix is never more workers — it is removing what they share, and [chapter 07](07_time_mdbn.md)'s single-writer design is that taken to its limit.
 
-**Queue cliffs** come from variation, not from load. Idle capacity is what absorbs a burst; near saturation there is none left. This is also why average latency is such a poor measure here — the system is not slow on average, it is slow precisely when it is busiest.
+**The queueing curve's cliff** comes from variation, not from load. Idle capacity is what absorbs a burst; near saturation there is none left. This is also why average latency is such a poor measure here — the system is not slow on average, it is slow precisely when it is busiest.
 
-**Steps** come from the fixed fetch size. The machine moves a whole line whether you wanted eight bytes of it or all of it, so the question is never how much data you need but how much of each fetched block you use. That is decided by layout, not by algorithm.
+**The memory hierarchy's step** comes from the fixed fetch size. The machine moves a whole line whether you wanted eight bytes of it or all of it, so the question is never how much data you need but how much of each fetched block you use. That is decided by layout, not by algorithm.
 
-**Floors** come from physics, and there is no mechanism to explain for the scope of this book.
+**The speed-of-light floor** comes from physics, and there is no mechanism to explain for the scope of this book.
 
 ---
 

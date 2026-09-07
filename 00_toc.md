@@ -19,7 +19,7 @@ Back to [the introduction](README.md).
 - 06. [Layered Architecture](06_layering_p2vk.md)
 - 07. [Time: Concurrency and Clocks](07_time_mdbn.md)
 - 08. [Distribution: What's Impossible](08_distribution_49yh.md)
-- 09. [Scale: Queues, Parallelism, Memory](09_scale_637f.md)
+- 09. [Laws That Shape Scaling](09_scale_637f.md)
 - 10. [Change: Evolution, Organization, Compatibility](10_change_rjf9.md)
 
 ## Part III — Patterns, Graded

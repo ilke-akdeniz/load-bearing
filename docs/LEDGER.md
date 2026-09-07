@@ -122,7 +122,7 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Availability is a product | 49yh | Availabilities multiply rather than average; ten dependencies at three nines gives two nines, and better components do not fix it | "p^N" |
 | Three ways to stop multiplying | 49yh | Remove the dependency, make it optional, or make it asynchronous | cite |
 | Saga is not rollback | 49yh | Compensations are business operations and are visible to customers | cite |
-| Five shapes of scale | 637f | Ceiling, knee, superlinear curve, discontinuity, floor — the shape decides the fix | "which shape" |
+| Six laws of scaling, five shapes | 637f | Amdahl, the Universal Scalability Law, Little's Law, the queueing curve, the memory hierarchy, the speed of light. Five produce a shape — ceiling, reversal, cliff, step, floor — and Little's Law is the identity underneath rather than a curve. The law is the axis; the shape is what it produces | "which law am I on" |
 | Shapes travel, numbers do not | 637f | The formulas are exact everywhere; the measurements are of one machine. Someone else's benchmark tells you a shape exists, only yours tells you where on it you are — which is q5c6's theorem-versus-empirical distinction applied to performance figures | cite |
 | Three kinds of Law in one chapter | 637f | Amdahl is a theorem, Little's Law is true by definition, the latency figures are empirical and drift. q5c6 owns the grading; 637f is where all three appear together and the standing decides whether a number may be quoted or must be measured | cite |
 | Amdahl: a ceiling | 637f | The serial fraction bounds speedup regardless of core count; shrink s rather than buying cores | cite |
