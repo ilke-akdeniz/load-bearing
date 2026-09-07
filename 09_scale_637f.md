@@ -8,7 +8,7 @@ Intuition says the relationship is a straight line: twice the servers, twice the
 
 This chapter works through four laws and the three shapes they produce.
 
-Each law's grade is stated too, in the sense [chapter 04](04_families-of-law_q5c6.md) defines. Which law you are up against, and what grade it carries, decides whether the fix is more hardware, less sharing, or a different design.
+Each law's family is stated too, in the sense [chapter 04](04_families-of-law_q5c6.md) defines. Which law you are up against, and which family it belongs to, decides whether the fix is more hardware, less sharing, or a different design.
 
 ---
 

@@ -1,16 +1,16 @@
-# Three Kinds of True
+# Three Families of Law
 
 ## The claim
 
-**Not all Laws are the same kind of true, and the kind decides what you can do about one.**
+**Not all Laws are true for the same reason, and the reason decides what you can do about one.**
 
 Against a theorem you can work on its assumptions, or on what you actually need from it — never on the conclusion. Against a definitional law you can only check whether its words describe you. Against an empirical law you can measure, because the number came from somebody else's system on some other day.
 
-What no kind allows is arguing with the claim. The kind tells you where you are permitted to work instead.
+What no family allows is arguing with the claim. The family tells you where you are permitted to work instead.
 
-## The three kinds
+## The three families
 
-| Kind | What makes it true | What would falsify it | The only move available |
+| Family | What makes it true | What would falsify it | The only move available |
 |---|---|---|---|
 | **Theorem** | a proof, from stated assumptions | nothing, unless the proof is wrong | change its assumptions, or stop needing its conclusion |
 | **Definition** | what the words mean | nothing; the words may simply not describe you | check whether they do |
@@ -159,7 +159,7 @@ The three are not flavours of one thing. They differ in **where the claim's auth
 
 **A definitional law's authority is in its terms.** It is true because of what its words pick out, so the only question it admits is whether those words pick out anything in your program. This is why such claims are the easiest to state and the hardest to argue with, and also why they can evaporate without ever having been wrong.
 
-**An empirical law's authority is accumulated observation.** It can therefore drift, and it does. The shape of the memory hierarchy has changed several times in forty years. Team communication overhead depends on tools that did not exist when it was first counted. Repeat an empirical number long enough and it starts to sound like a theorem, which is this kind's characteristic failure.
+**An empirical law's authority is accumulated observation.** It can therefore drift, and it does. The shape of the memory hierarchy has changed several times in forty years. Team communication overhead depends on tools that did not exist when it was first counted. Repeat an empirical number long enough and it starts to sound like a theorem, which is this family's characteristic failure.
 
 There is a fourth possibility the naming exists to catch: **the claim is not a Law at all.**
 
@@ -220,7 +220,7 @@ The honest response is to leave the question open rather than force an answer, b
 
 **Measuring costs more than quoting.** That is why people quote. Sometimes quoting is right: an order of magnitude from a good source beats no number at all. The failure is quoting a number to three significant figures that you have never measured, in a setting that differs from the one it came from.
 
-**Three kinds imply the world has three.** It has more — statistical laws with confidence intervals, results proved under assumptions nobody believes, claims true of every implementation ever built but never proved. This is a sorting aid, and most of its value is in separating *proved* from *observed*. The finer distinctions matter far less than that one.
+**Three families imply the world has three.** It has more — statistical laws with confidence intervals, results proved under assumptions nobody believes, claims true of every implementation ever built but never proved. This is a sorting aid, and most of its value is in separating *proved* from *observed*. The finer distinctions matter far less than that one.
 
 ---
 
@@ -239,7 +239,7 @@ The honest response is to leave the question open rather than force an answer, b
 - **"We can't check that, halting problem"** — said about an analysis over the code in one repository, where the theorem forbids only a decider that works for every program ever written.
 - **"Conway's Law says we should reorganize."** It says no such thing; it describes a tendency. The prescription belongs to whoever is making it, and should be defended on its own.
 - **A number quoted with more precision than anyone present has measured.**
-- **"It's a law"** offered as the end of a discussion rather than the start of one, when the useful next question is always *which kind, and what does it assume?*
+- **"It's a law"** offered as the end of a discussion rather than the start of one, when the useful next question is always *which family, and what does it assume?*
 - **An argument about any claim with a formal and a folk version**, where neither side has noticed they are holding different claims.
 
 The question that does the work is short: **what would have to be true for this to be false?**

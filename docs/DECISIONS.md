@@ -6123,3 +6123,39 @@ A **second measurement, taken while testing whether the section could be made to
 **Consequence.**
 Two ledger rows under `agjy` — the cache line as transfer unit in the concepts table, the measurement in code examples.
 Chapter 09 keeps nothing of it, and its handoff and title no longer promise memory.
+
+---
+
+## 148. *Kind* stops doing double duty: the three become families
+
+**Date.** 2026-09-07
+
+**Context.**
+The author: *"chapter 04's file name is 04_grading-a-law, inside that chapter and probably in other places, instead of grade, kind is used. That is confusing, you have 5 kinds of claims and 3 kinds of law."*
+Options offered: **family**, **type**, **breed**.
+
+**The confusion is already live, and not only in chapter 04.**
+[Chapter 20](../20_force-map-method_r37x.md) opens its mechanism section with *"The three kinds stand in a fixed relation"* — meaning Force, Principle and Idiom, three of the **five**. A reader arriving from chapter 04 has just been taught that *the three kinds* are theorem, definition and empirical law.
+
+**Decision.** **Family.**
+
+*Type* is ruled out by a collision the book cannot afford: `type` appears fifty times across the chapters as software vocabulary — type systems, type parameters, the type the compiler needs in hand — and *three types of Law* sitting beside that is worse than the problem it fixes.
+*Breed* is outside the register.
+
+**One complication, and the fix is an improvement.**
+The claim was *"Not all Laws are the same **kind** of true, and the kind decides what you can do about one."*
+*The same family of true* does not parse, so the classifier had to leave the claim rather than be substituted in it. It now reads **"Not all Laws are true for the same reason, and the reason decides what you can do about one."**
+That is closer to what the chapter actually sorts by — *What makes it true* is the first column of its own table — and it leaves *family* to do its work in the body, where it reads naturally: three families, which family is this, what no family allows.
+
+**What this does and does not reverse.**
+[Decision 17](#17-the-abc-grading-is-dropped-the-three-are-named) dropped the A/B/C grading because the letters implied a rank that does not exist, and named the three by name instead. That substance is untouched — there is still no ordering, and the three are still named at every use.
+What changes is the classifier decision 17 settled on, *kind*, which it chose before the five-kind vocabulary had hardened around the same word.
+
+The filename change goes the other way: `04_grading-a-law_q5c6.md` was a leftover that decision 17 should have removed in August and did not. It is now `04_families-of-law_q5c6.md`, so the file no longer advertises a concept the chapter abandoned.
+
+**Consequence.**
+Title *Three Kinds of True* becomes **Three Families of Law**, with the contents page.
+Fifty-six filename references, updated in their own commit ahead of the content change.
+[Chapter 09](../09_scale_637f.md) inherited the vocabulary while chapter 04 had none of its own and had been saying *grade* — *each law's grade is stated too*, *what grade it carries* — which is now *family*, and which incidentally removes a word chapter 15 uses for grading names on two axes.
+Two ledger rows retitled.
+Chapter 20's line needed no change and improves for free: once chapter 04 stops using *kinds*, *the three kinds* is unambiguous.
