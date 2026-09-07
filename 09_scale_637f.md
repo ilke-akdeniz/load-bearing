@@ -1,10 +1,8 @@
 # Scale: Queues, Parallelism, Memory
 
-[-- this is an interesting chapter but I'm struggling to fit in this book conceptually. It's not related to 5 kinds of software claims. It's more hardware - paralellism - resource insights, fitted loosely on our claim format. I'm considering removing this chapter completely, what do you think? ]
-
 ## The claim
 
-**Adding more of a resource has an arithmetic shape you can work out before you build.**
+**Adding more of a resource has an arithmetic shape you can work out before you build. The shape is a law and transfers everywhere; the number is a measurement and transfers nowhere.**
 
 Intuition says the relationship is a straight line: twice the servers, twice the throughput; twice the traffic, twice the wait. It never is. This chapter works through five shapes, and the skill is recognizing **which one you are on**, because that is what decides whether the fix is more hardware, less sharing, or a different design.
 
@@ -15,6 +13,8 @@ Intuition says the relationship is a straight line: twice the servers, twice the
 | **Cliff-edge curve** | fine at 80% load, unusable at 95% | leave headroom |
 | **Step** | one extra struct field costs 7× | change the memory layout |
 | **Floor** | latency you cannot optimize away | move the data, or stop waiting for it |
+
+It is also the chapter where [chapter 04](04_grading-a-law_q5c6.md)'s three kinds of Law turn up together, which is what decides the claim's second sentence. Amdahl's ceiling is a **theorem** — it follows from arithmetic, binds on any hardware anyone will ever build, and is not going to be repealed. Little's Law is **true by definition**, assuming so little that denying it is incoherent. The latency figures are **empirical**: observed, drifting, and different on your machine from the one that measured them. Three standings in one chapter, and the standing is what tells you whether you may quote a number or are obliged to go and take one.
 
 ## About the numbers
 

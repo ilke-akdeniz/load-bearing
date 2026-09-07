@@ -20,7 +20,7 @@ Only the author moves a chapter to **draft** or **ready**.
 | 06 | `06_layering_p2vk.md` | **draft** | 2026-09-02 |
 | 07 | `07_time_mdbn.md` | **draft** | 2026-09-05 |
 | 08 | `08_distribution_49yh.md` | **draft** | 2026-09-06 |
-| 09 | `09_scale_637f.md` | **draft** | — |
+| 09 | `09_scale_637f.md` | **draft** | 2026-09-07 |
 | 10 | `10_change_rjf9.md` | **draft** | — |
 | 11 | `11_what-a-pattern-is-for_3xzc.md` | **draft** | — |
 | 12 | `12_patterns-that-cross_r8dw.md` | **draft** | — |

@@ -123,6 +123,8 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Three ways to stop multiplying | 49yh | Remove the dependency, make it optional, or make it asynchronous | cite |
 | Saga is not rollback | 49yh | Compensations are business operations and are visible to customers | cite |
 | Five shapes of scale | 637f | Ceiling, knee, superlinear curve, discontinuity, floor — the shape decides the fix | "which shape" |
+| Shapes travel, numbers do not | 637f | The formulas are exact everywhere; the measurements are of one machine. Someone else's benchmark tells you a shape exists, only yours tells you where on it you are — which is q5c6's theorem-versus-empirical distinction applied to performance figures | cite |
+| Three kinds of Law in one chapter | 637f | Amdahl is a theorem, Little's Law is true by definition, the latency figures are empirical and drift. q5c6 owns the grading; 637f is where all three appear together and the standing decides whether a number may be quoted or must be measured | cite |
 | Amdahl: a ceiling | 637f | The serial fraction bounds speedup regardless of core count; shrink s rather than buying cores | cite |
 | USL: returns go negative | 637f | Contention grows with workers and coherency with pairs, so past a peak each added worker lowers throughput | cite |
 | Little's Law | 637f | L = λW, near-definitional, true of any stable queue; two knowns give the third | cite |
