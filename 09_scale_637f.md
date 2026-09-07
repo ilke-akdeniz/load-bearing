@@ -1,10 +1,10 @@
-# Laws That Shape Scaling
+# Scale: Queues, Parallelism, Memory
 
 ## The claim
 
-**What you could gain by increasing resources has unintuitive arithmetic shapes that emerge from the underlying laws.**
+**More resources can degrade the performance and when they improve the gain is not linear.**
 
-Intuition says the relationship is a straight line: twice the servers, twice the throughput; twice the traffic, twice the wait. It never is. This chapter works through six laws and the five shapes they produce. The skill is recognizing **which one you are on**, because that is what decides whether the fix is more hardware, less sharing, or a different design.
+Intuition says the relationship is a straight line: twice the servers, twice the throughput; twice the traffic, twice the wait. In reality, you never get that perfect line. The shape is mostly a curve determined by the underlying laws. This chapter works through six laws and the five shapes they produce. Each law's grade is also stated as defined on ([Chapter 04](04_grading-a-law_q5c6.md). Which law you are up against and what grade is that decides whether the fix is more hardware, less sharing, or a different design.
 
 ---
 
@@ -27,7 +27,7 @@ Add cores and only the eighty minutes shrink:
 
 Twenty minutes never goes away, so the whole job can never take less than that — and 100 minutes divided by 20 is a ceiling of **five times, forever.** Buying a thousand cores instead of sixteen improves this job by 20%.
 
-**Amdahl's Law** as a formula, with `s` as the fraction that cannot be split and `N` as the number of cores:
+**Amdahl's Law** is also expressed as a formula, with `s` for the fraction that cannot be split and `N` for the number of cores:
 
 ```text
 speedup ≤ 1 / (s + (1 − s)/N)
@@ -324,7 +324,7 @@ A batch job that must finish by 6 a.m. and takes two hours has seven hours of sl
 - **"It's O(1), so it's faster."** At what size, and against what constant?
 - **"We optimized the algorithm"** — on a workload whose cost was memory layout, where the algorithm was never the problem.
 
-The question that does the work: **which resource shape am I on?**
+The question that does the work: **which law am I up against?**
 
 A ceiling means stop buying hardware and shrink the serial part. A reversal means stop adding workers and find what they share. A queue cliff means buy headroom rather than speed. A step means look at the layout. A floor means move the data or stop waiting for it.
 
