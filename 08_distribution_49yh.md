@@ -111,7 +111,7 @@ func chargeIdempotent(ledger *Ledger, idempotencyKey string, cents int) {
 GOOD charges: [4200]
 ```
 
-Three deliveries, one charge. The delivery is still at-least-once — nothing fixed that, and nothing can. What changed is that **exactly-once *effect* no longer requires exactly-once *delivery***, which is the same move [chapter 04](04_grading-a-law_q5c6.md) identified: the theorem holds, and you stopped needing its conclusion. Systems advertising exactly-once delivery are doing this and not something else — discarding duplicates on arrival — which is why the guarantee holds inside their own boundary and stops at the edge of it.
+Three deliveries, one charge. The delivery is still at-least-once — nothing fixed that, and nothing can. What changed is that **exactly-once *effect* no longer requires exactly-once *delivery***, which is the same move [chapter 04](04_families-of-law_q5c6.md) identified: the theorem holds, and you stopped needing its conclusion. Systems advertising exactly-once delivery are doing this and not something else — discarding duplicates on arrival — which is why the guarantee holds inside their own boundary and stops at the edge of it.
 
 Two details decide whether this works in practice.
 

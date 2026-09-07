@@ -15,7 +15,7 @@ Only the author moves a chapter to **draft** or **ready**.
 | 01 | `01_load-bearing_w8kq.md` | **draft** | 2026-09-04 |
 | 02 | `02_the-five-kinds_cjx4.md` | **draft** | 2026-08-30 |
 | 03 | `03_forces_f4m5.md` | **draft** | 2026-08-31 |
-| 04 | `04_grading-a-law_q5c6.md` | **draft** | 2026-08-31 |
+| 04 | `04_families-of-law_q5c6.md` | **draft** | 2026-08-31 |
 | 05 | `05_dependency-and-hiding_agjy.md` | **draft** | 2026-09-02 |
 | 06 | `06_layering_p2vk.md` | **draft** | 2026-09-02 |
 | 07 | `07_time_mdbn.md` | **draft** | 2026-09-05 |

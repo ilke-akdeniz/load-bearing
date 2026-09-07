@@ -676,12 +676,12 @@ The seven Forces are now individually owned by 03, so later chapters name a Forc
 
 ---
 
-## 16. [Chapter 04](../04_grading-a-law_q5c6.md): one grade, one move
+## 16. [Chapter 04](../04_families-of-law_q5c6.md): one grade, one move
 
 **Date.** 2026-08-09
 
 **Context.**
-[Chapter 04](../04_grading-a-law_q5c6.md)'s difficulty is structural rather than editorial: it grades material that other chapters own. CAP belongs to 07, Conway to 09, the memory hierarchy to 08, acyclic dependency to 05, Hyrum's Law to 05. Written straight, the chapter becomes a tour of other chapters' examples with a letter attached to each.
+[Chapter 04](../04_families-of-law_q5c6.md)'s difficulty is structural rather than editorial: it grades material that other chapters own. CAP belongs to 07, Conway to 09, the memory hierarchy to 08, acyclic dependency to 05, Hyrum's Law to 05. Written straight, the chapter becomes a tour of other chapters' examples with a letter attached to each.
 
 **Options.**
 Present the three grades as a taxonomy with examples; organize around how to check a claimed Law; find what the grade is *for* and make that the claim.
@@ -713,7 +713,7 @@ The TOC asked what makes Conway's Law different from "prefer composition over in
 **Consequence.**
 `LEDGER.md` gains five concept rows and three example rows.
 [Chapter 05](../05_dependency-and-hiding_agjy.md)'s existing commitments are honoured: acyclic dependency stays Grade B, and Hyrum's Law stays an empirical regularity rather than a theorem.
-[Chapter 04](../04_grading-a-law_q5c6.md) runs 206 lines, the shortest so far, which suits a chapter whose job is a distinction rather than a subject.
+[Chapter 04](../04_families-of-law_q5c6.md) runs 206 lines, the shortest so far, which suits a chapter whose job is a distinction rather than a subject.
 
 ---
 
@@ -722,7 +722,7 @@ The TOC asked what makes Conway's Law different from "prefer composition over in
 **Date.** 2026-08-10
 
 **Context.**
-[Chapter 04](../04_grading-a-law_q5c6.md) was drafted with the TOC's A/B/C grading — Grade A a proven theorem, Grade B a near-tautology, Grade C an empirical constant.
+[Chapter 04](../04_families-of-law_q5c6.md) was drafted with the TOC's A/B/C grading — Grade A a proven theorem, Grade B a near-tautology, Grade C an empirical constant.
 Reviewing it, the author proposed two changes: refer to the kinds by name rather than by letter, and consider abandoning the grading concept entirely, on the grounds that grading implies a hierarchy nobody can justify — *I don't see why a theorem comes before tautology*.
 
 **Options.**
@@ -733,7 +733,7 @@ Drop the grading. The kinds are **theorem**, **definition**, and **empirical law
 The chapter's title changes from *Grading a Law* to *Three Kinds of True*.
 
 **Why.**
-The author's objection is correct, and the decisive support for it is that **this book already decided this question, in decision 3, and [chapter 04](../04_grading-a-law_q5c6.md) contradicted it.**
+The author's objection is correct, and the decisive support for it is that **this book already decided this question, in decision 3, and [chapter 04](../04_families-of-law_q5c6.md) contradicted it.**
 
 Decision 3 removed numbering from the five kinds, with the reasoning that "a Level 0 violation" forces the reader to decode an arbitrary index before the sentence means anything, while "a Law violation" is self-describing at the point of use. Grade A, B, and C is the identical failure, introduced a week later in a chapter drafted against a file that records the earlier decision. The draft did not notice.
 
@@ -752,7 +752,7 @@ The author changed *near-tautology* to *tautology*, adding a parenthetical that 
 
 **Consequence.**
 `00_toc.md` gains the new chapter title and loses "Grade A theorems" from [chapter 08](../08_distribution_49yh.md)'s entry.
-`05_dependency-and-hiding_agjy.md`'s three-claims table now reads "true by definition ([Ch. 04](../04_grading-a-law_q5c6.md))" rather than "near-tautology, Grade B."
+`05_dependency-and-hiding_agjy.md`'s three-claims table now reads "true by definition ([Ch. 04](../04_families-of-law_q5c6.md))" rather than "near-tautology, Grade B."
 `LEDGER.md` has seven rows reworded and one added, for the regularity-versus-magnitude distinction.
 `CLAUDE.md` gains a rule the author asked for directly: **write Go for a reader who does not know Go**, since the audience is fluent in Java, C#, or Python, and an unglossed `chan` spends the example.
 
@@ -763,7 +763,7 @@ The author changed *near-tautology* to *tautology*, adding a parenthetical that 
 **Date.** 2026-08-10
 
 **Context.**
-The author's second pass on [chapter 04](../04_grading-a-law_q5c6.md) raised three things. One was a question about which assumptions the worked example was talking about. Answering it exposed an error in the chapter's central framing.
+The author's second pass on [chapter 04](../04_families-of-law_q5c6.md) raised three things. One was a question about which assumptions the worked example was talking about. Answering it exposed an error in the chapter's central framing.
 
 **The error.**
 The chapter claimed that the only move against a theorem is to change which of its assumptions hold, then demonstrated it with Two Generals and offered idempotency as the fix — describing idempotency as "removing an assumption."
@@ -796,9 +796,9 @@ The failure-list entry changes with it: *"we can't check that, halting problem"*
 The empirical section's practical form gains a second half: quoting somebody's number is not the same as knowing yours, **and knowing yours does not mean you should be chasing their target.** Worth having — it closes the failure that follows a successful measurement, where a team measures honestly and then adopts someone else's goal for the number.
 
 **Consequence.**
-`00_toc.md`'s [chapter 04](../04_grading-a-law_q5c6.md) entry names the actual examples; CAP stays with [chapter 08](../08_distribution_49yh.md), which owns it.
+`00_toc.md`'s [chapter 04](../04_families-of-law_q5c6.md) entry names the actual examples; CAP stays with [chapter 08](../08_distribution_49yh.md), which owns it.
 `LEDGER.md` gains a row for the two escapes and one for the halting problem, and loses the CAP row.
-[Chapter 04](../04_grading-a-law_q5c6.md) runs 259 lines.
+[Chapter 04](../04_families-of-law_q5c6.md) runs 259 lines.
 
 ---
 
@@ -934,7 +934,7 @@ Two Generals, FLP, and CAP then arrive as three formalizations of one predicamen
 
 `p^N` is deliberately kept outside that unification and named as the other kind of fact, because it is arithmetic about independent events rather than a limit on knowledge. Folding it in would have been tidier and false.
 
-**The theorems are presented by their assumptions rather than their proofs**, following [chapter 04](../04_grading-a-law_q5c6.md): the assumptions are the only negotiable part. FLP is stated with the consequence that matters — Raft and Paxos do not evade it, they add timeouts, giving up guaranteed termination to keep guaranteed safety. CAP is stated once and then set aside for PACELC, because the else-branch applies every day and CAP's branch only during an outage.
+**The theorems are presented by their assumptions rather than their proofs**, following [chapter 04](../04_families-of-law_q5c6.md): the assumptions are the only negotiable part. FLP is stated with the consequence that matters — Raft and Paxos do not evade it, they add timeouts, giving up guaranteed termination to keep guaranteed safety. CAP is stated once and then set aside for PACELC, because the else-branch applies every day and CAP's branch only during an outage.
 
 **[Chapter 07](../07_time_mdbn.md)'s review shaped the structure.**
 Two lessons carried forward without being asked for.
@@ -1118,10 +1118,10 @@ What rises is the marginal cost, continuously, from the start. 85% is a conventi
 
 Following decision 14's rule that a failed demonstration is the finding, the chapter reports it and runs the integer version, where the scan wins to about eleven elements. So **the crossover is not a property of the two algorithms**: it is set by the cost of one comparison against the cost of one hash, and string comparison is expensive enough to move the crossing off the bottom of the chart.
 
-That makes the widely repeated *use a slice under about twenty items* a magnitude quoted without its conditions — [chapter 04](../04_grading-a-law_q5c6.md)'s exact failure, arriving unprompted in the material. The boundary section is stronger for the demonstration having failed than it would have been had it worked.
+That makes the widely repeated *use a slice under about twenty items* a magnitude quoted without its conditions — [chapter 04](../04_families-of-law_q5c6.md)'s exact failure, arriving unprompted in the material. The boundary section is stronger for the demonstration having failed than it would have been had it worked.
 
 **Provenance for the measurements.**
-Every number was measured on the machine the chapter was written on — an Apple M4, Go 1.26.5 — and a section before the demonstration says so, with the reason: the regularity holds everywhere and the magnitude is local, so the formulas are exact and the numbers are an instance. That is [chapter 04](../04_grading-a-law_q5c6.md)'s regularity-versus-magnitude distinction applied to the chapter's own evidence.
+Every number was measured on the machine the chapter was written on — an Apple M4, Go 1.26.5 — and a section before the demonstration says so, with the reason: the regularity holds everywhere and the magnitude is local, so the formulas are exact and the numbers are an instance. That is [chapter 04](../04_families-of-law_q5c6.md)'s regularity-versus-magnitude distinction applied to the chapter's own evidence.
 
 The AoS/SoA benchmark uses an 80-byte struct against a 64-byte cache line and shows 4.3× from field layout alone, discharging [chapter 05](../05_dependency-and-hiding_agjy.md)'s deferral of the arithmetic and [chapter 03](../03_forces_f4m5.md)'s latency-Force pointer.
 
@@ -1216,7 +1216,7 @@ That is better than an assertion about compatibility promises: it is checkable, 
 **Lehman is graded rather than recited.**
 There are eight of Lehman's laws and they are not equally solid. The chapter uses two — continuing change, and increasing complexity — and says plainly that the study population was mainframe systems decades ago with release cycles measured in years, and that several of the others ("conservation of familiarity," "conservation of organizational stability") are vague enough to resist checking.
 
-This follows [chapter 04](../04_grading-a-law_q5c6.md)'s empirical-law framing applied to the book's own sources: an empirical law carries a study population, and citing all eight equally would repeat the error the book exists to describe.
+This follows [chapter 04](../04_families-of-law_q5c6.md)'s empirical-law framing applied to the book's own sources: an empirical law carries a study population, and citing all eight equally would repeat the error the book exists to describe.
 
 The same treatment is given to the inverse Conway manoeuvre. Conway's observation is established; the claim that architecture can be driven by reshaping teams is a strategy rather than a finding, and the chapter says so.
 
@@ -1228,7 +1228,7 @@ The same treatment is given to the inverse Conway manoeuvre. Conway's observatio
 
 **Consequence.**
 `LEDGER.md` gains seven concept rows and three example rows.
-Part II is complete: [chapters 04](../04_grading-a-law_q5c6.md) through 09 are drafted.
+Part II is complete: [chapters 04](../04_families-of-law_q5c6.md) through 09 are drafted.
 [Chapter 10](../10_change_rjf9.md) runs 219 lines and moves to **in progress**.
 
 ---
@@ -1267,7 +1267,7 @@ Same team, same hire, opposite answers — and sweeping the remaining work puts 
 
 That is not the same question as *are we behind schedule*, and the two come apart precisely in case B: a project badly behind a wrong estimate is not late in Brooks's sense, it is under-staffed, and the fix is people added now rather than later, since the ramp-up cost is fixed and the runway only shrinks.
 
-The ramp-up figures are marked illustrative rather than measured, with the note that substituting your own moves the break-even — which is the reason to compute it rather than quote it ([Ch. 04](../04_grading-a-law_q5c6.md)).
+The ramp-up figures are marked illustrative rather than measured, with the note that substituting your own moves the break-even — which is the reason to compute it rather than quote it ([Ch. 04](../04_families-of-law_q5c6.md)).
 
 **An expansion the author asked for, and the ledger allowed.**
 They asked whether one-team-per-service deserved treatment here. Nothing else in `LEDGER.md` owns organizational structure, so it landed in 09.
@@ -1827,7 +1827,7 @@ It is closer than *model* and still over-claims, for two reasons.
 
 An axiom is posited without justification, and this chapter justifies itself — three worked demonstrations and twenty classified claims. Something offering evidence is not an axiom.
 
-More seriously, it borrows mathematical authority the thing has not got. [Chapter 04](../04_grading-a-law_q5c6.md) grades claims as theorem, definition, or empirical law, and warns that folk versions drop quantifiers and conditions. *Axiom* sits adjacent to *theorem*, so using it would claim standing the model cannot support — in the chapter that defines the test for exactly that error. **Premise** keeps the derivation role and drops the over-claim.
+More seriously, it borrows mathematical authority the thing has not got. [Chapter 04](../04_families-of-law_q5c6.md) grades claims as theorem, definition, or empirical law, and warns that folk versions drop quantifiers and conditions. *Axiom* sits adjacent to *theorem*, so using it would claim standing the model cannot support — in the chapter that defines the test for exactly that error. **Premise** keeps the derivation role and drops the over-claim.
 
 It also echoes `README.md`'s own *The premise* section, where the book states the same idea informally; [chapter 02](../02_the-five-kinds_cjx4.md) is that premise made precise, and the TOC entry now says so.
 
@@ -1881,7 +1881,7 @@ The author's third review of [chapter 13](../13_patterns-that-survive-translatio
 
 > I started to thing that lines like this after each worked pattern are like the chapter epigraphs we got rid off. Not much value and they create noise. Evaluate if removing these while preserving valuable parts without saying chapter this chapter that is better
 
-Eleven of the fourteen worked patterns ended on a line naming another chapter — *[chapter 04](../04_grading-a-law_q5c6.md)'s definitional claim applies*, *which is [chapter 08](../08_distribution_49yh.md)'s territory*, *[Chapter 07](../07_time_mdbn.md)'s registration example puts the hashing outside the lock for exactly this reason*.
+Eleven of the fourteen worked patterns ended on a line naming another chapter — *[chapter 04](../04_families-of-law_q5c6.md)'s definitional claim applies*, *which is [chapter 08](../08_distribution_49yh.md)'s territory*, *[Chapter 07](../07_time_mdbn.md)'s registration example puts the hashing outside the lock for exactly this reason*.
 
 **Options.**
 Delete them all, which loses real pointers; keep them, which is the status quo the author objected to; or separate the two things they were doing.
@@ -1889,7 +1889,7 @@ Delete them all, which loses real pointers; keep them, which is the status quo t
 **Decision.**
 Separate them. A cross-reference stays when the fact it carries is one the reader needs at that moment, and it is then written as the fact with a compact `(Ch. NN)` pointer. It goes when the sentence exists only to say another chapter owns the idea.
 
-By that test six lines lost their scaffolding and kept their content — *a copy with no invalidation strategy is a copy that is allowed to be wrong ([Ch. 04](../04_grading-a-law_q5c6.md))* says the thing rather than reporting that [chapter 04](../04_grading-a-law_q5c6.md) says it. One sentence was deleted outright: [chapter 07](../07_time_mdbn.md)'s registration example was a pure location, and the claim before it already stood.
+By that test six lines lost their scaffolding and kept their content — *a copy with no invalidation strategy is a copy that is allowed to be wrong ([Ch. 04](../04_families-of-law_q5c6.md))* says the thing rather than reporting that [chapter 04](../04_families-of-law_q5c6.md) says it. One sentence was deleted outright: [chapter 07](../07_time_mdbn.md)'s registration example was a pure location, and the claim before it already stood.
 
 **Why.**
 The failure is the one the epigraph decision found. A line that names another chapter reads as though it is adding authority, and authority is not what the book runs on — the mechanism is. It also degrades over time: a pointer to *where* a claim lives breaks silently when chapters move, while a pointer that states the claim survives being wrong about the number.
@@ -2057,7 +2057,7 @@ The defect is the same and the fix was free; it is recorded here so it can be re
 
 **What the verification caught.**
 Nothing behavioural, but two formatting defects the renames introduced: `Currency` lengthened [chapter 12](../12_patterns-that-cross_r8dw.md)'s struct and broke `gofmt`'s field alignment, and [chapter 13](../13_patterns-that-survive-translation_us2k.md)'s identity map needed its call sites updated to match.
-[Chapter 04](../04_grading-a-law_q5c6.md)'s retranscribed output, [chapter 07](../07_time_mdbn.md)'s race, [chapter 13](../13_patterns-that-survive-translation_us2k.md)'s identity map, and [chapter 13](../13_patterns-that-survive-translation_us2k.md)'s compiler error were all re-run and match what the chapters print — including the error text quoted in a comment, *cannot refer to unexported field at in struct literal of type delivery.Delivered*.
+[Chapter 04](../04_families-of-law_q5c6.md)'s retranscribed output, [chapter 07](../07_time_mdbn.md)'s race, [chapter 13](../13_patterns-that-survive-translation_us2k.md)'s identity map, and [chapter 13](../13_patterns-that-survive-translation_us2k.md)'s compiler error were all re-run and match what the chapters print — including the error text quoted in a comment, *cannot refer to unexported field at in struct literal of type delivery.Delivered*.
 
 **Consequence.**
 [Chapters 02](../02_the-five-kinds_cjx4.md), 08, and 09 needed no changes.
@@ -2095,7 +2095,7 @@ Two hooks were pulled back on a check against the chapters, and the corrections 
 
 **Consequence.**
 The rule this establishes for any promotional copy: **a hook must be cashable by the chapter it links to.**
-A reader who arrives on an overclaim and then meets [chapter 04](../04_grading-a-law_q5c6.md)'s careful separation of theorem, definition, and empirical law will feel the mismatch, and not overclaiming is the book's differentiator.
+A reader who arrives on an overclaim and then meets [chapter 04](../04_families-of-law_q5c6.md)'s careful separation of theorem, definition, and empirical law will feel the mismatch, and not overclaiming is the book's differentiator.
 
 ---
 
@@ -2125,7 +2125,7 @@ Same guarantee, 28 lines against 11.
 The talk was fetched and its slides extracted rather than paraphrased from memory, and two things in it do not survive into the version people quote.
 
 Norvig's count is "16 of 23 patterns are either **invisible or simpler**", and the preceding slide adds "**for at least some uses of each pattern**".
-The folk version — *patterns are just missing language features* — drops both, which is [chapter 04](../04_grading-a-law_q5c6.md)'s dropped-quantifier failure applied to a smaller result.
+The folk version — *patterns are just missing language features* — drops both, which is [chapter 04](../04_families-of-law_q5c6.md)'s dropped-quantifier failure applied to a smaller result.
 He also defines three levels, invisible / informal / formal, where the retelling has two.
 And he lists five purposes for patterns, of which "to avoid limitations of implementation language" is one; the claim that patterns are *only* workarounds is something readers added.
 
@@ -2187,7 +2187,7 @@ The chapter closed on *whatever survives is the design, whatever vanishes was th
 The move is now stated: **name the language first, then the design.** A document saying "use Strategy" means an interface and three classes in one language and passing a function in another, so omitting the language underspecifies the work — and the same reading applies to advice you receive.
 
 **Also on review.**
-The quantifier discussion was rewritten in plain words with [chapter 04](../04_grading-a-law_q5c6.md)'s halting-problem parallel given enough context to work without turning back, per the author's note that nobody re-reads an earlier chapter.
+The quantifier discussion was rewritten in plain words with [chapter 04](../04_families-of-law_q5c6.md)'s halting-problem parallel given enough context to work without turning back, per the author's note that nobody re-reads an earlier chapter.
 *Sum type* is now defined at first use.
 Two cross-references to [chapters 11](../11_what-a-pattern-is-for_3xzc.md) and 11 were cut as detours; the author's standing objection to "abrupt flashbacks" is that they need to earn their place, and these restated a convergence the local argument did not need.
 
@@ -2255,7 +2255,7 @@ Fowler on *CodeSmell*, crediting Kent Beck with the coinage: *"a surface indicat
 So the chapter grades terms in three tiers rather than treating loadedness as binary: **shape name, hint word, verdict noun**, separated by a one-sentence test — say the term about your own code, then disagree with it, and see whether the result parses.
 This grading is the book's own and the chapter says so.
 
-**Why this is not a repeat of [chapters 04](../04_grading-a-law_q5c6.md) and 13.**
+**Why this is not a repeat of [chapters 04](../04_families-of-law_q5c6.md) and 13.**
 Both of those are about a claim losing a qualifier — the halting problem's quantifier, Norvig's *for at least some uses*.
 [Chapter 15](../15_smuggled-verdicts_8y69.md)'s mechanism is lexical rather than propositional: a claim can be qualified and a noun cannot, so the condition is not merely dropped but made unsayable while the word is in play.
 The chapter states that difference rather than leaving the three to look alike.
@@ -2545,7 +2545,7 @@ Now conditional: **it carries the scope only where the sentence names it**, and 
 *This book is doing it too* — their objection was that it read as "part splitting hairs, part self-flattery, and part trying to counter every possible argument against the book pre-emptively like a paranoid."
 That is right about its placement. The material came from `docs/ai-material.md`'s warning that the book is most likely to commit its own diagnosed error, but answering the charge in the chapter that names the mechanism is pre-emption. The two non-negotiable conditions move to [chapter 24](../24_never-written-down_at4r.md)'s TOC entry, where the method is actually delivered.
 
-The opening paragraph listing [chapters 04](../04_grading-a-law_q5c6.md), 13, and 14 as prior instances also went. It was orientation rather than argument.
+The opening paragraph listing [chapters 04](../04_families-of-law_q5c6.md), 13, and 14 as prior instances also went. It was orientation rather than argument.
 
 **One recognition bullet was wrong about its own evidence.**
 The draft described the Reddit thread as an argument about what a word covers. The author quoted the post to show it is not: the poster found working code, could not fault it, still suspected it violated the proverb, and asked.
@@ -3704,7 +3704,7 @@ A log that is silently updated to match the present cannot be used as evidence a
 The draft proposed *the only reliable end is to take the choice away from the people having it*.
 The author rejected the register — too dramatic — and proposed *only a resort to authority can end it*.
 
-The draft objected on a specific ground rather than a general one: **authority is a defined term in this book.** [Chapter 02](../02_the-five-kinds_cjx4.md)'s own claim is that the kind of a claim *"determines how much authority it has"*, the four advice kinds *"form a ladder of authority"*, Style *"has no authority at all"*, [chapter 04](../04_grading-a-law_q5c6.md) has a section on where a claim's authority comes from, and 02 lists citing an authority rather than a mechanism as a failure symptom. So the sentence would have read as: Style has no authority, and what ends a Style argument is authority.
+The draft objected on a specific ground rather than a general one: **authority is a defined term in this book.** [Chapter 02](../02_the-five-kinds_cjx4.md)'s own claim is that the kind of a claim *"determines how much authority it has"*, the four advice kinds *"form a ladder of authority"*, Style *"has no authority at all"*, [chapter 04](../04_families-of-law_q5c6.md) has a section on where a claim's authority comes from, and 02 lists citing an authority rather than a mechanism as a failure symptom. So the sentence would have read as: Style has no authority, and what ends a Style argument is authority.
 
 The draft's replacement, *the choice is made once for everyone*, the author rejected in turn — *"wishy-washy… evokes the images of endless style convention meetings"* — which was correct, since it reads as consensus where the point is decisiveness.
 
@@ -4725,7 +4725,7 @@ Decision 13's requirement is satisfied, at the site that was always satisfying i
 
 **The general point, which is the author's and worth keeping.**
 Defining a term and stating the chapter's claim is the work. Announcing that the work is original is a separate move, and it is the book selling itself rather than saying something.
-The five other places where the book marks its own vocabulary — [chapters 04](../04_grading-a-law_q5c6.md), [05](../05_dependency-and-hiding_agjy.md), [15](../15_smuggled-verdicts_8y69.md), [19](../19_abstraction-as-insurance_4jk6.md), [21](../21_six-profiles_dnkz.md) — are all the shape the author describes: a clause at the point the term is used, saying it is not standard vocabulary so the reader knows what a search will return. None of them claims credit, and none is a paragraph.
+The five other places where the book marks its own vocabulary — [chapters 04](../04_families-of-law_q5c6.md), [05](../05_dependency-and-hiding_agjy.md), [15](../15_smuggled-verdicts_8y69.md), [19](../19_abstraction-as-insurance_4jk6.md), [21](../21_six-profiles_dnkz.md) — are all the shape the author describes: a clause at the point the term is used, saying it is not standard vocabulary so the reader knows what a search will return. None of them claims credit, and none is a paragraph.
 
 **A note on the draft's error, since the log is where method gets recorded.**
 Raising the conflict was right; deferring to the log without checking its factual claim was not.
@@ -4753,7 +4753,7 @@ Applying that literally, a chapter that names a standard result as a label — *
 On that test:
 
 - **[Chapter 02](../02_the-five-kinds_cjx4.md)** names Amdahl and Knuth as labels only, and after decision 114 removed the Appleton material it cites nothing. No section.
-- **[Chapter 04](../04_grading-a-law_q5c6.md)** discusses Two Generals, Hyrum's Law, Conway's Law and Amdahl's Law entirely as named results whose chapters own them, and quotes no work. No section.
+- **[Chapter 04](../04_families-of-law_q5c6.md)** discusses Two Generals, Hyrum's Law, Conway's Law and Amdahl's Law entirely as named results whose chapters own them, and quotes no work. No section.
 - **[Chapters 13](../13_patterns-that-survive-translation_us2k.md) and [21](../21_six-profiles_dnkz.md)** name no external work at all — they are synthesis chapters drawing on the rest of the book. No section.
 
 Adding sections to those four would have made them further-reading lists, which is the one thing the rule forbids.
@@ -5192,7 +5192,7 @@ One fix. The chapter wrote the noun both ways: *force map* twice and *force-map*
 
 **Slice 3 — sources.**
 The chapter cites no external work and gets no `## Sources` section, which puts it with [chapters 02](../02_the-five-kinds_cjx4.md), [13](../13_patterns-that-survive-translation_us2k.md) and [21](../21_six-profiles_dnkz.md).
-It quotes Conway — *negotiated and agreed upon* — but through [chapter 10](../10_change_rjf9.md), which owns that material and carries the citation. The rule that decided it is the one applied in slice 3 proper: a citation belongs where the material is owned, which is why [chapter 04](../04_grading-a-law_q5c6.md) needed a Turing entry (the halting-problem section is its own) and this chapter does not.
+It quotes Conway — *negotiated and agreed upon* — but through [chapter 10](../10_change_rjf9.md), which owns that material and carries the citation. The rule that decided it is the one applied in slice 3 proper: a citation belongs where the material is owned, which is why [chapter 04](../04_families-of-law_q5c6.md) needed a Turing entry (the halting-problem section is its own) and this chapter does not.
 
 **Slice 4 — reconciliation.**
 Fourteen ledger rows now own by `3fjx`, one added for the routed architecture line.
@@ -5339,7 +5339,7 @@ Four facts, found before the questions were put.
 
 The chapter was **9,630 words** against a book median of 3,842 and a next-longest of 5,840, so *too long* was the outlier of the book rather than an impression.
 The claim sentence was the shape `CLAUDE.md` names as a failure — two assertions welded with *and*, plus a third clause.
-Hyrum's Law was a ledger defect: [chapter 04](../04_grading-a-law_q5c6.md) already stated it *and* used Go's map randomization as the example, with verified command output and a Python contrast that chapter 04 did not have.
+Hyrum's Law was a ledger defect: [chapter 04](../04_families-of-law_q5c6.md) already stated it *and* used Go's map randomization as the example, with verified command output and a Python contrast that chapter 04 did not have.
 And the chapter already contained its own unifying section, *Both halves are fan-in*, sitting at 60% under *Why the claim holds* — which reframed *fragmented* from two subjects welded together into one subject whose spine arrives 5,700 words late.
 
 **The root question, and the one the tag did not raise.**
@@ -5471,7 +5471,7 @@ The author replaced the positions with descriptive prefixes in the table: *acycl
 **Decision.** Adopted, and set as proper names: **the Acyclicity Law**, **the Ranking Principle**, **the Three-Tier Idiom**.
 
 **Why.**
-Position numbers carry nothing and have to be decoded at every use, which is the argument [chapter 04](../04_grading-a-law_q5c6.md) already makes for naming its three kinds of Law rather than lettering them.
+Position numbers carry nothing and have to be decoded at every use, which is the argument [chapter 04](../04_families-of-law_q5c6.md) already makes for naming its three kinds of Law rather than lettering them.
 Capitalising the kind word follows the book-wide sweep in decision 120; capitalising the qualifier too makes each one read as a name rather than as a description that happens to contain a kind, which matters because they are referred to across sections.
 *Three-tier* takes a hyphen as a compound modifier.
 
@@ -5763,7 +5763,7 @@ The `bare ref` check caught two chapter references in the draft's own explanator
 
 **Context.**
 The author found the phrase wearing out: *it becomes annoying and in some places it's better to be more specific about the subject instead of alluding to it with "two halves".*
-Five sites were edited in [chapters 04](../04_grading-a-law_q5c6.md), [07](../07_time_mdbn.md), [10](../10_change_rjf9.md), [12](../12_patterns-that-cross_r8dw.md) and [13](../13_patterns-that-survive-translation_us2k.md).
+Five sites were edited in [chapters 04](../04_families-of-law_q5c6.md), [07](../07_time_mdbn.md), [10](../10_change_rjf9.md), [12](../12_patterns-that-cross_r8dw.md) and [13](../13_patterns-that-survive-translation_us2k.md).
 
 **Decision.** Adopted, and surveyed — the rule in `CLAUDE.md` is that a wording problem found in one place is a survey rather than a fix.
 
@@ -5779,7 +5779,7 @@ The sharpest was *a number does not have halves* — [chapter 05](../05_dependen
 
 [Chapter 12](../12_patterns-that-cross_r8dw.md) became *"both invariants are free"* four lines after *"The invariant is the same on both sides"* — singular, then plural, for one invariant carrying two requirements. Now *both requirements*.
 
-[Chapter 04](../04_grading-a-law_q5c6.md) became *"The practical form of the claim has two versions"*, but the two things are successive statements rather than alternatives: quoting somebody's number is not knowing yours, and knowing yours is not chasing their target. The count was dropped rather than renamed, since announcing a count and then delivering it is a tic this file already lists.
+[Chapter 04](../04_families-of-law_q5c6.md) became *"The practical form of the claim has two versions"*, but the two things are successive statements rather than alternatives: quoting somebody's number is not knowing yours, and knowing yours is not chasing their target. The count was dropped rather than renamed, since announcing a count and then delivering it is a tic this file already lists.
 
 **One inconsistency left standing.**
 [Chapter 07](../07_time_mdbn.md) now says *both sentences* of a two-sentence claim; [chapter 13](../13_patterns-that-survive-translation_us2k.md) says *the claim has two halves* of a two-sentence claim.
@@ -5845,7 +5845,7 @@ The author's brief: define the terms people get wrong first, give each important
 
 **What the questions turned up, before any writing.**
 
-The escape is real and the book already relies on it — [chapter 04](../04_grading-a-law_q5c6.md)'s *"memory does not lose messages, so the theorem's precondition is absent."*
+The escape is real and the book already relies on it — [chapter 04](../04_families-of-law_q5c6.md)'s *"memory does not lose messages, so the theorem's precondition is absent."*
 What the exchange added is the reason it is structural rather than a matter of degree: **Two Generals needs the channel to fail independently of the parties**, and in one process there is no state where both parties survive and the message vanished.
 
 Beyond in-process there is one further case and three near-misses.
@@ -5951,7 +5951,7 @@ What the paper does not settle is whether an error counts as a response, and the
 
 ***Network* is retired as this chapter's term.**
 The author: *"is it alright to abuse a well known cs term such as network like this? Why not simply use channel instead?"*
-Right on both counts. The chapter had been redefining a word every reader already has, and *channel* is the word the theorems themselves are stated over — Two Generals is over a channel that can lose messages. The Go collision was checked and is negligible: `chan` appears once in the book, in [chapter 04](../04_grading-a-law_q5c6.md), glossed as a queue.
+Right on both counts. The chapter had been redefining a word every reader already has, and *channel* is the word the theorems themselves are stated over — Two Generals is over a channel that can lose messages. The Go collision was checked and is negligible: `chan` appears once in the book, in [chapter 04](../04_families-of-law_q5c6.md), glossed as a queue.
 
 **A framing that was wrong rather than unclear.**
 The boundary sections opened *"the exemptions below are one scale rather than three categories, and the scale is how much fate two parts share."*
@@ -6054,7 +6054,7 @@ Reading [chapter 09](../09_scale_637f.md), the author raised removing it: *"I'm 
 
 **The draft's first answer was measured wrongly and has to be recorded as such.**
 It counted the five kind-names across Part II, found four in chapter 09 and none in chapter 08, and presented a table that made both look disconnected.
-The count measured vocabulary rather than use. Chapter 09 engages the model **five times** through [chapter 04](../04_grading-a-law_q5c6.md)'s sublanguage instead — *this is a theorem, so there are two moves and no others*, *true by definition*, *the measurements are empirical*, *the moves are chapter 04's two*, and a closing reference to quoting a number without its conditions.
+The count measured vocabulary rather than use. Chapter 09 engages the model **five times** through [chapter 04](../04_families-of-law_q5c6.md)'s sublanguage instead — *this is a theorem, so there are two moves and no others*, *true by definition*, *the measurements are empirical*, *the moves are chapter 04's two*, and a closing reference to quoting a number without its conditions.
 
 **And the dependency runs the other way, harder.** Chapter 04 uses chapter 09's material for three of its own worked examples: the memory hierarchy as a law that drifts, the cache-versus-main-memory gap as an empirical law that decides a design, and **Amdahl as the worked case in *Firmness is not relevance***, which is chapter 04's mandatory boundary section. Cutting chapter 09 would leave chapter 04 arguing from material with no home.
 

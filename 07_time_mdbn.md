@@ -398,7 +398,7 @@ The failure is importing distributed-systems machinery — vector clocks, causal
 
 **Enforcement in one place means error messages in another.** Moving uniqueness into a database constraint gets you correctness and a constraint violation with a constraint name in it. Turning that back into something a user can read is real work, done in a place that has to know what every constraint means.
 
-**Atomic operations are easy to make slower than locks.** A single mutex under low contention is frequently faster than a lock-free structure written to avoid it, because the lock-free version pays on every access what the mutex pays only when contended. Measure, and expect to be wrong ([Ch. 04](04_grading-a-law_q5c6.md), on empirical constants).
+**Atomic operations are easy to make slower than locks.** A single mutex under low contention is frequently faster than a lock-free structure written to avoid it, because the lock-free version pays on every access what the mutex pays only when contended. Measure, and expect to be wrong ([Ch. 04](04_families-of-law_q5c6.md), on empirical constants).
 
 **Causal ordering costs space that grows with the system.** Lamport clocks are an integer. Vector clocks are an integer per node, attached to every message, and pruning them safely as nodes come and go is its own problem.
 

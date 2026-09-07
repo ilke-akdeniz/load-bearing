@@ -8,7 +8,7 @@
 
 | Claim | Kind | Standing |
 |---|---|---|
-| **Acyclicity Law**: If A depends on B, then B must not depend on A — directly or through any chain | **Law** | true by definition ([Ch. 04](04_grading-a-law_q5c6.md)) |
+| **Acyclicity Law**: If A depends on B, then B must not depend on A — directly or through any chain | **Law** | true by definition ([Ch. 04](04_families-of-law_q5c6.md)) |
 | **Ranking Principle**: The parts can be stacked into layering ranks, each depending only on the rank beneath it | **Principle** | true when the graph is that shape, and often it isn't |
 | **Three-Tier Idiom**: The ideal ranking, top to bottom, is `presentation → business → data`, and each rank becomes a physical boundary | **Idiom** | 1990s enterprise Java and C# |
 

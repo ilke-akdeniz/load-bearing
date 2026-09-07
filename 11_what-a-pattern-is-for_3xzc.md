@@ -22,7 +22,7 @@ A pattern catalogue is a record of shapes that were already occurring. Fowler's 
 
 That is **ethnography**: someone observed a population and named the recurring structures. It is descriptive work, and it is genuinely useful, because a shape that keeps appearing independently is worth having a word for.
 
-What happens next is the problem, and it is a mechanism the book has already named. [Chapter 04](04_grading-a-law_q5c6.md) draws the line between a claim that **describes** what happens and one that **prescribes** what to do — and notes that only a prescription can be bad advice, because only a prescription is advice. A catalogue describes. Read as a checklist, "shapes that occur" silently becomes "shapes you should have," and a list of observations becomes a list of obligations.
+What happens next is the problem, and it is a mechanism the book has already named. [Chapter 04](04_families-of-law_q5c6.md) draws the line between a claim that **describes** what happens and one that **prescribes** what to do — and notes that only a prescription can be bad advice, because only a prescription is advice. A catalogue describes. Read as a checklist, "shapes that occur" silently becomes "shapes you should have," and a list of observations becomes a list of obligations.
 
 Nobody performs that conversion deliberately. It happens because a catalogue of solutions, read by someone with a problem, looks exactly like a menu.
 

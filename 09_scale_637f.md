@@ -8,7 +8,7 @@ Intuition says the relationship is a straight line: twice the servers, twice the
 
 This chapter works through four laws and the three shapes they produce.
 
-Each law's grade is stated too, in the sense [chapter 04](04_grading-a-law_q5c6.md) defines. Which law you are up against, and what grade it carries, decides whether the fix is more hardware, less sharing, or a different design.
+Each law's grade is stated too, in the sense [chapter 04](04_families-of-law_q5c6.md) defines. Which law you are up against, and what grade it carries, decides whether the fix is more hardware, less sharing, or a different design.
 
 ---
 
@@ -52,7 +52,7 @@ The result is a multiplier: how many times faster the whole job runs. As `N` gro
 
 The practical reading: **find the un-splittable fraction before you buy anything.** At 25% it barely matters what hardware you have.
 
-So there are two moves and no others ([Ch. 04](04_grading-a-law_q5c6.md)). Falsify an assumption, or stop needing the conclusion. The assumption worth attacking is that `s` is fixed — usually it is a lock, a single writer, or a coordination step somebody chose ([Ch. 07](07_time_mdbn.md)), and making it smaller raises the ceiling in a way that hardware cannot.
+So there are two moves and no others ([Ch. 04](04_families-of-law_q5c6.md)). Falsify an assumption, or stop needing the conclusion. The assumption worth attacking is that `s` is fixed — usually it is a lock, a single writer, or a coordination step somebody chose ([Ch. 07](07_time_mdbn.md)), and making it smaller raises the ceiling in a way that hardware cannot.
 
 **The famous attempt at the other assumption is worth knowing about, and worth being careful with.** Amdahl assumes the job is fixed, the parallel part included. Decline that, let the parallel part grow with the machine, and the twenty minutes stops being a ceiling and becomes an overhead: sixteen cores then get through 1300 minutes of work in the same 100, a speedup of 13 rather than 4. That is **Gustafson's Law**, `speedup = s + N(1 − s)`, and it is usually introduced as the result that overturned Amdahl.
 
@@ -115,7 +115,7 @@ items inside = arrival rate × time each one spends inside
 
 At 500 requests per second with 200 ms average response time, there are 100 requests inside your system at any moment. That number is worth having, because if your connection pool holds 50, then half of those requests are queuing for a connection and the pool is your bottleneck — a thing you can check this afternoon.
 
-The law assumes essentially nothing, which makes it true by **definition** ([Ch. 04](04_grading-a-law_q5c6.md)) for any queue that is not growing without limit.
+The law assumes essentially nothing, which makes it true by **definition** ([Ch. 04](04_families-of-law_q5c6.md)) for any queue that is not growing without limit.
 
 ### The queueing curve
 
@@ -191,7 +191,7 @@ That failure is the more useful result. The same test with integer keys:
 
 Scanning wins up to about eleven integers, and never wins for strings. So the crossover point is **not a property of the two algorithms.** It is set by how expensive one comparison is against one hash, and comparing strings is expensive enough to move the crossing off the chart entirely.
 
-Which makes the familiar advice — *use a list under about twenty items* — a number quoted without the conditions that produced it, exactly the failure [chapter 04](04_grading-a-law_q5c6.md) describes — the pattern holds, but the threshold belongs to somebody else's data type and machine.
+Which makes the familiar advice — *use a list under about twenty items* — a number quoted without the conditions that produced it, exactly the failure [chapter 04](04_families-of-law_q5c6.md) describes — the pattern holds, but the threshold belongs to somebody else's data type and machine.
 
 In practice, at these sizes the difference is nanoseconds. Use the map and spend the attention elsewhere.
 
@@ -254,7 +254,7 @@ A ceiling means stop buying hardware and shrink the serial part. A reversal mean
 
 Every measurement in this chapter was taken on the machine it was written on — an Apple M4 laptop, Go 1.26.5, ten cores and 32 GB of memory.
 
-**Your numbers will differ, and that is the point.** The formulas are exact and hold everywhere. The measurements are empirical ([Ch. 04](04_grading-a-law_q5c6.md)), which means the *pattern* described by the law transfers and the *number* does not. Someone else's benchmark tells you a shape exists; only your own tells you where you are on it.
+**Your numbers will differ, and that is the point.** The formulas are exact and hold everywhere. The measurements are empirical ([Ch. 04](04_families-of-law_q5c6.md)), which means the *pattern* described by the law transfers and the *number* does not. Someone else's benchmark tells you a shape exists; only your own tells you where you are on it.
 
 ---
 

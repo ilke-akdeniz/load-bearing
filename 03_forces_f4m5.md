@@ -503,7 +503,7 @@ That is the reversibility question again, and it is the only one that still work
 
 The remedy in each case is the same, and it is almost never applied — stop arguing about the Principle and ask each side what they believe about the situation.
 
-[Chapter 04](04_grading-a-law_q5c6.md) turns to Laws, and to the fact that they do not all have the same standing — a proven theorem, a near-tautology, and an empirical regularity are three different kinds of true.
+[Chapter 04](04_families-of-law_q5c6.md) turns to Laws, and to the fact that they do not all have the same standing — a proven theorem, a near-tautology, and an empirical regularity are three different kinds of true.
 
 ---
 
@@ -514,4 +514,4 @@ The remedy in each case is the same, and it is almost never applied — stop arg
 
 ---
 
-[← Ch. 02](02_the-five-kinds_cjx4.md)  ·  [Contents](00_toc.md)  ·  [Ch. 04 →](04_grading-a-law_q5c6.md)
+[← Ch. 02](02_the-five-kinds_cjx4.md)  ·  [Contents](00_toc.md)  ·  [Ch. 04 →](04_families-of-law_q5c6.md)

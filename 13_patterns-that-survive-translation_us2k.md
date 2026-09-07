@@ -401,7 +401,7 @@ value := source.Get(key)
 cache.Set(key, value, ttl)
 ```
 
-*The constraint:* the cached copy may be stale, so the design is not the lookup — it is the invalidation. A copy with no invalidation strategy is a copy that is allowed to be wrong ([Ch. 04](04_grading-a-law_q5c6.md)).
+*The constraint:* the cached copy may be stale, so the design is not the lookup — it is the invalidation. A copy with no invalidation strategy is a copy that is allowed to be wrong ([Ch. 04](04_families-of-law_q5c6.md)).
 
 *The cost:* a second source of truth, a stampede when a popular key expires and every request misses at once, and a debugging surface where the answer depends on what happened earlier.
 
@@ -411,7 +411,7 @@ cache.Set(key, value, ttl)
 - **Backpressure** — when the consumer cannot keep up, make the producer wait rather than growing a queue. The alternative is [chapter 09](09_scale_637f.md)'s queue curve, and it ends in memory exhaustion.
 - **CQRS**, for Command Query Responsibility Segregation — separate the write model from the read model, so each can be shaped for its own access pattern. Its real cost is that they are now two models that can disagree.
 - **Materialised view** — precompute the answer, and accept that it lags.
-- **Data-oriented layout** — [chapters 04](04_grading-a-law_q5c6.md) and 07 own it; the 7× that comes from where the bytes sit rather than what the algorithm does.
+- **Data-oriented layout** — [chapters 04](04_families-of-law_q5c6.md) and 07 own it; the 7× that comes from where the bytes sit rather than what the algorithm does.
 
 ### Force: Control of the callers
 

@@ -14,7 +14,7 @@ Back to [the introduction](README.md).
 
 ## Part II — The Foundations
 
-- 04. [Three Kinds of True](04_grading-a-law_q5c6.md)
+- 04. [Three Kinds of True](04_families-of-law_q5c6.md)
 - 05. [Dependency and Hiding](05_dependency-and-hiding_agjy.md)
 - 06. [Layered Architecture](06_layering_p2vk.md)
 - 07. [Time: Concurrency and Clocks](07_time_mdbn.md)

@@ -195,7 +195,7 @@ Everything so far has been about which way the arrows point. This is about how m
 
 Parnas, 1972 — the founding paper, and still the clearest statement: decompose a system by what each module *hides*, not by the steps of the process it performs. The value of a module is the decision it keeps to itself, because that is the decision you can change later without telling anyone.
 
-The mechanism is fan-in again. A decision that nothing can observe has a fan-in of zero and is therefore free to change. A decision that is visible has as many dependents as care to look, and nobody tells you when someone starts looking. That last point is not a guess: with enough users, every observable behaviour of a system ends up depended on regardless of what was documented, which is Hyrum's Law — [chapter 04](04_grading-a-law_q5c6.md) grades it and works through what Go and Python each did about it.
+The mechanism is fan-in again. A decision that nothing can observe has a fan-in of zero and is therefore free to change. A decision that is visible has as many dependents as care to look, and nobody tells you when someone starts looking. That last point is not a guess: with enough users, every observable behaviour of a system ends up depended on regardless of what was documented, which is Hyrum's Law — [chapter 04](04_families-of-law_q5c6.md) grades it and works through what Go and Python each did about it.
 
 So **your export surface is a liability inventory, not a feature list.** Every exported identifier — a capital letter in Go, `public` in C# — is a commitment you did not necessarily mean to make, and taking one back is a breaking change even if no document mentioned it. The export surface, not the design document, is the real API:
 
@@ -626,4 +626,4 @@ The next chapter takes the shape most people mean when they say architecture. Ev
 
 ---
 
-[← Ch. 04](04_grading-a-law_q5c6.md)  ·  [Contents](00_toc.md)  ·  [Ch. 06 →](06_layering_p2vk.md)
+[← Ch. 04](04_families-of-law_q5c6.md)  ·  [Contents](00_toc.md)  ·  [Ch. 06 →](06_layering_p2vk.md)
