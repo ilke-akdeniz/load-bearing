@@ -12,9 +12,7 @@ Each law's family is stated too, in the sense [chapter 04](04_families-of-law_q5
 
 ---
 
-## Four Laws
-
-### Amdahl's Law
+## Amdahl's Law
 
 First a clarification for two key terms: we use *parallel part* and *serial part* for the splittable and non-splittable portions of the work.
 
@@ -60,7 +58,7 @@ It did not, and the condition it rests on is the part that gets dropped. Gustafs
 
 So this is not a second law standing beside the first. Karbowski derives it from Amdahl in a page and concludes that it *"is nothing but a different form of Amdahl's law"*, and that the popular claim it overthrows Amdahl *"is a mistake"*. What is sold as a law is the theorem re-measured, resting on an empirical bet about your workload — advice that is good given certain Forces and wrong without them, which in this book's vocabulary makes it a **Principle** wearing a Law's name. The test before taking the bet: **is your serial part a fixed startup cost, or is it work proportional to the data?**
 
-### The Universal Scalability Law
+## The Universal Scalability Law
 
 **Empirical law:** Past some number of workers, adding more *reduces* throughput, because each worker contends with every other for whatever they share.
 
@@ -103,7 +101,7 @@ The practical reading: when a system is slow and adding workers does not help, a
 
 The coefficients being fitted rather than derived is what decides how much of this transfers. A measurement can falsify them, which means the shape is worth trusting and the location is not: where your peak sits is a property of your contention, and nobody else's benchmark can find it for you.
 
-### Little's Law
+## Little's Law
 
 **A definitional law:** the number of things inside a system at once is the arrival rate multiplied by the average time each one spends there.
 
@@ -117,7 +115,7 @@ At 500 requests per second with 200 ms average response time, there are 100 requ
 
 The law assumes essentially nothing, which makes it true by **definition** ([Ch. 04](04_families-of-law_q5c6.md)) for any queue that is not growing without limit.
 
-### The queueing curve
+## The queueing curve
 
 **A theorem.** *Utilization* is the fraction of time a server is busy: 0.8 means busy 80% of the time, idle 20%. For a single server handling irregular traffic, the time a request spends waiting grows as `1 / (1 − utilization)`:
 

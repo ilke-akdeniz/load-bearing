@@ -28,9 +28,7 @@ Nobody performs that conversion deliberately. It happens because a catalogue of 
 
 ---
 
-## The demonstration
-
-### Test one: does the name save more words than it costs?
+## Test one: does the name save more words than it costs?
 
 The straightforward test, and the easier one to pass.
 
@@ -53,7 +51,7 @@ The last two fail, and it is worth being exact about why, because it is not that
 
 So compression is a claim about a shared vocabulary, not about a word. A name coined inside one codebase compresses nothing for anyone outside it, however precise it is. That is the difference between vocabulary and jargon, and it is decided by the audience rather than by the term.
 
-### Test two: does the name rule anything out?
+## Test two: does the name rule anything out?
 
 The harder test, and the one that separates a name carrying information from a name that only sounds like it does.
 
@@ -108,7 +106,7 @@ Is that a Facade? Yes. Is anything that calls several things and exposes fewer m
 
 That is not an argument against the word existing. It is an observation that it belongs in the vocabulary bucket, not the constraint bucket — and [chapter 12](12_patterns-that-cross_r8dw.md) shows that the answer changes once the other side stops being yours, which is a different question from this one.
 
-### The two tests are independent
+## The two tests are independent
 
 Facade is the case that proves it: it compresses well and constrains nothing. Putting the tests on two axes gives four outcomes, and each behaves differently in a codebase.
 

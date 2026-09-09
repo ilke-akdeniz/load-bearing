@@ -12,9 +12,7 @@
 
 ---
 
-## The demonstration
-
-### Domain and force profile are two different axes
+## Domain and force profile are two different axes
 
 A flight simulator, a video encoder and a high-frequency trading loop share almost nothing anyone would call a domain. They share a force profile: a fixed latency budget measured in milliseconds, inside which the memory hierarchy decides what is possible. And they share its inversions — all three end up with memory layouts nobody may hide and allocation moved out of the loop.
 
@@ -45,7 +43,7 @@ The left column is where each profile is commonly met, not what the profile is. 
 
 **Most of what follows is worked elsewhere in this book**, because the individual findings belong to the chapters that established them. What this chapter adds is the observation that they are not scattered. They cluster, one cluster per Force that leaves its ordinary range.
 
-### Line-of-business: the schema outlives the code
+## Line-of-business: the schema outlives the code
 
 The Force is durability. A payroll system's tables will be read by software nobody has written yet, in a language nobody has chosen, after every original author has left.
 
@@ -57,7 +55,7 @@ The ORM question follows from the same Force and is worth stating plainly, becau
 
 It is that an ORM chosen because it means you will not have to write SQL is chosen on a promise this profile breaks. You will read the SQL it generates — on the day a query is slow, a migration is wrong, or a constraint cannot be expressed through the mapping. That is an argument against one particular reason for picking one, not against the tool.
 
-### Games and simulations: the memory layout is the interface
+## Games and simulations: the memory layout is the interface
 
 The Forces are the frame budget and the memory hierarchy, and [chapter 05](05_dependency-and-hiding_agjy.md) works this profile's central inversion. *Hide the representation* turns over: in an entity-component system the order and grouping of fields in memory is what a dozen systems index directly, so it is the contract rather than a private detail, and changing it means changing all of them. [Chapter 09](09_scale_637f.md) owns the arithmetic underneath it.
 
@@ -71,7 +69,7 @@ Outside this profile, allocating in a loop is a performance question you resolve
 
 The mainstream treats reproducibility as a testing convenience. In a simulation it is part of the specification, because a replay that drifts is not a replay and a bug report you cannot reproduce is not a bug report. What costs reproducibility is precisely the better routes: a parallel reduction sums in a different order than a sequential one, fused multiply-add is more accurate and changes the result, an adaptive timestep is better physics than a fixed one, and iterating a hash map is fine until the order leaks into the simulation. So the deterministic version is often slightly less accurate per step and slower, on purpose. The divergence you are avoiding is tiny — and tiny is fatal, because it compounds over a few thousand frames into two machines watching different games. [Chapter 07](07_time_mdbn.md)'s ordering material is the mechanism; what is unusual here is which side of the trade is non-negotiable.
 
-### Embedded and real-time: no allocator, no second chance
+## Embedded and real-time: no allocator, no second chance
 
 The Force is a deadline that is part of the specification rather than a target, on hardware with a fixed memory budget and often no heap at all.
 
@@ -94,7 +92,7 @@ status_t read_sample(sensor_t *sensor, uint16_t *out) {
 
 **And what inverts quietly: inject your dependencies.** Here it becomes: construct them, once, in place. There is one sensor, one radio, one clock, and the composition root [chapter 05](05_dependency-and-hiding_agjy.md) argues for has exactly one composition to root. Injection buys the ability to substitute something that does not exist, and the seam costs a pointer indirection on a deadline you are already fighting.
 
-### Compilers and language tooling: one type touched by everything
+## Compilers and language tooling: one type touched by everything
 
 The Force is the shape of change. A compiler's abstract syntax tree — the tree of nodes representing the parsed program — is read by the type checker, the optimizer, the code generator, the formatter and the language server. Every one of them depends on it.
 
@@ -104,7 +102,7 @@ The reason is [chapter 05](05_dependency-and-hiding_agjy.md)'s, applied to a sha
 
 What this profile adds is that the property generalises: **a type depended on by everything is a problem exactly when it also depends on things.** Fan-in alone is not the smell. Fan-in with fan-out is.
 
-### UI frameworks: you are not the caller
+## UI frameworks: you are not the caller
 
 The Force is control of the callers, at the third of the three intensities [chapter 03](03_forces_f4m5.md) gives it: you can neither see your callers nor change them. And it applies from both ends. As a framework author you cannot see your callers. As a framework *user* you are the callee, and the flow of control belongs to somebody else.
 
@@ -114,7 +112,7 @@ The Force is control of the callers, at the third of the three intensities [chap
 
 Which has a practical consequence worth more than the definition: the framework's lifecycle is a Force, not a convention. Fighting it — holding state outside it, calling into it from your own loop, treating its callbacks as an inconvenient API over the thing you really wanted — is the single most common way applications under this profile become unmaintainable, and it is always defended in the language of good architecture.
 
-### Distributed services: atomicity is gone, so everything downstream changes
+## Distributed services: atomicity is gone, so everything downstream changes
 
 The Force is concurrency across machines, and [chapter 08](08_distribution_49yh.md) owns this profile end to end: you cannot tell a late reply from one that is never coming, exactly-once delivery is impossible, so at-least-once plus idempotency is the shape everything takes, and two systems cannot share a transaction.
 
@@ -122,7 +120,7 @@ The profile-level observation is what happens to the toolkit as a whole. Nothing
 
 **Which is the signature of a profile, and the reason this chapter groups by Force rather than by domain.** A Force outside its ordinary range does not overturn one piece of advice. It overturns the whole family that depended on it, because they all depended on the same thing — and here the thing is that a set of writes either all happen or none do.
 
-### What the six have in common
+## What the six have in common
 
 In every case the pattern is identical, and it is [chapter 02](02_the-five-kinds_cjx4.md)'s distinction seen at scale.
 

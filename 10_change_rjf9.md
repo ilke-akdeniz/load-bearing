@@ -18,9 +18,7 @@ Most systems have one or two of the three. A team with a database but no externa
 
 ---
 
-## The demonstration
-
-### Software that is used must change
+## Software that is used must change
 
 The first of **Lehman's laws of software evolution**, from Meir Lehman and László Belady's study of large systems in the 1970s: a system that is used must be continually adapted, or it becomes progressively less satisfactory.
 
@@ -32,7 +30,7 @@ That is a ratchet, and it works because of an asymmetry in what changes cost. Ad
 
 **On how much weight these carry.** Lehman's laws are empirical, and the study population was mainframe systems, decades ago, with release cycles measured in years. There are eight of them, and they are not equally solid — the two above are widely recognizable, and several of the others ("conservation of familiarity," "conservation of organizational stability") are vague enough that they resist being checked at all.
 
-### Once published, it is forever
+## Once published, it is forever
 
 This is the sharpest constraint in the chapter, and the one that is most often discovered late.
 
@@ -101,7 +99,7 @@ This does not contradict the argument above, because it is the same rule. *Once 
 
 [Chapter 05](05_dependency-and-hiding_agjy.md) covers the other half of this problem: users depend on behaviour you never documented, so the surface you are committed to is larger than the one you published.
 
-### The organization ends up in the software
+## The organization ends up in the software
 
 **Conway's Law**, from Melvin Conway in 1968. In his words:
 
@@ -151,7 +149,7 @@ Both directions of mismatch are common.
 
 *(The quotations are from Conway's 1968 paper, "How Do Committees Invent?" The negotiation mechanism is his. What this book adds is the asymmetry that makes a partition stick — free to change inside an owner, expensive across — and the reading of "communication structure" as ownership, which is how his design-group argument lands in an organization that has teams rather than committees.)*
 
-### One team per service, and where that heuristic breaks
+## One team per service, and where that heuristic breaks
 
 Conway's Law is the reason behind the common advice that each service should have exactly one owning team, and the reasoning is sound as far as it goes: a deployment boundary that crosses a team boundary needs coordination on every release, which is the cost the boundary was supposed to remove.
 
@@ -165,7 +163,7 @@ Conway's homomorphism says why, if you follow the direction it runs. A map from 
 
 The honest form: let the problem decide how many parts there are, then make sure no part is owned by more than one team. If that turns out to be impossible with the teams you have, that is real information about the organization, and it is what the inverse manoeuvre is for.
 
-### Coordination grows faster than the team
+## Coordination grows faster than the team
 
 **Brooks's Law**, from Fred Brooks in 1975: adding people to a late software project makes it later.
 
@@ -194,7 +192,7 @@ At twenty people, a quarter of everyone's time goes on staying aligned, before a
 
 Note what the law does *not* say. It is not "adding people never works," which would be absurd — every team that has ever grown is a counter-example. It says adding people to a **late** project makes it later, and the word doing the work is *late*.
 
-### What "late" actually means, worked
+## What "late" actually means, worked
 
 Here is a scenario worth putting numbers to, because it separates two situations that look identical on a status report.
 

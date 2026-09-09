@@ -8,9 +8,7 @@ Every chapter so far has worked on a claim somebody made about software. This on
 
 ---
 
-## The demonstration
-
-### The chain, from the end
+## The chain, from the end
 
 Start from the end goal and ask what each level needs in order to exist.
 
@@ -36,7 +34,7 @@ Read downward it is unremarkable. Read upward it is the argument, because each l
 
 **Ownership is where people enter.** Standups, retrospectives, planning sessions, review policies — every one of them carries a tension looking for a resolution, and the tension is always the same question: *which artifacts do we need, and who makes each one?* For many teams, that question is never asked and answered clearly, and the meetings turn into a ceremony.
 
-### The artifacts that come before code
+## The artifacts that come before code
 
 Code is the obvious artifact and the easiest to own correctly. Nobody argues that code is unnecessary, and nobody says *the team will write this at next week's coding meeting*. Assigning a ticket to one person is second nature.
 
@@ -53,7 +51,7 @@ Four artifacts sit between a request and the code. The claim here is not that th
 
 Each is described below by what it looks like, who should own it, and what that owner has to be able to do. **Owners are given by capability and never by title.** A title says what somebody is called in one company; the capability says whether the artifact will exist, and it is the same question in a startup of four and a bank of forty thousand.
 
-### 1. The rules and invariants
+## 1. The rules and invariants
 
 The root, because everything after it is conditioned on it. What must always be true of this system — an invoice reconciles, a booking cannot double-sell a seat, a payment is applied once.
 
@@ -63,7 +61,7 @@ The root, because everything after it is conditioned on it. What must always be 
 
 **What that owner must be able to do.** Get a decision out of the business and refuse a vague answer. Not translate a vague answer into a precise-sounding one — obtain a real one, which sometimes means going back three times.
 
-### 2. The force map
+## 2. The force map
 
 [Chapter 20](20_force-map-method_r37x.md) owns the method and [chapter 03](03_forces_f4m5.md) owns the Forces themselves. What is added here is that its output is an artifact somebody owns, and that its size varies more than anything else in the list.
 
@@ -94,7 +92,7 @@ Nothing in that second version is a design. It is a set of constraints, and hand
 
 **What that owner must be able to do.** Price the options. [Chapter 20](20_force-map-method_r37x.md) is blunt that this is where the expertise goes, and a reading produced by somebody who cannot say what a mechanism costs is a confident document with the wrong values in it.
 
-### 3. The solution
+## 3. The solution
 
 This one is missing from the rest of the book, and [chapter 20](20_force-map-method_r37x.md) says so itself: **the output of a force map is not a design.** It is a record of what was forced and what was chosen. Constraints, not an answer.
 
@@ -110,7 +108,7 @@ This is what the word *architecture* is usually reaching for, and it is worth sa
 
 **When the rules and the map exist and there is still an argument, it is about the solution — and that is the argument worth having, because it is the only one of the three with genuine alternatives in it.**
 
-### 4. The code
+## 4. The code
 
 The artifact everybody already owns properly, and it is worth asking why.
 

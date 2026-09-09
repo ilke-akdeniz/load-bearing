@@ -18,13 +18,11 @@ If yes, a pattern is one option among several, and often not the cheapest. If no
 
 The rest of the chapter is one worked example crossing that line, and then what happens to the familiar pattern names when they cross it.
 
----
-
-## The demonstration
-
 Throughout: **FastSell**, a shop. It takes payments and it keeps a ledger.
 
-### Both sides yours: the pattern is optional
+---
+
+## Both sides yours: the pattern is optional
 
 FastSell started with its own payment code. Two internal packages, both written in-house, and their types do not quite line up:
 
@@ -89,7 +87,7 @@ That is the whole fix: rename two fields and delete the adapter. It is smaller, 
 
 *(Worth noting how completely this can evaporate. In Go, a type satisfies an interface by having the right methods, with no declaration required, so an adapter that exists only to announce conformance is not written at all. In C# or Java the same requirement produces a wrapper class per type. [Chapter 14](14_missing-language-features_esqm.md) takes up names whose content depends on the language that way.)*
 
-### One side theirs: the option disappears
+## One side theirs: the option disappears
 
 FastSell drops its own payment code and moves to Stripe. Nothing about the shape of the problem has changed — a payment result still has to become a ledger entry — but one thing has:
 
@@ -137,7 +135,7 @@ The pattern literature calls this an **Anti-Corruption Layer**, a name from Eric
 
 **Same pattern, same shape, both times.** In the first case, three lines that were better deleted. In the second, a file, an owner, and a standing obligation.
 
-### The names, and what crossing the line does to them
+## The names, and what crossing the line does to them
 
 | Pattern | Both sides yours | The other side is theirs | What appears when it crosses |
 |---|---|---|---|
@@ -192,7 +190,7 @@ You may add `POST /v1/orders/{id}/hold`. You may not rename the route, remove `D
 
 The name of the pattern did not change. What it commits you to did.
 
-### Why these arguments do not converge
+## Why these arguments do not converge
 
 Two engineers argue about whether something should be a Facade. One is picturing a class in the same package and hears a suggestion about tidiness. The other is picturing something other teams will call and hears a proposal to publish an interface that can never be narrowed.
 

@@ -33,9 +33,7 @@ That is why the dependency direction and information hiding belong in one chapte
 
 ---
 
-## The demonstration
-
-### A cycle, and what notices it
+## A cycle, and what notices it
 
 Two pieces of a workflow library. A store that writes rows, and a service that composes writes into a transaction.
 
@@ -94,7 +92,7 @@ Six outcomes for one structural fact. Go is the strictest of these and it is sti
 
 The Law does not care about any of this. The compiler is a partial detector operating at whatever granularity that language happens to check. **The damage is the same at every granularity; only the detection varies.**
 
-### What the damage actually is
+## What the damage actually is
 
 Most of it is not what people expect.
 
@@ -157,7 +155,7 @@ Every one of those is the same fact in a different costume: **the unit of compre
 
 None of it is a bug report. It shows up as estimates being wrong by a factor of five, as a refactor that gets abandoned, as a service extraction that slips two quarters. **The damage is denominated in future change, not in incorrect output** — which is why it accumulates unnoticed, and why no single commit looks like the culprit.
 
-### Breaking the cycle
+## Breaking the cycle
 
 The cycle shows up first at the construction site:
 
@@ -189,7 +187,7 @@ type Billing struct{ plans PlanLookup }
 
 The difference is not that an interface appeared. It is **which module owns it.** An interface declared by `accounts` and handed to `billing` would leave the arrow pointing exactly where it was; what reverses the direction is `billing` declaring what it needs, in its own terms. That distinction is the whole of dependency inversion, and it is the reason `net/http` may call up into your handler without a violation.
 
-### Anyone can depend on what you expose
+## Anyone can depend on what you expose
 
 Everything so far has been about which way the arrows point. This is about how many exist at all — the other way of losing control of the same number. A cycle is two arrows where there should be one. Information hiding is about not creating an arrow in the first place. A dependency that was never created costs nothing to change, forever.
 
@@ -213,7 +211,7 @@ FlowCore's decision log records the reasoning for keeping `querier` private, and
 
 Exporting `querier` would have bought nothing and tied the library's freedom to a third party's release schedule.
 
-### "Doesn't dependency injection contradict hiding?"
+## "Doesn't dependency injection contradict hiding?"
 
 It looks like it should. Injection means the caller has to be told about the thing being injected, and hiding says to know as little as possible. Both cannot be right.
 

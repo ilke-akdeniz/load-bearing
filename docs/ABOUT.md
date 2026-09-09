@@ -7,7 +7,7 @@ How *Load-Bearing* is put together. The book itself starts at [`README.md`](../R
 Each chapter follows this shape:
 
 1. **The claim** — one sentence, and the chapter opens on it.
-2. **The demonstration** — code, in two or more languages when the point concerns translation.
+2. **The demonstration** — code, in two or more languages when the point concerns translation. It carries no heading of its own: its sections sit at the top level, named for what each one shows, so the contents page of a chapter reads as its argument rather than as a rubric. [Chapter 03](03_forces_f4m5.md) is the exception, where `## Seven Forces` groups an enumeration that would otherwise scatter.
 3. **Why the claim holds** — the mechanism, never the authority. No argument from who said it.
 4. **Where the claim doesn't apply** — mandatory, with a worked counter-example.
 5. **What the claim costs** — every choice has a bill.

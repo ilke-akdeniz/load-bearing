@@ -25,9 +25,7 @@ Patterns another chapter owns appear with a pointer instead of a definition.
 
 ---
 
-## The demonstration
-
-### Force: Concurrency
+## Force: Concurrency
 
 > **Can two of these run at the same time and touch the same state?**
 
@@ -112,7 +110,7 @@ One round trip, and no way for the two to disagree about what order 42 currently
 - **Idempotency key** — [chapter 08](08_distribution_49yh.md) owns it; it is what makes at-least-once delivery survivable.
 - **Saga** — [chapter 08](08_distribution_49yh.md) owns it; the answer when the unit of consistency spans systems and no transaction can.
 
-### Force: Durability of the medium
+## Force: Durability of the medium
 
 > **If this process dies right now, what must still be true when it comes back?**
 
@@ -162,7 +160,7 @@ values ($1, -100, 'withdrawal', now());
 - **Data Mapper** — the object model and the tables are allowed to differ, and something translates. Its cost is the translation; its benefit is that neither side constrains the other.
 - **Transactional Outbox** — [chapter 08](08_distribution_49yh.md) owns this one, and it is what you reach for when Unit of Work's constraint cannot be met.
 
-### Force: Blast radius
+## Force: Blast radius
 
 > **When this breaks, what else stops working?**
 
@@ -205,7 +203,7 @@ func ParseAmount(text string) (Money, error)
 - **Parse, don't validate** — worked under team size, where its distinctive value is; it belongs here too, because a value that cannot be invalid cannot spread an invalid one.
 - **Make illegal states unrepresentable** — the same move in the type system: if the invalid combination has no representation, no code path can produce it.
 
-### Force: Change frequency, and its shape
+## Force: Change frequency, and its shape
 
 > **Which parts of this move at different rates?**
 
@@ -249,7 +247,7 @@ type Rates interface {
 - **Feature toggle** — separate deploying code from enabling it, so the two can move at different rates. Its cost is that every live toggle doubles the paths under test.
 - **Anti-corruption layer** — [chapter 12](12_patterns-that-cross_r8dw.md) owns it: what a translation boundary becomes when the thing on the other side is not yours to change.
 
-### Force: Team size and turnover
+## Force: Team size and turnover
 
 > **How many people must agree to change this, and how many of today's people will still be here in two years?**
 
@@ -362,7 +360,7 @@ The languages this pattern comes from do not have the hole. A Rust `enum` or an 
 - **Golden test** — assert a whole recorded artifact rather than picked-out fields. Worth it where the output is too large or too structured to assert piecemeal — a rendered invoice, a generated migration — and where you want changes nobody anticipated to show up as a diff. It over-constrains by design, which is the trade.
 - **Contract tests** — also a control-of-callers pattern, worked there. Same double duty: an agreement written down rather than remembered.
 
-### Force: Latency budget
+## Force: Latency budget
 
 > **What is the budget, and what does one mechanism cost of it?**
 
@@ -413,7 +411,7 @@ cache.Set(key, value, ttl)
 - **Materialised view** — precompute the answer, and accept that it lags.
 - **Data-oriented layout** — [chapters 04](04_families-of-law_q5c6.md) and 07 own it; the 7× that comes from where the bytes sit rather than what the algorithm does.
 
-### Force: Control of the callers
+## Force: Control of the callers
 
 > **Who else depends on this, and can I change them?**
 

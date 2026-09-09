@@ -82,11 +82,7 @@ Getting this backwards produces two recognizable errors:
 
 ---
 
-## The demonstration
-
-Three pieces of code: a Law violation, an Idiom difference, and a Force rendering a Law inert.
-
-### A Law violation: wrong in every language
+## A Law violation: wrong in every language
 
 ```go
 func Reserve(ctx context.Context, db *pgxpool.Pool, seatID string) error {
@@ -122,7 +118,7 @@ That is what a Law violation looks like: the program is wrong, and the wrongness
 
 *(The Law being broken is check-then-act, which [chapter 07](07_time_mdbn.md) owns.)*
 
-### An Idiom difference: same shape, opposite reception
+## An Idiom difference: same shape, opposite reception
 
 ```go
 // Go — completely ordinary. Nobody comments on this in review.
@@ -157,7 +153,7 @@ Two facts sit side by side:
 
 That is the signature of an Idiom. The rule is real, it is worth following, and it is **about the ecosystem rather than about the program**.
 
-### A Force rendering a Law inert
+## A Force rendering a Law inert
 
 Take the seat-reservation code again, unchanged, and put it somewhere else:
 

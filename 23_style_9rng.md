@@ -8,9 +8,7 @@
 
 ---
 
-## The demonstration
-
-### Nothing in the program depends on it
+## Nothing in the program depends on it
 
 Here is a function that totals the line items on an invoice, written the way `gofmt` writes it. Go's `range` yields an index and a value; `_` discards the index.
 
@@ -36,7 +34,7 @@ func Total( amounts []int ) int {
 
 Both print `1745` on the same input. That is the whole of what the machine has to say about the difference.
 
-### So the choice belongs to whoever makes it first
+## So the choice belongs to whoever makes it first
 
 Run `gofmt` over the second version and it reports the file, then rewrites it:
 
@@ -64,7 +62,7 @@ Rob Pike, looking back at Go's first fourteen years, gives the history and is ex
 
 That is one person, with the standing to make it stick, acting early. The result was not that Go settled the brace question correctly — there is no correct answer — but that Go stopped paying for it. Python's Black and JavaScript's Prettier are the same move made later.
 
-### The same question, with nothing to end it
+## The same question, with nothing to end it
 
 Now change the names instead of the layout:
 

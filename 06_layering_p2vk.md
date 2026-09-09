@@ -42,9 +42,7 @@ The three are taught together, defended together, and heard as one sentence. Sep
 
 ---
 
-## The demonstration
-
-### When the shape isn't a line
+## When the shape isn't a line
 
 The dependency graph of a compiler's own source — the packages the compiler is built from, not anything it reads or emits — is not a line, and it is worth walking through why, because this is the case where insisting on one does visible damage.
 
@@ -124,7 +122,7 @@ All three costs come from one mistake: the real graph was a directed acyclic gra
 
 > **Managed, acyclic dependency direction is the Law. Layering is its most common shape, not its definition.**
 
-### Layering, without directories
+## Layering, without directories
 
 The previous case had the Ranking Principle failing. This one has it holding and the Three-Tier Idiom absent, which is the combination that shows how little the physical boundary was doing.
 
@@ -170,7 +168,7 @@ argument to readState: *pgxpool.Pool does not implement txQuerier
 
 So: **layer ≠ directory.** A layer is a rule about which direction calls may go. Nothing about that rule requires, implies, or is helped by a file hierarchy.
 
-### When the lower layer is more capable
+## When the lower layer is more capable
 
 The third case has claim three not merely absent but inverted. Layered doctrine says business logic belongs in the business layer and the data layer is dumb persistence. Under that rule, this is a violation:
 

@@ -47,9 +47,7 @@ This grading is the book's own, and the axes are not standard vocabulary.
 
 ---
 
-## The demonstration
-
-### The same code, named twice
+## The same code, named twice
 
 Here is an invoice, in the style a great many working systems are built in. Plain data, functions that operate on it, and constraints in the database.
 
@@ -101,7 +99,7 @@ The first describes the file. The second describes the file *and convicts it*, a
 
 **That is the whole mechanism.** A name that convicts does not have to argue, because the argument arrives already finished.
 
-### What Fowler actually argued, and the condition that does not travel
+## What Fowler actually argued, and the condition that does not travel
 
 Worth reading the source rather than the reputation, because the original is careful and narrow.
 
@@ -119,7 +117,7 @@ So the argument is: *if* you bought the machinery, use it. Applied to the invoic
 
 **The verdict travels and the condition does not.** *Incurring the costs of a domain model without the benefits* is nine words carrying a condition; *anemic* is one word carrying the conclusion. [Chapter 16](16_principle-loses-scope_b86v.md) is about why the second outlives the first in transmission. This chapter's interest is narrower and starts where that leaves off: the word that survived **convicts**, so a reply has to reject the vocabulary before it can reach the design.
 
-### The third option the binary cannot see
+## The third option the binary cannot see
 
 The term offers two positions: behaviour on the objects, or behaviour nowhere. The invoice above is in neither, and the reason it looks like the second is that the term has no name for the third.
 
@@ -157,7 +155,7 @@ That constraint is a business rule, fully enforced, and it is behaviour by any d
 
 [Chapter 05](05_dependency-and-hiding_agjy.md) reaches the same place from the structural side, where a `completed_at is null` gate makes the lower layer the more capable one and inverts layering doctrine. Here the point is narrower: a term that cannot see the third option will misclassify every design that uses it.
 
-### Off the map: when the word names nothing at all
+## Off the map: when the word names nothing at all
 
 This is the bottom-right cell, and reaching it means leaving pattern territory. *Decorator* and *code smell* are not two grades of the same thing; on the grid above they sit diagonally opposite, and the difference matters more than the similarity.
 

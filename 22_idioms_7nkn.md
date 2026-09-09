@@ -12,9 +12,7 @@ That is why ecosystems diverge on the same question, and it is why an Idiom does
 
 ---
 
-## The demonstration
-
-### One split, two languages, opposite bills
+## One split, two languages, opposite bills
 
 Here is an order lookup in one Go package. In Go, an identifier beginning with a lower-case letter is visible only inside its own package — that is the whole of the language's access control, and there is no `private` keyword anywhere in it.
 
@@ -103,7 +101,7 @@ The usual reply is that Go has a mechanism for this, and it does — the `intern
 
 The export is the visible cost and the smaller one. [Chapter 05](05_dependency-and-hiding_agjy.md) prices enforced boundaries in a sentence — walls force exports and mapping code, worth paying at some team sizes and not others — and this is the second half of that bill, itemised. Once `store` and the service are separate packages, an entity type has to live somewhere. If it lives in `store`, the service's public API returns types owned by persistence, which is the coupling the split was meant to remove. If each side owns its own, there are two of them and something converts between them. FlowCore's decision names this as its reason for keeping one package: splitting would force two representations of each entity and a mapping layer between them, which is the duplication the split was supposed to prevent. The charge is per field, per entity, per boundary, and it is invisible in review because every individual mapping function is trivial. It is also where drift lives — add a column, and nothing fails to compile until you reach the second definition.
 
-### Where the line between Idiom and Style falls
+## Where the line between Idiom and Style falls
 
 Look again at what fixed the Go compile error. Renaming `scanOrder` to `ScanOrder` is a change of one character's case, which is the definition of a Style decision everywhere else. The Go specification says an identifier is exported if "the first character of the identifier's name is a Unicode uppercase letter" and it is declared in the package block. So in Go, capitalization is an access modifier.
 
@@ -124,7 +122,7 @@ In Go or C# that is a formatting preference, settled by running the formatter. I
 
 Pike, listing the things about Go that people have argued over for years, puts "using upper case for export" in the same breath as "where the newlines go". They belong in different categories, and the reason they get argued about in the same tone is [chapter 02](02_the-five-kinds_cjx4.md)'s: tone does not vary with authority.
 
-### One decision, three ecosystems
+## One decision, three ecosystems
 
 [Chapter 02](02_the-five-kinds_cjx4.md) shows the demonstration already — a Go `main` that wires its dependencies by hand is unremarkable, and the same shape in C# gets sent back in review. Neither version is more correct. What [chapter 02](02_the-five-kinds_cjx4.md) does not do is say why the two ecosystems ended up on opposite sides, and the answer is a condition each of them can name.
 

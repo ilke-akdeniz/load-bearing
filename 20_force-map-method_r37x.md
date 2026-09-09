@@ -8,9 +8,7 @@ Everything before this chapter was diagnosis. This is the procedure, and it is s
 
 ---
 
-## The demonstration
-
-### The three steps of force-mapping
+## The three steps of force-mapping
 
 **One: read the Forces.** Not the requirements — the Forces. [Chapter 03](03_forces_f4m5.md) names seven and gives each a question: how many run at once and do they touch the same state; how long what this writes outlives the code that wrote it; what happens when it is wrong and who finds out; how often it changes and how many places change with it; how many people must agree and how many will still be here; what the latency budget is and what fraction one mechanism costs; whether you can change every call site and would know if you broke one.
 
@@ -22,7 +20,7 @@ Answers are values, not verdicts. *Concurrency: two writers, same row, twice a s
 
 The sequence is the whole of the method. The same three steps in a different order do not fail loudly — they produce an answer that looks the same and cannot be checked, which is what the rest of this chapter is about.
 
-### Reading a Force is not measuring one
+## Reading a Force is not measuring one
 
 [Chapter 03](03_forces_f4m5.md) calls Forces facts about your situation, and the word invites a picture that is wrong: an instrument, a reading, a number. Some are like that. Row counts, request rates, latency budgets, the number of people with commit access, how many clients you cannot contact — these are countable, and where they are countable a disagreement is settled by going and counting.
 
@@ -34,7 +32,7 @@ And the seven are not a closed list. They are the Forces that recur often enough
 
 So step one is not instrument work, and this is where the expertise this chapter's costs section charges for actually goes. What the method claims is narrower than measurement and is still worth something: **a Force is the kind of thing that has an answer.** Two people disagreeing about whether callers can be changed are disagreeing about a fact, and can go and find out. Two people disagreeing about whether a repository is good architecture are not, and cannot. Moving an argument from the second kind to the first does not win it. It makes it winnable.
 
-### Four systems, read cold
+## Four systems, read cold
 
 Here are four systems, given only as force readings. Nothing about their architecture, their stack or their teams appears in the table, and nothing needs to.
 
@@ -54,7 +52,7 @@ The script is a one-off data migration, run once and deleted. The ledger records
 
 Nothing in that table is a design decision. Every cell is a fact somebody could check.
 
-### The same advice, four verdicts
+## The same advice, four verdicts
 
 Now run advice the book has already graded across all four, and watch it change value.
 
@@ -68,7 +66,7 @@ Now run advice the book has already graded across all four, and watch it change 
 
 Every difference above traces to a cell in the table, which means each one can be checked instead of argued.
 
-### A map, for one real decision
+## A map, for one real decision
 
 The table above is a comparison, not a map. Here is a map: one decision, from a real system, written the way the method produces it.
 
@@ -126,14 +124,14 @@ His reason for the practice is this chapter's argument in different words. Witho
 
 So what the map adds is two lines. **Forced against chosen** — an ADR's Context can carry it and usually does not, because describing the Forces and saying which of them left no alternative are separate sentences, and only the second one tells you what is safe to touch. And **revisit if**, which is not Nygard's Status. Status is set after a decision has been superseded; *revisit if* is written before, and names the thing to watch for. One records what happened. The other is a trigger.
 
-### What the map records
+## What the map records
 Generalising from that: the output is not a design. It is a record of which decisions were forced and which were chosen, and that distinction is the one thing you cannot reconstruct from the code afterwards.
 
 A forced decision has a Force behind it — *this is a version column because two writers touch one row.* A chosen decision does not — *this is a version column because that is what we do.* Both produce identical code. Only the first says what would have to change for it to stop being right.
 
 Which answers something [chapter 03](03_forces_f4m5.md) raises and leaves open. Forces move on their own clock, and nobody revisits a design when they do, because nothing signals it. A map is what makes the revisit possible: it says *this assumed two writers*, so when the second writer goes away there is a sentence to search for.
 
-### How to notice a Principle whose Forces are absent
+## How to notice a Principle whose Forces are absent
 
 Most Principles in a codebase were not derived there. They arrived with a framework, a previous employer, or a book, and the question is whether the situation they answer is your situation.
 
@@ -143,7 +141,7 @@ If the answer comes back concrete — *if only one process ever wrote to this ta
 
 The failure has a shape worth naming. Inherited Principles cluster: a codebase does not carry a single one, it carries the whole set that travelled together from similar sources. Finding one unforced principle is a reason to look at its neighbours.
 
-### When the Forces conflict
+## When the Forces conflict
 
 [Chapter 03](03_forces_f4m5.md) states the problem and hands it here: low latency pulls against durability, a small team pulls against a large blast radius, and naming both does not tell you which wins. It does not, and no method computes it. Trade-offs are decided.
 

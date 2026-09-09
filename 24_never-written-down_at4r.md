@@ -8,9 +8,7 @@ Every chapter before this one works on a claim somebody made. A proverb, a revie
 
 ---
 
-## The demonstration
-
-### A decision nobody wrote down
+## A decision nobody wrote down
 
 Here is a function that fetches a workflow definition and its steps. It is two queries, and they are wrapped in a transaction.
 
@@ -59,7 +57,7 @@ The second row is revision 1 of a definition that has three steps. **No such def
 
 [Chapter 20](20_force-map-method_r37x.md) maps this same decision as a log entry, with its Forces named and the transaction marked as forced rather than chosen. This is the same decision seen from the other end: in the code, where none of that is visible.
 
-### Why asking afterwards does not get it back
+## Why asking afterwards does not get it back
 
 If the transaction was put there by a person, there is a period during which you can find out why. They remember, or they wrote it down, or somebody who was in the room remembers. The period is finite and it is longer than nothing.
 
@@ -93,7 +91,7 @@ Those questions are different from the one grilling answers later on. A model ac
 
 Finally, one thing does survive without deliberate effort, and it is worth separating out because it gets conflated with the decisions. **What the code does is re-derivable from the code**, by a person or by the agent, at any time. Asking for a description of behaviour is reading. Asking why this shape was chosen is not — that was never in the artifact, and no amount of freshness puts it there.
 
-### Grilling: making the decision happen in the open
+## Grilling: making the decision happen in the open
 
 [Chapter 20](20_force-map-method_r37x.md)'s procedure assumes you can name the Forces before the design exists. Usually you cannot — not because you are careless, but because you do not yet know which decisions are about to be made, so you do not know which facts about your situation are about to matter.
 

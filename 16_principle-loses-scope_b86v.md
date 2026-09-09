@@ -12,9 +12,7 @@ Part IV is three case studies, and this chapter is the mechanism they share, sta
 
 ---
 
-## The demonstration
-
-### The form Pike borrowed, and what it was for
+## The form Pike borrowed, and what it was for
 
 In November 2015 Rob Pike gave a talk at Gopherfest that produced the Go proverbs. He opens by naming his source: a book about the Japanese board game go, translated into English about fifty years earlier, called *Go Proverbs Illustrated*. The author is Kensaku Segoe and the slide behind Pike shows the book's cover.
 
@@ -28,7 +26,7 @@ Pike also says what a proverb buys a player who *does* have the context: seeing 
 
 That last clause is the point. The proverb tells you the consequence; whether you want it is a judgement it declines to make. Board proverbs are predictive. Several of Pike's are imperative — *don't communicate by sharing memory*, *clear is better than clever* — and that change of mood is the first thing that crossed over unremarked.
 
-### What the first proverb means, according to Pike
+## What the first proverb means, according to Pike
 
 > Don't communicate by sharing memory, share memory by communicating.
 
@@ -40,7 +38,7 @@ So the proverb is about **transferring ownership**. One goroutine has the thing,
 
 Two items later comes a separate proverb, *channels orchestrate, mutexes serialize*, with its own explanation and its own scope. It answers a different question — which primitive for which job — and in explaining it Pike says a mutex is often very important and sometimes exactly what you want.
 
-### What the proverb says when nobody is there to gloss it
+## What the proverb says when nobody is there to gloss it
 
 Near the end of the talk, Pike guesses what will become of the idea of "Go Proverbs":
 
@@ -52,7 +50,7 @@ The idea survived, though not on the wiki. There is now a canonical list of the 
 
 **The proverbs were built for people who already hold the context, as tools for explaining it to people who do not.** The speaker carries the scope; the proverb is the handle. Detached, the handle travels alone.
 
-### A reader supplying the missing scope
+## A reader supplying the missing scope
 
 In late 2023 someone posted a genuine question to the Go subreddit. They had found a parallel map in a real library where each goroutine writes its result straight into a shared slice, with no channel anywhere, and asked whether that violates the proverb.
 
@@ -88,7 +86,7 @@ The code is fine. What is interesting is the reading that made it look wrong, wh
 
 The same post asks a second question worth as much: is the proverb about maintainability and safety, or is there some other reason for it? **They cannot tell what kind of claim the proverb is.** That is [chapter 02](02_the-five-kinds_cjx4.md)'s subject arriving in the wild. Sorting the proverb into one of the five kinds is what tells you how much authority it has — a Law binds regardless, a Principle holds only under certain Forces, an Idiom is local — and the compressed form gives you nothing to sort it with.
 
-### The same failure, twice more, admitted by the same person
+## The same failure, twice more, admitted by the same person
 
 Eight years after the proverbs talk, Pike gave a closing talk at GopherConAU looking back on fourteen years of Go. Two passages in it are this chapter's mechanism, and he is the one naming it.
 
@@ -106,7 +104,7 @@ It also produced the third repair in this chapter. He gave an entire talk in 201
 
 **This is not more evidence about the proverbs.** *Don't communicate by sharing memory* and *concurrency support in the language* are different artifacts, and nothing here says the proverb caused what Pike is describing. **But the mechanism is the same, and that is the whole of it: a Principle arrives without its scope, the reader takes the widest reading available, and the damage follows from the reading rather than from the advice.** Ousterhout was not wrong about pthreads and the Go team were not wrong about concurrency — in both cases what did the harm was a reading neither of them wrote.
 
-### The scope gets rebuilt by hand, more than once
+## The scope gets rebuilt by hand, more than once
 
 The Go project's own wiki has a page for this, and its first line is the proverb. Immediately after comes the qualification — the language also ships traditional locks in `sync` — and then this:
 
@@ -124,7 +122,7 @@ None of that apparatus in the game wiki was designed in, and the oldest collecti
 
 Which is the more useful way to put the whole progression. **Scope lives either inside the Principle or in an apparatus around the collection it belongs to, and where it is in neither, the reader reconstructs it — or fails to.** Segoe's book puts it in worked game diagrams beside each phrase. The game wiki puts it in categories, provenance marks, and a warning to evaluate before applying. The list of nineteen for the language has none of the three.
 
-### The same list contains proverbs this cannot happen to
+## The same list contains proverbs this cannot happen to
 
 Pike's nineteen are not uniform, and the difference is visible in the grammar.
 
@@ -146,7 +144,7 @@ This is a structural claim rather than an empirical one. It says the left column
 
 So the test gets sharper, and becomes something you can check rather than hope for. **Look at the grammatical subject.** If it names a package, a file format, a specific operation, the situation arrived with the proverb. If it names a style of programming, it did not, and reconstructing it is your job.
 
-### Past proverbs, to Principles nobody wrote to be memorable
+## Past proverbs, to Principles nobody wrote to be memorable
 
 Everything above is a proverb, and a proverb is a special case — short and poetic on purpose, because Pike said those were his criteria. So the obvious objection is that the finding belongs to the genre rather than to advice in general.
 

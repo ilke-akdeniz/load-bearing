@@ -27,9 +27,7 @@ So *partition tolerance* is not insurance against a rare catastrophe. If you hav
 
 ---
 
-## The demonstration
-
-### Every timeout is a guess
+## Every timeout is a guess
 
 A payments client calls a charge service, with a 100 ms deadline on the request:
 
@@ -68,7 +66,7 @@ The two observations are the same string. The client has no instrument that dist
 
 That last line is the expensive part. **The slow peer completed the work.** So the client's two options are both wrong: retry, and the work happens twice; give up, and the client reports a failure that did not occur. There is no third option available at the client, which is why the fix is never at the client.
 
-### What the waiter can do
+## What the waiter can do
 
 Everything in this chapter is built out of four responses to that silence. There are only four, and naming them is most of the design work.
 
@@ -119,7 +117,7 @@ Two details decide whether this works in practice.
 
 **The record of applied keys must be written in the same transaction as the effect.** If the charge commits and the key does not, the next retry charges again, and you have moved the bug rather than fixed it.
 
-### What the answerer can do
+## What the answerer can do
 
 Those four options belong to whoever is waiting. Stand on the other side — you are the part being asked — and a different set appears, but only if you have more than one copy of the answer.
 
@@ -145,7 +143,7 @@ The condition is per object, and that is what makes it sensible rather than absu
 
 Where it does not come due is the row under continuous write load, which is usually the row you were worried about. There the quiet moment never arrives and the promise is never tested. So the useful thing is not the guarantee but the gap it leaves, which Vogels names the **inconsistency window**, which is Vogels' term for the period between an update and the moment any observer is guaranteed to see it. Under lazy replication that is simply how long it takes every replica to catch up. That turns the useful questions into measurable ones: how wide does the window get under load, and what is a reader allowed to do inside it. A system where nothing ever reconciles has not chosen eventual consistency. It is wrong, on a delay.
 
-### Two systems cannot share a transaction
+## Two systems cannot share a transaction
 
 This is where it stops being abstract. An order is placed: a row goes in the database, and an event goes on a queue so other services hear about it. Two parts, and no transaction spans them.
 
@@ -232,7 +230,7 @@ Before, a crash destroyed information: nothing anywhere knew an event was owed, 
 
 **Sagas** are the same manoeuvre for a longer sequence. When five parts must each do a thing and there is no transaction across them, you do them in order and give each step a compensating action that undoes it. There is no rollback, because there was never a transaction; there is a sequence of forward steps and a sequence of undo steps, and the undo steps are ordinary business operations — refund, cancel, release — with all the visibility that implies. A customer may see a charge and then a refund rather than never seeing a charge.
 
-### Availability is a product, not an average
+## Availability is a product, not an average
 
 Parts that can fail independently must all be working at once, and that multiplies.
 

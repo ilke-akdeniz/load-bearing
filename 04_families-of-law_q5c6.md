@@ -18,9 +18,7 @@ What no family allows is arguing with the claim. The family tells you where you 
 
 ---
 
-## The demonstration
-
-### Theorem: change the assumptions
+## Theorem: change the assumptions
 
 The theorem here is the **Two Generals Problem**: over a channel that can lose messages, no protocol can leave both parties certain that the other received what was sent. Its practical consequence is that exactly-once delivery is impossible — you get at-least-once, and you make repeating safe ([chapter 08](08_distribution_49yh.md) owns the result and what gets built on top of it).
 
@@ -90,7 +88,7 @@ So a theorem admits two escapes and no third:
 - **Arrange for one of its assumptions not to hold**, and the theorem does not apply to you.
 - **Stop needing the theorem's conclusion**, and the theorem applies but costs you nothing.
 
-### Definition: check whether the words apply
+## Definition: check whether the words apply
 
 A definitional law is not proved so much as unpacked. Its truth is already inside its terms, so reading it feels like noticing something.
 
@@ -116,7 +114,7 @@ rate is edited in an admin screen   a bug: every process serves a stale
 
 This is why definitional laws feel unfalsifiable without being vacuous. "Dependencies must be acyclic" is one: a cycle makes two things a single unit of comprehension, test, and change, because that is what a cycle *is* ([chapter 05](05_dependency-and-hiding_agjy.md) works it through). You cannot violate it. You can find that the two things were never separate units, in which case nothing was violated, because nothing was joined.
 
-### Empirical law: measure, because the number moved
+## Empirical law: measure, because the number moved
 
 An empirical law describes the world rather than following from a proof, and the world is under no obligation to hold still.
 

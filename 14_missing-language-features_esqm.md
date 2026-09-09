@@ -34,9 +34,7 @@ So the honest form is narrower than the slogan and still worth having: for a spe
 
 ---
 
-## The demonstration
-
-### Visitor got simplified in the language that needed it
+## Visitor got simplified in the language that needed it
 
 Visitor exists because a program sometimes has to do different work for each member of a fixed set of types, and 1994 Java could not switch on a type. The way around that was **double dispatch**: every node type gets an `accept` method that calls back into the operation, so the node's own method dispatch chooses which branch runs.
 
@@ -121,7 +119,7 @@ Identical guarantee. One costs an interface, a method per node type, and a callb
 
 And notice which language this happened in. Not Lisp, not Dylan — Java, the language where Visitor was most entrenched. The pattern did not fail to survive translation into some more expressive language. It expired in place.
 
-### Strategy, in four languages
+## Strategy, in four languages
 
 Strategy is a family of interchangeable algorithms with a common interface, selected at run time. In a language with a class system and nothing else, that is an interface, a class per algorithm, and a field to hold the chosen one:
 
@@ -223,7 +221,7 @@ print(Checkout(by_weight).total(2000, 3000))
 
 All four print `2499` and `2500`, and all four keep the policies named and reusable. The design is identical in each: the caller decides how shipping is priced and the checkout does not know which rule it got. What differs is whether the language obliges you to make each policy a type. One of the four does. Three do not, and in those the word *Strategy* names nothing that appears in the file.
 
-### The rest of the catalogue, compactly
+## The rest of the catalogue, compactly
 
 Norvig's sixteen, with what makes each one invisible, and the seven he did not include:
 

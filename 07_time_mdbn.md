@@ -32,9 +32,7 @@ None of those is exotic, and none costs much. The reason this chapter is long is
 
 ---
 
-## The demonstration
-
-### Check-then-act is not atomic
+## Check-then-act is not atomic
 
 Check-then-act is the common name for the shape: read a value, decide something on the strength of it, then act — where the act quietly assumes the value has not changed since the read.
 
@@ -135,7 +133,7 @@ Nothing was added and nothing became slower. The check moved *inside* the same l
 
 That is the shape of the ordinary fix: **not more locking, but locking the right span.**
 
-### The same bug, in whatever language you own
+## The same bug, in whatever language you own
 
 The shape does not belong to Go, or to databases. Here it is against the filesystem, which is where the name **TOCTOU** — time of check to time of use — comes from, and where the consequence is worse than a duplicate row.
 
@@ -202,7 +200,7 @@ The `select` is gone entirely. That is what "do not check at all" looks like in 
 
 And the same in C#, Java, or anything else with two statements and a gap between them. **The bug survives every translation, because it is not about the language** — and so does the fix, because all three moves are one idea: make the decision and the action inseparable.
 
-### Shared mutable state plus concurrency equals races
+## Shared mutable state plus concurrency equals races
 
 The narrower, more famous case. A thousand goroutines, each adding one:
 
@@ -251,7 +249,7 @@ That is the cheap fix for one number. For the general case, the equation in the 
 
 "Just add a lock" is a fourth option, which serializes the race rather than removing it, and brings the costs set out at the end of this chapter.
 
-### Only the lock-holder can enforce
+## Only the lock-holder can enforce
 
 The registration fix above works because one mutex covered both steps. Two processes cannot share a mutex, so you have to raise the same move up a level:
 
@@ -265,7 +263,7 @@ The rule is now checked by the component that holds the row locks, at the instan
 
 There is a corollary worth stating separately, because it is the part people resist: **an application-level check is not wrong, but it is not the enforcement.** Keep it, because it produces a good error message and saves a round trip in the common case. Do not count it as the guarantee, and do not remove the constraint because the check is there.
 
-### The single-writer principle
+## The single-writer principle
 
 The strongest version of removing the sharing. If exactly one thread, process, or partition ever writes a piece of state, then no write can interleave with another, and the entire apparatus above becomes unnecessary — no locks, no atomics, no constraint to enforce.
 
@@ -275,7 +273,7 @@ The contrast is the same work without the partition. Four workers appending to o
 
 The price is that the partition is now part of your design, permanently. Any operation spanning two partitions is back to needing coordination, and the boundaries are difficult to move once data has accumulated behind them ([Ch. 03](03_forces_f4m5.md), on why that decision expires).
 
-### No clock can tell you what happened first
+## No clock can tell you what happened first
 
 The second sentence of the claim, and it even surprises people who accept the first easily.
 
@@ -319,7 +317,7 @@ The second is optimistic concurrency control, and it needs no clock at all: the 
 
 That is enough for the large majority of systems, which have one database. The apparatus in the next section is for when you do not.
 
-### What does order events
+## What does order events
 
 When there is no single authority to ask — several databases, several regions, offline clients that reconcile later — the answer is still counters rather than clocks.
 

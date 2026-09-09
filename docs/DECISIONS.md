@@ -6159,3 +6159,44 @@ Fifty-six filename references, updated in their own commit ahead of the content 
 [Chapter 09](../09_scale_637f.md) inherited the vocabulary while chapter 04 had none of its own and had been saying *grade* — *each law's grade is stated too*, *what grade it carries* — which is now *family*, and which incidentally removes a word chapter 15 uses for grading names on two axes.
 Two ledger rows retitled.
 Chapter 20's line needed no change and improves for free: once chapter 04 stops using *kinds*, *the three kinds* is unambiguous.
+
+---
+
+## 149. *The demonstration* loses its heading
+
+**Date.** 2026-09-09
+
+**Context.**
+The author: *"The Demonstration section in chapters is not pure demonstration and that's ok… it's clear to me that it will never be a 'Demonstration' in a scientific or mathematical sense. So it sets the expectations wrong and looks weird on the chapters."*
+Options raised: a better name, or removing the heading and promoting its subsections.
+
+**What the survey found, and it ruled out the first option.**
+Nineteen chapters used the heading, holding three to eight subsections each. Sampling five showed at least four different structures underneath it:
+
+- [Chapter 02](../02_the-five-kinds_cjx4.md): three worked cases — *A Law violation*, *An Idiom difference*, *A Force rendering a Law inert*
+- [Chapter 05](../05_dependency-and-hiding_agjy.md): a mixed analysis — an example, a diagnosis, a fix, a topic, a question answered
+- [Chapter 13](../13_patterns-that-survive-translation_us2k.md): a catalogue of seven `Force:` entries
+- [Chapter 20](../20_force-map-method_r37x.md): a method walked through in eight steps
+- [Chapter 23](../23_style_9rng.md): an argument in three moves
+
+*The cases* fits 02 and not 20. *The argument* fits 23 and not 13. So the fault was never the word: **one word for nineteen different things will always be wrong somewhere**, which is why the mismatch read as weird rather than as merely imprecise.
+
+**The draft proposed a name per chapter** and produced a table of nineteen, following the two chapters that had already solved it locally.
+**The author rejected it:** *"most of the headings add little value and some of them look really forced and weird. Clarity and simplicity is always better."*
+
+That is right, and the table proved it while being written. The good names — *The two tests*, *The six profiles*, *The four artifacts* — were the ones where the chapter enumerates. The forced ones — 10, 15, 24 — were the chapters carrying two subjects, where the name had to name both and ended up naming neither well. A rule that produces a good result two-thirds of the time and a strained one otherwise is worse than no rule.
+
+**Decision.** The heading is removed and its subsections promoted to the top level. Twenty headings removed, ninety-six subsections promoted. [Chapter 03](../03_forces_f4m5.md) keeps `## Seven Forces`, which groups an enumeration that would otherwise scatter into seven top-level sections.
+
+**Chapter 09's `## Four Laws` went with them**, though the author had chosen it two days earlier under [decision 146](#146-chapter-09-was-nearly-cut-and-came-back-on-a-different-axis). The instruction was that only chapter 03 keeps a grouping heading, and the four law sections read better at the top level than under a label.
+
+**Why this works structurally rather than only being simpler.**
+The subsections were already self-describing, and four of the five remaining rubric headings — *Why the claim holds*, *Where the claim doesn't apply*, *What the claim costs*, *How to recognize the failure* — are unmistakable, so the chapter's shape stays legible when the worked material sits beside them. A reader scanning a chapter's headings now sees its argument rather than a rubric word followed by nothing.
+
+**Two things the promotion stranded, both lead-ins that had lived under the heading.**
+[Chapter 02](../02_the-five-kinds_cjx4.md)'s said *"Three pieces of code: a Law violation, an Idiom difference, and a Force rendering a Law inert"* — which is the three headings, now visible, announced in advance. Deleted, as the announce-then-deliver tic this file already lists.
+[Chapter 12](../12_patterns-that-cross_r8dw.md)'s introduced the running example — *"Throughout: FastSell, a shop"* — which is not redundant, so it moved above the divider to close the preceding section instead of floating after it.
+
+**Consequence.**
+Rubric point 2 changes in both `CLAUDE.md` and `docs/ABOUT.md`: the demonstration remains an element and stops being a named section.
+Part IV's *What the wide reading produces* is untouched — it is that rubric's own third point, and it describes its content rather than labelling it generically.
