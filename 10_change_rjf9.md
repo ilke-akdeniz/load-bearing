@@ -161,7 +161,7 @@ Conway's homomorphism says why, if you follow the direction it runs. A map from 
 - **One service owned by many teams** is the failure the heuristic exists to prevent. Every release needs agreement from people with different priorities, so releases get slower, get batched, and eventually get scheduled.
 - **Services sized to the team chart** is the failure the heuristic causes. If there are six teams, six services appear, whether or not the problem has six parts — and the seams land where the reporting lines are.
 
-The honest form: let the problem decide how many parts there are, then make sure no part is owned by more than one team. If that turns out to be impossible with the teams you have, that is real information about the organization, and it is what the inverse manoeuvre is for.
+The honest form: **let the problem decide how many parts there are, then make sure no part is owned by more than one team.** If that turns out to be impossible with the teams you have, that is real information about the organization, and it is what the inverse manoeuvre is for. [-- what is the inverse manoevre specifically?]
 
 ## Coordination grows faster than the team
 
@@ -236,9 +236,9 @@ The other half of Brooks stands regardless of arithmetic: some work does not div
 
 The four results have one thing in common: **their feedback loops are longer than the decisions that cause them.**
 
-You can test a function in seconds and a deployment in hours. You cannot test a schema decision, because the evidence arrives when the table has four years of rows in it. You cannot test a published interface, because the evidence arrives when other people's software depends on it. You cannot test an organizational structure, because the evidence arrives in the architecture a year later.
+You can test a function in seconds and a deployment in hours. You cannot test a schema decision, because the evidence arrives when the table has four years of rows in it. You cannot test a published interface, because the evidence arrives when other people's software depends on it. You cannot test an organizational structure, because the evidence arrives in the architecture a year later. [-- Do you really need to test org structure, you only need to test the architecture and act accorgingly no? And even if the org structure is wrong and that affects software, is that in the scope of engineering and as a result this book? Not trying to argue, maybe it is in some parts but not clear what those cloud be as this chapter stands.]
 
-That length is the entire difficulty. Everywhere else in engineering, being wrong is cheap because you find out quickly and try again. Here you find out after the cost is sunk, which is why these are the decisions worth slowing down for — and it is [chapter 03](03_forces_f4m5.md)'s reversibility question, applied at the timescale where it bites hardest.
+That length is the entire difficulty. Everywhere else in engineering, being wrong is cheap because you find out quickly and try again. Here you find out after the cost is sunk, which is why these are the decisions worth slowing down for — and it is [chapter 03](03_forces_f4m5.md)'s reversibility question, applied at the timescale where it bites hardest. [-- meh. Being wrong cheaply is the minority in engineering not majority as you claim here. Otherwise this book wouldn't exist. I smell at least two claims glued together poorly in this chapter's claiom: 1) feeback loops - rate of change 2) Conway's law - Brook's Law*]
 
 The compatibility rule follows from something narrower and worth stating separately: **you cannot deploy other people's software.** Every other constraint in this book can be fixed by changing code you control. This one cannot, because the code that has to change is on a machine you have no access to and belongs to someone who has no reason to hurry.
 
