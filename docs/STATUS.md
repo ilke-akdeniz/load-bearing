@@ -22,7 +22,7 @@ Only the author moves a chapter to **draft** or **ready**.
 | 08 | `08_distribution_49yh.md` | **draft** | 2026-09-06 |
 | 09 | `09_scale_637f.md` | **draft** | 2026-09-07 |
 | 10 | `10_organization_rjf9.md` | **draft** | 2026-09-09 |
-| 11 | `11_what-a-pattern-is-for_3xzc.md` | **draft** | — |
+| 11 | `11_what-a-pattern-is-for_3xzc.md` | **draft** | 2026-09-10 |
 | 12 | `12_patterns-that-cross_r8dw.md` | **draft** | — |
 | 13 | `13_patterns-that-survive-translation_us2k.md` | **draft** | — |
 | 14 | `14_missing-language-features_esqm.md` | **draft** | — |
