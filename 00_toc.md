@@ -20,7 +20,7 @@ Back to [the introduction](README.md).
 - 07. [Time: Concurrency and Clocks](07_time_mdbn.md)
 - 08. [Distribution: What's Impossible](08_distribution_49yh.md)
 - 09. [Scale: Queues and Parallelism](09_scale_637f.md)
-- 10. [Organization: The Input Nobody Chose](10_change_rjf9.md)
+- 10. [Organization as a Design Force](10_change_rjf9.md)
 
 ## Part III — Patterns, Graded
 

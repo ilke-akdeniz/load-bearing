@@ -6225,7 +6225,7 @@ Two attempts, two different failure points, both at the same seam.
 
 A second check, on the author's insistence after the draft had asserted it from one grep, confirmed the reverse for the organization half. Conway appears outside chapter 10 only in chapter 04, borrowed twice as a classification example. Brooks appears nowhere else at all. Lehman appears nowhere else at all.
 
-**Decision.** No new chapter. Chapter 10 becomes **Organization: The Input Nobody Chose**, claiming *your organization is a design input, whether or not anyone chose it.* Conway gives the structure, Brooks the price of agreement, Lehman's ratchet the direction of growth. 4,794 words to 3,280.
+**Decision.** No new chapter. Chapter 10 becomes **Organization as a Design Force**, claiming *your organization is a design input, whether or not anyone chose it.* Conway gives the structure, Brooks the price of agreement, Lehman's ratchet the direction of growth. 4,794 words to 3,280.
 
 **What moved, and where.**
 The compatibility taxonomy — four server changes against an un-recompilable client, and which failures are silent — moved into chapter 03's *Control of the callers*, compressed from 800 words to about 300. That Force already had the dial and one silent-failure example; it now has the rule that generates them. The line *you cannot deploy other people's software* went with it, along with Go's 175 deprecations as the measured cost of a compatibility promise.

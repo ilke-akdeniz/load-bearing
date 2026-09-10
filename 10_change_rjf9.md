@@ -1,4 +1,4 @@
-# Organization: The Input Nobody Chose
+# Organization as a Design Force
 
 ## The claim
 
