@@ -147,7 +147,7 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | One team per service, read correctly | rjf9 | A constraint on who may own a service, not a recipe for how many to have | cite |
 | "Late" in Brooks's Law | rjf9 | Remaining work shorter than the time a new person takes to become useful — not the same as behind schedule | "what late means" |
 | Compression + constraint tests | 3xzc | A pattern earns its name by saving words and ruling something out | "the two tests" |
-| A pattern is not a claim | 3xzc | The kinds classify claims; a pattern name is a noun, so there is nothing to classify until it sits in a sentence — and the same name sits in a definition, a description or a prescription, of which only the prescription is advice | cite |
+| A pattern is not a claim in itself | 3xzc | The kinds classify claims; a pattern name is a noun, so there is nothing to classify until it sits in a sentence — and the same name sits in a definition, a description or a prescription, of which only the prescription is advice | cite |
 | The tests are independent | 3xzc | Facade compresses and constrains nothing — four outcomes, not a single axis | cite |
 | Compression needs a shared referent | 3xzc | The saving exists only for a reader who knows the term; a local coinage compresses nothing outside | cite |
 | The constraint test is mechanical | 3xzc | Try to write code the name forbids; if you can and still use the name, it constrains nothing | cite |

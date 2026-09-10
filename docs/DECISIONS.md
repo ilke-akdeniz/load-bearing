@@ -6408,3 +6408,29 @@ Three further sites, none of which a check would have caught: the contents page,
 The filename keeps the slug `what-a-pattern-is-for`; a slug is not required to track a title, and `11_what-a-design-pattern-is-for_3xzc.md` buys nothing for its length.
 
 **Also proofread in the author's edits**, as review prose is subject to the book's rules like any other: a typo in a heading (*Vefification*), two trailing spaces, the book's only Title Case heading, two kind names in lower case (*a law or principle*), an ungrammatical *the [chapter 02's]*, and two uses of *can't* — every other *can't* in the book sits inside a quotation, and the narrative voice uses *cannot*.
+
+## 156. A handoff that stated the next chapter's claim, and a register rule stated too strongly
+
+**Context.**
+Four direct edits, no tags, on the passage written in decision 154.
+Two were sharpenings the draft should have got right: *A pattern is not a claim* became **A pattern is not a claim in itself**, which is what the section now argues — the name sits inside claims — and *the same name sits in three kinds of sentence* became *can sit*, since any one use sits in exactly one.
+
+**The handoff was a rule violation, in text written one commit earlier.**
+It read: *"…takes the pattern vocabulary the two tests just filtered and shows that the answer changes once the thing on the other side stops being yours to edit — the same name that costs nothing between your own files can be a permanent obligation across a boundary you do not own."*
+That trailing clause is a paraphrase of [chapter 12](../12_patterns-that-cross_r8dw.md)'s claim, which `CLAUDE.md` forbids in as many words: name what the next chapter takes up, do not state its claim, because the next chapter opens on it and a paraphrase arriving a page early spends it.
+The author cut the clause.
+25 words, inside the book's 17-to-52 range.
+
+**A register claim the draft made too strongly, and the survey that corrected it.**
+Decision 155 reported that *"every other `can't` in the book sits inside a quotation, and the narrative voice uses cannot."*
+The first half was checked and is true.
+The second was an extrapolation, and acting on it, the draft changed a narrative-voice `it's` in chapter 12 — a chapter the author has not yet read in this pass.
+
+Classifying all 126 contractions in the book's prose says otherwise: about ten are in the narrative voice, including the claim sentence of [chapter 16](../16_principle-loses-scope_b86v.md) (*"Where it doesn't, the reader has to reconstruct that scope"*), and the rest sit in quoted speech, italicised slogans, source titles, or code comments.
+So there is no rule to apply, and the chapter 12 edit was reverted.
+
+The two changes inside chapter 11 stand on clarity rather than on register: *used as a prescription but it's treated as* needed two different verbs, since *used* and *treated* are near-synonyms and the contrast is the whole point — it now reads *used as a prescription and received as a definition or a description*, *received* being the book's own word for how it means to be read.
+
+**The lesson, which is the reason this is logged.**
+A survey run before asserting the rule would have produced the same ten instances and the claim would never have been made.
+The survey discipline in `CLAUDE.md` exists for words doing the wrong job; this is the same discipline owed to a claim about the book's own register.

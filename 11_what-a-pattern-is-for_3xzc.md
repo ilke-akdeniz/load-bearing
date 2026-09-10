@@ -16,7 +16,7 @@ So [chapter 02](02_the-five-kinds_cjx4.md)'s classification test has nothing to 
 - **A description.** *This shape recurs in object-oriented systems.* An empirical claim, and what would settle it is going and counting.
 - **A prescription.** *Use Strategy when you have more than one way of doing something.* The only one of the three that is advice, and so the only one a Force can make wrong.
 
-The trouble starts when a pattern is used as a prescription but it's treated as a definition or description. It's easy to miss that distinction because the first two sentences above are claims, and they are true — so the third arrives sounding equally settled.
+The trouble starts when a pattern is used as a prescription and received as a definition or a description. That distinction is easy to miss, because the first two sentences above are claims and they are true — so the third arrives sounding equally settled.
 
 ## What a pattern catalogue actually is
 
@@ -209,7 +209,7 @@ The question that does the work: **what does this name let me stop wondering abo
 
 If the answer is a description you no longer have to write, the name compresses. If it is a set of implementations you no longer have to check, the name constrains. If it is neither, you have been told the author had a word for it.
 
-[Chapter 12](12_patterns-that-cross_r8dw.md) takes the same pattern vocabulary  and shows that the answer changes once the thing on the other side stops being yours to edit.
+[Chapter 12](12_patterns-that-cross_r8dw.md) takes the same pattern vocabulary and shows that the answer changes once the thing on the other side stops being yours to edit.
 
 ---
 
