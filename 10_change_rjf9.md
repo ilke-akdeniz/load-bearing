@@ -2,13 +2,11 @@
 
 ## The claim
 
-**Your organization is a design input, whether or not anyone chose it.**
+**Your organization is a design Force that ends up in the software.**
 
 Work has to be divided before it can start. Somebody decides that this team takes billing and that team takes fulfilment, or that these three engineers own the importer — and that decision is already a decomposition of the system, usually made before anyone has read the problem closely, by whoever was arranging the work.
 
-Three results describe what follows. One gives the structure you inherit, one the speed you can move at, and one the direction your codebase grows in.
-
-## When this binds
+## When this binds [-- remove this section from here, either delete it or if it's not redundant move it to the "when the claim doesn't apply" at the end]
 
 You are in this chapter's territory when more than a handful of people work on the same system and the work is divided among them in any durable way — teams, squads, areas of ownership, or just "Ana knows the pricing code."
 
@@ -16,9 +14,9 @@ Below that it goes quiet rather than false. Three people coordinating by convers
 
 ---
 
-## The organization ends up in the software
+## Conway's Law**
 
-**Conway's Law**, from Melvin Conway in 1968. In his words:
+From Melvin Conway in 1968. In his words:
 
 > Organizations which design systems […] are constrained to produce designs which are copies of the communication structures of these organizations.
 
@@ -28,13 +26,15 @@ It is a description, not advice — [chapter 04](04_families-of-law_q5c6.md) use
 
 > If there is a branch, then the two […] design groups X and Y which designed the two nodes must have **negotiated and agreed upon an interface specification** […] If, on the other hand, there is no branch between x and y, then the subsystems do not communicate with each other, there was nothing for the two corresponding design groups to negotiate.
 
-*Negotiated and agreed upon.* An interface exists between two parts of the system exactly where two groups had to settle something between them. So the structure that gets copied is **who owns what and therefore who must agree with whom** — which is why messaging tools do not change the outcome. They lower the cost of talking; the constraint was never talking, it was agreement.
+*Negotiated and agreed upon.* An interface exists between two parts of the system exactly where two groups had to settle something between them. So the structure that gets copied is **who owns what and therefore who must agree with whom**. 
 
-He states the relationship more precisely than "copy" suggests. Both the system and the organization are graphs — for the system, "each node is a subsystem which communicates with other subsystems along the branches"; for the organization, the nodes are design groups and the branches are the pairs who had to negotiate something. His claim is that there is
+Modern messaging tools let people in different timezones work on the same team but they have no effect on Conway's Law. These tools lower the cost of talking but the constraint was never talking, it was agreement and ownership.
+
+Conway states that both the system and the organization are graphs — for the system, "each node is a subsystem which communicates with other subsystems along the branches"; for the organization, the nodes are design groups and the branches are the pairs who had to negotiate something. His claim is that there is
 
 > a homomorphism from the linear graph of a system to the linear graph of its design organization.
 
-A homomorphism is a map that preserves structure: every subsystem corresponds to a group, every interface to a negotiation. It also runs in one direction only, which turns out to matter.
+A homomorphism is a map that preserves structure: every subsystem corresponds to a group, every interface to a negotiation. This map runs in one direction only, which turns out to matter.
 
 His own example is the one worth carrying. A research organization put five people on a COBOL compiler and three on an ALGOL compiler, and got **a five-phase COBOL compiler and a three-phase ALGOL compiler.** Nobody chose the number of phases. It was chosen when the people were assigned.
 
@@ -42,16 +42,16 @@ And the consequence that matters most here:
 
 > Given any design team organization, there is a class of design alternatives which cannot be effectively pursued by such an organization because the necessary communication paths do not exist.
 
-Some designs are not available to you, given who owns what.
+**Some designs are not available to you, given who owns what.**
 
-What makes the partition stick is an asymmetry in who can change what.
+What makes the partition stick is an asymmetry in who can change what. [-- partition of what?]
 
 - A boundary **inside** your own area is yours to move. Notice it is wrong on Tuesday, change it on Wednesday, and nobody else is involved.
-- A boundary **between** areas is a negotiation. Moving it means persuading another team to reopen something they consider settled, reschedule work they have committed to, and accept a change with no benefit to them this quarter.
+- A boundary **between** areas is a negotiation. Moving it means persuading another team to reopen something they consider settled, reschedule work they have committed to, and accept a change with no benefit to them this quarter. [-- what is the area in "your own area", "between areas" specifically? Should the better word be group | team | pod...? ]
 
-So internal boundaries stay fluid and shared ones calcify — not because anyone is tempted into bad design, but because one kind of correction is free and the other needs a meeting, a quarter, and somebody's agreement.
+So internal boundaries stay fluid and shared ones calcify — not because anyone is tempted into bad design, but because one kind of correction is free and the other needs a meeting, a quarter, and somebody's agreement. [-- what is an internal boundary? What is a shared boundary? I think clarification of previous tags and a concrete example for each case will help.]
 
-This is why good engineers do not escape it. Two excellent engineers who own the two parts of a badly split problem will each build their part well. Neither is in a position to notice that the split itself was wrong, and if one does notice, fixing it is not an engineering decision they are allowed to make.
+This is why good engineers do not escape it. Two excellent engineers who own the two parts of a badly split problem will each build their part well. Neither is in a position to notice that the split itself was wrong, and if one does notice, fixing it is not an engineering decision they are allowed to make. [-- an example for this, maybe just building on the same example of the previous tag.]
 
 **Neither shape is better in itself**, and this is where the law is most often misread. Tight coupling between two things that genuinely are one thing is right — splitting them adds ceremony to something indivisible. A firm interface between things that genuinely are separate is also right. The law does not say that distance improves design.
 
@@ -65,8 +65,10 @@ Both directions of mismatch are common.
 *(The quotations are from Conway's 1968 paper, "How Do Committees Invent?" The negotiation mechanism is his. What this book adds is the asymmetry that makes a partition stick — free to change inside an owner, expensive across — and the reading of "communication structure" as ownership, which is how his design-group argument lands in an organization that has teams rather than committees.)*
 
 ## The ratchet: why a codebase only grows
+[-- I don't understand how this part is related to Conway's law or to the chapter in general.]
 
 The same asymmetry decides which direction the code moves in, and it has a name of its own.
+[-- what asymmetry? Could this be relic from the parts we moved before?]
 
 **Lehman's laws of software evolution**, from Meir Lehman and László Belady's study of large systems in the 1970s. The first: a system that is used must be continually adapted, or it becomes progressively less satisfactory. The mechanism is not that code rots — code nobody touches does exactly what it did last year. What moves is everything around it: tax rules, currencies, browser versions, the API you call, what users expect. **A system is judged against a moving world, so standing still is a slow decline.**
 
