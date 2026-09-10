@@ -6,15 +6,9 @@
 
 Work has to be divided before it can start. Somebody decides that this team takes billing and that team takes fulfilment, or that these three engineers own the importer — and that decision is already a decomposition of the system, usually made before anyone has read the problem closely, by whoever was arranging the work.
 
-## When this binds [-- remove this section from here, either delete it or if it's not redundant move it to the "when the claim doesn't apply" at the end]
-
-You are in this chapter's territory when more than a handful of people work on the same system and the work is divided among them in any durable way — teams, squads, areas of ownership, or just "Ana knows the pricing code."
-
-Below that it goes quiet rather than false. Three people coordinating by conversation have no partition for the software to copy.
-
 ---
 
-## Conway's Law**
+## Conway's Law
 
 From Melvin Conway in 1968. In his words:
 
@@ -26,9 +20,9 @@ It is a description, not advice — [chapter 04](04_families-of-law_q5c6.md) use
 
 > If there is a branch, then the two […] design groups X and Y which designed the two nodes must have **negotiated and agreed upon an interface specification** […] If, on the other hand, there is no branch between x and y, then the subsystems do not communicate with each other, there was nothing for the two corresponding design groups to negotiate.
 
-*Negotiated and agreed upon.* An interface exists between two parts of the system exactly where two groups had to settle something between them. So the structure that gets copied is **who owns what and therefore who must agree with whom**. 
+*Negotiated and agreed upon.* An interface exists between two parts of the system exactly where two groups had to settle something between them. So the structure that gets copied is **who owns what and therefore who must agree with whom**.
 
-Modern messaging tools let people in different timezones work on the same team but they have no effect on Conway's Law. These tools lower the cost of talking but the constraint was never talking, it was agreement and ownership.
+Modern messaging tools let people in different time zones work on the same team, and they have no effect on Conway's Law. They lower the cost of talking; the constraint was never talking, it was agreement and ownership.
 
 Conway states that both the system and the organization are graphs — for the system, "each node is a subsystem which communicates with other subsystems along the branches"; for the organization, the nodes are design groups and the branches are the pairs who had to negotiate something. His claim is that there is
 
@@ -44,14 +38,15 @@ And the consequence that matters most here:
 
 **Some designs are not available to you, given who owns what.**
 
-What makes the partition stick is an asymmetry in who can change what. [-- partition of what?]
+What makes that division stick — the split of the system among owning teams — is an asymmetry in who is allowed to move a boundary.
 
-- A boundary **inside** your own area is yours to move. Notice it is wrong on Tuesday, change it on Wednesday, and nobody else is involved.
-- A boundary **between** areas is a negotiation. Moving it means persuading another team to reopen something they consider settled, reschedule work they have committed to, and accept a change with no benefit to them this quarter. [-- what is the area in "your own area", "between areas" specifically? Should the better word be group | team | pod...? ]
+Suppose one team owns both pricing and discounts. The boundary between them is **internal**: both sides of it belong to the same team. Notice on Tuesday that discount rules need to read tax state, move the boundary on Wednesday, and nobody outside the team is involved.
 
-So internal boundaries stay fluid and shared ones calcify — not because anyone is tempted into bad design, but because one kind of correction is free and the other needs a meeting, a quarter, and somebody's agreement. [-- what is an internal boundary? What is a shared boundary? I think clarification of previous tags and a concrete example for each case will help.]
+Now suppose pricing belongs to one team and fulfilment to another. The boundary between them is **shared**. If pricing works out that address validation really belongs on the fulfilment side, moving it means persuading fulfilment to reopen something they consider settled, reschedule work they have committed to, and take on a change that costs them this quarter and benefits somebody else.
 
-This is why good engineers do not escape it. Two excellent engineers who own the two parts of a badly split problem will each build their part well. Neither is in a position to notice that the split itself was wrong, and if one does notice, fixing it is not an engineering decision they are allowed to make. [-- an example for this, maybe just building on the same example of the previous tag.]
+So internal boundaries stay fluid and shared ones calcify — not because anyone is tempted into bad design, but because one correction is an afternoon and the other is a negotiation.
+
+This is why good engineers do not escape it. Give that badly placed pricing-and-fulfilment boundary to two excellent engineers and each will build their own side well. Neither is positioned to notice the split was wrong, because each sees their own side working — and if one does notice, moving the boundary is not a decision they are allowed to make.
 
 **Neither shape is better in itself**, and this is where the law is most often misread. Tight coupling between two things that genuinely are one thing is right — splitting them adds ceremony to something indivisible. A firm interface between things that genuinely are separate is also right. The law does not say that distance improves design.
 
@@ -65,16 +60,14 @@ Both directions of mismatch are common.
 *(The quotations are from Conway's 1968 paper, "How Do Committees Invent?" The negotiation mechanism is his. What this book adds is the asymmetry that makes a partition stick — free to change inside an owner, expensive across — and the reading of "communication structure" as ownership, which is how his design-group argument lands in an organization that has teams rather than committees.)*
 
 ## The ratchet: why a codebase only grows
-[-- I don't understand how this part is related to Conway's law or to the chapter in general.]
 
-The same asymmetry decides which direction the code moves in, and it has a name of its own.
-[-- what asymmetry? Could this be relic from the parts we moved before?]
+That asymmetry — one team can change what it owns, two teams must agree — also decides which direction the code grows in, acting on what is *in* the code rather than on where its boundaries fall. The result has a name of its own.
 
 **Lehman's laws of software evolution**, from Meir Lehman and László Belady's study of large systems in the 1970s. The first: a system that is used must be continually adapted, or it becomes progressively less satisfactory. The mechanism is not that code rots — code nobody touches does exactly what it did last year. What moves is everything around it: tax rules, currencies, browser versions, the API you call, what users expect. **A system is judged against a moving world, so standing still is a slow decline.**
 
 The second has more teeth: as a system evolves its complexity increases, unless deliberate work is done to reduce it.
 
-That is a ratchet, and the asymmetry above is what drives it. Adding a case is cheap and local — one `if`, one column, one flag, decided by whoever owns that file. Removing one is expensive and diffuse: you have to establish that nobody depends on it, which means finding every caller, every saved row, every customer whose workflow quietly relies on it, and getting agreement from each owner you find. **Additions need one person. Removals need everybody who might object.** So additions happen continuously, removals need a project, and the ratio between those two costs is what makes the direction one-way.
+That is a ratchet, and ownership is what drives it. Adding a case sits inside one owner — one `if`, one column, one flag, decided by whoever owns that file. Removing one means first establishing that nobody depends on it: finding every caller, every saved row, every customer whose workflow quietly relies on it, and getting agreement from each owner you turn up. **Additions need one person; removals need everybody who might object.** That is the boundary asymmetry again, applied to the contents instead of the seams — which is why additions happen continuously and removals need a project.
 
 **On how much weight these carry.** Lehman's laws are empirical, and the study population was mainframe systems, decades ago, with release cycles measured in years. There are eight of them and they are not equally solid — the two above are widely recognizable, and several of the others ("conservation of familiarity," "conservation of organizational stability") are vague enough to resist being checked at all.
 
