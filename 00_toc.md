@@ -24,7 +24,7 @@ Back to [the introduction](README.md).
 
 ## Part III — Patterns, Graded
 
-- 11. [What a Pattern Is For](11_what-a-pattern-is-for_3xzc.md)
+- 11. [What a Design Pattern Is For](11_what-a-pattern-is-for_3xzc.md)
 - 12. [Patterns That Cross the Line](12_patterns-that-cross_r8dw.md)
 - 13. [Patterns That Survive Translation](13_patterns-that-survive-translation_us2k.md)
 - 14. [Patterns That Are Missing Language Features](14_missing-language-features_esqm.md)

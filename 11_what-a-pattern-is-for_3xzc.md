@@ -8,9 +8,15 @@ Those are the two tests, and the rest of Part III applies them. They are indepen
 
 ## A pattern is not a claim
 
-A claim is a statement that can be true, false, or conditional. A pattern is a **name for a shape** and can't be true or false by itself. 
+A claim is a statement that can be true, false, or conditional. A pattern is a **name for a shape**, and a name is a noun rather than a statement — *Strategy* can no more be true than *triangle* can.
 
-The trouble starts when a pattern is used as though it is a claim, most of the time disguised as a law or principle. The problem is that you can't run the [chapter 02's](02_the-five-kinds_cjx4.md) classification test to see how much authority the *Singleton Pattern* has.
+So [chapter 02](02_the-five-kinds_cjx4.md)'s classification test has nothing to work on. Asking how much authority *Singleton* carries is asking a question about a word, and the question is malformed rather than hard. What the test works on is the sentence the name is sitting in, and the same name sits in three different kinds of sentence.
+
+- **A definition.** *Strategy is a family of interchangeable algorithms behind one interface.* True because that is what the words mean — [chapter 04](04_families-of-law_q5c6.md)'s second family of Law, where nothing falsifies the claim and the words may simply not describe your code.
+- **A description.** *This shape recurs in object-oriented systems.* An empirical claim, and what would settle it is going and counting.
+- **A prescription.** *Use Strategy when you have more than one way of doing something.* The only one of the three that is advice, and so the only one a Force can make wrong.
+
+The trouble starts when a pattern is used as though it were a claim, usually disguised as a Law or a Principle. The disguise works because the first two sentences above are claims, and they are true — so the third arrives sounding equally settled.
 
 ## What a pattern catalogue actually is
 
@@ -18,13 +24,17 @@ A pattern catalogue is a record of shapes that were already occurring. Fowler's 
 
 That is **ethnography**: someone observed a population and named the recurring structures. It is descriptive work, and it is genuinely useful, because a shape that keeps appearing independently is worth having a word for.
 
-What happens next is the problem, and it is a mechanism the book has already named. [Chapter 04](04_families-of-law_q5c6.md) draws the line between a claim that **describes** what happens and one that **prescribes** what to do — and notes that only a prescription can be bad advice, because only a prescription is advice. A catalogue describes. Read as a checklist, "shapes that occur" silently becomes "shapes you should have," and a list of observations becomes a list of obligations. [-- interesting: pattern is not a claim because can't be true or false in itself. Is a catalogue of pattern a claim because it describes what happens? I guess not because by the same token singular patterns can be considered as claims. Maybe there is a distinction worth making here between "empirical laws" and patterns. What is it that makes one a law, a claim of mosth authority and the other no claim at all? Or is it purely a matter of how you use the pattern, the way, the context you use that "name": Ethnography: Those shapes happened here there | Name: Strategy is this | Fake Law - Principle: Use strategy whenever you have different ways... otherwise you are doomed | Good Principle: When you have x, y, z in language a with forces 1, 2, 3 strategy pattern is useful because... So maybe, the patterns started as ethnography, in themselves they are just names and then for a period they were abused as laws-principles altough they can still be part of a load-bearing principle for your situation? Those are my ideas, please don't agree with them blindly, make your own judgement.]
+What happens next is the problem, and it is a mechanism the book has already named. [Chapter 04](04_families-of-law_q5c6.md) draws the line between a claim that **describes** what happens and one that **prescribes** what to do — and notes that only a prescription can be bad advice, because only a prescription is advice.
+
+A catalogue does both, and the Gang of Four is open about it: every entry in the book follows a fixed template, and one of its sections is **Applicability** — the situations in which the pattern applies, and the poor designs it addresses. The advice was written down beside the observation, with its conditions attached.
+
+What travels is the name without them. Read as a checklist, "shapes that occur" silently becomes "shapes you should have," and a list of observations becomes a list of obligations — a condition dropped rather than an assertion invented, which is the mechanism [chapter 16](16_principle-loses-scope_b86v.md) works through in full.
 
 Nobody performs that conversion deliberately. It happens because a catalogue of solutions, read by someone with a problem, looks exactly like a menu.
 
 ---
 
-## Two-step Pattern Vefification 
+## Two-step pattern verification
 
 ### Test one: does the name save more words than it costs?
 

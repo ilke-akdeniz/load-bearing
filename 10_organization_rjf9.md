@@ -181,7 +181,7 @@ The question that does the work: **who has to agree before this can change?**
 
 Nobody, and it is yours to fix this afternoon. Two teams, and the answer is a quarter. That number is set by a decision somebody made about who owns what, usually before the problem was understood — which is what makes it a design input rather than a fact of nature.
 
-Part III turns from laws to patterns, starting with the question the whole part depends on — [what a pattern is actually for](11_what-a-pattern-is-for_3xzc.md), and the two tests that separate a pattern name carrying real information from one that only sounds like it does.
+Part III turns from laws to patterns, starting with the question the whole part depends on — [what a design pattern is actually for](11_what-a-pattern-is-for_3xzc.md), and the two tests that separate a pattern name carrying real information from one that only sounds like it does.
 
 ---
 

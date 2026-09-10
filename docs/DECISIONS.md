@@ -6346,3 +6346,65 @@ A gap in a list is not sufficient reason to reinstate something retired one roun
 **Consequence.**
 2,951 words to 2,862, with three entries in the costs section.
 Two more ledger rows dropped: the one decision 152 added for this bullet, and *Long feedback loops*, stale since decision 150 retired that passage and missed when the other six ownership defects were fixed.
+
+## 154. A pattern name is a noun, and what that leaves to classify
+
+**Context.**
+Chapter 11 settled that a pattern is not one of the five kinds, in two sentences: the kinds classify claims, a pattern is a name for a shape, and names are neither.
+The author rewrote the section in review, retitling it *A pattern is not a claim*, and then tagged the paragraph below it with the question the rewrite exposed.
+
+*"Is a catalogue of pattern a claim because it describes what happens? […] What is it that makes one a law, a claim of most authority and the other no claim at all? Or is it purely a matter of how you use the pattern […] Ethnography: Those shapes happened here there | Name: Strategy is this | Fake Law - Principle: Use strategy whenever you have different ways… | Good Principle: When you have x, y, z in language a with forces 1, 2, 3 strategy pattern is useful because… So maybe, the patterns started as ethnography, in themselves they are just names and then for a period they were abused as laws-principles although they can still be part of a load-bearing principle for your situation? Those are my ideas, please don't agree with them blindly, make your own judgement."*
+
+**The defect the tag found.**
+The section now said *a pattern is not a claim*, and eleven lines later the chapter said *a catalogue describes*, citing chapter 04's describes-versus-prescribes line — which treats the catalogue as making a claim.
+Both are true.
+They were one paragraph apart, used *claim* at two different levels, and nothing told the reader the level had changed.
+
+**The answer, and it is grammatical rather than a matter of authority.**
+Conway's Law is a sentence; *Strategy* is a noun.
+A sentence can be true; a noun cannot, any more than *triangle* can.
+So a pattern name is not below Law on the ladder — it is not on the ladder, because the ladder grades claims.
+Chapter 04 already had the parallel and nobody had connected it: *"'Conway's Law says we should reorganize.' It says no such thing; it describes a tendency. The prescription belongs to whoever is making it."*
+The difference is only that Conway's Law arrives as a sentence and a pattern name needs one built around it before there is anything to classify.
+
+**Decision.**
+The section states the grammar point, then shows the same name inside three different kinds of sentence: a **definition** (*Strategy is a family of interchangeable algorithms behind one interface*), a **description** (*this shape recurs in object-oriented systems*), and a **prescription** (*use Strategy when you have more than one way of doing something*) — only the last being advice, and so the only one a Force can make wrong.
+This gives the reader something to do in place of a test that does not apply: classify the sentence, not the word.
+
+**Two places the draft argued against the author's sketch, on the author's instruction to judge it rather than accept it.**
+
+*The catalogue is a claim.* The author guessed not.
+It is, of the descriptive kind — *these shapes recur in this population* is checkable by going and looking at C++ systems from 1994, which is what makes *ethnography* the right word for it.
+The name inside the catalogue is not a claim; the catalogue's assertion about that name's frequency is.
+
+*Four uses compress to three.* Ethnography is a description and *Strategy is this* is a definition, so two of the author's four are claim-types the book already has.
+But *Fake Law — Principle* and *Good Principle* are not two kinds.
+They are one Principle, with and without its condition stated, which is [chapter 16](../16_principle-loses-scope_b86v.md)'s claim exactly.
+Keeping them as separate rows would have restated a chapter the ledger assigns elsewhere.
+
+**And a correction to the chapter, found while checking the tag rather than asked about.**
+The chapter said *a catalogue describes*, putting the whole conversion from observation to obligation on the reader.
+The Gang of Four template gives every entry an **Applicability** section — the situations in which the pattern applies, and the poor designs it addresses.
+The prescription was written down beside the observation, by the authors, with conditions attached.
+So the failure is not a description becoming a prescription; it is a conditioned prescription losing its conditions, which is chapter 16's mechanism arriving eight chapters early and is now named as such in one clause.
+
+**What the author must verify.**
+The Applicability section's existence and purpose were confirmed against the Hillside Group's statement of the Gang of Four template, not against the book, which is not online.
+The chapter asserts only that the template has such a section and what it is for; nothing is quoted.
+
+**Consequence.**
+Two ledger rows rewritten — *a pattern is not one of the five kinds* followed the old section heading, and *a catalogue is ethnography* asserted description only.
+
+## 155. Chapter 11 becomes *What a Design Pattern Is For*
+
+**Context and decision, the author's**, applied in the same review: the title and claim sentence now say *design pattern* rather than *pattern*.
+
+**Why it holds.** The book uses *pattern* in no other sense — no access patterns, no usage patterns, checked across all twenty-five chapters — so this is not disambiguation against a collision.
+It is the book's own convention applied to its own vocabulary: explain a term once, at its owning chapter, then use the short form.
+Part III's remaining titles and the part name keep *Patterns*, which is that convention working rather than drift.
+
+**Consequence.**
+Three further sites, none of which a check would have caught: the contents page, the README hook and its promotional line, and chapter 10's handoff, which paraphrases the title in lower case.
+The filename keeps the slug `what-a-pattern-is-for`; a slug is not required to track a title, and `11_what-a-design-pattern-is-for_3xzc.md` buys nothing for its length.
+
+**Also proofread in the author's edits**, as review prose is subject to the book's rules like any other: a typo in a heading (*Vefification*), two trailing spaces, the book's only Title Case heading, two kind names in lower case (*a law or principle*), an ungrammatical *the [chapter 02's]*, and two uses of *can't* — every other *can't* in the book sits inside a quotation, and the narrative voice uses *cannot*.

@@ -147,11 +147,11 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | One team per service, read correctly | rjf9 | A constraint on who may own a service, not a recipe for how many to have | cite |
 | "Late" in Brooks's Law | rjf9 | Remaining work shorter than the time a new person takes to become useful — not the same as behind schedule | "what late means" |
 | Compression + constraint tests | 3xzc | A pattern earns its name by saving words and ruling something out | "the two tests" |
-| A pattern is not one of the five kinds | 3xzc | The kinds classify claims; a pattern is a name for a shape, and names are not true or false | cite |
+| A pattern is not a claim | 3xzc | The kinds classify claims; a pattern name is a noun, so there is nothing to classify until it sits in a sentence — and the same name sits in a definition, a description or a prescription, of which only the prescription is advice | cite |
 | The tests are independent | 3xzc | Facade compresses and constrains nothing — four outcomes, not a single axis | cite |
 | Compression needs a shared referent | 3xzc | The saving exists only for a reader who knows the term; a local coinage compresses nothing outside | cite |
 | The constraint test is mechanical | 3xzc | Try to write code the name forbids; if you can and still use the name, it constrains nothing | cite |
-| A catalogue is ethnography | 3xzc | It records shapes that were occurring; read as a checklist it becomes obligations. q5c6 owns describes-vs-prescribes | cite |
+| A catalogue is ethnography and advice | 3xzc | It records shapes that were occurring, and the Gang of Four template gives every entry an Applicability section, so the prescription shipped with its conditions attached; what travels is the name without them. q5c6 owns describes-vs-prescribes, b86v the dropped condition | cite |
 | A name as a search term | 3xzc | Some names are mediocre descriptions and good indexes into the literature on their failure modes; this is also all a weak name gives a learner | cite |
 | Too young to name | 3xzc | The tests assume you can say what the code does; before that a vague name is honest, and the failure is losing track that it is provisional | cite |
 | Directories group by change, names group by shape | 3xzc | A folder named for a pattern collects code belonging to different features | cite |

@@ -17,9 +17,9 @@ Asking *are you still there?* does not help either: a reply proves the channel w
 → [Chapter 08 — Distribution: What's Impossible](08_distribution_49yh.md)
 
 **"This should be a Repository." What would that rule out?**
-A pattern name earns its place by forbidding something.
+A design pattern name earns its place by forbidding something.
 Run that test on the names you use in code review and count how many survive it.
-→ [Chapter 11 — What a Pattern Is For](11_what-a-pattern-is-for_3xzc.md)
+→ [Chapter 11 — What a Design Pattern Is For](11_what-a-pattern-is-for_3xzc.md)
 
 **Why design arguments don't get settled.**
 Because both sides are arguing about the answer while disagreeing about the situation — and nobody wrote the situation down.
