@@ -1,34 +1,32 @@
-# What a Pattern Is For
+# What a Design Pattern Is For
 
 ## The claim
 
-**A pattern name earns its place by doing two things: saving more words than it costs, and ruling something out. Most named things do the first. Far fewer do the second.**
+**A design pattern name earns its place by doing two things: saving more words than it costs, and ruling something out. Most named things do the first. Far fewer do the second.**
 
 Those are the two tests, and the rest of Part III applies them. They are independent — a name can pass one and fail the other, and the names that fail the second are the ones that cause trouble, because they feel informative while carrying almost nothing.
 
-## A pattern is not one of the five kinds
+## A pattern is not a claim
 
-Worth settling first, because a reader arriving from Part II will try to run the classification test on *Repository* and find that it does not fit.
+A claim is a statement that can be true, false, or conditional. A pattern is a **name for a shape** and can't be true or false by itself. 
 
-The five kinds classify **claims** — things that can be true, false, or conditional. A pattern is a **name for a shape**, and names are neither. The question is malformed, and asking it is not a failure of the test.
+The trouble starts when a pattern is used as though it is a claim, most of the time disguised as a law or principle. The problem is that you can't run the [chapter 02's](02_the-five-kinds_cjx4.md) classification test to see how much authority the *Singleton Pattern* has.
 
-The trouble starts when a name is used as though it were a claim, which is most of what Part III is about.
-
-## What a catalogue actually is
-
-Before the tests, what the thing being tested is for.
+## What a pattern catalogue actually is
 
 A pattern catalogue is a record of shapes that were already occurring. Fowler's *Patterns of Enterprise Application Architecture* wrote down what enterprise Java teams were doing in 2002. The Gang of Four book — Gamma, Helm, Johnson, and Vlissides, 1994, and the source of most pattern vocabulary in circulation — catalogued shapes its authors found in existing C++ and Smalltalk systems.
 
 That is **ethnography**: someone observed a population and named the recurring structures. It is descriptive work, and it is genuinely useful, because a shape that keeps appearing independently is worth having a word for.
 
-What happens next is the problem, and it is a mechanism the book has already named. [Chapter 04](04_families-of-law_q5c6.md) draws the line between a claim that **describes** what happens and one that **prescribes** what to do — and notes that only a prescription can be bad advice, because only a prescription is advice. A catalogue describes. Read as a checklist, "shapes that occur" silently becomes "shapes you should have," and a list of observations becomes a list of obligations.
+What happens next is the problem, and it is a mechanism the book has already named. [Chapter 04](04_families-of-law_q5c6.md) draws the line between a claim that **describes** what happens and one that **prescribes** what to do — and notes that only a prescription can be bad advice, because only a prescription is advice. A catalogue describes. Read as a checklist, "shapes that occur" silently becomes "shapes you should have," and a list of observations becomes a list of obligations. [-- interesting: pattern is not a claim because can't be true or false in itself. Is a catalogue of pattern a claim because it describes what happens? I guess not because by the same token singular patterns can be considered as claims. Maybe there is a distinction worth making here between "empirical laws" and patterns. What is it that makes one a law, a claim of mosth authority and the other no claim at all? Or is it purely a matter of how you use the pattern, the way, the context you use that "name": Ethnography: Those shapes happened here there | Name: Strategy is this | Fake Law - Principle: Use strategy whenever you have different ways... otherwise you are doomed | Good Principle: When you have x, y, z in language a with forces 1, 2, 3 strategy pattern is useful because... So maybe, the patterns started as ethnography, in themselves they are just names and then for a period they were abused as laws-principles altough they can still be part of a load-bearing principle for your situation? Those are my ideas, please don't agree with them blindly, make your own judgement.]
 
 Nobody performs that conversion deliberately. It happens because a catalogue of solutions, read by someone with a problem, looks exactly like a menu.
 
 ---
 
-## Test one: does the name save more words than it costs?
+## Two-step Pattern Vefification 
+
+### Test one: does the name save more words than it costs?
 
 The straightforward test, and the easier one to pass.
 
@@ -51,7 +49,7 @@ The last two fail, and it is worth being exact about why, because it is not that
 
 So compression is a claim about a shared vocabulary, not about a word. A name coined inside one codebase compresses nothing for anyone outside it, however precise it is. That is the difference between vocabulary and jargon, and it is decided by the audience rather than by the term.
 
-## Test two: does the name rule anything out?
+### Test two: does the name rule anything out?
 
 The harder test, and the one that separates a name carrying information from a name that only sounds like it does.
 
