@@ -6312,3 +6312,37 @@ Four things the cut stranded were repaired — the known-death-date boundary cas
 Six ledger rows and one cross-reference still credited chapter 10 with the compatibility material that had moved to chapter 03 — add-only, the silent rename, Pike on Go 1.0, *you cannot deploy other people's software*, and two example rows.
 Chapter 03's `## Sources` had not gained the citations that arrived with that material either.
 It now lists Lehman, the Go 1 compatibility promise, and Pike's 2023 retrospective.
+
+## 153. Lehman's second law leaves the book
+
+**Context.**
+Decision 152 cut *The ratchet* and kept Lehman's second law in chapter 10's costs section, on the draft's argument that the claim being made there was the book's own and organizational.
+The author read the surviving bullet against the chapter's claim and asked what the connection was.
+
+There was none, and the bullet's history says why.
+`git log -S` puts it in the chapter before the rewrite, when chapter 10 was *Change: Evolution, Organization, Compatibility* and evolution was one of its three subjects.
+It was a cost of that chapter.
+It survived the rewrite, survived decision 152's cut, and decision 152 made it self-contained without asking whether it had earned its place — which was the question to ask.
+
+**The test it fails.**
+*What the claim costs* says what accepting this chapter's claim costs.
+The other three entries do: a reorganization is a design change that lands on people rather than code; an ownership boundary buys coordination and sells flexibility; Conway's Law is available as a hindsight excuse with no prediction attached.
+Complexity accumulating under change is a cost of time.
+It would read identically in a chapter about anything.
+
+**Decision, the author's.**
+Cut it.
+This reverses decision 152's retention, and the draft's recommendation in 152 was the thing being corrected.
+Chapter 10's `## Sources` loses its Lehman entry.
+Lehman's second law now appears nowhere in the book.
+Nothing reaches for it: no chapter in the twenty-five claims that complexity accumulates, and the first law stayed in chapter 03 only because it grounds a Force.
+
+**An option considered and rejected.**
+There is an organizational version of the invisibility point — getting an ownership boundary right produces no feature, and what the wrong one would have cost is never observable, so the work loses to visible work.
+It is true, and not a duplicate of the other three entries.
+It is also the feedback-loop passage returning by a side door, retired in decision 150 on the grounds that chapter 03 works it better.
+A gap in a list is not sufficient reason to reinstate something retired one round earlier.
+
+**Consequence.**
+2,951 words to 2,862, with three entries in the costs section.
+Two more ledger rows dropped: the one decision 152 added for this bullet, and *Long feedback loops*, stale since decision 150 retired that passage and missed when the other six ownership defects were fixed.

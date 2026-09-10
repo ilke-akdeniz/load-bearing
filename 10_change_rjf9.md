@@ -154,8 +154,6 @@ This is the case that shows the two laws are independent rather than one idea. G
 
 **Taking it seriously means treating a reorganization as a design change.** Reshaping teams to shape the software means changing who reports to whom, who sits with whom, and who owns what. That is disruptive, slow, and lands on people rather than on code. It is not a refactoring, whatever the diagram suggests.
 
-**Reducing complexity is invisible work.** Complexity accumulates as a system is changed — Lehman's second law of software evolution, from his and László Belady's study of large systems in the 1970s — and the work that reverses it produces no feature. It is the first thing cut under pressure and the hardest to justify afterwards, because the counterfactual — how bad it would have got — is not observable.
-
 **Ownership boundaries buy coordination and sell flexibility.** A boundary that removes a negotiation also removes your ability to move it later without one. That is the trade, and it is worth making where the problem really has a seam and expensive where it does not.
 
 **The law is easy to use as an excuse.** *Conway's Law* is available as an explanation for any architecture anyone dislikes, offered after the fact, with no prediction attached. A description used only in hindsight has stopped doing work.
@@ -190,7 +188,6 @@ Part III turns from laws to patterns, starting with the question the whole part 
 ## Sources
 
 - Melvin E. Conway, *How Do Committees Invent?* — Datamation 14(4), April 1968. [melconway.com/Home/Committees_Paper.html](http://www.melconway.com/Home/Committees_Paper.html).
-- Meir M. Lehman, *Programs, Life Cycles, and Laws of Software Evolution* — Proceedings of the IEEE 68(9), September 1980.
 - Frederick P. Brooks Jr., *The Mythical Man-Month* — Addison-Wesley, 1975.
 
 ---

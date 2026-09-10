@@ -146,8 +146,6 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Conway's mechanism is negotiation | rjf9 | His own wording: an interface exists where two design groups had to negotiate one. "Communication structure" means who must agree with whom, not who can reach whom | "the ownership asymmetry" |
 | One team per service, read correctly | rjf9 | A constraint on who may own a service, not a recipe for how many to have | cite |
 | "Late" in Brooks's Law | rjf9 | Remaining work shorter than the time a new person takes to become useful — not the same as behind schedule | "what late means" |
-| Reducing complexity is invisible work | rjf9 | The work that reverses accumulated complexity produces no feature, so it loses every comparison against visible work and cannot be justified afterwards — the counterfactual is not observable. Lehman's second law is the provenance for the accumulation, not for the organizational cause | cite |
-| Long feedback loops | rjf9 | These decisions cannot be tested, because the evidence arrives after the cost is sunk | cite |
 | Compression + constraint tests | 3xzc | A pattern earns its name by saving words and ruling something out | "the two tests" |
 | A pattern is not one of the five kinds | 3xzc | The kinds classify claims; a pattern is a name for a shape, and names are not true or false | cite |
 | The tests are independent | 3xzc | Facade compresses and constrains nothing — four outcomes, not a single axis | cite |
