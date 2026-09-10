@@ -139,7 +139,7 @@ The pattern literature calls this an **Anti-Corruption Layer**, a name from Eric
 
 | Pattern | Both sides yours | The other side is theirs | What appears when it crosses |
 |---|---|---|---|
-| **Adapter** | a wrapper, or nothing at all | Anti-Corruption Layer | their model changes without asking ([Ch. 10](10_change_rjf9.md)) |
+| **Adapter** | a wrapper, or nothing at all | Anti-Corruption Layer | their model changes without asking ([Ch. 03](03_forces_f4m5.md)) |
 | **Facade** | an object with fewer methods | a service boundary or public API | your surface becomes permanent ([Ch. 05](05_dependency-and-hiding_agjy.md), 09) |
 | **Observer** | a list of callbacks | a message bus | delivery can fail, or repeat ([Ch. 08](08_distribution_49yh.md)) |
 | **Proxy** | a wrapper adding behaviour | a network hop, with retries and caching | latency floor, partial failure ([Ch. 08](08_distribution_49yh.md), 08) |
@@ -150,7 +150,7 @@ Read the last column first. What changes across a row is not the amount of code 
 
 - **Proxy** is in the original catalogue. The Gang of Four list a *remote proxy* — "a local representative for an object in a different address space" — as one of the pattern's named variants. Crossing the line is not an extension here; it was in the definition.
 - **Adapter** is supported by the anti-corruption layer literature. Evans describes such a layer as containing translators, which is what an adapter is. The structure is genuinely the same on both sides; what is added is the obligation to maintain it.
-- **Facade** is this book's extension. Nobody's catalogue says a facade becomes a public API. The observation is that the structure is identical — fewer methods over more machinery — and that once the callers are outside your deploy, [chapter 10](10_change_rjf9.md)'s rule attaches to it.
+- **Facade** is this book's extension. Nobody's catalogue says a facade becomes a public API. The observation is that the structure is identical — fewer methods over more machinery — and that once the callers are outside your deploy, [chapter 03](03_forces_f4m5.md)'s add-only rule attaches to it.
 - **Observer is the weakest row, and it is worth saying why.** A message bus is not simply an observer with a network in the middle: a broker is genuinely new structure, and the publisher stops holding references to its subscribers, which is a change in the mechanism rather than only in what can fail. Treat the row as a family resemblance rather than the same pattern relocated. The point about failure modes still holds — delivery can be lost or repeated — but the "same shape" claim is looser here than in the rows above.
 
 That distribution is itself informative. **The rows that survive best are the ones where nothing structural is added**, which is a hint about when this reading applies at all.
@@ -186,7 +186,7 @@ still yours     the method name, its parameters, everything behind it
 now theirs      the route, the field names on the wire, which are optional
 ```
 
-You may add `POST /v1/orders/{id}/hold`. You may not rename the route, remove `DELETE /v1/orders/{id}`, or make a field of the request body required — those are [chapter 10](10_change_rjf9.md)'s forbidden moves, and the client that breaks is one you cannot deploy.
+You may add `POST /v1/orders/{id}/hold`. You may not rename the route, remove `DELETE /v1/orders/{id}`, or make a field of the request body required — those are [chapter 03](03_forces_f4m5.md)'s forbidden moves, and the client that breaks is one you cannot deploy.
 
 The name of the pattern did not change. What it commits you to did.
 

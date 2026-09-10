@@ -132,9 +132,10 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Little's Law | 637f | L = λW, near-definitional, true of any stable queue; two knowns give the third | cite |
 | Utilization is superlinear | 637f | Wait scales as 1/(1−ρ); there is no cliff at 85%, only a marginal cost that rises from the start | cite |
 | The crossover is not a property of the algorithms | 637f | Where O(n) loses to O(1) is set by comparison cost against hash cost — measure yours | cite |
-| Rate of change layers | rjf9 | Code, schema, published interface, organization — each slower than the last, and the slow ones set the terms | "rate layers" |
-| Conway / Brooks / Lehman | rjf9 | Structure mirrors org; adding people to a late project; systems must change | cite |
-| Lehman's ratchet | rjf9 | Complexity rises because adding a case is cheap and local while removing one needs a project | cite |
+| The organization is a design input | rjf9 | Work is divided before the problem is understood, and that division is already a decomposition; nobody chose it and it decides what the software can look like | cite |
+| Conway and Brooks are independent | rjf9 | Growing a team raises the price of agreement; splitting ownership decides where agreement is needed at all. One owner with twenty people has the pairs and none of the seams | cite |
+| The inverse Conway manoeuvre, defined | rjf9 | Reshaping teams to get the architecture you want rather than inheriting one; it works on the direction the homomorphism runs, and cannot manufacture ownership that is not there | cite |
+| Lehman's ratchet | rjf9 | Complexity rises because adding a case needs one person and removing one needs everybody who might object — Conway's asymmetry applied to the codebase's own growth | cite |
 | Compatibility is add-only | rjf9 | You may add optional things and relax constraints; you may not remove, rename, retype, or tighten | "add-only" |
 | A rename is a silent break | rjf9 | Removals and renames fail without an error; a type change at least fails loudly | cite |
 | Compatibility adopted rather than suffered | rjf9 | Pike prices Go's 1.0 lock-down from the inside: uptake, and it blocks feature-itis — a language accumulating features each defensible alone. Same irreversibility the chapter treats as a burden, working as a filter: anything added is added permanently, so a proposal must be worth keeping for the life of the language. The difference from the section above is timing, not the constraint | "bought rather than incurred" |

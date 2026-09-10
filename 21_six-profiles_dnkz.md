@@ -160,7 +160,7 @@ A game with a persistent inventory is two profiles in one repository. The frame 
 
 The mistake is choosing one profile and applying it throughout. A game that treats its save file with frame-loop discipline loses inventories; an inventory service that treats the frame loop with line-of-business discipline misses frames.
 
-**What to do is a boundary question, and the boundary is a real one: it goes where the force profile changes.** That is the same seam [chapter 05](05_dependency-and-hiding_agjy.md) draws for dependency direction and [chapter 10](10_change_rjf9.md) draws for rate of change, arriving from a third direction. Concretely:
+**What to do is a boundary question, and the boundary is a real one: it goes where the force profile changes.** That is the same seam [chapter 05](05_dependency-and-hiding_agjy.md) draws for dependency direction and [chapter 03](03_forces_f4m5.md) draws for rate of change, arriving from a third direction. Concretely:
 
 - **Name the two profiles.** Write down which Force is outside its ordinary range on each side. If you cannot, there is one profile and the question is moot.
 - **Put the seam where the data crosses**, not where the code is organized. In the game, the seam is the point where component arrays become rows — and that point should be a small, explicit, boring piece of code that both sides understand, rather than a leak of either discipline into the other.

@@ -372,6 +372,23 @@ The Force decides how you can apply that fix:
 
 Same defect, same fix, three different projects. Nothing about the code told you which one you were in.
 
+**Which changes are safe is a short list, and the dangerous ones are silent.** Take a client built against version 1 of an API, installed on machines you cannot recompile, and change the server four ways:
+
+```text
+ADD an optional field    id="ord-1" amount=4200 status="paid"        err=<nil>
+RENAME a field           id="ord-1" amount=0    status="paid"        err=<nil>
+CHANGE a type            id="ord-1" amount=0    status="paid"        err=cannot unmarshal
+ADD an enum value        id="ord-1" amount=4200 status="partially_refunded"  err=<nil>
+```
+
+Adding is safe — the old client ignores what it has no field for. The type change is **loud**: an error, a page, fixed within the hour. The rename is the dangerous one, because there is no error and the amount is now **zero** — a payment of nothing, reported as a successful parse, on a machine you cannot reach. The new enum value parses too, leaving the client holding a status it has no branch for.
+
+So: **you may add optional things and relax constraints; you may not remove, rename, retype, or tighten.** Nothing there is specific to JSON — it holds for protocol buffers, for a database view another team queries, for a library signature, for the shape of a message on a queue.
+
+What makes this Force different in kind from the other six is one sentence: **you cannot deploy other people's software.** Every other constraint in this book can be answered by changing code you control. At the bottom of this dial, the code that would have to change is on a machine you have no access to, owned by somebody with no reason to hurry.
+
+The bill is visible in any long-lived library. Go promised that code written for Go 1 keeps building, and its standard library now carries **175 declarations marked deprecated** — each one something its maintainers would remove and cannot. Rob Pike counts that promise among the things the Go project got right, and part of what it bought was the discipline: under a guarantee, anything added is added permanently, so a feature has to be worth keeping rather than merely worth having.
+
 **What changes with the Force:** not the design, the *plan*. This is the Force that decides how much a mistake costs to correct, which is why it belongs in the room before the API is designed rather than after. [Chapter 05](05_dependency-and-hiding_agjy.md) owns what this implies for what you expose in the first place.
 
 ### The seven Forces, as questions

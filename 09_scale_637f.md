@@ -244,7 +244,7 @@ The question that does the work: **which law am I up against?**
 
 A ceiling means stop buying hardware and shrink the serial part. A reversal means stop adding workers and find what they share. A queue cliff means buy headroom rather than speed.
 
-[Chapter 10](10_change_rjf9.md) moves to the timescale where the arithmetic is measured in years rather than milliseconds — how systems change, how the shape of an organization ends up in its software.
+[Chapter 10](10_change_rjf9.md) keeps the arithmetic and changes what is being counted: not workers contending for memory but people who must agree with each other, and what that does to the shape of what they build.
 
 ---
 

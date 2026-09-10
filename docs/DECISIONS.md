@@ -6200,3 +6200,41 @@ The subsections were already self-describing, and four of the five remaining rub
 **Consequence.**
 Rubric point 2 changes in both `CLAUDE.md` and `docs/ABOUT.md`: the demonstration remains an element and stops being a named section.
 Part IV's *What the wide reading produces* is untouched — it is that rubric's own third point, and it describes its content rather than labelling it generically.
+
+---
+
+## 150. Chapter 10 becomes a chapter about organization
+
+**Date.** 2026-09-09
+
+**Context.**
+The author: *"Chapter 10 reads well but it doesn't seem coherent around a claim. We might need a better claim and / or a chapter split."*
+And in a tag: *"I smell at least two claims glued together poorly in this chapter's claim: 1) feedback loops - rate of change 2) Conway's law - Brooks's Law."*
+
+**The diagnosis was measurable.** The claim — *everything you build changes, but not at the same rate, and the slow parts set the terms for the fast ones* — reached two of the chapter's six sections. Conway, one-team-per-service, Brooks's arithmetic and the *late* scenario fell outside it: roughly half the chapter.
+
+**The draft proposed two unifying claims and both failed, which is how the seam was located.**
+
+The first said the rates differ according to how many people must agree. The author reversed the causality: *"You can decide by yourself because code can change daily: it's a low effort change, the risk is relatively low and the failure is reversible."* Agreement is a **consequence** of a change's properties, not their cause — and the schema case disproves it outright, since nothing stops one person changing a schema and people do. The same claim also denied that complexity affects rate, which is simply false.
+
+The second would have been feedback-loop length, and the author's own tag anticipated where it breaks: *"do you really need to test org structure?"* Conway is not a decision you get late feedback on; it is a structure you inherit.
+
+Two attempts, two different failure points, both at the same seam.
+
+**Then the author asked the question that settled the shape:** whether the first half was already covered elsewhere. It was, and comprehensively. Chapter 10's rate-and-compatibility material is **four of [chapter 03](../03_forces_f4m5.md)'s seven Forces** — change frequency and its shape, durability of the medium, blast radius, and control of the callers — each already stated as a question with a dial and a worked example. The chapter restated them as a narrative about time, which is why no claim covered both halves: **half of it belonged to another chapter.**
+
+A second check, on the author's insistence after the draft had asserted it from one grep, confirmed the reverse for the organization half. Conway appears outside chapter 10 only in chapter 04, borrowed twice as a classification example. Brooks appears nowhere else at all. Lehman appears nowhere else at all.
+
+**Decision.** No new chapter. Chapter 10 becomes **Organization: The Input Nobody Chose**, claiming *your organization is a design input, whether or not anyone chose it.* Conway gives the structure, Brooks the price of agreement, Lehman's ratchet the direction of growth. 4,794 words to 3,280.
+
+**What moved, and where.**
+The compatibility taxonomy — four server changes against an un-recompilable client, and which failures are silent — moved into chapter 03's *Control of the callers*, compressed from 800 words to about 300. That Force already had the dial and one silent-failure example; it now has the rule that generates them. The line *you cannot deploy other people's software* went with it, along with Go's 175 deprecations as the measured cost of a compatibility promise.
+
+**What was retired.** The rate ladder, the feedback-loop passage and the reversibility framing, all of which chapter 03 works better. Rob Pike's *feature-itis* argument survives as one clause rather than four paragraphs. And *What "late" actually means, worked* — a scheduling scenario with invented ramp-up figures — was dropped on the author's instruction; its conclusion survives as a sentence inside Brooks, since the definition of *late* is what makes the law non-obvious.
+
+**Two things the rewrite had to add rather than move.**
+The *inverse Conway manoeuvre* was named twice and never defined, which the author tagged. It now has a definition where it is first used, including what it cannot do — reshaping teams on a diagram, while they still need each other's agreement to ship, produces the same coordination with new names.
+And a boundary case the old chapter did not have: **one owner, whatever the headcount.** Twenty people owning one thing have Brooks's 190 pairs and none of Conway's seams, which shows the two laws are independent rather than one idea.
+
+**Consequence.**
+Eleven citations across seven chapters pointed at chapter 10 for compatibility or rate layers and now point at chapter 03. Chapter 09's handoff described a chapter that no longer exists and now names the one that does, keeping the `n(n−1)/2` link between the Universal Scalability Law and Brooks. Two ledger rows dropped, one rewritten, three added.

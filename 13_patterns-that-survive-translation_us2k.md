@@ -207,7 +207,7 @@ func ParseAmount(text string) (Money, error)
 
 > **Which parts of this move at different rates?**
 
-Every pattern here is a seam placed where two things move at different speeds — [chapter 10](10_change_rjf9.md)'s rate-of-change layers, made structural.
+Every pattern here is a seam placed where two things move at different speeds — [chapter 03](03_forces_f4m5.md)'s change-frequency and durability Forces, made structural.
 
 **Pattern: Ports and adapters** — the application defines the interfaces it needs; the outside world implements them.
 
@@ -415,7 +415,7 @@ cache.Set(key, value, ttl)
 
 > **Who else depends on this, and can I change them?**
 
-[Chapter 10](10_change_rjf9.md)'s compatibility rule and [chapter 12](12_patterns-that-cross_r8dw.md)'s ownership line both land here. The patterns are ways of making a boundary survivable.
+[Chapter 03](03_forces_f4m5.md)'s compatibility rule and [chapter 12](12_patterns-that-cross_r8dw.md)'s ownership line both land here. The patterns are ways of making a boundary survivable.
 
 **Pattern: Tolerant reader** — read only the fields you need, and ignore everything else.
 
@@ -430,7 +430,7 @@ var view OrderView
 err := decoder.Decode(&view) // the day they add "currency", this starts failing
 ```
 
-Adding a field is the one change [chapter 10](10_change_rjf9.md) says is always safe, so a reader that fails on it has turned their safe change into your outage. The tolerant version simply does not look:
+Adding a field is the one change [chapter 03](03_forces_f4m5.md) says is always safe, so a reader that fails on it has turned their safe change into your outage. The tolerant version simply does not look:
 
 ```go
 // Only these three. Any other field in the payload is discarded silently.
@@ -446,7 +446,7 @@ err := json.Unmarshal(body, &view) // unknown fields are skipped
 
 *The constraint:* you may not fail on an unrecognized field, which means you cannot use strict schema validation on the inbound side.
 
-*The cost:* a field that disappears reads as its zero value rather than as an error, which is the silent failure of [chapter 10](10_change_rjf9.md) and the price of the tolerance.
+*The cost:* a field that disappears reads as its zero value rather than as an error, which is the silent failure [chapter 03](03_forces_f4m5.md) names and the price of the tolerance.
 
 **Pattern: Consumer-driven contracts** — each consumer records the subset of your interface it actually uses, and your build replays those recordings against the real implementation.
 
@@ -485,7 +485,7 @@ The payoff is knowing what is safe to change:
 
 - **Bounded context** — one model per context, with translation between them, rather than one model everyone must agree on. [Chapter 10](10_change_rjf9.md)'s Conway material is why the boundaries end up where they do.
 - **Composition root** — one place where the object graph is assembled, so nothing else needs to know how anything is built ([Ch. 05](05_dependency-and-hiding_agjy.md)).
-- **Expand and contract** — add the new field, migrate readers, then remove the old one, in three deploys rather than one. [Chapter 10](10_change_rjf9.md)'s add-only rule is what forces the shape.
+- **Expand and contract** — add the new field, migrate readers, then remove the old one, in three deploys rather than one. [Chapter 03](03_forces_f4m5.md)'s add-only rule is what forces the shape.
 - **Contract tests** — verify both sides against the same shared expectation, rather than trusting a document.
 
 ---

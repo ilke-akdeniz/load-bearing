@@ -75,7 +75,7 @@ So the lowest common denominator is not a list anyone knows in advance. It is th
 
 ### The swap is a data problem and the abstraction is in the code layer
 
-[Chapter 10](10_change_rjf9.md)'s rate layers put the schema below the code and moving more slowly. The interface lives in the fast layer. What has to move on migration day — rows, types, constraints, indexes, the queries a planner was tuned for, the operational runbook — lives in the slow one.
+[Chapter 03](03_forces_f4m5.md)'s durability Force puts the schema below the code and moving more slowly. The interface lives in the fast layer. What has to move on migration day — rows, types, constraints, indexes, the queries a planner was tuned for, the operational runbook — lives in the slow one.
 
 Counting what a repository interface covers in an engine migration is a short exercise. It covers the call sites. It does not cover the schema translation, the data copy, the verification, the cutover, or the rollback. The insurance was filed against the smallest line item on the invoice.
 
