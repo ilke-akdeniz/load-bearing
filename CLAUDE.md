@@ -262,7 +262,7 @@ Naming a result is one thing; explaining its mechanism, or saying what its terms
 The trigger is writing a sentence of the form *the mechanism is…*, *what X actually meant was…*, or *the reason this holds is…* about a named law, paper, or person's argument.
 At that point, go and read it.
 
-[Chapter 10](10_change_rjf9.md) explained Conway's Law twice without reading Conway.
+[Chapter 10](10_organization_rjf9.md) explained Conway's Law twice without reading Conway.
 The first attempt made it a temptation acting on individuals, which the author rejected as implausible.
 The second replaced that with an ownership mechanism, which was defensible and still could not answer *is this what he said*.
 One fetch settled it: Conway's own words are *negotiated and agreed upon*, which is the ownership reading in his vocabulary — and the paper contained a sharper example than anything invented for it, a five-person team producing a five-phase compiler and a three-person team producing a three-phase one.

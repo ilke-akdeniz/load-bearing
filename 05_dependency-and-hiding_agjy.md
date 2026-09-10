@@ -586,7 +586,7 @@ func (c *Catalog) Create(ctx context.Context, definition WorkflowDefinition) err
 }
 ```
 
-The second is right when the code has years ahead of it. On a migration script that gets deleted next month, the ten-minute version is the correct engineering call and the afternoon is waste ([Ch. 10](10_change_rjf9.md) owns the known-short-life case).
+The second is right when the code has years ahead of it. On a migration script that gets deleted next month, the ten-minute version is the correct engineering call and the afternoon is waste ([Ch. 10](10_organization_rjf9.md) owns the known-short-life case).
 
 ### Enforced boundaries cost more than unenforced ones
 

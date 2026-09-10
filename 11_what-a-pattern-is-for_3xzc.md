@@ -212,4 +212,4 @@ If the answer is a description you no longer have to write, the name compresses.
 
 ---
 
-[← Ch. 10](10_change_rjf9.md)  ·  [Contents](00_toc.md)  ·  [Ch. 12 →](12_patterns-that-cross_r8dw.md)
+[← Ch. 10](10_organization_rjf9.md)  ·  [Contents](00_toc.md)  ·  [Ch. 12 →](12_patterns-that-cross_r8dw.md)

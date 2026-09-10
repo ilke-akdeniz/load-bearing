@@ -493,7 +493,7 @@ A related question — *doesn't dependency injection contradict information hidi
 
 **Consequence.**
 `LEDGER.md` gained 10 concept rows and 6 example rows, most of them for material that did not exist before the review.
-That is the ledger working as decision 7 intended: the additions were entered at the point the chapter claimed them, so [chapters 10](../10_change_rjf9.md), 13, 16, 17, and 18 now have explicit boundaries against material they would otherwise have re-derived.
+That is the ledger working as decision 7 intended: the additions were entered at the point the chapter claimed them, so [chapters 10](../10_organization_rjf9.md), 13, 16, 17, and 18 now have explicit boundaries against material they would otherwise have re-derived.
 
 **Worth recording about the process.**
 Every one of the seventeen comments identified something real; none was rejected on the merits.
@@ -1184,12 +1184,12 @@ The epigraph said *grades*, which decision 17 replaced with *kinds* — a regres
 
 ---
 
-## 27. [Chapter 10](../10_change_rjf9.md) organizes by rate of change, and grades Lehman honestly
+## 27. [Chapter 10](../10_organization_rjf9.md) organizes by rate of change, and grades Lehman honestly
 
 **Date.** 2026-08-12
 
 **Context.**
-[Chapter 10](../10_change_rjf9.md) covers Lehman's laws, Conway's Law and the inverse manoeuvre, Brooks's Law, and compatibility. Four results from four different literatures, with no obvious connection beyond operating on long timescales.
+[Chapter 10](../10_organization_rjf9.md) covers Lehman's laws, Conway's Law and the inverse manoeuvre, Brooks's Law, and compatibility. Four results from four different literatures, with no obvious connection beyond operating on long timescales.
 
 **Decision.**
 Organize by **rate of change**: code changes daily, schemas monthly, published interfaces rarely and never backwards, organizations yearly and expensively. The claim follows — everything changes, but not at the same rate, and the slow parts set the terms for the fast ones.
@@ -1229,7 +1229,7 @@ The same treatment is given to the inverse Conway manoeuvre. Conway's observatio
 **Consequence.**
 `LEDGER.md` gains seven concept rows and three example rows.
 Part II is complete: [chapters 04](../04_families-of-law_q5c6.md) through 09 are drafted.
-[Chapter 10](../10_change_rjf9.md) runs 219 lines and moves to **in progress**.
+[Chapter 10](../10_organization_rjf9.md) runs 219 lines and moves to **in progress**.
 
 ---
 
@@ -1238,7 +1238,7 @@ Part II is complete: [chapters 04](../04_families-of-law_q5c6.md) through 09 are
 **Date.** 2026-08-12
 
 **Context.**
-The author's review of [chapter 10](../10_change_rjf9.md) raised eight points. Two were challenges to the substance, and both found real defects.
+The author's review of [chapter 10](../10_organization_rjf9.md) raised eight points. Two were challenges to the substance, and both found real defects.
 
 **Conway's mechanism was written so that it implied something absurd.**
 The draft's illustration set two engineers at neighbouring desks, who build tightly coupled code, against two teams in different time zones, who build a versioned interface. The author's objection:
@@ -1278,7 +1278,7 @@ The section states the heuristic's real content and the two ways it is misapplie
 A sentence reading as an instruction to the writer — *cite the two, treat the rest as observations of their era* — was removed. Go struct tags are now explained, with the Java and C# equivalents, which is the audience rule applied in a chapter drafted after that rule was added. And the demonstration now says the server sends the new shape in every case and the output is what the client makes of it, since the draft said "reaches" while the output said "parsed."
 
 **Consequence.**
-[Chapter 10](../10_change_rjf9.md) runs 278 lines, up from 219.
+[Chapter 10](../10_organization_rjf9.md) runs 278 lines, up from 219.
 `LEDGER.md` gains three concept rows and one example row.
 
 ---
@@ -1314,7 +1314,7 @@ The ownership mechanism is the draft's; the two objections that forced it are th
 
 **Consequence.**
 `LEDGER.md` gains a row for the ownership asymmetry.
-[Chapter 10](../10_change_rjf9.md) runs 289 lines.
+[Chapter 10](../10_organization_rjf9.md) runs 289 lines.
 
 ---
 
@@ -1349,7 +1349,7 @@ Two rounds were spent rewriting an explanation of Conway's Law without reading C
 The book's rule is mechanism over authority, which is about not using citation as proof. It is not a licence to skip reading the thing being cited.
 
 **Consequence.**
-[Chapter 10](../10_change_rjf9.md) runs 301 lines.
+[Chapter 10](../10_organization_rjf9.md) runs 301 lines.
 `LEDGER.md`'s row is reworded: the mechanism is negotiation, and it is Conway's.
 
 ---
@@ -1380,7 +1380,7 @@ Marked as this book's reading. Conway states the homomorphism and does not draw 
 
 **Consequence.**
 `LEDGER.md` gains a row for the homomorphism and its direction.
-[Chapter 10](../10_change_rjf9.md) runs 311 lines.
+[Chapter 10](../10_organization_rjf9.md) runs 311 lines.
 
 ---
 
@@ -1389,7 +1389,7 @@ Marked as this book's reading. Conway states the homomorphism and does not draw 
 **Date.** 2026-08-12
 
 **Context.**
-[Chapter 10](../10_change_rjf9.md) explained Conway's Law twice without reading Conway, and the author asked for a rule that would prevent it.
+[Chapter 10](../10_organization_rjf9.md) explained Conway's Law twice without reading Conway, and the author asked for a rule that would prevent it.
 
 **What actually happened.**
 The first attempt described the law as a temptation acting on individual engineers; the author rejected it as implausible, since competent engineers are not tempted into bad structure. The second replaced that with an ownership mechanism. It was defensible, survived scrutiny, and still could not answer the question the author then asked — *is this what he said*. Only fetching the paper settled it.
@@ -1498,7 +1498,7 @@ State the axis as **ownership**: can you change the other side?
 
 Class scale means both sides are yours — same repository, same deploy — so if two things do not fit you may change either. System scale means one side is not yours to edit: a vendor's API, another team's service, a published format.
 
-That reframing does three things the size framing cannot. It explains why a small integration is a serious commitment and a large refactor is not. It connects the chapter to material the book already owns — [chapter 03](../03_forces_f4m5.md)'s control-of-the-callers Force and [chapter 10](../10_change_rjf9.md)'s *you cannot deploy other people's software*. And it produces the diagnostic the chapter ends on, which is a question with an answer rather than a judgement call.
+That reframing does three things the size framing cannot. It explains why a small integration is a serious commitment and a large refactor is not. It connects the chapter to material the book already owns — [chapter 03](../03_forces_f4m5.md)'s control-of-the-callers Force and [chapter 10](../10_organization_rjf9.md)'s *you cannot deploy other people's software*. And it produces the diagnostic the chapter ends on, which is a question with an answer rather than a judgement call.
 
 **The insight that carries the demonstration.**
 What makes Adapter cheap at class scale is not the line count. It is that **a third option exists**: change the other side so no adapter is needed. Rename the method, change the signature, move the parameter.
@@ -1514,7 +1514,7 @@ Those are Part II's Laws arriving one at a time. So the table's last column name
 Go's structural typing satisfying `querier` with two vendor types and zero wrapper code, against the C# shape that needs a class and two forwarding methods per type. And the Stripe status leaking into three call sites versus stopping at one translation function, with the counts taken from the file rather than asserted.
 
 **A question [chapter 11](../11_what-a-pattern-is-for_3xzc.md) left open is answered here.**
-[Chapter 11](../11_what-a-pattern-is-for_3xzc.md) used Facade to show that compression and constraint are independent — it compresses well and forbids nothing — and handed the scale question forward. The answer: at class scale a facade is a word for a wrapper; at system scale it is what other teams call, so [chapter 10](../10_change_rjf9.md)'s compatibility rule applies and it may be added to but never narrowed. The name did not change; the commitment did.
+[Chapter 11](../11_what-a-pattern-is-for_3xzc.md) used Facade to show that compression and constraint are independent — it compresses well and forbids nothing — and handed the scale question forward. The answer: at class scale a facade is a word for a wrapper; at system scale it is what other teams call, so [chapter 10](../10_organization_rjf9.md)'s compatibility rule applies and it may be added to but never narrowed. The name did not change; the commitment did.
 
 **The boundary section found a genuine asymmetry.**
 The TOC asked for patterns trivial at every scale. The test that works is whether you can state the system-scale version at all — Strategy and Template Method have none, because nothing about passing a function becomes unreliable when the program grows.
@@ -1703,7 +1703,7 @@ The convention had a real justification: this book argues that you should know w
 
 But the placement was wrong, and that is what the author identified. *This chapter is Law of the strictest kind* means nothing to a reader who does not yet know what the chapter is about. The classification is useful **after** the claim, not before — which is where several chapters already stated it anyway, making the epigraph a duplicate as well as an interruption.
 
-Checked before deleting: eight of the eleven were already covered in their bodies. [Chapter 07](../07_time_mdbn.md) states the definitional point at line 353, [chapter 10](../10_change_rjf9.md) gives the study-population caveat inside the Lehman section, [chapter 09](../09_scale_637f.md) has an entire *About the numbers* section.
+Checked before deleting: eight of the eleven were already covered in their bodies. [Chapter 07](../07_time_mdbn.md) states the definitional point at line 353, [chapter 10](../10_organization_rjf9.md) gives the study-population caveat inside the Lehman section, [chapter 09](../09_scale_637f.md) has an entire *About the numbers* section.
 
 **Three needed relocating first**, and were.
 
@@ -1896,7 +1896,7 @@ The failure is the one the epigraph decision found. A line that names another ch
 
 **Consequence.**
 The pattern generalizes past [chapter 13](../13_patterns-that-survive-translation_us2k.md) and is worth applying whenever cross-references accumulate: **write what the other chapter established, not that it established it.**
-The same review applied the author's other standing note — that showing the failing code before the pattern is worth doing where it does not make the example worse — to the tolerant reader, which now opens with a strict decoder that breaks on the one change [chapter 10](../10_change_rjf9.md) calls always safe.
+The same review applied the author's other standing note — that showing the failing code before the pattern is worth doing where it does not make the example worse — to the tolerant reader, which now opens with a strict decoder that breaks on the one change [chapter 10](../10_organization_rjf9.md) calls always safe.
 Both tags were the author's; the test that separates a fact-carrying reference from a locating one is the draft's.
 
 ---
@@ -2945,7 +2945,7 @@ It says at the top to read the talk rather than the file, because everything in 
 
 *[Chapter 02](../02_the-five-kinds_cjx4.md)* gets a paragraph: Pike observing that what is good and bad in a language is largely opinion, argued with certainty. That is 02's *tone does not vary with authority*, witnessed by a language designer about arguments over his own language.
 
-*[Chapter 10](../10_change_rjf9.md)* gets the compatibility promise priced by the person who made it — it costs, and it blocks feature-itis. The chapter argues the constraint; this is somebody adopting it deliberately as a feature.
+*[Chapter 10](../10_organization_rjf9.md)* gets the compatibility promise priced by the person who made it — it costs, and it blocks feature-itis. The chapter argues the constraint; this is somebody adopting it deliberately as a feature.
 
 *[Chapter 14](../14_missing-language-features_esqm.md)* gets a flagged maybe — the async/await aside and *coloured functions* — with an explicit instruction not to force it, since 13 is about patterns dissolving into features and this is closer to the inverse.
 
@@ -3133,7 +3133,7 @@ The symptom named for future review is a paragraph the reader must decode rather
 
 **The sweep was scoped before it was proposed.**
 The author asked whether earlier chapters need the same pass.
-A survey found the problem contained: one block quote over 200 characters in the whole book — Conway's, in [chapter 10](../10_change_rjf9.md), which the chapter's argument turns on and which is his own plain wording — and three hits for statistics vocabulary, all of them ordinary usage (*control group* describing a study's limits, *correlate* in its everyday sense).
+A survey found the problem contained: one block quote over 200 characters in the whole book — Conway's, in [chapter 10](../10_organization_rjf9.md), which the chapter's argument turns on and which is his own plain wording — and three hits for statistics vocabulary, all of them ordinary usage (*control group* describing a study's limits, *correlate* in its everyday sense).
 So no standalone sweep. [Chapter 09](../09_scale_637f.md) had already been through a jargon pass in August, and anything not visible to this survey is covered by the final sweep's slice 2 (decision 77), which checks each chapter against the rules that postdate it — a set this rule now joins.
 
 **Consequence.**
@@ -3174,7 +3174,7 @@ Worth noting that the draft had written a version of that sentence into 18's *Wh
 
 **The renumbering.**
 Twenty-nine references across twelve files, swept descending so the ranges never collide, and restricted to chapter-context forms — `chapter NN`, `Ch. NN`, `cite NN`, TOC headings, bare table cells, filenames, `belongs to NN`, `(→ NN)`.
-A numeric sweep would have corrupted *16 of 23 patterns* in [chapter 14](../14_missing-language-features_esqm.md), *a team of 20* in [chapter 10](../10_change_rjf9.md), and `Trace.java:19` in 13. Every changed line was reviewed.
+A numeric sweep would have corrupted *16 of 23 patterns* in [chapter 14](../14_missing-language-features_esqm.md), *a team of 20* in [chapter 10](../10_organization_rjf9.md), and `Trace.java:19` in 13. Every changed line was reviewed.
 
 `docs/DECISIONS.md` is deliberately **not** renumbered, on the same reasoning as decision 78's file paths: an entry written when 19 was the force-map method should say 19. This entry is the key for reading the earlier ones.
 
@@ -4316,7 +4316,7 @@ The draft recommended putting chapter titles in that row, arguing they tell a re
 The two decisions were taken separately and only fit together in retrospect.
 
 **Found on the way through, none of it asked about.**
-[Chapter 10](../10_change_rjf9.md)'s handoff pointed at Part III with **no link at all** — the book's one dead end — and now links [chapter 11](../11_what-a-pattern-is-for_3xzc.md).
+[Chapter 10](../10_organization_rjf9.md)'s handoff pointed at Part III with **no link at all** — the book's one dead end — and now links [chapter 11](../11_what-a-pattern-is-for_3xzc.md).
 Nineteen handoffs opened with a lower-case *"[chapter NN]"*, correct after a bold label and wrong once they became the paragraph's first word.
 `CLAUDE.md` described *"the full 23-chapter TOC"*; the count check ran over `00_toc.md` and `README.md` only, so it never saw it, and now covers `CLAUDE.md` and `docs/ABOUT.md` too.
 The README promised a contents page "with a summary and a stated boundary for every chapter", which stopped being true in the same commit.
@@ -4472,7 +4472,7 @@ The corpus-monoculture argument, the uniform-confidence clause, the Pike certain
 Decision 110's bar was *route only what strengthens the chapter*, applied by the draft to ten pieces; the author then cut two of the four that passed it.
 The two that survived attach to a question their section had already opened.
 [Chapter 03](../03_forces_f4m5.md)'s section is about a Force as a dial, and the addition is a value at the end of that dial.
-[Chapter 10](../10_change_rjf9.md)'s section argues a constraint and had only the victim's posture, so the designer's is the missing half.
+[Chapter 10](../10_organization_rjf9.md)'s section argues a constraint and had only the victim's posture, so the designer's is the missing half.
 The two that were cut added a new subject to a section that had finished its argument — three extra paragraphs hung under two entries of [chapter 02](../02_the-five-kinds_cjx4.md)'s four-mechanism list, and a fifth consideration appended to [chapter 18](../18_tdd-and-mocks_u8eu.md)'s costs.
 **A late addition survives if the section was still asking something. It does not survive being another thing the section could also have said.**
 
@@ -4485,7 +4485,7 @@ The edit also moved the subject from generated code to the model, and two predic
 *"The agent can only reach it to the extent that some prompt happened to carry them"* — *it* has no antecedent; the thing being reached is the Forces, which *them* refers to in the same sentence.
 Both repaired, keeping every word of the author's that was doing work.
 
-**The [chapter 10](../10_change_rjf9.md) tag was a question, not a removal.**
+**The [chapter 10](../10_organization_rjf9.md) tag was a question, not a removal.**
 
 > this seems like an intersting point and good addition but I read it two times and couldn't get the exact meaning … what you mean by "feature-itis" and what is the trade-off here and why that is justified and doesn't contradict our chapter?
 
@@ -4512,7 +4512,7 @@ Row *The team-size Force at its extreme* is rewritten into the vocabulary the ch
 Row *Compatibility adopted rather than suffered* carries the mechanism the chapter now spells out.
 
 [Chapter 02](../02_the-five-kinds_cjx4.md)'s `## Sources` entry for the Pike retrospective is removed with the paragraph that cited it; nothing in that chapter cites him now.
-[Chapter 10](../10_change_rjf9.md) still has no `## Sources` section and still needs one for the same talk, which remains slice 3's work.
+[Chapter 10](../10_organization_rjf9.md) still has no `## Sources` section and still needs one for the same talk, which remains slice 3's work.
 
 ---
 
@@ -4635,7 +4635,7 @@ Rewritten in the chapter's own words, and a count corrected on the way — three
 
 [Chapter 09](../09_scale_637f.md) is the model `CLAUDE.md` cites for leading with the situation, and it earns it — *utilization* is given in the queueing sense at first use, a cache line is *"64 bytes on most machines"*, Coherency gets a full paragraph before the bare term reappears 130 lines later, and the Universal Scalability Law arrives with the caveat that its coefficients are fitted rather than derived.
 
-[Chapter 10](../10_change_rjf9.md) satisfies the no-splicing rule in the text itself: *"The negotiation mechanism is his. What this book adds is the asymmetry…"* and *"Conway states the homomorphism; drawing this consequence out of its direction is this book's."*
+[Chapter 10](../10_organization_rjf9.md) satisfies the no-splicing rule in the text itself: *"The negotiation mechanism is his. What this book adds is the asymmetry…"* and *"Conway states the homomorphism; drawing this consequence out of its direction is this book's."*
 
 [Chapter 17](../17_behaviour-placement_z47a.md) quotes Riel by heuristic number, gives his own gloss on *related*, and carries his standing instruction that the sixty are *"warning bells"* rather than rules.
 
@@ -4940,7 +4940,7 @@ The change was applied by script and reviewed as a word-level diff, which was ne
 Five further mis-fires were found by listing every surviving lower-case instance and reading it, rather than by trusting the pass.
 
 **Consequence.**
-Roughly a hundred instances across [chapters 10](../10_change_rjf9.md), [16](../16_principle-loses-scope_b86v.md), [18](../18_tdd-and-mocks_u8eu.md), [19](../19_abstraction-as-insurance_4jk6.md), [20](../20_force-map-method_r37x.md), [21](../21_six-profiles_dnkz.md) and [24](../24_never-written-down_at4r.md).
+Roughly a hundred instances across [chapters 10](../10_organization_rjf9.md), [16](../16_principle-loses-scope_b86v.md), [18](../18_tdd-and-mocks_u8eu.md), [19](../19_abstraction-as-insurance_4jk6.md), [20](../20_force-map-method_r37x.md), [21](../21_six-profiles_dnkz.md) and [24](../24_never-written-down_at4r.md).
 The book now runs 124 capital to 14 lower case on *Force*, 59 to 4 on *Principle*, and 42 to 0 on *Idiom* — and every survivor is an attributive compound on the keep-list above.
 
 [Chapter 20](../20_force-map-method_r37x.md)'s claim was the sentence that mattered most, and it now names the model's three rungs as the model names them: *Forces, then Principles, then Idioms.*
@@ -5116,7 +5116,7 @@ Dropping the taxonomy improved them. *Meetings are for clarifications* had to ha
 **Q5 — the boundaries, one of which did not survive the new claim.**
 The Friday meeting still works: not derived from the artifact, right anyway, and it yields the chapter's test — *the reason given for a step has to be the reason it exists*.
 
-The second is new and comes from [chapter 10](../10_change_rjf9.md). Conway's interfaces exist where two design groups **negotiated and agreed upon** one, so a decision binding two teams cannot have a single owner. That is a direct counter-example to the claim's second half, derived from the book rather than invented.
+The second is new and comes from [chapter 10](../10_organization_rjf9.md). Conway's interfaces exist where two design groups **negotiated and agreed upon** one, so a decision binding two teams cannot have a single owner. That is a direct counter-example to the claim's second half, derived from the book rather than invented.
 
 The instinctive team was demoted to a cost. Under [chapter 23](../23_organization-forces_i59b.md)'s Force claim it was a genuine boundary; under this claim it is not, because a team deriving instinctively is doing both things the claim asks and merely not writing them down — and the claim does not require writing. It argues with the chapter's artifacts, not with its claim.
 
@@ -5192,7 +5192,7 @@ One fix. The chapter wrote the noun both ways: *force map* twice and *force-map*
 
 **Slice 3 — sources.**
 The chapter cites no external work and gets no `## Sources` section, which puts it with [chapters 02](../02_the-five-kinds_cjx4.md), [13](../13_patterns-that-survive-translation_us2k.md) and [21](../21_six-profiles_dnkz.md).
-It quotes Conway — *negotiated and agreed upon* — but through [chapter 10](../10_change_rjf9.md), which owns that material and carries the citation. The rule that decided it is the one applied in slice 3 proper: a citation belongs where the material is owned, which is why [chapter 04](../04_families-of-law_q5c6.md) needed a Turing entry (the halting-problem section is its own) and this chapter does not.
+It quotes Conway — *negotiated and agreed upon* — but through [chapter 10](../10_organization_rjf9.md), which owns that material and carries the citation. The rule that decided it is the one applied in slice 3 proper: a citation belongs where the material is owned, which is why [chapter 04](../04_families-of-law_q5c6.md) needed a Turing entry (the halting-problem section is its own) and this chapter does not.
 
 **Slice 4 — reconciliation.**
 Fourteen ledger rows now own by `3fjx`, one added for the routed architecture line.
@@ -5763,14 +5763,14 @@ The `bare ref` check caught two chapter references in the draft's own explanator
 
 **Context.**
 The author found the phrase wearing out: *it becomes annoying and in some places it's better to be more specific about the subject instead of alluding to it with "two halves".*
-Five sites were edited in [chapters 04](../04_families-of-law_q5c6.md), [07](../07_time_mdbn.md), [10](../10_change_rjf9.md), [12](../12_patterns-that-cross_r8dw.md) and [13](../13_patterns-that-survive-translation_us2k.md).
+Five sites were edited in [chapters 04](../04_families-of-law_q5c6.md), [07](../07_time_mdbn.md), [10](../10_organization_rjf9.md), [12](../12_patterns-that-cross_r8dw.md) and [13](../13_patterns-that-survive-translation_us2k.md).
 
 **Decision.** Adopted, and surveyed — the rule in `CLAUDE.md` is that a wording problem found in one place is a survey rather than a fix.
 
 **The criterion, which is the author's and is narrower than "remove the phrase".**
 Replace it where *half* is alluding to a subject that could be named; leave it where it is ordinary English.
 So Monadnock's north and south halves stay, along with *half an hour*, *half the capacity*, *half the system*.
-[Chapter 10](../10_change_rjf9.md)'s two remaining uses stay as well, because a colon names the subject immediately afterwards in both.
+[Chapter 10](../10_organization_rjf9.md)'s two remaining uses stay as well, because a colon names the subject immediately afterwards in both.
 
 **Six further sites were changed**, none of which the original commit reached: two in [chapter 03](../03_forces_f4m5.md), one in [05](../05_dependency-and-hiding_agjy.md), two in [07](../07_time_mdbn.md), one in [22](../22_idioms_7nkn.md).
 The sharpest was *a number does not have halves* — [chapter 05](../05_dependency-and-hiding_agjy.md) described exposure as "the second half of the same number", where the number is fan-in and the two things are ways of losing control of it.

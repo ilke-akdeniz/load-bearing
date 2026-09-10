@@ -175,7 +175,7 @@ A meeting with no decision in it at all is a third object and can be perfectly s
 
 ### An artifact that needs two names
 
-[Chapter 10](10_change_rjf9.md) has Conway's mechanism in his own vocabulary: an interface exists where two design groups **negotiated and agreed upon** one. An interface binding two teams cannot have a single owner, because a single owner is one team imposing on the other, and what comes back is not agreement but compliance followed by a workaround.
+[Chapter 10](10_organization_rjf9.md) has Conway's mechanism in his own vocabulary: an interface exists where two design groups **negotiated and agreed upon** one. An interface binding two teams cannot have a single owner, because a single owner is one team imposing on the other, and what comes back is not agreement but compliance followed by a workaround.
 
 So it has two names against it and the work is the negotiation between them. What does not change is that both names are individuals. *The platform team and the payments team will agree an interface* fails exactly as the dialogue above fails; two developers, one from each side, each able to commit their own, does not.
 

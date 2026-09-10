@@ -163,7 +163,7 @@ There is a fourth possibility the naming exists to catch: **the claim is not a L
 
 The test is [chapter 02](02_the-five-kinds_cjx4.md)'s, applied honestly. *Can circumstances make this bad advice?* A Law cannot become bad advice, because it is not advice — it describes what happens. "Prefer composition over inheritance" can certainly become bad advice, in a domain with a genuinely stable hierarchy and variation on a single axis. So it is a Principle, and calling it a law is how it gets applied where its Forces are absent.
 
-Conway's Law — that a system's structure tends to mirror the communication structure of the organization that built it — survives the same test, and the difference is worth stating exactly. It tells you to do nothing. It describes a tendency, which can be weak, strong, or deliberately countered, but which cannot be *bad advice*, because it is not advice ([chapter 10](10_change_rjf9.md) owns what it means and what to do about it). **A Law describes; a Principle prescribes.** That one question separates them faster than any amount of arguing about how universal something feels.
+Conway's Law — that a system's structure tends to mirror the communication structure of the organization that built it — survives the same test, and the difference is worth stating exactly. It tells you to do nothing. It describes a tendency, which can be weak, strong, or deliberately countered, but which cannot be *bad advice*, because it is not advice ([chapter 10](10_organization_rjf9.md) owns what it means and what to do about it). **A Law describes; a Principle prescribes.** That one question separates them faster than any amount of arguing about how universal something feels.
 
 ---
 

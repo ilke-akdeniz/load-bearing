@@ -483,7 +483,7 @@ The payoff is knowing what is safe to change:
 
 **The rest of this family**
 
-- **Bounded context** — one model per context, with translation between them, rather than one model everyone must agree on. [Chapter 10](10_change_rjf9.md)'s Conway material is why the boundaries end up where they do.
+- **Bounded context** — one model per context, with translation between them, rather than one model everyone must agree on. [Chapter 10](10_organization_rjf9.md)'s Conway material is why the boundaries end up where they do.
 - **Composition root** — one place where the object graph is assembled, so nothing else needs to know how anything is built ([Ch. 05](05_dependency-and-hiding_agjy.md)).
 - **Expand and contract** — add the new field, migrate readers, then remove the old one, in three deploys rather than one. [Chapter 03](03_forces_f4m5.md)'s add-only rule is what forces the shape.
 - **Contract tests** — verify both sides against the same shared expectation, rather than trusting a document.
