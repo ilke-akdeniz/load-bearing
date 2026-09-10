@@ -6238,3 +6238,77 @@ And a boundary case the old chapter did not have: **one owner, whatever the head
 
 **Consequence.**
 Eleven citations across seven chapters pointed at chapter 10 for compatibility or rate layers and now point at chapter 03. Chapter 09's handoff described a chapter that no longer exists and now names the one that does, keeping the `n(n−1)/2` link between the Universal Scalability Law and Brooks. Two ledger rows dropped, one rewritten, three added.
+
+## 151. The asymmetry that makes a partition stick, stated concretely
+
+**Context.**
+The rewrite in decision 150 shipped chapter 10 with the mechanism it had been missing — a boundary inside one owner is cheap to move, a boundary between two owners is not — and stated it in the abstract.
+The author's review carried seven tags.
+They were seven instances of one defect: every statement of the asymmetry was a general proposition, so a reader had nothing to check it against.
+
+**Decision.**
+One running example, introduced once and carried through every statement of the mechanism.
+One team owning both pricing and discounts has an **internal** boundary between them; pricing owned by one team and fulfilment by another is a **shared** boundary.
+Every later sentence about cost, about good engineers not escaping the law, and about the two directions of mismatch now refers back to that pair rather than restating the principle.
+
+**The author rewrote the claim**, from *your organization is a design input, whether or not anyone chose it* to **your organization is a design Force that ends up in the software**.
+This supersedes the claim quoted in decision 150.
+The gain is that it names the kind — Force — instead of the weaker *design input*, and it says what happens rather than asserting that something matters, which is the test in `CLAUDE.md` under *The claim sentence*.
+
+**The title followed.**
+*Change: Evolution, Organization, Compatibility* described the chapter as it was before decision 150 split it.
+It became **Organization as a Design Force**, so title and claim share their vocabulary.
+
+**Also removed.**
+A *When this binds* section, which said what the small-teams boundary case already says from the other side.
+The author cut it; the draft had not noticed the overlap.
+
+**Consequence.**
+3,280 words to 3,265, with the abstract statements replaced rather than supplemented.
+The TOC entry and one decision-log reference were updated with the title.
+
+## 152. Lehman's ratchet was an overreach, and is cut
+
+**Context.**
+Chapter 10 carried a section, *The ratchet: why a codebase only grows*, asserting that Lehman's second law of software evolution — complexity increases unless work is done to reduce it — is driven by ownership.
+Its argument: adding a case needs one person, removing one needs agreement from everybody who might depend on it, so the codebase ratchets.
+
+The author's tag set out the chain and then doubted it.
+*"Conway says org structure shapes the design, we say that the ownership boundaries between org structures slows decisions. And now we tie Lehman's second law and previous sentence to say, complexity is hard to remove because ownership of complexity means exponential ownership issues? […] It needs more expansion around this idea to belong in the chapter and maybe an example. Otherwise it looks like an overreach for fitting our Conway narrative to another law which has not much to do with orgs and is mainly about software complexity."*
+
+**What checking the source found.**
+Lehman's own mechanism for the second law is structural degradation under accumulated change — a structure built for one purpose adapted to another, change upon change.
+Ownership appears nowhere in his account.
+So *ownership is what drives it* was the draft's inference carrying Lehman's name, which is the failure recorded for chapter 16's Pike material: two genuine claims, and a relationship between them the source never asserted.
+
+**And the weaker version does not rescue the section.**
+The removal asymmetry is mostly about not being able to count your dependents, which [chapter 05](../05_dependency-and-hiding_agjy.md) owns — grep gives you the count inside the repository and nothing gives it to you once published.
+One team with no external callers still finds removal harder than addition.
+Ownership raises the price of reversing complexity; it does not cause complexity to accumulate.
+
+**Options.**
+Expand the section with an example, as the tag offered.
+Or cut it.
+Expansion was rejected by the finding above: any example would have been built to fit a mechanism that is not there, producing a better-dressed version of the same overreach.
+Recording this because the author's tag left both open and the draft argued against the one it was offered.
+
+**Decision, the author's.**
+Cut the section, and move Lehman's first law to chapter 03.
+
+Lehman's second law survives in chapter 10's costs section, where the claim being made is the book's own and organizational — the work that reverses accumulated complexity produces no feature, so it is cut first under pressure and cannot be justified afterwards, the counterfactual not being observable.
+Lehman is provenance there for the accumulation, not for the cause.
+This supersedes decision 150's description of the chapter as *Conway gives the structure, Brooks the price of agreement, Lehman's ratchet the direction of growth*.
+
+**Where the first law went.**
+Chapter 03's *Change frequency, and its shape* showed a dial without saying why anything has to change at all.
+Three sentences now ground it: code nobody touches does exactly what it did last year, and what moves is everything around it.
+
+**Consequence.**
+3,265 words to 2,951.
+Three body sections remain, all of them organization: Conway, one team per service, Brooks.
+Four things the cut stranded were repaired — the known-death-date boundary case, which said *each of these laws* of three laws and now says *both* of two; the costs entry, which referred back to a section that no longer existed; a recognition item, *no dead-code removal in the history*, which was the cut section's evidence and was dropped with it; and the chapter's own summary of which laws it carries.
+
+**And a defect found on the way in, from decision 150's move.**
+Six ledger rows and one cross-reference still credited chapter 10 with the compatibility material that had moved to chapter 03 — add-only, the silent rename, Pike on Go 1.0, *you cannot deploy other people's software*, and two example rows.
+Chapter 03's `## Sources` had not gained the citations that arrived with that material either.
+It now lists Lehman, the Go 1 compatibility promise, and Pike's 2023 retrospective.

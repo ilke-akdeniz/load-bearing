@@ -193,7 +193,9 @@ def split_minor(total_cents, parts):
 
 > **How often does this change, and when it does, how many places change with it?**
 
-Two readings, and the second is the one that gets skipped.
+Something has to change in the first place, and what forces it sits outside the code. Code nobody touches does exactly what it did last year; what moves is tax rules, currencies, browser versions, the API you call, what users expect. A system in use is measured against all of that, so standing still is a slow decline — the first of **Lehman's laws of software evolution**, from Meir Lehman and László Belady's study of large systems in the 1970s: a system that is used must be continually adapted, or it becomes progressively less satisfactory.
+
+The question has two readings, and the second is the one that gets skipped.
 
 ```go
 // Two payment methods in six years. The switch is correct, and a
@@ -526,6 +528,9 @@ The remedy in each case is the same, and it is almost never applied — stop arg
 
 ## Sources
 
+- Meir M. Lehman, *Programs, Life Cycles, and Laws of Software Evolution* — Proceedings of the IEEE 68(9), September 1980.
+- Go 1 and the Future of Go Programs — [go.dev/doc/go1compat](https://go.dev/doc/go1compat).
+- Rob Pike, *What We Got Right, What We Got Wrong*, closing talk at GopherConAU, Sydney, 10 November 2023, published 4 January 2024. [Text and slides](https://commandcenter.blogspot.com/2024/01/what-we-got-right-what-we-got-wrong.html).
 - Go, internal packages — [go.dev/doc/go1.4#internalpackages](https://go.dev/doc/go1.4#internalpackages).
 - FlowCore, `docs/decisions.md`, decision 1 — [github.com/ilke-akdeniz/flowcore](https://github.com/ilke-akdeniz/flowcore).
 

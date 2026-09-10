@@ -35,9 +35,10 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | A Force is a dial, not a switch | f4m5 | A Force has an **intensity** — how hard it presses on the design, which is not how large the number is; the design changes several times across the range, each answer discarding the last | "read the intensity" |
 | The seven Forces | f4m5 | Concurrency, durability of the medium, blast radius, change frequency and shape, team size and turnover, latency budget, control of callers | name the Force, cite |
 | Concurrency | f4m5 | How many threads or processes at once, and do they touch the same state — it binds where writers collide, not where they coexist | cite; mdbn owns the races |
-| Durability of the medium | f4m5 | How long what this writes outlives the code that wrote it | cite; rjf9 owns published compatibility |
+| Durability of the medium | f4m5 | How long what this writes outlives the code that wrote it | cite; *Control of the callers* covers published compatibility |
 | Blast radius | f4m5 | When it is wrong, what happens and who finds out — decides how much prevention is worth | cite |
 | Change frequency and shape | f4m5 | How often, and how many places must change with it | cite; agjy owns fan-in pricing |
+| A system in use must keep changing | f4m5 | Code nobody touches still decays in fitness, because it is measured against a moving world — Lehman's first law, and the reason the change-frequency dial is never at zero | cite |
 | Team size and turnover | f4m5 | How many must agree, and how many will still be here — the rule migrates comment → review → type system | cite |
 | Latency budget | f4m5 | What the budget is, and what fraction one mechanism costs | cite; 637f owns the arithmetic |
 | Control of the callers | f4m5 | Can I change every call site, and would I know if I broke one — three values, not two | cite; agjy owns what it implies for exposure |
@@ -135,17 +136,17 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | The organization is a design input | rjf9 | Work is divided before the problem is understood, and that division is already a decomposition; nobody chose it and it decides what the software can look like | cite |
 | Conway and Brooks are independent | rjf9 | Growing a team raises the price of agreement; splitting ownership decides where agreement is needed at all. One owner with twenty people has the pairs and none of the seams | cite |
 | The inverse Conway manoeuvre, defined | rjf9 | Reshaping teams to get the architecture you want rather than inheriting one; it works on the direction the homomorphism runs, and cannot manufacture ownership that is not there | cite |
-| Lehman's ratchet | rjf9 | Complexity rises because adding a case needs one person and removing one needs everybody who might object — Conway's asymmetry applied to the codebase's own growth | cite |
-| Compatibility is add-only | rjf9 | You may add optional things and relax constraints; you may not remove, rename, retype, or tighten | "add-only" |
-| A rename is a silent break | rjf9 | Removals and renames fail without an error; a type change at least fails loudly | cite |
-| Compatibility adopted rather than suffered | rjf9 | Pike prices Go's 1.0 lock-down from the inside: uptake, and it blocks feature-itis — a language accumulating features each defensible alone. Same irreversibility the chapter treats as a burden, working as a filter: anything added is added permanently, so a proposal must be worth keeping for the life of the language. The difference from the section above is timing, not the constraint | "bought rather than incurred" |
-| You cannot deploy other people's software | rjf9 | The one constraint in the book that cannot be fixed by changing code you control | cite |
+| Compatibility is add-only | f4m5 | You may add optional things and relax constraints; you may not remove, rename, retype, or tighten | "add-only" |
+| A rename is a silent break | f4m5 | Removals and renames fail without an error; a type change at least fails loudly | cite |
+| Compatibility adopted rather than suffered | f4m5 | Pike prices Go's 1.0 lock-down from the inside: uptake, and it blocks feature-itis — a language accumulating features each defensible alone. Same irreversibility the chapter treats as a burden, working as a filter: anything added is added permanently, so a proposal must be worth keeping for the life of the language. The difference from the section above is timing, not the constraint | "bought rather than incurred" |
+| You cannot deploy other people's software | f4m5 | The one constraint in the book that cannot be fixed by changing code you control | cite |
 | Inverse Conway is a strategy, not a finding | rjf9 | The observation is established; driving architecture by reshaping teams is not | cite |
 | Conway detects mismatch | rjf9 | Neither tight coupling nor a firm interface is better in itself; the failure is seams landing where the work was divided rather than where the problem divides | cite |
 | Conway as a homomorphism | rjf9 | Every subsystem maps to one design group and every interface to a negotiation; the direction gives many-services-per-team but never many-teams-per-service | cite |
 | Conway's mechanism is negotiation | rjf9 | His own wording: an interface exists where two design groups had to negotiate one. "Communication structure" means who must agree with whom, not who can reach whom | "the ownership asymmetry" |
 | One team per service, read correctly | rjf9 | A constraint on who may own a service, not a recipe for how many to have | cite |
 | "Late" in Brooks's Law | rjf9 | Remaining work shorter than the time a new person takes to become useful — not the same as behind schedule | "what late means" |
+| Reducing complexity is invisible work | rjf9 | The work that reverses accumulated complexity produces no feature, so it loses every comparison against visible work and cannot be justified afterwards — the counterfactual is not observable. Lehman's second law is the provenance for the accumulation, not for the organizational cause | cite |
 | Long feedback loops | rjf9 | These decisions cannot be tested, because the evidence arrives after the cost is sunk | cite |
 | Compression + constraint tests | 3xzc | A pattern earns its name by saving words and ruling something out | "the two tests" |
 | A pattern is not one of the five kinds | 3xzc | The kinds classify claims; a pattern is a name for a shape, and names are not true or false | cite |
@@ -383,8 +384,8 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | loggingStore forwarding four methods | esqm | What decoration costs when the interface is not one function |
 | WithLog/WithCache ordering | esqm | Composition order changes behaviour; both orders compile |
 | Filesystem tree, Java and Go | esqm | Composite unchanged by the presence or absence of sum types |
-| Old client against four API changes | rjf9 | Add is safe, retype fails loudly, rename fails silently with a zero amount |
-| `io/ioutil`, deprecated 2021, running in 2026 | rjf9 | 175 deprecated declarations in Go's stdlib — the cost of a compatibility promise, kept |
+| Old client against four API changes | f4m5 | Add is safe, retype fails loudly, rename fails silently with a zero amount |
+| `io/ioutil`, deprecated 2021, running in 2026 | f4m5 | 175 deprecated declarations in Go's stdlib — the cost of a compatibility promise, kept |
 | Brooks n(n−1)/2 and the weekly hours | rjf9 | A team of 20 spends a quarter of every week staying aligned |
 | The 80h vs 988h remaining scenario | rjf9 | Same team, same hire, opposite answers; break-even sits at the ramp-up length |
 | Invoice, named twice | 8y69 | One file, two accurate descriptions — one a shape, one a conviction |

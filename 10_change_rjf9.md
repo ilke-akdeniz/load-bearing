@@ -59,18 +59,6 @@ Both directions of mismatch are common.
 
 *(The quotations are from Conway's 1968 paper, "How Do Committees Invent?" The negotiation mechanism is his. What this book adds is the asymmetry that makes a partition stick — free to change inside an owner, expensive across — and the reading of "communication structure" as ownership, which is how his design-group argument lands in an organization that has teams rather than committees.)*
 
-## The ratchet: why a codebase only grows
-
-That asymmetry — one team can change what it owns, two teams must agree — also decides which direction the code grows in, acting on what is *in* the code rather than on where its boundaries fall. The result has a name of its own.
-
-**Lehman's laws of software evolution**, from Meir Lehman and László Belady's study of large systems in the 1970s. The first: a system that is used must be continually adapted, or it becomes progressively less satisfactory. The mechanism is not that code rots — code nobody touches does exactly what it did last year. What moves is everything around it: tax rules, currencies, browser versions, the API you call, what users expect. **A system is judged against a moving world, so standing still is a slow decline.**
-
-The second has more teeth: as a system evolves its complexity increases, unless deliberate work is done to reduce it.
-
-That is a ratchet, and ownership is what drives it. Adding a case sits inside one owner — one `if`, one column, one flag, decided by whoever owns that file. Removing one means first establishing that nobody depends on it: finding every caller, every saved row, every customer whose workflow quietly relies on it, and getting agreement from each owner you turn up. **Additions need one person; removals need everybody who might object.** That is the boundary asymmetry again, applied to the contents instead of the seams — which is why additions happen continuously and removals need a project. [-- this is a very interesting part. So conway says org structure shapes the design, we say that the ownership boundaries between org structures slows decisions. And now we tie Lehman's second law and previous sentence to say, complexity is hard to remove because ownership of complexity means exponential ownership issues? This sounds very interesting but at the same time I'm not sure if it still fits in the chapter. It needs more expansion around this idea to belong in the chapter and maybe an example. Otherwise It looks like an overreach for fiting our Conway narrative to another law which has not much to do with orgs and is mainly about software complexity. ]
-
-**On how much weight these carry.** Lehman's laws are empirical, and the study population was mainframe systems, decades ago, with release cycles measured in years. There are eight of them and they are not equally solid — the two above are widely recognizable, and several of the others ("conservation of familiarity," "conservation of organizational stability") are vague enough to resist being checked at all.
-
 ## One team per service, and where that heuristic breaks
 
 Conway's Law is the reason behind the common advice that each service should have exactly one owning team, and the reasoning is sound as far as it goes: a deployment boundary that crosses a team boundary needs coordination on every release, which is the cost the boundary was supposed to remove.
@@ -150,7 +138,7 @@ Neither law is false at that size; they have nothing to act on ([Ch. 02](02_the-
 
 A migration script that runs once. A spike written to answer a question. An import job for a system being decommissioned in March.
 
-Each of these laws is a claim about **accumulated time**, and there is not going to be any. The ratchet needs years of additions to ratchet. Conway needs a second group with something to negotiate.
+Both laws are claims about **accumulated time**, and there is not going to be any. Conway needs a second group with something to negotiate. Brooks needs a project long enough that a new person could have become useful on it.
 
 The failure here is not ignoring the laws but applying them — designing a spike for extension, or giving a one-off report an owning team. The dangerous version is a script that was going to be deleted and was not, which is what happens when nobody records the death date.
 
@@ -166,7 +154,7 @@ This is the case that shows the two laws are independent rather than one idea. G
 
 **Taking it seriously means treating a reorganization as a design change.** Reshaping teams to shape the software means changing who reports to whom, who sits with whom, and who owns what. That is disruptive, slow, and lands on people rather than on code. It is not a refactoring, whatever the diagram suggests.
 
-**Reducing complexity is invisible work.** Lehman's second law says complexity grows unless work is done to reduce it, and that work produces no feature. It is the first thing cut under pressure and the hardest to justify afterwards, because the counterfactual — how bad it would have got — is not observable.
+**Reducing complexity is invisible work.** Complexity accumulates as a system is changed — Lehman's second law of software evolution, from his and László Belady's study of large systems in the 1970s — and the work that reverses it produces no feature. It is the first thing cut under pressure and the hardest to justify afterwards, because the counterfactual — how bad it would have got — is not observable.
 
 **Ownership boundaries buy coordination and sell flexibility.** A boundary that removes a negotiation also removes your ability to move it later without one. That is the trade, and it is worth making where the problem really has a seam and expensive where it does not.
 
@@ -180,7 +168,6 @@ This is the case that shows the two laws are independent rather than one idea. G
 
 - **Two services that cannot be released independently.** They are one system with a network call in the middle, and the deployment boundary does not match the design boundary.
 - **A service whose boundary matches a team that no longer exists.** Conway's Law recording an organization from three reorganizations ago.
-- **No dead-code removal in the history.** The ratchet, visible: additions every week, removals never.
 - **A module every team edits and none owns.** Every change to it is a negotiation, so it accumulates whatever was easiest to add rather than whatever was right.
 - **The number of services equal to the number of teams**, arrived at without anyone asking how many parts the problem has.
 
