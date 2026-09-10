@@ -6,17 +6,17 @@
 
 Those are the two tests, and the rest of Part III applies them. They are independent — a name can pass one and fail the other, and the names that fail the second are the ones that cause trouble, because they feel informative while carrying almost nothing.
 
-## A pattern is not a claim
+## A pattern is not a claim in itself
 
 A claim is a statement that can be true, false, or conditional. A pattern is a **name for a shape**, and a name is a noun rather than a statement — *Strategy* can no more be true than *triangle* can.
 
-So [chapter 02](02_the-five-kinds_cjx4.md)'s classification test has nothing to work on. Asking how much authority *Singleton* carries is asking a question about a word, and the question is malformed rather than hard. What the test works on is the sentence the name is sitting in, and the same name sits in three different kinds of sentence.
+So [chapter 02](02_the-five-kinds_cjx4.md)'s classification test has nothing to work on. Asking how much authority *Singleton* carries is asking a question about a word, and the question is malformed rather than hard. What the test works on is the sentence the name is sitting in, and the same name can sit in three different kinds of sentence.
 
 - **A definition.** *Strategy is a family of interchangeable algorithms behind one interface.* True because that is what the words mean — [chapter 04](04_families-of-law_q5c6.md)'s second family of Law, where nothing falsifies the claim and the words may simply not describe your code.
 - **A description.** *This shape recurs in object-oriented systems.* An empirical claim, and what would settle it is going and counting.
 - **A prescription.** *Use Strategy when you have more than one way of doing something.* The only one of the three that is advice, and so the only one a Force can make wrong.
 
-The trouble starts when a pattern is used as though it were a claim, usually disguised as a Law or a Principle. The disguise works because the first two sentences above are claims, and they are true — so the third arrives sounding equally settled.
+The trouble starts when a pattern is used as a prescription but it's treated as a definition or description. It's easy to miss that distinction because the first two sentences above are claims, and they are true — so the third arrives sounding equally settled.
 
 ## What a pattern catalogue actually is
 
@@ -209,7 +209,7 @@ The question that does the work: **what does this name let me stop wondering abo
 
 If the answer is a description you no longer have to write, the name compresses. If it is a set of implementations you no longer have to check, the name constrains. If it is neither, you have been told the author had a word for it.
 
-[Chapter 12](12_patterns-that-cross_r8dw.md) takes the pattern vocabulary the two tests just filtered and shows that the answer changes once the thing on the other side stops being yours to edit — the same name that costs nothing between your own files can be a permanent obligation across a boundary you do not own.
+[Chapter 12](12_patterns-that-cross_r8dw.md) takes the same pattern vocabulary  and shows that the answer changes once the thing on the other side stops being yours to edit.
 
 ---
 
