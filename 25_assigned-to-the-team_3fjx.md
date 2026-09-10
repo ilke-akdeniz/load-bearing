@@ -4,7 +4,7 @@
 
 **Programming with the five kinds depends on individual ownership: every artifact has one name against it, and that name belongs to whoever holds the most context on the subject the artifact is about.**
 
-Every chapter so far has worked on a claim somebody made about software. This one works on the arrangement that produces the software, and it is the only chapter whose subject is people. It is here because the arrangement is derivable.
+Every chapter so far has worked on a claim somebody made about software. This one works on the arrangement that produces the software. [Chapter 10](10_organization_rjf9.md) does too, at the scale of teams: where the boundaries between them fall, and what that does to the shape of the system. This chapter works at the scale of individuals — which artifacts have to exist, and whose name is against each one. It is here because the arrangement is derivable.
 
 ---
 
