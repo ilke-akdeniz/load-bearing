@@ -1,24 +1,20 @@
-# Patterns That Cross the Line
+# Patterns That Cross a Boundary
 
 ## The claim
 
-**The same pattern name describes a change you can make in an afternoon and a commitment you will maintain for years when it crosses the ownership line. What separates them is not size. It is whether you can change the other side.**
+**Same pattern crossing different boundaries could describe a simple code change or a yearlong commitment. What prevails is whether you own both sides of the boundary.** [-- I changed "line" to "boundary" because they were used for the same thing and it was confusing to track, correct me if that was wrong. I feel this "boundary" needs one qualifier to make it more specific. Because I confused this with ownershhip boundary which is not, this is more like a "service boundary" I guess. We need to use that qualifier at the beginning at least to make the meanin precise.]
 
 People usually call this a question of scale, and size does correlate with it, because systems acquire other owners as they grow. But size is not the cause, and the two come apart in a way worth being precise about.
 
 A ten-thousand-line refactor inside your own repository is a large piece of work. It is not a large *commitment*: when it is done it is done, nobody else's release schedule bears on it, and if you get the design wrong you can change it again. A fifty-line integration with a payment provider is a small piece of work and a permanent obligation — it has to keep working through their changes, forever, and you will not be consulted about them.
 
-Those are different kinds of expensive, and only the second is what this chapter is about.
-
-The question that decides it is one sentence long:
+Those are different kinds of expensive, and the question that decides that kind is one sentence long:
 
 > **Can I change the thing on the other side?**
 
 If yes, a pattern is one option among several, and often not the cheapest. If no, most of the options were never available — and what looks like a design choice is really the acknowledgment of a constraint.
 
-The rest of the chapter is one worked example crossing that line, and then what happens to the familiar pattern names when they cross it.
-
-Throughout: **FastSell**, a shop. It takes payments and it keeps a ledger.
+The rest of the chapter is one worked example of a pattern crossing boundaries: **FastSell**, a shopping platform that takes payments and keeps a ledger.
 
 ---
 
@@ -103,7 +99,7 @@ type StripeCharge struct {
 
 You cannot rename `Amount` to `Minor`. You cannot collapse their eleven statuses into the one boolean your ledger has. **The better answer from the previous section is not available**, and adapting is no longer one option among several — it is the only one.
 
-Which turns the question into *where*. Without a boundary, their vocabulary goes wherever it is convenient:
+Which turns the question into *where*. Without a boundary, their vocabulary goes wherever it seems convenient:
 
 ```go
 func receipt(charge StripeCharge) string   { if charge.Status == "succeeded" { ... } }
@@ -113,7 +109,7 @@ func refundable(charge StripeCharge) bool  { return charge.Status == "succeeded"
 func reconcile(charge StripeCharge) bool   { return charge.Status == "succeeded" || charge.Status == "pending" }
 ```
 
-With one, it stops at the edge and everything behind it speaks FastSell:
+With one, it stops at the edge and everything behind it doesn't depend on FastSell directly:
 
 ```go
 func fromStripe(charge StripeCharge) LedgerEntry {
@@ -129,13 +125,13 @@ Both versions produce identical output today. The difference shows up when Strip
    with a boundary      1   (inside fromStripe)
 ```
 
-Six is small because the example is small; a real integration reaches further. **The boundary converts a change that lands everywhere into a change that lands once** — [chapter 05](05_dependency-and-hiding_agjy.md)'s argument about fan-in, applied to a dependency whose release schedule is not yours.
+**The boundary converts a change that lands everywhere into a change that lands once.** This is [chapter 05](05_dependency-and-hiding_agjy.md)'s argument about fan-in, applied to a dependency whose release schedule is not yours.
 
-The pattern literature calls this an **Anti-Corruption Layer**, a name from Eric Evans, where the corruption is another system's model spreading into yours. Note what it costs: a translation function, a set of mappings that encode real judgements, tests for code that does nothing but rename fields, and somebody whose job includes reading Stripe's release notes.
+Called an **Anti-Corruption Layer** in the pattern litterature, a name from Eric Evans, where the corruption is another system's model spreading into yours. Note what it costs: a translation function, a set of mappings that encode real judgements, tests for code that does nothing but rename fields, and somebody whose job includes reading Stripe's release notes.
 
-**Same pattern, same shape, both times.** In the first case, three lines that were better deleted. In the second, a file, an owner, and a standing obligation.
+## Other pattern examples, and what crossing the boundary does to them
 
-## The names, and what crossing the line does to them
+[-- I see this section as a missed opportuniy. Needs a rewrite. Right now it goes into the nitpicks of 4 other patterns that follows the same journey without ever showing what the journeys are. It should instead show at leas two more examples of those patterns, demonstrating the easy change and year-long commitment with code examples. I'ts ok to have more compact examples now since the reader is now used to the shape. But without those examples it's not clear if this list is an overreach or genuine. Then instead of all nitpick only the most important details should be stated.]
 
 | Pattern | Both sides yours | The other side is theirs | What appears when it crosses |
 |---|---|---|---|
@@ -157,6 +153,7 @@ That distribution is itself informative. **The rows that survive best are the on
 
 Observer makes it plainest. Among your own objects, notifying a listener is calling a function: it cannot be lost, cannot arrive twice, cannot arrive out of order. Across a process boundary all three become possible, and every one is a design decision the word "Observer" does not mention.
 
+[-- what follow about Facade and previous entries about it seems like an overreach. I'm not able to follow the argument, how does facade become load-bearing when crossing the boundary? Are you sure about this?]
 [Chapter 11](11_what-a-pattern-is-for_3xzc.md) left a question here. **Facade** compresses well and rules nothing out, so what is it doing in a book about load-bearing claims? This is the answer, and "published" is worth making concrete.
 
 ```go
