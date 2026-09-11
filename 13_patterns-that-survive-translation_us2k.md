@@ -109,7 +109,7 @@ One round trip, and no way for the two to disagree about what order 42 currently
 - **Single writer** — remove the contention rather than manage it. [Chapter 07](07_time_mdbn.md) owns this, and [chapter 09](09_scale_637f.md) shows what it does to throughput.
 - **Idempotency key** — [chapter 08](08_distribution_49yh.md) owns it; it is what makes at-least-once delivery survivable.
 - **Saga** — [chapter 08](08_distribution_49yh.md) owns it; the answer when the unit of consistency spans systems and no transaction can.
-- **Leader election** — [chapter 08](08_distribution_49yh.md) owns it; what *exactly one instance* becomes across machines, where both halves of it have to be bought.
+- **Leader election** — one machine holds a role and the others stand ready. It needs a lease whose duration is a guess, because a holder that is slow and a holder that is gone look the same ([Ch. 08](08_distribution_49yh.md)).
 
 ## Force: Durability of the medium
 

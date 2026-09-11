@@ -230,24 +230,6 @@ Before, a crash destroyed information: nothing anywhere knew an event was owed, 
 
 **Sagas** are the same manoeuvre for a longer sequence. When five parts must each do a thing and there is no transaction across them, you do them in order and give each step a compensating action that undoes it. There is no rollback, because there was never a transaction; there is a sequence of forward steps and a sequence of undo steps, and the undo steps are ordinary business operations — refund, cancel, release — with all the visibility that implies. A customer may see a charge and then a refund rather than never seeing a charge.
 
-## Only one of them may run it
-
-A nightly billing job must run on exactly one machine. The other machines exist so that something still runs it when that one dies, which is the only reason the job is not a cron entry on a box somebody owns.
-
-The requirement has two halves, and they cost different things:
-
-> **At most one holder of the role at a time, and everyone agrees which one it is.**
-
-In a single process both halves are free. There is one memory space, so a package variable guarded by `sync.Once` — Go's run-this-exactly-once primitive — *is* the one holder, and "everyone agrees" is not a question anything can ask, because there is nothing that could disagree.
-
-Across machines the first half is this chapter's claim arriving where it costs the most. "At most one" needs something that stops a second machine from starting the job while the first is merely slow, and a machine that is slow and a machine that is gone produce the same silence. So the mechanism is a **lease**: the holder renews its claim every few seconds, and the others may take the role when it has not been renewed for some duration. That duration is a guess, and it is billed at both ends. Too short, and a garbage-collection pause on the holder hands the role to a second machine while the first is still billing customers. Too long, and nobody bills anybody for the length of the timeout.
-
-The guess is unavoidable rather than badly chosen. A lease duration is a deadline, and a deadline is what turns silence into a decision — which is the same trade the timeout section makes, with the cost moved from one request to the whole role.
-
-The second half is consensus, and the FLP result later in this chapter says what consensus can promise: safety always, termination never. Two machines will not both believe they hold the role. There is no protocol that also promises they will agree *by* any particular moment.
-
-So the bill for one instance, across machines, is a lock service somebody has to run, a lease duration nobody is confident about, and a plan for the machine that wakes from a pause believing it is still in charge. That last one is not solved by the old holder noticing: it has to be impossible for a superseded holder to write, which means whatever it writes to must itself be able to refuse a stale claim.
-
 ## Availability is a product, not an average
 
 Parts that can fail independently must all be working at once, and that multiplies.

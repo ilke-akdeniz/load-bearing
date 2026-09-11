@@ -6641,3 +6641,18 @@ It is now a listed entry that defines the pattern and names its price, which is 
 
 **Still outstanding.** The deletion itself and the renumber of chapters 13 through 25, which are separate commits.
 Chapter 13 still carries three references to chapter 12's question and chapter 11 carries two, all of which have to be rewritten rather than merely unlinked, since two of them use it as a working test rather than as a pointer.
+
+---
+
+## 164. The leader-election salvage is reversed
+
+**Date.** 2026-09-11
+
+**Decision, the author's.** The section added to [chapter 08](../08_distribution_49yh.md) in decision 163 — *Only one of them may run it* — is deleted.
+
+**Consequence, and what it strands.**
+[Chapter 13](../13_patterns-that-survive-translation_us2k.md)'s concurrency family had gained a listed entry pointing at that section, and the ledger row assigning the concept to 49yh went with it.
+The ledger row is removed and the entry is now self-contained, on the same footing as the anti-corruption layer entry: the pattern named, the lease, and why its duration cannot be chosen confidently, in one line with a pointer to [chapter 08](../08_distribution_49yh.md)'s claim rather than to a section.
+Dropping the entry as well is a one-line change if the author wants the name out of the catalogue too.
+
+So of the two pieces decision 162 identified as worth more than the chapter around them, one is gone entirely and one survives as a catalogue entry.
