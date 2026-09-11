@@ -225,7 +225,7 @@ type Rates interface {
 
 *The constraint:* the interface is declared by the consumer rather than the provider, which is what reverses the arrow — a provider-declared interface leaves the dependency pointing exactly where it was ([Ch. 05](05_dependency-and-hiding_agjy.md)).
 
-*The cost:* an interface per boundary, and the habit of adding one wherever a boundary is drawn ([Ch. 18](18_tdd-and-mocks_u8eu.md) traces where that habit comes from).
+*The cost:* an interface per boundary, and the habit of adding one wherever a boundary is drawn ([Ch. 17](17_tdd-and-mocks_u8eu.md) traces where that habit comes from).
 
 **Pattern: Strangler fig** — route traffic through a facade, move one route at a time, delete the old system when the last route has moved.
 
@@ -416,7 +416,7 @@ cache.Set(key, value, ttl)
 
 > **Who else depends on this, and can I change them?**
 
-[Chapter 03](03_forces_f4m5.md)'s compatibility rule and [chapter 12](12_patterns-that-cross_r8dw.md)'s question of who owns the other side of a seam both land here. The patterns are ways of making a boundary survivable.
+[Chapter 03](03_forces_f4m5.md)'s compatibility rule lands here — what you may still change when you cannot change your callers. The patterns are ways of making a boundary survivable.
 
 **Pattern: Tolerant reader** — read only the fields you need, and ignore everything else.
 
@@ -495,7 +495,7 @@ The payoff is knowing what is safe to change:
 
 Two questions worth separating: why do these patterns last, and why does the grouping work?
 
-**They last because a Force outlives a language.** Concurrency was a problem in 1970 and is a problem now. Data outlives code in COBOL and in Rust. Someone else always depends on your interface. A pattern answering one of those describes the shape of the problem rather than a gap in a toolchain — which is why it is still recognizable after being carried into a language its author never used. [Chapter 14](14_missing-language-features_esqm.md) takes the converse: a name that disappears when the language changes was answering the language, not the problem.
+**They last because a Force outlives a language.** Concurrency was a problem in 1970 and is a problem now. Data outlives code in COBOL and in Rust. Someone else always depends on your interface. A pattern answering one of those describes the shape of the problem rather than a gap in a toolchain — which is why it is still recognizable after being carried into a language its author never used. [Chapter 13](13_missing-language-features_esqm.md) takes the converse: a name that disappears when the language changes was answering the language, not the problem.
 
 **The grouping works because a pattern is a Force with a shape attached.** If two patterns answer the same Force, they are alternatives, and knowing the Force tells you which question you are choosing between. Optimistic and pessimistic locking are not two techniques to learn; they are two answers to *how often do writers collide*, and the intensity of that Force picks one.
 
@@ -511,7 +511,7 @@ Sorting the field left five patterns that do not answer a Force, and they fail i
 
 **Some answer a goal rather than a situation.** Property-based testing, the test-double taxonomy, and functional core / imperative shell all answer *how will I know this works*, and a goal is a property you have decided to want in the system: testability, observability, portability, a particular standard of code review. The test that separates it from a Force is whether you can decide to want less of it and stay honest. You cannot decide that four teams will stop needing to agree, or that the network will stop dropping packets — those are true whatever you want. You can decide that a prototype does not need to be portable, or that a script does not need tests, and nothing has been denied.
 
-That is a real gap in this chapter's method, not a defect in the patterns. [Chapter 18](18_tdd-and-mocks_u8eu.md) covers the testing material, and it is organized by what the techniques actually buy rather than by Force, for exactly this reason.
+That is a real gap in this chapter's method, not a defect in the patterns. [Chapter 17](17_tdd-and-mocks_u8eu.md) covers the testing material, and it is organized by what the techniques actually buy rather than by Force, for exactly this reason.
 
 **Some answer what the problem is rather than what the situation is.** A state machine is the right shape when the domain genuinely has states and transitions — an order that is placed, then paid, then shipped. That is a fact about the business, not about your concurrency or your latency budget. The same goes for Transaction Script, which [chapter 11](11_what-a-pattern-is-for_3xzc.md) uses as its compression example: it is what you write when *no* Force is pushing you anywhere else, and it is right far more often than its reputation suggests.
 
@@ -521,13 +521,13 @@ Confusing the Forces, goals, and problem shapes in play is one way people end up
 
 Knowing the Force narrows the field; it rarely closes it. *Writers collide* gives you optimistic locking, pessimistic locking, single-writer partitioning, and a serializable transaction, and choosing between them needs the Force's **intensity** — [chapter 03](03_forces_f4m5.md)'s dial — plus what you are willing to pay.
 
-This chapter sorts. It does not decide. [Chapter 20](20_force-map-method_r37x.md) is the one that turns a set of Forces into a design.
+This chapter sorts. It does not decide. [Chapter 19](19_force-map-method_r37x.md) is the one that turns a set of Forces into a design.
 
 ### The listed entries are not endorsements
 
 The one-line entries above place each pattern; they do not recommend it. Repository and Active Record are both listed, and they are alternatives with opposite trade-offs. CQRS is listed and is wrong for most systems that adopt it.
 
-Run [chapter 11](11_what-a-pattern-is-for_3xzc.md)'s tests before using any of them, and [chapter 12](12_patterns-that-cross_r8dw.md)'s question before believing the cost estimate. A list is a map of what exists, which is a different thing from a set of instructions.
+Run [chapter 11](11_what-a-pattern-is-for_3xzc.md)'s tests before using any of them, and [chapter 03](03_forces_f4m5.md)'s Forces before believing the cost estimate. A list is a map of what exists, which is a different thing from a set of instructions.
 
 ---
 
@@ -555,7 +555,7 @@ Run [chapter 11](11_what-a-pattern-is-for_3xzc.md)'s tests before using any of t
 **In a conversation:**
 
 - **"We should use X."** Which Force, and how intense? If neither can be answered, the proposal is a shape looking for a problem.
-- **"That's the standard pattern for this."** Standard where, and answering which Force? [Chapter 12](12_patterns-that-cross_r8dw.md)'s question applies to the recommendation too.
+- **"That's the standard pattern for this."** Standard where, and answering which Force?
 - **"We'll need CQRS eventually."** Eventually is [chapter 03](03_forces_f4m5.md)'s territory: does the decision expire, and is it cheap today? For CQRS, both answers are unfavourable.
 - **Someone reciting a list of patterns as a design.** A list of shapes is not a design until each one is attached to a Force.
 
@@ -563,8 +563,8 @@ The question that does the work: **which Force is this answering, and how strong
 
 A pattern with a Force behind it can be argued about on the merits — you can disagree about the intensity, and the disagreement is resolvable. A pattern with no Force behind it can only be argued about on taste, which is the argument this book exists to end.
 
-[Chapter 14](14_missing-language-features_esqm.md) takes the converse of this chapter's test. If a pattern survives translation because it answers a Force, then a pattern that *disappears* when you change language was answering the language — and a surprising share of the best-known catalogue turns out to be exactly that.
+[Chapter 13](13_missing-language-features_esqm.md) takes the converse of this chapter's test. If a pattern survives translation because it answers a Force, then a pattern that *disappears* when you change language was answering the language — and a surprising share of the best-known catalogue turns out to be exactly that.
 
 ---
 
-[← Ch. 12](12_patterns-that-cross_r8dw.md)  ·  [Contents](00_toc.md)  ·  [Ch. 14 →](14_missing-language-features_esqm.md)
+[← Ch. 11](11_what-a-pattern-is-for_3xzc.md)  ·  [Contents](00_toc.md)  ·  [Ch. 13 →](13_missing-language-features_esqm.md)

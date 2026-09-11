@@ -214,10 +214,10 @@ Five questions, in order. Stop at the first that answers.
 | "Premature optimization is the root of all evil" | **Principle** | routinely quoted with Knuth's conditions removed |
 | "Use dependency injection" | **Principle** | the technique |
 | "Use a DI container" | **Idiom** | the tooling — a different kind of claim entirely |
-| "Every repository gets an interface" | **Idiom** | C#/Java; [Ch. 18](18_tdd-and-mocks_u8eu.md) for why |
+| "Every repository gets an interface" | **Idiom** | C#/Java; [Ch. 17](17_tdd-and-mocks_u8eu.md) for why |
 | "Accept interfaces, return structs" | **Idiom** | Go |
 | "Exceptions are for exceptional cases" | **Idiom** | Go and Python disagree at the root |
-| "Short local names" | **Style** | Go-specific, and still Style — nothing sees it; [Ch. 23](23_style_9rng.md) |
+| "Short local names" | **Style** | Go-specific, and still Style — nothing sees it; [Ch. 22](22_style_9rng.md) |
 | "Prefer `var` / avoid `var`" | **Style** | pick one, stop talking |
 | "Tabs vs spaces" | **Style** | genuinely arbitrary |
 
@@ -233,7 +233,7 @@ Four mechanisms, none of them anyone's fault in particular.
 
 **Tone does not vary with authority.** Confidence is a personality trait and a rhetorical choice. Someone stating a proven theorem and someone stating a formatting preference can sound identical — and frequently the formatting preference sounds *more* certain, because there is less to qualify.
 
-**Advocacy compresses.** "Always do X" travels further than "do X when Y, unless Z." The conditions are the first thing lost, and they were the content. [Chapter 16](16_principle-loses-scope_b86v.md) traces this mechanism in detail.
+**Advocacy compresses.** "Always do X" travels further than "do X when Y, unless Z." The conditions are the first thing lost, and they were the content. [Chapter 15](15_principle-loses-scope_b86v.md) traces this mechanism in detail.
 
 **Monoculture makes Idioms look like physics.** If you have only worked in one ecosystem, its conventions are indistinguishable from necessity. You have never seen the counter-example, so you conclude there isn't one. This is the single most common source of confusion here, and the only reliable cure is working in a second ecosystem long enough to be fluent — long enough that its conventions stop feeling wrong and start feeling like conventions.
 
@@ -247,7 +247,7 @@ Three boundaries, and the last is the important one.
 
 **Claims that genuinely span kinds.** "Validate at the boundary" is partly a security Law, partly a feedback-speed Principle, partly an Idiom about *which* boundary. Forcing a single label loses information. Hold two labels and say which part you mean.
 
-**Classifying is not deciding.** The model tells you what kind of claim you are holding. It does not tell you what to do about it. Recognizing something as an Idiom is not permission to ignore it — [chapter 22](22_idioms_7nkn.md) argues that following local convention is usually correct even when you can out-argue it, because reviewability and shared expectations are worth more than being interesting. The model narrows the question; it does not answer it.
+**Classifying is not deciding.** The model tells you what kind of claim you are holding. It does not tell you what to do about it. Recognizing something as an Idiom is not permission to ignore it — [chapter 21](21_idioms_7nkn.md) argues that following local convention is usually correct even when you can out-argue it, because reviewability and shared expectations are worth more than being interesting. The model narrows the question; it does not answer it.
 
 **The model needs comparative experience it cannot supply.** This is the real limit, and it is uncomfortable.
 

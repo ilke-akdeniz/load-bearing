@@ -6,7 +6,7 @@
 
 It is a Principle, and the Forces behind it are real. A rule that lives next to the data it reads can be enforced rather than merely documented, and a caller who cannot reach the data cannot get the rule wrong.
 
-This is the first of Part IV's three cases. [Chapter 16](16_principle-loses-scope_b86v.md) made the claim; these three are what it looks like happening, and this one is the case where the author of the advice saw the compression coming and wrote against it in his introduction.
+This is the first of Part IV's three cases. [Chapter 15](15_principle-loses-scope_b86v.md) made the claim; these three are what it looks like happening, and this one is the case where the author of the advice saw the compression coming and wrote against it in his introduction.
 
 ---
 
@@ -139,7 +139,7 @@ What the compressed sentence gives you is an instruction. What it leaves behind 
 
 ### Identifiers instead of references
 
-The other reading of *belongs with* is already in [chapter 15](15_smuggled-verdicts_8y69.md), where behaviour is not absent but **placed**, and what decides the placement is **what the rule must see** — how much data you have to be looking at before you can tell whether the rule holds. Under that reading, a rule needing a customer and an order belongs at a scope that can see both, and that scope is neither entity.
+The other reading of *belongs with* is already in [chapter 14](14_smuggled-verdicts_8y69.md), where behaviour is not absent but **placed**, and what decides the placement is **what the rule must see** — how much data you have to be looking at before you can tell whether the rule holds. Under that reading, a rule needing a customer and an order belongs at a scope that can see both, and that scope is neither entity.
 
 What the entities hold instead is an identifier:
 
@@ -255,7 +255,7 @@ Everything above is about rules that read two entities. Two situations sit outsi
 
 ### A rule that never leaves one entity
 
-Where a rule needs one entity, the advice is right as stated, and this chapter's caution produces the failure [chapter 15](15_smuggled-verdicts_8y69.md) describes: the rule is moved away from the only data it reads, for no gain.
+Where a rule needs one entity, the advice is right as stated, and this chapter's caution produces the failure [chapter 14](14_smuggled-verdicts_8y69.md) describes: the rule is moved away from the only data it reads, for no gain.
 
 A money value is the clean case. Adding two amounts requires checking that the currencies match, and everything that check reads is inside the value:
 
@@ -272,7 +272,7 @@ record Money(long minorUnits, String currency) {
 
 `Money` holds no reference to anything that holds it. The method reads two money values and nothing else, so there is no second entity for an edge to point at, and no reading of *belongs with* produces one. Moving `plus` to a `MoneyService` would put the currency check where a caller can skip it, which is the enforcement argument in [chapter 05](05_dependency-and-hiding_agjy.md), running in the opposite direction from this chapter's advice.
 
-The same holds for a state machine over a single aggregate. If the legal transitions of an order depend only on the order's own status and lines, they belong on the order, and [chapter 13](13_patterns-that-survive-translation_us2k.md)'s aggregate is the shape that says so.
+The same holds for a state machine over a single aggregate. If the legal transitions of an order depend only on the order's own status and lines, they belong on the order, and [chapter 12](12_patterns-that-survive-translation_us2k.md)'s aggregate is the shape that says so.
 
 ### The cycle that costs nothing
 
@@ -286,11 +286,11 @@ Two types that hold each other and are never separated, never serialized, never 
 
 **Identifiers move errors from compile time to run time.** `order.customer.tier` cannot be null-dereferenced in a language that checks it; `customerID` can point at a customer that no longer exists, and only a lookup finds out. What was a type error becomes a missing row.
 
-**Every traversal becomes explicit work.** With references, `customer.orders` is free at the call site. With identifiers, somebody must fetch the orders for a customer, and the code that does it has to exist, be tested, and be called in the right order. [Chapter 13](13_patterns-that-survive-translation_us2k.md)'s N+1 problem is what happens when this is done carelessly.
+**Every traversal becomes explicit work.** With references, `customer.orders` is free at the call site. With identifiers, somebody must fetch the orders for a customer, and the code that does it has to exist, be tested, and be called in the right order. [Chapter 12](12_patterns-that-survive-translation_us2k.md)'s N+1 problem is what happens when this is done carelessly.
 
-**The rule's location stops being obvious.** On an entity, a rule has one plausible home and everybody finds it. At a service that sees both entities, there are several plausible homes, and without a stated method for choosing — which [chapter 20](20_force-map-method_r37x.md) owns — the placement becomes a matter of local habit.
+**The rule's location stops being obvious.** On an entity, a rule has one plausible home and everybody finds it. At a service that sees both entities, there are several plausible homes, and without a stated method for choosing — which [chapter 19](19_force-map-method_r37x.md) owns — the placement becomes a matter of local habit.
 
-**Flat structures read as procedural, and that carries a social cost.** A team fluent in object modelling will recognize the shape as the one [chapter 15](15_smuggled-verdicts_8y69.md) defends against a verdict noun, and the argument has to be made again on every review. The technical answer is settled and the vocabulary is not.
+**Flat structures read as procedural, and that carries a social cost.** A team fluent in object modelling will recognize the shape as the one [chapter 14](14_smuggled-verdicts_8y69.md) defends against a verdict noun, and the argument has to be made again on every review. The technical answer is settled and the vocabulary is not.
 
 ---
 
@@ -307,7 +307,7 @@ Two types that hold each other and are never separated, never serialized, never 
 **In a conversation:**
 
 - **"Put the logic on the entity"** offered without asking what the rule reads. The question that separates the two readings is how many entities you must be looking at before you can tell whether the rule holds.
-- **"It's an anemic domain model"** used against flat structures with identifiers. [Chapter 15](15_smuggled-verdicts_8y69.md) has the answer: the term carries an antecedent about wasted mapping cost that the speaker has to establish before the word means anything.
+- **"It's an anemic domain model"** used against flat structures with identifiers. [Chapter 14](14_smuggled-verdicts_8y69.md) has the answer: the term carries an antecedent about wasted mapping cost that the speaker has to establish before the word means anything.
 - **"The ORM handles it."** It materializes the cycle rather than removing it, and the costs above are then paid inside the framework's rules instead of yours.
 
 The question that does the work: **what tool we do not own will walk this object graph?**
@@ -318,7 +318,7 @@ The person who makes that promise is rarely the person who breaks it. Adding a J
 
 So the useful reading of the answer is not *what walks it now* but *whether the graph sits anywhere such a tool can reach*. Where it does, the back-pointer has a cost that has not been paid yet, and paying it later means either a flattening layer at the boundary or a field excluded from equality with a comment explaining why.
 
-[Chapter 18](18_tdd-and-mocks_u8eu.md) turns to testing, where *test behaviour, not implementation* meets the mock that asserts about itself.
+[Chapter 17](17_tdd-and-mocks_u8eu.md) turns to testing, where *test behaviour, not implementation* meets the mock that asserts about itself.
 
 ---
 
@@ -331,4 +331,4 @@ So the useful reading of the answer is not *what walks it now* but *whether the 
 
 ---
 
-[← Ch. 16](16_principle-loses-scope_b86v.md)  ·  [Contents](00_toc.md)  ·  [Ch. 18 →](18_tdd-and-mocks_u8eu.md)
+[← Ch. 15](15_principle-loses-scope_b86v.md)  ·  [Contents](00_toc.md)  ·  [Ch. 17 →](17_tdd-and-mocks_u8eu.md)

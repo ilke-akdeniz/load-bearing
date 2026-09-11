@@ -269,7 +269,9 @@ n_chapters = len(entries)
 for fname in ["00_toc.md", "README.md", "CLAUDE.md", "docs/ABOUT.md"]:
     text = read(fname)
     for stated in re.findall(r"(\w+[- ]\w+|\w+) chapters", text):
-        words = {"twenty-three": 23, "twenty three": 23, "23": 23}
+        words = {"twenty-three": 23, "twenty three": 23, "23": 23,
+                 "twenty-four": 24, "twenty four": 24, "24": 24,
+                 "twenty-five": 25, "twenty five": 25, "25": 25}
         if stated.lower() in words and words[stated.lower()] != n_chapters:
             fail("count", f"{fname} says {stated} chapters, TOC has {n_chapters}")
 if "four levels and five kinds" not in read("CLAUDE.md"):

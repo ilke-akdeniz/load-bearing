@@ -155,13 +155,6 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | A name as a search term | 3xzc | Some names are mediocre descriptions and good indexes into the literature on their failure modes; this is also all a weak name gives a learner | cite |
 | Too young to name | 3xzc | The tests assume you can say what the code does; before that a vague name is honest, and the failure is losing track that it is provisional | cite |
 | Directories group by change, names group by shape | 3xzc | A folder named for a pattern collects code belonging to different features | cite |
-| Crossing a seam you don't own | r8dw | The same pattern name is an afternoon's work or a years-long commitment, and "scale" is the wrong word for what separates them | "crossing a seam you don't own" |
-| Ownership, not size | r8dw | The deciding question is whether you can change the other side; size only correlates, because systems acquire other owners as they grow | "can I change the other side" |
-| The third option | r8dw | With both sides yours you can change the other side instead of adapting; across a seam you don't own, that option is gone | cite |
-| Shapes are scale-free, Forces are not | r8dw | A pattern name transfers the picture and drops the constraints, which were the expensive half | cite |
-| Crossing a seam adds failure modes | r8dw | The same shape acquires loss, duplication, latency, and published commitment — Part II's Laws, one at a time | cite |
-| Facade forbids nothing on either side | r8dw | The crossing gives the name no teeth — 3xzc's finding survives it. What stops being revisable is the operation set, which becomes add-only once somebody else holds a copy of it | cite |
-| Unchanged by the seam | r8dw | If you cannot state what the pattern would be on the other side, it is a code-organization device — Strategy, Template Method | cite |
 | Patterns are Forces with a shape | us2k | The durable patterns answer a Force; grouping by Force finds the name from the situation, where a catalogue only finds it from the name | "the Force groups" |
 | Patterns sorted by Force | us2k | Chapter f4m5's seven Forces, in chapter f4m5's order and names; 49 patterns sort, 5 refuse | cite |
 | Team size relocates rules | us2k | This Force changes where a rule lives rather than what it is, so it produces few patterns of its own | cite |
@@ -365,13 +358,7 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | M/M/1 wait table and the marginal-cost table | 637f | The queue curve, with the 85% "cliff" shown not to exist |
 | Linear scan vs map, ints and strings | 637f | The crossover moves with element type — the finding that the expected demo did not show |
 | Word counts: Transaction Script, Singleton, Manager | 3xzc | Compression measured, and the two names with no referent to compress |
-| Code each name forbids | 3xzc | Singleton and Transaction Script forbid something; Facade forbids nothing. r8dw owns Facade across a seam, where it still forbids nothing |
-| FastSell: `Receipt` to `LedgerEntry`, both sides owned | r8dw | The adapter is the second-best answer — renaming two fields deletes it |
-| FastSell moves to Stripe | r8dw | The rename is unavailable, so adapting is the only move; six call sites speak Stripe, or one |
-| Proxy: the `ctx` parameter that appears | r8dw | `Get(id)` becomes `Get(ctx, id)` when the catalogue is somebody else's service — a deadline the local call had no use for. GoF's *remote proxy* had the crossing in the definition |
-| Observer: the two error returns that appear | r8dw | `listen(order)` returns nothing; `Publish` and the subscriber both return an error, and each is a decision 49yh answers |
-| FastSell's order facade, then the same object over HTTP | r8dw | Two exported methods over pricing, inventory, payments and ledger; published, the route is in someone else's source and the method name is not |
-| Partial ownership | r8dw | An internal service two other teams call — changeable, but not unilaterally |
+| Code each name forbids | 3xzc | Singleton and Transaction Script forbid something; Facade forbids nothing |
 | Unit of Work / append-only log | us2k | Durability's two shapes, and what each constrains |
 | Aggregate / identity map | us2k | The consistency boundary, and one row loaded once |
 | Bulkhead / Result types | us2k | Containment in capacity and in the type system |

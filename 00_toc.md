@@ -1,6 +1,6 @@
 # Load-Bearing — Table of Contents
 
-Twenty-five chapters in five parts.
+Twenty-four chapters in five parts.
 
 Back to [the introduction](README.md).
 
@@ -25,23 +25,22 @@ Back to [the introduction](README.md).
 ## Part III — Patterns, Graded
 
 - 11. [What a Design Pattern Is For](11_what-a-pattern-is-for_3xzc.md)
-- 12. [Patterns That Cross a Seam](12_patterns-that-cross_r8dw.md)
-- 13. [Patterns That Survive Translation](13_patterns-that-survive-translation_us2k.md)
-- 14. [Patterns That Are Missing Language Features](14_missing-language-features_esqm.md)
-- 15. [Smuggled Verdicts](15_smuggled-verdicts_8y69.md)
+- 12. [Patterns That Survive Translation](12_patterns-that-survive-translation_us2k.md)
+- 13. [Patterns That Are Missing Language Features](13_missing-language-features_esqm.md)
+- 14. [Smuggled Verdicts](14_smuggled-verdicts_8y69.md)
 
 ## Part IV — Methodologies Versus Principles
 
-- 16. [How a Principle Loses Its Scope](16_principle-loses-scope_b86v.md)
-- 17. [Behaviour Placement and OOP](17_behaviour-placement_z47a.md)
-- 18. [TDD, Mocks, and What Testing Actually Buys](18_tdd-and-mocks_u8eu.md)
-- 19. [Abstraction as Insurance](19_abstraction-as-insurance_4jk6.md)
+- 15. [How a Principle Loses Its Scope](15_principle-loses-scope_b86v.md)
+- 16. [Behaviour Placement and OOP](16_behaviour-placement_z47a.md)
+- 17. [TDD, Mocks, and What Testing Actually Buys](17_tdd-and-mocks_u8eu.md)
+- 18. [Abstraction as Insurance](18_abstraction-as-insurance_4jk6.md)
 
 ## Part V — Programming With the Five Kinds
 
-- 20. [The Force-Map Method](20_force-map-method_r37x.md)
-- 21. [Six Profiles, Six Inversions](21_six-profiles_dnkz.md)
-- 22. [Idioms: Why Ecosystems Diverge](22_idioms_7nkn.md)
-- 23. [Style: The Level Where Being Right Doesn't Matter](23_style_9rng.md)
-- 24. [What Was Never Written Down](24_never-written-down_at4r.md)
-- 25. [Assigned to the Team, Owned by Nobody](25_assigned-to-the-team_3fjx.md)
+- 19. [The Force-Map Method](19_force-map-method_r37x.md)
+- 20. [Six Profiles, Six Inversions](20_six-profiles_dnkz.md)
+- 21. [Idioms: Why Ecosystems Diverge](21_idioms_7nkn.md)
+- 22. [Style: The Level Where Being Right Doesn't Matter](22_style_9rng.md)
+- 23. [What Was Never Written Down](23_never-written-down_at4r.md)
+- 24. [Assigned to the Team, Owned by Nobody](24_assigned-to-the-team_3fjx.md)

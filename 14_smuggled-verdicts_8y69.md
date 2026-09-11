@@ -115,7 +115,7 @@ And the article says so directly:
 
 So the argument is: *if* you bought the machinery, use it. Applied to the invoice above, the antecedent is absent. There is no mapping layer, no object graph, no identity map, no lazy loading — a struct, some functions, and a table. Nothing was paid, so nothing was wasted, and the cost-benefit argument has nothing to attach to.
 
-**The verdict travels and the condition does not.** *Incurring the costs of a domain model without the benefits* is nine words carrying a condition; *anemic* is one word carrying the conclusion. [Chapter 16](16_principle-loses-scope_b86v.md) is about why the second outlives the first in transmission. This chapter's interest is narrower and starts where that leaves off: the word that survived **convicts**, so a reply has to reject the vocabulary before it can reach the design.
+**The verdict travels and the condition does not.** *Incurring the costs of a domain model without the benefits* is nine words carrying a condition; *anemic* is one word carrying the conclusion. [Chapter 15](15_principle-loses-scope_b86v.md) is about why the second outlives the first in transmission. This chapter's interest is narrower and starts where that leaves off: the word that survived **convicts**, so a reply has to reject the vocabulary before it can reach the design.
 
 ## The third option the binary cannot see
 
@@ -193,7 +193,7 @@ Two properties follow, and they are why this is worth a chapter rather than a co
 
 **It is not a claim, so it never has to be defended.** [Chapter 11](11_what-a-pattern-is-for_3xzc.md)'s point is that names sit outside the five kinds — they are not true or false. A verdict noun exploits that: it does the work of a claim while keeping a name's exemption. Nobody has to state the condition, because on the surface nothing has been asserted.
 
-**It compresses well, which is why it spreads.** Run [chapter 11](11_what-a-pattern-is-for_3xzc.md)'s first test on it and *anemic domain model* passes easily — three words standing in for a paragraph. It is a good name by that measure. That is the uncomfortable part: the terms that travel furthest are the ones that compress best, and compressing well is what got this one into every code review it appears in ([Ch. 16](16_principle-loses-scope_b86v.md)).
+**It compresses well, which is why it spreads.** Run [chapter 11](11_what-a-pattern-is-for_3xzc.md)'s first test on it and *anemic domain model* passes easily — three words standing in for a paragraph. It is a good name by that measure. That is the uncomfortable part: the terms that travel furthest are the ones that compress best, and compressing well is what got this one into every code review it appears in ([Ch. 15](15_principle-loses-scope_b86v.md)).
 
 ---
 
@@ -267,7 +267,7 @@ Two questions do the work, and they are the two axes.
 
 **What would have to be true for this to be fine, and does the term let me say it?** If you can state the condition, you have a claim and can argue with it. If the word forbids the sentence, you have been handed a conclusion.
 
-[Chapter 16](16_principle-loses-scope_b86v.md) opens Part IV with the mechanism behind this one — why the fragment that survives repetition is always the part telling you what to do, and never the part telling you when.
+[Chapter 15](15_principle-loses-scope_b86v.md) opens Part IV with the mechanism behind this one — why the fragment that survives repetition is always the part telling you what to do, and never the part telling you when.
 
 ---
 
@@ -278,4 +278,4 @@ Two questions do the work, and they are the two axes.
 
 ---
 
-[← Ch. 14](14_missing-language-features_esqm.md)  ·  [Contents](00_toc.md)  ·  [Ch. 16 →](16_principle-loses-scope_b86v.md)
+[← Ch. 13](13_missing-language-features_esqm.md)  ·  [Contents](00_toc.md)  ·  [Ch. 15 →](15_principle-loses-scope_b86v.md)

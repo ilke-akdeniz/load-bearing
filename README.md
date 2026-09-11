@@ -25,7 +25,7 @@ Run that test on the names you use in code review and count how many survive it.
 Because both sides are arguing about the answer while disagreeing about the situation — and nobody wrote the situation down.
 → [Chapter 03 — Forces: The Inputs Nobody Names](03_forces_f4m5.md)
 
-Those are five of twenty-five chapters. Each one makes a claim and states where it stops.
+Those are five of twenty-four chapters. Each one makes a claim and states where it stops.
 → [All chapters](00_toc.md)
 
 ## The premise
@@ -94,9 +94,9 @@ The decision log is there so that claim can be checked rather than taken on trus
 
 ## Contents
 
-All twenty-five chapters, in five parts, are listed in **[`00_toc.md`](00_toc.md)**.
+All twenty-four chapters, in five parts, are listed in **[`00_toc.md`](00_toc.md)**.
 Each chapter states its own claim and where that claim stops, so the contents page lists them and leaves the arguing to them.
 
 How the book is put together — the chapter rubric, the language conventions, the running example, the license and how to cite it — is in **[`docs/ABOUT.md`](docs/ABOUT.md)**.
 
-> **Status: complete draft.** All twenty-five chapters are written and under review.
+> **Status: complete draft.** All twenty-four chapters are written and under review.

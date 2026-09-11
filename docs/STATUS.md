@@ -23,20 +23,19 @@ Only the author moves a chapter to **draft** or **ready**.
 | 09 | `09_scale_637f.md` | **draft** | 2026-09-07 |
 | 10 | `10_organization_rjf9.md` | **draft** | 2026-09-09 |
 | 11 | `11_what-a-pattern-is-for_3xzc.md` | **draft** | 2026-09-10 |
-| 12 | `12_patterns-that-cross_r8dw.md` | **draft** | — |
-| 13 | `13_patterns-that-survive-translation_us2k.md` | **draft** | — |
-| 14 | `14_missing-language-features_esqm.md` | **draft** | — |
-| 15 | `15_smuggled-verdicts_8y69.md` | **draft** | — |
-| 16 | `16_principle-loses-scope_b86v.md` | **draft** | — |
-| 17 | `17_behaviour-placement_z47a.md` | **draft** | — |
-| 18 | `18_tdd-and-mocks_u8eu.md` | **draft** | — |
-| 19 | `19_abstraction-as-insurance_4jk6.md` | **draft** | — |
-| 20 | `20_force-map-method_r37x.md` | **draft** | — |
-| 21 | `21_six-profiles_dnkz.md` | **draft** | — |
-| 22 | `22_idioms_7nkn.md` | **draft** | — |
-| 23 | `23_style_9rng.md` | **draft** | — |
-| 24 | `24_never-written-down_at4r.md` | **draft** | — |
-| 25 | `25_assigned-to-the-team_3fjx.md` | **draft** | — |
+| 12 | `12_patterns-that-survive-translation_us2k.md` | **draft** | — |
+| 13 | `13_missing-language-features_esqm.md` | **draft** | — |
+| 14 | `14_smuggled-verdicts_8y69.md` | **draft** | — |
+| 15 | `15_principle-loses-scope_b86v.md` | **draft** | — |
+| 16 | `16_behaviour-placement_z47a.md` | **draft** | — |
+| 17 | `17_tdd-and-mocks_u8eu.md` | **draft** | — |
+| 18 | `18_abstraction-as-insurance_4jk6.md` | **draft** | — |
+| 19 | `19_force-map-method_r37x.md` | **draft** | — |
+| 20 | `20_six-profiles_dnkz.md` | **draft** | — |
+| 21 | `21_idioms_7nkn.md` | **draft** | — |
+| 22 | `22_style_9rng.md` | **draft** | — |
+| 23 | `23_never-written-down_at4r.md` | **draft** | — |
+| 24 | `24_assigned-to-the-team_3fjx.md` | **draft** | — |
 
 The contents page is [00_toc.md](../00_toc.md).
 

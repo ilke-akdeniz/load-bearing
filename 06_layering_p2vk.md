@@ -36,7 +36,7 @@ Two things follow, and they are the difference between the first two claims:
 - **The Acyclicity Law is exactly the condition that ranks can be assigned at all.** Try the rule on a cycle and it never terminates: A's rank needs B's, which needs A's. Acyclic and rankable are the same property.
 - **The Ranking Principle adds that every arrow crosses exactly one rank.** Rank 4 may use rank 3. It may not reach down to rank 1, even though nothing about acyclicity forbids that. This is a real constraint and most systems do not satisfy it.
 
-The Three-Tier Idiom is where the physical boundary arrives, and it varies by ecosystem. In Java and C# it was usually separate projects, assemblies, or shipped libraries; elsewhere it shows up as top-level directories or packages. What each form actually enforces differs — a directory is a package in Go, carries no access meaning in C# until assemblies split, and enforces nothing in Python — and [chapter 22](22_idioms_7nkn.md) works through why ecosystems diverge like this.
+The Three-Tier Idiom is where the physical boundary arrives, and it varies by ecosystem. In Java and C# it was usually separate projects, assemblies, or shipped libraries; elsewhere it shows up as top-level directories or packages. What each form actually enforces differs — a directory is a package in Go, carries no access meaning in C# until assemblies split, and enforces nothing in Python — and [chapter 21](21_idioms_7nkn.md) works through why ecosystems diverge like this.
 
 The three are taught together, defended together, and heard as one sentence. Separating them is what the rest of this chapter does.
 
@@ -216,7 +216,7 @@ Here the Idiom is right, and it is right for reasons that have nothing to do wit
 
 - **The ranking matches the graph**, so the Ranking Principle holds without anyone forcing it, and no pass-through class is needed to fill a rank.
 - **The names are real.** Somebody can say what belongs in the service layer and what does not, which is the test the compiler's rank 2 failed.
-- **A new contributor already knows it.** The convention costs nothing to learn and answers the placement question the same way every time, which is worth more than a better arrangement nobody shares ([Ch. 22](22_idioms_7nkn.md) argues this at length — an Idiom you can out-argue is usually still the one to follow).
+- **A new contributor already knows it.** The convention costs nothing to learn and answers the placement question the same way every time, which is worth more than a better arrangement nobody shares ([Ch. 21](21_idioms_7nkn.md) argues this at length — an Idiom you can out-argue is usually still the one to follow).
 
 This is the common case, and saying so matters. Most applications that call themselves layered are layered, and their teams are not making the mistake this chapter describes. The failure is not in using the ranking. It is in carrying it into a program whose graph has a different shape, and defending it there with the Law's certainty.
 
@@ -270,7 +270,7 @@ Expressing a rank as a package or assembly wall forces exports and mapping code.
 **In a codebase:**
 
 - **A class whose every method forwards to one other object.** It was invented to fill a slot in a shape, and it charges a file edit on every change while deciding nothing.
-- **The same entity re-typed once per layer, with mappers between.** Every boundary that isn't a real dependency boundary still bills you a type and a mapper, plus the bug where someone adds a field to two of the three ([Ch. 19](19_abstraction-as-insurance_4jk6.md)).
+- **The same entity re-typed once per layer, with mappers between.** Every boundary that isn't a real dependency boundary still bills you a type and a mapper, plus the bug where someone adds a field to two of the three ([Ch. 18](18_abstraction-as-insurance_4jk6.md)).
 - **A rank nobody can name.** A real rank has a job you can state: `presentation` renders, `service` enforces rules, `data` persists. Where the best available description is *the things two hops from `ast`*, the rank is a count of arrows rather than a division of work — and enforcing it puts parts in one box that have nothing to do with each other, then asks what belongs in that box.
 - **A folder tree that does not match the import graph.** The tree is the claim; the imports are what is true. Where they disagree, the tree is decoration and the review that checked it found nothing.
 - **A `core` or `domain` package that imports the *web framework*.** The standard library is not the tell: `System.Collections`, `System.Threading` and Go's `sync` are part of the platform and sit below everything, so depending on them says nothing. The tell is an import of something the ranking places *above* this package — an HTTP attribute, a controller base class, a request type. The ranking says it is at the bottom; the import says it is not, and the import is the one the compiler acts on.

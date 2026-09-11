@@ -95,7 +95,7 @@ Rollback for an engine migration is operational rather than architectural:
 
 - Logical replication or change data capture into the new engine, running for weeks before anything moves.
 - Both engines serving reads, results compared, until the diff is empty.
-- Cutting over per-tenant or per-route rather than all at once — [chapter 13](13_patterns-that-survive-translation_us2k.md)'s strangler fig.
+- Cutting over per-tenant or per-route rather than all at once — [chapter 12](12_patterns-that-survive-translation_us2k.md)'s strangler fig.
 - Keeping the old engine running and receiving writes for a defined window.
 
 You roll back by pointing at a database that is still there and still current. A repository interface enables none of that, and none of it can usefully be built in advance, because every part of it is specific to the pair of engines and to the shape of the data on the day.
@@ -134,7 +134,7 @@ Now apply that test to a repository interface written against one database, for 
 
 > Thus, I would deeply regret it if anybody suddenly decided that all their designs must unconditionally be conformant to "The Martin Metrics".
 
-That is a scope statement written down by the author in the original paper. [Chapter 16](16_principle-loses-scope_b86v.md)'s case was a scope given aloud once, in a talk, and lost because nobody re-watched it. This one has been in print since 1994.
+That is a scope statement written down by the author in the original paper. [Chapter 15](15_principle-loses-scope_b86v.md)'s case was a scope given aloud once, in a talk, and lost because nobody re-watched it. This one has been in print since 1994.
 
 ### Two implementations at once, or one after another
 
@@ -185,7 +185,7 @@ Once the move is decided, scheduled, and staffed, the abstraction stops being sp
 
 The honest reason most repository interfaces exist is not a future engine. It is that the test suite wants something the production code does not, and Postgres in production with a fake in tests *is* simultaneous plurality by the definition above.
 
-[Chapter 18](18_tdd-and-mocks_u8eu.md) owns that argument and answers it: test against the real database, and reserve doubles for dependencies you cannot run. This chapter does not reopen it. But the dependency runs the other way — if you reject 17's position, the interface has a justification that has nothing to do with insurance, and none of this chapter reaches it.
+[Chapter 17](17_tdd-and-mocks_u8eu.md) owns that argument and answers it: test against the real database, and reserve doubles for dependencies you cannot run. This chapter does not reopen it. But the dependency runs the other way — if you reject 17's position, the interface has a justification that has nothing to do with insurance, and none of this chapter reaches it.
 
 ### One implementation is not the same as speculative
 
@@ -213,7 +213,7 @@ The claim is about interfaces justified by a future substitution, not about inte
 - **A method that names a capability rather than a need.** `GetForUpdate`, `Upsert`, `BulkCopy`. Each is an engine feature promoted to a contract, and each is a thing the second implementation must have.
 - **The interface changes in the same commit as the schema, every time.** Then it is not insulating code from the database; it is a second file that must agree with the first.
 - **A "we don't use that here" convention with no written reason.** Ask which engine the avoidance was protecting against, and whether anyone checked the feature is actually unsupported there.
-- **A second implementation that exists only in tests.** That is [chapter 18](18_tdd-and-mocks_u8eu.md)'s subject, and it means the insurance framing was never the real reason.
+- **A second implementation that exists only in tests.** That is [chapter 17](17_tdd-and-mocks_u8eu.md)'s subject, and it means the insurance framing was never the real reason.
 
 **In a conversation:**
 
@@ -226,7 +226,7 @@ The question that does the work: **if the swap happened next quarter, which of i
 
 Answer it by listing the steps — schema translation, data copy, verification, cutover, rollback, retuning — and marking the ones the abstraction touches. The usual answer is the call sites, which were never the expensive part, and the usual reaction to seeing the list is more useful than any argument in this chapter.
 
-Part V turns from diagnosis to method — [chapter 20](20_force-map-method_r37x.md) sets out how to read the Forces in front of you, derive the Principles they support, and check the Idioms of the language you are writing in, in that order.
+Part V turns from diagnosis to method — [chapter 19](19_force-map-method_r37x.md) sets out how to read the Forces in front of you, derive the Principles they support, and check the Idioms of the language you are writing in, in that order.
 
 ---
 
@@ -239,4 +239,4 @@ Part V turns from diagnosis to method — [chapter 20](20_force-map-method_r37x.
 
 ---
 
-[← Ch. 18](18_tdd-and-mocks_u8eu.md)  ·  [Contents](00_toc.md)  ·  [Ch. 20 →](20_force-map-method_r37x.md)
+[← Ch. 17](17_tdd-and-mocks_u8eu.md)  ·  [Contents](00_toc.md)  ·  [Ch. 19 →](19_force-map-method_r37x.md)

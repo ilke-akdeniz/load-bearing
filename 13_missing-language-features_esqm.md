@@ -4,7 +4,7 @@
 
 **Much of the Gang of Four catalogue is scaffolding that mimics a language feature. Build the same design in a language that has the feature and the scaffold disappears while the design stays — and that difference is how you tell one from the other.**
 
-[Chapter 13](13_patterns-that-survive-translation_us2k.md) claimed that patterns which answer a Force survive. This chapter claims that a pattern can be expressed as a scaffold or as a language feature. The two claims are independent: a shape can answer a real Force and still be assembled out of scaffolding that another language does not need.
+[Chapter 12](12_patterns-that-survive-translation_us2k.md) claimed that patterns which answer a Force survive. This chapter claims that a pattern can be expressed as a scaffold or as a language feature. The two claims are independent: a shape can answer a real Force and still be assembled out of scaffolding that another language does not need.
 
 ## What Norvig actually counted
 
@@ -309,7 +309,7 @@ func (d Directory) TotalBytes() int64 {
 }
 ```
 
-Both print `6700` for the same tree. The dispatch mechanism changed completely between the two and the containment did not, because the containment is not a mechanism. Directories contain files. That is a fact about filesystems, and no language feature has anything to say about it — which is [chapter 13](13_patterns-that-survive-translation_us2k.md)'s category of patterns that answer the shape of the problem rather than a Force.
+Both print `6700` for the same tree. The dispatch mechanism changed completely between the two and the containment did not, because the containment is not a mechanism. Directories contain files. That is a fact about filesystems, and no language feature has anything to say about it — which is [chapter 12](12_patterns-that-survive-translation_us2k.md)'s category of patterns that answer the shape of the problem rather than a Force.
 
 So the test does not partition the catalogue into *real* and *fake*. It separates the patterns whose substance is a language workaround from the patterns whose substance is a claim about the domain, and the second group is untouched by anything a compiler does.
 
@@ -390,7 +390,7 @@ Decorator therefore sits outside the claim from two directions at once, and Norv
 
 Norvig lists Observer as dissolved, and inside one process it is: a Go channel, a C# event, a callback list. The word adds nothing to `orders.Subscribe(handler)`.
 
-Move the observer to another machine and every part of that comes back, in a worse form. The notification can be lost, so somebody has to decide between at-least-once and at-most-once. It can arrive twice, so the handler needs to be idempotent. It can arrive out of order. The publisher now has to decide what happens when a subscriber is slow, and the answer is either unbounded buffering or dropping. None of these is a language question and no feature makes them go away — they are [chapter 08](08_distribution_49yh.md)'s material, arriving because the shape crossed a boundary, which is [chapter 12](12_patterns-that-cross_r8dw.md)'s.
+Move the observer to another machine and every part of that comes back, in a worse form. The notification can be lost, so somebody has to decide between at-least-once and at-most-once. It can arrive twice, so the handler needs to be idempotent. It can arrive out of order. The publisher now has to decide what happens when a subscriber is slow, and the answer is either unbounded buffering or dropping. None of these is a language question and no feature makes them go away — they are [chapter 08](08_distribution_49yh.md)'s material, arriving because the shape crossed a process boundary.
 
 The lesson is about the test rather than about Observer. **The test is scoped, and running it at the wrong scope returns a confident wrong answer.** "Observer is just events" is true of the version that lives in one address space and false of the version that lives in two, and the sentence does not say which one it is talking about.
 
@@ -450,7 +450,7 @@ The rule that survives is about size rather than about patterns: a policy of thr
 
 - **"We should use the Strategy pattern here."** In which language? If the answer is one with first-class functions, the proposal is "pass a function," and it should be said that way, because then someone can disagree with the actual design.
 - **"That's just a closure."** Frequently correct, and it is a claim about the implementation rather than about the design. The design question — should this vary at all, and who decides — is untouched by the observation.
-- **"Design patterns are obsolete."** The strong folk version of Norvig, and the seven patterns he did not list are the counter-evidence. So is every pattern in [chapter 13](13_patterns-that-survive-translation_us2k.md) that answers a Force rather than a language gap.
+- **"Design patterns are obsolete."** The strong folk version of Norvig, and the seven patterns he did not list are the counter-evidence. So is every pattern in [chapter 12](12_patterns-that-survive-translation_us2k.md) that answers a Force rather than a language gap.
 - **A design document specifying patterns before specifying a language.** The catalogue is not language-independent, and half of it is a description of what you will have to build if you pick a language without the feature.
 
 The question that does the work: **if I wrote this in a language with first-class functions and sum types, what would be left?**
@@ -463,7 +463,7 @@ The same reading applies in reverse to advice you receive. A blog post recommend
 
 And *language* here does not have to mean a different one. Visitor changed status between two releases of Java, so the version you compile with is part of the answer — a design document naming Java and not naming the version has answered half the question.
 
-[Chapter 15](15_smuggled-verdicts_8y69.md) turns from names that describe a shape to names that arrive with a verdict already attached — vocabulary like *anemic domain model*, where accepting the word concedes the conclusion, and how much that costs depends on whether the word also names something you can go and check.
+[Chapter 14](14_smuggled-verdicts_8y69.md) turns from names that describe a shape to names that arrive with a verdict already attached — vocabulary like *anemic domain model*, where accepting the word concedes the conclusion, and how much that costs depends on whether the word also names something you can go and check.
 
 ---
 
@@ -474,4 +474,4 @@ And *language* here does not have to mean a different one. Visitor changed statu
 
 ---
 
-[← Ch. 13](13_patterns-that-survive-translation_us2k.md)  ·  [Contents](00_toc.md)  ·  [Ch. 15 →](15_smuggled-verdicts_8y69.md)
+[← Ch. 12](12_patterns-that-survive-translation_us2k.md)  ·  [Contents](00_toc.md)  ·  [Ch. 14 →](14_smuggled-verdicts_8y69.md)

@@ -128,7 +128,7 @@ Pike, listing the things about Go that people have argued over for years, puts "
 
 **In Go you own `main`.** Nothing constructs your handlers but your own code, so wiring by hand is available. The condition that would make a container pay — something else builds your objects — is absent.
 
-**In C# it is usually present.** The web framework instantiates your controllers, which means it must supply their constructor arguments, so the container is not an addition to the framework but the mechanism by which the framework can call you at all. [Chapter 21](21_six-profiles_dnkz.md) owns the general form of this: under a framework you are the callee, and its lifecycle is a Force rather than a convention.
+**In C# it is usually present.** The web framework instantiates your controllers, which means it must supply their constructor arguments, so the container is not an addition to the framework but the mechanism by which the framework can call you at all. [Chapter 20](20_six-profiles_dnkz.md) owns the general form of this: under a framework you are the callee, and its lifecycle is a Force rather than a convention.
 
 **Python has both conditions in different projects**, which is why it never settled. A module-level object is a process-wide singleton for free, because imports are cached, and that covers most of what a container is reached for. Where Python does adopt injection is where a second condition appears — a per-request lifetime, such as a database session that must be opened and closed around one request — and the frameworks that grew that feature are the ones serving requests.
 
@@ -240,7 +240,7 @@ So the test has a second step. Name the condition, and then check that the conve
 
 **Most of the time the answer is obey, and you did the work anyway.** Naming the condition is a real cost paid on every convention you decide to question, and it returns nothing visible in the overwhelming majority of cases, because the condition holds. The return comes entirely from the few where it does not, and you cannot tell which those are without doing it.
 
-**"I can name the condition" becomes the new licence.** [Chapter 21](21_six-profiles_dnkz.md) records the same failure one level up, where *it's a different profile* excuses anything. Here it is *our situation is different*, followed by a condition that was never checked and would not survive being written down. The defence is that the condition has to be the kind of thing someone could contradict.
+**"I can name the condition" becomes the new licence.** [Chapter 20](20_six-profiles_dnkz.md) records the same failure one level up, where *it's a different profile* excuses anything. Here it is *our situation is different*, followed by a condition that was never checked and would not survive being written down. The defence is that the condition has to be the kind of thing someone could contradict.
 
 **Deviations are individually cheap and collectively expensive.** Each one is defensible on its own terms, and the codebase they add up to is one that nobody hired for the ecosystem can read. Neither Pike's compiler nor FlowCore's naming rule is a counter-example to this: both are single, declared, documented deviations in a body of otherwise conventional code, and that is the shape that stays affordable.
 
@@ -267,7 +267,7 @@ The question that does the work: **what is true about my surroundings that made 
 
 If the answer names a language feature, a tool, or a person who will read the code, you have something to check. If nothing comes back, you have not found an Idiom — you have found a habit, and you are about to argue with it as though it could answer.
 
-[Chapter 23](23_style_9rng.md) takes the level below this one — the decisions no compiler and no runtime can see, where being right is worth less than being consistent, and where the arguments are fiercest for exactly that reason.
+[Chapter 22](22_style_9rng.md) takes the level below this one — the decisions no compiler and no runtime can see, where being right is worth less than being consistent, and where the arguments are fiercest for exactly that reason.
 
 ---
 
@@ -279,4 +279,4 @@ If the answer names a language feature, a tool, or a person who will read the co
 
 ---
 
-[← Ch. 21](21_six-profiles_dnkz.md)  ·  [Contents](00_toc.md)  ·  [Ch. 23 →](23_style_9rng.md)
+[← Ch. 20](20_six-profiles_dnkz.md)  ·  [Contents](00_toc.md)  ·  [Ch. 22 →](22_style_9rng.md)

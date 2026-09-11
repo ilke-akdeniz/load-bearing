@@ -238,7 +238,7 @@ func NewBilling(plans PlanLookup) *Billing {
 
 Read this version as `billing` saying: *those were never my decisions. Where plans are stored, how they are fetched, what is configured — none of that is my business. I need exactly the operations in this interface in order to decide what I actually decide, which is what to charge.*
 
-Hiding is about what a *module* is coupled to, and injection reduces that: `billing` unlearned four decisions and learned one interface. What grows is what the **composition root** knows, and the composition root is one file whose entire job is knowing how the pieces fit — the one place where knowing everything is correct. It is `func main` in Go, `Program.cs` in a .NET application, and the `@Configuration` class in a Spring one. Which of those needs a container to do the assembling, and which does it by hand, varies by ecosystem for reasons [chapter 22](22_idioms_7nkn.md) works through.
+Hiding is about what a *module* is coupled to, and injection reduces that: `billing` unlearned four decisions and learned one interface. What grows is what the **composition root** knows, and the composition root is one file whose entire job is knowing how the pieces fit — the one place where knowing everything is correct. It is `func main` in Go, `Program.cs` in a .NET application, and the `@Configuration` class in a Spring one. Which of those needs a container to do the assembling, and which does it by hand, varies by ecosystem for reasons [chapter 21](21_idioms_7nkn.md) works through.
 
 The contradiction only survives if you read hiding as "less information anywhere." Parnas proposed something narrower: each module hides a decision, and other modules stop depending on it. Injection is how a module *declines to hold* a decision that belongs elsewhere.
 
@@ -364,7 +364,7 @@ Be exact about what was traded away. In the class version the field layout is pr
 
 That is a genuine loss, accepted deliberately. You gave up the ability to change the representation quietly, and what you bought is the speed that comes from every system agreeing on it.
 
-The Force is the memory hierarchy. Where it dominates, "hide the representation" inverts: hiding it is precisely what you must not do. [Chapter 21](21_six-profiles_dnkz.md) works through the rest of what that force profile overturns.
+The Force is the memory hierarchy. Where it dominates, "hide the representation" inverts: hiding it is precisely what you must not do. [Chapter 20](20_six-profiles_dnkz.md) works through the rest of what that force profile overturns.
 
 Note carefully what has *not* inverted. The ECS dependency graph is still acyclic — systems depend on component arrays, and the arrays depend on nothing. The Law holds untouched while the Principle turns over completely, which is the difference [chapter 02](02_the-five-kinds_cjx4.md) draws, seen in the wild.
 
@@ -496,7 +496,7 @@ type Invoice struct {
 }
 ```
 
-*The bill:* `invoice.Merchant.Name` becomes a lookup that can fail and can be stale. "What if the merchant was deleted?" is now a question you answer explicitly, where the pointer answered it by existing. [Chapter 17](17_behaviour-placement_z47a.md) works through the version of this that appears in object-oriented domain models, where the mutual pointers are the design rather than an accident.
+*The bill:* `invoice.Merchant.Name` becomes a lookup that can fail and can be stale. "What if the merchant was deleted?" is now a question you answer explicitly, where the pointer answered it by existing. [Chapter 16](16_behaviour-placement_z47a.md) works through the version of this that appears in object-oriented domain models, where the mutual pointers are the design rather than an accident.
 
 ### Hiding costs you the day you need what you hid
 
