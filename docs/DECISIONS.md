@@ -6538,3 +6538,34 @@ The Proxy row cited *(Ch. 08, 08)*, one of which was meant to be something else;
 
 **The deletion that was accepted.** The author cut *"Same pattern, same shape, both times. In the first case, three lines that were better deleted. In the second, a file, an owner, and a standing obligation."*
 It is a grand summary of the two sections above it, which the register rules name as a form to cut, and nothing downstream depended on it.
+
+---
+
+## 161. The facade example did not show a facade
+
+**Date.** 2026-09-10
+
+**Context.**
+The author's second full-read pass, on the section rewritten in decisions 158 and 159.
+Their tag: *"confused with this example, what's the facade here? I just see an Order struct with boring methods."*
+
+**They are right, and the defect survived a rewrite that was about this very passage.**
+Decision 158 narrowed what the Facade case claims and left the code block as it stood: `type Orders struct{ ... }` with two method signatures and an unexported one.
+Nothing in it fronted anything, so *fewer methods over more machinery* — the structural claim the whole row rests on — was asserted in prose and absent from the page.
+
+**Decision.** The snippet now shows four collaborators as fields and a real `Place` body coordinating them: quote, reserve, charge, record.
+It closes on `o.ledger.Record(fromStripe(charge))`, so the facade stands on the adapter from the chapter's own second section rather than on new material.
+Rejected as insufficient: fields plus bare signatures and a comment naming what `Place` coordinates, which is shorter and asks the reader to take the machinery on trust — the thing the tag declined to do.
+
+**What the author cut, and what came back.**
+Two paragraphs after the table went.
+The second, *that distribution is a condition on the whole reading*, stays cut: the Observer caveat above it already says the same thing about the only row it applies to.
+The first carried the only statement that **Facade is this book's reading rather than any catalogue's** — required by the provenance rule, and the resolution recorded in decision 37 when the author asked whether the table was solid or our theory.
+It returns as one clause inside the Facade subsection instead of a paragraph after the table, which is where it was piling up.
+
+**The handoff cut, checked and endorsed.**
+The author reduced the chapter 13 handoff to 21 words.
+What they removed — *"grouped by the Force each one answers rather than by shape, so you can find a pattern without already knowing its name"* — is a near-verbatim paraphrase of [chapter 13](../13_patterns-that-survive-translation_us2k.md)'s claim sentence, so the cut fixes the defect decision 156 records in chapter 11's handoff rather than losing anything.
+What remains is accurate: the survivors of translation are 13's, and the workarounds are [chapter 14](../14_missing-language-features_esqm.md)'s, which is how 13's own handoff describes the pair.
+
+**Also proofread in the author's edits.** *pattenrs*; *an internal service two teams … calls*, which needed a plural verb; *the alternatives of the pattern*; and their own tag asking *boundary or seam?* in the Strategy passage — seam, since it is the thing crossed.

@@ -131,7 +131,7 @@ In the pattern literature this is an **Anti-Corruption Layer**, a name from Eric
 
 ## What the crossing does to other patterns
 
-Three other pattenrs make the same journey, and two of them can be shown quickly now that the shape is familiar.
+Three other patterns make the same journey, and two of them can be shown quickly now that the shape is familiar.
 
 ### Proxy: a parameter appears
 
@@ -198,17 +198,37 @@ Two error returns where there were none, and each is a decision. The publisher's
 
 Not that it acquires teeth at the crossing. It doesn't: a facade can sit in front of anything on either side of a seam, and the word excludes no code in either place, which is [chapter 11](11_what-a-pattern-is-for_3xzc.md)'s finding and survives intact. What the crossing changes is that the operations it chose stop being revisable.
 
-[-- confused with this example, what's the facade here? I just see an Order struct with boring methods.]
+FastSell's order facade is two exported methods in front of four subsystems, which is all the shape amounts to — fewer methods over more machinery:
+
 ```go
 // Called only from inside this repository. Nothing here is a promise.
-type Orders struct{ ... }
+type Orders struct {
+	pricing   *Pricing
+	inventory *Inventory
+	payments  *Payments
+	ledger    *Ledger
+}
 
-func (o *Orders) Place(ctx context.Context, request PlaceRequest) (Order, error)
+func (o *Orders) Place(ctx context.Context, request PlaceRequest) (Order, error) {
+	price, err := o.pricing.Quote(ctx, request.Items)
+	if err != nil {
+		return Order{}, err
+	}
+	if err := o.inventory.Reserve(ctx, request.Items); err != nil {
+		return Order{}, err
+	}
+	charge, err := o.payments.Charge(ctx, request.Customer, price)
+	if err != nil {
+		return Order{}, err
+	}
+	order := Order{ID: charge.ID, Total: price}
+	return order, o.ledger.Record(fromStripe(charge)) // fromStripe, from the section above
+}
+
 func (o *Orders) Cancel(ctx context.Context, orderID string) error
-func (o *Orders) resolvePricing(...)   // unexported; nobody outside can call it
 ```
 
-You can rename `Place`, merge `Cancel` into it, or change what `PlaceRequest` contains with reasonable effort. You just have to fix the call sites in the same commit.
+Four collaborators, one call. You can rename `Place`, merge `Cancel` into it, or change what `PlaceRequest` contains with reasonable effort. You just have to fix the call sites in the same commit.
 
 Now imagine the same object reachable by two other teams, over HTTP:
 
@@ -228,7 +248,7 @@ now theirs    the route, and the wire field names, which are optional
 
 You may add `POST /v1/orders/{id}/hold`. You may not rename the route, remove `DELETE /v1/orders/{id}`, or make a field of the request body required — those are [chapter 03](03_forces_f4m5.md)'s forbidden moves, and the client that breaks is one you cannot deploy. [Chapter 05](05_dependency-and-hiding_agjy.md) owns what else publication costs, starting with the fact that you can no longer count who depends on you.
 
-**The facade is as free as it ever was, and the operation set is not.** Which operations exist was settled by whoever drew the facade, at a point when the decision looked reversible, and the name says nothing about whether somebody else is now holding a copy of it.
+No catalogue says a facade becomes a public API; that reading is this book's own, and it rests on the structure being identical on both sides. **The facade is as free as it ever was, and the operation set is not.** Which operations exist was settled by whoever drew the facade, at a point when the decision looked reversible, and the name says nothing about whether somebody else is now holding a copy of it.
 
 ### The four together
 
@@ -275,7 +295,7 @@ That is [chapter 02](02_the-five-kinds_cjx4.md)'s mechanism in a new place. Ther
 
 Some names do not have a version on the other side of a seam, and the test is short: **try to state what it would be.** If you cannot, the pattern is a way of arranging code inside one program and the question does not arise.
 
-**Strategy** — passing behaviour as a parameter — is the clearest. In your own code, it's passing a function or class as a parameter. Across a boundary [-- boundary or seam?] is it… configuration? A plugin? Nothing sharpens, because nothing about passing a function becomes unreliable when the program grows. **Template Method** and most uses of **Decorator** are the same.
+**Strategy** — passing behaviour as a parameter — is the clearest. In your own code, it's passing a function or class as a parameter. Across a seam is it… configuration? A plugin? Nothing sharpens, because nothing about passing a function becomes unreliable when the program grows. **Template Method** and most uses of **Decorator** are the same.
 
 **Singleton is the notable exception to this section** — it changes more than anything else in the chapter when it crosses a seam.
 
@@ -293,9 +313,9 @@ So the name survives the crossing and its cost does not. In one process, `sync.O
 
 ### Where ownership is partial
 
-This ownership form typically emerges as an internal service two teams in the same organization calls. You *can* change the other side but it takes a conversation, a coordinated release, and cooperation with the other team.
+This is where most working code sits: an internal service that two teams in the same organization call. You *can* change the other side, but it takes a conversation, a coordinated release, and cooperation with the other team.
 
-That makes the alternatives of the pattern expensive rather than absent:
+That makes the alternatives expensive rather than absent:
 
 ```go
 // Fully yours: rename it, fix the callers, one commit.

@@ -371,6 +371,7 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | FastSell moves to Stripe | r8dw | The rename is unavailable, so adapting is the only move; six call sites speak Stripe, or one |
 | Proxy: the `ctx` parameter that appears | r8dw | `Get(id)` becomes `Get(ctx, id)` when the catalogue is somebody else's service — a deadline the local call had no use for. GoF's *remote proxy* had the crossing in the definition |
 | Observer: the two error returns that appear | r8dw | `listen(order)` returns nothing; `Publish` and the subscriber both return an error, and each is a decision 49yh answers |
+| FastSell's order facade, then the same object over HTTP | r8dw | Two exported methods over pricing, inventory, payments and ledger; published, the route is in someone else's source and the method name is not |
 | Partial ownership | r8dw | An internal service two other teams call — changeable, but not unilaterally |
 | Unit of Work / append-only log | us2k | Durability's two shapes, and what each constrains |
 | Aggregate / identity map | us2k | The consistency boundary, and one row loaded once |
