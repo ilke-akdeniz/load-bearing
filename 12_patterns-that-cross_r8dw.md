@@ -194,6 +194,8 @@ Two error returns where there were none, and each is a decision. The publisher's
 
 ### Facade: the name that forbids nothing, either way
 
+[-- read this section over and over, didn't get what it achieves. Facade is a meh pattern that only compresses, nothing worthy of discussion on itself. When it crosses a seam, as far as I can see nothing happens. What you show here as a result of the facade crossing is really the cost of publishing regardless of any pattern. I suggest you remove this Facade section completely and promoto the singleton section that starts with "**Singleton is the notable exception to this section**" to here. That is more interesting and it belongs here.]
+
 [Chapter 11](11_what-a-pattern-is-for_3xzc.md) left a question here. **Facade** compresses well and rules nothing out, so what is it doing in a book about load-bearing claims?
 
 Not that it acquires teeth at the crossing. It doesn't: a facade can sit in front of anything on either side of a seam, and the word excludes no code in either place, which is [chapter 11](11_what-a-pattern-is-for_3xzc.md)'s finding and survives intact. What the crossing changes is that the operations it chose stop being revisable.
