@@ -10,6 +10,12 @@ Two purposes:
 1. **Working memory.** In six months the question will be "why Levels and not Altitudes," and the answer should not have to be re-derived.
 2. **Authorship record.** The book is written with AI assistance. What makes it an authored work rather than an assembled one is the selection, rejection, and correction recorded here — so those are recorded with attribution, contemporaneously.
 
+**Chapter numbers before decision 162 are the old numbering.**
+On 2026-09-11 chapter 12 was deleted and chapters 13 through 25 became 12 through 24, so an entry written before then names chapters by the numbers they had when it was written.
+The links resolve either way: a filename carries a permanent four-character identifier, and that is what identifies a chapter here.
+Quoted lines carry a bracketed `[now NN]` gloss from the earlier renumber of decision 103, and those glosses were not updated — they refer to the numbering in force when the gloss was added.
+The log is not renumbered again, because the last pass over it was broken in three ways (decision 111) and a second layer of glosses would falsify the first.
+
 Entries note who originated what.
 "The author" is the human; "the draft" is generated text prior to review.
 
@@ -6685,5 +6691,5 @@ Three used it as a working test rather than as a pointer, which is what decision
 Decision 103 renumbered this log — its prose and its entry titles — and explicitly reversed the draft's first position of leaving it alone, with quoted lines kept exact under a bracketed `[now NN]` gloss.
 Following that precedent here means editing about 320 bare chapter numbers.
 Two facts argue for not doing it: decision 111 records that the last renumber of this log *"turned out to be broken in three ways"*, and the quoted lines already carry one layer of `[now NN]` glosses, which a second renumber would either falsify or have to nest.
-The alternative is a dated note at the head of this file saying that entries before decision 162 use the old numbering, leaving every entry as written — the filenames in the links carry permanent identifiers, so nothing is ambiguous.
-The author's call.
+**Decided by the author: the dated note.** It sits at the head of this file, every entry stays as written, and the permanent identifiers in the filenames do the disambiguating.
+The 320 bare numbers are not touched, so nothing in the log is re-edited on the strength of a change that happened after it was written — which is the property that makes it an authorship record rather than a description of the current draft.
