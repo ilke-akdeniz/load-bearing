@@ -162,7 +162,7 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Crossing a seam adds failure modes | r8dw | The same shape acquires loss, duplication, latency, and published commitment — Part II's Laws, one at a time | cite |
 | Facade forbids nothing on either side | r8dw | The crossing gives the name no teeth — 3xzc's finding survives it. What stops being revisable is the operation set, which becomes add-only once somebody else holds a copy of it | cite |
 | Unchanged by the seam | r8dw | If you cannot state what the pattern would be on the other side, it is a code-organization device — Strategy, Template Method | cite |
-| Singleton inverts | r8dw | "Exactly one" across machines is leader election, which needs consensus | cite |
+| One instance across machines | 49yh | *At most one holder of the role, and everyone agrees which one* — free in one process, and across machines a lease whose duration is a guess plus consensus that promises safety and not termination | cite |
 | Patterns are Forces with a shape | us2k | The durable patterns answer a Force; grouping by Force finds the name from the situation, where a catalogue only finds it from the name | "the Force groups" |
 | Patterns sorted by Force | us2k | Chapter f4m5's seven Forces, in chapter f4m5's order and names; 49 patterns sort, 5 refuse | cite |
 | Team size relocates rules | us2k | This Force changes where a rule lives rather than what it is, so it produces few patterns of its own | cite |

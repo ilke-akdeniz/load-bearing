@@ -6613,3 +6613,31 @@ The destination assumed when this was agreed was chapter 13, and a fact found wh
 Decision 43 fixed **two worked patterns per Force**, and it was the resolution to the author's own objection that the chapter might look like cherry-picking; the count is exactly two across all seven Forces today.
 Both salvaged pieces would be thirds — leader election under Concurrency, the anti-corruption layer under Change frequency.
 Put to the author rather than decided here, since changing it contradicts a recorded decision.
+
+---
+
+## 163. Where the chapter 12 salvage landed
+
+**Date.** 2026-09-11
+
+**Context.**
+Decision 162 left the destination open, because both salvaged pieces would have been third worked patterns in a chapter where decision 43 fixed two per Force — and that count was itself the resolution to the author's objection that the chapter might look like it picked the patterns that fit.
+The author took the draft's recommendation to route around the rule rather than reopen it.
+
+**Leader election goes to [chapter 08](../08_distribution_49yh.md), and that is a better home than chapter 13 on the merits.**
+Both mechanisms the passage rests on are already there: *Every timeout is a guess* owns why a lease duration cannot be chosen confidently, and the chapter's FLP entry owns what consensus can promise.
+The chapter had also been referring to leader election in passing — *"a cluster which cannot elect a leader and makes no progress"* — without ever working it.
+The new section states the requirement in two halves, *at most one holder of the role at a time, and everyone agrees which one it is*, shows both are free in one process, and prices each across machines: a lease whose duration is billed at both ends, and consensus that promises safety and never termination.
+It closes on the case the old chapter only gestured at — the holder that wakes from a pause still believing it is in charge — with the correction that noticing is not the fix, since whatever it writes to has to be able to refuse a superseded claim.
+
+**The anti-corruption layer stays in [chapter 13](../13_patterns-that-survive-translation_us2k.md) and stops being a pointer.**
+Line 248 deferred to chapter 12 for the definition, which will point at nothing.
+It is now a listed entry that defines the pattern and names its price, which is what the chapter's own convention asks of an entry nobody else owns.
+
+**What was deliberately not salvaged**, so the loss is on the record rather than discovered later:
+
+- **The Stripe demonstration** — six call sites testing `charge.Status` against one `fromStripe`. It is a fan-in count, and [chapter 05](../05_dependency-and-hiding_agjy.md) owns that argument with its own examples. Manufacturing a home for it in a chapter the author has already read was rejected as worse than losing it.
+- **The two engineers arguing about a Facade**, for the reason given in decision 162.
+
+**Still outstanding.** The deletion itself and the renumber of chapters 13 through 25, which are separate commits.
+Chapter 13 still carries three references to chapter 12's question and chapter 11 carries two, all of which have to be rewritten rather than merely unlinked, since two of them use it as a working test rather than as a pointer.

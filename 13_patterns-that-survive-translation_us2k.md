@@ -109,6 +109,7 @@ One round trip, and no way for the two to disagree about what order 42 currently
 - **Single writer** — remove the contention rather than manage it. [Chapter 07](07_time_mdbn.md) owns this, and [chapter 09](09_scale_637f.md) shows what it does to throughput.
 - **Idempotency key** — [chapter 08](08_distribution_49yh.md) owns it; it is what makes at-least-once delivery survivable.
 - **Saga** — [chapter 08](08_distribution_49yh.md) owns it; the answer when the unit of consistency spans systems and no transaction can.
+- **Leader election** — [chapter 08](08_distribution_49yh.md) owns it; what *exactly one instance* becomes across machines, where both halves of it have to be bought.
 
 ## Force: Durability of the medium
 
@@ -245,7 +246,7 @@ type Rates interface {
 - **Parameter object** — one struct instead of a growing argument list, so adding a field is not a signature change at every call site.
 - **Repository** — a collection-like interface over storage. Worth [chapter 11](11_what-a-pattern-is-for_3xzc.md)'s tests before adopting: it compresses well, and what it rules out is thinner than its reputation suggests.
 - **Feature toggle** — separate deploying code from enabling it, so the two can move at different rates. Its cost is that every live toggle doubles the paths under test.
-- **Anti-corruption layer** — [chapter 12](12_patterns-that-cross_r8dw.md) owns it: what a translation boundary becomes when the thing on the other side is not yours to change.
+- **Anti-corruption layer** — a translation layer at the edge of your model, so another system's vocabulary stops there instead of spreading through yours. Its cost is permanent: mappings that encode real judgements, and somebody whose job includes reading the vendor's release notes.
 
 ## Force: Team size and turnover
 
