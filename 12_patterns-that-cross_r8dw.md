@@ -129,9 +129,9 @@ Both versions produce identical output today. The difference shows up when Strip
 
 In the pattern literature this is an **Anti-Corruption Layer**, a name from Eric Evans, where the corruption is another system's model spreading into yours. Note what it costs: a translation function, a set of mappings that encode real judgements, tests for code that does nothing but rename fields, and somebody whose job includes reading Stripe's release notes.
 
-## What the crossing does to other names
+## What the crossing does to other patterns
 
-Adapter was one name. Three others make the same journey, and two of them can be shown quickly now that the shape is familiar.
+Three other pattenrs make the same journey, and two of them can be shown quickly now that the shape is familiar.
 
 ### Proxy: a parameter appears
 
@@ -198,6 +198,7 @@ Two error returns where there were none, and each is a decision. The publisher's
 
 Not that it acquires teeth at the crossing. It doesn't: a facade can sit in front of anything on either side of a seam, and the word excludes no code in either place, which is [chapter 11](11_what-a-pattern-is-for_3xzc.md)'s finding and survives intact. What the crossing changes is that the operations it chose stop being revisable.
 
+[-- confused with this example, what's the facade here? I just see an Order struct with boring methods.]
 ```go
 // Called only from inside this repository. Nothing here is a promise.
 type Orders struct{ ... }
@@ -240,10 +241,6 @@ You may add `POST /v1/orders/{id}/hold`. You may not rename the route, remove `D
 
 Read the last column first. What changes across a row is not the amount of code — it is that something can now go wrong that could not go wrong before, and each of those is a Law from Part II.
 
-**One of the four is this book's reading rather than anyone's catalogue.** No pattern catalogue says a facade becomes a public API; the observation is that the structure is identical, fewer methods over more machinery, and that once the callers are outside your deploy [chapter 03](03_forces_f4m5.md)'s add-only rule attaches to what the facade exposes.
-
-That distribution is a condition on the whole reading: **it holds where nothing structural is added.** Adapter and Proxy cross with the same parts on both sides. Observer gains a broker, and that is the row that had to be qualified.
-
 ## Why these arguments do not converge
 
 Two engineers argue about whether something should be a Facade. One is picturing a class in the same package and hears a suggestion about tidiness. The other is picturing something other teams will call and hears a proposal to publish an interface that can never be narrowed.
@@ -278,7 +275,7 @@ That is [chapter 02](02_the-five-kinds_cjx4.md)'s mechanism in a new place. Ther
 
 Some names do not have a version on the other side of a seam, and the test is short: **try to state what it would be.** If you cannot, the pattern is a way of arranging code inside one program and the question does not arise.
 
-**Strategy** — passing behaviour as a parameter — is the clearest. In your own code, it's passing a function or class as a parameter. Across a boundary is it… configuration? A plugin? Nothing sharpens, because nothing about passing a function becomes unreliable when the program grows. **Template Method** and most uses of **Decorator** are the same.
+**Strategy** — passing behaviour as a parameter — is the clearest. In your own code, it's passing a function or class as a parameter. Across a boundary [-- boundary or seam?] is it… configuration? A plugin? Nothing sharpens, because nothing about passing a function becomes unreliable when the program grows. **Template Method** and most uses of **Decorator** are the same.
 
 **Singleton is the notable exception to this section** — it changes more than anything else in the chapter when it crosses a seam.
 
@@ -296,11 +293,9 @@ So the name survives the crossing and its cost does not. In one process, `sync.O
 
 ### Where ownership is partial
 
-The question has two answers in this chapter and three in reality, and the third is where most working code sits.
+This ownership form typically emerges as an internal service two teams in the same organization calls. You *can* change the other side but it takes a conversation, a coordinated release, and cooperation with the other team.
 
-[Chapter 03](03_forces_f4m5.md) already sets it out: you control every caller; or you can see them but not change them; or you can neither see nor change them. The middle one is an internal service two other teams call. You *can* change both sides — it takes a conversation, a coordinated release, and somebody else's cooperation.
-
-What that does to the pattern question is make the alternatives expensive rather than absent:
+That makes the alternatives of the pattern expensive rather than absent:
 
 ```go
 // Fully yours: rename it, fix the callers, one commit.
@@ -352,11 +347,11 @@ An internal dependency that changes weekly and is called from forty places behav
 - **"It's just a facade."** Called by whom? If the answer includes anyone outside your deploy, it is not just anything.
 - **"We use that pattern elsewhere."** With the same answer to the ownership question? The same name on the other side of a seam is a different decision.
 
-The question that does the work: **can I change the other side?**
+The question that does the work: **can I change the other side of the seam?**
 
 If yes, you are choosing between options, and following the pattern is rarely the cheapest option. If no, you are not choosing — you are pricing a constraint, and the pattern is what the price looks like.
 
-[Chapter 13](13_patterns-that-survive-translation_us2k.md) works through the patterns that survive translation between languages — the ones describing a real shape rather than a workaround, grouped by the Force each one answers rather than by shape, so you can find a pattern without already knowing its name.
+[Chapter 13](13_patterns-that-survive-translation_us2k.md) works through the patterns that survive translation between languages — the ones describing a real shape rather than a workaround.
 
 ---
 
