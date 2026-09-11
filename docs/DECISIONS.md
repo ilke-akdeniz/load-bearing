@@ -6569,3 +6569,47 @@ What they removed — *"grouped by the Force each one answers rather than by sha
 What remains is accurate: the survivors of translation are 13's, and the workarounds are [chapter 14](../14_missing-language-features_esqm.md)'s, which is how 13's own handoff describes the pair.
 
 **Also proofread in the author's edits.** *pattenrs*; *an internal service two teams … calls*, which needed a plural verb; *the alternatives of the pattern*; and their own tag asking *boundary or seam?* in the Strategy passage — seam, since it is the thing crossed.
+
+---
+
+## 162. Chapter 12 is cut
+
+**Date.** 2026-09-11
+
+**Context.**
+The fourth pass of the author's full read. Their conclusion, in their own words: *"I started to think that this chapter is quicksand. It keeps degrading as we try to make it better… I now think that we should simply delete this chapter, the book would be better without it."*
+
+**The author's two findings, which are what made the question unavoidable.**
+
+*Only Adapter was ever about ownership, and perhaps not even Adapter.*
+Put to them as a draft finding — that Proxy's `ctx` parameter appears because the call left the machine rather than because somebody else owns the catalogue, that Observer's crossing is a process boundary, that Singleton's is a machine boundary with both sides owned throughout — they extended it: *"now I suspect that even Adapter is not related to ownership. It looks like if there is a seam you mostly need an adapter. Our 'rename the fields and delete the adapter' is either a very bad advice if a seam exists or a rare case where there is not a real seam."*
+
+They are right, and the book already said so in a row nobody had connected to this chapter.
+`LEDGER.md`'s **mapping tax**, owned by [chapter 22](../22_idioms_7nkn.md): *two packages cannot share an entity type without one owning the other's API, so each keeps its own and something converts.*
+Two types at a real seam are the normal case. Chapter 12's first section told the reader to delete exactly that, and merging `Receipt` into `LedgerEntry` makes `billing` depend on `payments`' API — the coupling the mapping tax prices, not a saving.
+
+**The diagnostic that decided it**, and the draft's argument, which the author accepted: the claim had been rewritten three times and not one demonstration had changed.
+*Scale* was wrong (decision 36). *Ownership* was wrong (this pass). The author's proposed replacement — *a pattern's shape and usefulness can change drastically when crossing a seam* — the draft argued against on the book's own rules: **shape** is the one thing that does not change (Proxy's remote variant is in the Gang of Four catalogue, Adapter's structure is Evans's translators), and *can change drastically* is not falsifiable.
+Four demonstrations in search of a claim is the opposite of how a chapter behaves under review.
+
+**Why no claim fit.**
+Each demonstration answers a different Force: Adapter/ACL is change frequency and control of the callers, Proxy is latency budget, Observer is distribution, Singleton is concurrency across machines.
+The only thing uniting them is that they are pattern names — and patterns sorted by the Force each answers is [chapter 13](../13_patterns-that-survive-translation_us2k.md), which is already built that way, already lists the anti-corruption layer, and already reaches for *"chapter 12's question"* three separate times as though it were a tool rather than a chapter.
+Chapter 12's own mechanism section conceded the rest: *"That is [chapter 02](../02_the-five-kinds_cjx4.md)'s mechanism in a new place."*
+
+**Decision.** Chapter 12 is deleted. Part III goes to four chapters, the book to twenty-four, and chapters 13 through 25 renumber.
+The draft's counter-proposal for a claim — *a pattern name carries its shape across every seam and none of its costs* — was rejected by the author (*"sounds horrible"*), and the draft agrees the chapter should not be kept alive on it: it restates the mechanism section, and the constructive version of it is chapter 13's whole design.
+
+**What is not deleted.**
+Two pieces are worth more than the chapter around them, and **leader election appears nowhere else in the book** — checked across all twenty-five chapters.
+
+- **Singleton in one process against across machines.** `sync.Once` and a package variable, against a lease with a timeout nobody is confident about and a consensus protocol that may not terminate. The invariant that makes the connection real rather than a play on words: *at most one holder of this role at a time, and everyone agrees which one it is.*
+- **The anti-corruption layer**, which [chapter 13](../13_patterns-that-survive-translation_us2k.md):248 currently defers to chapter 12 to define.
+
+*The two engineers arguing about a Facade* is not salvaged: [chapter 11](../11_what-a-pattern-is-for_3xzc.md) already says *"this should be a Facade" is not a design position*, which is the same finding with less machinery.
+
+**Open: where the salvage lands.**
+The destination assumed when this was agreed was chapter 13, and a fact found while starting the work says it cannot be, unaltered.
+Decision 43 fixed **two worked patterns per Force**, and it was the resolution to the author's own objection that the chapter might look like cherry-picking; the count is exactly two across all seven Forces today.
+Both salvaged pieces would be thirds — leader election under Concurrency, the anti-corruption layer under Change frequency.
+Put to the author rather than decided here, since changing it contradicts a recorded decision.
