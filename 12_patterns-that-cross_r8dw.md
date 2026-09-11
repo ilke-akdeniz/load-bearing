@@ -1,8 +1,8 @@
-# Patterns That Cross a Boundary
+# Patterns That Cross a Seam
 
 ## The claim
 
-**Same pattern crossing different boundaries could describe a simple code change or a yearlong commitment. What prevails is whether you own both sides of the boundary.** [-- I changed "line" to "boundary" because they were used for the same thing and it was confusing to track, correct me if that was wrong. I feel this "boundary" needs one qualifier to make it more specific. Because I confused this with ownershhip boundary which is not, this is more like a "service boundary" I guess. We need to use that qualifier at the beginning at least to make the meanin precise.]
+**The same pattern crossing different seams can be a change you make in an afternoon or a commitment you carry for years. What decides which is not size: it is whether you own both sides of the seam.**
 
 People usually call this a question of scale, and size does correlate with it, because systems acquire other owners as they grow. But size is not the cause, and the two come apart in a way worth being precise about.
 
@@ -14,7 +14,7 @@ Those are different kinds of expensive, and the question that decides that kind 
 
 If yes, a pattern is one option among several, and often not the cheapest. If no, most of the options were never available — and what looks like a design choice is really the acknowledgment of a constraint.
 
-The rest of the chapter is one worked example of a pattern crossing boundaries: **FastSell**, a shopping platform that takes payments and keeps a ledger.
+The rest of the chapter works one seam in code — **FastSell**, a shopping platform that takes payments and keeps a ledger — and then what happens to other pattern names at the same crossing.
 
 ---
 
@@ -109,7 +109,7 @@ func refundable(charge StripeCharge) bool  { return charge.Status == "succeeded"
 func reconcile(charge StripeCharge) bool   { return charge.Status == "succeeded" || charge.Status == "pending" }
 ```
 
-With one, it stops at the edge and everything behind it doesn't depend on FastSell directly:
+With one, it stops at the edge, and nothing behind it mentions Stripe:
 
 ```go
 func fromStripe(charge StripeCharge) LedgerEntry {
@@ -127,34 +127,76 @@ Both versions produce identical output today. The difference shows up when Strip
 
 **The boundary converts a change that lands everywhere into a change that lands once.** This is [chapter 05](05_dependency-and-hiding_agjy.md)'s argument about fan-in, applied to a dependency whose release schedule is not yours.
 
-Called an **Anti-Corruption Layer** in the pattern litterature, a name from Eric Evans, where the corruption is another system's model spreading into yours. Note what it costs: a translation function, a set of mappings that encode real judgements, tests for code that does nothing but rename fields, and somebody whose job includes reading Stripe's release notes.
+In the pattern literature this is an **Anti-Corruption Layer**, a name from Eric Evans, where the corruption is another system's model spreading into yours. Note what it costs: a translation function, a set of mappings that encode real judgements, tests for code that does nothing but rename fields, and somebody whose job includes reading Stripe's release notes.
 
-## Other pattern examples, and what crossing the boundary does to them
+## What the crossing does to other names
 
-[-- I see this section as a missed opportuniy. Needs a rewrite. Right now it goes into the nitpicks of 4 other patterns that follows the same journey without ever showing what the journeys are. It should instead show at leas two more examples of those patterns, demonstrating the easy change and year-long commitment with code examples. I'ts ok to have more compact examples now since the reader is now used to the shape. But without those examples it's not clear if this list is an overreach or genuine. Then instead of all nitpick only the most important details should be stated.]
+Adapter was one name. Three others make the same journey, and two of them can be shown quickly now that the shape is familiar.
 
-| Pattern | Both sides yours | The other side is theirs | What appears when it crosses |
-|---|---|---|---|
-| **Adapter** | a wrapper, or nothing at all | Anti-Corruption Layer | their model changes without asking ([Ch. 03](03_forces_f4m5.md)) |
-| **Facade** | an object with fewer methods | a service boundary or public API | your surface becomes permanent ([Ch. 05](05_dependency-and-hiding_agjy.md), 09) |
-| **Observer** | a list of callbacks | a message bus | delivery can fail, or repeat ([Ch. 08](08_distribution_49yh.md)) |
-| **Proxy** | a wrapper adding behaviour | a network hop, with retries and caching | latency floor, partial failure ([Ch. 08](08_distribution_49yh.md), 08) |
+### Proxy: a parameter appears
 
-Read the last column first. What changes across a row is not the amount of code — it is that something can now go wrong that could not go wrong before, and each of those is a Law from Part II.
+A proxy stands in for something else and adds behaviour on the way through. With both sides yours, that is a wrapper around a local catalogue:
 
-**How solid is each row?** Worth answering, because the rows are not equally well supported and the chapter should not pretend otherwise.
+```go
+// Both sides yours: a cache in front of the real thing.
+func (c *CachingCatalog) Get(id string) (Item, error)
+```
 
-- **Proxy** is in the original catalogue. The Gang of Four list a *remote proxy* — "a local representative for an object in a different address space" — as one of the pattern's named variants. Crossing the line is not an extension here; it was in the definition.
-- **Adapter** is supported by the anti-corruption layer literature. Evans describes such a layer as containing translators, which is what an adapter is. The structure is genuinely the same on both sides; what is added is the obligation to maintain it.
-- **Facade** is this book's extension. Nobody's catalogue says a facade becomes a public API. The observation is that the structure is identical — fewer methods over more machinery — and that once the callers are outside your deploy, [chapter 03](03_forces_f4m5.md)'s add-only rule attaches to it.
-- **Observer is the weakest row, and it is worth saying why.** A message bus is not simply an observer with a network in the middle: a broker is genuinely new structure, and the publisher stops holding references to its subscribers, which is a change in the mechanism rather than only in what can fail. Treat the row as a family resemblance rather than the same pattern relocated. The point about failure modes still holds — delivery can be lost or repeated — but the "same shape" claim is looser here than in the rows above.
+Once the catalogue is a service somebody else deploys, the same stand-in looks like this:
 
-That distribution is itself informative. **The rows that survive best are the ones where nothing structural is added**, which is a hint about when this reading applies at all.
+```go
+// The other side is theirs: the same call, over the network.
+func (c *RemoteCatalog) Get(ctx context.Context, id string) (Item, error)
+```
 
-Observer makes it plainest. Among your own objects, notifying a listener is calling a function: it cannot be lost, cannot arrive twice, cannot arrive out of order. Across a process boundary all three become possible, and every one is a design decision the word "Observer" does not mention.
+One parameter appeared. `ctx` is Go's carrier for a deadline and a cancellation signal — the caller states how long it is prepared to wait. The local version had nowhere to put one and no use for one: a local call either returns or the program is sitting inside it, and there is no third state where it is in flight on another machine and may never come back.
 
-[-- what follow about Facade and previous entries about it seems like an overreach. I'm not able to follow the argument, how does facade become load-bearing when crossing the boundary? Are you sure about this?]
-[Chapter 11](11_what-a-pattern-is-for_3xzc.md) left a question here. **Facade** compresses well and rules nothing out, so what is it doing in a book about load-bearing claims? This is the answer, and "published" is worth making concrete.
+So the crossing hands the caller two decisions the wrapper never posed — how long to wait, and what to do when nothing arrives. Whether asking a second time is safe is [chapter 08](08_distribution_49yh.md)'s question, and its answer costs an idempotency key.
+
+This row is the catalogue's own rather than this book's reading of it. The Gang of Four list a **remote proxy** — "a local representative for an object in a different address space" — among the pattern's named variants, so the crossing was in the definition from the start.
+
+### Observer: two return values appear
+
+```go
+// Both sides yours: callbacks, run one after another inside the call that triggered them.
+type Orders struct {
+	listeners []func(Order)
+}
+
+func (o *Orders) OnPlaced(listen func(Order)) {
+	o.listeners = append(o.listeners, listen)
+}
+
+func (o *Orders) placed(order Order) {
+	for _, listen := range o.listeners {
+		listen(order)
+	}
+}
+```
+
+`listen(order)` returns nothing, and there is nothing useful it could return. The notification cannot be lost, cannot arrive twice, and cannot arrive before the order exists.
+
+Across a process, the same notification goes to a broker:
+
+```go
+// The same method, once the subscriber is somebody else's process.
+func (o *Orders) placed(ctx context.Context, order Order) error {
+	return o.broker.Publish(ctx, "orders.placed", encode(order))
+}
+
+// At the other end, where returning an error means "send it to me again".
+func onOrderPlaced(ctx context.Context, message Message) error
+```
+
+Two error returns where there were none, and each is a decision. The publisher's: the order is placed whether or not `Publish` succeeds, so something has to happen to the notification when it fails. The subscriber's: the same order will arrive twice eventually, so something has to make handling it twice harmless. [Chapter 08](08_distribution_49yh.md) owns both answers, and the word *Observer* raises neither question.
+
+**This is the loosest crossing in the chapter.** A message bus is not an observer with a network in the middle: a broker is new structure, and the publisher stops holding references to its subscribers, which is a change in the mechanism rather than only in what can fail. Take it as a family resemblance rather than the same pattern relocated. What is lost and duplicated is real; the claim that it is the same shape is weaker here than in any other row.
+
+### Facade: the name that forbids nothing, either way
+
+[Chapter 11](11_what-a-pattern-is-for_3xzc.md) left a question here. **Facade** compresses well and rules nothing out, so what is it doing in a book about load-bearing claims?
+
+Not that it acquires teeth at the crossing. It doesn't: a facade can sit in front of anything on either side of a seam, and the word excludes no code in either place, which is [chapter 11](11_what-a-pattern-is-for_3xzc.md)'s finding and survives intact. What the crossing changes is that the operations it chose stop being revisable.
 
 ```go
 // Called only from inside this repository. Nothing here is a promise.
@@ -176,16 +218,31 @@ DELETE /v1/orders/{id}   -> Cancel
 
 Nothing about the Go code changed, and it is worth being exact about what did. `Place` is still your method name — rename it tomorrow, adjust the routing line, and nobody outside notices. What is now in somebody else's source is `POST /v1/orders` and the shape of the JSON it accepts, deployed on a schedule you do not set.
 
-So the line falls between the two, in a place the pattern name never mentioned:
+So the seam falls between the two, in a place the pattern name never mentioned:
 
 ```text
-still yours     the method name, its parameters, everything behind it
-now theirs      the route, the field names on the wire, which are optional
+still yours   the method name, its parameters, everything behind it
+now theirs    the route, and the wire field names, which are optional
 ```
 
-You may add `POST /v1/orders/{id}/hold`. You may not rename the route, remove `DELETE /v1/orders/{id}`, or make a field of the request body required — those are [chapter 03](03_forces_f4m5.md)'s forbidden moves, and the client that breaks is one you cannot deploy.
+You may add `POST /v1/orders/{id}/hold`. You may not rename the route, remove `DELETE /v1/orders/{id}`, or make a field of the request body required — those are [chapter 03](03_forces_f4m5.md)'s forbidden moves, and the client that breaks is one you cannot deploy. [Chapter 05](05_dependency-and-hiding_agjy.md) owns what else publication costs, starting with the fact that you can no longer count who depends on you.
 
-The name of the pattern did not change. What it commits you to did.
+**The facade is as free as it ever was, and the operation set is not.** Which operations exist was settled by whoever drew the facade, at a point when the decision looked reversible, and the name says nothing about whether somebody else is now holding a copy of it.
+
+### The four together
+
+| Pattern | Both sides yours | The other side is theirs | What appears when it crosses |
+|---|---|---|---|
+| **Adapter** | a wrapper, or nothing at all | Anti-Corruption Layer | their model changes without asking ([Ch. 03](03_forces_f4m5.md)) |
+| **Facade** | an object with fewer methods | a service boundary or public API | the operation set becomes add-only ([Ch. 03](03_forces_f4m5.md), [05](05_dependency-and-hiding_agjy.md)) |
+| **Observer** | a list of callbacks | a message bus | delivery can fail, or repeat ([Ch. 08](08_distribution_49yh.md)) |
+| **Proxy** | a wrapper adding behaviour | a network hop, with retries and caching | latency, partial failure ([Ch. 08](08_distribution_49yh.md), [09](09_scale_637f.md)) |
+
+Read the last column first. What changes across a row is not the amount of code — it is that something can now go wrong that could not go wrong before, and each of those is a Law from Part II.
+
+**One of the four is this book's reading rather than anyone's catalogue.** No pattern catalogue says a facade becomes a public API; the observation is that the structure is identical, fewer methods over more machinery, and that once the callers are outside your deploy [chapter 03](03_forces_f4m5.md)'s add-only rule attaches to what the facade exposes.
+
+That distribution is a condition on the whole reading: **it holds where nothing structural is added.** Adapter and Proxy cross with the same parts on both sides. Observer gains a broker, and that is the row that had to be qualified.
 
 ## Why these arguments do not converge
 
@@ -219,11 +276,11 @@ That is [chapter 02](02_the-five-kinds_cjx4.md)'s mechanism in a new place. Ther
 
 ### Patterns that stay the same wherever you put them
 
-Some names do not have a version on the other side of the line, and the test is short: **try to state what it would be.** If you cannot, the pattern is a way of arranging code inside one program and the question does not arise.
+Some names do not have a version on the other side of a seam, and the test is short: **try to state what it would be.** If you cannot, the pattern is a way of arranging code inside one program and the question does not arise.
 
 **Strategy** — passing behaviour as a parameter — is the clearest. In your own code, it's passing a function or class as a parameter. Across a boundary is it… configuration? A plugin? Nothing sharpens, because nothing about passing a function becomes unreliable when the program grows. **Template Method** and most uses of **Decorator** are the same.
 
-**Singleton is the notable exception to this section** — it changes more than anything else in the chapter when it crosses the line.
+**Singleton is the notable exception to this section** — it changes more than anything else in the chapter when it crosses a seam.
 
 The invariant is the same on both sides, and stating it precisely is what makes the connection real rather than a play on words:
 
@@ -275,7 +332,7 @@ An internal dependency that changes weekly and is called from forty places behav
 
 **Placing the boundary wrongly is expensive in both directions.** Too early and you have a mapping layer over a dependency that was never going to move. Too late and their vocabulary is already in forty files, and adding the boundary means touching all of them.
 
-**Two settings is coarse.** Real systems have degrees of ownership — your team's code, another team's, a library you could fork, a vendor with a support contract, a vendor without. Each behaves a little differently. The chapter compresses them into two because two is enough to catch the error it is about, and the boundary section above says where that breaks.
+**Two settings is coarse.** Real systems have degrees of ownership — your team's code, another team's, a library you could fork, a vendor with a support contract, a vendor without. Each behaves a little differently. The chapter compresses them into two because two is enough to catch the error it is about, and the partial-ownership case above says where that breaks.
 
 ---
 
@@ -293,7 +350,7 @@ An internal dependency that changes weekly and is called from forty places behav
 
 - **"We should put an adapter there."** Between what and what — and can we change either one?
 - **"It's just a facade."** Called by whom? If the answer includes anyone outside your deploy, it is not just anything.
-- **"We use that pattern elsewhere."** With the same answer to the ownership question? The same name on the other side of the line is a different decision.
+- **"We use that pattern elsewhere."** With the same answer to the ownership question? The same name on the other side of a seam is a different decision.
 
 The question that does the work: **can I change the other side?**
 

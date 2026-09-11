@@ -415,7 +415,7 @@ cache.Set(key, value, ttl)
 
 > **Who else depends on this, and can I change them?**
 
-[Chapter 03](03_forces_f4m5.md)'s compatibility rule and [chapter 12](12_patterns-that-cross_r8dw.md)'s ownership line both land here. The patterns are ways of making a boundary survivable.
+[Chapter 03](03_forces_f4m5.md)'s compatibility rule and [chapter 12](12_patterns-that-cross_r8dw.md)'s question of who owns the other side of a seam both land here. The patterns are ways of making a boundary survivable.
 
 **Pattern: Tolerant reader** — read only the fields you need, and ignore everything else.
 

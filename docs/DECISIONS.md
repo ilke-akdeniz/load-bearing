@@ -6434,3 +6434,107 @@ The two changes inside chapter 11 stand on clarity rather than on register: *use
 **The lesson, which is the reason this is logged.**
 A survey run before asserting the rule would have produced the same ten instances and the claim would never have been made.
 The survey discipline in `CLAUDE.md` exists for words doing the wrong job; this is the same discipline owed to a claim about the book's own register.
+
+## 157. Chapter 12's axis gets a name the book was already using: *seam*
+
+**Date.** 2026-09-10
+
+**Context.**
+The author's first full read of [chapter 12](../12_patterns-that-cross_r8dw.md) arrived as direct edits plus three tags, and the root one was vocabulary.
+They had renamed the chapter *Patterns That Cross a Boundary* and written: *"I changed 'line' to 'boundary' because they were used for the same thing and it was confusing to track… I feel this 'boundary' needs one qualifier to make it more specific… this is more like a 'service boundary' I guess."*
+
+**The qualifier the draft recommended, and the author's objection that killed it.**
+The draft proposed **ownership boundary**, on the grounds that the axis is [chapter 03](../03_forces_f4m5.md)'s *control of the callers* and that a *service* boundary inside one organisation is the chapter's partial-ownership case rather than its subject.
+The author rejected it on a test the draft had not run: *"If you can change the other side, and there is still a boundary it can't be an ownership boundary… Both sides of ownership boundary? Meh…"*
+The chapter's first section is headed **Both sides yours**, and its deciding question is *can I change the other side* — neither sentence can be written about a thing whose name already answers it.
+
+**What the objection established**, and it is the reason this is logged rather than absorbed: the thing crossed is generic, and ownership is the question asked *at* it.
+Two in-house packages meet at one; so do FastSell and Stripe, an orders service and two other teams, and one process and another machine.
+The Singleton counter-example crosses a seam with both sides owned throughout, which reads as off-topic under any ownership-qualified title.
+
+**The word is the author's, and it was already in the book.**
+They proposed *seam*, and a survey found it in six chapters used consistently for exactly this — [10](../10_organization_rjf9.md):53 *your software gets its seams where the work was divided*, [13](../13_patterns-that-survive-translation_us2k.md):210 *a seam placed where two things move at different speeds*, [21](../21_six-profiles_dnkz.md):166 *put the seam where the data crosses*, plus [05](../05_dependency-and-hiding_agjy.md), [18](../18_tdd-and-mocks_u8eu.md) and [19](../19_abstraction-as-insurance_4jk6.md) — while chapter 12, which is about the thing, used it zero times.
+No ledger row defines it. Six chapters converging on one word without being told to is better evidence than an argument for it.
+
+**Decision.** *Seam* for what is crossed; *boundary* left to the thing you build at one, which is what was causing the tracking problem the tag reported — *"without a boundary, their vocabulary goes everywhere"* is a different noun from the one in the title.
+Not defined in ceremony and not attributed: *seam* is Michael Feathers' term, and his sense — a place where behaviour can be altered without editing there — is narrower than this chapter's, so citing him would attach a meaning he did not give it.
+
+**Consequence.** Title, contents page, four ledger rows, and [chapter 13](../13_patterns-that-survive-translation_us2k.md):418. Chapter 11's two forward references do not name the title and were untouched.
+Two ledger rows were stale in a second way and fixed while there: *The third option* and *Code each name forbids* both still said *at class scale* / *at scale*, the vocabulary decision 36 removed from the chapter itself.
+
+---
+
+## 158. Facade does not acquire teeth at the seam, and chapter 12 had been claiming it does
+
+**Date.** 2026-09-10
+
+**Context.**
+The author's tag: *"what follows about Facade and previous entries about it seems like an overreach. I'm not able to follow the argument, how does facade become load-bearing when crossing the boundary? Are you sure about this?"*
+
+**The suspicion was right, and the evidence was in this log.**
+Decision 38 records the author catching the near-neighbour of this in August: the draft had said that once the orders object is exposed over HTTP *you may not rename `Place`*, and the correction was that `Place` stays entirely yours — what is in somebody else's source is `POST /v1/orders`.
+That correction landed in the prose and the argument around it did not move.
+So the section demonstrated that **the route** became permanent while claiming that **the facade** did, with a routing layer between the two performing exactly the decoupling that proves the facade was not what got published.
+The closing line — *"The name of the pattern did not change. What it commits you to did"* — was not shown by the example under it.
+
+**Decision.** The claim narrows to what the code demonstrates.
+A facade forbids nothing on either side of a seam, which is [chapter 11](../11_what-a-pattern-is-for_3xzc.md)'s finding and survives the crossing intact; what stops being revisable is the **operation set**, which becomes add-only once a copy of it lives in someone else's source.
+
+**Why the weaker claim is the stronger one**, and this was the draft's argument, accepted: it makes Facade the cleanest case in the chapter rather than its shakiest.
+The name is equally uninformative on both sides, so the entire difference in cost sits in the part the name never mentions — which is the chapter's thesis without dilution.
+It also keeps [chapter 11](../11_what-a-pattern-is-for_3xzc.md):115 and :212 cashable, since both promise that the *answer changes*, not that the word acquires teeth.
+
+**Rejected: demonstrating it on Go exports instead of HTTP.**
+It would read more directly — the method name would be the published thing — but [chapter 05](../05_dependency-and-hiding_agjy.md) owns *your export surface is a liability inventory* and *a disclaimer is not a boundary* outright, and rebuilding the point on exported identifiers is a ledger defect.
+HTTP keeps the chapter on its own facet and cites 05 for why publication is irreversible.
+
+---
+
+## 159. Four graded rows become two worked examples and two caveats
+
+**Date.** 2026-09-10
+
+**Context.**
+The author's tag on the table section: *"I see this section as a missed opportunity… Right now it goes into the nitpicks of 4 other patterns that follows the same journey without ever showing what the journeys are. It should instead show at least two more examples of those patterns, demonstrating the easy change and year-long commitment with code examples… without those examples it's not clear if this list is an overreach or genuine. Then instead of all nitpick only the most important details should be stated."*
+
+**The tension with decision 37, and why this is not a reversal.**
+That entry records the author asking whether the table was solid or this book's theory, and grading all four rows was the answer — an answer the same entry says strengthened the chapter.
+The compression asked for here is what the worked examples make possible rather than a change of mind: once a reader has watched Proxy and Observer cross, the defences of Adapter and Proxy are arguing for something already on the page.
+What still earns prose is Observer's looseness, which is a caveat on an example just read, and Facade being this book's reading rather than any catalogue's.
+Four notes to two, with nothing in decision 37 withdrawn.
+
+**Which two patterns.**
+Proxy and Observer, because they are the only rows with no worked case anywhere in the chapter — Adapter has the two long sections above and Facade has the HTTP passage below, so all four rows are now demonstrated somewhere.
+
+**What the examples are made of.**
+[Chapter 08](../08_distribution_49yh.md) owns delivery semantics outright — at-least-once, duplicates, idempotency keys — so these show the code and cite 08 for why it breaks rather than re-deriving it.
+That constraint decided their shape: the crossing is visible in the **signatures**.
+Proxy gains one parameter, `Get(id)` to `Get(ctx, id)`, a deadline the local call had no use for because a local call has no third state where it is in flight elsewhere and may never return.
+Observer gains two error returns where there were none, one on `Publish` and one on the subscriber, each of which is a decision the word does not raise.
+
+**Consequence.** The table moves to the end of the section as consolidation of four crossings the reader has now seen three of, rather than opening it as a promise. Two new ledger rows for the worked examples.
+
+---
+
+## 160. Two direct edits in the full-read commit that changed the meaning
+
+**Date.** 2026-09-10
+
+**Context.**
+`CLAUDE.md` requires the whole review commit to be read, not only the tags, and two of the author's direct edits did not survive the reading.
+
+**An inversion.** *"With one, it stops at the edge and everything behind it speaks FastSell"* became *"…everything behind it doesn't depend on FastSell directly."*
+FastSell is our own shop, so the sentence now asked that the code behind the boundary not depend on itself.
+The intended noun was Stripe; rewritten as *"it stops at the edge, and nothing behind it mentions Stripe."*
+
+**A fragment and a typo.** *"The pattern literature calls this an Anti-Corruption Layer"* became *"Called an Anti-Corruption Layer in the pattern litterature"* — *literature* misspelled, and the *where the corruption is…* clause left with nothing to attach to.
+The author's word order is kept and both defects fixed: *"In the pattern literature this is an Anti-Corruption Layer, a name from Eric Evans, where…"*
+
+**Also proofread.** The claim sentence's *what prevails is whether* — *prevails* does not mean *decides* — and a missing article in *Same pattern crossing different boundaries*.
+Both were the author's edit and both are kept in substance; the sentence now reads *"The same pattern crossing different seams can be a change you make in an afternoon or a commitment you carry for years. What decides which is not size: it is whether you own both sides of the seam."*
+
+**Found unasked, and fixed.** [Chapter 12](../12_patterns-that-cross_r8dw.md):278 said *"the boundary section above says where that breaks"* — *boundary section* is this repo's name for the rubric slot, not a phrase a reader can use; it now names the partial-ownership case.
+The Proxy row cited *(Ch. 08, 08)*, one of which was meant to be something else; latency is [chapter 09](../09_scale_637f.md)'s, so the row now cites 08 and 09.
+
+**The deletion that was accepted.** The author cut *"Same pattern, same shape, both times. In the first case, three lines that were better deleted. In the second, a file, an owner, and a standing obligation."*
+It is a grand summary of the two sections above it, which the register rules name as a form to cut, and nothing downstream depended on it.
