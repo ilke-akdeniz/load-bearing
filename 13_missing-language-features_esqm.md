@@ -1,16 +1,10 @@
-# Patterns That Are Missing Language Features
+# Are Patterns Just Missing Language Features?
 
 ## The claim
 
-**Much of the Gang of Four catalogue is scaffolding that mimics a language feature. Build the same design in a language that has the feature and the scaffold disappears while the design stays — and that difference is how you tell one from the other.**
+**Many patterns in the Gang of Four catalogue is OOP scaffolding that is not needed on other programming languages.**
 
-[Chapter 12](12_patterns-that-survive-translation_us2k.md) claimed that patterns which answer a Force survive. This chapter claims that a pattern can be expressed as a scaffold or as a language feature. The two claims are independent: a shape can answer a real Force and still be assembled out of scaffolding that another language does not need.
-
-## What Norvig actually counted
-
-The claim above is a version of an observation that already exists, and it is worth getting the original right before leaning on it, because the popular retelling is stronger than what was originally said.
-
-Peter Norvig, in a 1996 talk called *Design Patterns in Dynamic Programming*, worked through the Gang of Four book and reported this:
+This is just another form of the claim made in a 1996 talk called *Design Patterns in Dynamic Programming*  by Peter Norvig. He worked through the Gang of Four book and reported this:
 
 > 16 of 23 patterns are either invisible or simpler, due to:
 > First-class types (6): Abstract-Factory, Flyweight, Factory-Method, State, Proxy, Chain-Of-Responsibility.
@@ -20,9 +14,15 @@ Peter Norvig, in a 1996 talk called *Design Patterns in Dynamic Programming*, wo
 > Multimethods (1): Builder.
 > Modules (1): Facade.
 
-Three distinctions in the talk do not survive into the version people quote.
+## Folk Version
 
-**Being simpler is not the same as being invisible.** The folk version — *patterns are just missing language features* — asserts complete disappearance. Norvig's own taxonomy has three levels, not two: a pattern is **invisible** when it is "so much a part of the language that you don't notice", **informal** when it exists as prose you reimplement by hand each time, and **formal** when the language lets you implement the pattern itself once and call it. Moving from informal to formal is a real gain and is not disappearance.
+The rationale to have a chapter about a claim made in 1996 is that the folk version of it survives and leads to over-simplification and confusion: *"patterns are just missing language features"*. This asserts complete disappearance but Norvig's own taxonomy has three levels, not two.
+
+Same pattern in another language could be:
+
+- **invisible:** it is "so much a part of the language that you don't notice".
+- **informal:** it exists as prose you reimplement by hand each time. 
+- **formal:** when the language lets you implement the pattern itself once and call it. Moving from informal to formal is a real gain and is not disappearance. 
 
 **Five words were dropped from Norvig's preceding slide, and they were the ones that mattered.** The slide reads: "16 of 23 patterns have qualitatively simpler implementation in Lisp or Dylan than in C++ *for at least some uses of each pattern*."
 
@@ -31,6 +31,18 @@ Three distinctions in the talk do not survive into the version people quote.
 Norvig also lists five things patterns are for, and one of them is "to avoid limitations of implementation language", alongside recording design tradeoffs and describing what experienced designers know. The talk does not claim patterns are *only* workarounds. That is a claim its readers added.
 
 So the honest form is narrower than the slogan and still worth having: for a specific list of patterns, in a language with a specific feature, the code you write to get the pattern's effect is not needed anymore.
+
+## What the catalogue was
+For readers who are familiar with the primary source of the catalogue, the book *Design Patterns: Elements of Reusable Object-Oriented Software* what this chapter said so far shouldn't come as a surprise. These are verbatim excerpts from the book's preface and it's first chapter:
+
+- "This book assumes you are reasonably proficient in at least one **object-oriented programming language**, and you should have some experience in **object-oriented design** as well."
+- "It’s a book of design patterns that describes simple and elegant solutions to specific problems **in object-oriented software design**.
+- "The **choice of programming language** is important because it influences one’s point of view. Our patterns assume Smalltalk/C++-level language features, and that choice determines what can and cannot be implemented easily."
+- "some of our patterns are supported directly by the less common object-oriented languages. CLOS has multi-methods, for example, which lessen the need for a pattern such as Visitor"
+
+This the foundational catalogue describing it's scope precisely: Common OOP design structures in Object Oriented Languages that existed in 1994.
+
+Considering this scope, Norvig's presentation can be taken as a compliment on the patterns. Some patterns are still impactful in the no OOP designs and "Not Object Oriented" languages, reaching far beyond the original scope.
 
 ---
 
@@ -250,19 +262,17 @@ Two entries in the first group are worth a sentence each because their dissoluti
 
 ## Why the claim holds
 
-A pattern is something you **construct**. A feature is something you **get**.
+A pattern is a named design shape. The Gang of Four catalogue's scope is OOP design in OOP languages available in 1994.
 
 That is the whole mechanism, and everything above is an instance of it. The Visitor's `accept` methods, the `Visitor` interface, and the callback protocol are three pieces of apparatus that exist only to produce an effect — dispatch on a value's type — that the language did not offer. When the language offers it, the apparatus has nothing to do. The effect was never the apparatus.
-
-The tell is in the names. **A pattern that is simulating a feature has parts with no counterpart in the problem.** There is no `accept` in arithmetic, no `ConcreteStrategy` in shipping, no `visitNum` in an expression tree. Those names come from the pattern, and their presence is a sign that some of the file is about the language rather than about the domain.
 
 There is a reason the dissolving ones cluster. Look at the four that first-class functions handle: Command, Strategy, Template Method, Visitor. All four are the same underlying request — *let the caller supply behaviour* — differing only in when and how it is supplied. A language with function values answers all four with one feature, because there was only ever one question. The catalogue lists four patterns because in a language without function values, the four workarounds genuinely do look different.
 
 ---
-
+[-- I read and updated until this point. With the updated claim and what follow, you try to solve what should change in the next sections. Keep in mind that some material could need replacement - combination, don't treat the task as all is done until here and what follows from here needs a rework on itself. Do what will make the chapter better maybe that's needed maybe not.]
 ## Where the claim doesn't apply
 
-### The same feature that dissolved Visitor leaves Composite standing
+### The same language feature that dissolved Visitor leaves Composite standing
 
 The clearest limit is visible in one file, because sum types dissolve one of these patterns and not the other.
 
