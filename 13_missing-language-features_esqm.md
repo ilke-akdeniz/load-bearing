@@ -2,7 +2,8 @@
 
 ## The claim
 
-**Many patterns in the Gang of Four catalogue are OOP scaffolding that other languages — and later versions of the same language — do not need.**
+**Many patterns in the Gang of Four catalogue is OOP scaffolding that is not needed on other programming languages.**
+[-- restored my claim, your addition is overly defensive and complicates the claim without adding much value. Visitor example in the same language is a nice surprise in the chapter. I don't think this claim needs a fix for that because we can always point that Java version with that new feature is not the same language without it and our claim is not excluding the possibility of a language evolving into something else.]
 
 This is another form of a claim made in a 1996 talk called *Design Patterns in Dynamic Programming*, by Peter Norvig. He worked through the Gang of Four book and reported this:
 
@@ -281,6 +282,7 @@ There is a reason the dissolving ones cluster. Look at the four that first-class
 ## Where the claim doesn't apply
 
 ### The same language feature that dissolved Visitor leaves Composite standing
+[-- how is this related to our claim and how this is a case where the claim doesn't apply? Also isn't the point of this section banally obvious? Who said that a language feature sweeps many patterns, a feature makign a single pattern obsolete is the norm.]
 
 The clearest limit is visible in one file, because sum types dissolve one of these patterns and not the other.
 
@@ -329,9 +331,10 @@ func (d Directory) TotalBytes() int64 {
 
 Both print `6700` for the same tree. The dispatch mechanism changed completely between the two and the containment did not, because the containment is not a mechanism. Directories contain files. That is a fact about filesystems, and no language feature has anything to say about it — which is [chapter 12](12_patterns-that-survive-translation_us2k.md)'s category of patterns that answer the shape of the problem rather than a Force.
 
-So the test does not partition the catalogue into *real* and *fake*. It separates the patterns whose substance is a language workaround from the patterns whose substance is a claim about the domain, and the second group is untouched by anything a compiler does.
+So the test does not partition the catalogue into *real* and *fake*. [-- what's "the test"?] It separates the patterns whose substance is a language workaround from the patterns whose substance is a claim about the domain, and the second group is untouched by anything a compiler does.
 
 ### Decorator, where the test returns no
+[-- same, how this is a case where the claim doesn't apply? what's "the test"?]
 
 Decorator is not one of Norvig's sixteen, and writing it both ways shows why.
 
@@ -405,6 +408,7 @@ Four forwarding methods that exist to be forwarded through. No language feature 
 Decorator therefore sits outside the claim from two directions at once, and Norvig's list was right to omit it.
 
 ### Observer dissolves in one process and not across a machine
+[-- just wondering, is this a stretch if the chapter talks about the gang of four catalogue? If the pattern is a specific shape in OOP language, maybe the original shape was never about the distribution. Since our claim is about the gang of four, this sudden relaxation of the pattern might look unfair.]
 
 Norvig lists Observer as dissolved, and inside one process it is: a Go channel, a C# event, a callback list. The word adds nothing to `orders.Subscribe(handler)`.
 
@@ -413,6 +417,7 @@ Move the observer to another machine and every part of that comes back, in a wor
 The lesson is about the test rather than about Observer. **The test is scoped, and running it at the wrong scope returns a confident wrong answer.** "Observer is just events" is true of the version that lives in one address space and false of the version that lives in two, and the sentence does not say which one it is talking about.
 
 ### The test names the language you moved to, not the pattern
+[-- "the test" again, I'm not gonna dissect this, probably needs an update with the new claim]
 
 *Visitor is a workaround for missing sum types* is a claim about a pair — that pattern, and a language that has sum types. It is not a property Visitor carries around.
 
@@ -423,6 +428,7 @@ The honest use of the test is diagnostic rather than prescriptive — it explain
 ---
 
 ## What the claim costs
+[-- I wrote a similar tag on previous commits, it appears to me that you didn't act on that. I'm trying again, my reading so far shows that you didn't consider the implications of claim change properly. I read until here and pointed the issies with tags. Read the rest and try to find and fix the issues yourself.]
 
 **The failure modes do not vanish with the scaffold; they move to the feature.** The instinct is to say you have lost the pattern name and with it the literature on the pattern's failure modes. That is mostly wrong, because when the scaffold goes, the scaffold's own problems go with it — there is no wrapper class to drift out of sync with the interface it wraps if there is no wrapper class. What you inherit instead is the failure modes of the language feature, and those are usually more general and better documented.
 
