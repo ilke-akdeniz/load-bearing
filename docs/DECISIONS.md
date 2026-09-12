@@ -6756,3 +6756,36 @@ Adding Active Record as a fiftieth listed entry was the alternative, and it woul
 **One word changed against the author's text, and it is flagged rather than absorbed.** *They are alternatives* became *they are often alternatives*, because the survey says five of the seven worked pairs are not: layers, independent questions, a sequence, one technique at two scopes, two sides of a boundary. The rest of their sentence stands.
 
 **Also proofread:** *domintes*, a mid-sentence capital after a colon in *Optimistic*, and a trailing space.
+
+---
+
+## 168. Chapter 13 is reframed around the scope the catalogue declared
+
+**Date.** 2026-09-12
+
+**Context.**
+The author rewrote the chapter's title, claim and opening, added a section quoting the Gang of Four on their own scope, and left the rest to the draft: *"With the updated claim and what follow, you try to solve what should change in the next sections… Do what will make the chapter better maybe that's needed maybe not."*
+
+**The draft misread the new claim, and the author was right to push back.**
+The draft argued that **"Many patterns in the Gang of Four catalogue are OOP scaffolding…"** was the folk version the chapter exists to complicate, and that Composite, Decorator and Observer refute it.
+They do not. The claim is quantified — *many* — so the patterns that survive are outside it rather than counterexamples to it; the folk version says *just*, meaning all of them with nothing left over.
+The second half of the misreading was worse: the draft filed the new section under [chapter 15](../15_principle-loses-scope_b86v.md)'s mechanism, scope that gets lost. It is the opposite move. The scope was stated plainly, so Norvig's count is not a debunking of the catalogue but the catalogue's own prediction, measured — and what is then interesting is the patterns that reach past the scope their authors claimed.
+The author declined to explain it a second time, which was the correct call; re-reading the diff was enough.
+
+**One objection that did survive, on wording.** *"not needed on other programming languages"* does not cover the chapter's lead demonstration: Visitor died in Java when Java grew sealed types and pattern matching — same language, later version, and the chapter's closing makes a point of it. The claim now reads *"other languages — and later versions of the same language — do not need"*, which also fixes the number agreement.
+
+**The primary source was read, and it contained a better sentence than the four excerpts.**
+The author supplied the epub. All four quotes verify verbatim — two from the preface, two from chapter 1. Between the third and fourth sits this:
+
+> If we assumed procedural languages, we might have included design patterns called "Inheritance," "Encapsulation," and "Polymorphism."
+
+That is the chapter's thesis in the catalogue's own voice, and it runs in both directions: what is a feature at one language level is a pattern at a weaker one. It is now quoted in the chapter, attributed as theirs rather than the book's own reading — this is the rule about never presenting inference as the source's, run in reverse.
+
+**What the new claim changed downstream, which is what the author asked the draft to work out.**
+
+- **The mechanism section was broken by the edit.** *"That is the whole mechanism"* pointed at a sentence that had been replaced, while the paragraph under it still argued the deleted one. The mechanism is now stated to match the claim: a pattern is a design shape plus whatever apparatus the language makes you build to get it, and the catalogue assumed a language level.
+- **The tell was restored**, in one sentence rather than the paragraph the author cut: apparatus simulating a feature has parts with no counterpart in the problem. `LEDGER.md` assigns it to this chapter and the *How to recognize* section still uses it, so its deletion would have left a row with nothing behind it.
+- **Two forward references were wrong**, one of them pre-existing. *"the next section is about why those seven are there"* pointed at the mechanism section, which is about the sixteen. The draft's own new sentence promised the last half of the chapter to patterns that exceed the scope, which is also not where they are.
+- **The boundary and costs sections needed nothing.** They were already about the patterns that do not dissolve, which is exactly what a quantified claim leaves outside itself — and the last cost, *running the audit as a cleanup is a category error, because the finding is a fact about the languages of 1994*, reads better under the new framing than the old.
+
+**Also proofread in the author's edits**: number agreement in the claim, *it's* for *its* twice, a missing closing quotation mark on the second excerpt, *This the foundational catalogue*, two trailing spaces, and a heading in Title Case where the book uses sentence case.

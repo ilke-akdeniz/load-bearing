@@ -26,7 +26,7 @@ Back to [the introduction](README.md).
 
 - 11. [What a Design Pattern Is For](11_what-a-pattern-is-for_3xzc.md)
 - 12. [Patterns That Survive Translation](12_patterns-that-survive-translation_us2k.md)
-- 13. [Patterns That Are Missing Language Features](13_missing-language-features_esqm.md)
+- 13. [Are Patterns Just Missing Language Features?](13_missing-language-features_esqm.md)
 - 14. [Smuggled Verdicts](14_smuggled-verdicts_8y69.md)
 
 ## Part IV — Methodologies Versus Principles
