@@ -158,10 +158,9 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Patterns are Forces with a shape | us2k | The durable patterns answer a Force; grouping by Force finds the name from the situation, where a catalogue only finds it from the name | "the Force groups" |
 | Patterns sorted by Force | us2k | Chapter f4m5's seven Forces, in chapter f4m5's order and names; 49 patterns sort, 5 refuse | cite |
 | Team size relocates rules | us2k | This Force changes where a rule lives rather than what it is, so it produces few patterns of its own | cite |
-| Goal vs Force vs problem shape | us2k | Some patterns answer a goal and some answer the problem's shape, and neither sorts by Force. Each is settled differently — a Force by evidence about where you are, a goal by whether it is worth its price, the problem's shape by the business — and the test for a goal is whether you can decide to want less of it and stay honest | "the three kinds of input" |
+| Goal vs Force vs problem shape | us2k | Some patterns answer a goal and some answer the problem's shape, and neither sorts by Force; the test for a goal is whether you can decide to want less of it and stay honest | "the three kinds of input" |
 | The zero value is a hole in the pattern | us2k | Go gives every struct a zero value and no way to withhold it, so *make illegal states unrepresentable* reaches populated illegal states only; Rust and F# have no such fallback | "the zero-value hole" |
 | Same Force, several answers | us2k | The Force narrows the field; the intensity picks the answer, and 19 does the choosing | cite |
-| Two patterns under one Force are related, but not always as alternatives | us2k | Each Force section closes on what its pair has to do with each other — layered, independent, sequential, one technique at two scopes, or two sides of one boundary. *We already have a pattern for that Force* is an argument only in the alternatives case | "what the pair has to do with each other" |
 | Survives-translation test | esqm | Build the same design where the feature exists; the construction disappears and the design does not | "the translation test" |
 | Norvig's count, with its qualifier | esqm | 16 of 23 "invisible **or simpler**", "for at least some uses" — and three levels, invisible/informal/formal, not two | cite; q5c6 owns dropped quantifiers |
 | Constructed vs given | esqm | A pattern is something you construct, a feature something you get; the tell is parts with no counterpart in the problem | "constructed, not given" |
@@ -361,7 +360,7 @@ Reuse requires a different point *and* an explicit callback, never a re-run of t
 | Word counts: Transaction Script, Singleton, Manager | 3xzc | Compression measured, and the two names with no referent to compress |
 | Code each name forbids | 3xzc | Singleton and Transaction Script forbid something; Facade forbids nothing |
 | Unit of Work / append-only log | us2k | Durability's two shapes, and what each constrains |
-| Aggregate / identity map | us2k | The consistency boundary, and one row loaded once — the identity map shown as two steps that were written separately, with the concession that passing the loaded order makes it unnecessary |
+| Aggregate | us2k | The consistency boundary — the unit that is read and written as one, and why drawing it does not stop two writers |
 | Bulkhead / Result types | us2k | Containment in capacity and in the type system |
 | Ports and adapters / strangler fig | us2k | Seams where two things move at different rates |
 | Batching measured: 1145 ms to 11 ms | us2k | Latency's arithmetic; 637f owns the curve |

@@ -6696,49 +6696,33 @@ The 320 bare numbers are not touched, so nothing in the log is re-edited on the 
 
 ---
 
-## 166. What two patterns under one Force have to do with each other
+## 166. An expansion the author asked for, tried and reverted; and the identity map is cut
 
 **Date.** 2026-09-11
 
 **Context.**
-The author's first full read of [chapter 12](../12_patterns-that-survive-translation_us2k.md) in its new position. Four tags, two of them on the same material.
+[Chapter 12](../12_patterns-that-survive-translation_us2k.md)'s first full read in its new position produced four tags. Acting on them made the chapter worse, and the author said so: **"I was wrong. Those expansions didnt make the chapter better."**
 
-**The author found the chapter's best sentence and asked for more of it.**
-Tagging *"the grouping works because a pattern is a Force with a shape attached… if two patterns answer the same Force, they are alternatives"*: **"this could be the best part of the chapter so far, is it possible to expand this more for other forces the same way and maybe distribute this insight into each section rather then keep it at the bottom here?"**
+**What was tried.**
+The author had tagged the chapter's *"if two patterns answer the same Force, they are alternatives"* sentence as possibly its best, and asked to distribute it into every Force section.
+Checking it first found it false in five of the seven sections — only optimistic against pessimistic locking is a clean either/or, and it sits in a listed family rather than a worked pair. The worked pairs relate as layers, as independent questions, as a sequence, as one technique at two scopes, and as two sides of one boundary.
+So the draft wrote seven per-section closing lines naming each pair's actual relation, generalised the sentence to *the Force tells you which relation it is*, split the overlap the author had flagged between that passage and *One Force, several answers*, and expanded the Force/goal/problem-shape distinction with what settles each.
 
-**Checking it before expanding it is what changed the answer: the claim is false in five of the seven sections.**
-Only optimistic against pessimistic locking — which sits in a *listed* family, not a worked pair — is a clean either/or. The worked pairs relate in four other ways:
+**Why it was reverted.** All of it is defensible line by line, and together it turned a catalogue into a commentary on itself: seven closing paragraphs the reader did not ask for, in a chapter whose job is to place fifty patterns.
+**The survey result is worth keeping even though the prose is gone** — it says the single sentence the author admired is true in one section of seven, so if it is ever restored it has to be restored as the narrow claim.
 
-| Force | Relationship |
-|---|---|
-| Concurrency | layered — one draws the boundary, the other defends it, which the chapter already said |
-| Durability | independent questions: what commits together, and whether the previous value survives |
-| Blast radius | different layers — what a failure may consume, and whether a caller can ignore it |
-| Change frequency | sequence, not choice: a steady state, and the way of arriving at one |
-| Team size | one technique at two scopes, which the chapter also already said |
-| Latency | calls you must make, against calls you would repeat |
-| Control of the callers | one boundary from two sides, consumer and provider |
+**One thing survived the revert, at the author's instruction**: *"Aggregate only answers the first question: What has to change together"* had capitalised a clause mid-sentence after a colon. It is now an em dash with the question in italics.
 
-Distributing the sentence as written would have put a false claim in five sections.
+**The identity map is removed, and the reason generalises.**
+The author: **"We don't need that kind of mediocre examples in the book, they drag the book instead of adding value."**
+They had already caught the example as artificial — two lookups sitting side by side in one function are a variable waiting to be introduced.
 
-**Decision.** Each Force section now closes on what its own patterns have to do with each other, and the general statement is the stronger one the survey supports: two patterns under one Force are always related, and the Force tells you *which* relation — choosing, stacking, sequencing, or one technique at two scopes.
-It is demonstrated seven times rather than asserted once, which is the distribution the author asked for.
+The section's own framing is the argument for cutting the whole entry rather than re-exampling it. Concurrency is split into two questions: *what has to change together*, which Aggregate answers, and *what stops two writers changing it at once*, which locking answers and which [chapter 07](../07_time_mdbn.md) works through.
+Identity map answers neither. It is a third thing, about how many times a row is loaded, and it held the slot because the family's strong members — optimistic locking, single writer, idempotency key — are all owned by [chapters 07](../07_time_mdbn.md) and [08](../08_distribution_49yh.md).
+**Selection by availability is what produces a mediocre worked example**, and the fix is to have fewer rather than to find a better filler.
 
-**The payoff is a mistake the original sentence caused.** *We already have a pattern for that Force* is an argument only in the alternatives case — an optimistic version column and a pessimistic lock on the same rows are one decision made twice. It is not an argument about a unit of work and an append-only log, and treating those as duplication deletes something doing a different job.
-
-**The author's repetition tag resolves under the same change.**
-They flagged that *One Force, several answers* repeated the passage above it. It did: both said the Force narrows without deciding, using the same locking example.
-Split — the mechanism section now owns *what the relation is*, and the boundary subsection owns *even four genuine alternatives do not pick themselves*, which is where intensity and price come in.
-
-**The identity map example was artificial, and the author said so.**
-Their objection: **"Most of the code I dealt with would simply do `order = repo.GetOrder(orderId); order.AddLine(1000); order.Total()`. I don't see how your example is any useful over this."**
-Correct. Two lookups sitting side by side in one function are a variable waiting to be introduced.
-The example now shows two steps written separately, each handed only an order id, neither knowing the other ran — the only situation where the pattern buys anything.
-And the concession is now in the chapter rather than left for a reader to find: **load the order once and pass it to both steps and none of this is needed.** That is the pattern's boundary, and it is the author's objection promoted to the page.
-
-**The three-way distinction was expanded and given its test**, on the author's tag that it *"could deserve an expansion and better placement."*
-Force, goal, and problem shape now each carry what settles them — evidence about where you are, whether it is worth its price, and the business — rather than only the goal carrying its test.
-Its recognizable form moved to *How to recognize the failure*, where the reader is looking for symptoms, while the distinction itself stays in the boundary section with the five patterns that refuse to sort.
-
-**Also proofread in the author's edits.** *"Aggregate only answers the first question: What has to change together"* capitalised a mid-sentence clause after a colon; it is now an em dash and the question in italics, matching how the two questions are set at the head of the section.
-Their cut of *"patterns another chapter owns appear with a pointer instead of a definition"* stands — the pointers read as pointers without being announced.
+**Consequence, and it contradicts decision 43 in the letter.**
+That entry fixed two worked patterns per Force, as the answer to the author's own cherry-picking objection. Concurrency now has one.
+Rather than go quietly uneven, *How to read this chapter* says why: the second half of that Force is locking, and chapter 07 works it through instead.
+That is more informative than the symmetry was, and the listed family already points the reader there.
+Rejected, after being offered: replacing it with copy-on-write. The author chose removal, and a chapter that has just cut a weak worked example is not the place to audition a new one.

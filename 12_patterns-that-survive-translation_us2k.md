@@ -12,7 +12,7 @@ This chapter sorts the field against [chapter 03](03_forces_f4m5.md)'s seven For
 
 There are two kinds of pattern entry.
 
-**Worked patterns** — two per Force, with code, the constraint the pattern imposes, and what it costs. These carry the argument.
+**Worked patterns** — two per Force, with code, the constraint the pattern imposes, and what it costs. These carry the argument. Concurrency has one, because the second half of that Force is locking, and [chapter 07](07_time_mdbn.md) works it through rather than this chapter repeating it.
 
 **Listed patterns** — the rest of each family, one line each. These are not explained, only placed. By now you have [chapter 11](11_what-a-pattern-is-for_3xzc.md)'s tests, so a one-line entry is something you can evaluate rather than something you have to accept.
 
@@ -62,57 +62,6 @@ What the aggregate contributes is the thing that mechanism needs. It says **orde
 
 So the two are not alternatives. One draws the boundary; the other defends it.
 
-**Pattern: Identity map** — within one unit of work, a given row is loaded once and the same object is returned to everyone.
-
-```go
-// One map per unit of work, so two lookups of the same row give one object.
-type IdentityMap struct {
-	db     *sql.DB
-	loaded map[uuid.UUID]*Order
-}
-
-func (m *IdentityMap) Order(ctx context.Context, orderID uuid.UUID) (*Order, error) {
-	if order, ok := m.loaded[orderID]; ok { // comma-ok: ok reports whether the key was there
-		return order, nil // the same pointer, not a second copy
-	}
-	order, err := loadOrder(ctx, m.db, orderID)
-	if err != nil {
-		return nil, err
-	}
-	m.loaded[orderID] = order
-	return order, nil
-}
-```
-
-The effect is at the call sites, in two steps of one operation that were written separately:
-
-```go
-// Neither step knows the other ran, and neither was handed the order.
-func applyShipping(ctx context.Context, identityMap *IdentityMap, orderID uuid.UUID) error {
-	order, err := identityMap.Order(ctx, orderID)
-	if err != nil {
-		return err
-	}
-	return order.AddLine("shipping", 1)
-}
-
-func invoiceTotal(ctx context.Context, identityMap *IdentityMap, orderID uuid.UUID) (int64, error) {
-	order, err := identityMap.Order(ctx, orderID) // the same pointer; no second query
-	if err != nil {
-		return 0, err
-	}
-	return order.total(), nil // includes the line applyShipping added
-}
-```
-
-One round trip, and no way for the two to disagree about what order 42 currently is.
-
-**Load the order once and pass it to both steps, and none of this is needed** — which is the honest boundary on the pattern rather than an objection to it. It earns its place where an operation is assembled rather than written straight through: a handler holding an order id and a list of steps to run, where threading the object into every signature is the thing being avoided. Where you can pass it, pass it.
-
-*The constraint:* two parts of one operation cannot hold divergent copies of the same row, which is a lost-update race ([Ch. 07](07_time_mdbn.md)) that no amount of care at the call sites removes.
-
-*The cost:* it is a cache, so it needs a lifetime — and the lifetime must be the unit of work rather than the process, or it quietly becomes a source of stale data.
-
 **The rest of this family**
 
 - **Optimistic offline lock** — a version column; the writer whose version is stale is refused. [Chapter 07](07_time_mdbn.md) works it through.
@@ -121,8 +70,6 @@ One round trip, and no way for the two to disagree about what order 42 currently
 - **Idempotency key** — [chapter 08](08_distribution_49yh.md) owns it; it is what makes at-least-once delivery survivable.
 - **Saga** — [chapter 08](08_distribution_49yh.md) owns it; the answer when the unit of consistency spans systems and no transaction can.
 - **Leader election** — one machine holds a role and the others stand ready. It needs a lease whose duration is a guess, because a holder that is slow and a holder that is gone look the same ([Ch. 08](08_distribution_49yh.md)).
-
-Aggregate and identity map do not compete: one decides what moves together, the other stops a single operation holding two versions of it. The either/or in this family is optimistic against pessimistic locking, and it is the only one here.
 
 ## Force: Durability of the medium
 
@@ -174,8 +121,6 @@ values ($1, -100, 'withdrawal', now());
 - **Data Mapper** — the object model and the tables are allowed to differ, and something translates. Its cost is the translation; its benefit is that neither side constrains the other.
 - **Transactional Outbox** — [chapter 08](08_distribution_49yh.md) owns this one, and it is what you reach for when Unit of Work's constraint cannot be met.
 
-Unit of work and the append-only log answer different questions — what commits together, and whether the previous value still exists afterwards. Nothing makes you pick: an event store committing through a unit of work is both.
-
 ## Force: Blast radius
 
 > **When this breaks, what else stops working?**
@@ -218,8 +163,6 @@ func ParseAmount(text string) (Money, error)
 - **Dead-letter queue** — a message that cannot be processed goes somewhere a human will find it, instead of blocking the queue or vanishing.
 - **Parse, don't validate** — worked under team size, where its distinctive value is; it belongs here too, because a value that cannot be invalid cannot spread an invalid one.
 - **Make illegal states unrepresentable** — the same move in the type system: if the invalid combination has no representation, no code path can produce it.
-
-A bulkhead limits what one failure can consume; result types decide whether a caller can walk past that failure without noticing. One is operational and one is in the type system, and neither does the other's job.
 
 ## Force: Change frequency, and its shape
 
@@ -264,8 +207,6 @@ type Rates interface {
 - **Repository** — a collection-like interface over storage. Worth [chapter 11](11_what-a-pattern-is-for_3xzc.md)'s tests before adopting: it compresses well, and what it rules out is thinner than its reputation suggests.
 - **Feature toggle** — separate deploying code from enabling it, so the two can move at different rates. Its cost is that every live toggle doubles the paths under test.
 - **Anti-corruption layer** — a translation layer at the edge of your model, so another system's vocabulary stops there instead of spreading through yours. Its cost is permanent: mappings that encode real judgements, and somebody whose job includes reading the vendor's release notes.
-
-Ports and adapters is a steady state. Strangler fig is a way of arriving at one, so running both at once is expected — and the fig is the half that is supposed to end, which is why an unmigrated route is the failure mode rather than a pause.
 
 ## Force: Team size and turnover
 
@@ -380,8 +321,6 @@ The languages this pattern comes from do not have the hole. A Rust `enum` or an 
 - **Golden test** — assert a whole recorded artifact rather than picked-out fields. Worth it where the output is too large or too structured to assert piecemeal — a rendered invoice, a generated migration — and where you want changes nobody anticipated to show up as a diff. It over-constrains by design, which is the trade.
 - **Contract tests** — also a control-of-callers pattern, worked there. Same double duty: an agreement written down rather than remembered.
 
-These two are one technique at two scopes: a value that cannot be wrong, then a combination of values that cannot be wrong. Adopting the first alone is the common half-measure, and it leaves every invariant spanning two fields exactly where it was.
-
 ## Force: Latency budget
 
 > **What is the budget, and what does one mechanism cost of it?**
@@ -414,7 +353,7 @@ At one millisecond per round trip:
 **Pattern: Cache-aside** — check the cache, fall through to the source, populate on the way back.
 
 ```go
-if value, ok := cache.Get(key); ok {
+if value, ok := cache.Get(key); ok { // comma-ok: ok reports whether the key was there
 	return value
 }
 
@@ -433,8 +372,6 @@ cache.Set(key, value, ttl)
 - **CQRS**, for Command Query Responsibility Segregation — separate the write model from the read model, so each can be shaped for its own access pattern. Its real cost is that they are now two models that can disagree.
 - **Materialised view** — precompute the answer, and accept that it lags.
 - **Data-oriented layout** — [chapters 04](04_families-of-law_q5c6.md) and 07 own it; the 7× that comes from where the bytes sit rather than what the algorithm does.
-
-Batching reduces calls you have to make; caching removes calls you would otherwise repeat. They stack, and the order is not free either way round — check the cache first and you batch only the misses.
 
 ## Force: Control of the callers
 
@@ -513,8 +450,6 @@ The payoff is knowing what is safe to change:
 - **Expand and contract** — add the new field, migrate readers, then remove the old one, in three deploys rather than one. [Chapter 03](03_forces_f4m5.md)'s add-only rule is what forces the shape.
 - **Contract tests** — verify both sides against the same shared expectation, rather than trusting a document.
 
-These two are the same boundary from opposite sides. A tolerant reader is what the consumer does about output it does not control; a consumer-driven contract is what the provider runs so that it finds out before its callers do. A boundary with neither in place is one where the first news of a break arrives from somebody else.
-
 ---
 
 ## Why the claim holds
@@ -523,9 +458,7 @@ Two questions worth separating: why do these patterns last, and why does the gro
 
 **They last because a Force outlives a language.** Concurrency was a problem in 1970 and is a problem now. Data outlives code in COBOL and in Rust. Someone else always depends on your interface. A pattern answering one of those describes the shape of the problem rather than a gap in a toolchain — which is why it is still recognizable after being carried into a language its author never used. [Chapter 13](13_missing-language-features_esqm.md) takes the converse: a name that disappears when the language changes was answering the language, not the problem.
 
-**The grouping works because a pattern is a Force with a shape attached.** Two patterns filed under one Force always have something to do with each other, and the Force tells you what: whether you are choosing between them, stacking them, running one until the other is ready, or looking at a single technique applied at two scopes. Each Force section above closes on that question, and the answer is different almost every time.
-
-That variation is worth more than a tidy rule would have been, because it is the thing *we already have a pattern for that Force* gets wrong. The sentence is an argument when the two are genuine alternatives — an optimistic version column and a pessimistic lock on the same rows are one decision made twice. It is not an argument anywhere else: a unit of work does not make an append-only log redundant, and a bulkhead does not make result types redundant, and treating either pair as a duplication removes something that was doing a different job.
+**The grouping works because a pattern is a Force with a shape attached.** If two patterns answer the same Force, they are alternatives, and knowing the Force tells you which question you are choosing between. Optimistic and pessimistic locking are not two techniques to learn; they are two answers to *how often do writers collide*, and the intensity of that Force picks one. [--a this could be the best part of the chapter so far, is it possible to expand this more for other forces the same way and maybe distribute this insight into each section rather then keep it at the bottom here?]
 
 That is the practical use of the whole chapter. **Catalogues are organized by shape, so they let you look up what you already know the name of.** Grouping by Force lets you find the name from the situation, which is the direction you actually need.
 
@@ -543,17 +476,11 @@ That is a real gap in this chapter's method, not a defect in the patterns. [Chap
 
 **Some answer what the problem is rather than what the situation is.** A state machine is the right shape when the domain genuinely has states and transitions — an order that is placed, then paid, then shipped. That is a fact about the business, not about your concurrency or your latency budget. The same goes for Transaction Script, which [chapter 11](11_what-a-pattern-is-for_3xzc.md) uses as its compression example: it is what you write when *no* Force is pushing you anywhere else, and it is right far more often than its reputation suggests.
 
-So three different things can put a pattern in front of you, and only one of them is what this chapter sorts by. **Before adopting anything, it is worth saying which of the three you are answering**, because the question that settles each one is different:
-
-- **A Force** — a fact about your situation. The test is that you cannot decide to want less of it: four teams needing to agree, a network that drops packets, data outliving the code. Settled by evidence about where you are.
-- **A goal** — something you decided to want. Testability, portability, observability. Settled by whether it is worth its price here, and a prototype declining portability has denied nothing.
-- **The shape of the problem** — a fact about the domain. An order that is placed, then paid, then shipped has states whatever your traffic looks like. Settled by the business, and it does not move when your circumstances do.
-
-Mixing them is how machinery ends up answering a question nobody asked: an event-sourced log because durability sounds important, when what the domain has is a state machine; a testing technique adopted because it is rigorous rather than because anything about the situation called for it. Both are real decisions made against the wrong one of the three.
+Confusing the Forces, goals, and problem shapes in play is one way people end up applying machinery to a question they were not asking: reaching for an event-sourced log because durability sounds important, when what the domain actually has is a state machine; or adopting a testing technique because it is rigorous, rather than because anything about the situation called for it. [-- this paragraph is also very important and could deserve an expantion and better placement in the chaper]
 
 ### One Force, several answers, and no way to choose from here
 
-Naming the relationship does not make the choice. *Writers collide* gives you optimistic locking, pessimistic locking, single-writer partitioning, and a serializable transaction — four genuine alternatives, which is the one case where the Force does narrow to a shortlist, and it still stops there. Picking one needs the Force's **intensity** ([chapter 03](03_forces_f4m5.md)'s dial) and what you are willing to pay for it, neither of which is on the shelf the pattern came from.
+Knowing the Force narrows the field; it rarely closes it. *Writers collide* gives you optimistic locking, pessimistic locking, single-writer partitioning, and a serializable transaction, and choosing between them needs the Force's **intensity** — [chapter 03](03_forces_f4m5.md)'s dial — plus what you are willing to pay. [-- this looks like a repetition of --a ]
 
 This chapter sorts. It does not decide. [Chapter 19](19_force-map-method_r37x.md) is the one that turns a set of Forces into a design.
 
@@ -581,7 +508,6 @@ Run [chapter 11](11_what-a-pattern-is-for_3xzc.md)'s tests before using any of t
 **In a codebase:**
 
 - **A pattern whose Force you cannot name.** Ask what would break without it. If the answer is nothing concrete, it is structure that was applied rather than derived.
-- **Machinery answering a goal or a domain fact as though it were a Force.** Event sourcing adopted because durability sounds important, a state machine's transitions spread across five services because the domain was never the reason. The three-way test above is what separates them.
 - **Two patterns answering the same Force, both present.** An optimistic version column *and* a pessimistic lock on the same rows means somebody added the second without removing the first, and the invariant now depends on which path ran.
 - **A pattern from the durability family with no durable medium** — event sourcing over a cache, an append-only log that is truncated weekly.
 - **Bulkheads that share a limit.** Two pools that both draw from the same connection ceiling are one pool with extra configuration.
