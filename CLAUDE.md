@@ -316,9 +316,9 @@ Then **write that into the sentence** — there is no tagging notation.
 
 - Standard: cite it in the normal way. *Parnas, 1972* is already its own provenance; do not label it as well.
 - Disputed: say who disputes it and on what grounds. A bare "this is contested" is hedging, not honesty.
-- The book's own: say it is not standard vocabulary, so the reader knows what to expect when they search for the term.
+- The book's own: **the sentence that introduces the term usually does this by itself.** *This chapter calls that the translation test*, *what this book's author calls a folk remedy* — a reader already knows where the name came from, and adding *and it is not standard vocabulary* after one of those says it twice, in a register no author writes in. Add the explicit marker only where the construction cannot: an ordinary word being used in a special sense, where a reader would otherwise assume the usual one, or a name that has to be told apart from a source's own words.
 
-The five-kind model is the book's own, and every chapter that leans on it should read that way.
+Either way it is a clause, never a sentence of its own, and it appears once — at the term's owning chapter. **A book that keeps announcing which parts are its own is not being careful, it is being self-conscious.** The five-kind model is the book's own and no chapter says so; it simply uses it.
 
 **Running example.**
 FlowCore — a Go workflow library at `~/s/flowcore` with a 38-entry decision log — supplies examples in Parts II, IV, and V, because its reasoning was recorded at the time rather than reconstructed afterwards.

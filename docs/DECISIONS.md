@@ -6852,3 +6852,29 @@ The author cut its second half — *how much that costs depends on whether the w
 Now two chapters, against Forces and against language.
 
 This is the second stranded reference to a cut chapter found by reading rather than by tooling; the first was [chapter 13](../13_missing-language-features_esqm.md):393's boundary attribution. Both sat in prose that mentions no chapter by number.
+
+---
+
+## 171. The rule that produced "not standard vocabulary" is rewritten
+
+**Date.** 2026-09-12
+
+**Context.**
+The author, on *"This chapter calls that the **translation test** — the book's name for it, not a standard one"*: **"This failure keeps happening, after saying this 'chapter calls' no author in his right mind would say 'the book's name for it...'. Even without that, no author would say 'this is mine, this is book's' at all in any place of the book… Please check claude.md or other resources and remove whatever instruction that causes this failure."**
+
+**The instruction they suspected exists, and it is `CLAUDE.md`'s provenance rule**, third bullet: *the book's own: say it is not standard vocabulary, so the reader knows what to expect when they search for the term.*
+Read as a default it produces exactly what they object to, and the draft applied it as a default twice in one chapter — first writing the marker, then restoring it after the author trimmed it.
+
+**The survey, before rewriting the rule.**
+Explicit markers appear in four chapters, and the useful finding is that **only [chapter 13](../13_missing-language-features_esqm.md) doubled them**:
+
+- [Chapter 20](../20_six-profiles_dnkz.md):9 — *force profile is this book's term and is not standard vocabulary*, in a definition list, contrasting with *domain*, which is standard.
+- [Chapter 21](../21_idioms_7nkn.md):9 — *condition* is an ordinary word used in a special sense; without the note a reader assumes the usual one.
+- [Chapter 18](../18_abstraction-as-insurance_4jk6.md):148 — separates the book's two names from Martin's own argument, which the rule against splicing inference into a source requires.
+- [Chapter 23](../23_never-written-down_at4r.md):154 — *what this book's author calls a folk remedy*, where the construction carries it and nothing is added.
+
+So three of the four are doing work the construction cannot do, and the fourth does it the right way. The failure was never the marker; it was **saying it twice** — once in *this chapter calls*, once in a note afterwards.
+
+**The rule now says that.** A sentence introducing a coined term generally gives its own provenance, and the explicit marker is reserved for the two cases where it cannot: an ordinary word in a special sense, and a name that must be told apart from a source's words. It is a clause rather than a sentence, it appears once, and the rule closes on the reason: *a book that keeps announcing which parts are its own is not being careful, it is being self-conscious.* The five-kind model is the example — the book's own, and no chapter says so.
+
+**Not acted on, and put to the author instead.** Their note goes further than the rewrite does — *that should happen very rarely… one time inside the book maybe*. Three of the four instances above survive the new rule, and the draft's view is that each earns its clause. If the author wants the count down to one, [chapter 20](../20_six-profiles_dnkz.md)'s is the one to keep, since it is the only place where the term is the chapter's whole subject; the other two would have to lose something real, and 18's is required by a different rule.
