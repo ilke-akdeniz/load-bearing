@@ -51,7 +51,7 @@ Which says the relationship runs both ways: what is a feature at one language le
 
 **So Norvig's count is not a refutation of the catalogue. It is the catalogue's own prediction, measured.** Read that way the interesting patterns are not the sixteen that got simpler — those were promised — but the seven that did not, and the ones still load-bearing in designs and languages the book never addressed. Those reach past the scope their authors claimed, which is why the patterns that refuse to dissolve get as much room here as the ones that do.
 
-**Which patterns are OOP scaffolding is a question with a procedure.** Build the same design in a language that supplies the feature, and look at what is left: either the apparatus goes and the design stays, or it doesn't. This chapter calls that the **translation test** — the book's name for it, not a standard one.
+**Which patterns are OOP scaffolding is a question with a procedure.** Build the same design in a language that supplies the feature, and look at what is left: either the apparatus goes and the design stays, or it doesn't. This chapter calls that the **translation test**. [-- " the book's name for it, not a standard one". This failure keeps happening, after saying this "chapter calls" no author in his right mind would say "the book's name for it...". Even without that, no author would say "this is mine, this is book's" at all in any place of the book. That should happen very rarely when the situation asks for it for some book, one time inside the book maybe... Please check claude.md or other resources and remove whatever instruction that causes this failure.]
 
 ---
 
