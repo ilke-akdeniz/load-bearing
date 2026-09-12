@@ -6693,3 +6693,52 @@ Following that precedent here means editing about 320 bare chapter numbers.
 Two facts argue for not doing it: decision 111 records that the last renumber of this log *"turned out to be broken in three ways"*, and the quoted lines already carry one layer of `[now NN]` glosses, which a second renumber would either falsify or have to nest.
 **Decided by the author: the dated note.** It sits at the head of this file, every entry stays as written, and the permanent identifiers in the filenames do the disambiguating.
 The 320 bare numbers are not touched, so nothing in the log is re-edited on the strength of a change that happened after it was written — which is the property that makes it an authorship record rather than a description of the current draft.
+
+---
+
+## 166. What two patterns under one Force have to do with each other
+
+**Date.** 2026-09-11
+
+**Context.**
+The author's first full read of [chapter 12](../12_patterns-that-survive-translation_us2k.md) in its new position. Four tags, two of them on the same material.
+
+**The author found the chapter's best sentence and asked for more of it.**
+Tagging *"the grouping works because a pattern is a Force with a shape attached… if two patterns answer the same Force, they are alternatives"*: **"this could be the best part of the chapter so far, is it possible to expand this more for other forces the same way and maybe distribute this insight into each section rather then keep it at the bottom here?"**
+
+**Checking it before expanding it is what changed the answer: the claim is false in five of the seven sections.**
+Only optimistic against pessimistic locking — which sits in a *listed* family, not a worked pair — is a clean either/or. The worked pairs relate in four other ways:
+
+| Force | Relationship |
+|---|---|
+| Concurrency | layered — one draws the boundary, the other defends it, which the chapter already said |
+| Durability | independent questions: what commits together, and whether the previous value survives |
+| Blast radius | different layers — what a failure may consume, and whether a caller can ignore it |
+| Change frequency | sequence, not choice: a steady state, and the way of arriving at one |
+| Team size | one technique at two scopes, which the chapter also already said |
+| Latency | calls you must make, against calls you would repeat |
+| Control of the callers | one boundary from two sides, consumer and provider |
+
+Distributing the sentence as written would have put a false claim in five sections.
+
+**Decision.** Each Force section now closes on what its own patterns have to do with each other, and the general statement is the stronger one the survey supports: two patterns under one Force are always related, and the Force tells you *which* relation — choosing, stacking, sequencing, or one technique at two scopes.
+It is demonstrated seven times rather than asserted once, which is the distribution the author asked for.
+
+**The payoff is a mistake the original sentence caused.** *We already have a pattern for that Force* is an argument only in the alternatives case — an optimistic version column and a pessimistic lock on the same rows are one decision made twice. It is not an argument about a unit of work and an append-only log, and treating those as duplication deletes something doing a different job.
+
+**The author's repetition tag resolves under the same change.**
+They flagged that *One Force, several answers* repeated the passage above it. It did: both said the Force narrows without deciding, using the same locking example.
+Split — the mechanism section now owns *what the relation is*, and the boundary subsection owns *even four genuine alternatives do not pick themselves*, which is where intensity and price come in.
+
+**The identity map example was artificial, and the author said so.**
+Their objection: **"Most of the code I dealt with would simply do `order = repo.GetOrder(orderId); order.AddLine(1000); order.Total()`. I don't see how your example is any useful over this."**
+Correct. Two lookups sitting side by side in one function are a variable waiting to be introduced.
+The example now shows two steps written separately, each handed only an order id, neither knowing the other ran — the only situation where the pattern buys anything.
+And the concession is now in the chapter rather than left for a reader to find: **load the order once and pass it to both steps and none of this is needed.** That is the pattern's boundary, and it is the author's objection promoted to the page.
+
+**The three-way distinction was expanded and given its test**, on the author's tag that it *"could deserve an expansion and better placement."*
+Force, goal, and problem shape now each carry what settles them — evidence about where you are, whether it is worth its price, and the business — rather than only the goal carrying its test.
+Its recognizable form moved to *How to recognize the failure*, where the reader is looking for symptoms, while the distinction itself stays in the boundary section with the five patterns that refuse to sort.
+
+**Also proofread in the author's edits.** *"Aggregate only answers the first question: What has to change together"* capitalised a mid-sentence clause after a colon; it is now an em dash and the question in italics, matching how the two questions are set at the head of the section.
+Their cut of *"patterns another chapter owns appear with a pointer instead of a definition"* stands — the pointers read as pointers without being announced.
