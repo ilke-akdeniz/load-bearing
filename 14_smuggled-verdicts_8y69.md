@@ -4,9 +4,9 @@
 
 **Some vocabulary arrives with its verdict attached, so accepting the word concedes the argument — and how much you have conceded depends on whether the word also names something you can go and check.**
 
-Part III has been about patterns which are named shapes in essence. [Chapter 11's](11_what-a-pattern-is-for_3xzc.md) finding was that a name sits outside the five kinds: it picks out a shape, and a shape is not true or false. 
+Part III has been about patterns, which are names for shapes. [Chapter 11](11_what-a-pattern-is-for_3xzc.md)'s finding was that a name sits outside the five kinds: it picks out a shape, and a shape is not true or false.
 
-Some names defy that, using one asserts something. And they do it while keeping a name's exemption from ever having to be defended. 
+Some names defy that: using one asserts something — and they do it while keeping a name's exemption from ever having to be defended.
 
 Pattern culture produces the densest supply of those names, but the mechanism is not confined to patterns.
 
@@ -174,7 +174,7 @@ So the practical difference is not whether the word gets used. It is whether it 
 
 > This part has code smells, but I can't work out what would go wrong. Can you walk me through why you chose this shape?
 
-The first goes from hunch to conclusion in one step with nothing checkable in between, so the only moves available are deference and refusal, and seniority decides which. The second declares its own status — *I can't work out what would go wrong* — which keeps the hunch labelled, and then converts it into a request for the reasoning. 
+The first goes from hunch to conclusion in one step with nothing checkable in between, so the only moves available are deference and refusal, and seniority decides which. The second declares its own status — *I can't work out what would go wrong* — which keeps the hunch labelled, and then converts it into a request for the reasoning.
 
 **A no-shape term is admissible when it is stated as the speaker's state.** Unmarked, it is a verdict with no subject, and there is no design discussion available until somebody supplies the missing shape.
 

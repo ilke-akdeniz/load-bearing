@@ -6878,3 +6878,34 @@ So three of the four are doing work the construction cannot do, and the fourth d
 **The rule now says that.** A sentence introducing a coined term generally gives its own provenance, and the explicit marker is reserved for the two cases where it cannot: an ordinary word in a special sense, and a name that must be told apart from a source's words. It is a clause rather than a sentence, it appears once, and the rule closes on the reason: *a book that keeps announcing which parts are its own is not being careful, it is being self-conscious.* The five-kind model is the example — the book's own, and no chapter says so.
 
 **Not acted on, and put to the author instead.** Their note goes further than the rewrite does — *that should happen very rarely… one time inside the book maybe*. Three of the four instances above survive the new rule, and the draft's view is that each earns its clause. If the author wants the count down to one, [chapter 20](../20_six-profiles_dnkz.md)'s is the one to keep, since it is the only place where the term is the chapter's whole subject; the other two would have to lose something real, and 18's is required by a different rule.
+
+---
+
+## 172. Chapter 14's opening, and stale numbers the renumber could not reach
+
+**Date.** 2026-09-12
+
+**Context.** The author's first full-read pass on [chapter 14](../14_smuggled-verdicts_8y69.md): direct edits throughout, no tags.
+
+**The edits, reviewed on the merits.**
+Most are cuts of self-justification and they improve the chapter: *which is why the chapter sits in this part*, *and they are why this is worth a chapter rather than a complaint*, *and neither is the ordering*, *in the style a great many working systems are built in*. Two tests and two properties become lists, which is what they were.
+*Does the term pick out something in the code?* became **does the term name a shape you can inspect in the code?**, which is the better question: the axis is inspectability, and the old wording did not say so.
+
+**Two deletions consistent with decision 171**, made the same day the rule was rewritten: *this grading is the book's own, and the axes are not standard vocabulary*, and *this is the author's formulation, developed while building FlowCore, and it is not standard vocabulary*. Both are the pattern the new rule reserves for cases the introducing sentence cannot carry, and neither is one.
+Worth noting rather than reversing: the second also carried a fact that is not a vocabulary marker — that *what the rule must see* came out of building FlowCore. That provenance is now only in this log.
+
+**Proofread.** Three trailing spaces; *patterns which are named shapes in essence*, where *in essence* was filler and the clause wanted a comma; a comma splice in *Some names defy that, using one asserts something*; and `[Chapter 11's](…)`, which puts the possessive inside the link text — the book's other thirty-odd references put it outside, and this was the only one.
+
+**A narrowed rule, kept narrow, with the ledger brought to it.**
+*A no-shape term is admissible when it is stated as the speaker's state and turned into a question* lost its second clause. The chapter's own example still does both, and the sentence above it still says the good version *converts it into a request for the reasoning* — so the rule now understates its demonstration.
+Understating is the safe direction and the author's version is true as written, so it stands. `LEDGER.md`'s row said *stated as the speaker's state and converted into a question … a hunch becomes the Forces question*, which is no longer what the chapter says — the author also cut the sentence naming [chapter 03](../03_forces_f4m5.md). The row now matches the text.
+
+**Not changed, and flagged instead.** *The cost of the term is borne by whoever is right and did not pick the vocabulary* became *the cost of the verdict is borne by whoever did not pick the vocabulary*. True, and it drops the point the sentence existed for: being right is not enough when the other side named the thing. The author's cut stands unless they want the clause back.
+
+**Stale chapter numbers in `docs/LEDGER.md`, which decision 165's renumber could not have caught.**
+That pass rewrote every markdown link in one sweep. The ledger contains no links — it refers to chapters by bare number in its prose — so nothing in it was checked. Sweeping all sixteen such references found two wrong:
+
+- Row 188: *it passes **09's** compression test* — compression is [chapter 11](../11_what-a-pattern-is-for_3xzc.md)'s, and 09 is *Scale*. A fossil of an older numbering, not of this one.
+- Row 287: ***14's** repair is to go back to the source and rebuild the scope* — that is [chapter 15](../15_principle-loses-scope_b86v.md), and the very next row, on the same subject and by the same owner, already says *15 hands it over*.
+
+The other fourteen are correct. **The lesson is that `LEDGER.md` needs the same sweep as the chapters whenever numbering moves**, and it is the one working document where a wrong number is silent — `tools/check-drift.py` validates the four-character owner ids and cannot see a number in prose.
