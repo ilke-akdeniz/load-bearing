@@ -6789,3 +6789,38 @@ That is the chapter's thesis in the catalogue's own voice, and it runs in both d
 - **The boundary and costs sections needed nothing.** They were already about the patterns that do not dissolve, which is exactly what a quantified claim leaves outside itself — and the last cost, *running the audit as a cleanup is a category error, because the finding is a fact about the languages of 1994*, reads better under the new framing than the old.
 
 **Also proofread in the author's edits**: number agreement in the claim, *it's* for *its* twice, a missing closing quotation mark on the second excerpt, *This the foundational catalogue*, two trailing spaces, and a heading in Title Case where the book uses sentence case.
+
+---
+
+## 169. The chapter is re-cut to the claim it now makes
+
+**Date.** 2026-09-12
+
+**Context.**
+The author's second full-read pass, with a tag the draft had earned: *"I wrote a similar tag on previous commits, it appears to me that you didn't act on that. I'm trying again, my reading so far shows that you didn't consider the implications of claim change properly."*
+
+**They were right, and the defect has one cause.**
+The old claim contained the chapter's method — *build the same design in a language that has the feature, and that difference is how you tell one from the other.*
+The new claim does not. Four later passages still said **the test**, with nothing introducing it, and the author tagged three of them with *what's "the test"?*
+The previous pass had checked whether those sections were still *true* under the new claim and concluded they needed nothing. They were true and they were orphaned: written in the vocabulary of a claim that had been removed.
+
+**Fixed by introducing the method where it now belongs**, at the end of the section on the catalogue's stated scope, as the answer to the question that claim raises — which patterns are in the many. It is named there as **the translation test**, marked as the book's own vocabulary rather than anyone else's, and a second name for it (*the audit*, used twice in later sections) is gone.
+
+**Composite was in the wrong section, and the author's objection was sharper than a placement note.**
+Their tag: *"how is this related to our claim and how this is a case where the claim doesn't apply? Also isn't the point of this section banally obvious? Who said that a language feature sweeps many patterns, a feature making a single pattern obsolete is the norm."*
+Under the old claim — a test that partitions the catalogue — showing that one feature dissolves Visitor and leaves Composite was a real limit. Under a claim quantified as *many*, a pattern that is not scaffolding is not a limit on anything; it is simply outside the many, and saying so at length is the banality the author names.
+So the section moves out of *Where the claim doesn't apply* and into the demonstration, as **What the feature cannot touch**, immediately after the table that introduces the seven Norvig left out. What was a weak boundary becomes the criterion: the test separates patterns whose substance is a language workaround from patterns whose substance is a claim about the domain.
+
+**The Observer subsection is cut**, on the author's challenge: *"is this a stretch if the chapter talks about the gang of four catalogue? If the pattern is a specific shape in OOP language, maybe the original shape was never about the distribution… this sudden relaxation of the pattern might look unfair."*
+It is a stretch. The catalogue's Observer is an in-process object protocol; moving it to another machine and reporting that the problems come back measures something the catalogue never claimed. The chapter's other boundary already carries the point that the claim is scoped — to a language pair — without borrowing a second axis to do it. `LEDGER.md`'s *the translation test is scoped* row goes with it.
+
+**The two surviving boundaries now say how they bound this claim**, which neither did:
+
+- *Decorator, where the test returns no* → **Dropping the scaffolding can cost more than keeping it.** The claim says the scaffolding is not needed where the feature exists; here the feature exists, the scaffolding goes, and the Go version is longer — 37 lines against 31.
+- *The test names the language you moved to* → **"Not needed in other languages" is about a pair, not a pattern.** The claim's *other programming languages* has to be a particular other language: in Java 8 there are no sum types, so Visitor is the correct code.
+
+**The author restored their own claim and rejected the draft's widening**, which had added *and later versions of the same language* to cover Visitor dying inside Java: *"overly defensive and complicates the claim without adding much value… we can always point that Java version with that new feature is not the same language without it."*
+Accepted. The chapter already makes that argument in its closing section, so the claim does not have to carry it.
+Two repairs were kept and are not defensive: *patterns … is* did not agree, and *not needed on other programming languages* wanted *in*.
+
+**Also fixed, found while re-reading rather than tagged:** a divider with no blank line after it, and a forward reference promising that the seven are *where this chapter's limits are found*, which stopped being true when Composite moved out of the limits.

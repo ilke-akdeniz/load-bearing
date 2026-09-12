@@ -2,8 +2,7 @@
 
 ## The claim
 
-**Many patterns in the Gang of Four catalogue is OOP scaffolding that is not needed on other programming languages.**
-[-- restored my claim, your addition is overly defensive and complicates the claim without adding much value. Visitor example in the same language is a nice surprise in the chapter. I don't think this claim needs a fix for that because we can always point that Java version with that new feature is not the same language without it and our claim is not excluding the possibility of a language evolving into something else.]
+**Many patterns in the Gang of Four catalogue are OOP scaffolding that is not needed in other programming languages.**
 
 This is another form of a claim made in a 1996 talk called *Design Patterns in Dynamic Programming*, by Peter Norvig. He worked through the Gang of Four book and reported this:
 
@@ -51,6 +50,8 @@ The sentence between the third excerpt and the fourth goes further than anything
 Which says the relationship runs both ways: what is a feature at one language level is a pattern at a weaker one, and the catalogue's contents are a function of where its authors were standing.
 
 **So Norvig's count is not a refutation of the catalogue. It is the catalogue's own prediction, measured.** Read that way the interesting patterns are not the sixteen that got simpler — those were promised — but the seven that did not, and the ones still load-bearing in designs and languages the book never addressed. Those reach past the scope their authors claimed, which is why the patterns that refuse to dissolve get as much room here as the ones that do.
+
+**Which patterns are in the many is a question with a procedure.** Build the same design in a language that supplies the feature, and look at what is left: either the apparatus goes and the design stays, or it doesn't. This chapter calls that the **translation test** — not standard vocabulary, and a name is worth having because the rest of the chapter is one long run of it: on Visitor, on Strategy, on the seven Norvig left out, and on the cases where it comes back negative.
 
 ---
 
@@ -262,29 +263,13 @@ Norvig's sixteen, with what makes each one invisible, and the seven he did not i
                            Memento, Prototype, Singleton
 ```
 
-The second group is the interesting one: nothing in the catalogue's stated assumptions accounts for it, and it is where this chapter's limits are found.
+The second group is the interesting one: nothing in the catalogue's stated assumptions accounts for it. The next section takes one of them.
 
 Two entries in the first group are worth a sentence each because their dissolution is so complete that the word has fallen out of use. **Iterator** is `for x in y` — Java got it in 2004, and almost nobody who writes that line knows they are invoking a pattern with a four-method interface behind it. **Command** is a closure: an operation plus the arguments it was going to be called with, packaged as a value you can store and invoke later, which is what a function literal capturing its surroundings already is.
 
----
+## What the feature cannot touch
 
-## Why the claim holds
-
-A pattern is a named design shape plus whatever apparatus the language makes you build to get it. The catalogue assumed a particular language level — Smalltalk and C++ as they stood in 1994 — so for the patterns in question, that apparatus is sized to what those languages could not express.
-
-That is the whole mechanism, and everything above is an instance of it. The Visitor's `accept` methods, the `Visitor` interface, and the callback protocol are three pieces of apparatus that exist only to produce an effect — dispatch on a value's type — that the language did not offer. When the language offers it, the apparatus has nothing to do. The effect was never the apparatus.
-
-Which is why the residue is visible in the names. **Apparatus built to simulate a feature has parts with no counterpart in the problem**: there is no `accept` in arithmetic, no `ConcreteStrategy` in shipping, no `visitNum` in an expression tree. Those names came from the pattern, and where the feature has arrived they are the last thing left of it.
-
-There is a reason the dissolving ones cluster. Look at the four that first-class functions handle: Command, Strategy, Template Method, Visitor. All four are the same underlying request — *let the caller supply behaviour* — differing only in when and how it is supplied. A language with function values answers all four with one feature, because there was only ever one question. The catalogue lists four patterns because in a language without function values, the four workarounds genuinely do look different.
-
----
-## Where the claim doesn't apply
-
-### The same language feature that dissolved Visitor leaves Composite standing
-[-- how is this related to our claim and how this is a case where the claim doesn't apply? Also isn't the point of this section banally obvious? Who said that a language feature sweeps many patterns, a feature makign a single pattern obsolete is the norm.]
-
-The clearest limit is visible in one file, because sum types dissolve one of these patterns and not the other.
+Sum types dissolved Visitor. In the same file, with the same feature available, they leave Composite exactly as it was — and the reason is the criterion that decides the whole question.
 
 ```java
 // Composite: a Directory holds Nodes, and is itself a Node.
@@ -331,12 +316,27 @@ func (d Directory) TotalBytes() int64 {
 
 Both print `6700` for the same tree. The dispatch mechanism changed completely between the two and the containment did not, because the containment is not a mechanism. Directories contain files. That is a fact about filesystems, and no language feature has anything to say about it — which is [chapter 12](12_patterns-that-survive-translation_us2k.md)'s category of patterns that answer the shape of the problem rather than a Force.
 
-So the test does not partition the catalogue into *real* and *fake*. [-- what's "the test"?] It separates the patterns whose substance is a language workaround from the patterns whose substance is a claim about the domain, and the second group is untouched by anything a compiler does.
+So the translation test does not partition the catalogue into *real* and *fake*. It separates the patterns whose substance is a language workaround from the patterns whose substance is a claim about the domain, and the second group is untouched by anything a compiler does. That is the line the seven fall on the far side of.
 
-### Decorator, where the test returns no
-[-- same, how this is a case where the claim doesn't apply? what's "the test"?]
+---
 
-Decorator is not one of Norvig's sixteen, and writing it both ways shows why.
+## Why the claim holds
+
+A pattern is a named design shape plus whatever apparatus the language makes you build to get it. The catalogue assumed a particular language level — Smalltalk and C++ as they stood in 1994 — so for the patterns in question, that apparatus is sized to what those languages could not express.
+
+That is the whole mechanism, and everything above is an instance of it. The Visitor's `accept` methods, the `Visitor` interface, and the callback protocol are three pieces of apparatus that exist only to produce an effect — dispatch on a value's type — that the language did not offer. When the language offers it, the apparatus has nothing to do. The effect was never the apparatus.
+
+Which is why the residue is visible in the names. **Apparatus built to simulate a feature has parts with no counterpart in the problem**: there is no `accept` in arithmetic, no `ConcreteStrategy` in shipping, no `visitNum` in an expression tree. Those names came from the pattern, and where the feature has arrived they are the last thing left of it.
+
+There is a reason the dissolving ones cluster. Look at the four that first-class functions handle: Command, Strategy, Template Method, Visitor. All four are the same underlying request — *let the caller supply behaviour* — differing only in when and how it is supplied. A language with function values answers all four with one feature, because there was only ever one question. The catalogue lists four patterns because in a language without function values, the four workarounds genuinely do look different.
+
+---
+
+## Where the claim doesn't apply
+
+### Dropping the scaffolding can cost more than keeping it
+
+The claim says the scaffolding is not needed where the feature exists. Decorator is the case where the feature exists, the scaffolding goes, and the result is **longer**. It is not one of Norvig's sixteen, and writing it both ways shows why.
 
 Decorator wraps something in another thing with the same interface, adds behaviour, and forwards the rest. Without function values, that is an interface and a struct per decoration holding the thing it wraps:
 
@@ -405,30 +405,19 @@ func (l loggingStore) Count() (int, error)                  { return l.inner.Cou
 
 Four forwarding methods that exist to be forwarded through. No language feature removes them, because they are not simulating anything — they are the price of the interface being five methods wide, which is a fact about the design rather than about the compiler. [Chapter 05](05_dependency-and-hiding_agjy.md) works through where that leaves you.
 
-Decorator therefore sits outside the claim from two directions at once, and Norvig's list was right to omit it.
+Decorator therefore sits outside the claim from two directions at once: the ceremony the claim expects to find is not there to remove, and what is there survives every feature you throw at it. Norvig's list was right to omit it.
 
-### Observer dissolves in one process and not across a machine
-[-- just wondering, is this a stretch if the chapter talks about the gang of four catalogue? If the pattern is a specific shape in OOP language, maybe the original shape was never about the distribution. Since our claim is about the gang of four, this sudden relaxation of the pattern might look unfair.]
+### *Not needed in other languages* is about a pair, not a pattern
 
-Norvig lists Observer as dissolved, and inside one process it is: a Go channel, a C# event, a callback list. The word adds nothing to `orders.Subscribe(handler)`.
+The claim's *other programming languages* is doing more work than it looks. *Visitor is a workaround for missing sum types* is a claim about a pair — that pattern, and a language that has sum types. It is not a property Visitor carries around, and the other language has to be a particular one.
 
-Move the observer to another machine and every part of that comes back, in a worse form. The notification can be lost, so somebody has to decide between at-least-once and at-most-once. It can arrive twice, so the handler needs to be idempotent. It can arrive out of order. The publisher now has to decide what happens when a subscriber is slow, and the answer is either unbounded buffering or dropping. None of these is a language question and no feature makes them go away — they are [chapter 08](08_distribution_49yh.md)'s material, arriving because the shape crossed a process boundary.
+This matters because the language you are actually in is not a free variable. If you are maintaining a Java 8 service, "Visitor is a workaround" is completely true and completely useless: the feature that would dissolve it does not exist in your compiler, so the workaround is the correct code and writing it is not a failure of taste. The test tells you where the boundary of your language is. It does not tell you to stand outside it.
 
-The lesson is about the test rather than about Observer. **The test is scoped, and running it at the wrong scope returns a confident wrong answer.** "Observer is just events" is true of the version that lives in one address space and false of the version that lives in two, and the sentence does not say which one it is talking about.
-
-### The test names the language you moved to, not the pattern
-[-- "the test" again, I'm not gonna dissect this, probably needs an update with the new claim]
-
-*Visitor is a workaround for missing sum types* is a claim about a pair — that pattern, and a language that has sum types. It is not a property Visitor carries around.
-
-This matters because the language you are actually in is not a free variable. If you are maintaining a Java 8 service, "Visitor is a workaround" is completely true and completely useless: the feature that would dissolve it does not exist in your compiler, so the workaround is the correct code and writing it is not a failure of taste. The audit tells you where the boundary of your language is. It does not tell you to stand outside it.
-
-The honest use of the test is diagnostic rather than prescriptive — it explains *why* a piece of your codebase is shaped the way it is, and it tells you what would happen to that shape if you moved. Neither is an instruction to delete anything.
+The honest use of the translation test is diagnostic rather than prescriptive — it explains *why* a piece of your codebase is shaped the way it is, and it tells you what would happen to that shape if you moved. Neither is an instruction to delete anything.
 
 ---
 
 ## What the claim costs
-[-- I wrote a similar tag on previous commits, it appears to me that you didn't act on that. I'm trying again, my reading so far shows that you didn't consider the implications of claim change properly. I read until here and pointed the issies with tags. Read the rest and try to find and fix the issues yourself.]
 
 **The failure modes do not vanish with the scaffold; they move to the feature.** The instinct is to say you have lost the pattern name and with it the literature on the pattern's failure modes. That is mostly wrong, because when the scaffold goes, the scaffold's own problems go with it — there is no wrapper class to drift out of sync with the interface it wraps if there is no wrapper class. What you inherit instead is the failure modes of the language feature, and those are usually more general and better documented.
 
@@ -457,7 +446,7 @@ The rule that survives is about size rather than about patterns: a policy of thr
 
 **Erasing the construction erases the announcement.** An interface named `ShippingPolicy` with two implementations tells the next person that variation was anticipated here, where to add the third, and what the contract is. A field typed `func(int) int64` says the same thing to somebody reading that line and nothing to somebody searching the repository for extension points, because there is no name to search for. This is not only a documentation cost — it is reuse and maintenance. A named type is what an IDE lists implementations of, what a reviewer greps for before changing a signature, and what stops a fourth policy being written from scratch somewhere else because nobody knew the first three existed. Keeping the policies in one named place, as above, recovers most of this; keeping nothing recovers none of it.
 
-**Running the audit as a cleanup is a category error.** The catalogue is a description of shapes that occurred ([Ch. 11](11_what-a-pattern-is-for_3xzc.md)). Finding that some entries were language workarounds is a fact about the languages of 1994, not a licence to remove those shapes from a codebase that still compiles with the compiler it has. The finding is worth having because it changes what you conclude when you meet the pattern, not because it generates work.
+**Running the test as a cleanup is a category error.** The catalogue is a description of shapes that occurred ([Ch. 11](11_what-a-pattern-is-for_3xzc.md)). Finding that some entries were language workarounds is a fact about the languages of 1994, not a licence to remove those shapes from a codebase that still compiles with the compiler it has. The finding is worth having because it changes what you conclude when you meet the pattern, not because it generates work.
 
 ---
 
