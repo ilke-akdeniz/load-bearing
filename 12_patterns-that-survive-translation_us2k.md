@@ -458,7 +458,7 @@ Two questions worth separating: why do these patterns last, and why does the gro
 
 **They last because a Force outlives a language.** Concurrency was a problem in 1970 and is a problem now. Data outlives code in COBOL and in Rust. Someone else always depends on your interface. A pattern answering one of those describes the shape of the problem rather than a gap in a toolchain — which is why it is still recognizable after being carried into a language its author never used. [Chapter 13](13_missing-language-features_esqm.md) takes the converse: a name that disappears when the language changes was answering the language, not the problem.
 
-**The grouping works because a pattern is a Force with a shape attached.** If two patterns answer the same Force, they are alternatives, and knowing the Force helps when considering the trade-offs. Sometimes force domintes the choice: Optimistic and pessimistic locking are not two techniques to learn; they are two answers to *how often do writers collide*, and the intensity of that Force picks one. Sometimes it only gives hints: [--a try to fill this example]
+**The grouping works because a pattern is a Force with a shape attached.** If two patterns answer the same Force, they are often alternatives, and knowing the Force helps when considering the trade-offs. Sometimes the Force dominates the choice: optimistic and pessimistic locking are not two techniques to learn; they are two answers to *how often do writers collide*, and the intensity of that Force picks one. Sometimes it only narrows the field: batching and cache-aside both answer *the round trips are costing too much*, and no reading of the latency budget chooses between them. What chooses is whether the same value is asked for over and over, or many different ones at once — a fact about the workload rather than about the budget, and one the Force never mentions.
 
 That is the practical use of the whole chapter. **Catalogues are organized by shape, so they let you look up what you already know the name of.** Grouping by Force lets you find the name from the situation, which is the direction you actually need.
 
@@ -478,15 +478,15 @@ That is a real gap in this chapter's method, not a defect in the patterns. [Chap
 
 Confusing the Forces, goals, and problem shapes in play is one way people end up applying machinery to a question they were not asking: reaching for an event-sourced log because durability sounds important, when what the domain actually has is a state machine; or adopting a testing technique because it is rigorous, rather than because anything about the situation called for it.
 
-### One Force, several answers, and no way to choose from here
+### Sorting is not choosing
 
-Knowing the Force narrows the field; it rarely closes it. *Writers collide* gives you optimistic locking, pessimistic locking, single-writer partitioning, and a serializable transaction, and choosing between them needs the Force's **intensity** — [chapter 03](03_forces_f4m5.md)'s dial — plus what you are willing to pay. 
+*Writers collide* gives you optimistic locking, pessimistic locking, single-writer partitioning, and a serializable transaction. Narrowing four to one needs the Force's **intensity** — [chapter 03](03_forces_f4m5.md)'s dial — and what you are willing to pay for it, and neither is written on the shelf the pattern came from.
 
-This chapter sorts. It does not decide. [Chapter 19](19_force-map-method_r37x.md) is the one that turns a set of Forces into a design. [-- if you can fill the example in --a this section could be removed as it will basically be a repetition.]
+This chapter sorts. It does not decide. [Chapter 19](19_force-map-method_r37x.md) is the one that turns a set of Forces into a design.
 
 ### The listed entries are not endorsements
 
-The one-line entries above place each pattern; they do not recommend it. Repository and Active Record are both listed, and they are alternatives with opposite trade-offs. CQRS is listed and is wrong for most systems that adopt it.
+The one-line entries above place each pattern; they do not recommend it. Optimistic and pessimistic offline locks are both listed, and they are alternatives with opposite trade-offs. CQRS is listed and is wrong for most systems that adopt it.
 
 Run [chapter 11](11_what-a-pattern-is-for_3xzc.md)'s tests before using any of them, and [chapter 03](03_forces_f4m5.md)'s Forces before believing the cost estimate. A list is a map of what exists, which is a different thing from a set of instructions.
 

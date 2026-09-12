@@ -6726,3 +6726,33 @@ That entry fixed two worked patterns per Force, as the answer to the author's ow
 Rather than go quietly uneven, *How to read this chapter* says why: the second half of that Force is locking, and chapter 07 works it through instead.
 That is more informative than the symmetry was, and the listed family already points the reader there.
 Rejected, after being offered: replacing it with copy-on-write. The author chose removal, and a chapter that has just cut a weak worked example is not the place to audition a new one.
+
+---
+
+## 167. The Force decides, or only narrows
+
+**Date.** 2026-09-11
+
+**Context.**
+The author reopened the sentence they had asked about and then reverted, in a narrower form: *"If two patterns answer the same Force, they are alternatives, and knowing the Force helps when considering the trade-offs. Sometimes force dominates the choice: [locking]. Sometimes it only gives hints: [-- try to fill this example]"*
+
+**This is the survey from decision 166 arriving at its useful size.** That pass found the strong version false in five of seven sections and answered it with seven closing paragraphs, which the author reverted as commentary. The same finding now costs two sentences in the place it belongs.
+
+**The example, and why this pair rather than another.**
+Batching and cache-aside, from the latency section. Both answer *the round trips are costing too much*; no reading of the budget chooses between them. What chooses is whether the same value is asked for repeatedly or many different ones at once — a fact about the workload, and one the Force never mentions.
+Considered and rejected: unit of work against an append-only log, which is the cleaner story until you notice the two are not alternatives at all and a reader may reasonably stop there.
+
+**The section the author offered to delete is compressed instead, and this is a disagreement worth recording.**
+Their note: *"if you can fill the example in --a this section could be removed as it will basically be a repetition."*
+Most of it is. What is not is the bound on the claim itself — the chapter says grouping by Force **tells you which one you need**, and the honest limit is that it often produces a shortlist instead. Deleting the subsection would leave the claim unbounded in the one section the rubric reserves for bounding it.
+So *One Force, several answers, and no way to choose from here* becomes **Sorting is not choosing**, keeping the four-way shortlist, intensity, price and the pointer to [chapter 19](../19_force-map-method_r37x.md), and dropping the sentence that the mechanism section now carries.
+
+**Found unasked, and it was wrong rather than unclear.**
+*"Repository and Active Record are both listed, and they are alternatives with opposite trade-offs."*
+Active Record is listed nowhere in the chapter — Repository appears once, under change frequency, and Active Record only in this sentence.
+The fix keeps the point and costs nothing: optimistic and pessimistic offline locks **are** both listed, in the concurrency family, and they are alternatives with opposite trade-offs.
+Adding Active Record as a fiftieth listed entry was the alternative, and it would have put the chapter's own count of forty-nine out of date in two places.
+
+**One word changed against the author's text, and it is flagged rather than absorbed.** *They are alternatives* became *they are often alternatives*, because the survey says five of the seven worked pairs are not: layers, independent questions, a sequence, one technique at two scopes, two sides of a boundary. The rest of their sentence stands.
+
+**Also proofread:** *domintes*, a mid-sentence capital after a colon in *Optimistic*, and a trailing space.

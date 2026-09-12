@@ -160,7 +160,7 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Team size relocates rules | us2k | This Force changes where a rule lives rather than what it is, so it produces few patterns of its own | cite |
 | Goal vs Force vs problem shape | us2k | Some patterns answer a goal and some answer the problem's shape, and neither sorts by Force; the test for a goal is whether you can decide to want less of it and stay honest | "the three kinds of input" |
 | The zero value is a hole in the pattern | us2k | Go gives every struct a zero value and no way to withhold it, so *make illegal states unrepresentable* reaches populated illegal states only; Rust and F# have no such fallback | "the zero-value hole" |
-| Same Force, several answers | us2k | The Force narrows the field; the intensity picks the answer, and 19 does the choosing | cite |
+| Same Force, several answers | us2k | Sometimes the Force decides — locking, where intensity picks one — and sometimes it only narrows, as with batching against cache-aside, where the workload picks and the budget cannot. 19 does the choosing either way | cite |
 | Survives-translation test | esqm | Build the same design where the feature exists; the construction disappears and the design does not | "the translation test" |
 | Norvig's count, with its qualifier | esqm | 16 of 23 "invisible **or simpler**", "for at least some uses" — and three levels, invisible/informal/formal, not two | cite; q5c6 owns dropped quantifiers |
 | Constructed vs given | esqm | A pattern is something you construct, a feature something you get; the tell is parts with no counterpart in the problem | "constructed, not given" |
