@@ -4,15 +4,17 @@
 
 **Some vocabulary arrives with its verdict attached, so accepting the word concedes the argument — and how much you have conceded depends on whether the word also names something you can go and check.**
 
-Part III has been about names. [Chapter 11](11_what-a-pattern-is-for_3xzc.md) asked what a name buys and answered in two tests, which it ran on `Manager` and `Helper` as readily as on Singleton — because the tests are about names, and patterns are only the richest supply of them. The two chapters since graded the catalogue's names against the Forces they answer, and against the language you write them in.
+Part III has been about patterns which are named shapes in essence. [Chapter 11's](11_what-a-pattern-is-for_3xzc.md) finding was that a name sits outside the five kinds: it picks out a shape, and a shape is not true or false. 
 
-This is the last thing a name can do. [Chapter 11](11_what-a-pattern-is-for_3xzc.md)'s finding was that a name sits outside the five kinds: it picks out a shape, and a shape is not true or false. Some names are built to break that — using one asserts something — and they do it while keeping a name's exemption from ever having to be defended. Pattern culture produces the densest supply of those too, which is why the chapter sits in this part; the mechanism is not confined to patterns, which is why its boundary cases come from outside.
+Some names defy that, using one asserts something. And they do it while keeping a name's exemption from ever having to be defended. 
+
+Pattern culture produces the densest supply of those names, but the mechanism is not confined to patterns.
 
 ## Two questions about any term
 
-[Chapter 11](11_what-a-pattern-is-for_3xzc.md) graded names on two independent properties and refused to put them on one line — a name can compress well and constrain nothing, and Facade is the case that proves it. The same discipline is needed here, because two different things are being asked and they come apart.
+[Chapter 11](11_what-a-pattern-is-for_3xzc.md) graded names on two independent properties and refused to put them on one line — a name can compress well and constrain nothing, and Facade is the case that proves it. A similar discipline is needed here, because two different things are being asked and they come apart.
 
-**Does the term pick out something in the code?** Something you could open the file and confirm or deny.
+**Does the term name a shape you can inspect in the code?** Something you could open the file and confirm or deny.
 
 **Does the term carry a verdict?** Something you would be agreeing with by using it.
 
@@ -31,25 +33,22 @@ Four combinations, and all four are occupied:
 
 **The bottom-left is easy to miss, because the words in it are not doing a technical job.** *Interesting approach.* *A lot of work has clearly gone into this.* They name no shape and pass no verdict, and that is their function rather than their failure — they are what gets said when a response is required and a position is not.
 
-Recognizing the cell is worth something, because of what a word from it tells you: **no design feedback was given.** Rewriting something because a senior reviewer called it interesting is acting on a statement that was never about the code. The check is the same one used everywhere else in this chapter — if you accept the word, what have you agreed is true? Here the answer is nothing, and that is the finding rather than a gap in the grid.
+Recognizing that cell is worth something, because of what a word from it tells you: **no design feedback was given.** Rewriting something because a senior reviewer called it interesting is acting on a statement that was never about the code. The check is the same one used everywhere else in this chapter — if you accept the word, what have you agreed is true? Here the answer is nothing, and that is the finding rather than a gap in the grid.
 
 **The top-right cell is this chapter's subject.** A term there names a shape *and* convicts it, which is the combination that does damage inside pattern vocabulary: you can check the shape, so the term looks like a description, and the verdict rides along unexamined.
 
 The bottom-right is a different failure, and reaching it means leaving the territory Part III has been about. Those terms name no shape, so there is nothing to open the file and check. The chapter deals with them at the end of the demonstration, where the crossing is marked.
 
-Two tests follow from the two questions, and they are worth keeping separate.
+Two tests follow from the two questions:
 
-**For the verdict.** Apply the term to your own code, then say the code is fine as it stands, and see whether the result means anything. *"This is a Transaction Script, and that is the right shape here"* means something. *"This is an anemic domain model, and that is correct here"* does not — *anemic* means sick, so the sentence argues with itself, and the word is unavailable to anyone who disagrees with it.
-
-**For the shape.** Ask what you would be agreeing is true about the code if you accepted the word. For *Decorator*, that is answerable: something wraps something else with the same interface. For *anemic*, it is answerable: behaviour is not on the entities. For *smell*, there is no answer, which is the whole of the bottom-right cell's problem.
-
-This grading is the book's own, and the axes are not standard vocabulary.
+- **For the verdict.** Apply the term to your own code, then say the code is fine as it stands, and see whether the result means anything. *"This is a Transaction Script, and that is the right shape here"* means something. *"This is an anemic domain model, and that is correct here"* does not — *anemic* means sick, so the sentence argues with itself, and the word is unavailable to anyone who disagrees with it.
+- **For the shape.** Ask what you would be agreeing is true about the code if you accepted the word. For *Decorator*, that is answerable: something wraps something else with the same interface. For *anemic*, it is answerable: behaviour is not on the entities. For *smell*, there is no answer, which is the whole of the bottom-right cell's problem.
 
 ---
 
 ## The same code, named twice
 
-Here is an invoice, in the style a great many working systems are built in. Plain data, functions that operate on it, and constraints in the database.
+Here is an invoice. Plain data, functions that operate on it, and constraints in the database.
 
 ```go
 // The whole type.
@@ -121,7 +120,7 @@ So the argument is: *if* you bought the machinery, use it. Applied to the invoic
 
 The term offers two positions: behaviour on the objects, or behaviour nowhere. The invoice above is in neither, and the reason it looks like the second is that the term has no name for the third.
 
-**Behaviour is not absent, it is placed** — and what decides the placement is **what the rule must see**: how much data you have to be looking at before you can tell whether a business rule holds. This is the author's formulation, developed while building FlowCore, and it is not standard vocabulary.
+**Behaviour is not absent, it is placed** — and what decides the placement is **what the rule must see**: how much data you have to be looking at before you can tell whether a business rule holds.
 
 Ask the question of any rule and it answers where the rule can live:
 
@@ -175,11 +174,11 @@ So the practical difference is not whether the word gets used. It is whether it 
 
 > This part has code smells, but I can't work out what would go wrong. Can you walk me through why you chose this shape?
 
-The first goes from hunch to conclusion in one step with nothing checkable in between, so the only moves available are deference and refusal, and seniority decides which. The second declares its own status — *I can't work out what would go wrong* — which keeps the hunch labelled, and then converts it into a request for the reasoning. That second question is the one [chapter 03](03_forces_f4m5.md) says should have been asked anyway: which Forces produced this shape.
+The first goes from hunch to conclusion in one step with nothing checkable in between, so the only moves available are deference and refusal, and seniority decides which. The second declares its own status — *I can't work out what would go wrong* — which keeps the hunch labelled, and then converts it into a request for the reasoning. 
 
-**A no-shape term is admissible when it is stated as the speaker's state and turned into a question.** Unmarked, it is a verdict with no subject, and there is no design discussion available until somebody supplies the missing shape.
+**A no-shape term is admissible when it is stated as the speaker's state.** Unmarked, it is a verdict with no subject, and there is no design discussion available until somebody supplies the missing shape.
 
-One consequence worth stating, because it inverts the ordering the rest of this chapter implies. Measured by *can you dissent*, the top-right is worse: *anemic* forbids the sentence that disagrees with it and *smell* does not. Measured by *is there anything here to check*, the bottom-right is worse: with *anemic* you can at least open the file, establish that behaviour is off the entities, and argue about whether that is a defect. With *smell* there is nothing to establish. Two axes give two orderings, and neither is the ordering.
+One consequence worth stating, because it inverts the ordering the rest of this chapter implies. Measured by *can you dissent*, the top-right is worse: *anemic* forbids the sentence that disagrees with it and *smell* does not. Measured by *is there anything here to check*, the bottom-right is worse: with *anemic* you can at least open the file, establish that behaviour is off the entities, and argue about whether that is a defect. With *smell* there is nothing to establish. Two axes give two orderings.
 
 ---
 
@@ -187,13 +186,12 @@ One consequence worth stating, because it inverts the ordering the rest of this 
 
 A word does two jobs at once: it picks out a thing, and it comes with a stance. Most technical vocabulary keeps the second job near zero. *Hash table*, *mutex*, *idempotent*, *Transaction Script* — each names something and asserts nothing about whether you should want it.
 
-A verdict noun bundles them, and the bundling is what makes it hard to answer. To disagree you first have to refuse the word, and refusing a word looks like evasion. **The cost of the term is borne by whoever is right and did not pick the vocabulary.**
+A verdict noun bundles them, and the bundling is what makes it hard to answer. To disagree you first have to refuse the word, and refusing a word looks like evasion. **The cost of the verdict is borne by whoever did not pick the vocabulary.**
 
-Two properties follow, and they are why this is worth a chapter rather than a complaint.
+Two properties follow:
 
-**It is not a claim, so it never has to be defended.** [Chapter 11](11_what-a-pattern-is-for_3xzc.md)'s point is that names sit outside the five kinds — they are not true or false. A verdict noun exploits that: it does the work of a claim while keeping a name's exemption. Nobody has to state the condition, because on the surface nothing has been asserted.
-
-**It compresses well, which is why it spreads.** Run [chapter 11](11_what-a-pattern-is-for_3xzc.md)'s first test on it and *anemic domain model* passes easily — three words standing in for a paragraph. It is a good name by that measure. That is the uncomfortable part: the terms that travel furthest are the ones that compress best, and compressing well is what got this one into every code review it appears in ([Ch. 15](15_principle-loses-scope_b86v.md)).
+- **It is not a claim, so it never has to be defended.** [Chapter 11](11_what-a-pattern-is-for_3xzc.md)'s point is that names sit outside the five kinds — they are not true or false. A verdict noun exploits that: it does the work of a claim while keeping a name's exemption. Nobody has to state the condition, because on the surface nothing has been asserted.
+- **It compresses well, which is why it spreads.** Run [chapter 11](11_what-a-pattern-is-for_3xzc.md)'s first test on it and *anemic domain model* passes easily — three words standing in for a paragraph. It is a good name by that measure. That is the uncomfortable part: the terms that travel furthest are the ones that compress best, and compressing well is what got this one into every code review it appears in ([Ch. 15](15_principle-loses-scope_b86v.md)).
 
 ---
 
