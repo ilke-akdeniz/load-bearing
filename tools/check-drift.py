@@ -178,6 +178,19 @@ for n, line in enumerate(read("docs/LEDGER.md").split("\n"), 1):
             fail("ledger id", f"docs/LEDGER.md:{n} is owned by '{owner}', "
                               f"which is not a chapter id")
 
+# 5c-bis. The ledger names chapters by id, never by number. A number there
+#     is silent drift: it survives a renumbering pointing at the wrong
+#     chapter, and checks 5b and 5f cannot see this form. Two were wrong
+#     when this was written, one of them a fossil of a numbering two
+#     renumbers old.
+checked += 1
+LEDGER_NUM = re.compile(r"(?<![\w.$/(-])(\d{1,2})(?:'s\b| (?:owns?|does|hands|says|maps|puts|lists|cites|adds|covers|grades|carries)\b)")
+for n, line in enumerate(read("docs/LEDGER.md").split("\n"), 1):
+    for m in LEDGER_NUM.finditer(line):
+        fail("ledger number", f"docs/LEDGER.md:{n} refers to a chapter as "
+                              f"'{m.group(0)}'; the ledger uses the four-character id, "
+                              f"which a renumbering cannot break")
+
 # 5d. A markdown link to a chapter must resolve, and if its text names a
 #     chapter number that number must match the file it points at.
 checked += 1

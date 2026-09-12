@@ -6909,3 +6909,26 @@ That pass rewrote every markdown link in one sweep. The ledger contains no links
 - Row 287: ***14's** repair is to go back to the source and rebuild the scope* — that is [chapter 15](../15_principle-loses-scope_b86v.md), and the very next row, on the same subject and by the same owner, already says *15 hands it over*.
 
 The other fourteen are correct. **The lesson is that `LEDGER.md` needs the same sweep as the chapters whenever numbering moves**, and it is the one working document where a wrong number is silent — `tools/check-drift.py` validates the four-character owner ids and cannot see a number in prose.
+
+---
+
+## 173. The ledger names chapters by id, and a check now enforces it
+
+**Date.** 2026-09-12
+
+**Context.** Decision 172 found two wrong chapter numbers in `docs/LEDGER.md` and noted the file had never been swept, since decision 165's renumber rewrote markdown links and the ledger contains none. The author asked for the sweep.
+
+**The sweep.** Every one- and two-digit number in `docs/LEDGER.md`, `docs/ABOUT.md`, `docs/STATUS.md` and `docs/pending-tasks/` — 86 candidates — read in context and sorted into chapter references and everything else: FlowCore decision numbers, this book's own decision numbers, pattern counts, measurements, `split(8.03, 3)`, a team of 20.
+Twenty-one were chapter references. The two already fixed were the only wrong ones, so the file is now correct.
+
+**Being correct was not the finding.** `tools/check-drift.py` cannot see this class at all. Check 5b validates `Ch. NN`, `chapters NN`, `cite NN` and `NN owns`; check 5f rejects bare references in chapters. The ledger's commonest form — `15's mechanism`, `19 does the choosing`, `21 puts the same decision` — matches none of them, so a wrong number there is silent in a file whose whole job is to be consulted before drafting.
+One of the two was a fossil from a numbering two renumbers old, which is how long it can sit.
+
+**Decision: delete the class rather than police it.**
+The ledger already refers to chapters by their four-character id throughout — `4jk6 owns what folders cost`, `cjx4 owns the demonstration`, `b86v owns why the qualifier is the part that goes` — in the owner column and in prose both. Ids are what the book invented for exactly this: a number moves, an id does not.
+So the twenty remaining number references are now ids, and a new check rejects the form outright. It was verified by reintroducing the fossil and watching it fail.
+`CLAUDE.md` records the rule where the ledger is described.
+
+**This is the same move the contents page got**, recorded in that file already: a wrong entry is now a failing check rather than something a reader has to notice.
+
+**Not extended to `docs/DECISIONS.md`**, which decision 165 date-stamped instead and which is exempt from sweeps by design — an entry describes the numbering in force when it was written.

@@ -58,7 +58,7 @@ Read these before writing anything.
 - `README.md` — premise, the model, the chapter rubric, conventions, license. The landing page.
 - `00_toc.md` — the contents page: twenty-four chapters in five parts, each a number, a title and a link, and nothing else.
 - `docs/STATUS.md` — which chapter is at which status. Update it when a status changes.
-- `docs/LEDGER.md` — **concept and example ownership.** Which chapter owns which idea. Non-optional; see the protocol below.
+- `docs/LEDGER.md` — **concept and example ownership.** Which chapter owns which idea. Non-optional; see the protocol below. It names chapters by their four-character id and never by number, in the owner column and in the prose alike, because a number there is silent when the book renumbers.
 - `docs/DECISIONS.md` — editorial decisions, with reasoning and the options that lost. Consult before reversing anything.
 
 If a change contradicts `docs/DECISIONS.md`, stop and say so rather than proceeding.
