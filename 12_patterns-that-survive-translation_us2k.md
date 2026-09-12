@@ -4,13 +4,13 @@
 
 **The patterns that last are answers to Forces, or answers to the shape of the problem. Grouping patterns by the Force they answer tells you which one you need, where a catalogue organized by pattern shape cannot.**
 
-The claim has two halves, and the second is the practical one. A catalogue is arranged by what patterns look like, so it can only be searched by a name you already have. Arranged by Force, the same material can be searched from the situation, which is the direction you are actually travelling.
+A catalogue is arranged by what patterns look like, so it can only be searched by a name you already have. Arranged by Force, the same material can be searched from the situation, which is the direction you are actually travelling.
 
-So this chapter sorts the field against [chapter 03](03_forces_f4m5.md)'s seven Forces, in [chapter 03](03_forces_f4m5.md)'s order. Forty-nine patterns fall into them, and a handful answer the shape of the problem instead — a state machine is right when the domain has states, which is a fact about the business rather than about your circumstances. What is left over after both is the interesting residue, and it is dealt with in the boundary section.
+This chapter sorts the field against [chapter 03](03_forces_f4m5.md)'s seven Forces. Forty-nine patterns fall into them, and a handful answer the shape of the problem instead — a state machine is right when the domain has states, which is a fact about the business rather than about your circumstances. What is left over after both is the interesting residue, and it is dealt with in the boundary section.
 
 ## How to read this chapter
 
-Two kinds of pattern entry, and the difference matters.
+There are two kinds of pattern entry.
 
 **Worked patterns** — two per Force, with code, the constraint the pattern imposes, and what it costs. These carry the argument.
 
@@ -20,8 +20,6 @@ Each worked pattern carries two labelled lines, and they answer different questi
 
 - ***The constraint*** — what the pattern **forbids** once you adopt it. This is [chapter 11](11_what-a-pattern-is-for_3xzc.md)'s second test applied: a name that rules nothing out carries no information, so a pattern with no constraint is not a pattern. It is not a list of prerequisites; it is what you may no longer do.
 - ***The cost*** — what you pay for the constraint, in work, in performance, or in something you can no longer see.
-
-Patterns another chapter owns appear with a pointer instead of a definition.
 
 ---
 
@@ -58,7 +56,7 @@ func (o *Order) AddLine(sku string, quantity int) error {
 
 *The cost:* draw the boundary too large and every operation contends on one row; too small and invariants leak out to the caller, where they cannot be enforced at all.
 
-**It answers the first question only, and this is worth being exact about.** Two requests that both load order 42, both check the credit limit, and both add a line will both succeed — the aggregate did not stop them, and nothing in the pattern claims it would. That is [chapter 07](07_time_mdbn.md)'s lost update, and it needs a mechanism: a version column that refuses the stale writer, or a lock held across the read and the write.
+**Aggregate only answers the first question: What has to change together.** Two requests that both load order 42, both check the credit limit, and both add a line will both succeed — the aggregate did not stop them, and nothing in the pattern claims it would. That is [chapter 07](07_time_mdbn.md)'s lost update, and it needs a mechanism: a version column that refuses the stale writer, or a lock held across the read and the write.
 
 What the aggregate contributes is the thing that mechanism needs. It says **order 42 and its lines are one unit**, so there is exactly one row to version and one boundary to lock. Without it you are left asking which of eleven tables to lock and in what order, which is how deadlocks are made.
 
@@ -95,6 +93,14 @@ billing, err := identityMap.Order(ctx, orderID) // no second query
 shipping.AddLine(1000)
 billing.Total() // 3500 — includes the line shipping just added
 ```
+[-- I can't make up my mind, is this code example realistic or a made up artificial example? Most of the code I dealt with would simply do something like this: 
+
+order = repo.GetOrder(orderId)
+order.AddLine(1000)
+order.Total()
+
+I don't see how your example is any useful over this...
+]
 
 One round trip, and no way for the two to disagree about what order 42 currently is.
 
@@ -396,6 +402,7 @@ At one millisecond per round trip:
 if value, ok := cache.Get(key); ok {
 	return value
 }
+
 value := source.Get(key)
 cache.Set(key, value, ttl)
 ```
@@ -497,7 +504,7 @@ Two questions worth separating: why do these patterns last, and why does the gro
 
 **They last because a Force outlives a language.** Concurrency was a problem in 1970 and is a problem now. Data outlives code in COBOL and in Rust. Someone else always depends on your interface. A pattern answering one of those describes the shape of the problem rather than a gap in a toolchain — which is why it is still recognizable after being carried into a language its author never used. [Chapter 13](13_missing-language-features_esqm.md) takes the converse: a name that disappears when the language changes was answering the language, not the problem.
 
-**The grouping works because a pattern is a Force with a shape attached.** If two patterns answer the same Force, they are alternatives, and knowing the Force tells you which question you are choosing between. Optimistic and pessimistic locking are not two techniques to learn; they are two answers to *how often do writers collide*, and the intensity of that Force picks one.
+**The grouping works because a pattern is a Force with a shape attached.** If two patterns answer the same Force, they are alternatives, and knowing the Force tells you which question you are choosing between. Optimistic and pessimistic locking are not two techniques to learn; they are two answers to *how often do writers collide*, and the intensity of that Force picks one. [--a this could be the best part of the chapter so far, is it possible to expand this more for other forces the same way and maybe distribute this insight into each section rather then keep it at the bottom here?]
 
 That is the practical use of the whole chapter. **Catalogues are organized by shape, so they let you look up what you already know the name of.** Grouping by Force lets you find the name from the situation, which is the direction you actually need.
 
@@ -515,11 +522,11 @@ That is a real gap in this chapter's method, not a defect in the patterns. [Chap
 
 **Some answer what the problem is rather than what the situation is.** A state machine is the right shape when the domain genuinely has states and transitions — an order that is placed, then paid, then shipped. That is a fact about the business, not about your concurrency or your latency budget. The same goes for Transaction Script, which [chapter 11](11_what-a-pattern-is-for_3xzc.md) uses as its compression example: it is what you write when *no* Force is pushing you anywhere else, and it is right far more often than its reputation suggests.
 
-Confusing the Forces, goals, and problem shapes in play is one way people end up applying machinery to a question they were not asking: reaching for an event-sourced log because durability sounds important, when what the domain actually has is a state machine; or adopting a testing technique because it is rigorous, rather than because anything about the situation called for it.
+Confusing the Forces, goals, and problem shapes in play is one way people end up applying machinery to a question they were not asking: reaching for an event-sourced log because durability sounds important, when what the domain actually has is a state machine; or adopting a testing technique because it is rigorous, rather than because anything about the situation called for it. [-- this paragraph is also very important and could deserve an expantion and better placement in the chaper]
 
 ### One Force, several answers, and no way to choose from here
 
-Knowing the Force narrows the field; it rarely closes it. *Writers collide* gives you optimistic locking, pessimistic locking, single-writer partitioning, and a serializable transaction, and choosing between them needs the Force's **intensity** — [chapter 03](03_forces_f4m5.md)'s dial — plus what you are willing to pay.
+Knowing the Force narrows the field; it rarely closes it. *Writers collide* gives you optimistic locking, pessimistic locking, single-writer partitioning, and a serializable transaction, and choosing between them needs the Force's **intensity** — [chapter 03](03_forces_f4m5.md)'s dial — plus what you are willing to pay. [-- this looks like a repetition of --a ]
 
 This chapter sorts. It does not decide. [Chapter 19](19_force-map-method_r37x.md) is the one that turns a set of Forces into a design.
 
