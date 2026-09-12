@@ -51,7 +51,7 @@ Which says the relationship runs both ways: what is a feature at one language le
 
 **So Norvig's count is not a refutation of the catalogue. It is the catalogue's own prediction, measured.** Read that way the interesting patterns are not the sixteen that got simpler — those were promised — but the seven that did not, and the ones still load-bearing in designs and languages the book never addressed. Those reach past the scope their authors claimed, which is why the patterns that refuse to dissolve get as much room here as the ones that do.
 
-**Which patterns are OOP scaffolding is a question with a procedure.** Build the same design in a language that supplies the feature, and look at what is left: either the apparatus goes and the design stays, or it doesn't. This chapter calls that the **translation test**
+**Which patterns are OOP scaffolding is a question with a procedure.** Build the same design in a language that supplies the feature, and look at what is left: either the apparatus goes and the design stays, or it doesn't. This chapter calls that the **translation test** — the book's name for it, not a standard one.
 
 ---
 
@@ -316,8 +316,6 @@ func (d Directory) TotalBytes() int64 {
 
 Both print `6700` for the same tree. The dispatch mechanism changed completely between the two and the containment did not, because the containment is not a mechanism. Directories contain files. That is a fact about filesystems, and no language feature has anything to say about it — which is [chapter 12](12_patterns-that-survive-translation_us2k.md)'s category of patterns that answer the shape of the problem rather than a Force.
 
-So the translation test does not partition the catalogue into *real* and *fake*. It separates the patterns whose substance is a language workaround from the patterns whose substance is a claim about the domain, and the second group is untouched by anything a compiler does. That is the line the seven fall on the far side of. [-- would just remove this. It doesn't separate workaround vs domain either: What if the translation you made preserves the scaffold because the other language also doesn't have the feature? Unless you can turn this paragraph into a very solid version just remove it.]
-
 ---
 
 ## Why the claim holds
@@ -476,7 +474,7 @@ The same reading applies in reverse to advice you receive. A blog post recommend
 
 And *language* here does not have to mean a different one. Visitor changed status between two releases of Java, so the version you compile with is part of the answer — a design document naming Java and not naming the version has answered half the question.
 
-[Chapter 14](14_smuggled-verdicts_8y69.md) turns from names that describe a shape to names that arrive with a verdict already attached — vocabulary like *anemic domain model*, where accepting the word concedes the conclusion.
+[Chapter 14](14_smuggled-verdicts_8y69.md) turns from names that describe a shape to names that arrive with a verdict already attached — vocabulary like *anemic domain model*, and what it costs to let one into an argument.
 
 ---
 

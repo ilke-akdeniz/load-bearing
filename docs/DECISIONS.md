@@ -6824,3 +6824,31 @@ Accepted. The chapter already makes that argument in its closing section, so the
 Two repairs were kept and are not defensive: *patterns … is* did not agree, and *not needed on other programming languages* wanted *in*.
 
 **Also fixed, found while re-reading rather than tagged:** a divider with no blank line after it, and a forward reference promising that the seven are *where this chapter's limits are found*, which stopped being true when Composite moved out of the limits.
+
+---
+
+## 170. A paragraph removed rather than rescued, and a count the renumber could not see
+
+**Date.** 2026-09-12
+
+**The author's objection, which was a defect and not a preference.**
+On *"the translation test … separates the patterns whose substance is a language workaround from the patterns whose substance is a claim about the domain"*: **"It doesn't separate workaround vs domain either: What if the translation you made preserves the scaffold because the other language also doesn't have the feature? Unless you can turn this paragraph into a very solid version just remove it."**
+
+They are right, and the chapter refutes the sentence two sections later: Visitor in Java 8 keeps its apparatus, and not because containment is a domain fact.
+A negative result has two causes — the pattern's substance is domain-shaped, or the target language is missing the feature too — and the paragraph claimed one of them.
+
+**Removed rather than made solid**, which was the draft's judgement against its own instinct to save it. A solid version exists — *a negative result means either of two things, and which one depends on the language you picked* — but that is what the boundary subsection *"Not needed in other languages" is about a pair, not a pattern* already works through at length. Rescuing the paragraph would have bought a second statement of it before the first.
+What the paragraph was guarding against, the reading that the test judges patterns, is still covered in the costs section: running it as a cleanup is a category error.
+
+**The author's own trim left two things behind.**
+*"This chapter calls that the **translation test**"* lost its full stop, and with the rest of the sentence went the marker the book requires for its own vocabulary — a reader who searches for the term should know it is not standard. Restored in eleven words rather than the original thirty.
+
+**The handoff was still stating the next chapter's claim.**
+The author cut its second half — *how much that costs depends on whether the word also names something you can go and check* — which is verbatim the qualifier in [chapter 14](../14_smuggled-verdicts_8y69.md)'s claim. Correct cut, and the half that remained, *accepting the word concedes the conclusion*, is the claim's first clause. Both halves were the claim. It now names the subject and stops: *what it costs to let one into an argument*.
+
+**A count stranded by the deleted chapter, which no check could catch.**
+[Chapter 14](../14_smuggled-verdicts_8y69.md):7 read: *"The three chapters since graded the catalogue's names against ownership, against Forces, and against the language you write them in."*
+**Ownership was the deleted chapter's axis.** The sentence names no chapter and carries no link, so the renumber pass could not see it and `tools/check-drift.py` cannot either — it is the global drift the sweep exists for, found only because the handoff at the other end of the same seam was being read.
+Now two chapters, against Forces and against language.
+
+This is the second stranded reference to a cut chapter found by reading rather than by tooling; the first was [chapter 13](../13_missing-language-features_esqm.md):393's boundary attribution. Both sat in prose that mentions no chapter by number.

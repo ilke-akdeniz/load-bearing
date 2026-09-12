@@ -4,7 +4,7 @@
 
 **Some vocabulary arrives with its verdict attached, so accepting the word concedes the argument — and how much you have conceded depends on whether the word also names something you can go and check.**
 
-Part III has been about names. [Chapter 11](11_what-a-pattern-is-for_3xzc.md) asked what a name buys and answered in two tests, which it ran on `Manager` and `Helper` as readily as on Singleton — because the tests are about names, and patterns are only the richest supply of them. The three chapters since graded the catalogue's names against ownership, against Forces, and against the language you write them in.
+Part III has been about names. [Chapter 11](11_what-a-pattern-is-for_3xzc.md) asked what a name buys and answered in two tests, which it ran on `Manager` and `Helper` as readily as on Singleton — because the tests are about names, and patterns are only the richest supply of them. The two chapters since graded the catalogue's names against the Forces they answer, and against the language you write them in.
 
 This is the last thing a name can do. [Chapter 11](11_what-a-pattern-is-for_3xzc.md)'s finding was that a name sits outside the five kinds: it picks out a shape, and a shape is not true or false. Some names are built to break that — using one asserts something — and they do it while keeping a name's exemption from ever having to be defended. Pattern culture produces the densest supply of those too, which is why the chapter sits in this part; the mechanism is not confined to patterns, which is why its boundary cases come from outside.
 
