@@ -24,7 +24,8 @@ Four combinations, and all four are occupied:
                     no verdict              carries a verdict
  -----------------  ----------------------  --------------------
  names a shape      Decorator               anemic domain model
- you can inspect    Transaction Script      SQL injection
+ you can inspect    Transaction Script      god object
+                                            SQL injection
 
  names no shape     "interesting approach"  code smell
  nothing to check   "a lot of work in this" anti-pattern
@@ -42,7 +43,7 @@ The bottom-right is a different failure, and reaching it means leaving the terri
 Two tests follow from the two questions:
 
 - **For the verdict.** Apply the term to your own code, then say the code is fine as it stands, and see whether the result means anything. *"This is a Transaction Script, and that is the right shape here"* means something. *"This is an anemic domain model, and that is correct here"* does not — *anemic* means sick, so the sentence argues with itself, and the word is unavailable to anyone who disagrees with it.
-- **For the shape.** Ask what you would be agreeing is true about the code if you accepted the word. For *Decorator*, that is answerable: something wraps something else with the same interface. For *anemic*, it is answerable: behaviour is not on the entities. For *smell*, there is no answer, which is the whole of the bottom-right cell's problem.
+- **For the shape.** Ask what you would be agreeing is true about the code if you accepted the word. For *Decorator*, that is answerable: something wraps something else with the same interface. For *god object*, it is answerable: one type that most of the system depends on. For *smell*, there is no answer, which is the whole of the bottom-right cell's problem.
 
 ---
 
@@ -191,6 +192,8 @@ A verdict noun bundles them, and the bundling is what makes it hard to answer. T
 Two properties follow:
 
 - **It is not a claim, so it never has to be defended.** [Chapter 11](11_what-a-pattern-is-for_3xzc.md)'s point is that names sit outside the five kinds — they are not true or false. A verdict noun exploits that: it does the work of a claim while keeping a name's exemption. Nobody has to state the condition, because on the surface nothing has been asserted.
+
+  *God object* is the cleanest case, because this book has written the missing condition down. The noun convicts a type that most of the system depends on. [Chapter 20](20_six-profiles_dnkz.md) works through a compiler, where the abstract syntax tree is read by the type checker, the optimizer, the code generator, the formatter and the language server — and being depended on by everything is exactly right, because the tree is the stable thing at the bottom of the graph ([Ch. 05](05_dependency-and-hiding_agjy.md)). The condition on *avoid god objects* is that the type is still moving. The noun does not carry it, and nobody using the noun has to.
 - **It compresses well, which is why it spreads.** Run [chapter 11](11_what-a-pattern-is-for_3xzc.md)'s first test on it and *anemic domain model* passes easily — three words standing in for a paragraph. It is a good name by that measure. That is the uncomfortable part: the terms that travel furthest are the ones that compress best, and compressing well is what got this one into every code review it appears in ([Ch. 15](15_principle-loses-scope_b86v.md)).
 
 ---
@@ -247,7 +250,7 @@ Two consequences. **The tests measure a term in a community at a time**, so runn
 
 **In a codebase and its documents:**
 
-- **A review comment naming a defect with no statement of what breaks.** "This is anemic," "this smells," "this is not clean" — none of which say what goes wrong or under what conditions.
+- **A review comment naming a defect with no statement of what breaks.** "This is a god object," "this smells," "this is not clean" — none of which say what goes wrong or under what conditions.
 - **An architecture decision record whose rationale is a diagnosis.** *We rejected X because it produced an anemic model* records the verdict and not the reasoning, so nobody can revisit it when the Forces change.
 - **A style guide with a banned-shapes list and no conditions attached.** The shapes are usually right and the missing conditions are what somebody needed.
 - **A term whose opposite has no name.** *Anemic* has no antonym in use — nobody says a model is *robust* as a technical classification — which is a sign the word exists to fail things rather than to sort them.

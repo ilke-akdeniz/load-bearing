@@ -178,6 +178,7 @@ If a concept is already owned, the new chapter gets one line and a cross-referen
 | Two axes, not one ladder | 8y69 | Does the term pick out something inspectable, and does it carry a verdict — independent questions giving four occupied cells | "the two axes" |
 | Neither shape nor verdict | 8y69 | *Interesting approach* names nothing and asserts nothing, which is its function; a word from that cell means no design feedback was given | cite |
 | Shape-plus-verdict is the damaging cell | 8y69 | The shape is checkable so the term reads as description, and the verdict rides along unexamined; this is the pattern-vocabulary case | cite |
+| *God object* as the cleanest concealed condition | 8y69 | The noun convicts a type most of the system depends on; dnkz's compiler is the case where that is exactly right, so the condition on *avoid god objects* is that the type is still moving — and the noun does not carry it | cite |
 | A no-shape term reports the reader | 8y69 | *This smells* is evidence about the reader's pattern-matching rather than a property of the file, and cjx4's classification test has nothing to grip | "no shape to check" |
 | Marking a hunch makes it usable | 8y69 | Stated as the speaker's state, a hunch is admissible; the worked version also converts it into a question about why this shape. Unmarked it is a verdict with no subject | cite |
 | Two axes give two orderings | 8y69 | By *can you dissent* the shape-plus-verdict cell is worse; by *is there anything to check* the no-shape cell is worse, and neither is the ordering | cite |

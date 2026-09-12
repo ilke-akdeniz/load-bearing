@@ -96,7 +96,7 @@ status_t read_sample(sensor_t *sensor, uint16_t *out) {
 
 The Force is the shape of change. A compiler's abstract syntax tree — the tree of nodes representing the parsed program — is read by the type checker, the optimizer, the code generator, the formatter and the language server. Every one of them depends on it.
 
-**What inverts: nothing should be depended on by everything.** In most systems, a type with that many dependents is the god object [chapter 11](11_what-a-pattern-is-for_3xzc.md) warns about, and the advice to break it up is correct. Here it is exactly right that everything depends on the AST, and breaking it up produces a translation layer per consumer for no gain.
+**What inverts: nothing should be depended on by everything.** In most systems, a type with that many dependents is the god object [chapter 14](14_smuggled-verdicts_8y69.md) grades, and the advice to break it up is correct. Here it is exactly right that everything depends on the AST, and breaking it up produces a translation layer per consumer for no gain.
 
 The reason is [chapter 05](05_dependency-and-hiding_agjy.md)'s, applied to a shape it already names: the dependency graph is a pipeline, not a stack of layers, and the AST is at the bottom of it — depended on by many, depending on nothing. That is the *stable* position, which is what "depend on abstractions" was pointing at all along ([Ch. 18](18_abstraction-as-insurance_4jk6.md)). An AST is concrete, has no interface, and is one of the most stable types in the system. [Chapter 05](05_dependency-and-hiding_agjy.md) makes the same point about a parser's mutually recursive node types being nobody's idea of a violation.
 

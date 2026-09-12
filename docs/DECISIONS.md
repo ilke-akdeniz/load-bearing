@@ -6932,3 +6932,30 @@ So the twenty remaining number references are now ids, and a new check rejects t
 **This is the same move the contents page got**, recorded in that file already: a wrong entry is now a failing check rather than something a reader has to notice.
 
 **Not extended to `docs/DECISIONS.md`**, which decision 165 date-stamped instead and which is exempt from sweeps by design — an entry describes the numbering in force when it was written.
+
+---
+
+## 174. A second smuggled verdict, and the three that did not qualify
+
+**Date.** 2026-09-12
+
+**Context.** The author: *"'anemic domain model' is overused in the chapter. Try to find at least one more smuggled verdict that can replace some that usage. If you can't find, dont try to replace with meh smuggled verdicts but that also could mean a more serious problem about the chapter."*
+Nineteen uses in one chapter, which is the whole of its top-right cell carried by a single term.
+
+**Candidates were run against the chapter's own two tests** — does it name a shape you can open the file and check, and does *"and that is correct here"* argue with itself — rather than chosen by how familiar they sound.
+
+Failed the shape test, so they belong in the bottom-right cell the chapter already has: *spaghetti code*, *big ball of mud*, *over-engineering*.
+Failed the verdict test, so they are top-left descriptions: *tight coupling*, which [chapter 06](../06_layering_p2vk.md) and [chapter 10](../10_organization_rjf9.md) both argue is sometimes correct; *magic number*, where *that is fine here* is an ordinary sentence; *dead code*, where nobody disagrees.
+Passed both but rejected on other grounds: *distributed monolith*, whose shape is a property of the release process rather than of a file, which is the axis this chapter uses; *stringly typed*, whose register is wrong for the book; *primitive obsession*, which is Fowler again, in the same pathology metaphor, and would have read as one example rather than two.
+
+**So the cell is not thin, and the chapter has no deeper problem** — which was the author's other hypothesis and the more serious one. Four terms pass both tests on inspection.
+
+**Chosen: *god object*.**
+Its shape is checkable in the file — one type that most of the system depends on — and the pejorative is in the noun.
+What decided it over the others is that **the book has already written down the condition the noun conceals.** [Chapter 20](../20_six-profiles_dnkz.md) works through a compiler whose abstract syntax tree is read by five subsystems, and being depended on by everything is exactly right there, for [chapter 05](../05_dependency-and-hiding_agjy.md)'s reason: it is the stable thing at the bottom of the graph. So the condition on *avoid god objects* is that the type is still moving, the noun does not carry it, and the chapter can demonstrate that from material it already owns instead of reading a new source.
+
+**Honest about where it is weaker than *anemic*.** *Anemic* means sick, so the sentence that disagrees with it cannot be said at all. *God object* mocks rather than diagnoses, and dissent is available — [chapter 20](../20_six-profiles_dnkz.md) manages it by endorsing the shape while declining the label. It is a member of the cell, not an equal of the worked case, and it is used for range rather than as a second demonstration.
+
+**Placed in four spots**, taking *anemic* from nineteen uses to seventeen: the grid's top-right cell, the shape test, the recognition list, and a new paragraph under *it is not a claim, so it never has to be defended*, which is where the concealed condition belongs.
+
+**A wrong cross-reference found on the way.** [Chapter 20](../20_six-profiles_dnkz.md):99 called it *"the god object [chapter 11](../11_what-a-pattern-is-for_3xzc.md) warns about"*. [Chapter 11](../11_what-a-pattern-is-for_3xzc.md) does not mention god objects and does not warn about anything of the kind — the fan-in argument is [chapter 05](../05_dependency-and-hiding_agjy.md)'s, which the next paragraph of 20 already cites correctly. It now points at [chapter 14](../14_smuggled-verdicts_8y69.md), which is where the term is now graded.
