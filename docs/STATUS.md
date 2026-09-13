@@ -26,7 +26,7 @@ Only the author moves a chapter to **draft** or **ready**.
 | 12 | `12_patterns-that-survive-translation_us2k.md` | **draft** | 2026-09-11 |
 | 13 | `13_missing-language-features_esqm.md` | **draft** | 2026-09-12 |
 | 14 | `14_smuggled-verdicts_8y69.md` | **draft** | 2026-09-12 |
-| 15 | `15_principle-loses-scope_b86v.md` | **draft** | — |
+| 15 | `15_principle-loses-scope_b86v.md` | **draft** | 2026-09-13 |
 | 16 | `16_behaviour-placement_z47a.md` | **draft** | — |
 | 17 | `17_tdd-and-mocks_u8eu.md` | **draft** | — |
 | 18 | `18_abstraction-as-insurance_4jk6.md` | **draft** | — |
