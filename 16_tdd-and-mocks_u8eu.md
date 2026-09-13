@@ -6,7 +6,7 @@
 >
 > **Mock your dependencies.**
 
-Two sentences, and they arrive together. This chapter is Part IV's first case and it is kept fair: tests are worth writing, and both practices are worth following in most situations. What is examined is that each travels as a settled default when the literature behind it records a stated purpose for one and an open disagreement about the other.
+Two sentences, and they usually arrive together. This chapter is Part IV's first case and it is kept fair: tests are worth writing, and both practices are worth following in most situations. What is examined is that each travels as a settled default when the literature behind it records a stated purpose for one and an open disagreement about the other.
 
 ---
 
@@ -177,13 +177,13 @@ This is [chapter 15](15_principle-loses-scope_b86v.md)'s mechanism — a Princip
 
 ---
 
-## What the narrow reading looks like
+## What the tight reading looks like
 
-*Mock your dependencies* does not say what a dependency is. Under the widest reading — anything your unit does not itself compute — the database is a dependency, the clock is a dependency, the file system is a dependency, and so is the other class you wrote last Tuesday. Under a narrow reading, a dependency you must replace is one you **cannot run**: it costs money per call, it needs hardware you do not have, or it belongs to somebody else.
+*Mock your dependencies* does not say what a dependency is. Under the widest reading — anything your unit does not itself compute — the database is a dependency, the clock is a dependency, the file system is a dependency, and so is the other class you wrote last Tuesday. Under the tight reading, a dependency you must replace is one you **cannot run**: it costs money per call, it needs hardware you do not have, or it belongs to somebody else.
 
 The two readings differ on exactly one thing, and it is the thing this chapter is about: whether the rule you care about lives inside the dependency or outside it.
 
-FlowCore takes the narrow reading and states it as a rule: its tests run against a real Postgres, not a fake. The reason is visible in its schema. Its decision 4 pushes same-definition integrity into composite foreign keys, and decision 9 puts uniqueness — scoped, case-insensitive, length-capped — into constraints. A fake repository would be a second implementation of every one of those rules, written by the same person who wrote the first, agreeing with it by construction, and unable to disagree with the schema when the schema is wrong.
+FlowCore takes the tight reading and states it as a rule: its tests run against a real Postgres, not a fake. The reason is visible in its schema. Its decision 4 pushes same-definition integrity into composite foreign keys, and decision 9 puts uniqueness — scoped, case-insensitive, length-capped — into constraints. A fake repository would be a second implementation of every one of those rules, written by the same person who wrote the first, agreeing with it by construction, and unable to disagree with the schema when the schema is wrong.
 
 That is the general form. **A test double — a mock, a stub, or a hand-written fake — can only encode the constraints its author already knows about.** The constraints worth testing are the ones somebody will get wrong, and the drift between the real constraint and its stand-in is what costs you.
 
@@ -191,13 +191,15 @@ That is the general form. **A test double — a mock, a stub, or a hand-written 
 
 Both principles compress a *mechanism* into an *instruction*, and the mechanism is where the condition lives.
 
+[-- I get this but isn't the root cause of this failure mostly what the chapter 15 demonstrates? The principle is "replace your dependencies with doubles", missing scope is something like: "when you have dependencies outside of your testing domain and costly to setup..."]
+
 **For mocks.** The instruction is *replace your dependencies with doubles*. The mechanism is that a test's power comes from the set of reasons it can fail for. Every double you install removes a region of that set — deliberately, since that is what makes the test fast and deterministic. The question the instruction cannot answer is whether the rule you are testing lived in the region you just removed. When the rule is a schema constraint, a query plan, a transaction boundary, or a third-party API's actual behaviour, it did.
 
 This is why the failure is silent rather than loud. A test that has lost its subject does not error; it passes faster than before. Nothing in the run distinguishes *this assertion is meaningful* from *this assertion is about the fixture*, which is what makes mutation the only mechanical check.
 
 **For ordering.** The instruction is *write the test first*. The mechanism proposed for it is usually design pressure — that being forced to name the behaviour before implementing it produces a better interface. That is a claim about what writing a test first does to your thinking, and it is plausible. What the measurement above found is that when you separate the ordering from the other things a test-first workflow forces on you — small steps, a steady rhythm — the ordering is not the part carrying the measured effect.
 
-Which does not make the ritual useless, and the paper says so. It relocates the credit. A team that adopted test-first and got better results may have got them from the cycle length the ritual imposed, and a team that abandons the ritual while keeping fifty-minute cycles has kept the wrong half.
+Which does not make the ritual useless, and the paper says so. It relocates the credit. A team that adopted test-first and got better results may have got them from the cycle length the ritual imposed, and a team that abandons the ritual while keeping fifty-minute cycles has kept the wrong half. [-- This paragragraph is annoying. I get that a scientific paper is expected to be: "we found this but there is that it doesn't mean that under that conditions..." but we don't have to adopt the same tone. Either delete this paragraph or make it something direct and clear. To illustrate how annoying this is, I can add another paragraph here on your style: "Which does not say the ritual is useful either. That's not proven, under..."]
 
 **The shared shape** is that both slogans name an action and leave out what the action is for. *Mock your dependencies* is an instruction about a technique with no statement of which failures it is meant to preserve. *Write the test first* is an instruction about an order with no statement of which benefit the order produces. In both cases the missing part is the only thing that would let you tell whether your situation qualifies.
 
