@@ -1,4 +1,5 @@
 # Behaviour Placement and OOP
+[-- a general observation first: I get your points about the space/time split and rial naming the failure. But in the end the core of this chapter rests on this bahavior placement issue and as far as I can see, that issue looks overblown. A rare case where, two objects hold references to each other. We already touched on this on previous chapters. Now this get's more specific, code fails because of serialization. I've seen this happen in real life and the fix was changing the serializer options. Having the more important implications of this situation in the previous chapters, I don't see how this chapter is still interesting. Principle loses scope, we alread know. They lose even if you warn about it, we already know. Circular dependendices are bad, we already know.]
 
 ## The advice
 
@@ -8,7 +9,7 @@ It is a Principle, and the Forces behind it are real. A rule that lives next to 
 
 This is the first of Part IV's three cases. [Chapter 15](15_principle-loses-scope_b86v.md) made the claim; these three are what it looks like happening.
 
-What makes this one worth having is that the author saw it coming. Arthur Riel opened the book these heuristics come from by naming the fate he wanted to avoid — *goto considered harmful*, and the decades of rebuttal papers it produced — called his sixty **warning bells** rather than rules, and wrote that any of them may be declared inapplicable in a given design. Heuristic 2.9 travelled anyway, stripped to five words.
+What makes this one worth having is that the author saw it coming. Arthur Riel opened the book these heuristics come from by naming the fate he wanted to avoid — *goto considered harmful*, and the decades of rebuttal papers it produced — called his sixty heuristics **warning bells** rather than rules, and wrote that any of them may be declared inapplicable in a given design. Heuristic 2.9 travelled anyway, stripped to five words.
 
 ---
 
@@ -137,11 +138,12 @@ What the compressed sentence gives you is an instruction. What it leaves behind 
 
 ---
 
-## What the narrow reading looks like
+## What the scoped reading looks like
+[-- narrow was instantly evoking "incorrect" reading]
 
 ### Identifiers instead of references
 
-The other reading of *belongs with* is already in [chapter 14](14_smuggled-verdicts_8y69.md), where behaviour is not absent but **placed**, and what decides the placement is **what the rule must see** — how much data you have to be looking at before you can tell whether the rule holds. Under that reading, a rule needing a customer and an order belongs at a scope that can see both, and that scope is neither entity.
+The other reading of *belongs with* is already in [chapter 14](14_smuggled-verdicts_8y69.md), where behaviour is not absent but **placed**, and what decides the placement is **what the rule must see** — how much data you have to be looking at before you can tell whether the rule holds. Under that reading, a rule needing a customer and an order belongs to a place that can see both. [-- using scope here for another meaning was confusing, so I changed]
 
 What the entities hold instead is an identifier:
 
