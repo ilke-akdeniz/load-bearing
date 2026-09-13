@@ -7070,3 +7070,35 @@ Both chapters now name their own kind and point at the other. That converts a fe
 **The *less interesting* objection was accepted and answered rather than argued with.** The advice is the least contested of the three, so the chapter has the least to push against, and its answer is Riel — which had one clause in the opening and a section two-thirds down. The anticipation now opens the chapter.
 
 **The cut case, recorded because it was close.** Had it gone, the value-cycle material would have moved to [chapter 05](../05_dependency-and-hiding_agjy.md), which owns cycles and has nothing on the value graph, and Riel to [chapter 15](../15_principle-loses-scope_b86v.md) as a third source case. Lost outright would have been FlowCore's decision 3 — Part IV's only appearance of the running example — and the `Money.plus` boundary. Part IV would have been one mechanism and two cases.
+
+---
+
+## 179. Chapter 16 is cut, and almost nothing is salvaged
+
+**Date.** 2026-09-13
+
+**Context.** Decision 178 kept the chapter and answered the author's repetition objection with two fixes. They read it again and made a different objection, which held:
+
+> the core of this chapter rests on this bahavior placement issue and as far as I can see, that issue looks overblown. A rare case where, two objects hold references to each other… code fails because of serialization. I've seen this happen in real life and the fix was changing the serializer options… Principle loses scope, we alread know. They lose even if you warn about it, we already know. Circular dependendices are bad, we already know.
+
+**The serializer point decides it, and the draft had not checked it.**
+The chapter says *"the reason is not a gap in any of the libraries… a format built on nesting has nothing to emit."* That is true of naive traversal and misleading about practice. Jackson ships `@JsonManagedReference`/`@JsonBackReference` and `@JsonIdentityInfo`; Json.NET has `ReferenceLoopHandling.Ignore` and `PreserveReferencesHandling`; System.Text.Json has `ReferenceHandler.Preserve`. The `HashSet.add` overflow is answered by id-based `equals`/`hashCode`, which is the standard recommendation for JPA entities **because bidirectional associations are normal there**, not a defect.
+Only Go has no option, which is why that example reads strongest and why it looked like a structural cost.
+
+So the chapter's load-bearing demonstration is a documented pitfall with idiomatic fixes, presented as an impossibility. Decision 178's defence — *a real crash from two decisions nobody would object to* — asked what the crash was and not what everyone does about it next.
+
+**The author's three *we already know* items hold on inspection.** The constructive answer, *what the rule must see*, belongs to [chapter 14](../14_smuggled-verdicts_8y69.md) and the chapter says so in its own text. The cycle cost is [chapter 05](../05_dependency-and-hiding_agjy.md)'s with a variant attached. *Warned against and lost* is a degree stronger than *printed and lost*, not a different kind.
+What survives the correction is **several cheap fixes, each discovered late**, which is a paragraph.
+
+**Decision.** Chapter 16 is deleted. Part IV becomes one mechanism and two cases; chapters 17 through 24 renumber to 16 through 23; the book is twenty-three chapters.
+
+**On salvage, the author's instruction was explicit**: *"we are not required to salvage anything. If a part is not adding value to it's new place and we can't find a better place for it, don't force it, it's ok to let it go."*
+Each piece was judged on that test, and **one of five passes**.
+
+- **Riel's introduction moves to [chapter 15](../15_principle-loses-scope_b86v.md)** — as one clause, not a section. Its value there is precise: chapter 15 now tells a writer to put the situation inside the sentence and to publish the unpacking beside it, and Riel did the second and not the first. Sixty heuristics introduced by an author saying none of them are rules and any may be declared inapplicable, and the introduction stayed where it was. That is the third instance of *the unpacking does not travel*, beside Pike's forty seconds and Martin's paper, and it is the strongest because it was written to prevent exactly this.
+- **The space/time split is dropped.** It was written one commit ago and needed two instances to be worth stating; with the space case gone, [chapter 18](../18_abstraction-as-insurance_4jk6.md) keeps the time point it already had, and the cross-reference added in decision 178 is reverted.
+- **Value cycles and generic walkers are dropped.** Honestly stated — every mature serializer has an option, so what remains is maintained annotations and hand-written `equals` — it is a paragraph, and [chapter 05](../05_dependency-and-hiding_agjy.md) is not improved by it.
+- **FlowCore decision 3 is dropped**, and it is the real loss: Part IV's only appearance of the running example, with the trade-off priced both ways. Its rationale is the cycle cost, which this entry has just demoted, so it would arrive somewhere else resting on a demoted argument.
+- **`Money.plus` is dropped.** [Chapter 14](../14_smuggled-verdicts_8y69.md) already owns behaviour being placed rather than absent, and the example adds nothing to it.
+
+**The author's two edits in the final review commit are recorded because one is a vocabulary catch.** *Narrow reading* became *scoped reading* — *narrow* read as *incorrect* — and a sentence using *scope* for a second sense one paragraph from the first was rewritten. That is the same discipline as the seam-versus-boundary fix in decision 157.
