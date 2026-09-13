@@ -157,8 +157,6 @@ That is [chapter 05](05_dependency-and-hiding_agjy.md)'s reading, which arrives 
 
 The compressed form survives because the technique is checkable and the criterion is not. Whether a file contains an interface can be seen in review. Whether that interface is stable is a claim about the future, which nobody can settle at the moment the decision is made — so the half that can be enforced is the half that gets enforced.
 
-**This one is uncheckable in time, which is the second of the two ways it happens.** [Chapter 16](16_behaviour-placement_z47a.md)'s qualifier could be settled today by anyone willing to look at the whole model, and is dropped because nobody reviews at that scale. This one cannot be settled today by anybody, at any scale, because the fact it turns on has not happened yet.
-
 **The second mechanism is that the cost and the benefit arrive at different times, and only one of them ever arrives.** The premium is paid continuously, in small amounts, by people who do not know they are paying it — a query not written, a feature not used, a mapping function maintained. The payout is a single event, in the future, that mostly does not occur; and on the rare occasion it does, the payout fails for reasons that are only visible at that moment.
 
 So the practice is never disconfirmed by experience. A team that abstracted and never migrated concludes the insurance was cheap. A team that abstracted and did migrate concludes the migration was hard, which it was, and rarely audits how much of the difficulty the abstraction removed.

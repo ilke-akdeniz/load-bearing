@@ -282,7 +282,7 @@ Which gives a move for the other end, when you are the one writing the advice. *
 
 That is necessary and not sufficient, for the reason given above: a named situation is a proxy for the conditions, and a proxy can be narrower than what it stands for. Naming one buys a Principle that cannot be resolved outward. It does not buy one that reaches every case it should.
 
-The unpacking beside the Principle buys something different. The paragraph explaining the situation, the worked example, the talk — none of it travels with the sentence. Martin's ran to a full paper and stayed there; Pike's ran forty seconds and stayed there. What that material buys is not transmission but **recovery**: it is what somebody has to find when they notice the sentence is doing more than it should.
+The unpacking beside the Principle buys something different. The paragraph explaining the situation, the worked example, the talk — none of it travels with the sentence. Martin's ran to a full paper and stayed there; Pike's ran forty seconds and stayed there. Arthur Riel's ran to an introduction saying that none of his sixty design heuristics are rules, that any of them may be declared inapplicable, and that they contradict each other often enough that a developer has to choose — written to avoid what happened to *goto considered harmful*, and it stayed there too. Putting the scope beside the sentence is not the same as putting it inside. What that material buys is not transmission but **recovery**: it is what somebody has to find when they notice the sentence is doing more than it should.
 
 [Chapter 16](16_behaviour-placement_z47a.md) is the first of the three cases — object orientation's advice about where behaviour belongs, and the references that appear in both directions once two rules are placed by it.
 
@@ -298,6 +298,7 @@ The unpacking beside the Principle buys something different. The paragraph expla
 - John Ousterhout, *Why Threads Are A Bad Idea (for most purposes)* — USENIX Annual Technical Conference, January 1996. [Slides](https://web.stanford.edu/~ouster/cgi-bin/papers/threads.pdf) dated September 1995.
 - Rob Pike, *Concurrency Is Not Parallelism* — Heroku Waza, January 2012. [Video and slides](https://go.dev/blog/waza-talk).
 - *Go Wiki: Use a sync.Mutex or a channel?* — [go.dev/wiki/MutexOrChannel](https://go.dev/wiki/MutexOrChannel).
+- Arthur J. Riel, *Object-Oriented Design Heuristics* — Addison-Wesley, 1996.
 - *Go Proverbs* at Sensei's Library — [senseis.xmp.net/?GoProverbs](https://senseis.xmp.net/?GoProverbs).
 - *Wei Qi Shi Jue*, *The Ten Golden Rules of Go* — [senseis.xmp.net/?TheTenGoldenRulesList](https://senseis.xmp.net/?TheTenGoldenRulesList).
 
