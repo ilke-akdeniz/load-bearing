@@ -6959,3 +6959,41 @@ What decided it over the others is that **the book has already written down the 
 **Placed in four spots**, taking *anemic* from nineteen uses to seventeen: the grid's top-right cell, the shape test, the recognition list, and a new paragraph under *it is not a claim, so it never has to be defended*, which is where the concealed condition belongs.
 
 **A wrong cross-reference found on the way.** [Chapter 20](../20_six-profiles_dnkz.md):99 called it *"the god object [chapter 11](../11_what-a-pattern-is-for_3xzc.md) warns about"*. [Chapter 11](../11_what-a-pattern-is-for_3xzc.md) does not mention god objects and does not warn about anything of the kind — the fan-in argument is [chapter 05](../05_dependency-and-hiding_agjy.md)'s, which the next paragraph of 20 already cites correctly. It now points at [chapter 14](../14_smuggled-verdicts_8y69.md), which is where the term is now graded.
+
+---
+
+## 175. Chapter 15's claim is compressed, and the author's compression is the method
+
+**Date.** 2026-09-13
+
+**Context, and it is the author's argument rather than a preference.**
+They replaced a three-sentence claim with one line and explained why: **"A claim should be defendable but it should also be simple and interesting. So far we tended to lean on defense and being cautious, putting many things in the claim, using multiple sentences. This is my attempt to go in the other direction, express the core important point on the claim. The rest are explained - explored in the chapter."**
+And they named the trap they were walking into: **"What is ironic is that I risk what the chapter warns about here: over-compressing and letting the chapter's claim be a folk-remedy or a cargo-culting subject. The other edge of the blade is under-compressing: Claim is so long and detailed that it doesn't grab attention, it is not remembered, it doesn't gain traction."**
+
+**Three drafts, and what each one failed.**
+
+Their first: *a principle expressed without its scope is prone to cargo-culting.*
+The draft objected on three grounds, and the first is the one that decided it. **Cargo-culting is a smuggled verdict**, and [chapter 14](../14_smuggled-verdicts_8y69.md) — the chapter immediately before — teaches the reader to catch exactly this: it names no shape you can open a file and check, since it is a claim about why somebody acted, and it convicts heavily. That is 8y69's bottom-right cell, and putting it in the next chapter's claim is the book doing one page later what it just told the reader to notice.
+Second, the book already has a name for the phenomenon: **folk remedy**, owned by [chapter 23](../23_never-written-down_at4r.md), whose ledger row records that this chapter hands it over. A weaker second name, eight chapters earlier, costs more than it buys.
+Third, it is not what the chapter demonstrates — the Reddit poster understood the proverb and got its boundary wrong, which is over-application rather than ritual imitation.
+
+Their second, after asking for severity: *a principle expressed without a scope condemns correct code and restoring a missing scope is a challenge.*
+**Refuted by the chapter's own mechanism section**, which says twice that the harm belongs to the reading and not to the advice — *"the damage follows from the reading rather than from the advice"*, and *"Ousterhout was not wrong about pthreads and the Go team were not wrong about concurrency."* A claim convicting the Principle itself contradicts the page that supports it, and personifies besides.
+*Restoring a missing scope is a challenge* is *lots of troubles* in a quieter voice — unfalsifiable, and the chapter has the specific measure.
+
+**What was taken**, the author's choice from the draft's three offers:
+
+> **A Principle without its scope is read at the widest scope available, and under that reading correct code is a violation.**
+
+Twenty words, one mechanism with one consequence, both falsifiable — the chapter says outright that nobody reads a proverb too narrowly, so a reader shown narrowing an unscoped Principle would break it. The harm is attached to the reading, which is where the chapter puts it, and the Reddit case is that sentence exactly: working code, read as a breach of the proverb.
+
+**The two rejected alternates are now in the chapter, at the author's request — one of them.**
+*Putting the scope back costs more than stating it would have* was genuinely absent and is now the paragraph after the wiki page and the comparison table, which is where the chapter measures the asymmetry: one sentence on stage against a page, a table, three independent reconstructions and a second talk.
+*The scope has to be rebuilt by whoever meets it next, if they can* was **not** added, because the chapter already says it twice — the section's own summary, *"where it is in neither, the reader reconstructs it — or fails to"*, and the first cost, *"recovering a scope is slow, and sometimes there is nothing to recover."* A third statement would be repetition, and both existing ones do more work than the alternate.
+
+**The author's replacement definition of *scope* was kept and narrowed by one clause.**
+Theirs — *scope is simply the conditions or situations where a claim is applied* — collapses two things the chapter later separates: at the boundary section a **named situation is a proxy for the conditions**, and can be narrower than them. So the definition now says that stating either one gives the boundary, which is the distinction `LEDGER.md` records, in one sentence rather than the two paragraphs the author cut.
+
+**Proofread.** *Principle* takes a capital, being one of the five kinds, and both of the author's drafts lowercased it. The section heading *Go Proverbs, The Game vs The Language* was the book's only Title Case heading, a defect decision 155 recorded once already. And a trimmed quotation needs an ellipsis while a gloss inside one needs square brackets: *"I think you know them (proverbs) already"* is now *"… I think you know them [the proverbs] already"*.
+
+**Still open: the author's three-point position** on how a Principle should be written — the *when scope, then X* form, an unpacking paragraph beside it, and written beating speech because the original stays recoverable. The third is contradicted by [chapter 18](../18_abstraction-as-insurance_4jk6.md)'s case, where Martin's caveat was printed and lost anyway, so it needs its own interview.

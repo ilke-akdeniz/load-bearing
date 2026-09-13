@@ -2,31 +2,16 @@
 
 ## The claim
 
-**A principle expressed without its scope is prone to cargo-culting.**
-[-- why this minimal claim? A claim should be defendable but it should also be simple and interesting. So far we tended to lean on defense and being cautious, putting many things in the claim, using multiple sentences. This is my attempt to go in the other direction, express the core important point on the claim. The rest are explained - explored in the chapter. 
+**A Principle without its scope is read at the widest scope available, and under that reading correct code is a violation.**
 
-What follows is my stream of ideas about this situation, maybe this could be useful for the book. Some parts are probably a repetition of what's already said in the book:
+**Scope** is where a claim applies. State the conditions that must hold and you have given it; name the situation it applies to and you have given it too:
 
-What is ironic is that I risk what the chapter warns about here: over-compressing and letting the chapter's claim be a folk-remedy or a cargo-culting subject. 
-
-The other edge of the blade is under-compressing: Claim is so long and detailed that it doesn't grab attention, it is not remembered, it doesnt' gain traction.
-
-Now I understand why people crate short - memorable principles, why that is dangerous, why the alternative is not to create 10 page claims. 
-
-This book's position is: 
-- Make the principle's scope an explicit part of it with this form: When *scope* then *X*. This is the no-negotiable part.
-- Step 1 is often not enough unless the principle is casual - local - temporary. Provide a less compressed version just after the principle, unpacking the scope. 
-- A written principle, followed by a single unpacking paragraph, beats a 1 hour oral explanation. That is because all transmission of the principle is prone to information loss but with the written format, the original form is always recovereable.
-
-]
-
-**Scope** is simply the conditions or situations where a claim is applied:
 - Use information hiding when *you do not control your callers.*
-- *When storing money values* don't use a float.
+- *When storing money values*, don't use a float.
 
 ---
 
-## Go Proverbs, The Game vs The Language
+## Go proverbs, the game and the language
 
 In November 2015 Rob Pike gave a talk at Gopherfest that produced the Go proverbs. He opens by naming his source: a book about the Japanese board game go, translated into English about fifty years earlier, called *Go Proverbs Illustrated*. The author is Kensaku Segoe and the slide behind Pike shows the book's cover.
 
@@ -60,7 +45,7 @@ Near the end of the talk, Pike guesses what will become of the idea of "Go Prove
 
 The idea survived, though not on the wiki. There is now a canonical list of the nineteen proverbs, credited to that talk, carrying the sentences and nothing else. Not the forty seconds on what the first one means. Not *don't worry whether you understand that or not*. And not this, from two minutes earlier:
 
-> I think you know them (proverbs) already but think about them as ideas that you might use to explain to somebody
+> … I think you know them [the proverbs] already but think about them as ideas that you might use to explain to somebody
 
 **The proverbs were built for people who already hold the context, as tools for explaining it to people who do not.** The speaker carries the scope; the proverb is the handle. Detached, the handle travels alone.
 
@@ -127,6 +112,8 @@ The Go project's own wiki has a page for this, and its first line is the proverb
 It tells you not to be afraid of a mutex, and gives a table of what each tool is for. Channels: passing ownership of data, distributing units of work, communicating async results. Mutexes: caches, state.
 
 **That table is Pike's forty seconds, reconstructed.** *Passing ownership of data* is what he said the proverb meant. The Go project needed a wiki page and a comparison table to restore a scope Pike had given in one sentence on stage — because the sentence did not travel and the proverb did.
+
+**Putting the scope back costs more than stating it would have.** One more line on the slide would have done it. The repair took a page and a table, and it was not the last one.
 
 Then it happens a third time, in the Reddit thread itself. One commenter, unprompted, says channels are about ownership, and that where ownership is not clear — a shared cache is their example — a mutex may be the better tool. Another states Pike's condition exactly, including what breaks without it: send a pointer over a channel while still holding it yourself and the race is back.
 
