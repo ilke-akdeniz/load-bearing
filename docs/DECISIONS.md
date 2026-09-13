@@ -7106,3 +7106,24 @@ Each piece was judged on that test, and **one of five passes**.
 `tools/check-drift.py` rejects a bare `Ch. NN` or `chapter NN` and does not see a bare number trailing a link in a list, which is how this survived two renumbers. It now names [chapter 17](../17_abstraction-as-insurance_4jk6.md) and its one entry from that table, as a link.
 
 **The author's two edits in the final review commit are recorded because one is a vocabulary catch.** *Narrow reading* became *scoped reading* — *narrow* read as *incorrect* — and a sentence using *scope* for a second sense one paragraph from the first was rewritten. That is the same discipline as the seam-versus-boundary fix in decision 157.
+
+---
+
+## 180. Chapter 16 stops re-deriving chapter 15, and loses the paper's register
+
+**Date.** 2026-09-13
+
+**Context.** The author's first full-read pass on [chapter 16](../16_tdd-and-mocks_u8eu.md), now Part IV's first case. Two tags, both correct, and a rename.
+
+**The mechanism section was restating the chapter before it, and the chapter knew.**
+Their tag: **"isn't the root cause of this failure mostly what the chapter 15 demonstrates? The principle is 'replace your dependencies with doubles', missing scope is something like: 'when you have dependencies outside of your testing domain and costly to setup…'"**
+It was. *Why the wide reading gets taken* opened with *"both principles compress a mechanism into an instruction, and the mechanism is where the condition lives"* — which is [chapter 15](../15_principle-loses-scope_b86v.md)'s finding in other words, three paragraphs after this chapter had already cited 15 for it by name.
+The opener now cites 15 for the general answer and states what this chapter adds instead: **the two slogans lost different halves.** *Mock your dependencies* never had a settled purpose to lose. *Write the test first* had one — design pressure — and it was measured, and the ordering was not where the effect lived. That distinction is this chapter's own and was buried under the restatement.
+The scope the author drafted for mocks is already in the chapter, as the tight reading: a dependency you must replace is one you cannot run.
+
+**A paragraph written in the source's register, which the author refused with a parody.**
+On *"Which does not make the ritual useless, and the paper says so. It relocates the credit…"*: **"I get that a scientific paper is expected to be: 'we found this but there is that it doesn't mean that under that conditions…' but we don't have to adopt the same tone."** And then, to show it: *"Which does not say the ritual is useful either. That's not proven, under…"*
+That is `CLAUDE.md`'s *a source's register is not the book's*, caught in the wild — the hedge is the paper protecting its finding, and the book was wearing it. The paragraph now states the finding and stops: **the credit moves**; a team that improved after adopting test-first may have got it from the cycle length, and a team that drops the ritual and keeps fifty-minute cycles has kept the half that was doing the work.
+
+**The author's rename finished.** *Narrow reading* became *tight reading*, on the same ground as the *narrow → scoped* change in the chapter that was cut: *narrow* reads as *incorrect*. One use at the far end of the chapter was left behind and now matches.
+[Chapter 17](../17_abstraction-as-insurance_4jk6.md) has no counterpart section, so there is no term to keep in step with.

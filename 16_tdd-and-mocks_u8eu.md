@@ -189,9 +189,7 @@ That is the general form. **A test double — a mock, a stub, or a hand-written 
 
 ## Why the wide reading gets taken
 
-Both principles compress a *mechanism* into an *instruction*, and the mechanism is where the condition lives.
-
-[-- I get this but isn't the root cause of this failure mostly what the chapter 15 demonstrates? The principle is "replace your dependencies with doubles", missing scope is something like: "when you have dependencies outside of your testing domain and costly to setup..."]
+[Chapter 15](15_principle-loses-scope_b86v.md) owns the general answer, and it is not repeated here: the half that tells you what to do survives, the half that tells you whether to do it does not. What these two add is that they lost different halves. One never had a settled purpose to lose. The other had one, and it was measured.
 
 **For mocks.** The instruction is *replace your dependencies with doubles*. The mechanism is that a test's power comes from the set of reasons it can fail for. Every double you install removes a region of that set — deliberately, since that is what makes the test fast and deterministic. The question the instruction cannot answer is whether the rule you are testing lived in the region you just removed. When the rule is a schema constraint, a query plan, a transaction boundary, or a third-party API's actual behaviour, it did.
 
@@ -199,7 +197,7 @@ This is why the failure is silent rather than loud. A test that has lost its sub
 
 **For ordering.** The instruction is *write the test first*. The mechanism proposed for it is usually design pressure — that being forced to name the behaviour before implementing it produces a better interface. That is a claim about what writing a test first does to your thinking, and it is plausible. What the measurement above found is that when you separate the ordering from the other things a test-first workflow forces on you — small steps, a steady rhythm — the ordering is not the part carrying the measured effect.
 
-Which does not make the ritual useless, and the paper says so. It relocates the credit. A team that adopted test-first and got better results may have got them from the cycle length the ritual imposed, and a team that abandons the ritual while keeping fifty-minute cycles has kept the wrong half. [-- This paragragraph is annoying. I get that a scientific paper is expected to be: "we found this but there is that it doesn't mean that under that conditions..." but we don't have to adopt the same tone. Either delete this paragraph or make it something direct and clear. To illustrate how annoying this is, I can add another paragraph here on your style: "Which does not say the ritual is useful either. That's not proven, under..."]
+**The credit moves.** A team that adopted test-first and got better results may have got them from the cycle length the ritual imposed; a team that drops the ritual and keeps fifty-minute cycles has kept the half that was doing the work.
 
 **The shared shape** is that both slogans name an action and leave out what the action is for. *Mock your dependencies* is an instruction about a technique with no statement of which failures it is meant to preserve. *Write the test first* is an instruction about an order with no statement of which benefit the order produces. In both cases the missing part is the only thing that would let you tell whether your situation qualifies.
 
@@ -309,7 +307,7 @@ In two situations the compressed advice is simply correct, and needs no qualific
 
 ### A dependency you genuinely cannot run
 
-The narrow reading still leaves real cases, and they are the ones the wide reading was built for.
+The tight reading still leaves real cases, and they are the ones the wide reading was built for.
 
 A payment gateway charges real money and its sandbox is not the same system. Hardware may not exist on the build machine. A third-party API may rate-limit, or require credentials no CI job should hold, or simply be down when you need to ship. Here you cannot run the dependency, and a double is not a shortcut — it is the only option.
 
