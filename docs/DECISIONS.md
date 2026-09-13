@@ -7020,3 +7020,27 @@ The author accepted that version.
 
 **Written as a prescriptive close**, at the end of *How to recognize the failure*, following [chapter 13](../13_missing-language-features_esqm.md)'s precedent of ending a recognition section on a move rather than a test. Three paragraphs: put the situation inside the sentence; necessary and not sufficient, because a named situation is a proxy that can be narrower than the conditions; and the unpacking buys recovery, not transmission.
 It is the chapter's first prescriptive passage — everything before it is diagnostic — and it is the author's material, argued for by them and corrected in one place by the draft.
+
+---
+
+## 177. *Read loosely* against *read at its widest*, and the title question
+
+**Date.** 2026-09-13
+
+**The author's edit, half taken.**
+They rewrote the claim as *"A Principle without its scope is read loosely, and under that reading correct code looks like a violation"*, noting **"this version is more clear for me."**
+
+**The second half is an improvement and stands.** *Correct code **is** a violation* asserted that it really breaches something; *looks like a violation* is what the chapter demonstrates, in its own words: *"The code is fine. What is interesting is the reading that made it look wrong."*
+
+**The first half loses the chapter's distinctive finding, so it was changed again rather than reverted.** *Loosely* has no direction — it covers a sloppy reading in either direction — and directionality is the thing this chapter establishes and repeats: *"With no context to narrow it, the widest reading is the only one available. That is why the error has a direction. Nobody reads a proverb too narrowly."*
+A claim that permits under-reading also stops supporting the mechanism section, which explains why neither failure runs the other way.
+*Read at its widest* is the compromise: three words shorter than the original *at the widest scope available*, which was the author's clarity objection, and the direction survives. Revertible to their wording if they prefer it stated.
+
+**The title was evaluated, as asked, and stays.**
+Their note: *"this chapter title and the claim are a bit off now… I'm not sure if a title change is required now, you evaluate."*
+They do not mirror each other any more — *How a Principle Loses Its Scope* names the process, and the claim now states what that process produces. That is not a defect in this book: [chapter 14](../14_smuggled-verdicts_8y69.md) is *Smuggled Verdicts* and [chapter 13](../13_missing-language-features_esqm.md)'s title is a question, and neither restates its claim.
+The chapter still demonstrates the losing as well as the consequence — *"compression fixes the wording, it does not fix the scope"* — and the title is what seven other chapters reach for when they cite this one's mechanism. A rename costs the contents page and gains nothing.
+
+**A cut accepted, with one consequence.** The author removed *"written or spoken makes no difference to whether it travels, and all the difference to whether it can be reached. What was never stated anywhere cannot be"*, which was the draft's refinement of their own third point and its handover to [chapter 23](../23_never-written-down_at4r.md).
+Defensible: the distinction is thinner than it looks, since Pike's talk is recorded and recoverable too, so what matters is only whether the scope was stated somewhere retrievable. The chapter's cost section already carries that — *"sometimes there is nothing to recover"* — and the handover survives in `LEDGER.md`.
+The ledger row written one commit earlier claimed the medium half, so it now says what the chapter says.
