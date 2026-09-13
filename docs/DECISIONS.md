@@ -7101,4 +7101,7 @@ Each piece was judged on that test, and **one of five passes**.
 - **FlowCore decision 3 is dropped**, and it is the real loss: Part IV's only appearance of the running example, with the trade-off priced both ways. Its rationale is the cycle cost, which this entry has just demoted, so it would arrive somewhere else resting on a demoted argument.
 - **`Money.plus` is dropped.** [Chapter 14](../14_smuggled-verdicts_8y69.md) already owns behaviour being placed rather than absent, and the example adds nothing to it.
 
+**Found while renumbering, and older than this cut.** [Chapter 15](../15_principle-loses-scope_b86v.md) carried *"[Chapters 15](…), 16 and 17 are three Principles from the second column"* — a reference to itself, with two bare numbers after it, and a count that had not been right since the previous deletion either.
+`tools/check-drift.py` rejects a bare `Ch. NN` or `chapter NN` and does not see a bare number trailing a link in a list, which is how this survived two renumbers. It now names [chapter 17](../17_abstraction-as-insurance_4jk6.md) and its one entry from that table, as a link.
+
 **The author's two edits in the final review commit are recorded because one is a vocabulary catch.** *Narrow reading* became *scoped reading* — *narrow* read as *incorrect* — and a sentence using *scope* for a second sense one paragraph from the first was rewritten. That is the same discipline as the seam-versus-boundary fix in decision 157.
