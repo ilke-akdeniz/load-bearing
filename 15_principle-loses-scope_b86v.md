@@ -2,17 +2,31 @@
 
 ## The claim
 
-**A compressed Principle carries its scope only when it names the situation it applies to. Where it doesn't, the reader has to reconstruct that scope from the surrounding context. Without that context, only the widest reading is available.**
+**A principle expressed without its scope is prone to cargo-culting.**
+[-- why this minimal claim? A claim should be defendable but it should also be simple and interesting. So far we tended to lean on defense and being cautious, putting many things in the claim, using multiple sentences. This is my attempt to go in the other direction, express the core important point on the claim. The rest are explained - explored in the chapter. 
 
-**A word on *scope*, because the book has used a different one for this.** Earlier chapters say a Principle has **conditions** — what must be true for it to hold, which is always some fact about your Forces. [Chapter 05](05_dependency-and-hiding_agjy.md)'s information-hiding Principle has a sharp one: *you do not control your callers.*
+What follows is my stream of ideas about this situation, maybe this could be useful for the book. Some parts are probably a repetition of what's already said in the book:
 
-**Scope is the same boundary seen from the other side: the situations the advice reaches.** State the conditions and you have given the scope; name the situation and you have given it too. This chapter says *scope* rather than *conditions* because it tracks what the wording carries rather than what the advice requires — and a Principle can carry that boundary either way. *Don't store money in a float* names a situation and states no condition, and it passes the test below regardless.
+What is ironic is that I risk what the chapter warns about here: over-compressing and letting the chapter's claim be a folk-remedy or a cargo-culting subject. 
 
-Part IV is three case studies, and this chapter is the mechanism they share, stated once.
+The other edge of the blade is under-compressing: Claim is so long and detailed that it doesn't grab attention, it is not remembered, it doesnt' gain traction.
+
+Now I understand why people crate short - memorable principles, why that is dangerous, why the alternative is not to create 10 page claims. 
+
+This book's position is: 
+- Make the principle's scope an explicit part of it with this form: When *scope* then *X*. This is the no-negotiable part.
+- Step 1 is often not enough unless the principle is casual - local - temporary. Provide a less compressed version just after the principle, unpacking the scope. 
+- A written principle, followed by a single unpacking paragraph, beats a 1 hour oral explanation. That is because all transmission of the principle is prone to information loss but with the written format, the original form is always recovereable.
+
+]
+
+**Scope** is simply the conditions or situations where a claim is applied:
+- Use information hiding when *you do not control your callers.*
+- *When storing money values* don't use a float.
 
 ---
 
-## The form Pike borrowed, and what it was for
+## Go Proverbs, The Game vs The Language
 
 In November 2015 Rob Pike gave a talk at Gopherfest that produced the Go proverbs. He opens by naming his source: a book about the Japanese board game go, translated into English about fifty years earlier, called *Go Proverbs Illustrated*. The author is Kensaku Segoe and the slide behind Pike shows the book's cover.
 
@@ -46,7 +60,7 @@ Near the end of the talk, Pike guesses what will become of the idea of "Go Prove
 
 The idea survived, though not on the wiki. There is now a canonical list of the nineteen proverbs, credited to that talk, carrying the sentences and nothing else. Not the forty seconds on what the first one means. Not *don't worry whether you understand that or not*. And not this, from two minutes earlier:
 
-> I don't think of these things that you guys need to know I think you know them already but think about them as ideas that you might use to explain to somebody
+> I think you know them (proverbs) already but think about them as ideas that you might use to explain to somebody
 
 **The proverbs were built for people who already hold the context, as tools for explaining it to people who do not.** The speaker carries the scope; the proverb is the handle. Detached, the handle travels alone.
 
@@ -82,7 +96,7 @@ The code is fine. What is interesting is the reading that made it look wrong, wh
 
 > I thought the proverb related to not even having the possibility of sharing memory, not that you shouldn't intentionally share memory
 
-**There is the mechanism, self-reported.** And it is more specific than channel over-use. The proverb never says what counts as sharing memory. Does writing to your own index in a shared slice count? Pike's forty seconds answer no — the proverb is about handing off a pointer and losing access to it. The eleven words alone do not answer it, and the reader resolved it outward, to any memory two goroutines can both reach.
+**There is the mechanism, self-reported.** And it is more specific than channel over-use. The proverb never says what counts as sharing memory. Does writing to your own index in a shared slice count? Pike's forty seconds explanation says no — the proverb is about handing off a pointer and losing access to it. The eleven words alone do not answer it, and the reader resolved it outward, to any memory two goroutines can both reach.
 
 The same post asks a second question worth as much: is the proverb about maintainability and safety, or is there some other reason for it? **They cannot tell what kind of claim the proverb is.** That is [chapter 02](02_the-five-kinds_cjx4.md)'s subject arriving in the wild. Sorting the proverb into one of the five kinds is what tells you how much authority it has — a Law binds regardless, a Principle holds only under certain Forces, an Idiom is local — and the compressed form gives you nothing to sort it with.
 
@@ -102,7 +116,7 @@ On concurrency, he says the use cases the team had in mind were mostly server so
 
 It also produced the third repair in this chapter. He gave an entire talk in 2012, *Concurrency is not Parallelism*, whose job was to supply the missing distinction, and says of it that it should have happened earlier.
 
-**This is not more evidence about the proverbs.** *Don't communicate by sharing memory* and *concurrency support in the language* are different artifacts, and nothing here says the proverb caused what Pike is describing. **But the mechanism is the same, and that is the whole of it: a Principle arrives without its scope, the reader takes the widest reading available, and the damage follows from the reading rather than from the advice.** Ousterhout was not wrong about pthreads and the Go team were not wrong about concurrency — in both cases what did the harm was a reading neither of them wrote.
+**This is not more evidence about the proverbs.** *Don't communicate by sharing memory* and *concurrency support in the language* are different artifacts, and nothing here says the proverb caused what Pike is describing. **But the mechanism is the same: a Principle arrives without its scope, the reader takes the widest reading available, and the damage follows from the reading rather than from the advice.** Ousterhout was not wrong about pthreads and the Go team were not wrong about concurrency — in both cases what did the harm was a reading neither of them wrote.
 
 ## The scope gets rebuilt by hand, more than once
 
