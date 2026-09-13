@@ -7044,3 +7044,29 @@ The chapter still demonstrates the losing as well as the consequence — *"compr
 **A cut accepted, with one consequence.** The author removed *"written or spoken makes no difference to whether it travels, and all the difference to whether it can be reached. What was never stated anywhere cannot be"*, which was the draft's refinement of their own third point and its handover to [chapter 23](../23_never-written-down_at4r.md).
 Defensible: the distinction is thinner than it looks, since Pike's talk is recorded and recoverable too, so what matters is only whether the scope was stated somewhere retrievable. The chapter's cost section already carries that — *"sometimes there is nothing to recover"* — and the handover survives in `LEDGER.md`.
 The ledger row written one commit earlier claimed the medium half, so it now says what the chapter says.
+
+---
+
+## 178. Chapter 16 evaluated for removal, and kept
+
+**Date.** 2026-09-13
+
+**Context.** After the full read of [chapter 15](../15_principle-loses-scope_b86v.md), the author skimmed [chapter 16](../16_behaviour-placement_z47a.md) and asked for an evaluation: **"this chapter is a removal candidate. It's ok on it's own but inside the book, most of the material looks like a repetition of previous chapters and the 'behavior belongs with the data' case doesn't look as interesting as chapter 17 and chapter 18's cases."**
+
+**The draft's evaluation was to keep it, and the argument rests on a comparison with the chapter that was cut.**
+Decision 162 removed [chapter 12](../12_patterns-that-survive-translation_us2k.md)'s predecessor on a diagnostic: the claim had been rewritten three times and no demonstration changed, which is four demonstrations in search of a claim.
+Nothing of the kind is true here. A Part IV case has no claim to fail, and this one's demonstrations are executed and unique — two individually correct placement decisions producing a bidirectional reference, and `HashSet.add` throwing `StackOverflowError`; then the same pair flat in Go, where `json.Marshal` refuses the first version and encodes the second.
+
+**And its source finding is the one Part IV would otherwise not have.** Pike's scope was spoken and lost; Martin's was printed and lost; **Riel saw the compression coming and wrote against it**, naming *goto considered harmful* as the fate he was avoiding, calling all sixty heuristics *warning bells*, and stating that any may be declared inapplicable — and heuristic 2.9 was compressed anyway. Three chapters, three different failure modes of one mechanism; without this one the remaining two are both *it was written down and nobody looked*.
+
+**The repetition the author felt is real, and it is in one section rather than in the case.**
+[Chapters 16](../16_behaviour-placement_z47a.md) and [18](../18_abstraction-as-insurance_4jk6.md) share a mechanism shape — the half that can be checked survives, the half that cannot is dropped — and neither said that the halves are uncheckable for **different reasons**. So the second reads as the first again.
+
+- 16's qualifier is uncheckable **in space**: anyone willing to hold every class in their head could settle today whether an order and a customer are one key abstraction, and nobody reviews at that scale.
+- 18's is uncheckable **in time**: whether an interface is stable turns on a fact that has not happened yet, so no scale of review settles it.
+
+Both chapters now name their own kind and point at the other. That converts a felt repetition into a stated progression, and it makes 18's section stronger than it was.
+
+**The *less interesting* objection was accepted and answered rather than argued with.** The advice is the least contested of the three, so the chapter has the least to push against, and its answer is Riel — which had one clause in the opening and a section two-thirds down. The anticipation now opens the chapter.
+
+**The cut case, recorded because it was close.** Had it gone, the value-cycle material would have moved to [chapter 05](../05_dependency-and-hiding_agjy.md), which owns cycles and has nothing on the value graph, and Riel to [chapter 15](../15_principle-loses-scope_b86v.md) as a third source case. Lost outright would have been FlowCore's decision 3 — Part IV's only appearance of the running example — and the `Money.plus` boundary. Part IV would have been one mechanism and two cases.

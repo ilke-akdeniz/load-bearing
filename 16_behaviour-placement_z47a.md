@@ -6,7 +6,9 @@
 
 It is a Principle, and the Forces behind it are real. A rule that lives next to the data it reads can be enforced rather than merely documented, and a caller who cannot reach the data cannot get the rule wrong.
 
-This is the first of Part IV's three cases. [Chapter 15](15_principle-loses-scope_b86v.md) made the claim; these three are what it looks like happening, and this one is the case where the author of the advice saw the compression coming and wrote against it in his introduction.
+This is the first of Part IV's three cases. [Chapter 15](15_principle-loses-scope_b86v.md) made the claim; these three are what it looks like happening.
+
+What makes this one worth having is that the author saw it coming. Arthur Riel opened the book these heuristics come from by naming the fate he wanted to avoid — *goto considered harmful*, and the decades of rebuttal papers it produced — called his sixty **warning bells** rather than rules, and wrote that any of them may be declared inapplicable in a given design. Heuristic 2.9 travelled anyway, stripped to five words.
 
 ---
 
@@ -221,6 +223,8 @@ The five words that travel are the instruction. What stayed behind is the qualif
 The damage has the same shape. One rule reaching for a second entity is one edge, and one edge is nothing. It takes two such rules resolved to opposite sides before anything breaks, and nobody makes both decisions in the same sitting — or, usually, in the same year.
 
 So the compressed form is not merely shorter. It is the part of the advice that can be applied locally, separated from the part that can only be judged globally.
+
+**What makes the qualifier uncheckable here is distance across the model.** Somebody willing to hold every class in their head could settle whether an order and a customer are one key abstraction, today, with no new information. Nobody reviews that way, so the judgement never gets made. [Chapter 18](18_abstraction-as-insurance_4jk6.md)'s case loses its qualifier for the other available reason, and the two together are the whole of it.
 
 The direction of the error is set by the same asymmetry. Both readings are available for every rule, and which one gets taken tracks how many entities the rule reads.
 
