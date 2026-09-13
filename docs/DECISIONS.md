@@ -6997,3 +6997,26 @@ Theirs — *scope is simply the conditions or situations where a claim is applie
 **Proofread.** *Principle* takes a capital, being one of the five kinds, and both of the author's drafts lowercased it. The section heading *Go Proverbs, The Game vs The Language* was the book's only Title Case heading, a defect decision 155 recorded once already. And a trimmed quotation needs an ellipsis while a gloss inside one needs square brackets: *"I think you know them (proverbs) already"* is now *"… I think you know them [the proverbs] already"*.
 
 **Still open: the author's three-point position** on how a Principle should be written — the *when scope, then X* form, an unpacking paragraph beside it, and written beating speech because the original stays recoverable. The third is contradicted by [chapter 18](../18_abstraction-as-insurance_4jk6.md)'s case, where Martin's caveat was printed and lost anyway, so it needs its own interview.
+
+---
+
+## 176. The writer's move, and the three-point position resolved
+
+**Date.** 2026-09-13
+
+**Context.** Decision 175 left the author's three-point position open, on the draft's objection that [chapter 18](../18_abstraction-as-insurance_4jk6.md)'s Martin caveat was printed and lost anyway, which looked like a counter-case to *written beats an hour of speech*.
+
+**The author's reply, which settles it, and the draft's objection was wrong.**
+They asked the question that decides it: **"Did he formulate the principle with the scope like 'Depend on abstractions when ...' Or was it similar to Pike's failed ones without any scope? Not stating the scope with the principle sentence and stating it only later as a footnote would prove my theory."**
+And then: **"my three point position are not independent. They build on top of each other: claim with scope, scope expanded and then written."**
+
+Checked against the source. Martin's principle sentence carries no scope — the stated form is *high level modules should not depend upon low level modules; both should depend upon abstractions*, and what travels is five words. The criterion, *a "Good Dependency" is a dependency upon something that is very stable*, is pages away. The limit is the paper's last paragraph.
+So the scope was stated everywhere except inside the sentence. **Chapter 18 is not a counter-case; it is the position's prediction coming true**, and the draft had read the three points as independent claims when they are a chain whose first link was never satisfied.
+
+**The positive half was already in the chapter and nobody had named it.** The Tang-dynasty *Wei Qi Shi Jue* spends part of a four-character budget on the situation — *when in danger, sacrifice*; *against strong positions, play safely* — which is the author's *when scope, then X* form under the tightest constraint in the chapter. The Go project's own repair has the same shape.
+
+**Where the draft pushed back, and it sharpened point three rather than refuting it.** Martin's unpacking was written, published and findable in minutes, and did not travel; Pike's was spoken and did not travel either. The medium is not what separates them — neither was inside the unit that travels. So the unpacking buys **recovery** rather than transmission: it decides whether somebody who notices can rebuild the scope, which is the repair this chapter's cost section prices and [chapter 23](../23_never-written-down_at4r.md)'s corpus default forecloses.
+The author accepted that version.
+
+**Written as a prescriptive close**, at the end of *How to recognize the failure*, following [chapter 13](../13_missing-language-features_esqm.md)'s precedent of ending a recognition section on a move rather than a test. Three paragraphs: put the situation inside the sentence; necessary and not sufficient, because a named situation is a proxy that can be narrower than the conditions; and the unpacking buys recovery, not transmission.
+It is the chapter's first prescriptive passage — everything before it is diagnostic — and it is the author's material, argued for by them and corrected in one place by the draft.

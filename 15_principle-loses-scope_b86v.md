@@ -278,6 +278,12 @@ The question that does the work: **what did the person who said this go on to sa
 
 If the source can be reached, go and look. The scope is often still there, in the forty seconds after the sentence, in the talk nobody re-watched.
 
+Which gives a move for the other end, when you are the one writing the advice. **Put the situation inside the sentence**, because the sentence is the only part that travels. The oldest collection in this chapter does it under the tightest budget anyone has worked to — *when in danger, sacrifice*; *against strong positions, play safely*, four characters each — and the Go project's own repair has the same shape: *channels are for passing ownership of data; mutexes are for caches and state.*
+
+That is necessary and not sufficient, for the reason given above: a named situation is a proxy for the conditions, and a proxy can be narrower than what it stands for. Naming one buys a Principle that cannot be resolved outward. It does not buy one that reaches every case it should.
+
+**The unpacking beside it buys something different, and it is worth being exact about what.** The paragraph explaining the situation, the worked example, the talk — none of it travels with the sentence. Martin's ran to a full paper and stayed there; Pike's ran forty seconds and stayed there. What that material buys is not transmission but **recovery**: it is what somebody has to find when they notice the sentence is doing more than it should. Written or spoken makes no difference to whether it travels, and all the difference to whether it can be reached. What was never stated anywhere cannot be, which is [chapter 23](23_never-written-down_at4r.md)'s case.
+
 [Chapter 16](16_behaviour-placement_z47a.md) is the first of the three cases — object orientation's advice about where behaviour belongs, and the references that appear in both directions once two rules are placed by it.
 
 ---
