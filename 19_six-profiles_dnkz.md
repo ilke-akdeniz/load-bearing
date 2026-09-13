@@ -8,7 +8,7 @@
 
 - **Force profile** is the reading of every Force bearing on a system — and what makes a reading a *profile* is that at least one of those Forces sits at an intensity outside the ordinary range ([Ch. 03](03_forces_f4m5.md)), and stays there. Unlike domain, force profile is this book's term and is not standard vocabulary.
 
-[Chapter 19](19_force-map-method_r37x.md) gave the force-map method for one decision. This chapter runs it at the scale of whole systems, six times, and the finding is that the answers cluster.
+[Chapter 18](18_force-map-method_r37x.md) gave the force-map method for one decision. This chapter runs it at the scale of whole systems, six times, and the finding is that the answers cluster.
 
 ---
 
@@ -47,9 +47,9 @@ The left column is where each profile is commonly met, not what the profile is. 
 
 The Force is durability. A payroll system's tables will be read by software nobody has written yet, in a language nobody has chosen, after every original author has left.
 
-**What inverts: keep business rules out of the database.** In most software this is sound — logic in the schema is hard to test, hard to version, invisible to the debugger. Here it turns over, because a rule enforced only in application code is a rule that holds until the next application. [Chapter 14](14_smuggled-verdicts_8y69.md) works the placement, and [chapter 17](17_tdd-and-mocks_u8eu.md) shows what a constraint catches that a test double cannot.
+**What inverts: keep business rules out of the database.** In most software this is sound — logic in the schema is hard to test, hard to version, invisible to the debugger. Here it turns over, because a rule enforced only in application code is a rule that holds until the next application. [Chapter 14](14_smuggled-verdicts_8y69.md) works the placement, and [chapter 16](16_tdd-and-mocks_u8eu.md) shows what a constraint catches that a test double cannot.
 
-**And a second one: the database is an implementation detail you can abstract away.** [Chapter 18](18_abstraction-as-insurance_4jk6.md) takes this apart in full. The profile-level version is shorter: the abstraction sits in the layer that changes fastest, and the thing it claims to insure sits in the layer that changes slowest, so the insurance is filed against the wrong asset.
+**And a second one: the database is an implementation detail you can abstract away.** [Chapter 17](17_abstraction-as-insurance_4jk6.md) takes this apart in full. The profile-level version is shorter: the abstraction sits in the layer that changes fastest, and the thing it claims to insure sits in the layer that changes slowest, so the insurance is filed against the wrong asset.
 
 The ORM question follows from the same Force and is worth stating plainly, because it is usually argued as taste. An ORM is a productivity trade whose bill comes due at exactly the point where this profile's Force bites: the generated query, the migration, the constraint the mapping cannot express. It is not that ORMs are wrong here.
 
@@ -98,7 +98,7 @@ The Force is the shape of change. A compiler's abstract syntax tree — the tree
 
 **What inverts: nothing should be depended on by everything.** In most systems, a type with that many dependents is the god object [chapter 14](14_smuggled-verdicts_8y69.md) grades, and the advice to break it up is correct. Here it is exactly right that everything depends on the AST, and breaking it up produces a translation layer per consumer for no gain.
 
-The reason is [chapter 05](05_dependency-and-hiding_agjy.md)'s, applied to a shape it already names: the dependency graph is a pipeline, not a stack of layers, and the AST is at the bottom of it — depended on by many, depending on nothing. That is the *stable* position, which is what "depend on abstractions" was pointing at all along ([Ch. 18](18_abstraction-as-insurance_4jk6.md)). An AST is concrete, has no interface, and is one of the most stable types in the system. [Chapter 05](05_dependency-and-hiding_agjy.md) makes the same point about a parser's mutually recursive node types being nobody's idea of a violation.
+The reason is [chapter 05](05_dependency-and-hiding_agjy.md)'s, applied to a shape it already names: the dependency graph is a pipeline, not a stack of layers, and the AST is at the bottom of it — depended on by many, depending on nothing. That is the *stable* position, which is what "depend on abstractions" was pointing at all along ([Ch. 17](17_abstraction-as-insurance_4jk6.md)). An AST is concrete, has no interface, and is one of the most stable types in the system. [Chapter 05](05_dependency-and-hiding_agjy.md) makes the same point about a parser's mutually recursive node types being nobody's idea of a violation.
 
 What this profile adds is that the property generalises: **a type depended on by everything is a problem exactly when it also depends on things.** Fan-in alone is not the smell. Fan-in with fan-out is.
 
@@ -183,11 +183,11 @@ That is a finding about your system rather than a disappointment, and four thing
 
 ### A profile you are visiting rather than living in
 
-Reading this chapter and concluding you now understand embedded development is the failure it is easiest to commit. The readings above are real and they are also the first page. What they let you do is ask better questions and stop offering advice from your own profile as though it were general. What they do not do is substitute for the thing [chapter 19](19_force-map-method_r37x.md) charges for, which is knowing what the options cost.
+Reading this chapter and concluding you now understand embedded development is the failure it is easiest to commit. The readings above are real and they are also the first page. What they let you do is ask better questions and stop offering advice from your own profile as though it were general. What they do not do is substitute for the thing [chapter 18](18_force-map-method_r37x.md) charges for, which is knowing what the options cost.
 
 ### Domains that are not on this list
 
-Six is not a complete enumeration and nothing in the argument requires it to be. Scientific computing, data engineering, security-critical systems and machine-learning infrastructure each have force profiles that would produce their own inversions, and the method for finding them is [chapter 19](19_force-map-method_r37x.md)'s rather than this chapter's list.
+Six is not a complete enumeration and nothing in the argument requires it to be. Scientific computing, data engineering, security-critical systems and machine-learning infrastructure each have force profiles that would produce their own inversions, and the method for finding them is [chapter 18](18_force-map-method_r37x.md)'s rather than this chapter's list.
 
 ---
 
@@ -208,7 +208,7 @@ Six is not a complete enumeration and nothing in the argument requires it to be.
 - **Advice applied uniformly across a seam.** One allocation discipline, one error-handling convention, one testing strategy across both sides of a boundary where the force profile changes. Somebody chose a house style over a force reading.
 - **A translation layer whose only job is to make one side look like the other.** Frequently the seam done wrong: rather than a small explicit crossing, one profile's shapes are dressed up as the other's throughout.
 - **Fighting the lifecycle.** The framework calls you — that is what makes it a framework rather than a library — so its lifecycle is the shape of the profile. The failure is state held outside that lifecycle, effects run in the wrong phase, and its calls treated as an API to work around: the profile resisted rather than read. Almost always defended as separation of concerns.
-- **A type everything depends on, being broken up because everything depends on it.** In the compiler profile that shape is correct, and the split makes it worse: the type checker, the optimizer, the code generator, the formatter and the language server each get a narrowed view of the syntax tree and adapter code to convert back, so a change to the tree now touches the tree and five translations of it. Check the other direction before splitting. Fan-in with no fan-out is the stable position ([Ch. 18](18_abstraction-as-insurance_4jk6.md)), and a type sitting there is load-bearing rather than overgrown.
+- **A type everything depends on, being broken up because everything depends on it.** In the compiler profile that shape is correct, and the split makes it worse: the type checker, the optimizer, the code generator, the formatter and the language server each get a narrowed view of the syntax tree and adapter code to convert back, so a change to the tree now touches the tree and five translations of it. Check the other direction before splitting. Fan-in with no fan-out is the stable position ([Ch. 17](17_abstraction-as-insurance_4jk6.md)), and a type sitting there is load-bearing rather than overgrown.
 
 **In a conversation:**
 
@@ -221,8 +221,8 @@ The question that does the work: **which Force here is outside its ordinary rang
 
 Every inversion in this chapter is that question answered. If every Force sits in its ordinary range, you are in the ordinary case, the mainstream advice applies, and the interesting thing about your system is somewhere other than its architecture.
 
-[Chapter 21](21_idioms_7nkn.md) turns from profiles to ecosystems — why two languages solving the same problem settle on conventions that contradict each other, and what an Idiom is actually worth once you can see where it came from.
+[Chapter 20](20_idioms_7nkn.md) turns from profiles to ecosystems — why two languages solving the same problem settle on conventions that contradict each other, and what an Idiom is actually worth once you can see where it came from.
 
 ---
 
-[← Ch. 19](19_force-map-method_r37x.md)  ·  [Contents](00_toc.md)  ·  [Ch. 21 →](21_idioms_7nkn.md)
+[← Ch. 18](18_force-map-method_r37x.md)  ·  [Contents](00_toc.md)  ·  [Ch. 20 →](20_idioms_7nkn.md)

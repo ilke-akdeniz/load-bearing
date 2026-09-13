@@ -185,7 +185,7 @@ type Rates interface {
 
 *The constraint:* the interface is declared by the consumer rather than the provider, which is what reverses the arrow — a provider-declared interface leaves the dependency pointing exactly where it was ([Ch. 05](05_dependency-and-hiding_agjy.md)).
 
-*The cost:* an interface per boundary, and the habit of adding one wherever a boundary is drawn ([Ch. 17](17_tdd-and-mocks_u8eu.md) traces where that habit comes from).
+*The cost:* an interface per boundary, and the habit of adding one wherever a boundary is drawn ([Ch. 16](16_tdd-and-mocks_u8eu.md) traces where that habit comes from).
 
 **Pattern: Strangler fig** — route traffic through a facade, move one route at a time, delete the old system when the last route has moved.
 
@@ -472,7 +472,7 @@ Sorting the field left five patterns that do not answer a Force, and they fail i
 
 **Some answer a goal rather than a situation.** Property-based testing, the test-double taxonomy, and functional core / imperative shell all answer *how will I know this works*, and a goal is a property you have decided to want in the system: testability, observability, portability, a particular standard of code review. The test that separates it from a Force is whether you can decide to want less of it and stay honest. You cannot decide that four teams will stop needing to agree, or that the network will stop dropping packets — those are true whatever you want. You can decide that a prototype does not need to be portable, or that a script does not need tests, and nothing has been denied.
 
-That is a real gap in this chapter's method, not a defect in the patterns. [Chapter 17](17_tdd-and-mocks_u8eu.md) covers the testing material, and it is organized by what the techniques actually buy rather than by Force, for exactly this reason.
+That is a real gap in this chapter's method, not a defect in the patterns. [Chapter 16](16_tdd-and-mocks_u8eu.md) covers the testing material, and it is organized by what the techniques actually buy rather than by Force, for exactly this reason.
 
 **Some answer what the problem is rather than what the situation is.** A state machine is the right shape when the domain genuinely has states and transitions — an order that is placed, then paid, then shipped. That is a fact about the business, not about your concurrency or your latency budget. The same goes for Transaction Script, which [chapter 11](11_what-a-pattern-is-for_3xzc.md) uses as its compression example: it is what you write when *no* Force is pushing you anywhere else, and it is right far more often than its reputation suggests.
 
@@ -482,7 +482,7 @@ Confusing the Forces, goals, and problem shapes in play is one way people end up
 
 *Writers collide* gives you optimistic locking, pessimistic locking, single-writer partitioning, and a serializable transaction. Narrowing four to one needs the Force's **intensity** — [chapter 03](03_forces_f4m5.md)'s dial — and what you are willing to pay for it, and neither is written on the shelf the pattern came from.
 
-This chapter sorts. It does not decide. [Chapter 19](19_force-map-method_r37x.md) is the one that turns a set of Forces into a design.
+This chapter sorts. It does not decide. [Chapter 18](18_force-map-method_r37x.md) is the one that turns a set of Forces into a design.
 
 ### The listed entries are not endorsements
 

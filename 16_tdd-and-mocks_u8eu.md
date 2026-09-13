@@ -6,7 +6,7 @@
 >
 > **Mock your dependencies.**
 
-Two sentences, and they arrive together. This chapter is Part IV's second case and it is kept fair: tests are worth writing, and both practices are worth following in most situations. What is examined is that each travels as a settled default when the literature behind it records a stated purpose for one and an open disagreement about the other.
+Two sentences, and they arrive together. This chapter is Part IV's first case and it is kept fair: tests are worth writing, and both practices are worth following in most situations. What is examined is that each travels as a settled default when the literature behind it records a stated purpose for one and an open disagreement about the other.
 
 ---
 
@@ -372,7 +372,7 @@ Broken the way code actually breaks, not deleted in the abstract: someone drops 
 
 The wider version is worth asking before a release: **if this behaviour is broken in production tomorrow, can we say the cause is not in our code, because these tests would have caught it?** That one reaches what the narrow question misses — the dependency that is faked in every environment below production, the fixture data that is tidier than anything real. The honest answer is usually more specific, and less comfortable, than a coverage number.
 
-[Chapter 18](18_abstraction-as-insurance_4jk6.md) takes the last of the cases — an abstraction bought as insurance against a change that has not been scheduled, and shaped by the thing it was insuring against.
+[Chapter 17](17_abstraction-as-insurance_4jk6.md) takes the last of the cases — an abstraction bought as insurance against a change that has not been scheduled, and shaped by the thing it was insuring against.
 
 ---
 
@@ -388,4 +388,4 @@ The wider version is worth asking before a release: **if this behaviour is broke
 
 ---
 
-[← Ch. 16](16_behaviour-placement_z47a.md)  ·  [Contents](00_toc.md)  ·  [Ch. 18 →](18_abstraction-as-insurance_4jk6.md)
+[← Ch. 15](15_principle-loses-scope_b86v.md)  ·  [Contents](00_toc.md)  ·  [Ch. 17 →](17_abstraction-as-insurance_4jk6.md)

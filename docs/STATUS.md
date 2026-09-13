@@ -27,15 +27,14 @@ Only the author moves a chapter to **draft** or **ready**.
 | 13 | `13_missing-language-features_esqm.md` | **draft** | 2026-09-12 |
 | 14 | `14_smuggled-verdicts_8y69.md` | **draft** | 2026-09-12 |
 | 15 | `15_principle-loses-scope_b86v.md` | **draft** | 2026-09-13 |
-| 16 | `16_behaviour-placement_z47a.md` | **draft** | — |
-| 17 | `17_tdd-and-mocks_u8eu.md` | **draft** | — |
-| 18 | `18_abstraction-as-insurance_4jk6.md` | **draft** | — |
-| 19 | `19_force-map-method_r37x.md` | **draft** | — |
-| 20 | `20_six-profiles_dnkz.md` | **draft** | — |
-| 21 | `21_idioms_7nkn.md` | **draft** | — |
-| 22 | `22_style_9rng.md` | **draft** | — |
-| 23 | `23_never-written-down_at4r.md` | **draft** | — |
-| 24 | `24_assigned-to-the-team_3fjx.md` | **draft** | — |
+| 16 | `16_tdd-and-mocks_u8eu.md` | **draft** | — |
+| 17 | `17_abstraction-as-insurance_4jk6.md` | **draft** | — |
+| 18 | `18_force-map-method_r37x.md` | **draft** | — |
+| 19 | `19_six-profiles_dnkz.md` | **draft** | — |
+| 20 | `20_idioms_7nkn.md` | **draft** | — |
+| 21 | `21_style_9rng.md` | **draft** | — |
+| 22 | `22_never-written-down_at4r.md` | **draft** | — |
+| 23 | `23_assigned-to-the-team_3fjx.md` | **draft** | — |
 
 The contents page is [00_toc.md](../00_toc.md).
 

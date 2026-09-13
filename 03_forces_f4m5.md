@@ -252,7 +252,7 @@ public interface IPaymentRepository { Task Save(PaymentMethodEntity entity); }
 
 Adding *direct debit* means a new case, or a new field, in each of the six — and the mapper twice, once per direction. None of the six decides anything about direct debit that the others do not already know.
 
-That is not evidence of a careless team. It is a structure whose boundaries do not line up with the way change actually arrives, so every change crosses all of them. [Chapter 05](05_dependency-and-hiding_agjy.md) owns why fan-in sets the price of a change; [chapter 18](18_abstraction-as-insurance_4jk6.md) owns what these particular boundaries cost.
+That is not evidence of a careless team. It is a structure whose boundaries do not line up with the way change actually arrives, so every change crosses all of them. [Chapter 05](05_dependency-and-hiding_agjy.md) owns why fan-in sets the price of a change; [chapter 17](17_abstraction-as-insurance_4jk6.md) owns what these particular boundaries cost.
 
 **What changes with the Force:** whether structure that makes adding cheap is worth having. Frequency alone does not decide it — a thing that changes monthly in one file needs nothing.
 
@@ -295,7 +295,7 @@ The second version is not free: it costs a package boundary and a constructor ca
 
 **AI coding agents sit at the extreme of both questions.** The Force asks how many people must agree and how many will still be here, and for coding agents the answer to the second is *nobody*. The model was present for no conversation and keeps nothing between sessions, and its output arrives at a volume the review step was not sized for. The Forces that would settle the decisions inside that output are facts about your situation, held by you, and they reach the agent only as far as some prompt happened to carry them.
 
-So the prediction is specific. **Two authors with an agent in the loop sit where twenty developers sit.** A comment works only while somebody remembers the argument behind it, and a review habit is the same bet on memory made by a larger group — neither survives a contributor who was present for no conversation and keeps nothing between sessions. The migration named above — comment, then review habit, then type system — stops tracking headcount, and what still holds is what the compiler, a constraint, or a test enforces. [Chapter 23](23_never-written-down_at4r.md) turns to rules nobody wrote down at all, which have nothing to migrate.
+So the prediction is specific. **Two authors with an agent in the loop sit where twenty developers sit.** A comment works only while somebody remembers the argument behind it, and a review habit is the same bet on memory made by a larger group — neither survives a contributor who was present for no conversation and keeps nothing between sessions. The migration named above — comment, then review habit, then type system — stops tracking headcount, and what still holds is what the compiler, a constraint, or a test enforces. [Chapter 22](22_never-written-down_at4r.md) turns to rules nobody wrote down at all, which have nothing to migrate.
 
 ### Latency budget
 
@@ -495,7 +495,7 @@ That is the reversibility question again, and it is the only one that still work
 
 **A written force-map goes stale, and a stale one is worse than none**, because it looks authoritative and nobody re-derives what a document already answers. Date them, and treat an undated one as unsigned.
 
-**This chapter does not resolve conflicts.** Low latency pulls against durability. A small team pulls against a large blast radius. Naming both does not tell you which wins, and the honest answer is that trade-offs are decided rather than computed. [Chapter 19](19_force-map-method_r37x.md) works through what to do when Forces point in opposite directions.
+**This chapter does not resolve conflicts.** Low latency pulls against durability. A small team pulls against a large blast radius. Naming both does not tell you which wins, and the honest answer is that trade-offs are decided rather than computed. [Chapter 18](18_force-map-method_r37x.md) works through what to do when Forces point in opposite directions.
 
 ---
 

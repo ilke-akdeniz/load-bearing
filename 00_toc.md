@@ -1,6 +1,6 @@
 # Load-Bearing — Table of Contents
 
-Twenty-four chapters in five parts.
+Twenty-three chapters in five parts.
 
 Back to [the introduction](README.md).
 
@@ -32,15 +32,14 @@ Back to [the introduction](README.md).
 ## Part IV — Methodologies Versus Principles
 
 - 15. [How a Principle Loses Its Scope](15_principle-loses-scope_b86v.md)
-- 16. [Behaviour Placement and OOP](16_behaviour-placement_z47a.md)
-- 17. [TDD, Mocks, and What Testing Actually Buys](17_tdd-and-mocks_u8eu.md)
-- 18. [Abstraction as Insurance](18_abstraction-as-insurance_4jk6.md)
+- 16. [TDD, Mocks, and What Testing Actually Buys](16_tdd-and-mocks_u8eu.md)
+- 17. [Abstraction as Insurance](17_abstraction-as-insurance_4jk6.md)
 
 ## Part V — Programming With the Five Kinds
 
-- 19. [The Force-Map Method](19_force-map-method_r37x.md)
-- 20. [Six Profiles, Six Inversions](20_six-profiles_dnkz.md)
-- 21. [Idioms: Why Ecosystems Diverge](21_idioms_7nkn.md)
-- 22. [Style: The Level Where Being Right Doesn't Matter](22_style_9rng.md)
-- 23. [What Was Never Written Down](23_never-written-down_at4r.md)
-- 24. [Assigned to the Team, Owned by Nobody](24_assigned-to-the-team_3fjx.md)
+- 18. [The Force-Map Method](18_force-map-method_r37x.md)
+- 19. [Six Profiles, Six Inversions](19_six-profiles_dnkz.md)
+- 20. [Idioms: Why Ecosystems Diverge](20_idioms_7nkn.md)
+- 21. [Style: The Level Where Being Right Doesn't Matter](21_style_9rng.md)
+- 22. [What Was Never Written Down](22_never-written-down_at4r.md)
+- 23. [Assigned to the Team, Owned by Nobody](23_assigned-to-the-team_3fjx.md)

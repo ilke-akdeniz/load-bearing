@@ -203,7 +203,7 @@ Sometimes the platform, the contract, or the existing schema leaves one thing yo
 
 **It requires the expertise it appears to replace.** This is the condition to state most harshly, because the method reads like a substitute for experience and is the opposite. Most of that expertise goes into step one, for the reason given earlier: reading a Force is a judgement about which facts matter to the decision in front of you, not a measurement. Deriving *idempotency follows from at-least-once delivery* requires already knowing what at-least-once delivery implies. Reading a latency budget as a Force requires knowing what a mechanism costs. The method organizes knowledge you have; it does not supply knowledge you lack, and a force map produced by someone who cannot price the options is a confident-looking document with the wrong cells filled in.
 
-The same holds wherever the method is run with an AI coding agent in the loop, which [chapter 23](23_never-written-down_at4r.md) takes in full: overriding a recommendation is only possible for someone who can tell that it is a convention rather than a consequence, and that scales with depth in the specific domain.
+The same holds wherever the method is run with an AI coding agent in the loop, which [chapter 22](22_never-written-down_at4r.md) takes in full: overriding a recommendation is only possible for someone who can tell that it is a convention rather than a consequence, and that scales with depth in the specific domain.
 
 **It costs real time per decision, and pays only under specific Forces.** FlowCore carries thirty-eight recorded decisions for roughly five thousand lines. That ratio is justified by durability: those are schema decisions that outlive the code. On a script with a known death date the same ratio is waste, and saying so is not a hedge — it is the method applied to itself.
 
@@ -226,14 +226,14 @@ The same holds wherever the method is run with an AI coding agent in the loop, w
 
 - **"That's the standard approach."** True and irrelevant until someone says which force it answers. The useful reply names one: *standard where the callers are strangers — are ours?*
 - **"We might need to scale."** *Scale* is not a Force; [chapter 03](03_forces_f4m5.md) splits it into steady load, bursts and data volume, which have different designs. The question is which one, at what number.
-- **"Let's keep it flexible."** Flexible against what? Flexibility is bought against a specific change, and a change nobody can name is not one you can prepare for ([Ch. 18](18_abstraction-as-insurance_4jk6.md)).
+- **"Let's keep it flexible."** Flexible against what? Flexibility is bought against a specific change, and a change nobody can name is not one you can prepare for ([Ch. 17](17_abstraction-as-insurance_4jk6.md)).
 - **A design debate still running after ten minutes.** Write the Forces down instead. It ends more of these arguments than continuing them does.
 
 The question that does the work: **which fact about our situation would have to change for this to be the wrong choice?**
 
 Ask it of your own decisions and it produces the force map as a by-product. Ask it of advice arriving from outside and it is the same question [chapter 15](15_principle-loses-scope_b86v.md) ends on, pointed at the present rather than at a source. If there is no answer — if no fact about the situation could make the choice wrong — then what you are holding is not a design decision, and finding out which of the five kinds it actually is takes one pass through [chapter 02](02_the-five-kinds_cjx4.md).
 
-[Chapter 20](20_six-profiles_dnkz.md) runs the method across six force profiles and finds that the Forces each one pins invert a piece of standard advice — not weaken it, invert it, so that the thing to do is the opposite of what the advice says.
+[Chapter 19](19_six-profiles_dnkz.md) runs the method across six force profiles and finds that the Forces each one pins invert a piece of standard advice — not weaken it, invert it, so that the thing to do is the opposite of what the advice says.
 
 ---
 
@@ -244,4 +244,4 @@ Ask it of your own decisions and it produces the force map as a by-product. Ask 
 
 ---
 
-[← Ch. 18](18_abstraction-as-insurance_4jk6.md)  ·  [Contents](00_toc.md)  ·  [Ch. 20 →](20_six-profiles_dnkz.md)
+[← Ch. 17](17_abstraction-as-insurance_4jk6.md)  ·  [Contents](00_toc.md)  ·  [Ch. 19 →](19_six-profiles_dnkz.md)
