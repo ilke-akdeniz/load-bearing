@@ -1,8 +1,10 @@
 # How a Principle Loses Its Scope
+[-- this chapter title and the claim are a bit off now but the chapter's content and the title could be ok. I'm not sure if a title change is required now, you evaluate.]
 
 ## The claim
 
-**A Principle without its scope is read at the widest scope available, and under that reading correct code is a violation.**
+**A Principle without its scope is read loosely, and under that reading correct code looks like a violation.**
+[-- this version is more clear for me]
 
 **Scope** is where a claim applies. State the conditions that must hold and you have given it; name the situation it applies to and you have given it too:
 
@@ -282,7 +284,7 @@ Which gives a move for the other end, when you are the one writing the advice. *
 
 That is necessary and not sufficient, for the reason given above: a named situation is a proxy for the conditions, and a proxy can be narrower than what it stands for. Naming one buys a Principle that cannot be resolved outward. It does not buy one that reaches every case it should.
 
-**The unpacking beside it buys something different, and it is worth being exact about what.** The paragraph explaining the situation, the worked example, the talk — none of it travels with the sentence. Martin's ran to a full paper and stayed there; Pike's ran forty seconds and stayed there. What that material buys is not transmission but **recovery**: it is what somebody has to find when they notice the sentence is doing more than it should. Written or spoken makes no difference to whether it travels, and all the difference to whether it can be reached. What was never stated anywhere cannot be, which is [chapter 23](23_never-written-down_at4r.md)'s case.
+The unpacking beside the principle buys something different. The paragraph explaining the situation, the worked example, the talk — none of it travels with the sentence. Martin's ran to a full paper and stayed there; Pike's ran forty seconds and stayed there. What that material buys is not transmission but **recovery**: it is what somebody has to find when they notice the sentence is doing more than it should.
 
 [Chapter 16](16_behaviour-placement_z47a.md) is the first of the three cases — object orientation's advice about where behaviour belongs, and the references that appear in both directions once two rules are placed by it.
 
