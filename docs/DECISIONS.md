@@ -7149,3 +7149,24 @@ The step is now **Where the wide reading gives the right answer**, with the auth
 [Chapter 16](../16_tdd-and-mocks_u8eu.md)'s opening sentence is rewritten to say what the section is actually about: following the compressed sentence puts you where you should be, the qualification it omitted is what makes the placement right, and the agreement lasts exactly as long as the situation does.
 
 **The author's direct edits stand.** Splitting the opening paragraph separates the chapter's position from its subject, which were welded. *The wider version* became *a more general question*, since the chapter uses *wide* as a term of art four headings away. And two sentences of detail went from the mocked-test passage — *four lines, in which `Registration` turns an `IntegrityError` into a `DuplicateEmail`*, and *that much is true, and it stays true whether or not any database anywhere would ever raise one* — leaving the point unweakened, since **a test can only fail for a reason it can reach** follows immediately.
+
+---
+
+## 182. The Part IV counter-example loses its wrapper
+
+**Date.** 2026-09-14
+
+**Context.** Decision 181 renamed the section rather than questioning it. The author questioned it:
+
+> I now really cant see the framing and point of "Where the wide reading gives the right answer". The wide reading gives the right answer, and the scope or conditions for the situation holds. Nothing unexpected so far… a lucky shot I guess but what's the significance of this framed this way? My answer is: "not much". What's described is useful in it's own: Expanding on the scope, showing how change in the scope affects outcome. My suggestion is to remove the heading … and promote two cases to the root.
+
+**They are right, and the rename had treated a symptom.** A compressed sentence coinciding with the correct answer is a property of the situation, not a finding. Building a section heading on it announces a discovery and then delivers an identity — *the advice is right where its unstated conditions happen to hold* — while the material underneath is doing something else entirely: stating the scope positively. Mock what you cannot run, and say what the double is allowed to claim. Assert a call when the call is the behaviour at a boundary you own, and not when the fact lives on the other side of it.
+
+**Decision.** The wrapper goes in both cases. The subsections are promoted to top level, after one line saying they sit outside the argument above — which is `CLAUDE.md`'s existing preference applied: sections sit at the top level, named for what each one shows, so a chapter's contents read as its argument rather than as a rubric.
+[Chapter 16](../16_tdd-and-mocks_u8eu.md) gets two top-level sections, [chapter 17](../17_abstraction-as-insurance_4jk6.md) four. Seventeen's grouping sentence was already sound — *in each the interface earns what it costs, or is bought for a reason this chapter never disputes* — and survives as the bridge.
+
+**The rubric is rewritten rather than renamed**, since the heading was coming from there and would have come back. Step 5 is now *the situations where the advice's conditions hold*, with no heading of its own, and the rule records why the two rejected framings were rejected, so neither is re-derived: a stopped clock reads correctly twice a day and is still stopped.
+
+**The mandatory counter-example is not weakened by losing its label.** The obligation is that a chapter shows where its finding stops, worked rather than hedged. Both chapters still do, in more space than before; what is gone is a heading that framed the boundary as a coincidence.
+
+**Noticed and not acted on**, for the author's read of [chapter 17](../17_abstraction-as-insurance_4jk6.md): that chapter has *What taking the alternative costs* and no *What following the advice costs*, where the rubric asks for both — and the rubric's note says the two-section split was invented because of this chapter's own mixed list.

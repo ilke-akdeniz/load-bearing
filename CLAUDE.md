@@ -146,7 +146,7 @@ So a Part IV case uses this shape instead:
 2. **What the source said** — the scope, quoted from the primary source.
 3. **What the wide reading produces** — the demonstration, in code, and where the chapter's own finding lands.
 4. **Why the wide reading gets taken** — the mechanism.
-5. **Where the wide reading gives the right answer** — the mandatory counter-example, framed as *when following the compressed version puts you where you should be* rather than as an exception to a claim the chapter never made. Not *where the wide reading is right*: a stopped clock reads correctly twice a day and is still stopped, and what makes the placement right in these sections is the qualification the sentence left out.
+5. **The situations where the advice's conditions hold** — the mandatory counter-example, and it gets no rubric heading of its own. Work each as a top-level section named for what it shows, after one line saying they sit outside the argument above. Do not frame them as *where the wide reading is right*, or as where it *gives the right answer*: a compressed sentence coinciding with the correct answer is a property of the situation rather than a finding, so a heading built on it puts a triviality where the boundary belongs. What these sections are for is the scope stated positively — where the conditions hold, and what changes when they stop.
 6. **What it costs** — where both sides have a bill, two sections: *what following the advice costs* and *what taking the alternative costs*. Mixing them in one list is what made [chapter 16](16_tdd-and-mocks_u8eu.md)'s costs section unreadable.
 7. **How to recognize it**
 

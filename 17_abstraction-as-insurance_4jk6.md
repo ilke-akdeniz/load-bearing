@@ -165,11 +165,9 @@ So the practice is never disconfirmed by experience. A team that abstracted and 
 
 ---
 
-## Where the wide reading gives the right answer
-
 Four situations sit outside the argument above, and in each the interface earns what it costs — or is bought for a reason this chapter never disputes.
 
-### Portability is a contract term
+## Portability is a contract term
 
 If you sell software customers install against their own database, supporting three engines is something you have promised. That is simultaneous plurality: the implementations both load, the dispatch is real, and the interface is exercised on every deployment.
 
@@ -177,17 +175,17 @@ The Force is [chapter 03](03_forces_f4m5.md)'s *control of the callers* pointed 
 
 Note what this boundary also buys: because the interface is exercised, the lowest-common-denominator restriction stops being a cost with no benefit and becomes the actual product requirement. You are not giving up `for update` speculatively. You are giving it up because a customer runs something that lacks it.
 
-### The migration is funded and dated
+## The migration is funded and dated
 
 Once the move is decided, scheduled, and staffed, the abstraction stops being speculative. It may still be the wrong tool — the rollback section applies unchanged — but the objection has moved from *this will never happen* to *this is not how to do it*, and those need different conversations.
 
-### Tests are a second implementation
+## Tests are a second implementation
 
 The honest reason most repository interfaces exist is not a future engine. It is that the test suite wants something the production code does not, and Postgres in production with a fake in tests *is* simultaneous plurality by the definition above.
 
 [Chapter 16](16_tdd-and-mocks_u8eu.md) owns that argument and answers it: test against the real database, and reserve doubles for dependencies you cannot run. This chapter does not reopen it. But the dependency runs the other way — if you reject 17's position, the interface has a justification that has nothing to do with insurance, and none of this chapter reaches it.
 
-### One implementation is not the same as speculative
+## One implementation is not the same as speculative
 
 The claim is about interfaces justified by a future substitution, not about interfaces. [Chapter 05](05_dependency-and-hiding_agjy.md) owns the legitimate uses and they are common: narrowing what a consumer can reach, breaking a cycle, declaring a seam whose shape the consumer owns. Any of those can be right with exactly one implementation and no plan for a second — and the test is whether you can state the reason without using the word *later*.
 

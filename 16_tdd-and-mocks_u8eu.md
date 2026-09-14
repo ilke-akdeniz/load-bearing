@@ -303,11 +303,9 @@ The weakness was noticed at the time and written down instead of fixed. The entr
 
 ---
 
-## Where the wide reading gives the right answer
+Two situations sit outside the argument above.
 
-In two situations, following the compressed sentence puts you where you should be. What makes the placement right is the qualification the sentence left out, and not the sentence — so the agreement holds only as long as the situation does.
-
-### A dependency you genuinely cannot run
+## A dependency you genuinely cannot run
 
 The tight reading still leaves real cases, and they are the ones the wide reading was built for.
 
@@ -325,7 +323,7 @@ Vladimir Khorikov states a sharper version of the same line, and it is worth hav
 
 > Communications with managed dependencies are implementation details; communications with unmanaged dependencies are part of your system's observable behavior.
 
-### A mock asserting a call, where the call is the behaviour
+## A mock asserting a call, where the call is the behaviour
 
 Sometimes the effect under test *is* that a particular call was made. Registration should send a welcome email; the test asserts the mailer was invoked with the right address. There is no state to inspect afterwards, and the call is the whole of the requirement.
 
