@@ -166,7 +166,7 @@ Five situations sit outside the argument above.
 
 ## Injection is not abstraction
 
-Two decisions travel under one word, and they are separable:
+If what you have is the dependency passed in and no interface over it, none of the argument above reaches you. Two decisions travel under one word, and they are separable:
 
 1. **Is the dependency passed in, or does the component construct it?**
 2. **Is it passed in behind an interface, or as a concrete type?**

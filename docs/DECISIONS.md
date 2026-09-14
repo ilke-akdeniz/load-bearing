@@ -7222,3 +7222,18 @@ What breaks is `Create`, which returns the row as stored. Postgres writes it in 
 
 **Consequence.** Every SQLite mention is gone from the chapter, its two Sources entries with it, and the MySQL manual's `INSERT` and `ON DUPLICATE KEY UPDATE` pages are cited. Three ledger rows carried the old engine and the old result, including one that said *`for update` is absent from SQLite* — which, stated about MySQL, is false in a way that would have survived any check the repo has.
 One conversational bullet had to change for the same reason: *ask what happens when a query needs `for update`* is no longer a question MySQL cannot answer.
+
+---
+
+## 185. *Injection is not abstraction* moves to the back
+
+**Date.** 2026-09-14
+
+**The author's move**, in their second pass on [chapter 17](../17_abstraction-as-insurance_4jk6.md): the section came out of the front of the demonstration and joined the situations that sit outside the argument, taking the group from four to five.
+
+**It belongs there, and the sentence that justified its old position was the problem.**
+It used to open with *"one thing has to be separated out first, or [chapter 05](../05_dependency-and-hiding_agjy.md) refutes this chapter in a sentence."*
+That is not true, and checking it is what settled whether to keep a guard at the front. [Chapter 05](../05_dependency-and-hiding_agjy.md) already makes the same separation, in its own words: *"the two travel together so often that they get one name in conversation, but injecting a concrete type buys you a seam for testing and nothing structural, while inversion is what lets `billing` be extracted."*
+So the section was defending against an objection the cited chapter does not make, and it was doing so for fifteen lines before the chapter reached its demonstration. **The draft considered restoring a one-line forward pointer and did not**, because there is nothing to point away from.
+
+**One sentence added, to make the section answer its new frame.** The other four in that group open by naming a situation; this one opened on a distinction. It now says what puts it in the group — *if what you have is the dependency passed in and no interface over it, none of the argument above reaches you* — which is a scope statement, and is why the move works at all.
