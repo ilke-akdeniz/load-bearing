@@ -4,7 +4,7 @@
 
 > **Depend on abstractions, not concretions.**
 
-This is Part IV's second case. In practice the sentence produces an interface between your code and the things it depends on, and the one it is most often pointed at is the database.
+This is Part IV's second case. 
 
 ---
 
@@ -50,6 +50,7 @@ select balance from account where id = ? for update
 ```
 
 Now try to satisfy the same interface with SQLite, which is the second implementation this design exists to permit:
+[-- it would be much better if we had an example with a "real" database engine like Postgres vs Mysql for example. Some people could consider SQLite as a cheat: "that's not a real engine, that's only for ver small projects..." ]
 
 ```text
 OperationalError: near "for": syntax error
@@ -138,34 +139,36 @@ That is a scope statement written down by the author in the original paper. [Cha
 
 ### Two implementations at once, or one after another
 
-Almost every repository interface is justified by the same sentence: *we might need to switch databases.* That sentence covers two different situations, and the machinery is only earned by one of them.
+Almost every repository interface could be justified by the same feature: *the ability to switch databases.* This feature can be expanded to two different situations, and the machinery is only earned by one of them.
 
 - **Simultaneous plurality.** Two implementations exist at the same time and something chooses between them while the program runs. Tenant A on Oracle, tenant B on SQL Server. A vendor shipping on-premises software onto whatever the customer already has. Here the interface is *exercised* — both implementations load, and dispatch is a real decision the program makes.
 - **Sequential replacement.** SQL Server today, Postgres from next March, forever after. At every instant there is exactly one implementation. The interface is never exercised as an interface. It is a shape the code is held in, not a choice anything makes.
 
-*We need to support two databases* is the first. *We might need to switch databases* is the second, and it is the one that gets said in the meeting.
+*We need to support two databases* is the requirement for the first situation. *We might need to switch databases* is the one for the second.
 
 Martin's example is the first. Keyboard and printer and disk file are readers and writers that exist at the same time, and the whole argument for `Copy` turns on being able to drive any of them. **The names for the two cases are this book's and are not standard vocabulary**, but the distinction is in the source; what the folk version dropped is that only one of the two produces the stability the Principle asks for.
 
-Everything demonstrated earlier in this chapter is the second case. The two are easy to conflate because the code they produce is identical — the same interface, the same constructor, the same dependency arrow — and only the run-time behaviour differs, which nobody looks at.
+Everything demonstrated earlier in this chapter is the second case. The two are easy to conflate because the code they produce is very similar — the same interface, the same constructor, the same dependency arrow.
 
 ## Why the wide reading gets taken
 
-**What was dropped is not the scope but the criterion.** The five words that travel — *depend on abstractions, not concretions* — name the technique and omit the test the technique was supposed to pass. Read alone they are an instruction to introduce an interface on every seam. Read with the paper, they are an instruction to depend on something stable, of which an interface is one way and not a guarantee.
+[Chapter 15's](15_principle-loses-scope_b86v.md) principle losing it's scope is in work again. The version that travels — *depend on abstractions, not concretions* — names the technique and omits the test the technique was supposed to pass. Read alone it is an instruction to introduce an interface on every seam. Read with the paper, it becomes an instruction to depend on something stable, of which an interface is one way and not a guarantee. [-- why did I change this? You tried to invent a new concept to show that this one is different "criterion". It is not different; that's just another name for the scope and that invention is confusing and doesn't add any value.]
 
-That is [chapter 05](05_dependency-and-hiding_agjy.md)'s reading, which arrives at the same place from the mechanism: put what changes least at the bottom, and an interface is not automatically the thing that changes least. A repository interface over an evolving schema changes every time the schema does, and now changes in two files rather than one.
+That is in essence [chapter 05](05_dependency-and-hiding_agjy.md)'s reading: put what changes least at the bottom, and an interface is not automatically the thing that changes least. A repository interface over an evolving schema changes every time the schema does, and now changes in two files rather than one.
 
 The compressed form survives because the technique is checkable and the criterion is not. Whether a file contains an interface can be seen in review. Whether that interface is stable is a claim about the future, which nobody can settle at the moment the decision is made — so the half that can be enforced is the half that gets enforced.
+
+[-- after reading the last two paragraphs, I'm slightly confused. Depending on an interface that is geared towards Postgresql and Mysql for a hypothetical switch is a bad idea and that is cleear with the first paragraph of this section. And then we say that even if you agree on that, using an interface just for Postgresql is also a bad idea. That's what I read from the following two paragraphs, but the problem is that it's not clear why that is bad. And this part in chapter 05 answers that clearly so we should remind that: "This is the real content behind "depend on abstractions," and that phrase is badly misleading, because it is routinely read as *add an interface*... So the usable form is: *put the thing that changes least at the bottom.* Sometimes that is an interface. Often it is a data type, a constant, or a function signature that has earned its shape. Whether it is an interface is not the question.]
 
 **The second mechanism is that the cost and the benefit arrive at different times, and only one of them ever arrives.** The premium is paid continuously, in small amounts, by people who do not know they are paying it — a query not written, a feature not used, a mapping function maintained. The payout is a single event, in the future, that mostly does not occur; and on the rare occasion it does, the payout fails for reasons that are only visible at that moment.
 
 So the practice is never disconfirmed by experience. A team that abstracted and never migrated concludes the insurance was cheap. A team that abstracted and did migrate concludes the migration was hard, which it was, and rarely audits how much of the difficulty the abstraction removed.
 
-**Which is what separates this from YAGNI**, and the difference is worth stating because the two arguments get answered the same way and only one of the answers works. *You aren't gonna need it* says you paid for something that never happened, and the reply — *but what if we do need it* — is a good one, because sometimes you do. The argument here concedes that reply entirely. Assume the swap comes. The premium was still paid daily, the interface was still shaped by the engine it was insuring against, and the migration is still a data problem sitting in a slower layer than the abstraction. You paid, the event occurred, and the cover did not apply.
+**This is not YAGNI**. *You aren't gonna need it* says you paid for something that never happened, and the reply — *but what if we do need it* — is a good one, because sometimes you do. The argument here concedes that reply entirely. Assume the swap comes. The premium was still paid daily, the interface was still shaped by the engine it was insuring against, and the migration is still a data problem sitting in a slower layer than the abstraction. You paid, the event occurred, and the cover did not apply.
 
 ---
 
-Four situations sit outside the argument above, and in each the interface earns what it costs — or is bought for a reason this chapter never disputes.
+Four situations sit outside the argument above.
 
 ## Portability is a contract term
 
@@ -199,7 +202,7 @@ The claim is about interfaces justified by a future substitution, not about inte
 
 **Deciding needs information the moment does not supply.** *Is this plurality or replacement* is answerable, but answering it means knowing what the product promises customers, and the person who knows that is often not in the room when the layout is chosen.
 
-**Being right does not make it arguable.** The doctrine has books, a diagram, and a name; this has a syntax error and an argument. In a design review the practical move is usually to price the specific interface in front of you — what does it forbid, and what did we give up to keep it honest — rather than to take on the architecture.
+**Being right does not make it arguable.** The doctrine has books, a diagram, and a name; this has a syntax error and an argument. In a design review the practical move is usually to price the specific interface in front of you — what does it forbid, and what did we give up to keep it honest — rather than to take on the architecture. [-- this looks all over the place unless I miss something. just remove it]
 
 ---
 
@@ -208,15 +211,15 @@ The claim is about interfaces justified by a future substitution, not about inte
 **In a codebase:**
 
 - **An interface and its only implementation differ by an affix.** `IOrderRepository` / `OrderRepository`, `Store` / `PostgresStore`. When the two can only be told apart by a prefix, nobody decided what to hide; a shape was applied.
-- **A method that names a capability rather than a need.** `GetForUpdate`, `Upsert`, `BulkCopy`. Each is an engine feature promoted to a contract, and each is a thing the second implementation must have.
+- **A method that names a capability rather than a need.** `GetForUpdate`, `Upsert`, `BulkCopy`. Each is an engine feature promoted to a contract, and each is a thing the second implementation must have. [-- not sure about this one. What's wrong with order.BulkCopy or order.Upsert? Those are record keeping semantics that could be worthy of keeping separate when you also have order.Copy, order.Update. If you are trying to talk about more specific case expand this.]
 - **The interface changes in the same commit as the schema, every time.** Then it is not insulating code from the database; it is a second file that must agree with the first.
-- **A "we don't use that here" convention with no written reason.** Ask which engine the avoidance was protecting against, and whether anyone checked the feature is actually unsupported there.
+- **A "we don't use that here" convention with no written reason.** Ask which engine the avoidance was protecting against, and whether anyone checked the feature is actually unsupported there. [-- just remove this, said many time on other chapters]
 - **A second implementation that exists only in tests.** That is [chapter 16](16_tdd-and-mocks_u8eu.md)'s subject, and it means the insurance framing was never the real reason.
 
 **In a conversation:**
 
 - **"We might need to switch databases."** The question that separates the cases: *would two of them ever be running at once?* If no, it is sequential replacement and the interface is a shape, not a decision.
-- **"It's just an interface, it's cheap."** The interface is cheap. The feature set it commits you to is not, and that is the part nobody prices.
+- **"It's just an interface, it's cheap."** The interface is cheap to create. Maintaining it across all callers is not. The price you will pay when you need an engine feature that is not part of the interface will hurt.
 - **"This way we're not coupled to Postgres."** Ask what happens when a query needs `for update`.
 - **"We'll swap it out later if we need to."** *Later* is the tell. An interface with a reason that survives deleting that word is one [chapter 05](05_dependency-and-hiding_agjy.md) would defend.
 
@@ -224,7 +227,7 @@ The question that does the work: **if the swap happened next quarter, which of i
 
 Answer it by listing the steps — schema translation, data copy, verification, cutover, rollback, retuning — and marking the ones the abstraction touches. The usual answer is the call sites, which were never the expensive part, and the usual reaction to seeing the list is more useful than any argument in this chapter.
 
-Part V turns from diagnosis to method — [chapter 18](18_force-map-method_r37x.md) sets out how to read the Forces in front of you, derive the Principles they support, and check the Idioms of the language you are writing in, in that order.
+Part V turns from diagnosis to method — [chapter 18](18_force-map-method_r37x.md) sets out how to read the Forces in front of you and derive the Principles they support.
 
 ---
 
