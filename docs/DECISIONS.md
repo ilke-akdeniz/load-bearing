@@ -7170,3 +7170,32 @@ The step is now **Where the wide reading gives the right answer**, with the auth
 **The mandatory counter-example is not weakened by losing its label.** The obligation is that a chapter shows where its finding stops, worked rather than hedged. Both chapters still do, in more space than before; what is gone is a heading that framed the boundary as a coincidence.
 
 **Noticed and not acted on**, for the author's read of [chapter 17](../17_abstraction-as-insurance_4jk6.md): that chapter has *What taking the alternative costs* and no *What following the advice costs*, where the rubric asks for both — and the rubric's note says the two-section split was invented because of this chapter's own mixed list.
+
+---
+
+## 183. Chapter 17: an invented distinction removed, and the toy-engine objection answered
+
+**Date.** 2026-09-14
+
+**Context.** The author's first full-read pass on [chapter 17](../17_abstraction-as-insurance_4jk6.md), five tags.
+
+**An invented term, caught by the author and correctly.**
+The chapter had *"what was dropped is not the scope but the criterion."* Their note: **"You tried to invent a new concept to show that this one is different 'criterion'. It is not different; that's just another name for the scope and that invention is confusing and doesn't add any value."**
+Right, and [chapter 15](../15_principle-loses-scope_b86v.md)'s own definition settles it: *state the conditions that must hold and you have given the scope*. **Depend on something stable** is a condition, so it is the scope, and dressing it as a second concept bought a distinction the book does not have.
+`LEDGER.md`'s row was titled *The criterion was dropped, not the scope* and enshrined the invention; it now says the test was dropped and that the test **was** the scope.
+
+**The toy-engine objection, and it needed evidence rather than an argument.**
+Their note on the SQLite demonstration: **"Some people could consider SQLite as a cheat: 'that's not a real engine, that's only for ver small projects…'"**
+The executed SQLite result stays, because it is executed. What it lacked was a case between two engines nobody dismisses, and there is a clean one: Postgres returns the row it just wrote with `insert … returning id`, and **MySQL's `INSERT` has no `RETURNING` clause in any of its three documented forms** — verified against the 8.4 manual, which is now in Sources beside the Postgres page.
+An interface whose `Create` returns the stored row has promoted a Postgres capability exactly as `GetForUpdate` does, and the MySQL implementation has to emulate it with an insert and a select.
+**Offered and not yet taken:** the author offered to install MySQL. Docker is present but its daemon is not running, so this passage cites documentation rather than quoting output. Starting Docker would let both halves be run in throwaway containers, which is the version the objection actually asks for.
+
+**A confusion that was a missing sentence.** The author could not see why an interface over a single engine is also wrong, having accepted why one built for a hypothetical switch is. The chapter cited [chapter 05](../05_dependency-and-hiding_agjy.md) without carrying across the part that answers it. It now does, in 05's own terms: the question is not *is there an interface* but *is this the thing that changes least* — and a repository interface over one engine fails that because it moves whenever the schema moves, in two files rather than one.
+
+**Two removals and two sharpenings, all the author's calls.**
+*Being right does not make it arguable* is gone — it mixed an asymmetry of rhetoric with practical advice and read, in their words, all over the place.
+*A "we don't use that here" convention with no written reason* is gone, as [chapter 20](../20_idioms_7nkn.md) and [chapter 22](../22_never-written-down_at4r.md) own it.
+The `GetForUpdate` bullet had been read as an objection to domain methods called `Upsert` or `BulkCopy`, which it never was; it now names the test — whose vocabulary is the method in, the caller's or the engine's — and says explicitly that a domain object's own `Update` is not the subject.
+*The price you will pay … will hurt* now says what the price is: widen the interface and implement the new method everywhere, or write around it.
+
+**The author's handoff trim fixed a rule violation they may not have been aiming at.** [Chapter 18](../18_force-map-method_r37x.md)'s claim **is** the sequence — *Forces, then Principles, then Idioms* — so naming the three steps in the handoff stated the next chapter's claim a page early. Their shorter version still carried two of the three, so it now names the subject instead: the procedure, worked on one decision from FlowCore's log.

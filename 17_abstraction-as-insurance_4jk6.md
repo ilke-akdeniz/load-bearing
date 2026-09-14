@@ -4,7 +4,7 @@
 
 > **Depend on abstractions, not concretions.**
 
-This is Part IV's second case. 
+This is Part IV's second case.
 
 ---
 
@@ -50,13 +50,14 @@ select balance from account where id = ? for update
 ```
 
 Now try to satisfy the same interface with SQLite, which is the second implementation this design exists to permit:
-[-- it would be much better if we had an example with a "real" database engine like Postgres vs Mysql for example. Some people could consider SQLite as a cheat: "that's not a real engine, that's only for ver small projects..." ]
 
 ```text
 OperationalError: near "for": syntax error
 ```
 
 SQLite has no row-level locking to offer, so `GetForUpdate` cannot be implemented — not implemented differently, not implemented slowly, but not implemented. The method is on the interface because Postgres has the feature. **The abstraction did not abstract over the engine; it published one of the engine's capabilities as a promise to its own callers.**
+
+**It does not depend on SQLite being small.** Run the same exercise between two engines nobody calls a toy and the method changes rather than the outcome. Postgres can hand back the row it just wrote in one statement, with `insert … returning id`; MySQL's `INSERT` has no `RETURNING` clause, in any of its three documented forms. An interface carrying a `Create` that returns the stored row has promoted a Postgres capability in exactly the way `GetForUpdate` does, and the second implementation has to emulate it — insert, then select, and decide what to do about the gap between them.
 
 This is Hyrum's Law ([Ch. 04](04_families-of-law_q5c6.md)) operating on an interface you own. What leaked through became part of the contract, and it leaked from the thing you were planning to replace. The same happens to error taxonomies, to isolation-level names that mean different things in different engines, to whether a returned id is populated before or after commit, and to every timeout whose value was tuned against one planner.
 
@@ -152,13 +153,13 @@ Everything demonstrated earlier in this chapter is the second case. The two are 
 
 ## Why the wide reading gets taken
 
-[Chapter 15's](15_principle-loses-scope_b86v.md) principle losing it's scope is in work again. The version that travels — *depend on abstractions, not concretions* — names the technique and omits the test the technique was supposed to pass. Read alone it is an instruction to introduce an interface on every seam. Read with the paper, it becomes an instruction to depend on something stable, of which an interface is one way and not a guarantee. [-- why did I change this? You tried to invent a new concept to show that this one is different "criterion". It is not different; that's just another name for the scope and that invention is confusing and doesn't add any value.]
+[Chapter 15](15_principle-loses-scope_b86v.md)'s mechanism is at work again. The version that travels — *depend on abstractions, not concretions* — names the technique and omits the test the technique was supposed to pass. Read alone it is an instruction to introduce an interface on every seam. Read with the paper, it becomes an instruction to depend on something stable, of which an interface is one way and not a guarantee.
 
 That is in essence [chapter 05](05_dependency-and-hiding_agjy.md)'s reading: put what changes least at the bottom, and an interface is not automatically the thing that changes least. A repository interface over an evolving schema changes every time the schema does, and now changes in two files rather than one.
 
-The compressed form survives because the technique is checkable and the criterion is not. Whether a file contains an interface can be seen in review. Whether that interface is stable is a claim about the future, which nobody can settle at the moment the decision is made — so the half that can be enforced is the half that gets enforced.
+So the question the sentence appears to ask — *is there an interface here* — is not the question it was drawn from. [Chapter 05](05_dependency-and-hiding_agjy.md) states the usable form: put the thing that changes least at the bottom, and sometimes that is an interface, often it is a data type, a constant, or a function signature that has earned its shape. A repository interface over one engine fails that test not because one engine is too few, but because it is not the stable thing: it moves whenever the schema moves, and now it moves in two files.
 
-[-- after reading the last two paragraphs, I'm slightly confused. Depending on an interface that is geared towards Postgresql and Mysql for a hypothetical switch is a bad idea and that is cleear with the first paragraph of this section. And then we say that even if you agree on that, using an interface just for Postgresql is also a bad idea. That's what I read from the following two paragraphs, but the problem is that it's not clear why that is bad. And this part in chapter 05 answers that clearly so we should remind that: "This is the real content behind "depend on abstractions," and that phrase is badly misleading, because it is routinely read as *add an interface*... So the usable form is: *put the thing that changes least at the bottom.* Sometimes that is an interface. Often it is a data type, a constant, or a function signature that has earned its shape. Whether it is an interface is not the question.]
+The compressed form survives because the technique is checkable and the test is not. Whether a file contains an interface can be seen in review. Whether the thing it depends on is stable is a claim about the future, which nobody can settle at the moment the decision is made — so the half that can be enforced is the half that gets enforced.
 
 **The second mechanism is that the cost and the benefit arrive at different times, and only one of them ever arrives.** The premium is paid continuously, in small amounts, by people who do not know they are paying it — a query not written, a feature not used, a mapping function maintained. The payout is a single event, in the future, that mostly does not occur; and on the rare occasion it does, the payout fails for reasons that are only visible at that moment.
 
@@ -202,8 +203,6 @@ The claim is about interfaces justified by a future substitution, not about inte
 
 **Deciding needs information the moment does not supply.** *Is this plurality or replacement* is answerable, but answering it means knowing what the product promises customers, and the person who knows that is often not in the room when the layout is chosen.
 
-**Being right does not make it arguable.** The doctrine has books, a diagram, and a name; this has a syntax error and an argument. In a design review the practical move is usually to price the specific interface in front of you — what does it forbid, and what did we give up to keep it honest — rather than to take on the architecture. [-- this looks all over the place unless I miss something. just remove it]
-
 ---
 
 ## How to recognize it
@@ -211,15 +210,14 @@ The claim is about interfaces justified by a future substitution, not about inte
 **In a codebase:**
 
 - **An interface and its only implementation differ by an affix.** `IOrderRepository` / `OrderRepository`, `Store` / `PostgresStore`. When the two can only be told apart by a prefix, nobody decided what to hide; a shape was applied.
-- **A method that names a capability rather than a need.** `GetForUpdate`, `Upsert`, `BulkCopy`. Each is an engine feature promoted to a contract, and each is a thing the second implementation must have. [-- not sure about this one. What's wrong with order.BulkCopy or order.Upsert? Those are record keeping semantics that could be worthy of keeping separate when you also have order.Copy, order.Update. If you are trying to talk about more specific case expand this.]
+- **A repository method named after an engine feature rather than after what the caller wanted.** `GetForUpdate` is on the interface because Postgres has row locks; `Upsert` because it has `on conflict`. The test is whose vocabulary the name is in: *reserve the seat* is the caller's and can be satisfied any number of ways, while *get for update* is the engine's and commits every future implementation to having that mechanism. A domain object's own `Update` or `Copy` is not this — the bullet is about the interface that was drawn to make the engine replaceable.
 - **The interface changes in the same commit as the schema, every time.** Then it is not insulating code from the database; it is a second file that must agree with the first.
-- **A "we don't use that here" convention with no written reason.** Ask which engine the avoidance was protecting against, and whether anyone checked the feature is actually unsupported there. [-- just remove this, said many time on other chapters]
 - **A second implementation that exists only in tests.** That is [chapter 16](16_tdd-and-mocks_u8eu.md)'s subject, and it means the insurance framing was never the real reason.
 
 **In a conversation:**
 
 - **"We might need to switch databases."** The question that separates the cases: *would two of them ever be running at once?* If no, it is sequential replacement and the interface is a shape, not a decision.
-- **"It's just an interface, it's cheap."** The interface is cheap to create. Maintaining it across all callers is not. The price you will pay when you need an engine feature that is not part of the interface will hurt.
+- **"It's just an interface, it's cheap."** Writing it is cheap. What costs is the feature set it commits you to: the day a query needs something the interface does not expose, the options are to widen it — and implement the new method everywhere — or to write around it.
 - **"This way we're not coupled to Postgres."** Ask what happens when a query needs `for update`.
 - **"We'll swap it out later if we need to."** *Later* is the tell. An interface with a reason that survives deleting that word is one [chapter 05](05_dependency-and-hiding_agjy.md) would defend.
 
@@ -227,14 +225,15 @@ The question that does the work: **if the swap happened next quarter, which of i
 
 Answer it by listing the steps — schema translation, data copy, verification, cutover, rollback, retuning — and marking the ones the abstraction touches. The usual answer is the call sites, which were never the expensive part, and the usual reaction to seeing the list is more useful than any argument in this chapter.
 
-Part V turns from diagnosis to method — [chapter 18](18_force-map-method_r37x.md) sets out how to read the Forces in front of you and derive the Principles they support.
+Part V turns from diagnosis to method — [chapter 18](18_force-map-method_r37x.md) gives the procedure for taking one real decision from the Forces bearing on it to the design they support, worked on a decision out of FlowCore's log.
 
 ---
 
 ## Sources
 
 - SQLite, unsupported SQL — [sqlite.org/omitted.html](https://www.sqlite.org/omitted.html); upsert support — [sqlite.org/lang_upsert.html](https://www.sqlite.org/lang_upsert.html).
-- PostgreSQL, `SELECT … FOR UPDATE` — [postgresql.org/docs/current/sql-select.html#SQL-FOR-UPDATE-SHARE](https://www.postgresql.org/docs/current/sql-select.html#SQL-FOR-UPDATE-SHARE).
+- PostgreSQL, `SELECT … FOR UPDATE` — [postgresql.org/docs/current/sql-select.html#SQL-FOR-UPDATE-SHARE](https://www.postgresql.org/docs/current/sql-select.html#SQL-FOR-UPDATE-SHARE); `INSERT … RETURNING` — [postgresql.org/docs/current/sql-insert.html](https://www.postgresql.org/docs/current/sql-insert.html).
+- MySQL 8.4, `INSERT` syntax — [dev.mysql.com/doc/refman/8.4/en/insert.html](https://dev.mysql.com/doc/refman/8.4/en/insert.html).
 - Go, `database/sql` — [pkg.go.dev/database/sql](https://pkg.go.dev/database/sql).
 - Robert C. Martin, *OO Design Quality Metrics: An Analysis of Dependencies*, October 1994 — [PDF](https://objectmentor.com/resources/articles/oodmetrc.pdf).
 
