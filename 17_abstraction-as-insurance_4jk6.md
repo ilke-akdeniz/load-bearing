@@ -39,25 +39,33 @@ type Accounts interface {
 	Get(ctx context.Context, id int64) (Account, error)
 	// GetForUpdate locks the row until the surrounding transaction ends.
 	GetForUpdate(ctx context.Context, id int64) (Account, error)
+	// Create stores the account and returns it as stored.
+	Create(ctx context.Context, account Account) (Account, error)
 	Debit(ctx context.Context, id int64, amount int64) error
 }
 ```
 
-`GetForUpdate` is there because somewhere a balance is read and then written, and [chapter 07](07_time_mdbn.md) owns why that needs the row held still. Against Postgres it is one clause:
+Written against Postgres, two of those are one statement each:
 
 ```sql
 select balance from account where id = ? for update
+insert into account values (?, ?) returning id
 ```
 
-Now try to satisfy the same interface with SQLite, which is the second implementation this design exists to permit:
+Now satisfy the same interface with MySQL, which is the second implementation this design exists to permit. Both engines here are PostgreSQL 17.10 and MySQL 8.4, a stock table, the same two statements:
 
 ```text
-OperationalError: near "for": syntax error
+select … for update    postgres  100
+                       mysql     100
+
+insert … returning id  postgres  2
+                       mysql     ERROR 1064 (42000): You have an error in your SQL
+                                 syntax … near 'returning id' at line 1
 ```
 
-SQLite has no row-level locking to offer, so `GetForUpdate` cannot be implemented — not implemented differently, not implemented slowly, but not implemented. The method is on the interface because Postgres has the feature. **The abstraction did not abstract over the engine; it published one of the engine's capabilities as a promise to its own callers.**
+**The method that survived is the one the team would have worried about.** Row locking sounds like the proprietary thing and is not: MySQL holds the row exactly as asked. What cannot be implemented is `Create`, because MySQL has no `RETURNING` clause and the row as stored has to be fetched back in a second statement — which is a different number of round trips, and a gap in which somebody else can write.
 
-**It does not depend on SQLite being small.** Run the same exercise between two engines nobody calls a toy and the method changes rather than the outcome. Postgres can hand back the row it just wrote in one statement, with `insert … returning id`; MySQL's `INSERT` has no `RETURNING` clause, in any of its three documented forms. An interface carrying a `Create` that returns the stored row has promoted a Postgres capability in exactly the way `GetForUpdate` does, and the second implementation has to emulate it — insert, then select, and decide what to do about the gap between them.
+The method is on the interface because Postgres has the feature. **The abstraction did not abstract over the engine; it published one of the engine's capabilities as a promise to its own callers.**
 
 This is Hyrum's Law ([Ch. 04](04_families-of-law_q5c6.md)) operating on an interface you own. What leaked through became part of the contract, and it leaked from the thing you were planning to replace. The same happens to error taxonomies, to isolation-level names that mean different things in different engines, to whether a returned id is populated before or after commit, and to every timeout whose value was tuned against one planner.
 
@@ -65,13 +73,16 @@ This is Hyrum's Law ([Ch. 04](04_families-of-law_q5c6.md)) operating on an inter
 
 The way to keep the interface honest is to restrict yourself to what every candidate engine supports. That restriction is not free and it is not deferred: it is paid every day, in features of the database you are running right now.
 
-It is also harder to compute than it looks. `for update` is unavailable in SQLite, so it is out. But `on conflict` — the clause usually named first when people list Postgres-specific things to avoid — runs perfectly well there:
+It is also harder to compute than it looks, and the exercise above shows it going wrong in both directions. `for update` is the clause usually named first when people list Postgres-specific things to avoid, and it ports. `on conflict` is the upsert everybody writes, and it does not:
 
 ```text
-plain select           OK
-select ... for update  OperationalError: near "for": syntax error
-on conflict            OK
+insert … on conflict (id) do update
+  postgres  INSERT 0 1
+  mysql     ERROR 1064 (42000): … near 'conflict (id) do update set
+            balance = excluded.balance' at line 1
 ```
+
+MySQL has upsert — as `on duplicate key update`, with its own semantics for what counts as a conflict and what the affected-row count means. So this one is not absent, which is worse: it is present in a shape the interface cannot express without choosing one engine's spelling.
 
 So the lowest common denominator is not a list anyone knows in advance. It is the intersection of the feature sets of engines you have not chosen, which means in practice it gets approximated by superstition — a team avoiding `jsonb`, partial indexes, advisory locks, and generated columns because those *sound* proprietary, while the actual boundary sits somewhere nobody has checked.
 
@@ -218,7 +229,7 @@ The claim is about interfaces justified by a future substitution, not about inte
 
 - **"We might need to switch databases."** The question that separates the cases: *would two of them ever be running at once?* If no, it is sequential replacement and the interface is a shape, not a decision.
 - **"It's just an interface, it's cheap."** Writing it is cheap. What costs is the feature set it commits you to: the day a query needs something the interface does not expose, the options are to widen it — and implement the new method everywhere — or to write around it.
-- **"This way we're not coupled to Postgres."** Ask what happens when a query needs `for update`.
+- **"This way we're not coupled to Postgres."** Ask what happens the first time a write needs its row back — `returning` is not a clause every engine has, and the interface already promises the row.
 - **"We'll swap it out later if we need to."** *Later* is the tell. An interface with a reason that survives deleting that word is one [chapter 05](05_dependency-and-hiding_agjy.md) would defend.
 
 The question that does the work: **if the swap happened next quarter, which of its steps would this interface remove?**
@@ -231,9 +242,8 @@ Part V turns from diagnosis to method — [chapter 18](18_force-map-method_r37x.
 
 ## Sources
 
-- SQLite, unsupported SQL — [sqlite.org/omitted.html](https://www.sqlite.org/omitted.html); upsert support — [sqlite.org/lang_upsert.html](https://www.sqlite.org/lang_upsert.html).
 - PostgreSQL, `SELECT … FOR UPDATE` — [postgresql.org/docs/current/sql-select.html#SQL-FOR-UPDATE-SHARE](https://www.postgresql.org/docs/current/sql-select.html#SQL-FOR-UPDATE-SHARE); `INSERT … RETURNING` — [postgresql.org/docs/current/sql-insert.html](https://www.postgresql.org/docs/current/sql-insert.html).
-- MySQL 8.4, `INSERT` syntax — [dev.mysql.com/doc/refman/8.4/en/insert.html](https://dev.mysql.com/doc/refman/8.4/en/insert.html).
+- MySQL 8.4, `INSERT` — [dev.mysql.com/doc/refman/8.4/en/insert.html](https://dev.mysql.com/doc/refman/8.4/en/insert.html); `INSERT … ON DUPLICATE KEY UPDATE` — [dev.mysql.com/doc/refman/8.4/en/insert-on-duplicate.html](https://dev.mysql.com/doc/refman/8.4/en/insert-on-duplicate.html).
 - Go, `database/sql` — [pkg.go.dev/database/sql](https://pkg.go.dev/database/sql).
 - Robert C. Martin, *OO Design Quality Metrics: An Analysis of Dependencies*, October 1994 — [PDF](https://objectmentor.com/resources/articles/oodmetrc.pdf).
 

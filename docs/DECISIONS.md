@@ -7199,3 +7199,26 @@ The `GetForUpdate` bullet had been read as an objection to domain methods called
 *The price you will pay … will hurt* now says what the price is: widen the interface and implement the new method everywhere, or write around it.
 
 **The author's handoff trim fixed a rule violation they may not have been aiming at.** [Chapter 18](../18_force-map-method_r37x.md)'s claim **is** the sequence — *Forces, then Principles, then Idioms* — so naming the three steps in the handoff stated the next chapter's claim a page early. Their shorter version still carried two of the three, so it now names the subject instead: the procedure, worked on one decision from FlowCore's log.
+
+---
+
+## 184. SQLite is out of chapter 17, and the replacement inverted the argument
+
+**Date.** 2026-09-14
+
+**Context.** Decision 183 answered the author's toy-engine objection by keeping the executed SQLite demonstration and adding a documented Postgres-versus-MySQL case beside it. They rejected the compromise: **"just remove the SQLite completely from the example. Create a new example with postgre and mysql. Nobody would take SQLite as a serious db engine, it's not our job to argue with that judgement in this book."**
+
+That is the stronger position. A demonstration that has to be defended against a dismissal has already lost the argument it was making, and defending it spends the reader's attention on the engine instead of on the interface.
+
+**Both engines were run, at the author's offer and then without needing it.** They offered to install MySQL; Docker was present with its daemon stopped, so PostgreSQL 17.10 and MySQL 8.4.11 went into throwaway containers and every line quoted below is output.
+
+**The replacement did not swap one failure for another — it reversed which method fails, and that is a better chapter.**
+Under SQLite, `GetForUpdate` was the method that could not be implemented, because SQLite has no row-level locking. Under MySQL it implements fine: `select … for update` returns the row on both engines.
+What breaks is `Create`, which returns the row as stored. Postgres writes it in one statement with `insert … returning id`; MySQL answers `ERROR 1064 (42000) … near 'returning id' at line 1`.
+
+**So the method that survives is the one a team would have worried about, and the one that fails is the one nobody flags.** That is the chapter's *lowest common denominator is unknown* argument demonstrated rather than asserted, and the old SQLite version had it weaker: there the surprise was only that `on conflict` happened to work.
+
+**The second demonstration inverted with it.** Against SQLite, `on conflict` ran, which made the point that the boundary is not where people guess. Against MySQL it fails — `ERROR 1064 … near 'conflict (id) do update'` — and MySQL has upsert under another name, `on duplicate key update`, with its own semantics for what counts as a conflict. Absent would have been simpler; present in a different shape is the harder case, because the interface cannot express it without picking one engine's spelling.
+
+**Consequence.** Every SQLite mention is gone from the chapter, its two Sources entries with it, and the MySQL manual's `INSERT` and `ON DUPLICATE KEY UPDATE` pages are cited. Three ledger rows carried the old engine and the old result, including one that said *`for update` is absent from SQLite* — which, stated about MySQL, is false in a way that would have survived any check the repo has.
+One conversational bullet had to change for the same reason: *ask what happens when a query needs `for update`* is no longer a question MySQL cannot answer.
