@@ -6,7 +6,9 @@
 >
 > **Mock your dependencies.**
 
-Two sentences, and they usually arrive together. This chapter is Part IV's first case and it is kept fair: tests are worth writing, and both practices are worth following in most situations. What is examined is that each travels as a settled default when the literature behind it records a stated purpose for one and an open disagreement about the other.
+Two sentences, and they usually arrive together. This chapter is Part IV's first case. 
+
+Tests are worth writing, and both practices are worth following in most situations. What is examined is that each travels as a settled default when the literature behind it records a stated purpose for one and an open disagreement about the other.
 
 ---
 
@@ -106,7 +108,7 @@ FAILED (failures=1)
 
 One failure, not two. **`test_with_a_mocked_repository` still passes**, and it will keep passing for as long as the line `accounts.insert.side_effect = [...]` is in it.
 
-Mocking the database means nothing that happens inside the database is covered. The duplicate rule is enforced in the database. So the mocked test covers only what happens after the insert returns — four lines, in which `Registration` turns an `IntegrityError` into a `DuplicateEmail`. That much is true, and it stays true whether or not any database anywhere would ever raise one.
+Mocking the database means nothing that happens inside the database is covered. The duplicate rule is enforced in the database. So the mocked test covers only what happens after the insert returns.
 
 **A test can only fail for a reason it can reach.** Mocking a dependency removes the reasons that live inside it. What is left is a test of the seam.
 
@@ -302,6 +304,7 @@ The weakness was noticed at the time and written down instead of fixed. The entr
 ---
 
 ## Where the wide reading is right
+[-- this title is not ok. A broken clock shows the correct time twicer per day, that doesn't mean that the broken clodk is "right." "need no qualification at all" is not ok. The qualification is what makes you say that the payment gateway should be mocked.]
 
 In two situations the compressed advice is simply correct, and needs no qualification at all.
 
@@ -370,7 +373,7 @@ The question that does the work: **if this behaviour broke, would this test fail
 
 Broken the way code actually breaks, not deleted in the abstract: someone drops the constraint in a migration, someone returns early, someone updates the wrong column. Pick the likeliest one, make that change, run the test, put it back. It takes about a minute, and most of the value of mutation testing is available without the tooling, because the tests that matter are few and you already know which they are.
 
-The wider version is worth asking before a release: **if this behaviour is broken in production tomorrow, can we say the cause is not in our code, because these tests would have caught it?** That one reaches what the narrow question misses — the dependency that is faked in every environment below production, the fixture data that is tidier than anything real. The honest answer is usually more specific, and less comfortable, than a coverage number.
+A more general question is worth asking before a release: **if this behaviour is broken in production tomorrow, can we say the cause is not in our code, because these tests would have caught it?** That one reaches what the narrow question misses — the dependency that is faked in every environment below production, the fixture data that is tidier than anything real. The honest answer is usually more specific, and less comfortable, than a coverage number.
 
 [Chapter 17](17_abstraction-as-insurance_4jk6.md) takes the last of the cases — an abstraction bought as insurance against a change that has not been scheduled, and shaped by the thing it was insuring against.
 
