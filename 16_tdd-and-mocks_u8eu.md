@@ -6,7 +6,7 @@
 >
 > **Mock your dependencies.**
 
-Two sentences, and they usually arrive together. This chapter is Part IV's first case. 
+Two sentences, and they usually arrive together. This chapter is Part IV's first case.
 
 Tests are worth writing, and both practices are worth following in most situations. What is examined is that each travels as a settled default when the literature behind it records a stated purpose for one and an open disagreement about the other.
 
@@ -303,10 +303,9 @@ The weakness was noticed at the time and written down instead of fixed. The entr
 
 ---
 
-## Where the wide reading is right
-[-- this title is not ok. A broken clock shows the correct time twicer per day, that doesn't mean that the broken clodk is "right." "need no qualification at all" is not ok. The qualification is what makes you say that the payment gateway should be mocked.]
+## Where the wide reading gives the right answer
 
-In two situations the compressed advice is simply correct, and needs no qualification at all.
+In two situations, following the compressed sentence puts you where you should be. What makes the placement right is the qualification the sentence left out, and not the sentence — so the agreement holds only as long as the situation does.
 
 ### A dependency you genuinely cannot run
 

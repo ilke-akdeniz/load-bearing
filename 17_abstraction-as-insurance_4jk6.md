@@ -165,7 +165,7 @@ So the practice is never disconfirmed by experience. A team that abstracted and 
 
 ---
 
-## Where the wide reading is right
+## Where the wide reading gives the right answer
 
 Four situations sit outside the argument above, and in each the interface earns what it costs — or is bought for a reason this chapter never disputes.
 

@@ -7127,3 +7127,25 @@ That is `CLAUDE.md`'s *a source's register is not the book's*, caught in the wil
 
 **The author's rename finished.** *Narrow reading* became *tight reading*, on the same ground as the *narrow → scoped* change in the chapter that was cut: *narrow* reads as *incorrect*. One use at the far end of the chapter was left behind and now matches.
 [Chapter 17](../17_abstraction-as-insurance_4jk6.md) has no counterpart section, so there is no term to keep in step with.
+
+---
+
+## 181. *Where the wide reading is right* was the wrong name, and it was in the rubric
+
+**Date.** 2026-09-14
+
+**The author's objection, on [chapter 16](../16_tdd-and-mocks_u8eu.md)'s counter-example heading:**
+
+> this title is not ok. A broken clock shows the correct time twicer per day, that doesn't mean that the broken clodk is "right." "need no qualification at all" is not ok. The qualification is what makes you say that the payment gateway should be mocked.
+
+**It holds, and it convicts the chapter of its own thesis.** Both situations in that section are correct *because of* a qualification — mock what you cannot run; assert a call when the call is the behaviour at a boundary you own. The compressed sentence agrees with both by accident, having named neither. Calling the reading *right* credits the sentence with an answer the qualification produced, which is the move the whole chapter exists to catch.
+And *needs no qualification at all* was the opposite of true: the qualification is the entire reason.
+
+**Fixed in four places rather than one, because the heading came from the rubric.**
+`CLAUDE.md`'s Part IV shape named step 5 *Where the wide reading is right*, so both surviving cases carried it and any future one would have.
+The step is now **Where the wide reading gives the right answer**, with the author's clock in the rule so the distinction survives the next reading of it: a stopped clock reads correctly twice a day and is still stopped.
+[Chapter 17](../17_abstraction-as-insurance_4jk6.md)'s section needed only the heading — its opening already said the interface *earns what it costs, or is bought for a reason this chapter never disputes*, which was never the claim being objected to.
+
+[Chapter 16](../16_tdd-and-mocks_u8eu.md)'s opening sentence is rewritten to say what the section is actually about: following the compressed sentence puts you where you should be, the qualification it omitted is what makes the placement right, and the agreement lasts exactly as long as the situation does.
+
+**The author's direct edits stand.** Splitting the opening paragraph separates the chapter's position from its subject, which were welded. *The wider version* became *a more general question*, since the chapter uses *wide* as a term of art four headings away. And two sentences of detail went from the mocked-test passage — *four lines, in which `Registration` turns an `IntegrityError` into a `DuplicateEmail`*, and *that much is true, and it stays true whether or not any database anywhere would ever raise one* — leaving the point unweakened, since **a test can only fail for a reason it can reach** follows immediately.

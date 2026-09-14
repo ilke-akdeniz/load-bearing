@@ -146,7 +146,7 @@ So a Part IV case uses this shape instead:
 2. **What the source said** — the scope, quoted from the primary source.
 3. **What the wide reading produces** — the demonstration, in code, and where the chapter's own finding lands.
 4. **Why the wide reading gets taken** — the mechanism.
-5. **Where the wide reading is right** — the mandatory counter-example, framed as *when following the compressed version is correct* rather than as an exception to a claim the chapter never made.
+5. **Where the wide reading gives the right answer** — the mandatory counter-example, framed as *when following the compressed version puts you where you should be* rather than as an exception to a claim the chapter never made. Not *where the wide reading is right*: a stopped clock reads correctly twice a day and is still stopped, and what makes the placement right in these sections is the qualification the sentence left out.
 6. **What it costs** — where both sides have a bill, two sections: *what following the advice costs* and *what taking the alternative costs*. Mixing them in one list is what made [chapter 16](16_tdd-and-mocks_u8eu.md)'s costs section unreadable.
 7. **How to recognize it**
 
