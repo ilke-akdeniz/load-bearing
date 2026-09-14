@@ -12,24 +12,6 @@ This is Part IV's second case.
 
 Take the sentence as an instruction to put an interface between your code and anything it depends on, which is how it is usually taken, and point it at the database.
 
-### Injection is not abstraction
-
-One thing has to be separated out first, or [chapter 05](05_dependency-and-hiding_agjy.md) refutes this chapter in a sentence.
-
-Two decisions travel under one word, and they are separable:
-
-1. **Is the dependency passed in, or does the component construct it?**
-2. **Is it passed in behind an interface, or as a concrete type?**
-
-[Chapter 05](05_dependency-and-hiding_agjy.md) argues for the first, for a reason with nothing to do with substitution: a component reaching for `os.Getenv("DATABASE_URL")` is holding decisions that were never its to make. That argument stands and this chapter does not touch it.
-
-```go
-func NewOrders(database *sql.DB) *Orders     // injected, concrete
-func NewOrders(database Repository) *Orders  // injected, abstract
-```
-
-The first is fully injected: the composition root chooses the database, the component reaches for nothing, and the wiring is explicit. No abstraction is involved anywhere in that. What the second adds is the interface — and only that addition is the subject of this chapter.
-
 ### The interface is shaped by the engine it was written against
 
 Here is a repository interface, of the kind written to keep the database swappable:
@@ -180,7 +162,23 @@ So the practice is never disconfirmed by experience. A team that abstracted and 
 
 ---
 
-Four situations sit outside the argument above.
+Five situations sit outside the argument above.
+
+## Injection is not abstraction
+
+Two decisions travel under one word, and they are separable:
+
+1. **Is the dependency passed in, or does the component construct it?**
+2. **Is it passed in behind an interface, or as a concrete type?**
+
+[Chapter 05](05_dependency-and-hiding_agjy.md) argues for the first, for a reason with nothing to do with substitution: a component reaching for `os.Getenv("DATABASE_URL")` is holding decisions that were never its to make. That argument stands and this chapter does not touch it.
+
+```go
+func NewOrders(database *sql.DB) *Orders     // injected, concrete
+func NewOrders(database Repository) *Orders  // injected, abstract
+```
+
+The first is fully injected: the composition root chooses the database, the component reaches for nothing, and the wiring is explicit. No abstraction is involved anywhere in that. What the second adds is the interface — and only that addition is the subject of this chapter.
 
 ## Portability is a contract term
 
