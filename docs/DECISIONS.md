@@ -7237,3 +7237,25 @@ That is not true, and checking it is what settled whether to keep a guard at the
 So the section was defending against an objection the cited chapter does not make, and it was doing so for fifteen lines before the chapter reached its demonstration. **The draft considered restoring a one-line forward pointer and did not**, because there is nothing to point away from.
 
 **One sentence added, to make the section answer its new frame.** The other four in that group open by naming a situation; this one opened on a distinction. It now says what puts it in the group — *if what you have is the dependency passed in and no interface over it, none of the argument above reaches you* — which is a scope statement, and is why the move works at all.
+
+---
+
+## 186. The method was missing a rung of the book's own ladder
+
+**Date.** 2026-09-15
+
+**Context.** The author's first full-read pass on [chapter 18](../18_force-map-method_r37x.md), the book's procedure chapter.
+
+**The finding is theirs and it is the largest defect found in this read so far.** Reading their own quotation of [chapter 02](../02_the-five-kinds_cjx4.md) back, they wrote: *"I see a possible gap in this chapter, where the Laws stand in the force-map method was totally skipped."*
+
+Checked: before this commit, the word **Law** appeared in chapter 18 exactly once, inside the author's tag. The book's model is four kinds of advice on a ladder — Law, Principle, Idiom, Style — and the chapter that sets out how to check advice ran Forces, Principles, Idioms and never mentioned the top rung.
+
+**Fixed as a step rather than a mention**, because the Law step does something the others do not. A Principle is *derived* from the Forces; a Law is not derived at all. [Chapter 02](../02_the-five-kinds_cjx4.md): a Force never makes a Law false, it decides whether the Law has anything to act on. So the reading settles which Laws **bind**, and those bound the space the Principles are then chosen in — *two writers, same row* means check-then-act is a race here, and no design trades that away.
+The section is now *The four steps of force-mapping*, and the claim gained the beat: **read the Forces, take the Laws they make binding, derive the Principles they support, and check the Idioms last.**
+
+**The claim was the author's from this same pass, and it is kept with its scope intact.** *When designing non-trivial systems* is a named situation, which is [chapter 15](../15_principle-loses-scope_b86v.md)'s own prescription applied to the book's own advice — the claim states the scope inside the sentence. Only the missing rung and a typo were touched.
+
+**A sentence they were right to challenge.** On *"the same three steps in a different order do not fail loudly — they produce an answer that looks the same and cannot be checked"*: **"I find this paragraph hard to support. Delete this unless you can explain clearly how doing a design without reading forces or deriving prinoples doesn't fail loudly."**
+*Does not fail loudly* was the overreach: a design that ignores its Forces can fail extremely loudly, in production. What is true is narrower and is the reason the order matters at all — **the artifact does not record which order produced it.** An interface derived from *you do not control your callers* and one added because every repository here has one are the same file, with the same name, in the same commit. The rewrite says that, and cites the two chapters that are already chapter-length cases of it: [17](../17_abstraction-as-insurance_4jk6.md), where nobody can fault the design on inspection, and [16](../16_tdd-and-mocks_u8eu.md), where the mocked test passes faster than the one that would have caught the bug.
+
+**A paragraph that disintegrated, in their word, and did.** *A Force is the kind of thing that has an answer* was reaching for [chapter 02](../02_the-five-kinds_cjx4.md)'s *facts about where you are standing* and arriving at something that sounds like a definition of a question. It now says the plain thing: a Force is a fact, so disagreements about one are settled by going and finding out rather than by whoever argues longest — *can we change every call site* has an answer somebody can fetch this afternoon, and *is a repository good architecture* has none, which is why that argument runs for a year.

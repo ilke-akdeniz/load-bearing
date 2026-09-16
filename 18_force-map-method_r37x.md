@@ -2,23 +2,25 @@
 
 ## The claim
 
-**When designing no-trivial systems, read the Forces, derive the Principles and check the Idioms last.**
+**When designing non-trivial systems, read the Forces, take the Laws they make binding, derive the Principles they support, and check the Idioms last.**
 
 A Principle followed where its Forces are absent, and an Idiom followed where its Principles are not needed, are the two ways a design goes wrong while every decision in it still looks correct.
 
 ---
 
-## The three steps of force-mapping
+## The four steps of force-mapping
 
 **One: read the Forces.** Not the requirements — the Forces. [Chapter 03](03_forces_f4m5.md) names seven and gives each a question: how many run at once and do they touch the same state; how long what this writes outlives the code that wrote it; what happens when it is wrong and who finds out; how often it changes and how many places change with it; how many people must agree and how many will still be here; what the latency budget is and what fraction one mechanism costs; whether you can change every call site and would know if you broke one.
 
 Answers are values, not verdicts. *Concurrency: two writers, same row, twice a second.* Not *concurrency is important.*
 
-**Two: derive the Principles those Forces support.** A Principle is good advice given certain Forces ([Ch. 02](02_the-five-kinds_cjx4.md)), so with the Forces in hand the derivation is mechanical in one direction: information hiding follows from not controlling your callers; idempotency follows from at-least-once delivery; a version column follows from concurrent writers and a rule spanning the read and the write.
+**Two: take the Laws the reading makes binding.** A Force never makes a Law false; it decides whether the Law has anything to act on ([Ch. 02](02_the-five-kinds_cjx4.md)). *Two writers, same row* means check-then-act is a race here, and no amount of design trades that away — it is a fact the rest of the map has to be built around. Laws that do not bind go quiet and need no further thought: one writer, and the race is not a consideration rather than a risk you are accepting. This step is short, and skipping it is how a design gets drawn in a space that was already smaller than it looked.
 
-**Three: check the Idioms last.** An Idiom is a local convention. Once you know which Principles you need, the question about any convention becomes answerable: does this serve the Principle, is it neutral, or does it work against it? Before you know that, the same convention is just what people do here.
+**Three: derive the Principles those Forces support.** A Principle is good advice given certain Forces ([Ch. 02](02_the-five-kinds_cjx4.md)), so with the Forces in hand the derivation is mechanical in one direction: information hiding follows from not controlling your callers; idempotency follows from at-least-once delivery; a version column follows from concurrent writers and a rule spanning the read and the write.
 
-The sequence is the whole of the method. The same three steps in a different order do not fail loudly — they produce an answer that looks the same and cannot be checked. [-- are you sure that they produce an answer that looks the same and do not fail loudly? I find this paragraph hard to support. Delete this unless you can explain clearly how doing a design without reading forces or deriving prinoples doesn't fail loudly.]
+**Four: check the Idioms last.** An Idiom is a local convention. Once you know which Principles you need, the question about any convention becomes answerable: does this serve the Principle, is it neutral, or does it work against it? Before you know that, the same convention is just what people do here.
+
+The sequence is the whole of the method, and the reason to keep it is that **the artifact does not record which order produced it.** An interface derived from *you do not control your callers* and an interface added because every repository here has one are the same file, with the same name, in the same commit. A reviewer sees the result, and the result is where the difference is not. That is why the order has to be held rather than checked afterwards: [chapter 17](17_abstraction-as-insurance_4jk6.md) is a chapter-length case of a design nobody could fault on inspection, and [chapter 16](16_tdd-and-mocks_u8eu.md)'s mocked test passes faster than the one that would have caught the bug.
 
 ## Reading a Force is not measuring one
 
@@ -30,18 +32,7 @@ And a third thing decides more than either: **which facts count as Forces depend
 
 And the seven are not a closed list. They are the Forces that recur often enough to be worth naming, and a situation will sometimes hand you a fact that settles a question without appearing among them — what makes something a Force is the property below rather than membership of a list.
 
-So step one is not instrument work, and this is where the expertise matters. What the method claims is narrower than measurement and is still worth something: **a Force is the kind of thing that has an answer.** Two people disagreeing about whether callers can be changed are disagreeing about a fact, and can go and find out. Two people disagreeing about whether a repository is good architecture are not, and cannot. Moving an argument from the second kind to the first does not win it. It makes it winnable. [-- this paragraph starts ok but then it disintegrates: Force is not measurement => ok.  force is the kind of thing that has an answer => huh!  callers can be changed vs repository good architecture => ok, but that's obvious and what's your point anyway? 
-
-I think it could be good for you to remember what chaoter 02 says about forces: 
-
-"A **property of your situation**: is there concurrency, does the data outlive the code..."
-
-"Forces are not recommendations, and they are not negotiable by argument. They are facts about where you are standing. ([Chapter 03](03_forces_f4m5.md) is entirely about them.)
-
-A Force is read before any pattern or technique is in view because that's the groundwork to decide whether a Law binds and whether a Principle inverts."
-
-And now that I read the previouis sentence, I see a possible gap in this chapter, where the Laws stand in the force-map method was totally skipped. If you need a reminder take a look at chapter 02.
-]
+So step one is not instrument work, and this is where the expertise matters. What the method claims is narrower than measurement: **a Force is a fact about where you are standing** ([Ch. 02](02_the-five-kinds_cjx4.md)), not a position anyone holds, so a disagreement about one is settled by going and finding out rather than by whoever argues longest. *Can we change every call site* has an answer somebody can fetch this afternoon. *Is a repository good architecture* has none, which is why that argument can run for a year without either side being wrong. Moving a design dispute from the second kind to the first does not win it; it makes it winnable.
 
 ## Four systems, read cold
 
