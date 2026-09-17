@@ -7512,3 +7512,45 @@ This does not reverse decision 112's reasoning; the parts moved under it.
 This is a factual correction forced by 188 rather than a change to the rubric itself, and it is flagged here because the rubric is the author's.
 
 **Left alone and flagged.** `CLAUDE.md`'s Sources entry for the author's TechIter document carries bare chapter arrows — *(→ 05, 18)*, *(→ 19)*, *(→ 11)*, *(→ 18)* — that do not match any current chapter and did not match before this restructure either; *layering … (→ 18)* has not pointed at a layering chapter through at least two renumberings. Repairing them means recovering what they originally meant, which is the author's to say.
+
+---
+
+## 191. What a decision is, and where Part VI ties to the book
+
+**Date.** 2026-09-16
+
+**The author's question is what produced this**, and it was the right one to ask: *"How do these tie to 5 kinds and the book's claim? Look at the decision examples on ch 21 and 22, what are they? Principles, force readings, idioms? Or a combination or something more?"*
+
+**Answering it by enumeration settled the part.** Every decision in [chapter 21](../21_never-written-down_at4r.md) classifies against the model, and none of them is a new kind:
+
+| Decision | What justified it | Kind |
+|---|---|---|
+| Wrap the two reads in a transaction | Concurrent editors, and a torn read is a definition that never existed | A **Law** with something to act on, made live by two **Forces** |
+| Four queries rather than one join | *A join is equally atomic, so this one is legibility* | A choice with no Law behind it |
+| Defer completion-path locking | Cheap to add when the path is written | A **Principle** — [chapter 03](../03_forces_f4m5.md)'s reversibility rule |
+| Application-generated ids | *A client assembles a whole definition offline* | A **Force** overriding an **Idiom** |
+| UUIDv7 rather than v4 | *Primary keys on a table that only grows* | A **Force** overriding an **Idiom** |
+| `UNIQUE (definition_id, active)` | The schema outlives the code | A **Principle** licensed by durability |
+| Full-word identifiers | Readers decode abbreviations | **Style**, with its reason recorded |
+
+[Chapter 22](../22_assigned-to-the-team_3fjx.md)'s export ticket is the same shape compressed — three Force readings, each licensing a Principle.
+
+**So: a decision is not a sixth kind. It is what the five produce when they meet a situation** — and *forced against chosen* is therefore a classification against the ladder, run on your own code rather than on advice arriving from outside. Forced means no live alternative, because a Law binds or the situation left one option. Chosen means a Principle, an Idiom or a Style, each with real alternatives.
+
+**Which lands on the book's title.** [Chapter 01](../01_load-bearing_w8kq.md): *a wall is not load-bearing by nature, it is load-bearing by circumstance.* The transaction is forced by concurrency and blast radius, which is a circumstance. **Forced or chosen is *is this load-bearing?* asked about code instead of advice**, and it is unavailable afterwards because both kinds compile to the same bytes.
+
+The author's verdict: *"this clarification is the missing link between part VI and the book."*
+
+### Where it went, and a draft proposal that was narrowed
+
+The author asked for most of it at the front of [chapter 21](../21_never-written-down_at4r.md). **The draft argued for splitting it and the author took the split**: the frame at the front, the classification at the entry.
+
+Two reasons. *Forced / chosen / deferred* is already defined and worked in `What the entry has to hold`, so defining it at the front states the vocabulary twice; and the payoff only lands once the reader has seen an entry. The second is this file's own ordering rule — **lead with the situation, name the thing last**. A taxonomy of decision kinds before the reader has met a single decision reads as a textbook, where the same content after `get_definition` labels something they already understand.
+
+**The table above is not in the chapter, deliberately.** Its rows are decisions [chapter 21](../21_never-written-down_at4r.md) already shows one at a time and already classifies in place — the grilling section says outright that the agent's recommendation is *"the majority ecosystem's convention arriving in the voice of an answer, which is an Idiom with its locality stripped off."* A table collecting them afterwards is the recap `docs/LEDGER.md` exists to prevent. It is kept here instead, where the reasoning belongs.
+
+**[Chapter 22](../22_assigned-to-the-team_3fjx.md) needs no gloss**, which the author proposed and then doubted. Its existing passage carries the tie in its own terms: *"Code that reflects a decision perfectly still says nothing about which Forces were present, what the alternatives were, or why this one was chosen."*
+
+**Two defects in the draft's own new prose, caught before the commit.** It glossed Style as *"a Style nobody needs to agree about"*, which contradicts [chapter 02](../02_the-five-kinds_cjx4.md)'s *arbitrary, but worth being consistent about* and [chapter 20](../20_style_9rng.md)'s whole claim; replaced with 02's mechanical test, *neither the compiler nor the runtime can see it*. And it cited [chapter 03](../03_forces_f4m5.md) twice in consecutive paragraphs, so the second was reworded to 03's actual mechanism — *nothing accumulates while you wait*.
+
+**Consequence.** Part VI's tie is in the chapter rather than asserted in a part title. The part's name is still open; the author proposed *Applied five kinds: Decisions*, and the draft objected that the colon breaks the set — no other part uses one — and that *applied five kinds* inverts the natural order, while *the five kinds, applied* would over-claim, since Parts II to V are also the kinds applied. Proposed instead: **Your Own Decisions**, with **Decisions, Graded** as the runner-up mirroring Part III.
