@@ -495,7 +495,7 @@ That is the reversibility question again, and it is the only one that still work
 
 **Half of these are estimates about the future wearing a measurement's clothes.** Team size in two years. Change frequency of a feature that does not exist yet. Peak traffic for a product with no users. Concurrency and latency can be measured today; the rest are forecasts, and should be labelled as such wherever they are written down.
 
-**A written force-map goes stale, and a stale one is worse than none**, because it looks authoritative and nobody re-derives what a document already answers. Date them, and treat an undated one as unsigned.
+**A written force reading goes stale, and a stale one is worse than none**, because it looks authoritative and nobody re-derives what a document already answers. Date them, and treat an undated one as unsigned.
 
 **This chapter does not resolve conflicts.** Low latency pulls against durability. A small team pulls against a large blast radius. Naming both does not tell you which wins, and the honest answer is that trade-offs are decided rather than computed. What the reading buys is the shape of the hand-off, because a genuine conflict between latency and durability is a business decision wearing technical clothes: *we can acknowledge a write in under ten milliseconds, or we can guarantee it survives a machine dying, and not both on the same write* is answerable by somebody who does not write code. *Which is more important, speed or reliability* is not.
 

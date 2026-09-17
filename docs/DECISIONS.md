@@ -7446,3 +7446,41 @@ Renumbering: 19→18, 20→19, 21→20, 22→21, 23→22, with the renames in th
 Also moving: [chapter 19](../19_six-profiles_dnkz.md)'s opening and three boundary pointers, [chapter 23](../23_assigned-to-the-team_3fjx.md)'s four citations, [chapter 17](../17_abstraction-as-insurance_4jk6.md)'s handoff, the counts in `README.md` and `00_toc.md`, fourteen ledger rows, and `CLAUDE.md`'s two stale grilling references.
 
 **Still open from 187:** [chapter 23](../23_assigned-to-the-team_3fjx.md)'s claim rewrite and trim; the names for Parts IV and VI; and the deferred placements of [chapters 06](../06_layering_p2vk.md), [10](../10_organization_rjf9.md) and [14](../14_smuggled-verdicts_8y69.md).
+
+---
+
+## 189. The force map becomes the force reading, and a claim rewrite was refused
+
+**Date.** 2026-09-16
+
+**Context.** Pass 5 of decision 188: [chapter 22](../22_assigned-to-the-team_3fjx.md)'s claim and trim, the last open item that touched a chapter.
+
+**A defect the cut created.** With [chapter 18](../18_force-map-method_r37x.md) gone, **force map** had no owning chapter — it survived in 22's chain diagram, a section heading, three prose mentions, one line of [chapter 03](../03_forces_f4m5.md) and a ledger row, with nothing left to define it. Decision 5197 had settled its hyphenation by reading 18 *"which owns the term"*, so the orphaning was exact.
+
+**The author chose *force reading*.** The argument that decided it was found in the chapter rather than supplied: 22 had been calling it a reading all along while its heading said map — *"The size of the artifact is not the point. Whether the reading happened is the point"*, and *"ten minutes from somebody who can read the Forces."* [Chapter 03](../03_forces_f4m5.md) owns *read* as the verb, and [chapter 21](../21_never-written-down_at4r.md) now owns what the written entry holds and calls it an entry, so reviving *map* there would have undone the previous pass.
+
+### The draft proposed rewriting the claim, twice, and neither survived
+
+**The proposal.** Drop *Programming with the five kinds depends on individual ownership* on the grounds that it asserts a dependency the chapter does not test, and promote the chapter's closing split instead.
+
+**The author's first correction was to the replacement's content.** The draft had written *"an artifact assigned to a team does not get made"*, and they rejected the framing: *"The problem chapter explores is the lack of individual ownership not the existence of team ownership. Something can be owned by a team, that's fine, but in the end the individual ownership is what decides and what's required."*
+That is right, and the chapter says it twice — its title is *Assigned to the Team, Owned by Nobody*, and its boundary on an interface between two teams gives it **two** owners, *"and what does not change is that both names are individuals."* Team involvement is never the fault; an absent individual name is.
+
+**The author then rejected the rewrite entirely**, after re-reading: *"the original claim looks fine to me. I don't understand why we are trying to modify the claim and throw 'programming with the five kinds'. I think in a chapter that talks about the rules, force reading, solution and the code, that claim is ok."*
+
+**They were right, and the draft's error is worth recording because the test it used was the wrong one.**
+The draft had applied *strip the five kinds out and see whether the chapter survives*, judged it survived, and concluded the tie was declared rather than argued. That test was run on the chapter's surface. **The dependency is argued, in the chapter's first section** — *"Read downward it is unremarkable. Read upward it is the argument, because each level is load-bearing for the one above it"* — and *Why the claim holds* then takes the bottom level specifically: *"The chain says what has to exist. It does not say who makes it exist, and that is where it fails."* Two stages, and the claim covers both. Strip the five kinds and the chapter does change: artifact 2 goes, and the end goal stops being software that survives its Forces moving.
+
+**And one supporting fact the draft had backwards.** *Programming with the five kinds* was Part V's title before decision 188 deleted it. The draft offered that as a reason to cut the phrase. It is a reason to keep it: the claim is now the only place in the book that names the activity, and a chapter claim is a legitimate home for it.
+
+### The trim, and a second correction of the draft's own figure
+
+The draft had told the author that the retrospectives-and-standups material was *"the rest of"* the chapter and that everything not downstream of the ownership sentence was passenger weight.
+Measured, that was wrong: 241 words in the meetings section and about 120 in the recognition bullets, roughly **ten percent** of 3,470.
+The meetings section is not passenger weight at all — *"a meeting called to decide something nobody owns is a decision assigned to a room"* is the claim applied.
+
+**Three recognition bullets removed**, on the author's word: the standup where nobody is blocked, the pointing session, and the recurring meeting whose reason nobody can state. Each is about meeting practice rather than about who owns an artifact.
+What went with them is worth naming, since it was the strongest of the three: *"an estimate produced by a room rather than a person, which makes it a number about the room."*
+The remaining four codebase bullets now run one per artifact, and *and its calendar* in the heading still earns its place on the retrospective bullet.
+
+**Consequence.** [Chapter 22](../22_assigned-to-the-team_3fjx.md)'s claim is unchanged. *Force reading* replaces *force map* in 22, [chapter 03](../03_forces_f4m5.md) and the ledger. The open items from 187 and 188 that remain are the Part IV and Part VI names, and the deferred placements of [chapters 06](../06_layering_p2vk.md), [10](../10_organization_rjf9.md) and [14](../14_smuggled-verdicts_8y69.md).

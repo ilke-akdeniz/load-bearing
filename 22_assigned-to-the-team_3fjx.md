@@ -41,10 +41,10 @@ The trouble starts with everything upstream of it. There the same question produ
 Four artifacts sit between a request and the code. The claim here is not that these are the only ones or the most important ones — they are what following this book's advice lands you on.
 
 ```text
-1  the rules      what must always be true
-2  the force map  what presses on it, and what follows
-3  the solution   what we are actually going to build
-4  the code       what applies and enforces the rest
+1  the rules          what must always be true
+2  the force reading  what presses on it, and what follows
+3  the solution       what we are actually going to build
+4  the code           what applies and enforces the rest
 ```
 
 Each is described below by what it looks like, who should own it, and what that owner has to be able to do. **Owners are given by capability and never by title.** A title says what somebody is called in one company; the capability says whether the artifact will exist, and it is the same question in a startup of four and a bank of forty thousand.
@@ -59,13 +59,13 @@ The root, because everything after it is conditioned on it. What must always be 
 
 **What that owner must be able to do.** Get a decision out of the business and refuse a vague answer. Not translate a vague answer into a precise-sounding one — obtain a real one, which sometimes means going back three times.
 
-## 2. The force map
+## 2. The force reading
 
 [Chapter 03](03_forces_f4m5.md) owns the Forces themselves and [chapter 21](21_never-written-down_at4r.md) owns what a written entry has to hold. What is added here is that it is an artifact somebody owns, and that its size varies more than anything else in the list.
 
 **Form.** The Forces bearing on the work in front of you, given as values rather than as verdicts — *two writers, same row, twice a second*, not *concurrency is important* — and the Principles that follow, each with the Force that licenses it. Same rule as before: **the length should reflect the Forces that actually apply, not the prose style of whoever wrote it or the current mood of the team.**
 
-Often that is a paragraph. Sometimes there is no separate document at all, because the feature is small and the whole thing fits in the ticket — and sometimes one person owns the rules and the map together, which is fine as long as both were considered and both were recorded where they mattered.
+Often that is a paragraph. Sometimes there is no separate document at all, because the feature is small and the whole thing fits in the ticket — and sometimes one person owns the rules and the reading together, which is fine as long as both were considered and both were recorded where they mattered.
 
 The size of the artifact is not the point. Whether the reading happened is the point, and the difference shows up immediately:
 
@@ -94,7 +94,7 @@ Nothing in that second version is a design. It is a set of constraints, and hand
 
 This one is missing from the rest of the book. A reading of the Forces is **not a design**: it is a record of what was forced and what was chosen ([Ch. 21](21_never-written-down_at4r.md)), which is constraints rather than an answer.
 
-So there is a gap between the force map and the code, and it is where most of the actual thinking happens. The rules say what must be true. The map says what presses on it. Neither of them says *what we are going to build* — a grid on this screen, a reminder sent by text the day before, a nightly job that reconciles and a queue for the failures.
+So there is a gap between the force reading and the code, and it is where most of the actual thinking happens. The rules say what must be true. The reading says what presses on it. Neither of them says *what we are going to build* — a grid on this screen, a reminder sent by text the day before, a nightly job that reconciles and a queue for the failures.
 
 **Form.** A description of the thing, short enough to read in one sitting, in whatever register the reader needs — a paragraph, a sketch, a screen, a sequence. It is the first artifact a non-engineer can check, and that is most of its value.
 
@@ -104,7 +104,7 @@ This is what the word *architecture* is usually reaching for, and it is worth sa
 
 **What that owner must be able to do.** Choose. The rules constrain, the Forces constrain, and something still has to be picked from what is left, which no amount of further reading does for you.
 
-**When the rules and the map exist and there is still an argument, it is about the solution — and that is the argument worth having, because it is the only one of the three with genuine alternatives in it.**
+**When the rules and the reading exist and there is still an argument, it is about the solution — and that is the argument worth having, because it is the only one of the three with genuine alternatives in it.**
 
 ## 4. The code
 
@@ -209,9 +209,6 @@ So there are two honest responses and the handoff is neither. Grow a second pers
 
 - **A retrospective producing actions nobody owns.** The list is real, the observations are often good, and the same items appear next month. The claim in its plainest form.
 - **A design that keeps coming out wrong**, where every individual decision in it was defensible. Usually the third artifact was assigned to a room, so what shipped is the intersection of what nobody objected to.
-- **A standup where nobody is blocked.** Fifteen people report status, and the two who needed each other could have said so in a message.
-- **A pointing session where nobody has read the tickets.** An estimate produced by a room rather than a person, which makes it a number about the room.
-- **A recurring meeting whose reason nobody can state**, other than that it has always been there. The test is not whether it is useful — it is whether anybody can name what it is for, or admit that it answers something other than the work.
 - **A design document describing only the happy path, or advice about a bug from somebody who has not reproduced it.** Both are ownership without the context that justifies it. Whoever wrote from the happy path never ran the system under load or under an awkward customer, and whoever advises on an unseen bug is spending authority they have not earned.
 - **Business rules that live only in the code.** Nobody owned the first artifact, so the invariants exist as an emergent property of whatever the code currently does, and the only way to answer *is this correct* is to ask the code what it does and agree with it, until an important user says that behaviour is wrong.
 
