@@ -7414,6 +7414,14 @@ The author's version is better, and three facts found while checking it say why.
 | Nygard's ADR comparison | [12](../12_patterns-that-survive-translation_us2k.md) | The ledger already records that `us2k` owns the ADR pattern |
 | Everything else | — | Already owned by 03, 19, 12, 15, 02 and 17 |
 
+**Corrected while routing, 2026-09-16.** The Nygard comparison went to [chapter 22](../22_never-written-down_at4r.md) rather than to [chapter 12](../12_patterns-that-survive-translation_us2k.md).
+12 has no `## Sources` section, so it is the wrong home for a new citation under this repo's own rule that Sources lists every work a chapter cites.
+22 has one, and the comparison now sits beside the entry it is a comparison *to*, which is the stronger placement anyway.
+12 keeps the ADR catalogue entry it already owned; nothing moved out of it.
+
+**Also dropped rather than routed:** [chapter 18](../18_force-map-method_r37x.md)'s interface example — *an interface derived from a Force and one added because every repository here has one are the same file* — because [chapter 22](../22_never-written-down_at4r.md) already makes that point with its own transaction, and with the column default and the v4 constructor in the grilling section.
+Routing it would have put two examples of one claim in one chapter.
+
 **[Chapter 03](../03_forces_f4m5.md)'s forward promise is settled by dropping it.**
 03 currently says *"chapter 18 works through what to do when Forces point in opposite directions."*
 Four of 18's five moves are 03's own restated; of the two that are not, *escalate with the quantities named* is kept as one sentence in 03 and *look for the third option* goes.

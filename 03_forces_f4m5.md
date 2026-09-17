@@ -405,6 +405,8 @@ The bill is visible in any long-lived library. Go promised that code written for
 | Latency budget | What is the time budget, and what does one mechanism cost of it? |
 | Control of the callers | Can I change every call site, and would I know if I broke one? |
 
+**Seven is not a closed list.** These are the Forces that recur often enough to be worth naming, and a situation will sometimes hand you a fact that settles a question without appearing here — how a client assembles a request, what an auditor is entitled to ask for. What makes something a Force is the property above rather than membership of this table: it is checkable, and it says what would have to change for the answer to change.
+
 ---
 
 ## Why the claim holds
@@ -495,7 +497,7 @@ That is the reversibility question again, and it is the only one that still work
 
 **A written force-map goes stale, and a stale one is worse than none**, because it looks authoritative and nobody re-derives what a document already answers. Date them, and treat an undated one as unsigned.
 
-**This chapter does not resolve conflicts.** Low latency pulls against durability. A small team pulls against a large blast radius. Naming both does not tell you which wins, and the honest answer is that trade-offs are decided rather than computed. [Chapter 18](18_force-map-method_r37x.md) works through what to do when Forces point in opposite directions.
+**This chapter does not resolve conflicts.** Low latency pulls against durability. A small team pulls against a large blast radius. Naming both does not tell you which wins, and the honest answer is that trade-offs are decided rather than computed. What the reading buys is the shape of the hand-off, because a genuine conflict between latency and durability is a business decision wearing technical clothes: *we can acknowledge a write in under ten milliseconds, or we can guarantee it survives a machine dying, and not both on the same write* is answerable by somebody who does not write code. *Which is more important, speed or reliability* is not.
 
 ---
 

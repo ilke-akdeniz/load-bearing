@@ -55,7 +55,7 @@ The second row is revision 1 of a definition that has three steps. **No such def
 
 *(The interleaving is forced in the run above so that it happens every time. In a running system it happens when it happens, which is the part that makes it expensive to find.)*
 
-[Chapter 18](18_force-map-method_r37x.md) maps this same decision as a log entry, with its Forces named and the transaction marked as forced rather than chosen. This is the same decision seen from the other end: in the code, where none of that is visible.
+Nothing in either version says which of the two is right, and the file is where somebody will look. The entry that would have settled it is later in this chapter, and it names the Forces and marks the transaction as forced rather than chosen.
 
 ## Why asking afterwards does not get it back
 
@@ -93,9 +93,9 @@ Finally, one thing does survive without deliberate effort, and it is worth separ
 
 ## Grilling: making the decision happen in the open
 
-[Chapter 18](18_force-map-method_r37x.md)'s procedure assumes you can name the Forces before the design exists. Usually you cannot — not because you are careless, but because you do not yet know which decisions are about to be made, so you do not know which facts about your situation are about to matter.
+Reading the Forces before the design exists assumes you already know which decisions are about to be made. Usually you do not — not because you are careless, but because until the decisions are in front of you there is no telling which facts about your situation are about to matter.
 
-One technique inverts the flow, and it is worth stating in full because it is [chapter 18](18_force-map-method_r37x.md)'s shape — Forces, then Principles, then Idioms — with the roles swapped. Instead of supplying Forces up front, you have the decisions surfaced one at a time and supply the fact that settles each one as it arrives. The prompt, quoted as the author of this book uses it:
+One technique inverts the flow, and it is worth stating in full. [Chapter 02](02_the-five-kinds_cjx4.md) gives the direction that makes a claim checkable: the facts first, the advice after. Grilling runs that backwards on purpose — the decisions are surfaced one at a time, and you supply the fact that settles each one as it arrives. The prompt, quoted as the author of this book uses it:
 
 > Interview me relentlessly about every aspect of this until we reach a shared understanding. Walk down each branch of the decision tree, resolving dependencies between decisions one-by-one. For each question, provide your recommended answer.
 >
@@ -107,7 +107,7 @@ One technique inverts the flow, and it is worth stating in full because it is [c
 
 The technique is not this book's. It comes from Matt Pocock's skills repository, as `skills/productivity/grilling/SKILL.md`, and this book's author encountered this use of it through a video by Jason Ku. The version quoted above is an earlier one, frozen here because the upstream text has since changed.
 
-**The split between fact and decision is the load-bearing line.** Facts get looked up; decisions get put to the human. That is [chapter 18](18_force-map-method_r37x.md)'s step one and step two, separated and given owners — and the separation is what makes the output auditable, because every decision arrives with a recommendation you either took or overrode.
+**The split between fact and decision is the load-bearing line.** Facts get looked up; decisions get put to the human. That is reading a Force and choosing from what it leaves, separated and given different owners — and the separation is what makes the output auditable, because every decision arrives with a recommendation you either took or overrode.
 
 The recommendation attached to each question is where the value is, and it takes an example to see why. Two questions from the start of a real library, with the answers that were actually given:
 
@@ -131,7 +131,7 @@ Both recommendations were sensible, both were overridden, and the same kind of t
 
 The first is about how the library is used — a client builds a whole definition in memory before any part of it exists, so ids cannot come from a column default without splitting the call. The second is a latency-budget reading at volume: these are primary keys on a table that only grows, and v4 scatters inserts across the index.
 
-Only the second is one of [chapter 03](03_forces_f4m5.md)'s seven, which is [chapter 18](18_force-map-method_r37x.md)'s point that the seven are not a closed list. What makes both of them Forces is that each is checkable, and each says what would have to change for the answer to change.
+Only the second is one of [chapter 03](03_forces_f4m5.md)'s seven, which does not claim to be a closed list. What makes both of them Forces is that each is checkable, and each says what would have to change for the answer to change.
 
 And note who supplied them. In both cases the human, because both are facts about this situation — which is the one thing a recommendation drawn from what is common cannot contain. The recommendation is the majority ecosystem's convention arriving in the voice of an answer, which is an Idiom ([Ch. 02](02_the-five-kinds_cjx4.md)) with its locality stripped off.
 
@@ -139,7 +139,7 @@ The alternative is not that these two decisions go unmade. Without the interview
 
 The narrower point here is the one worth keeping: **grilling does not produce better answers. It produces answers somebody can disagree with.**
 
-And disagreeing with them later requires that they were written down. The interview produces a sequence of decisions with the reasoning attached, and the reasoning is the perishable half: an hour afterwards the code is still there and the override is not. So the last step of the loop is that each settled decision goes into the log — [chapter 18](18_force-map-method_r37x.md)'s artifact, and the reason FlowCore's decision 12 was available to be mapped months after anyone made it.
+And disagreeing with them later requires that they were written down. The interview produces a sequence of decisions with the reasoning attached, and the reasoning is the perishable half: an hour afterwards the code is still there and the override is not. So the last step of the loop is that each settled decision goes into the log.
 
 That closes the circuit, and it is worth seeing as one thing rather than three. The interview surfaces the decision, the log records what settled it, and a standing instructions file promotes the answers that keep recurring into constraints so the same question stops being asked. Grilling without that second step is a conversation rather than a record, and a conversation is exactly what does not survive the session.
 
@@ -171,7 +171,45 @@ The decision log carries the same boundary throughout — *"full definition-side
 
 **Phases are easy to skip in AI-assisted development.** The whole implementation can arrive in an afternoon, and an afternoon does not feel like it needs a plan. Settling the phases before any of it is written is what keeps the decisions far enough apart to be asked about one at a time.
 
-**Not every piece of work needs the phases.** A proof of concept, a script you will delete, an obvious fix with one option — the interview is overhead and the conventional answer is fine ([Ch. 18](18_force-map-method_r37x.md)). The risk is that the category is decided at the start and not revisited: the one-off that turns out to be the product, and the obvious fix that turns out to be three faults interacting.
+**Not every piece of work needs the phases.** A proof of concept, a script you will delete, an obvious fix with one option — the interview is overhead and the conventional answer is fine. The risk is that the category is decided at the start and not revisited: the one-off that turns out to be the product, and the obvious fix that turns out to be three faults interacting.
+
+## What the entry has to hold
+
+Here is the entry behind the decision the function at the top of this chapter is pared down from. FlowCore's `Get` returns a four-level tree — definition, statuses, steps, actions — and its own log entry is prose; this sets out the same information in the order the reasoning arrived.
+
+```text
+ decision    Get returns the whole definition tree, assembled from four
+             queries run inside a repeatable-read transaction
+
+ forces      concurrency    definitions are edited while being read
+             blast radius   a torn read is a definition that never
+                            existed: steps from before an edit,
+                            actions from after
+             latency        four round trips, against one join whose
+                            fan-out is 15 rows to dedupe
+             durability     schema; outlives the code that reads it
+             callers        a library, so they are strangers
+
+ forced      the transaction, by concurrency and blast radius together
+ chosen      four queries over one join; a join is equally atomic, so
+             this one is legibility and can go back
+ deferred    completion-path locking, until that path is written
+
+ revisit if  definitions stop being editable while readable, or the
+             tree stops fitting in four queries
+```
+
+**Forced, chosen and deferred are the three lines nothing else in a codebase records.** The code shows a transaction. It does not show that the transaction was forced — that concurrency and blast radius together left no other option — so whoever reads it later cannot tell whether removing it is a cleanup or the data-loss bug at the top of this chapter. The entry says which, in its own words: the wrapper is taken now *"because it's this read's own correctness condition."*
+
+**The chosen line is the one people skip, and it is the most useful.** Four queries against one join is a legibility call, and a join would have satisfied atomicity equally well. Writing that down means the next person can revisit the query shape without reopening the question of whether the read has to be atomic. Without it both look like the same kind of decision, so touching either feels equally risky and nothing gets touched.
+
+**The deferred line is a decision rather than a gap.** Completion-path locking is not missing; it is scheduled against a trigger, and the entry says so — the justification *"is kept local to Get; it's not precedent for building other concurrency machinery this slice."*
+
+And *revisit if* is what makes the entry outlive the decision. Forces move on their own clock ([Ch. 03](03_forces_f4m5.md)), and nothing in a codebase announces it when they do. That line turns the change into something a person can search for.
+
+**None of this is a new artifact.** [Chapter 12](12_patterns-that-survive-translation_us2k.md) lists the architecture decision record among the patterns that answer team size and turnover, and the original template asks for most of the above in this book's own vocabulary. Michael Nygard's, from 2011: the Context section *"describes the forces at play, including technological, political, social, and project local."*
+
+What the entry above adds is two lines. **Forced against chosen** — an ADR's Context can carry it and usually does not, because describing the Forces and saying which of them left no alternative are separate sentences, and only the second tells you what is safe to touch. And **revisit if**, which is not Nygard's Status: a Status is set after a decision has been superseded, where *revisit if* is written before and names the thing to watch for.
 
 ---
 
@@ -179,7 +217,7 @@ The decision log carries the same boundary throughout — *"full definition-side
 
 The claim rests on one asymmetry: a decision is a thing that happened, and a record is a thing that exists.
 
-Code preserves the outcome perfectly and the reason not at all. The transaction is still there in the file, byte for byte, years later. What is not there — and was never there — is the sentence saying that concurrency and blast radius together left no alternative. [Chapter 18](18_force-map-method_r37x.md) calls that distinction forced against chosen, and it is the one thing you cannot reconstruct from the artifact, because both kinds of decision compile to the same bytes.
+Code preserves the outcome perfectly and the reason not at all. The transaction is still there in the file, byte for byte, years later. What is not there — and was never there — is the sentence saying that concurrency and blast radius together left no alternative. Forced against chosen is the one thing you cannot reconstruct from the artifact, because both kinds of decision compile to the same bytes.
 
 For a human author, memory covers the gap for a while. It is unreliable and it fades, but it exists, and the fading is what makes *write it down while it is fresh* good advice rather than ceremony.
 
@@ -232,7 +270,7 @@ The boundary is real and it is narrow. Most design decisions cannot be expressed
 
 ### A decision nobody needs
 
-Most code embodies no decision worth recovering. The name of a local variable, the order of two independent statements, which of two equivalent library calls got used — there is nothing behind these, and treating every line as a lost decision produces a log nobody reads and a review that never ends. [Chapter 18](18_force-map-method_r37x.md)'s test applies: what does being wrong here cost, and who finds out.
+Most code embodies no decision worth recovering. The name of a local variable, the order of two independent statements, which of two equivalent library calls got used — there is nothing behind these, and treating every line as a lost decision produces a log nobody reads and a review that never ends. [Chapter 03](03_forces_f4m5.md)'s blast radius decides it, pointed at the decision rather than at the code: what does being wrong here cost, and who finds out.
 
 ---
 
@@ -286,6 +324,7 @@ What you end up holding is not an answer but a position. Fixing Y changes Z; som
 - Jason Ku, on using the technique during development. [Video](https://www.youtube.com/watch?v=ikGhv9kKFdU&t=356s).
 - FlowCore, `docs/decisions.md`, decisions 12 and 18 — [github.com/ilke-akdeniz/flowcore](https://github.com/ilke-akdeniz/flowcore).
 - FlowCore, `CLAUDE.md` — the iteration scope, and the identifier rule's reference to the log — [github.com/ilke-akdeniz/flowcore](https://github.com/ilke-akdeniz/flowcore).
+- Michael Nygard, *Documenting Architecture Decisions*, 15 November 2011 — [cognitect.com/blog/2011/11/15/documenting-architecture-decisions](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions).
 
 ---
 
