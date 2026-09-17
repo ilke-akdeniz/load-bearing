@@ -7385,3 +7385,56 @@ Everything not downstream of that sentence is passenger weight.
 
 **Consequence.** [Chapter 18](../18_force-map-method_r37x.md) sits at **draft** in [STATUS.md](STATUS.md) and is under reconsideration; moving it back to *in progress* is the author's call and has not been made.
 The full read is mid-book, so any chapter restructured by this work carries a read date that no longer covers what is there.
+
+---
+
+## 188. Six parts, and chapter 18 is cut rather than rewritten
+
+**Date.** 2026-09-16
+
+**Context.** Decision 187 left five calls open. This settles the first two, and the author took both.
+
+**The author's decision**, in their words: *"Six parts, with Part IV gaining 19, a Conventions part holding 20 and 21, and a final part holding 22 and 23 and any useful part of 18 distributed to other places in any other chapter."*
+
+**The draft had recommended rewriting [chapter 18](../18_force-map-method_r37x.md) as a demonstration and did not survive.**
+The author's version is better, and three facts found while checking it say why.
+
+- **It repairs a drift that exists now.** [Chapter 12](../12_patterns-that-survive-translation_us2k.md)'s handoff reads *"chapter 18 is the one that turns a set of Forces into a design"*, and 18 says in terms that it does not — *"the output is not a design. It is a record"* — which [chapter 23](../23_assigned-to-the-team_3fjx.md) already quotes back at it as a gap. Cutting 18 removes a wrong sentence instead of requiring one to be rewritten.
+- **`CLAUDE.md` is already stale on 18.** It cites the chapter twice as the home of grilling. Grilling appears 0 times in 18 and 8 times in [chapter 22](../22_never-written-down_at4r.md); decision 96 and the entry that moved grilling did the move and nobody updated the project file.
+- **[Chapter 22](../22_never-written-down_at4r.md) already has the slot the map belongs in**, at line 142: *"each settled decision goes into the log — chapter 18's artifact"*. A pointer standing where the artifact should be.
+
+**Each piece lands somewhere it is native rather than somewhere it is summarised**, which is the argument against the rewrite as well: a summary chapter cannot be written well under this repo's rules, and a distributed one does not have to be.
+
+| From 18 | Goes to | Why there |
+|---|---|---|
+| The ladder reads one way: forwards every step has something that would falsify it, backwards the chain is consistent and unfalsifiable because it was assembled from the answer | [02](../02_the-five-kinds_cjx4.md) | A claim about the model. 02 defines the kinds and already carries the repository case to run it on |
+| Forced / chosen / deferred / revisit-if | [22](../22_never-written-down_at4r.md) | 22's mechanism section already names the distinction and attributes it away |
+| The FlowCore decision-12 force map | [22](../22_never-written-down_at4r.md) | 22 has the same decision from the code side, so it carries both ends: the code with nothing visible, then the record with everything |
+| *The artifact does not record which order produced it* | [22](../22_never-written-down_at4r.md) | The author's sentence from the [chapter 18](../18_force-map-method_r37x.md) full read, and 22's claim generalised |
+| Nygard's ADR comparison | [12](../12_patterns-that-survive-translation_us2k.md) | The ledger already records that `us2k` owns the ADR pattern |
+| Everything else | — | Already owned by 03, 19, 12, 15, 02 and 17 |
+
+**[Chapter 03](../03_forces_f4m5.md)'s forward promise is settled by dropping it.**
+03 currently says *"chapter 18 works through what to do when Forces point in opposite directions."*
+Four of 18's five moves are 03's own restated; of the two that are not, *escalate with the quantities named* is kept as one sentence in 03 and *look for the third option* goes.
+The book then says plainly that it does not resolve conflicting Forces, which is what [chapter 03](../03_forces_f4m5.md) already concedes two paragraphs earlier.
+
+**The cost, taken rather than incurred.**
+The book ends with no chapter that says *here is what you do*.
+That is consistent with the ending being a boundary rather than a method, and with [chapter 02](../02_the-five-kinds_cjx4.md) already carrying the runnable test [chapter 01](../01_load-bearing_w8kq.md) promises — but it is a loss and it is chosen.
+
+**Consequence.** The book goes to **twenty-two chapters in six parts**.
+
+```text
+I    Claims and Forces        01 02 03
+II   The Foundations          04 05 06 07 08 09 10
+III  Patterns, Graded         11 12 13 14
+IV   (retitle pending)        15 16 17 19
+V    Conventions              20 21
+VI   (name pending)           22 23
+```
+
+Renumbering: 19→18, 20→19, 21→20, 22→21, 23→22, with the renames in their own commit ahead of any edits.
+Also moving: [chapter 19](../19_six-profiles_dnkz.md)'s opening and three boundary pointers, [chapter 23](../23_assigned-to-the-team_3fjx.md)'s four citations, [chapter 17](../17_abstraction-as-insurance_4jk6.md)'s handoff, the counts in `README.md` and `00_toc.md`, fourteen ledger rows, and `CLAUDE.md`'s two stale grilling references.
+
+**Still open from 187:** [chapter 23](../23_assigned-to-the-team_3fjx.md)'s claim rewrite and trim; the names for Parts IV and VI; and the deferred placements of [chapters 06](../06_layering_p2vk.md), [10](../10_organization_rjf9.md) and [14](../14_smuggled-verdicts_8y69.md).
