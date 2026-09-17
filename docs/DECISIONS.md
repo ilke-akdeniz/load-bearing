@@ -7587,3 +7587,21 @@ So the title uses the book's own established verb for its own named failure, rat
 **Part VI.** The author proposed *Applied five kinds: Decisions*. The draft objected on two grounds — no other part uses a colon, and *applied five kinds* inverts the natural order, while *the five kinds, applied* over-claims, since Parts II to V are also the kinds applied. **Your Own Decisions** was taken instead.
 
 It carries the reversal that makes the part belong to this book: Parts I to V place advice arriving from outside, and Part VI is where the reader produces it. [Chapter 21](../21_never-written-down_at4r.md) now says the same thing in its own opening — *"here you are the one producing it"* — so the title and the chapter agree without the title having to carry the argument. Decision 191 is why it does not have to: the tie is argued in the chapter.
+
+---
+
+## 193. Part II becomes *Laws, and Where They Bind*
+
+**Date.** 2026-09-16
+
+**Context.** The author noticed Part II had never been renamed. It had not been queued either — they had said it looked fine, and the draft's two objections to its contents both collapsed under checking in decision 192's pass.
+
+**It was left the only part a reader learns nothing from.** After decision 192 every other part names its contents or its failure — *Claims and Forces*, *Patterns, Graded*, *Principles Promoted to Law*, *Conventions*, *Your Own Decisions* — and *The Foundations* named neither. The gap sharpened when Part V became **Conventions**, a bare kind-name, because the other end of the ladder was then sitting under a vague noun.
+
+**Part II is Laws.** [Chapter 04](../04_families-of-law_q5c6.md) is the taxonomy; [06](../06_layering_p2vk.md) proves acyclic and rankable are the same property; [07](../07_time_mdbn.md), [08](../08_distribution_49yh.md) and [09](../09_scale_637f.md) are Laws in their domains; [10](../10_organization_rjf9.md) carries Conway's and Brooks's, both empirical Laws that 04 hands over by name. [Chapter 05](../05_dependency-and-hiding_agjy.md) is the loosest, its claim being about the cost of fan-in, which is near-definitional and anchors acyclicity for the rest.
+
+**Why not the bare *Laws*.** It would pair with *Conventions* at the opposite end of the ladder, which is elegant as a set. Against it: Part II is seven chapters and the book's largest, where Part V is two, so a one-word title carries less there than at the small end. And the set's shape after 192 is kind-plus-something — *Patterns, Graded*; *Principles Promoted to Law* — so a bare kind-name would be the odd one in a different way.
+
+***Bind* is the book's own verb**, not new vocabulary: [chapter 02](../02_the-five-kinds_cjx4.md) gives it as the thing a Force decides — *"whether it binds in your situation or sits inert"* — and the model table reads *whether it **binds** — true either way, sometimes inert*. It also names what these chapters actually spend their mandatory boundary sections on, since a Law never stops being true and does stop being relevant. The comma form matches Part III.
+
+**What was given up.** *The Foundations* signalled *bedrock, read this first*, which a kind-name does not. The contents page already carries that in its ordering, so the title was spending itself on something the reader can see.

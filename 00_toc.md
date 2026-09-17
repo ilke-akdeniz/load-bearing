@@ -12,7 +12,7 @@ Back to [the introduction](README.md).
 - 02. [The Five Kinds of Claim](02_the-five-kinds_cjx4.md)
 - 03. [Forces: The Inputs Nobody Names](03_forces_f4m5.md)
 
-## Part II — The Foundations
+## Part II — Laws, and Where They Bind
 
 - 04. [Three Families of Law](04_families-of-law_q5c6.md)
 - 05. [Dependency and Hiding](05_dependency-and-hiding_agjy.md)
