@@ -7681,3 +7681,37 @@ Check 3b is new: a part's first chapter must carry that part's label and no othe
 **Thirteen were sound** and were not touched.
 
 **What the audit says about the rule.** Eight of twenty-one is worse than the four of twenty-one recorded earlier, and two of the eight were introduced by recent work rather than inherited — one by the draft in decision 194, one when a chapter was cut. A paraphrase drifts silently and stays fluent, which is why `CLAUDE.md` singles this out, and why the audit is worth repeating after any pass that moves chapters.
+
+---
+
+## 196. Chapter 18, full read 01
+
+**Date.** 2026-09-17
+
+**Context.** The author's first full read of [chapter 18](../18_six-profiles_dnkz.md), which moved into Part IV in decision 188. Four direct edits and four tags.
+
+### The direct edits
+
+**Three were tightening and are kept**: two closing turns cut (*"and why nobody finds that odd"*, *"a question they can nearly always answer, and are nearly never asked"*), and a framing sentence reduced to a colon. Each removed a sentence that was performing rather than saying something.
+
+**One renamed a term and the rename was incomplete.** *Profile knowledge transfers* became **Force profile knowledge transfers**, which is right for a bolded assertion — but the short form survived two paragraphs later and in `docs/LEDGER.md`'s row name. Both aligned, which is this file's *a wording problem found in one place is a survey* rule.
+
+**One is corrected rather than kept.** The author replaced a vague transition with a named one, which is the better instinct — *"The other direction matters more, because it is the one that catches people"* said nothing about what the direction was. The replacement read: *"Then there is the more surprising case: **Two very similar domains having completely different force profiles**"*.
+Three problems. It is a sentence fragment with no verb, it capitalises mid-sentence after a colon, and **it describes the wrong thing**: the example underneath is two companies in the *same* business, and the chapter's own summary four paragraphs later says *"one domain can contain opposite profiles."* Two similar domains is a different claim from one domain containing two profiles.
+Now: *"That was unrelated domains sharing one force profile. The more surprising case runs the other way: two systems in the same domain, with opposite profiles."*
+
+**And a trailing space** was left where the provenance sentence was cut.
+
+### The tags
+
+**A term collision, found while answering a tag rather than reported as one.** The author wrote *"I don't get 'what does it hold still' here"* about the chapter's closing question. The phrase is not merely unclear: **`hold still` is [chapter 07](../07_time_mdbn.md)'s vocabulary**, where it means preventing data from changing — `docs/LEDGER.md` carries it in the race conditions row, *"a rule spanning data you did not hold still"*, and 07 uses it twice more in that sense. Chapter 18 was using the same words for something unrelated. This is the cross-chapter drift that no check catches and that only a survey finds.
+The closing question is now *"which Force here is outside its ordinary range, and which piece of standard advice does that overturn?"*, which is what the following sentence already says the chapter answers.
+
+**Vocabulary from one profile had leaked into a sentence covering three.** The author: *"this looks like a relic of a more specific case and needs a more general version."* Correct — *"memory layouts nobody may hide and allocation moved out of the loop"* is entity-component and game-loop phrasing, in a sentence about a flight simulator, a video encoder and a high-frequency trading loop. Rewritten to what all three share: the layout is depended on directly rather than private, and allocation happens before the time-critical path.
+
+**An unglossed *the loop*.** Named as the frame loop, with a one-line gloss at first use — the loop that runs once per displayed frame, sixty or more times a second. The author's proposed reading, *"allocating these initially via a loop"*, is a different thing from what the sentence meant, which is itself evidence the phrase was not carrying.
+
+**The embedded sample was alien, and the fix is a second sample.** The author asked for a non-embedded version to contrast against, and specifically what *no allocation* means. The section now shows the ordinary Python version first, then the C, then says what the two phrases in the C comment mean and that neither is about C: **no allocation** is that the heap is never touched, where the Python builds an exception object and a string that something frees later at a moment nobody chose; **no unwinding** is that the failure path does not walk back up the stack running cleanup, which is what makes its worst case incomputable and so uncertifiable.
+The sample is structural — a shape contrasted with a shape — so it was checked for syntax and not run, which this file's rule allows.
+
+**Consequence.** [Chapter 18](../18_six-profiles_dnkz.md) now carries Python alongside its C, which also settles the *two or more languages* point for a chapter that had one sample.

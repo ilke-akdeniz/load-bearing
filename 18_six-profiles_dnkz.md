@@ -6,7 +6,7 @@
 
 - *Domain* means what the software is about — payroll, ledgers, air traffic, imaging. It keeps that ordinary meaning here and everywhere else in the book.
 
-- **Force profile** is the reading of every Force bearing on a system — and what makes a reading a *profile* is that at least one of those Forces sits at an intensity outside the ordinary range ([Ch. 03](03_forces_f4m5.md)), and stays there. 
+- **Force profile** is the reading of every Force bearing on a system — and what makes a reading a *profile* is that at least one of those Forces sits at an intensity outside the ordinary range ([Ch. 03](03_forces_f4m5.md)), and stays there.
 
 [Chapter 03](03_forces_f4m5.md) reads the Forces one at a time. This chapter reads them together, six times over and at the scale of whole systems, and the finding is that the answers cluster.
 
@@ -14,9 +14,9 @@
 
 ## Domain and force profile are two different axes
 
-A flight simulator, a video encoder and a high-frequency trading loop share almost nothing anyone would call a domain. They share a force profile: a fixed latency budget measured in milliseconds, inside which the memory hierarchy decides what is possible. And they share its inversions — all three end up with memory layouts nobody may hide and allocation moved out of the loop. [-- this looks like a relic of a more specific case and nees a more general version: "nobody may hide and allocation move out of the loop" => "transparent memory layouts, XXX memory allocation instead of objects and ..."]
+A flight simulator, a video encoder and a high-frequency trading loop share almost nothing anyone would call a domain. They share a force profile: a fixed latency budget measured in milliseconds, inside which the memory hierarchy decides what is possible. And they share its inversions — in all three the memory layout is something many pieces of code depend on directly rather than a private detail, and the allocation happens before the time-critical path rather than inside it.
 
-That was multiple domains sharing the same force profile. Then there is the more surprising case: **Two very similar domains having completely different force profiles**
+That was unrelated domains sharing one force profile. The more surprising case runs the other way: **two systems in the same domain, with opposite profiles.**
 
 Consider two systems in the same business. One company sells high-end pizza ovens to restaurants: a salesperson writes a proposal, one person to a proposal, and nobody else touches it. Another company sells and installs security systems for marine ports: several salespeople, technicians and advisors work the same proposal, and often the same line items, at overlapping stages.
 
@@ -61,7 +61,7 @@ The Forces are the frame budget and the memory hierarchy, and [chapter 05](05_de
 
 Two further inversions belong here rather than there.
 
-**What inverts: allocate when you need it, and optimize later if profiling says so.** Here it becomes: allocate everything before the loop starts, and never again inside it. [-- what "loop"? Make that clear. Is it something like: "In games and simulations you hold lots of objects (or data?) in memory, when allocating these initially via a loop..."]
+**What inverts: allocate when you need it, and optimize later if profiling says so.** Here it becomes: allocate everything before the frame loop starts — the loop that runs once per displayed frame, sixty or more times a second — and never again inside it.
 
 Outside this profile, allocating in a loop is a performance question you resolve when a profiler points at it. Inside a frame it is a latency event with a distribution rather than a cost — the allocator is cheap until the collector runs, and the collector runs when it likes, which is a spike you cannot schedule around. So the pools are built up front. That reads as premature optimization and is nothing of the kind: the budget was fixed before anyone wrote a line, so there is no *later* in which to optimize.
 
@@ -75,7 +75,16 @@ The Force is a deadline that is part of the specification rather than a target, 
 
 **What inverts: prefer exceptions to error codes.** Here it becomes: return a status from every call, and check it at every call site.
 
-In most software, error codes are the weaker option — easy to ignore, noisy everywhere, and [chapter 12](12_patterns-that-survive-translation_us2k.md) catalogues the alternatives. In hard real-time, unwinding has an execution time nobody can bound in advance, and a path whose worst case cannot be computed cannot be certified. So the code looks like this, and the noise is the point:
+In most software, error codes are the weaker option — easy to ignore, noisy everywhere, and [chapter 12](12_patterns-that-survive-translation_us2k.md) catalogues the alternatives. Read one sensor, the ordinary way:
+
+```python
+def read_sample(sensor):
+    if not sensor.ready:
+        raise SensorNotReady(f"sensor {sensor.id} not ready")
+    return sensor.latest
+```
+
+In hard real-time, unwinding has an execution time nobody can bound in advance, and a path whose worst case cannot be computed cannot be certified. So the same call looks like this instead, and the noise is the point:
 
 ```c
 /* No allocation, no unwinding, and every failure path visible
@@ -88,7 +97,11 @@ status_t read_sample(sensor_t *sensor, uint16_t *out) {
 }
 ```
 
-[-- this is very alien for a dev who didn't work with embedded before. I don't expect you to explain all details but maybe providing a version of the same code in a non-embedded system would help to contrast. For example what no allocatoon means? Is it no garbage collector, no variable setting?]
+Two phrases in that comment are doing specific work, and neither is about C.
+
+**No allocation** means the heap is never touched on this path. The Python version builds an exception object and a formatted string at the moment of failure, and something frees them later at a moment nobody chose. The C version returns a small integer by value and writes the reading through a pointer the caller already owns, so nothing is asked of an allocator and nothing has to be given back. Where there is no allocator to ask — which is common on this hardware — the Python shape is not slow, it is unavailable.
+
+**No unwinding** means the failure path does not walk back up the call stack. `raise` does: it leaves each frame in turn, running whatever cleanup each one carries, and how long that takes depends on how deep the call was and what those frames were holding. That is a number you cannot compute before the program runs, which is what puts it out of reach of certification.
 
 **What inverts: allocate what you need at run time.** Here it becomes: size every buffer at compile time, because there is frequently no allocator to call at all. This is the games inversion taken further — there the heap exists and you avoid it, here it may not exist.
 
@@ -219,7 +232,7 @@ Six is not a complete enumeration and nothing in the argument requires it to be.
 - **"Premature optimization."** True in the ordinary case, false under the frame-budget and hard-deadline profiles, where the budget was fixed before anyone wrote a line. The question is whether there is a *later* in which to optimize.
 - **"We're not Google."** Usually correct, and it is a claim about profiles rather than about modesty: it says the distributed profile's Forces are not yours. What to watch is what the sentence gets used to close. It can be true of the system and false of the one path that crosses a network you do not own.
 
-The question that does the work: **which Force here is outside its ordinary range, and what does it hold still?** [-- I don't get "what does it hold still" here]
+The question that does the work: **which Force here is outside its ordinary range, and which piece of standard advice does that overturn?**
 
 Every inversion in this chapter is that question answered. If every Force sits in its ordinary range, you are in the ordinary case, the mainstream advice applies, and the interesting thing about your system is somewhere other than its architecture.
 
