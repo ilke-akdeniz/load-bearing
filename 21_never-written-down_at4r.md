@@ -6,7 +6,7 @@
 
 Every chapter before this one works on a claim somebody made. A proverb, a review comment, a pattern name, a rule in a style guide — the technique throughout has been to find the condition behind the assertion and check whether it holds here. This chapter is about the case where there is no assertion, because the decision was taken without ever being written down.
 
-A decision is not a sixth kind of claim. It is what the five produce when they meet a situation: a Law with something to act on, a Principle that holds at this reading of the Forces and would not at another, an Idiom that arrived with the ecosystem, a Style that neither the compiler nor the runtime can see. What changes here is the direction. Until now the advice arrived from outside and the work was to place it; here you are the one producing it, and what you produce is code, which records the outcome and nothing about how it was reached.
+A decision is not a sixth kind of claim. It is what the five produce when they meet a situation: a Law with something to act on, a Principle that holds at this reading of the Forces and would not at another, an Idiom that arrived with the ecosystem, a Style that neither the compiler nor the runtime can see. What changes here is the direction. Until now the advice arrived from outside and the work was to place it; here you are the one producing it. [-- deleted last part as it's confusing. This paragraph describes the decision. The fact that it's sometimes is not written is the next sections job.]
 
 ---
 
