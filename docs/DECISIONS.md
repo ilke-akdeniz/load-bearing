@@ -7259,3 +7259,129 @@ The section is now *The four steps of force-mapping*, and the claim gained the b
 *Does not fail loudly* was the overreach: a design that ignores its Forces can fail extremely loudly, in production. What is true is narrower and is the reason the order matters at all — **the artifact does not record which order produced it.** An interface derived from *you do not control your callers* and one added because every repository here has one are the same file, with the same name, in the same commit. The rewrite says that, and cites the two chapters that are already chapter-length cases of it: [17](../17_abstraction-as-insurance_4jk6.md), where nobody can fault the design on inspection, and [16](../16_tdd-and-mocks_u8eu.md), where the mocked test passes faster than the one that would have caught the bug.
 
 **A paragraph that disintegrated, in their word, and did.** *A Force is the kind of thing that has an answer* was reaching for [chapter 02](../02_the-five-kinds_cjx4.md)'s *facts about where you are standing* and arriving at something that sounds like a definition of a question. It now says the plain thing: a Force is a fact, so disagreements about one are settled by going and finding out rather than by whoever argues longest — *can we change every call site* has an answer somebody can fetch this afternoon, and *is a repository good architecture* has none, which is why that argument runs for a year.
+
+---
+
+## 187. Part V does not hold together, and chapter 18 is the reason it was not noticed
+
+**Date.** 2026-09-16
+
+**Status: the analysis is settled, the structural call is not.**
+Nothing in the book has been changed by this entry.
+The open decisions are listed at the end, and a later session should not read the recommendations here as taken.
+
+**Context.** The author's full read reached [chapter 18](../18_force-map-method_r37x.md) a second time and rejected it outright, in their words: *"It felt like a bad compression of the book or even worse, it reads like another book attempting the same subject with less depth and poorly."*
+They named the chapters they believed already covered it better — 3, 4, 11, 12, 15, 19.
+The review then widened, on the author's initiative, from one chapter to the book's parts.
+
+### What the measurements found
+
+**The author's reading of [chapter 18](../18_force-map-method_r37x.md) is confirmed, and the evidence is countable.**
+
+- **Twelve of its thirty cross-references point at [chapter 03](../03_forces_f4m5.md).** No other chapter leans on one predecessor at that rate.
+- **It contains no code.** Its two fenced blocks are both `text`. The only other chapters with nothing executable are [10](../10_organization_rjf9.md) and [23](../23_assigned-to-the-team_3fjx.md), and neither claims to be a procedure. It sits in the part titled *Programming With the Five Kinds*.
+- **[Chapter 03](../03_forces_f4m5.md) already prices 18's artifact before 18 exists**: *"A written force-map goes stale, and a stale one is worse than none."*
+- **[Chapter 02](../02_the-five-kinds_cjx4.md) already carries the runnable procedure [chapter 01](../01_load-bearing_w8kq.md) promises** — the five-question classification test, *stop at the first that answers*.
+- Section by section, under a third of 18's body is its own: the FlowCore map, forced-against-chosen, and half the mechanism section.
+
+**Two corrections to the author's list.** [Chapter 04](../04_families-of-law_q5c6.md) does not overlap — 18's Law step comes from [chapter 02](../02_the-five-kinds_cjx4.md)'s asymmetry, not from theorem/definition/empirical — and [chapter 11](../11_what-a-pattern-is-for_3xzc.md)'s overlap is structural rather than substantive.
+The chapters actually being re-narrated are 03 above all, then 19, 12, 15 and 02.
+
+**The log corroborates the drift from the other side.** Decision 96 removed sixty-one lines of AI material from 18; another entry records that *"chapter 18 had absorbed chapter 22's planned job, and nobody had noticed"*; a third found [chapter 12](../12_patterns-that-survive-translation_us2k.md)'s planned demonstration already sitting in 18 as `The same advice, four verdicts`.
+Twice, other chapters found their material there.
+
+### The author's reframe, which changed the question
+
+**The decisive move was theirs**, and it separated two things the draft had been treating as one: *"I previously evaluated the chapters of part V only against their fit with the book and the main claim. When I said that ch 19, 20, 21 were fine I meant that they belong to the book and are ok but I don't think they support a part titled 'Programming With the Five Kinds'."*
+Chapter-fit and part-fit are different tests, and every chapter in Part V passes the first.
+
+They also named the symptom precisely: *"the difference between the sets 20-21 and 22-23 are big enough to raise an eyebrow for any Part that contains both sets."*
+
+**The citation matrix inside Part V confirms it and relocates the fault line.**
+
+```text
+        cites →   18   19   20   21   22   23
+18                 –    2    0    0    1    0
+19                 4    –    2    0    0    0
+20                 0    3    –    2    0    0
+21                 0    0    3    –    2    0
+22                 9    1    0    1    –    2
+23                 4    0    0    0    3    –
+```
+
+Two clusters: **{18, 22, 23}** with nineteen internal links, **{19, 20, 21}** with ten.
+Between them, almost nothing but 19's four pointers to 18, all of the form *the method for finding them is chapter 18's*.
+So the split the author felt between 20-21 and 22-23 is real, but the seam runs between `{19,20,21}` and `{18,22,23}`, and the two groups are interleaved.
+
+### A draft recommendation the author destroyed in one sentence
+
+The draft proposed grouping 19, 20 and 21 as *advice that holds only where you are standing*, narrowing from profile to ecosystem to team.
+
+**The author:** *"I don't get 'Advice that holds only where you are standing' => Aren't all advice like that and that's the essence of the book?"**
+
+Correct, and it is this file's own rule about claims too vague to be false, applied to a part title.
+The label was unfalsifiable because it restated the thesis.
+
+**It was also concealing a miscategorisation**, which is the part worth keeping.
+The real line is in [chapter 20](../20_idioms_7nkn.md)'s own claim — *an Idiom rests on a condition about your surroundings rather than about your problem* — so the question separating the kinds is not *is it local* but **what is the condition about**.
+A force profile is a fact about the problem, which puts [chapter 19](../19_six-profiles_dnkz.md) on the Principle side and not with 20 and 21.
+
+**A fact found mid-interview killed the author's own proposal too.**
+They suggested 19 could move to an earlier part.
+It cites [chapter 05](../05_dependency-and-hiding_agjy.md) seven times and [chapter 17](../17_abstraction-as-insurance_4jk6.md) three, plus 15, 14, 16, 12, 09 and 08 — it needs Parts II, III and IV behind it and cannot move up.
+Its only forward dependency is the four removable pointers to 18.
+
+### Where the analysis landed
+
+**[Chapter 19](../19_six-profiles_dnkz.md) closes Part IV** rather than opening a part.
+15 gives the mechanism, 16 and 17 are two cases, and 19 is the systematic version — six profiles where the wide reading does not merely overreach but inverts, predictably.
+
+**20 and 21 are the model's unfinished business, not method chapters.**
+20 cites [chapter 02](../02_the-five-kinds_cjx4.md) seven times and 02 points forward to both.
+The ladder gives Law a whole part and Principle a whole part, then leaves the bottom two rungs at the back of a part about something else.
+Their honest grouping is **Conventions**, and [chapter 02](../02_the-five-kinds_cjx4.md)'s classification test already separates them from each other on the only axis left: whether the compiler or the runtime acts on the choice.
+
+**18, 22 and 23 are one group, and its subject is the record.**
+18 is what a decision record holds that code cannot; 22 is what happens when there is none, and the case where the window was never open; 23 is why the records do not get made.
+
+### Why that group belongs to this book
+
+**The tie is [chapter 01](../01_load-bearing_w8kq.md)'s, and it is not a stretch.**
+01 says software has no equivalent of the builder's inspection, and that advice *"arrived as a finished conclusion with its supports removed, and there is nowhere to look them up."*
+Parts I to V work on advice arriving from outside, where the supports can sometimes be recovered — [chapter 15](../15_principle-loses-scope_b86v.md)'s scope is still there, in the forty seconds after the proverb.
+[Chapter 22](../22_never-written-down_at4r.md) already states the reversal in its second paragraph: *"Every chapter before this one works on a claim somebody made… This chapter is about the case where there is no assertion."*
+
+So the part is the book's diagnosis pointed at your own repository.
+**You are not only receiving advice with its supports stripped; you are emitting it**, in every commit, to a reader who is usually you.
+
+**The sharpest form: forced-against-chosen is the book's title question asked about code.**
+*Is this wall load-bearing* and *was this transaction forced or chosen* have the same unavailability and the same consequence, and 01's *a wall is load-bearing by circumstance* is 18's *both kinds of decision compile to the same bytes*.
+
+**And the record is a classification, which is what makes the part this book's rather than any book's.**
+*We use a transaction here* is worthless — it is 22's own bullet about comments restating the code.
+*Concurrency and blast radius left no alternative* says which kind the decision was: forced, chosen, or deferred against a trigger.
+That is the five kinds applied to your own decisions as you take them, instead of reconstructed later from a sentence somebody said in a talk.
+
+**[Chapter 23](../23_assigned-to-the-team_3fjx.md) is the weakest of the three and unevenly so.**
+Its force-map section earns its place — *what that owner must be able to do* is **price the options**, which is 18's cost section, and the export-ticket example is a force reading handed over in ten minutes.
+The retrospectives, standups and pointing sessions would read identically in a book with no five-kind model in it.
+Its tie is the **ownership of the reading**: a Force is a fact about your situation, facts have holders, and a holder is a person rather than a room.
+Everything not downstream of that sentence is passenger weight.
+
+### Recommendations, not decisions
+
+- **Six parts.** Part IV gains 19; a new part holds 20 and 21 as *Conventions*; a final part holds 18, 22 and 23.
+- **[Chapter 18](../18_force-map-method_r37x.md) becomes a demonstration rather than a summary** — one real decision worked end to end, with a second where the same walk stops at *take the convention* — and **its claim moves from the order to the record**. A summary chapter cannot be written well under this repo's own rules: the anti-repetition protocol forbids the recap, the code rule cannot be met by a chapter that owns no code, and a method claim is contradicted by 18's own concession that two teams running it reach different designs.
+- **[Chapter 23](../23_assigned-to-the-team_3fjx.md)'s claim** is rewritten to the ownership-of-the-reading sentence, and the chapter trimmed to what follows from it.
+- **The final part's name** is unsettled. *The record* names the artifact where this book names questions.
+
+### Still open, and the author's to take
+
+1. Six parts, or Part V stays one part and loses chapters.
+2. Whether [chapter 18](../18_force-map-method_r37x.md) survives at all — the coherent alternative is cutting it, moving the FlowCore map into 23, which already lists the force map as one of its four artifacts. Cost: 22 loses the chapter it cites nine times.
+3. [Chapter 23](../23_assigned-to-the-team_3fjx.md)'s claim rewrite and trim.
+4. The part names, and the retitling of Part IV, whose current *Methodologies Versus Principles* covers [chapter 16](../16_tdd-and-mocks_u8eu.md) and neither of the others.
+5. **Deferred by the author, raised and not yet worked:** [chapter 10](../10_organization_rjf9.md) is a Force chapter filed under Laws — its claim is *your organization is a design Force* — and [chapter 06](../06_layering_p2vk.md) is a kind-confusion chapter filed under Laws, its claim naming Law, Principle and Idiom in one sentence. [Chapter 14](../14_smuggled-verdicts_8y69.md) is about evaluative vocabulary rather than patterns, so either Part III is really *named advice* or 14 moves.
+
+**Consequence.** [Chapter 18](../18_force-map-method_r37x.md) sits at **draft** in [STATUS.md](STATUS.md) and is under reconsideration; moving it back to *in progress* is the author's call and has not been made.
+The full read is mid-book, so any chapter restructured by this work carries a read date that no longer covers what is there.
