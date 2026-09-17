@@ -7562,6 +7562,11 @@ Two reasons. *Forced / chosen / deferred* is already defined and worked in `What
 
 **Two defects in the draft's own new prose, caught before the commit.** It glossed Style as *"a Style nobody needs to agree about"*, which contradicts [chapter 02](../02_the-five-kinds_cjx4.md)'s *arbitrary, but worth being consistent about* and [chapter 20](../20_style_9rng.md)'s whole claim; replaced with 02's mechanical test, *neither the compiler nor the runtime can see it*. And it cited [chapter 03](../03_forces_f4m5.md) twice in consecutive paragraphs, so the second was reworded to 03's actual mechanism — *nothing accumulates while you wait*.
 
+**The author cut one clause from the frame on review**, and it was a repetition the draft had introduced.
+The paragraph ended *"and what you produce is code, which records the outcome and nothing about how it was reached"* — a restatement of the chapter's own line two hundred lines later, in `Why the claim holds`: *"Code preserves the outcome perfectly and the reason not at all."*
+Their reason was the same finding from the other side: *"This paragraph describes the decision. The fact that it's sometimes is not written is the next section's job."*
+The cut also drops a closing turn from a paragraph that reads better ending flat.
+
 **Consequence.** Part VI's tie is in the chapter rather than asserted in a part title. The part's name is still open; the author proposed *Applied five kinds: Decisions*, and the draft objected that the colon breaks the set — no other part uses one — and that *applied five kinds* inverts the natural order, while *the five kinds, applied* would over-claim, since Parts II to V are also the kinds applied. Proposed instead: **Your Own Decisions**, with **Decisions, Graded** as the runner-up mirroring Part III.
 
 ---
