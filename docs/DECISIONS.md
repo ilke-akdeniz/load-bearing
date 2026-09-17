@@ -7513,6 +7513,15 @@ This is a factual correction forced by 188 rather than a change to the rubric it
 
 **Left alone and flagged.** `CLAUDE.md`'s Sources entry for the author's TechIter document carries bare chapter arrows — *(→ 05, 18)*, *(→ 19)*, *(→ 11)*, *(→ 18)* — that do not match any current chapter and did not match before this restructure either; *layering … (→ 18)* has not pointed at a layering chapter through at least two renumberings. Repairing them means recovering what they originally meant, which is the author's to say.
 
+**Resolved the same day: the arrows are dropped, not repaired.**
+The author's reading was that the material has already been used and the numbers no longer matter, and checking confirmed it — every arrowed item has landed.
+Layering, the direction rule and when layering fails are in [05](../05_dependency-and-hiding_agjy.md) and [06](../06_layering_p2vk.md); placement-by-scope in [06](../06_layering_p2vk.md), [12](../12_patterns-that-survive-translation_us2k.md) and [14](../14_smuggled-verdicts_8y69.md); Adapter at two scales in [12](../12_patterns-that-survive-translation_us2k.md) and [13](../13_missing-language-features_esqm.md); layered packages forcing exports across [05](../05_dependency-and-hiding_agjy.md), [06](../06_layering_p2vk.md), [12](../12_patterns-that-survive-translation_us2k.md) and [19](../19_idioms_7nkn.md); dependency injection across languages in [19](../19_idioms_7nkn.md); error taxonomies in [17](../17_abstraction-as-insurance_4jk6.md); testing against a real database in [16](../16_tdd-and-mocks_u8eu.md).
+Only *params structs* appears in no chapter, and it never carried an arrow — it sits in the trailing group the entry lists as contents rather than as routing.
+
+**Dropping beats repairing, on this file's own reasoning.** Routing is deleted once the material lands, which is why `docs/pending-tasks/` documents are deleted rather than archived: *a finished task leaves nothing behind.*
+Repaired arrows would be accurate and still spent, and would go stale at the next renumber — they are bare numbers, the form `tools/check-drift.py` rejects in chapters because a bare number is silent when the book renumbers.
+The descriptions stay, so the entry now says what the source covers, which is what a Sources entry is for.
+
 ---
 
 ## 191. What a decision is, and where Part VI ties to the book
