@@ -248,7 +248,7 @@ A theorem answers *nothing, given its assumptions* — and then you go and read 
 
 Anything that cannot answer at all was never a Law.
 
-[Chapter 05](05_dependency-and-hiding_agjy.md) takes the first family of Laws in detail — dependency direction and information hiding — and separates the part that is genuinely load-bearing from the two conventions travelling under the same name.
+[Chapter 05](05_dependency-and-hiding_agjy.md) takes dependency direction and information hiding into a working codebase — what a dependency costs when something changes, what a cycle does to that cost, and what happens once a name is visible to people you cannot reach.
 
 ---
 

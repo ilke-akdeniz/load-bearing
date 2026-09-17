@@ -7647,3 +7647,37 @@ Check 3 read the file's first line as the H1, which the label broke; it now find
 Check 3b is new: a part's first chapter must carry that part's label and no other chapter may, verified against `00_toc.md`. Without it, a part rename would leave six labels stale with nothing to catch it — the silent failure this repo's tooling exists for. Tested against both a stale label and a stray one before shipping.
 
 **Found on the way in, and not asked about.** [Chapter 20](../20_style_9rng.md)'s handoff stated the next chapter's claim rather than naming its subject: *"the decision was taken and never written down, and the author was a machine that remembers nothing between sessions"* is both halves of [chapter 21](../21_never-written-down_at4r.md)'s claim, arriving a page early. This is the drift `CLAUDE.md` describes as the one thing no check can verify, and it predates this work. Rewritten to name the subject — the case where nobody stated a claim, and what a record has to hold.
+
+---
+
+## 195. The handoff audit: eight of twenty-one were wrong
+
+**Date.** 2026-09-16
+
+**Context.** Decision 194 found [chapter 20](../20_style_9rng.md)'s handoff stating the next chapter's claim, by accident, while doing something else. `CLAUDE.md` records four of twenty-one being wrong the last time anyone checked. The author asked for the full audit.
+
+**Method.** Each handoff extracted mechanically and set beside the claim of the chapter it points at, then read for four things: does it link with the identifier, does it name the next chapter's subject, does it state the next chapter's *claim*, and is it inside the seventeen-to-fifty-two word range the rubric records.
+
+**Eight were defective, in four distinct ways.**
+
+**Three stated the next chapter's claim**, which is the failure `CLAUDE.md` calls the one no check can verify.
+
+- [Chapter 13](../13_missing-language-features_esqm.md) → 14 was near-verbatim: *"names that arrive with a verdict already attached"* against [14](../14_smuggled-verdicts_8y69.md)'s *"Some vocabulary arrives with its verdict attached."* Now names the vocabulary — *anemic domain model*, *god object*, *over-engineered* — and where each came from.
+- [Chapter 12](../12_patterns-that-survive-translation_us2k.md) → 13 ended *"a surprising share of the best-known catalogue turns out to be exactly that"*, which is [13](../13_missing-language-features_esqm.md)'s claim with the number softened. Now says the catalogue is where the test gets run, and stops.
+- [Chapter 21](../21_never-written-down_at4r.md) → 22 carried *"why each of them needs one person's name against it rather than a team's"* — the second clause of [22](../22_assigned-to-the-team_3fjx.md)'s claim. Now names the four artifacts, their owners, and what a meeting can settle.
+
+**One described a chapter that does not do what it says.** [Chapter 04](../04_families-of-law_q5c6.md) → 05 promised that [05](../05_dependency-and-hiding_agjy.md) *"separates the part that is genuinely load-bearing from the two conventions travelling under the same name."* That is [chapter 06](../06_layering_p2vk.md)'s three-claims table. 05's sections are the cost of fan-in, a cycle and what notices it, the damage, breaking it, exposure, and the injection question — no such separation anywhere. Rewritten to what 05 actually does.
+
+**One had no handoff at all.** [Chapter 09](../09_scale_637f.md) ended on *"your numbers will differ, and that is the point"* and never mentioned [chapter 10](../10_organization_rjf9.md). A paragraph was written for it, closing Part II on the Force that is not a property of the machine.
+
+**One was a bare reference with no link.** [Chapter 05](../05_dependency-and-hiding_agjy.md) → 06 opened *"The next chapter takes the shape most people mean when they say architecture."* `tools/check-drift.py` rejects a bare *Ch. 04*, but *the next chapter* carries no number to catch, so it passed every check while being exactly the failure the identifier rule exists to prevent — renumber the book and a bare pointer is silently wrong. Only the link was added; the author's sentence is untouched.
+
+**One was below the floor.** [Chapter 06](../06_layering_p2vk.md) → 07 ran twelve words — *"does for concurrency what these two chapters did for structure"* — naming no subject at all. Extended to name what [07](../07_time_mdbn.md) takes up.
+
+**One was borderline and tightened.** [Chapter 03](../03_forces_f4m5.md) → 04 said *"the fact that Laws do not all have the same standing"*, which is the first clause of [04](../04_families-of-law_q5c6.md)'s claim. It now names the three kinds and stops. The draft had introduced this wording one commit earlier, in decision 194, by preserving the original phrasing while adding the part name.
+
+**Left alone, and it is the author's call.** [Chapter 01](../01_load-bearing_w8kq.md) ends on **Is this claim load-bearing?** — four words, no link, no handoff to [chapter 02](../02_the-five-kinds_cjx4.md). It hands off to the book instead, in the paragraph above: *"The rest of this book is an attempt to build that."* The rubric says every chapter's last paragraph hands to the next one, and this is the one place where that rule and a deliberate ending conflict. Ending the opening chapter on the book's title question looks like the stronger choice, so nothing was changed.
+
+**Thirteen were sound** and were not touched.
+
+**What the audit says about the rule.** Eight of twenty-one is worse than the four of twenty-one recorded earlier, and two of the eight were introduced by recent work rather than inherited — one by the draft in decision 194, one when a chapter was cut. A paraphrase drifts silently and stays fluent, which is why `CLAUDE.md` singles this out, and why the audit is worth repeating after any pass that moves chapters.

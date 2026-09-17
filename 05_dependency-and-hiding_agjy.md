@@ -613,7 +613,7 @@ The question that catches real damage is not *does this match the diagram?* It i
 
 The first question is answered by a diagram. The second is answered by deleting something and seeing what stops compiling.
 
-The next chapter takes the shape most people mean when they say architecture. Everything here has been about which way arrows point and how many there are; layering adds a further claim on top of both.
+[Chapter 06](06_layering_p2vk.md) takes the shape most people mean when they say architecture. Everything here has been about which way arrows point and how many there are; layering adds a further claim on top of both.
 
 ---
 

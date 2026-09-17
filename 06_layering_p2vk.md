@@ -284,7 +284,7 @@ Expressing a rank as a package or assembly wall forces exports and mapping code.
 
 The question that does the work is not *which layer does this belong to?* It is: **what would break if this piece stopped existing?**
 
-[Chapter 07](07_time_mdbn.md) does for concurrency what these two chapters did for structure.
+[Chapter 07](07_time_mdbn.md) does for concurrency what these two chapters did for structure — the ordering a machine actually gives you, what a clock can and cannot establish, and the invariants no amount of application code can hold.
 
 ---
 

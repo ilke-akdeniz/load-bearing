@@ -254,6 +254,8 @@ Every measurement in this chapter was taken on the machine it was written on —
 
 **Your numbers will differ, and that is the point.** The formulas are exact and hold everywhere. The measurements are empirical ([Ch. 04](04_families-of-law_q5c6.md)), which means the *pattern* described by the law transfers and the *number* does not. Someone else's benchmark tells you a shape exists; only your own tells you where you are on it.
 
+[Chapter 10](10_organization_rjf9.md) closes this part on the Force that is not a property of the machine at all — who has to agree with whom before a boundary can move, and what Conway and Brooks were each actually measuring.
+
 ---
 
 ## Sources

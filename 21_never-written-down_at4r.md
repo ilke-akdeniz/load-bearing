@@ -320,7 +320,7 @@ And if the answer is that somebody would read the code and work it out, that som
 
 What you end up holding is not an answer but a position. Fixing Y changes Z; some customers depend on Z; leaving Y another month costs you a different customer. Nobody in that conversation is being unreasonable and nobody is going to win it, because **there is no fact available that settles it** — and one sentence, written at the time by whoever chose Y, is what would have.
 
-[Chapter 22](22_assigned-to-the-team_3fjx.md) closes the book on the arrangement that produces the software — the artifacts that have to exist before the code, and why each of them needs one person's name against it rather than a team's.
+[Chapter 22](22_assigned-to-the-team_3fjx.md) closes the book on the arrangement that produces the software — the four artifacts that sit between a request and the code, who each one belongs to, and what a meeting can and cannot settle.
 
 ---
 

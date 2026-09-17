@@ -474,7 +474,7 @@ The same reading applies in reverse to advice you receive. A blog post recommend
 
 And *language* here does not have to mean a different one. Visitor changed status between two releases of Java, so the version you compile with is part of the answer — a design document naming Java and not naming the version has answered half the question.
 
-[Chapter 14](14_smuggled-verdicts_8y69.md) turns from names that describe a shape to names that arrive with a verdict already attached — vocabulary like *anemic domain model*, and what it costs to let one into an argument.
+[Chapter 14](14_smuggled-verdicts_8y69.md) turns from names that describe a shape to names that grade one — *anemic domain model*, *god object*, *over-engineered* — where each came from, and what happens to an argument once one of them is accepted.
 
 ---
 

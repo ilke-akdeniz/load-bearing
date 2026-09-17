@@ -524,7 +524,7 @@ The question that does the work: **which Force is this answering, and how strong
 
 A pattern with a Force behind it can be argued about on the merits — you can disagree about the intensity, and the disagreement is resolvable. A pattern with no Force behind it can only be argued about on taste, which is the argument this book exists to end.
 
-[Chapter 13](13_missing-language-features_esqm.md) takes the converse of this chapter's test. If a pattern survives translation because it answers a Force, then a pattern that *disappears* when you change language was answering the language — and a surprising share of the best-known catalogue turns out to be exactly that.
+[Chapter 13](13_missing-language-features_esqm.md) takes the converse of this chapter's test. If a pattern survives translation because it answers a Force, then a pattern that *disappears* when you change language was answering the language rather than the problem — and the best-known catalogue of all is where that test gets run.
 
 ---
 
