@@ -524,7 +524,7 @@ That is the reversibility question again, and it is the only one that still work
 
 The remedy in each case is the same, and it is almost never applied — stop arguing about the Principle and ask each side what they believe about the situation.
 
-[Chapter 04](04_families-of-law_q5c6.md) turns to Laws, and to the fact that they do not all have the same standing — a proven theorem, a near-tautology, and an empirical regularity are three different kinds of true.
+Part II — *Laws, and Where They Bind* — opens with [chapter 04](04_families-of-law_q5c6.md) and the fact that Laws do not all have the same standing: a proven theorem, a near-tautology, and an empirical regularity are three different kinds of true.
 
 ---
 

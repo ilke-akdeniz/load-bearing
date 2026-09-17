@@ -105,9 +105,35 @@ checked += 1
 for _, num, title, fname in entries:
     if not (ROOT / fname).exists():
         continue
-    h1 = read(fname).split("\n", 1)[0].lstrip("# ").strip()
+    body = read(fname).split("\n")
+    h1 = next((l[2:].strip() for l in body if l.startswith("# ")), "")
     if h1 != title:
         fail("h1 vs toc", f"ch {num}: H1 '{h1}' != contents page '{title}'")
+
+# 3b. A part's first chapter carries that part's name as an italic label above
+#     its H1, and no other chapter carries one. The label is what a reader
+#     crossing into a part sees on the web, where the contents page is the only
+#     other place parts appear; a print build emits a part page from the same
+#     structure. Checked because a part rename would otherwise leave the six
+#     labels stale with nothing to catch it.
+checked += 1
+_part_of = {}
+_cur = None
+for _l in toc_lines:
+    if _l.startswith("## Part "):
+        _cur = _l[3:].strip()
+    _m2 = re.match(r"^- \d\d\. \[.*?\]\((\S+?\.md)\)$", _l)
+    if _m2 and _cur and _cur not in _part_of.values():
+        _part_of[_m2.group(1)] = _cur
+for _, num, title, fname in entries:
+    if not (ROOT / fname).exists():
+        continue
+    first_line = read(fname).split("\n", 1)[0].strip()
+    want = f"*{_part_of[fname]}*" if fname in _part_of else ""
+    got = first_line if first_line.startswith("*Part ") else ""
+    if got != want:
+        fail("part label",
+             f"ch {num} starts with {got or '(no part label)'}, expected {want or '(no part label)'}")
 
 # 4. Status must be one of the four defined states, and match whether a file exists.
 checked += 1

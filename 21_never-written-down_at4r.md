@@ -1,3 +1,5 @@
+*Part VI — Your Own Decisions*
+
 # What Was Never Written Down
 
 ## The claim

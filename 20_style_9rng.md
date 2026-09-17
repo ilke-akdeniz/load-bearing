@@ -190,7 +190,7 @@ The question that does the work: **do these two versions produce the same progra
 
 If they do, nothing further can be learned by discussing it, and the only useful act is for somebody to choose. If they do not, this was never a Style question, and the time spent settling it will produce something.
 
-[Chapter 21](21_never-written-down_at4r.md) closes the book on the case the rest of it assumed away — where there is no claim to place at all, because the decision was taken and never written down, and the author was a machine that remembers nothing between sessions.
+[Chapter 21](21_never-written-down_at4r.md) opens Part VI, *Your Own Decisions*, on the case the rest of the book assumed away — where nobody ever stated a claim, so there is nothing to place — and on what a record has to hold for the reasoning behind a decision to outlast it.
 
 ---
 

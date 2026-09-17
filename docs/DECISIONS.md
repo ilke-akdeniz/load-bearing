@@ -7619,3 +7619,31 @@ It carries the reversal that makes the part belong to this book: Parts I to V pl
 ***Bind* is the book's own verb**, not new vocabulary: [chapter 02](../02_the-five-kinds_cjx4.md) gives it as the thing a Force decides — *"whether it binds in your situation or sits inert"* — and the model table reads *whether it **binds** — true either way, sometimes inert*. It also names what these chapters actually spend their mandatory boundary sections on, since a Law never stops being true and does stop being relevant. The comma form matches Part III.
 
 **What was given up.** *The Foundations* signalled *bedrock, read this first*, which a kind-name does not. The contents page already carries that in its ordering, so the title was spending itself on something the reader can see.
+
+---
+
+## 194. Parts become visible in the book, not only in the contents page
+
+**Date.** 2026-09-16
+
+**Context.** The author's observation: *"Right now parts are only visible in the TOC. In a normal book you will have separate pages when entering a new part. Here you will never know about a part unless you go back and check the TOC."*
+
+**Half of it was never a problem.** `tools/check-drift.py` already parses the parts out of `00_toc.md`, so a print build reads the same structure and emits real part pages for nothing. The defect is in the web read, which is where the book is read now.
+
+**Options, and what each cost.**
+
+- **Separate part-page files** break the navigation chain, add a file class the repo does not have, and reintroduce prose that can drift — which is why `00_toc.md` was reduced to number, title and link in the first place. Print gets parts without them.
+- **A part banner on every chapter** collides with the rubric's *no epigraph, no framing paragraph before the claim*, and it has a concrete cost rather than a formal one: Part IV is called **Principles Promoted to Law**, and [chapters 16](../16_tdd-and-mocks_u8eu.md) and [17](../17_abstraction-as-insurance_4jk6.md) are case studies designed so the reader meets the advice before the verdict. A banner carrying the verdict above the advice spends the chapter's structure.
+- **The part in the navigation row** is cheap and machine-checkable, but it sits after the Sources, which is late for a reader who wanted it.
+
+**The author took two measures together.**
+
+**A part label on the first chapter of each part only** — 01, 04, 11, 15, 19, 21 — as an italic line above the H1, in the author's words. Six files. That is exactly where a print build puts a part page, so the two reads agree, and no chapter mid-part carries a banner, which removes the 16/17 objection. 15's claim and the part name are already aligned, so the one label that does sit above a claim does not pre-empt it.
+
+**And the handoff names the part at each boundary**, which is where a linear reader crosses. Two of the five already did — [chapter 10](../10_organization_rjf9.md)'s *"Part III turns from laws to patterns"* and [chapter 14](../14_smuggled-verdicts_8y69.md)'s *"opens Part IV with the mechanism behind this one"* — so this makes a practice that had grown by itself consistent, and gives each part its full name rather than its number.
+
+**Two checks were added to the tool, and the second is the point.**
+Check 3 read the file's first line as the H1, which the label broke; it now finds the first `# ` line.
+Check 3b is new: a part's first chapter must carry that part's label and no other chapter may, verified against `00_toc.md`. Without it, a part rename would leave six labels stale with nothing to catch it — the silent failure this repo's tooling exists for. Tested against both a stale label and a stray one before shipping.
+
+**Found on the way in, and not asked about.** [Chapter 20](../20_style_9rng.md)'s handoff stated the next chapter's claim rather than naming its subject: *"the decision was taken and never written down, and the author was a machine that remembers nothing between sessions"* is both halves of [chapter 21](../21_never-written-down_at4r.md)'s claim, arriving a page early. This is the drift `CLAUDE.md` describes as the one thing no check can verify, and it predates this work. Rewritten to name the subject — the case where nobody stated a claim, and what a record has to hold.

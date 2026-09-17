@@ -1,3 +1,5 @@
+*Part III — Patterns, Graded*
+
 # What a Design Pattern Is For
 
 ## The claim

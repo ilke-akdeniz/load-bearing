@@ -221,7 +221,7 @@ The question that does the work: **which Force here is outside its ordinary rang
 
 Every inversion in this chapter is that question answered. If every Force sits in its ordinary range, you are in the ordinary case, the mainstream advice applies, and the interesting thing about your system is somewhere other than its architecture.
 
-[Chapter 19](19_idioms_7nkn.md) turns from profiles to ecosystems — why two languages solving the same problem settle on conventions that contradict each other, and what an Idiom is actually worth once you can see where it came from.
+[Chapter 19](19_idioms_7nkn.md) opens Part V, *Conventions*, turning from profiles to ecosystems — why two languages solving the same problem settle on conventions that contradict each other, and what an Idiom is actually worth once you can see where it came from.
 
 ---
 
