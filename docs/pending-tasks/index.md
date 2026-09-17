@@ -21,5 +21,5 @@ They are limits the book has chosen to live with, not work queued, and they stay
 Interface-per-class — the convention that every class is published behind an interface of its own, regardless of what the interface is for — is owned by no chapter.
 [Chapter 17](../../17_abstraction-as-insurance_4jk6.md) takes the case where the interface exists to keep a dependency swappable, and stops there.
 
-**Corrected 2026-08-26.** This gap previously also named the dependency-injection container, which is no longer true: [chapter 02](../../02_the-five-kinds_cjx4.md) classifies it as an Idiom and separates it from the Principle it travels with, and [chapter 20](../../20_idioms_7nkn.md) gives its conditions.
+**Corrected 2026-08-26.** This gap previously also named the dependency-injection container, which is no longer true: [chapter 02](../../02_the-five-kinds_cjx4.md) classifies it as an Idiom and separates it from the Principle it travels with, and [chapter 19](../../19_idioms_7nkn.md) gives its conditions.
 The same entry said [chapter 17](../../17_abstraction-as-insurance_4jk6.md) "reaches the testing half of the question and no further", which understated it — that chapter has six subsections on the swappability case and one on tests.

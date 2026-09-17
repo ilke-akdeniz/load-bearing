@@ -29,12 +29,11 @@ Only the author moves a chapter to **draft** or **ready**.
 | 15 | `15_principle-loses-scope_b86v.md` | **draft** | 2026-09-13 |
 | 16 | `16_tdd-and-mocks_u8eu.md` | **draft** | 2026-09-13 |
 | 17 | `17_abstraction-as-insurance_4jk6.md` | **draft** | — |
-| 18 | `18_force-map-method_r37x.md` | **draft** | — |
-| 19 | `19_six-profiles_dnkz.md` | **draft** | — |
-| 20 | `20_idioms_7nkn.md` | **draft** | — |
-| 21 | `21_style_9rng.md` | **draft** | — |
-| 22 | `22_never-written-down_at4r.md` | **draft** | — |
-| 23 | `23_assigned-to-the-team_3fjx.md` | **draft** | — |
+| 18 | `18_six-profiles_dnkz.md` | **draft** | — |
+| 19 | `19_idioms_7nkn.md` | **draft** | — |
+| 20 | `20_style_9rng.md` | **draft** | — |
+| 21 | `21_never-written-down_at4r.md` | **draft** | — |
+| 22 | `22_assigned-to-the-team_3fjx.md` | **draft** | — |
 
 The contents page is [00_toc.md](../00_toc.md).
 

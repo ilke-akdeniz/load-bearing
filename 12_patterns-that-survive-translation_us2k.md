@@ -482,7 +482,7 @@ Confusing the Forces, goals, and problem shapes in play is one way people end up
 
 *Writers collide* gives you optimistic locking, pessimistic locking, single-writer partitioning, and a serializable transaction. Narrowing four to one needs the Force's **intensity** — [chapter 03](03_forces_f4m5.md)'s dial — and what you are willing to pay for it, and neither is written on the shelf the pattern came from.
 
-This chapter sorts. It does not decide. [Chapter 18](18_force-map-method_r37x.md) is the one that turns a set of Forces into a design.
+This chapter sorts. It does not decide.
 
 ### The listed entries are not endorsements
 

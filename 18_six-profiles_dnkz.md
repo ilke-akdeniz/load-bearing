@@ -8,7 +8,7 @@
 
 - **Force profile** is the reading of every Force bearing on a system — and what makes a reading a *profile* is that at least one of those Forces sits at an intensity outside the ordinary range ([Ch. 03](03_forces_f4m5.md)), and stays there. Unlike domain, force profile is this book's term and is not standard vocabulary.
 
-[Chapter 18](18_force-map-method_r37x.md) gave the force-map method for one decision. This chapter runs it at the scale of whole systems, six times, and the finding is that the answers cluster.
+[Chapter 03](03_forces_f4m5.md) reads the Forces one at a time. This chapter reads them together, six times over and at the scale of whole systems, and the finding is that the answers cluster.
 
 ---
 
@@ -183,11 +183,11 @@ That is a finding about your system rather than a disappointment, and four thing
 
 ### A profile you are visiting rather than living in
 
-Reading this chapter and concluding you now understand embedded development is the failure it is easiest to commit. The readings above are real and they are also the first page. What they let you do is ask better questions and stop offering advice from your own profile as though it were general. What they do not do is substitute for the thing [chapter 18](18_force-map-method_r37x.md) charges for, which is knowing what the options cost.
+Reading this chapter and concluding you now understand embedded development is the failure it is easiest to commit. The readings above are real and they are also the first page. What they let you do is ask better questions and stop offering advice from your own profile as though it were general. What they do not do is substitute for knowing what the options cost, which is the part no list supplies.
 
 ### Domains that are not on this list
 
-Six is not a complete enumeration and nothing in the argument requires it to be. Scientific computing, data engineering, security-critical systems and machine-learning infrastructure each have force profiles that would produce their own inversions, and the method for finding them is [chapter 18](18_force-map-method_r37x.md)'s rather than this chapter's list.
+Six is not a complete enumeration and nothing in the argument requires it to be. Scientific computing, data engineering, security-critical systems and machine-learning infrastructure each have force profiles that would produce their own inversions, and finding them is a matter of reading which Force is pinned ([Ch. 03](03_forces_f4m5.md)) rather than of extending this chapter's list.
 
 ---
 
@@ -221,8 +221,8 @@ The question that does the work: **which Force here is outside its ordinary rang
 
 Every inversion in this chapter is that question answered. If every Force sits in its ordinary range, you are in the ordinary case, the mainstream advice applies, and the interesting thing about your system is somewhere other than its architecture.
 
-[Chapter 20](20_idioms_7nkn.md) turns from profiles to ecosystems — why two languages solving the same problem settle on conventions that contradict each other, and what an Idiom is actually worth once you can see where it came from.
+[Chapter 19](19_idioms_7nkn.md) turns from profiles to ecosystems — why two languages solving the same problem settle on conventions that contradict each other, and what an Idiom is actually worth once you can see where it came from.
 
 ---
 
-[← Ch. 18](18_force-map-method_r37x.md)  ·  [Contents](00_toc.md)  ·  [Ch. 20 →](20_idioms_7nkn.md)
+[← Ch. 17](17_abstraction-as-insurance_4jk6.md)  ·  [Contents](00_toc.md)  ·  [Ch. 19 →](19_idioms_7nkn.md)

@@ -56,7 +56,7 @@ Always name the kinds — Law, Force, Principle, Idiom, Style.
 Read these before writing anything.
 
 - `README.md` — premise, the model, the chapter rubric, conventions, license. The landing page.
-- `00_toc.md` — the contents page: twenty-three chapters in five parts, each a number, a title and a link, and nothing else.
+- `00_toc.md` — the contents page: twenty-two chapters in six parts, each a number, a title and a link, and nothing else.
 - `docs/STATUS.md` — which chapter is at which status. Update it when a status changes.
 - `docs/LEDGER.md` — **concept and example ownership.** Which chapter owns which idea. Non-optional; see the protocol below. It names chapters by their four-character id and never by number, in the owner column and in the prose alike, because a number there is silent when the book renumbers.
 - `docs/DECISIONS.md` — editorial decisions, with reasoning and the options that lost. Consult before reversing anything.
@@ -160,7 +160,7 @@ The bias has a specific shape: claiming *sufficiency* where only *necessity* was
 Two drafts of [chapter 03](03_forces_f4m5.md)'s claim failed this, in the same direction:
 
 - *"Evaluating the Forces is most of the work of choosing well"* — unquantifiable, and not what the chapter demonstrates.
-- *"…is where the design is actually decided"* — contradicted by the book itself in three places: [chapter 02](02_the-five-kinds_cjx4.md)'s *classifying is not deciding*, [chapter 03](03_forces_f4m5.md)'s own concession that conflicting Forces are decided rather than computed, and [chapter 20](20_idioms_7nkn.md)'s case for obeying an Idiom you can out-argue.
+- *"…is where the design is actually decided"* — contradicted by the book itself in three places: [chapter 02](02_the-five-kinds_cjx4.md)'s *classifying is not deciding*, [chapter 03](03_forces_f4m5.md)'s own concession that conflicting Forces are decided rather than computed, and [chapter 19](19_idioms_7nkn.md)'s case for obeying an Idiom you can out-argue.
 
 What survived was *"…is the groundwork"* — a prerequisite claim, necessary and explicitly not sufficient, provable from the seven cases the chapter works through.
 
@@ -429,7 +429,7 @@ The log doubles as the authorship record for an AI-assisted work, so it has to s
 
 ### Grilling
 
-**Both a chapter and a review are worked through by interview, not by delivering a result and waiting for objections.** [Chapter 18](18_force-map-method_r37x.md) documents the technique and quotes the prompt it comes from; this is the same thing, run by Claude, with the author answering.
+**Both a chapter and a review are worked through by interview, not by delivering a result and waiting for objections.** [Chapter 21](21_never-written-down_at4r.md) documents the technique and quotes the prompt it comes from; this is the same thing, run by Claude, with the author answering.
 
 The procedure:
 
@@ -437,13 +437,13 @@ The procedure:
 - **One question at a time**, waiting for the answer before the next one. A batch of questions is bewildering, and it also hides which ones were dependent on which.
 - **Give a recommended answer with every question**, and the reasoning for it. A question with no recommendation pushes the work back onto the author, which is the opposite of the point.
 - **Look facts up rather than asking.** Counts, cross-references, what a source actually says, what a rename would cost — go and find out. The *decisions* are the author's; the facts are Claude's job, and a fact discovered before the question is asked often settles it.
-- **Order the questions by dependency.** Ask the root decision first. [Chapter 19](19_six-profiles_dnkz.md)'s terminology question came first because the title, every heading, the TOC entry, three ledger rows and two cross-references all inherited from it, and asking anything else first would have meant asking it twice.
+- **Order the questions by dependency.** Ask the root decision first. [Chapter 18](18_six-profiles_dnkz.md)'s terminology question came first because the title, every heading, the TOC entry, three ledger rows and two cross-references all inherited from it, and asking anything else first would have meant asking it twice.
 - **Say what a decision will cost before it is taken**, where the cost is not obvious. The answer changes when the consequence is visible.
 - **Surface decisions the author did not tag.** A review is not an exhaustive list of what is wrong; anything found on the way in is worth putting to them as a question of its own.
 - **Log the interview, not only what it concluded.** Grilling is where the book's judgments get made, so the exchange goes into `docs/DECISIONS.md` with the work: the author's objection in their own words, the draft's recommendation where it did not survive, and any fact found mid-interview that changed the question being asked. This is the argument in *Attribution in decision entries* below, applied to the format that generates the most attributable material — a log that keeps only the conclusions is the quiet failure recorded there, and grilling produces conclusions that look self-evident once reached and were not.
-- **Keep a running note as the answers land.** Four questions in, the early exchanges are easy to reconstruct wrongly and easy to reconstruct confidently. The author's exact words are worth more than the paraphrase: [chapter 20](20_idioms_7nkn.md)'s two counter-arguments were sharper than the summary written from memory an hour later would have been.
+- **Keep a running note as the answers land.** Four questions in, the early exchanges are easy to reconstruct wrongly and easy to reconstruct confidently. The author's exact words are worth more than the paraphrase: [chapter 19](19_idioms_7nkn.md)'s two counter-arguments were sharper than the summary written from memory an hour later would have been.
 
-**When it is not worth it.** The technique is slow by design, which [chapter 18](18_force-map-method_r37x.md) states as one of its costs. A review that is three typos and a wording fix is applied, not interviewed. The test is whether any item would change what the other items should be — where nothing depends on anything, there is no tree to walk, and an interview is ceremony.
+**When it is not worth it.** The technique is slow by design, which [chapter 21](21_never-written-down_at4r.md) states as one of its costs. A review that is three typos and a wording fix is applied, not interviewed. The test is whether any item would change what the other items should be — where nothing depends on anything, there is no tree to walk, and an interview is ceremony.
 
 ### Attribution in decision entries
 
@@ -537,7 +537,7 @@ Never amend or rebase the author's commits — the point of the history is that 
 
 **Rename a file in its own commit, and edit it in the next one.**
 Git matches a renamed file to its original by similarity, and gives up below fifty percent.
-[Chapter 19](19_six-profiles_dnkz.md)'s rename shipped alongside its edits and came out at forty-three, so `git show` reported a deleted file and a new one and the review diff was unreadable at exactly the moment somebody wanted to read it.
+[Chapter 18](18_six-profiles_dnkz.md)'s rename shipped alongside its edits and came out at forty-three, so `git show` reported a deleted file and a new one and the review diff was unreadable at exactly the moment somebody wanted to read it.
 This has come up three times — [chapters 11](11_what-a-pattern-is-for_3xzc.md), 15 and 19 — and the fix costs one extra commit.
 
 Keep the message short: a subject line, and a body only when the change needs a reason rather than a description.

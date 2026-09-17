@@ -234,7 +234,7 @@ The question that does the work: **if the swap happened next quarter, which of i
 
 Answer it by listing the steps — schema translation, data copy, verification, cutover, rollback, retuning — and marking the ones the abstraction touches. The usual answer is the call sites, which were never the expensive part, and the usual reaction to seeing the list is more useful than any argument in this chapter.
 
-Part V turns from diagnosis to method — [chapter 18](18_force-map-method_r37x.md) gives the procedure for taking one real decision from the Forces bearing on it to the design they support, worked on a decision out of FlowCore's log.
+[Chapter 18](18_six-profiles_dnkz.md) turns from single pieces of advice to whole systems — six situations where one Force sits far outside its ordinary range, and the standard advice that was written as though it never did.
 
 ---
 
@@ -247,4 +247,4 @@ Part V turns from diagnosis to method — [chapter 18](18_force-map-method_r37x.
 
 ---
 
-[← Ch. 16](16_tdd-and-mocks_u8eu.md)  ·  [Contents](00_toc.md)  ·  [Ch. 18 →](18_force-map-method_r37x.md)
+[← Ch. 16](16_tdd-and-mocks_u8eu.md)  ·  [Contents](00_toc.md)  ·  [Ch. 18 →](18_six-profiles_dnkz.md)

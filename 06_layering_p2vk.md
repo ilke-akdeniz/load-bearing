@@ -36,7 +36,7 @@ Two things follow, and they are the difference between the first two claims:
 - **The Acyclicity Law is exactly the condition that ranks can be assigned at all.** Try the rule on a cycle and it never terminates: A's rank needs B's, which needs A's. Acyclic and rankable are the same property.
 - **The Ranking Principle adds that every arrow crosses exactly one rank.** Rank 4 may use rank 3. It may not reach down to rank 1, even though nothing about acyclicity forbids that. This is a real constraint and most systems do not satisfy it.
 
-The Three-Tier Idiom is where the physical boundary arrives, and it varies by ecosystem. In Java and C# it was usually separate projects, assemblies, or shipped libraries; elsewhere it shows up as top-level directories or packages. What each form actually enforces differs — a directory is a package in Go, carries no access meaning in C# until assemblies split, and enforces nothing in Python — and [chapter 20](20_idioms_7nkn.md) works through why ecosystems diverge like this.
+The Three-Tier Idiom is where the physical boundary arrives, and it varies by ecosystem. In Java and C# it was usually separate projects, assemblies, or shipped libraries; elsewhere it shows up as top-level directories or packages. What each form actually enforces differs — a directory is a package in Go, carries no access meaning in C# until assemblies split, and enforces nothing in Python — and [chapter 19](19_idioms_7nkn.md) works through why ecosystems diverge like this.
 
 The three are taught together, defended together, and heard as one sentence. Separating them is what the rest of this chapter does.
 
@@ -216,7 +216,7 @@ Here the Idiom is right, and it is right for reasons that have nothing to do wit
 
 - **The ranking matches the graph**, so the Ranking Principle holds without anyone forcing it, and no pass-through class is needed to fill a rank.
 - **The names are real.** Somebody can say what belongs in the service layer and what does not, which is the test the compiler's rank 2 failed.
-- **A new contributor already knows it.** The convention costs nothing to learn and answers the placement question the same way every time, which is worth more than a better arrangement nobody shares ([Ch. 20](20_idioms_7nkn.md) argues this at length — an Idiom you can out-argue is usually still the one to follow).
+- **A new contributor already knows it.** The convention costs nothing to learn and answers the placement question the same way every time, which is worth more than a better arrangement nobody shares ([Ch. 19](19_idioms_7nkn.md) argues this at length — an Idiom you can out-argue is usually still the one to follow).
 
 This is the common case, and saying so matters. Most applications that call themselves layered are layered, and their teams are not making the mistake this chapter describes. The failure is not in using the ranking. It is in carrying it into a program whose graph has a different shape, and defending it there with the Law's certainty.
 

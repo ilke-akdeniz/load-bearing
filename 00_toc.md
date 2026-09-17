@@ -1,6 +1,6 @@
 # Load-Bearing — Table of Contents
 
-Twenty-three chapters in five parts.
+Twenty-two chapters in six parts.
 
 Back to [the introduction](README.md).
 
@@ -34,12 +34,14 @@ Back to [the introduction](README.md).
 - 15. [How a Principle Loses Its Scope](15_principle-loses-scope_b86v.md)
 - 16. [TDD, Mocks, and What Testing Actually Buys](16_tdd-and-mocks_u8eu.md)
 - 17. [Abstraction as Insurance](17_abstraction-as-insurance_4jk6.md)
+- 18. [Six Profiles, Six Inversions](18_six-profiles_dnkz.md)
 
-## Part V — Programming With the Five Kinds
+## Part V — Conventions
 
-- 18. [The Force-Map Method](18_force-map-method_r37x.md)
-- 19. [Six Profiles, Six Inversions](19_six-profiles_dnkz.md)
-- 20. [Idioms: Why Ecosystems Diverge](20_idioms_7nkn.md)
-- 21. [Style: The Level Where Being Right Doesn't Matter](21_style_9rng.md)
-- 22. [What Was Never Written Down](22_never-written-down_at4r.md)
-- 23. [Assigned to the Team, Owned by Nobody](23_assigned-to-the-team_3fjx.md)
+- 19. [Idioms: Why Ecosystems Diverge](19_idioms_7nkn.md)
+- 20. [Style: The Level Where Being Right Doesn't Matter](20_style_9rng.md)
+
+## Part VI — The Record
+
+- 21. [What Was Never Written Down](21_never-written-down_at4r.md)
+- 22. [Assigned to the Team, Owned by Nobody](22_assigned-to-the-team_3fjx.md)

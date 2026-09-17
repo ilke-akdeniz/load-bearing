@@ -264,7 +264,7 @@ IntegrityError: UNIQUE constraint failed: revisions.definition_id, revisions.act
 
 **Nobody needs to remember why.** The constraint states the decision, enforces it, and objects on its own behalf when a change contradicts it — and the objection arrives at the moment of the change rather than in production, which is the only feedback that reliably survives a hand-off to somebody who was not there.
 
-So the claim has a corollary that is more useful than the claim: where a decision can be made self-enforcing, that is worth more than recording it, because the enforcement does not depend on anybody reading anything. [Chapter 12](12_patterns-that-survive-translation_us2k.md) works the general technique as making illegal states unrepresentable, and [chapter 19](19_six-profiles_dnkz.md) shows the line-of-business profile pushing rules into the schema for the related reason that the schema outlives the code.
+So the claim has a corollary that is more useful than the claim: where a decision can be made self-enforcing, that is worth more than recording it, because the enforcement does not depend on anybody reading anything. [Chapter 12](12_patterns-that-survive-translation_us2k.md) works the general technique as making illegal states unrepresentable, and [chapter 18](18_six-profiles_dnkz.md) shows the line-of-business profile pushing rules into the schema for the related reason that the schema outlives the code.
 
 The boundary is real and it is narrow. Most design decisions cannot be expressed as a constraint — *four queries rather than one join, because a join fans out to fifteen rows to dedupe* is a judgement, not an invariant. For those the record is the only mechanism there is.
 
@@ -312,7 +312,7 @@ And if the answer is that somebody would read the code and work it out, that som
 
 What you end up holding is not an answer but a position. Fixing Y changes Z; some customers depend on Z; leaving Y another month costs you a different customer. Nobody in that conversation is being unreasonable and nobody is going to win it, because **there is no fact available that settles it** — and one sentence, written at the time by whoever chose Y, is what would have.
 
-[Chapter 23](23_assigned-to-the-team_3fjx.md) closes the book on the arrangement that produces the software — the artifacts that have to exist before the code, and why each of them needs one person's name against it rather than a team's.
+[Chapter 22](22_assigned-to-the-team_3fjx.md) closes the book on the arrangement that produces the software — the artifacts that have to exist before the code, and why each of them needs one person's name against it rather than a team's.
 
 ---
 
@@ -328,4 +328,4 @@ What you end up holding is not an answer but a position. Fixing Y changes Z; som
 
 ---
 
-[← Ch. 21](21_style_9rng.md)  ·  [Contents](00_toc.md)  ·  [Ch. 23 →](23_assigned-to-the-team_3fjx.md)
+[← Ch. 20](20_style_9rng.md)  ·  [Contents](00_toc.md)  ·  [Ch. 22 →](22_assigned-to-the-team_3fjx.md)

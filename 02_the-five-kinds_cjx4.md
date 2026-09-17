@@ -217,7 +217,7 @@ Five questions, in order. Stop at the first that answers.
 | "Every repository gets an interface" | **Idiom** | C#/Java; [Ch. 16](16_tdd-and-mocks_u8eu.md) for why |
 | "Accept interfaces, return structs" | **Idiom** | Go |
 | "Exceptions are for exceptional cases" | **Idiom** | Go and Python disagree at the root |
-| "Short local names" | **Style** | Go-specific, and still Style — nothing sees it; [Ch. 21](21_style_9rng.md) |
+| "Short local names" | **Style** | Go-specific, and still Style — nothing sees it; [Ch. 20](20_style_9rng.md) |
 | "Prefer `var` / avoid `var`" | **Style** | pick one, stop talking |
 | "Tabs vs spaces" | **Style** | genuinely arbitrary |
 
@@ -229,7 +229,7 @@ One row is worth pausing on.
 
 ## Why the order runs one way
 
-Forces are the only inputs. They are not advice, they take nothing from the other kinds, and they are either true where you are standing or they are not. Laws take nothing from them either — a Force decides only whether a Law binds, which is what *How Forces relate to each kind of advice* sets out above. The two conditional kinds are where the direction matters: a Principle is conditioned on a fact about your system, an Idiom on a fact about your surroundings ([Ch. 20](20_idioms_7nkn.md)). So the model runs one way, from the facts to the advice.
+Forces are the only inputs. They are not advice, they take nothing from the other kinds, and they are either true where you are standing or they are not. Laws take nothing from them either — a Force decides only whether a Law binds, which is what *How Forces relate to each kind of advice* sets out above. The two conditional kinds are where the direction matters: a Principle is conditioned on a fact about your system, an Idiom on a fact about your surroundings ([Ch. 19](19_idioms_7nkn.md)). So the model runs one way, from the facts to the advice.
 
 Read that way, every step takes its input from the one before it, and every claim carries something that would prove it wrong. *This Principle applies because the schema outlives the code* fails the day somebody checks and it does not.
 
@@ -259,7 +259,7 @@ Three boundaries, and the last is the important one.
 
 **Claims that genuinely span kinds.** "Validate at the boundary" is partly a security Law, partly a feedback-speed Principle, partly an Idiom about *which* boundary. Forcing a single label loses information. Hold two labels and say which part you mean.
 
-**Classifying is not deciding.** The model tells you what kind of claim you are holding. It does not tell you what to do about it. Recognizing something as an Idiom is not permission to ignore it — [chapter 20](20_idioms_7nkn.md) argues that following local convention is usually correct even when you can out-argue it, because reviewability and shared expectations are worth more than being interesting. The model narrows the question; it does not answer it.
+**Classifying is not deciding.** The model tells you what kind of claim you are holding. It does not tell you what to do about it. Recognizing something as an Idiom is not permission to ignore it — [chapter 19](19_idioms_7nkn.md) argues that following local convention is usually correct even when you can out-argue it, because reviewability and shared expectations are worth more than being interesting. The model narrows the question; it does not answer it.
 
 **The model needs comparative experience it cannot supply.** This is the real limit, and it is uncomfortable.
 
