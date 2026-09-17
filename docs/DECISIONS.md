@@ -7554,3 +7554,36 @@ Two reasons. *Forced / chosen / deferred* is already defined and worked in `What
 **Two defects in the draft's own new prose, caught before the commit.** It glossed Style as *"a Style nobody needs to agree about"*, which contradicts [chapter 02](../02_the-five-kinds_cjx4.md)'s *arbitrary, but worth being consistent about* and [chapter 20](../20_style_9rng.md)'s whole claim; replaced with 02's mechanical test, *neither the compiler nor the runtime can see it*. And it cited [chapter 03](../03_forces_f4m5.md) twice in consecutive paragraphs, so the second was reworded to 03's actual mechanism — *nothing accumulates while you wait*.
 
 **Consequence.** Part VI's tie is in the chapter rather than asserted in a part title. The part's name is still open; the author proposed *Applied five kinds: Decisions*, and the draft objected that the colon breaks the set — no other part uses one — and that *applied five kinds* inverts the natural order, while *the five kinds, applied* would over-claim, since Parts II to V are also the kinds applied. Proposed instead: **Your Own Decisions**, with **Decisions, Graded** as the runner-up mirroring Part III.
+
+---
+
+## 192. The six part names, settled
+
+**Date.** 2026-09-16
+
+**Context.** The last open item from decisions 187 and 188. Both names are the author's.
+
+```text
+I    Claims and Forces           01 02 03
+II   The Foundations             04 05 06 07 08 09 10
+III  Patterns, Graded            11 12 13 14
+IV   Principles Promoted to Law  15 16 17 18
+V    Conventions                 19 20
+VI   Your Own Decisions          21 22
+```
+
+**Part III keeps its name, and the draft's proposal lost.** The draft argued that *Patterns, Graded* does not cover [chapter 14](../14_smuggled-verdicts_8y69.md), whose subject is evaluative vocabulary rather than patterns, and proposed *Named Advice, Graded*.
+The author refused: *"Pattern is existing jargon that fits so well here, 'Named Advice' can't compete with it no matter what you say."*
+That is this file's own rule about naming the real terms so the reader can find the literature, applied against an invented phrase. `Pattern` is findable; `named advice` is not.
+
+**Part IV is the author's phrase.** The draft had proposed *Advice Without Its Conditions*; the author proposed **Principles Promoted to Law**, which is better and is settled by [chapter 02](../02_the-five-kinds_cjx4.md):
+
+> A Principle stated without its conditions has been **promoted**, usually by accident, and that promotion is the failure this book exists to catch.
+
+So the title uses the book's own established verb for its own named failure, rather than new vocabulary. The `README`'s recurring-failure box uses the same verb for the other form — *"An Idiom gets promoted to a Law by advocacy"* — so the two forms now share it, with Part IV visibly the Principle one. It is also the right verb for the ladder the model runs on, Law → Principle → Idiom → Style, where promotion is movement up.
+
+**A collision avoided.** The author's earlier phrasing was *How a Principle Poses as a Law*, which would have sat on [chapter 15](../15_principle-loses-scope_b86v.md)'s own title, *How a Principle Loses Its Scope*. This file records the book being burned by exactly that once — Part I called *The five kinds* while [chapter 02](../02_the-five-kinds_cjx4.md) was called *The five kinds of claim*, a collision created by the sweep that fixed the terminology, and repaired by renaming the part away from the chapter. *Promoted to Law* names the damage without taking 15's subject.
+
+**Part VI.** The author proposed *Applied five kinds: Decisions*. The draft objected on two grounds — no other part uses a colon, and *applied five kinds* inverts the natural order, while *the five kinds, applied* over-claims, since Parts II to V are also the kinds applied. **Your Own Decisions** was taken instead.
+
+It carries the reversal that makes the part belong to this book: Parts I to V place advice arriving from outside, and Part VI is where the reader produces it. [Chapter 21](../21_never-written-down_at4r.md) now says the same thing in its own opening — *"here you are the one producing it"* — so the title and the chapter agree without the title having to carry the argument. Decision 191 is why it does not have to: the tie is argued in the chapter.

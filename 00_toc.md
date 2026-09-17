@@ -29,7 +29,7 @@ Back to [the introduction](README.md).
 - 13. [Are Patterns Just Missing Language Features?](13_missing-language-features_esqm.md)
 - 14. [Smuggled Verdicts](14_smuggled-verdicts_8y69.md)
 
-## Part IV — Methodologies Versus Principles
+## Part IV — Principles Promoted to Law
 
 - 15. [How a Principle Loses Its Scope](15_principle-loses-scope_b86v.md)
 - 16. [TDD, Mocks, and What Testing Actually Buys](16_tdd-and-mocks_u8eu.md)
@@ -41,7 +41,7 @@ Back to [the introduction](README.md).
 - 19. [Idioms: Why Ecosystems Diverge](19_idioms_7nkn.md)
 - 20. [Style: The Level Where Being Right Doesn't Matter](20_style_9rng.md)
 
-## Part VI — The Record
+## Part VI — Your Own Decisions
 
 - 21. [What Was Never Written Down](21_never-written-down_at4r.md)
 - 22. [Assigned to the Team, Owned by Nobody](22_assigned-to-the-team_3fjx.md)
