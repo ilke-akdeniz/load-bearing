@@ -134,13 +134,13 @@ Bare entries — author, title, venue, date, link — in order of first appearan
 It is not a further-reading list: a work the chapter does not cite does not go in, and a work it does cite is not annotated with what the chapter took from it.
 Provenance stays in the prose where the claim is made, so the section adds no footnote markers and changes no sentence.
 
-### Part IV takes a different shape
+### The two case studies take a different shape
 
 [Chapters 16](16_tdd-and-mocks_u8eu.md) and [17](17_abstraction-as-insurance_4jk6.md) are case studies. [Chapter 15](15_principle-loses-scope_b86v.md) makes the claim and keeps the general rubric; they are two instances of it, and they do not each get a claim of their own.
 
 Forcing the rubric on them produced manufactured claim sentences — each one two assertions welded with *and* or *neither/nor*, half reporting what a source said and half stating the chapter's technical finding. The author rejected all four. **A chapter whose job is to be evidence for another chapter's claim does not need a claim; it needs the case laid out.**
 
-So a Part IV case uses this shape instead:
+So a case study uses this shape instead:
 
 1. **The advice** — the sentence as it actually travels, and what it is for. The chapter opens on it.
 2. **What the source said** — the scope, quoted from the primary source.
@@ -150,7 +150,7 @@ So a Part IV case uses this shape instead:
 6. **What it costs** — where both sides have a bill, two sections: *what following the advice costs* and *what taking the alternative costs*. Mixing them in one list is what made [chapter 16](16_tdd-and-mocks_u8eu.md)'s costs section unreadable.
 7. **How to recognize it**
 
-The counter-example rule is unchanged and still mandatory; only its framing moves. Everything before Part IV keeps the general rubric, because those chapters do make claims of their own.
+The counter-example rule is unchanged and still mandatory; only its framing moves. Every other chapter keeps the general rubric, because they do make claims of their own — including [chapter 18](18_six-profiles_dnkz.md), which sits in the same part and is not a case study.
 
 ### The claim sentence
 
@@ -321,7 +321,7 @@ Then **write that into the sentence** — there is no tagging notation.
 Either way it is a clause, never a sentence of its own, and it appears once — at the term's owning chapter. **A book that keeps announcing which parts are its own is not being careful, it is being self-conscious.** The five-kind model is the book's own and no chapter says so; it simply uses it.
 
 **Running example.**
-FlowCore — a Go workflow library at `~/s/flowcore` with a 38-entry decision log — supplies examples in Parts II, IV, and V, because its reasoning was recorded at the time rather than reconstructed afterwards.
+FlowCore — a Go workflow library at `~/s/flowcore` with a 38-entry decision log — supplies examples in Parts I, II, IV, V and VI, because its reasoning was recorded at the time rather than reconstructed afterwards.
 Each appearance must show a *different* facet. No chapter rests on FlowCore alone.
 
 ## Markdown conventions

@@ -13,7 +13,7 @@ Each chapter follows this shape:
 5. **What the claim costs** — every choice has a bill.
 6. **How to recognize the failure** — what it looks like in a real codebase when someone got this wrong.
 
-**Part IV is the exception.**
+**The two case studies are the exception.**
 [Chapters 16](../16_tdd-and-mocks_u8eu.md) and [17](../17_abstraction-as-insurance_4jk6.md) are case studies in [chapter 15](../15_principle-loses-scope_b86v.md)'s claim rather than claims of their own.
 So each opens on the advice as it actually travels and on what its source said, and its mandatory counter-example asks when following the compressed version is right — the same rule, framed for a chapter that makes no claim to bound.
 
@@ -28,7 +28,7 @@ Java and C# appear where a point needs a class-based contrast — Java mostly in
 SQL runs through seven chapters, and C, Rust, and JavaScript appear once or twice each, where nothing else would show the point.
 
 **Running example.**
-[FlowCore](https://github.com/ilke-akdeniz/flowcore) supplies examples in Parts II, IV, and V — its 38-entry decision log means the reasoning behind a choice can be quoted rather than guessed at.
+[FlowCore](https://github.com/ilke-akdeniz/flowcore) supplies examples in Parts I, II, IV, V and VI — its 38-entry decision log means the reasoning behind a choice can be quoted rather than guessed at.
 Each appearance shows a different facet, other domains supply the contrast, and no chapter rests on FlowCore alone.
 
 ## Files

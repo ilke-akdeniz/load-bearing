@@ -7484,3 +7484,31 @@ What went with them is worth naming, since it was the strongest of the three: *"
 The remaining four codebase bullets now run one per artifact, and *and its calendar* in the heading still earns its place on the retrospective bullet.
 
 **Consequence.** [Chapter 22](../22_assigned-to-the-team_3fjx.md)'s claim is unchanged. *Force reading* replaces *force map* in 22, [chapter 03](../03_forces_f4m5.md) and the ledger. The open items from 187 and 188 that remain are the Part IV and Part VI names, and the deferred placements of [chapters 06](../06_layering_p2vk.md), [10](../10_organization_rjf9.md) and [14](../14_smuggled-verdicts_8y69.md).
+
+---
+
+## 190. Ledger reconciliation, and two rule files that the restructure made wrong
+
+**Date.** 2026-09-16
+
+**Context.** Pass 6 of decision 188, checking the ledger against what each chapter now says. It found more than bookkeeping.
+
+**A false row, created by the draft in pass 4.** Reassigning [chapter 18](../18_force-map-method_r37x.md)'s rows, the draft moved *The record is not a design* to `at4r` without checking whether the content had landed. It had not — the phrase appears nowhere in [chapter 21](../21_never-written-down_at4r.md), because what survived of that idea went to [chapter 22](../22_assigned-to-the-team_3fjx.md) instead, where its row already existed.
+The row is deleted. **A reassignment is a claim that a chapter says something, and it has to be checked against the chapter like any other claim.**
+
+**Two stale notes the checker cannot see.** `tools/check-drift.py` validates the owner column and not the prose beside it, so two rows still referred to `r37x` in their notes — the `us2k` row on Forces that narrow without deciding, and the `at4r` row on `get_definition`. Both reworded.
+
+**Seven rows were filed where the deleted chapter used to sit.** The ledger is grouped by owning chapter in book order, and pass 4's reassignments left `cjx4`, `f4m5`, `at4r` and `3fjx` rows stranded between the Part IV and Part V blocks — filed, and in the one place nobody reading for those chapters would look. Refiled into their own blocks.
+
+**One row added.** With [chapter 18](../18_force-map-method_r37x.md)'s five moves gone, nothing in the ledger covered conflicting Forces, which [chapter 03](../03_forces_f4m5.md) now owns in a single paragraph. Added as *Conflicting Forces are decided, not computed*.
+
+### Two rule files were left asserting things that stopped being true
+
+**FlowCore's range was recounted.** `CLAUDE.md`, `docs/ABOUT.md` and the ledger all said *Parts II, IV, and V*, which decision 112 had established by counting. Counted again under the new structure: [03](../03_forces_f4m5.md) 2 mentions, [05](../05_dependency-and-hiding_agjy.md) 2, [06](../06_layering_p2vk.md) 2, [16](../16_tdd-and-mocks_u8eu.md) 5, [19](../19_idioms_7nkn.md) 4, [20](../20_style_9rng.md) 2, [21](../21_never-written-down_at4r.md) 6 — **Parts I, II, IV, V and VI, every part but III.**
+This does not reverse decision 112's reasoning; the parts moved under it.
+
+**The case-study rubric was scoped to a part, and the part changed underneath it.** `CLAUDE.md`'s heading read *Part IV takes a different shape*, and it closed with *"everything before Part IV keeps the general rubric."* Decision 188 moved [chapter 18](../18_six-profiles_dnkz.md) into Part IV, and 18 is not a case study — it makes a claim of its own and uses the general rubric. So the rule as written covered a chapter it was never meant to cover, and excluded nothing that now needed excluding.
+**Rescoped from the part to the two chapters** in `CLAUDE.md` and `docs/ABOUT.md`: *The two case studies take a different shape*, with 18 named explicitly as keeping the general rubric.
+This is a factual correction forced by 188 rather than a change to the rubric itself, and it is flagged here because the rubric is the author's.
+
+**Left alone and flagged.** `CLAUDE.md`'s Sources entry for the author's TechIter document carries bare chapter arrows — *(→ 05, 18)*, *(→ 19)*, *(→ 11)*, *(→ 18)* — that do not match any current chapter and did not match before this restructure either; *layering … (→ 18)* has not pointed at a layering chapter through at least two renumberings. Repairing them means recovering what they originally meant, which is the author's to say.
