@@ -7760,3 +7760,37 @@ The draft flagged the embedded profile's *prefer exceptions to error codes* as c
 A ledger row now records that grading, under `dnkz`, so the resemblance does not start the argument again.
 
 **Three times in one review the draft built a relation from a resemblance rather than reading both texts** — twice on placement, once here. The pattern is comparing a remembered phrase against a remembered phrase.
+
+---
+
+## 198. Chapter 19's claim was the wrong shape, and half the chapter was built on it
+
+**Date.** 2026-09-17
+
+**Context.** The author's full read of [chapter 19](../19_idioms_7nkn.md), which they stopped partway through: *"I'm stopping my read here, the rest of the chapter probably doesn't match the new claim."*
+
+### The diagnosis is theirs and it is structural
+
+They replaced the claim in the file and explained why: *"The previous claim was very close to the ones of ch 03 and 18 and the same theme was repeated on many other places: 'X depends on Y, if you dont discover Y you are doomed.' An idiom is not something like that. You are not doomed if you get it wrong. That wrongly shaped claim drags the chapter to wrong places."*
+
+**Measured, the drag was about a third of the chapter.** The old claim's second half — *naming that condition is what separates deviating from an Idiom from merely ignoring one* — carried `Why the claim holds`, the Go-compiler-in-C deviation, and both boundary sections: roughly 1,280 words of 3,700. Four of the author's eight tags land on those sections.
+
+### The replacement needed a consequence, not just a distinction
+
+The author's sentence was *"A Principle's condition is a fact about your system, an Idiom's condition is a fact about your surroundings."* Three problems: a comma splice; a second splice left where the provenance clause was cut; and, structurally, **it is a definition rather than a finding** — [chapter 02](../02_the-five-kinds_cjx4.md) already defines an Idiom as an ecosystem convention, so this unpacks that definition rather than claiming something falsifiable. This file's rule is to say what happens, or what breaks without it.
+
+**Settled as:** *An Idiom's condition is a fact about your surroundings rather than about your system, so no measurement of your own system can settle an argument about one.*
+
+It keeps the author's distinction and lowers the stakes exactly as they wanted — the consequence is an argument that will not resolve, not a system that breaks. **And it earns the deviation half back.** Under the old claim, *what licences deviation is showing that a condition has failed* **was** the claim restated, which is the author's tag. Under this one it is the answer to the question the claim raises: if measuring your system cannot settle it, what can.
+
+### What changed in the chapter
+
+- **The Go split demonstration was genuinely broken**, and the author's confusion was the right response: *"why the store us trying to call it? I thought the helper was meant to be private."* The text asserted in one clause that the service had a row to convert and never said why. It now gives the service a reporting path `Get` does not cover, and the payoff says what actually changed — not the design, but that a visibility boundary now sits between two things that always belonged together, and Go cannot open it for one caller.
+- **Two sections cut or compressed as the author asked.** The Pike *upper case / where the newlines go* paragraph restated [chapter 02](../02_the-five-kinds_cjx4.md)'s *tone does not vary with authority* and added nothing this chapter owns; deleted. The dependency-injection closer restated 02's Principle/Idiom split; compressed to what this chapter adds.
+- **An abrupt transition fixed by moving a sentence rather than adding one.** *"Put each layer in its own folder is one instruction whose price runs from nothing to a published API"* sat **before** the `internal/` material, reading as a section close, so what followed felt like a new topic. It now closes the section, with a clause tying it to the claim.
+- **The deviation section never said which Idiom was being deviated from.** The author: *"I'm curious to know how this section is related to idioms."* An opening now names it — a compiler is written in the language it compiles or on an established toolkit, its condition is about surroundings, and both were absent for Go.
+- **Both boundary sections opened by restating the old claim** and were reframed against the new one. The generics case becomes: knowing where to look is not being able to act on what you find. The `defer` case becomes: the claim says no measurement of your system settles an Idiom, and does not promise that checking the surroundings will.
+
+**Nothing outside the chapter quoted the old claim**, checked before rewriting. [Chapter 02](../02_the-five-kinds_cjx4.md)'s cross-reference — *"following local convention is usually correct even when you can out-argue it"* — and `CLAUDE.md`'s use of the same case both survive, because the mechanism section keeps that argument. One ledger row was extended to carry the claim's second half.
+
+**A decoration the draft introduced and caught before committing.** Its own rewrite of the mechanism said the reading is *"taken of the room you are standing in"* and that two people *"are standing in different rooms"* — an image doing a mechanism's job, and one that twists [chapter 02](../02_the-five-kinds_cjx4.md)'s *facts about where you are standing*, which is Force vocabulary. Replaced with the three things that actually differ: the language, the toolchain, and the people who will read the code.
