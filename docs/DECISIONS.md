@@ -7931,3 +7931,28 @@ And *another dev*: checked across the book, and the only other matches for the b
 **The substantive edit, and the ordering fault in it.** The author added a guard against the example proving too much: *"the example is not a style choice, and still it doesn't prove that naming is not a style choice."* The concern is right — `G` is deliberately extreme, and an extreme case does not settle the ordinary one.
 But they placed it **before** the paragraph that establishes `G` is not a Style choice, so it presupposed its own premise. And they had removed *"but it is not"* from the paragraph before, which was what carried that verdict, so nothing established it until afterwards.
 Moved to the end of the resolution, where it reads as a consequence: *the example settles what `G` is and not what naming is: the first question has an answer and the second still does not.* That also puts it directly after the sentence conceding `Total` versus `Sum` has no answer, which is the concession it depends on.
+
+---
+
+## 205. Chapter 21's claim was narrower than its own mechanism
+
+**Date.** 2026-09-18
+
+**Context.** The author's full read of [chapter 21](../21_never-written-down_at4r.md). One tag, on the claim they had already replaced in the file: *"previous version was simply wrong about what's going on the AI case, it attributed the impossibility to sessions. The real mechanism is more deep and interesting."*
+
+**They are right, and the chapter proves it against itself.** The old claim located the impossibility at the session boundary — *an AI coding agent that remembers nothing between sessions, that recovery window was never open.* Two things in the chapter already contradicted that.
+
+- Its three cases show the **middle** one doing the damage: *same session, nothing written* produces a fresh computation on overlapping input, correlated and not a recollection. Within one session. So the boundary was never the mechanism.
+- Its mechanism section already stated the deeper version: *"there was never a moment when it existed anywhere but in a computation that has already been discarded."*
+
+**So the claim had been asserting less than the chapter demonstrated**, which is the inverse of the usual failure and easier to miss: nothing contradicts a claim that is too weak, it simply stops being what the chapter is about.
+
+**Rewritten keeping the author's finding and their mechanism**, with a hyphen made an em dash, a capital after a colon lowered, a trailing space removed, and *fundamentally* dropped as an intensifier the book does not use. It now ends on the chapter's own two load-bearing facts: the computation was discarded as it ran, and only text persists.
+
+**Four other edits, three kept.** Quoting *"it does nothing"* is right — the wrapper does do something, and unquoted the sentence reads as the book asserting it. Italicising the contrasting clause helps parse a long sentence. The heading's intent was right and its grammar was not: *why asking afterwards to AI* became *why asking the agent afterwards*.
+
+**One reverted with a reason.** *The work was to place it* had been changed to *evaluate it*. **Place** is the book's own verb for its subject — `README.md`: *"how to read advice … and place it correctly before deciding what to do about it."* *Evaluate* belongs to [chapter 03](../03_forces_f4m5.md) and its Forces. Swapping one for the other moves a term off its owning chapter.
+
+**And two small ones fixed:** *occured*, and backticks put around *grilling*, which appears eight times in the chapter and is a named technique rather than an identifier.
+
+**The handoff needed no change, which is the rule working.** [Chapter 20](../20_style_9rng.md) points into this chapter by naming its subject — *the case where nobody ever stated a claim* — rather than paraphrasing its claim, because decision 195's audit rewrote it that way. `CLAUDE.md` predicts exactly this: *a sentence that names a subject cannot be falsified by a later change to the next chapter's claim, and a sentence that paraphrases the claim can.* First time in this session that a claim changed and nothing pointing at it had to move.

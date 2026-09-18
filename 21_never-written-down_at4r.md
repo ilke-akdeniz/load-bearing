@@ -4,12 +4,11 @@
 
 ## The claim
 
-**An unrecorded decision made by a person can be recovered while the person remembers it - when made by an AI coding agent it is fundamentally unrecoverable: The decision was a volatile computation that was never captured.** 
-[-- why the claim change, previous version was simply wrong about what's going on the AI case, it attributed the impossibility to sessions. The real mechanism is more deep and interesting and the chapter explains that starting with "**A forward pass discards its activations." I tried to capture the essence of that part in the claim.]
+**An unrecorded decision made by a person can be recovered while the person still remembers it. Made by an AI coding agent there is nothing to recover: the computation that selected it was discarded as it ran, and only text persists.**
 
 Every chapter before this one works on a claim somebody made. A proverb, a review comment, a pattern name, a rule in a style guide — the technique throughout has been to find the condition behind the assertion and check whether it holds here. This chapter is about the case where there is no assertion, because the decision was taken without ever being written down.
 
-A decision is not a sixth kind of claim. It is what the five produce when they meet a situation: a Law with something to act on, a Principle that holds at this reading of the Forces and would not at another, an Idiom that arrived with the ecosystem, a Style that neither the compiler nor the runtime can see. What changes here is the direction. Until now the advice arrived from outside and the work was to evaluate it; here you are the one producing it.
+A decision is not a sixth kind of claim. It is what the five produce when they meet a situation: a Law with something to act on, a Principle that holds at this reading of the Forces and would not at another, an Idiom that arrived with the ecosystem, a Style that neither the compiler nor the runtime can see. What changes here is the direction. Until now the advice arrived from outside and the work was to place it; here you are the one producing it.
 
 ---
 
@@ -62,13 +61,13 @@ The second row is revision 1 of a definition that has three steps. **No such def
 
 Nothing in either version says which of the two is right, and the file is where somebody will look. The entry that would have settled it is later in this chapter, and it names the Forces and marks the transaction as forced rather than chosen.
 
-## Why asking afterwards to AI does not get it back
+## Why asking the agent afterwards does not get it back
 
 If the transaction was put there by a person, there is a period during which you can find out why. They remember, or they wrote it down, or somebody who was in the room remembers. The period is finite and it is longer than nothing.
 
 If it was put there by an AI coding agent, the intuition is that the same applies while the session is open — that you can ask, and the reason will come back. That intuition is wrong, and the reason is architectural rather than a matter of how good the tool is.
 
-**A forward pass discards its activations.** Whatever computation selected the transaction over its absence produced a token and was not retained. The key-value cache holds values derived from tokens and exists to avoid recomputation; it is not a record of a decision that occured during reasoning. Every mechanism an agentic coding tool has for persisting anything — the context window, the transcript, a memory file, a project instructions file — stores **text**. So there is never a replay. There is only whatever was written.
+**A forward pass discards its activations.** Whatever computation selected the transaction over its absence produced a token and was not retained. The key-value cache holds values derived from tokens and exists to avoid recomputation; it is not a record of the decision that produced them. Every mechanism an agentic coding tool has for persisting anything — the context window, the transcript, a memory file, a project instructions file — stores **text**. So there is never a replay. There is only whatever was written.
 
 Which gives three cases, and they are not equally bad.
 
@@ -92,7 +91,7 @@ There was a computation that produced this line of code rather than another one,
 
 **This chapter needs less than the research beside it, and deliberately so.** Whether the explanation a model gives for its own output describes what actually produced it is an open question, with results on both sides. One experiment changed something in the input that demonstrably moved the answer, and found the explanations carried on without mentioning the change. A later paper disputes what that shows: an explanation is a compressed account of a computation that was never a line of reasoning to begin with, so leaving something out is not the same as misreporting it, and the unmentioned thing can still be doing its work.
 
-Those questions are different from the one `grilling` answers later on. A model accounting for its own output afterwards is what the research contests. *A decision put to a person before any code is written, and settled by the facts that person supplied*, is not — **the load-bearing half of that record came from them.** And the chapter rests on the narrower fact that what persists is text, so what can be recovered is what was recorded.
+Those questions are different from the one grilling answers later on. A model accounting for its own output afterwards is what the research contests. *A decision put to a person before any code is written, and settled by the facts that person supplied*, is not — **the load-bearing half of that record came from them.** And the chapter rests on the narrower fact that what persists is text, so what can be recovered is what was recorded.
 
 Finally, one thing does survive without deliberate effort, and it is worth separating out because it gets conflated with the decisions. **What the code does is re-derivable from the code**, by a person or by the agent, at any time. Asking for a description of behaviour is reading. Asking why this shape was chosen is not — that was never in the artifact, and no amount of freshness puts it there.
 
