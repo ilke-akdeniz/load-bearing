@@ -7892,3 +7892,24 @@ It also explains something the section previously asserted without accounting fo
 **One ordering fault caught before committing.** The concession arrived after the damage, so the section read as an accusation, a retraction, and then the accusation again. The concession now sits directly after the condition is stated, before any cost is named.
 
 **Five passes on this chapter, and this is the only one where the author's objection replaced the finding rather than repairing it.** The previous four fixed the claim's shape, an unreadable demonstration, the wrong argument attached to a working one, and a sentence that dropped its mechanism. This one established that the argument itself was too strong for what the evidence supports.
+
+---
+
+## 203. Chapter 20, full read
+
+**Date.** 2026-09-17
+
+**Context.** The author's read of [chapter 20](../20_style_9rng.md). Three direct edits, no tags.
+
+**A markdown defect they caught that no check looks for.** Two paragraphs were on consecutive lines with no blank line between them, which this repo's *one paragraph per line* convention renders as a single paragraph with a soft break. `tools/check-drift.py` does not test for it. The blank line is theirs and it is right.
+
+**A real error corrected, in the middle of a sentence that needed other work.** The passage read *"A short name with a recorded reason behind it and a short name with nothing behind it are identical on the screen."* **Short is backwards.** Both deviations described in that paragraph — FlowCore's and this book's — go the other way: they abandon Go's short-name convention in favour of full words. The recorded reason justifies a *long* name. The author changed it to *long*, and the sentence had been wrong since it was written.
+
+**Their replacement consequence is better than what it replaced and was kept.** *"The second is indistinguishable from not having noticed"* is abstract. Theirs says what happens: the unexplained long name gets shortened by someone restoring the convention. That is the concrete failure, and it is the chapter's own subject — enforcement comes from people, repeatedly.
+
+**Three things in the edit were fixed rather than kept.**
+A typo, *coices*.
+The bolded clause had grown to *"where being right about the choice is unavailable, but having specific reasons for the choice is possible and recording those coices still matters"* — three clauses welded, with *the choice* and *those choices* repeating inside one sentence. Narrowed to **where being right is unavailable, having a reason is not, and only the written reason survives contact with the next person**, which keeps all three of the author's beats and lets the last one hand off to the consequence sentence.
+And *another dev*: checked across the book, and the only other matches for the bare word are `go.dev` URLs. The register is *developer* or *engineer* everywhere else, and the sentence reads better without an actor — *whoever notices it does not match the convention*.
+
+**One edit reversed, with a reason.** *"Rewritten by somebody making a point"* became *"making a point about the importance of naming"*. The original was too vague — the author was right that something was wrong — but the expansion states the section's conclusion in its first line, and the section then spends four paragraphs earning it: that `G` names nothing, so it is not a third name for the same function but the choice not to name the thing. That is this file's *lead with the situation, name the thing last*. Replaced with a factual lead that gives nothing away: **with every name stripped out**.

@@ -82,7 +82,7 @@ Same output. And `gofmt` reports nothing, because a formatter has no opinion abo
 
 Two decisions in this book's own history show what that costs. FlowCore deviates from Go's short-name convention, on the grounds that abbreviations like `def` and `mgr` must be decoded rather than read, and that the decoding **does not get cheaper with familiarity** the way the convention assumes. This book deviates from the same convention for a different reason: its reader meets a sample once and never returns to it, so a truncated domain noun is one more thing to decode in a language most of them do not write.
 
-Neither could be automated, so both were written down instead. Which is this chapter's oddity in one line: **where being right about the choice is unavailable, but having specific reasons for the choice is possible and recording those coices still matters.** A long variable name with a recorded reason and the same name without the reason look identical on the screen, but the second can easily be reverted to a shorter name by another dev because it doesn't conform to the standard style.
+Neither could be automated, so both were written down instead. Which is this chapter's oddity in one line: **where being right is unavailable, having a reason is not, and only the written reason survives contact with the next person.** A long name with a recorded reason and the same name without one look identical on the screen. The second gets shortened by whoever notices it does not match the convention, and nothing in the code tells them there was a reason.
 
 ---
 
@@ -137,7 +137,7 @@ without          -> ProgrammingError: parameters are of unsupported type
 
 ### A name that does not name
 
-The same trap with no machine to catch it. Here is the invoice total again, rewritten by somebody making a point about the importance of naming:
+The same trap with no machine to catch it. Here is the invoice total again, with every name stripped out:
 
 ```go
 func G(p []int) int {
