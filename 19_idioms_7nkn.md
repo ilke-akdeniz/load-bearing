@@ -240,6 +240,8 @@ func writeReport(path string, rows []Row) (err error) {
 
 So the test has a second step. Name the condition, and then check that the convention actually follows from it — because *cleanup should be adjacent* does not imply *throw away the return value*, and the second rode in with the first. **An Idiom you merely dislike survives that check. An Idiom encoding a mistake fails it, and fails it in a way you can show someone**, which is the difference between a defect report and a preference.
 
+[-- I know go and I read this example 3 times, I still don't get it. I think what you are trying to demonstrate is very simple: "An Idiom can be a bad inference from a true condition". Can't you just find a much simple example, it can be in python, Java, C# even JS...]
+
 ---
 
 ## What the claim costs
