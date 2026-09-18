@@ -186,61 +186,28 @@ An Idiom's cost is not that people follow it without thinking. It is that it sha
 
 The claim says no measurement of your system settles an Idiom. It does not promise that checking the surroundings will. Sometimes the condition about the surroundings is true, and the convention still does not follow from it.
 
-Go's `defer` runs a call when the surrounding function returns, on every path out of it, including a panic. The convention is to pair acquisition with cleanup immediately, so a reader can see both at once:
+In Java and C#, a field is not exposed directly. It gets a getter and a setter:
 
-```go
-func writeReport(path string, rows []Row) error {
-	file, err := os.Create(path)
-	if err != nil {
-		return err
-	}
-	defer file.Close()
+```java
+public class Account {
+    private long balance;
 
-	for _, row := range rows {
-		if _, err := fmt.Fprintf(file, "%d,%s\n", row.ID, row.Status); err != nil {
-			return err
-		}
-	}
-	return nil
+    public long getBalance()              { return balance; }
+    public void setBalance(long balance)  { this.balance = balance; }
 }
 ```
 
-The condition behind that is real: cleanup that is not adjacent to acquisition gets forgotten on the third early return somebody adds later. It is also true in every language, which is why the same convention exists everywhere `defer`-like machinery does.
+The condition behind that is real, and it is a fact about the surroundings rather than about your system: the tooling finds fields by looking for `getX` and `setX` pairs. That is the JavaBeans convention, and serializers, object-relational mappers, template engines and IDE property editors have looked for it ever since. A plain public field is invisible to all of them.
 
-But `Close` reports failure, and the convention throws the report away. Its signature is:
+What rode in with that condition is the claim that the pair is encapsulation. It is not. Anything a caller could do to a public field, it can do through the setter:
 
-```go
-func (file *File) Close() error
+```java
+account.setBalance(-500);
 ```
 
-For a file you only read, that value carries nothing you needed. For a file you just wrote, it is where a failed write surfaces — on a network filesystem, or anywhere the final flush can fail, the error arrives at close and nowhere earlier. The function above returns `nil` in that case, and the report on disk is short. The fix is to keep the adjacency and stop dropping the value, which costs four lines:
+The getter earns its place on the condition: it is the half that lets the stored representation change later without touching callers. The setter gives that back. A type with a setter for every field cannot hold a single invariant about its own state, because any caller can put it in any state — which is the property the field was made private to get.
 
-```go
-func writeReport(path string, rows []Row) (err error) {
-	file, createErr := os.Create(path)
-	if createErr != nil {
-		return createErr
-	}
-	// A named return value lets the deferred call set what the
-	// function returns, so a failed Close is not silently lost.
-	defer func() {
-		if closeErr := file.Close(); closeErr != nil && err == nil {
-			err = closeErr
-		}
-	}()
-
-	for _, row := range rows {
-		if _, writeErr := fmt.Fprintf(file, "%d,%s\n", row.ID, row.Status); writeErr != nil {
-			return writeErr
-		}
-	}
-	return nil
-}
-```
-
-So the test has a second step. Name the condition, and then check that the convention actually follows from it — because *cleanup should be adjacent* does not imply *throw away the return value*, and the second rode in with the first. **An Idiom you merely dislike survives that check. An Idiom encoding a mistake fails it, and fails it in a way you can show someone**, which is the difference between a defect report and a preference.
-
-[-- I know go and I read this example 3 times, I still don't get it. I think what you are trying to demonstrate is very simple: "An Idiom can be a bad inference from a true condition". Can't you just find a much simple example, it can be in python, Java, C# even JS...]
+So the test has a second step. Name the condition, and then check that the convention actually follows from it — because *the tooling has to find the field* does not imply *every field stays writable by everyone*, and the second rode in with the first. **An Idiom you merely dislike survives that check. An Idiom encoding a mistake fails it, and fails it in a way you can show someone**, which is the difference between a defect report and a preference.
 
 ---
 
