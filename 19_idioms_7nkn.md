@@ -207,7 +207,10 @@ account.setBalance(-500);
 
 The getter earns its place on the condition: it is the half that lets the stored representation change later without touching callers. The setter gives that back. A type with a setter for every field cannot hold a single invariant about its own state, because any caller can put it in any state — which is the property the field was made private to get.
 
-So the test has a second step. Name the condition, and then check that the convention actually follows from it — because *the tooling has to find the field* does not imply *every field stays writable by everyone*, and the second rode in with the first. **An Idiom you merely dislike survives that check. An Idiom encoding a mistake fails it, and fails it in a way you can show someone**, which is the difference between a defect report and a preference.
+So the test has a second step. Name the condition, and then check that the convention actually follows from it — because *the tooling has to find the field* does not imply *every field stays writable by everyone*, and the second rode in with the first. **An Idiom you merely dislike survives that check. An Idiom encoding a mistake fails it, and fails it in a way you can show someone**, which is the difference between a defect report and a preference. [-- now I get the example so that mission is complete. But I now see that I don't get the point you are making with this example. Your stating point is "An Idiom can be a bad inference from a true condition". After the example, you say because *the tooling has to find the field* does not imply *every field stays writable by everyone*, and the second rode in with the first. 
+What does that mean concretely? Is it: "writing getters and setters for tooling is ok you are honest, but if you say it's for encapsulation that's wrong"? | "writing getters and setters for tooling is not ok becaues you expose ervery field to outside"? 
+Also did you consider that you are not required to write a setter? 
+]
 
 ---
 
