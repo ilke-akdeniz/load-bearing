@@ -231,9 +231,9 @@ For a human author, memory covers the gap for a while. It is unreliable and it f
 
 **Remove the memory and the advice stops being about diligence.** There is no interval during which the reason is available and undocumented, because there was never a moment when it existed anywhere but in a computation that has already been discarded. The record is not a backup of something. It is the only copy there has ever been.
 
-### One decision, then all of them
+### Unrecorded decisions destroy maintainability
 
-The example above loses one reason. What matters is what happens when it is not one.
+The example above loses one reason. What matters is what happens when it is not just one.
 
 Each unrecorded decision constrains the next change without saying so. Someone removes the transaction; the next person notices intermittent bad reads and adds a retry; a third adds a cache to reduce the reads that are now being retried. Every step is locally reasonable and each adds a constraint nobody recorded either. The code accumulates behaviour that is load-bearing and undocumented, and the accumulation is faster than the removal, because removing anything requires knowing what it was for.
 
@@ -288,7 +288,7 @@ Most code embodies no decision worth recovering. The name of a local variable, t
 
 **It requires you to read, not merely to answer.** The failure is not accepting the recommendation — that is the common case and frequently right. It is answering without having understood what was being chosen between, which produces the silent defaults again with a paper trail attached.
 
-Where you did understand it, something is left that no log holds. The trade-off is now yours, and when a related question arrives next month you connect the two. An agent will not do that for you, and the reason is structural rather than a matter of capability: it keeps nothing between sessions, so the connection has to live in a person or in a document. **This chapter's claim names that half out loud** — recovery needs someone who still remembers, and this is how they come to.
+Where you did understand it, something is left that no log holds. The trade-off is now yours, and when a related question arrives next month you connect the two. An agent will not do that for you, the structural reason was explained in this chapter. So the connection has to live in a person or in a document. 
 
 **The record is partial by construction.** The interview surfaces what the agent presents as a decision, and what it presents comes from the same place its recommendations do. A complete record is not on offer; a record of the contested decisions is.
 
@@ -302,8 +302,8 @@ Where you did understand it, something is left that no log holds. The trade-off 
 
 - **A commit that removes something as unnecessary, with no reason given either way.** The change and the thing it removed are now both undocumented, and the second one used to work.
 - **Comments that only say what the code does.** A comment restating dense or bad code earns its place, and sometimes it is all there is time for. The signal is when every comment in a file is of that kind, because the reason is then nowhere: not in the code, and not beside it.
-- **Defensive code nobody will touch.** A retry, a lock, a sleep, a `try` that catches everything — kept because removing it once caused something and nobody found out what.
-- **A test suite that passes and a system nobody will change.** The tests encode the behaviour and none of the reasons, so they say a change is safe without being able to say a change is correct.
+- **Defensive code nobody will touch.** A retry, a lock, a sleep, a `try` that catches everything — kept because removing it once caused billing module to fail, and nobody remembers why.
+- **A test suite that passes and a system nobody will change.** The tests encode the known behaviour and none of the reasons, so any change that modifies the behaviour can't be cross-checked with the reasons.
 
 **In a conversation:**
 
