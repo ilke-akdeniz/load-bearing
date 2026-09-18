@@ -199,18 +199,21 @@ public class Account {
 
 The condition behind that is real, and it is a fact about the surroundings rather than about your system: the tooling finds fields by looking for `getX` and `setX` pairs. That is the JavaBeans convention, and serializers, object-relational mappers, template engines and IDE property editors have looked for it ever since. A plain public field is invisible to all of them.
 
-What rode in with that condition is the claim that the pair is encapsulation. It is not. Anything a caller could do to a public field, it can do through the setter:
+The condition asks for less than the convention delivers. Tooling that *reads* a property needs a getter. Tooling that *writes* one needs a setter — and for most fields nothing ever writes them that way. Nothing in the condition says the two arrive as a pair. The convention says they do, and that half is the inference nobody checked.
+
+What the extra half costs is every invariant the type might have held:
 
 ```java
 account.setBalance(-500);
 ```
 
-The getter earns its place on the condition: it is the half that lets the stored representation change later without touching callers. The setter gives that back. A type with a setter for every field cannot hold a single invariant about its own state, because any caller can put it in any state — which is the property the field was made private to get.
+A balance any caller can set to any value is a public field with four lines of ceremony around it. The getter still earns its place — it is the half that lets the stored representation change later without touching callers. The setter buys nothing the condition asked for and gives that back.
 
-So the test has a second step. Name the condition, and then check that the convention actually follows from it — because *the tooling has to find the field* does not imply *every field stays writable by everyone*, and the second rode in with the first. **An Idiom you merely dislike survives that check. An Idiom encoding a mistake fails it, and fails it in a way you can show someone**, which is the difference between a defect report and a preference. [-- now I get the example so that mission is complete. But I now see that I don't get the point you are making with this example. Your stating point is "An Idiom can be a bad inference from a true condition". After the example, you say because *the tooling has to find the field* does not imply *every field stays writable by everyone*, and the second rode in with the first. 
-What does that mean concretely? Is it: "writing getters and setters for tooling is ok you are honest, but if you say it's for encapsulation that's wrong"? | "writing getters and setters for tooling is not ok becaues you expose ervery field to outside"? 
-Also did you consider that you are not required to write a setter? 
-]
+The reason this went unexamined for so long is a second belief travelling with the first: that the pair *is* encapsulation, so writing both is the careful thing to do. **A getter written because the serializer needs one is the condition being answered. A setter written because getters come with setters is the inference, and it is the part that fails.**
+
+The ecosystem has since built the shape the condition actually called for. A Java record and a C# `init`-only property both give tooling a property it can find and read, and no way for a caller to write it afterwards — arriving two decades after the convention that overshot.
+
+So the test has a second step. Name the condition, and then check that the convention actually follows from it — because *the tooling has to find the field* does not imply *every field stays writable by everyone*, and the second rode in with the first. **An Idiom you merely dislike survives that check. An Idiom encoding a mistake fails it, and fails it in a way you can show someone**, which is the difference between a defect report and a preference.
 
 ---
 

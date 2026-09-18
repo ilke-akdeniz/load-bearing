@@ -7820,3 +7820,23 @@ Nothing is needed beyond reading a four-line class, and the failure is a broken 
 **Nothing was stranded.** `defer` appears nowhere else in the chapter, and the Sources entries all still earn their place: Pike is quoted twice more, the Go specification once. One ledger row was swapped for the new example.
 
 **Two defects in the draft's own replacement, caught before the commit.** The setter parameter was `v`, against the full-word identifier rule, and is now the authentic `setBalance(long balance)` with `this.balance = balance`. And it asserted *"what the JavaBeans convention specified"* — a claim about a document's contents that the draft had not read — narrowed to naming the convention, which is vocabulary the reader can search rather than a citation.
+
+---
+
+## 200. The accessor example landed and its point did not
+
+**Date.** 2026-09-17
+
+**Context.** The author's third pass on [chapter 19](../19_idioms_7nkn.md): *"now I get the example so that mission is complete. But I now see that I don't get the point you are making with this example."* They offered two readings and asked which, then added the question that settled it: *"did you consider that you are not required to write a setter?"*
+
+**Neither reading was right, and the third question is the section's own argument.** You are not required to write a setter — which is exactly why the convention that you always write one is an inference rather than a consequence. The author had found the point while asking whether it existed.
+
+**The draft had made two arguments and conflated them.** One: the pair is not encapsulation. Two: the setter does not follow from the tooling condition. The section's heading promises the second and the prose led with the first, so the reader got an argument about a *different* justification — encapsulation — where the heading had promised an argument about the stated condition. That is what made the point unreadable while the example itself was clear.
+
+**Rewritten so the inference is the subject.** Tooling that reads a property needs a getter; tooling that writes one needs a setter; most fields are never written that way. Nothing in the condition says the two arrive as a pair, and the convention says they do. The getter answers the condition, the setter is the inference, and the cost of the inference is every invariant the type might have held.
+
+**Encapsulation is kept, demoted to its real job.** It is not the bad inference — it is why the bad inference went unexamined, a second belief travelling with the first that made writing both look like the careful choice.
+
+**And the author's question supplied the evidence.** A Java record and a C# `init`-only property both give tooling a findable, readable property that no caller can write afterwards — the shape the condition actually called for, built two decades after the convention that overshot it. The entry states what those features *do* rather than why they were introduced, since the draft has not read the proposals behind either.
+
+**A pattern worth naming across 198 to 200.** Three consecutive passes on one chapter, each fixing a different layer: the claim was the wrong shape, then the demonstration was harder than the claim, then the demonstration worked and the argument attached to it was the wrong argument. Only the third was invisible until the second was fixed — a reader who cannot follow the example cannot tell you the point is wrong.
