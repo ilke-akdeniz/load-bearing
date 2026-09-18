@@ -2,7 +2,7 @@
 
 ## The claim
 
-**What decides which advice holds is not the domain but the force profile.**
+**What decides whether a Principle holds is not the domain but the force profile.**
 
 - *Domain* means what the software is about — payroll, ledgers, air traffic, imaging. It keeps that ordinary meaning here and everywhere else in the book.
 
@@ -143,7 +143,7 @@ In every case the pattern is identical, and it is [chapter 02](02_the-five-kinds
 
 **A Principle turns over.** Hide the representation, keep rules out of the database, own your flow, avoid god objects — each is good advice with a condition, and each condition fails in exactly one of these profiles.
 
-**And the failure is predictable.** Not one of the six inversions is a surprise once the Force reading is in front of you. That is the whole claim: you do not need to have worked under a profile to know which advice it overturns, if you know which force it pins.
+**And the failure is predictable.** Not one of the six inversions is a surprise once the Force reading is in front of you. That is the whole claim: you do not need to have worked under a profile to know which Principles it overturns, if you know which Force it pins.
 
 ---
 

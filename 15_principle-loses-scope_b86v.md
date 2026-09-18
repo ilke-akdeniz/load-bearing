@@ -1,4 +1,4 @@
-*Part IV — Principles Promoted to Law*
+*Part IV — Principles, Graded*
 
 # How a Principle Loses Its Scope
 

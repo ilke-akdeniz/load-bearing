@@ -7715,3 +7715,48 @@ The closing question is now *"which Force here is outside its ordinary range, an
 The sample is structural — a shape contrasted with a shape — so it was checked for syntax and not run, which this file's rule allows.
 
 **Consequence.** [Chapter 18](../18_six-profiles_dnkz.md) now carries Python alongside its C, which also settles the *two or more languages* point for a chapter that had one sample.
+
+---
+
+## 197. Six Profiles stays in Part IV, and the part is renamed instead
+
+**Date.** 2026-09-17
+
+**Context.** The author's full read of [chapter 18](../18_six-profiles_dnkz.md) left them unconvinced it belonged in Part IV: *"I don't see how it fits to the PART IV Principles Promoted to Law. I really think it could be the last chapter of Part I Claims and Forces."*
+
+### The move was made and then undone
+
+It was carried out — `dnkz` to chapter 04, chapters 04 to 17 each shifted up one, every cross-reference remapped by identifier, the chapter reframed from a synthesis to an orientation — and then reverted, **and the two commits were reset out of the history at the author's direction** rather than reverted on top of it. Nothing was pushed, and both dropped commits were the draft's, so no part of the author's side of the exchange was rewritten. This entry is the record of the attempt, which is why it exists at all.
+
+**The draft argued against the move twice and both arguments were void.**
+First, that the chapter is Part IV's payoff — promotion produces advice applied where its conditions do not hold, and six profiles are six worked cases of that.
+Second, after the author asked for a better one, that a force profile is a scope stated generally, so [15](../15_principle-loses-scope_b86v.md) is the scope going missing and 18 is what to do when the source cannot be reached.
+
+**The author supplied the test that killed both**: *"If you can construct similar relations for other placements of 18 then it means your argument is void."* Three comparable relations exist — Part II (a Law holds while a Principle turns over), Part I (03 reads Forces singly, 18 reads them together), Part VI (read your profile before recording anything). A relation constructible three other ways argues for no placement.
+
+**And the second argument misdescribed the chapter**, as the author said: *"chapter 18 right now doesn't say what to do when there is no source to go back to."* Correct — the draft had extrapolated a framing from one clause.
+
+### What actually resolved it was the claim, and the author's question found it
+
+*"Do you think that 'advice' is mainly about Principles? Don't answer without checking the chapter."*
+
+Checked, and it is. The mechanism section argues entirely in Principle terms — *"A Principle is advice that is good given certain Forces… A profile is where at least one Force leaves that ordinary range"*. The summary states it as a two-kind finding: *"A Law holds throughout… A Principle turns over."* And every inversion grades as a Principle against [chapter 02](../02_the-five-kinds_cjx4.md)'s own table, including *premature optimization* and *use dependency injection*, which 02 lists explicitly.
+
+**So the claim said `advice` — all four kinds — where the chapter demonstrates Principles.** That is the claim-sentence rule's named bias, asserting more than is shown, and it is the same failure as the two rejected drafts of [chapter 03](../03_forces_f4m5.md)'s claim. Narrowed to: **What decides whether a Principle holds is not the domain but the force profile.** One further sentence in `What the six have in common` was narrowed with it.
+
+**Narrowing the claim supplied the relation the draft had failed to construct.** All four chapters are then about **a Principle's conditions**: 15 the conditions stripped in transmission, 16 and 17 two cases of that, 18 the conditions failing structurally because the situation sits outside them. Unlike the draft's attempts, this does not transfer — neither Part II nor Part VI is about Principles.
+
+**The part is renamed rather than the chapter moved.** Run the four claims under each title and only one covers them:
+
+- *Principles Promoted to Law* — 15, 16, 17 yes; 18 no, since it is about what decides rather than about promotion. That gap is what the author kept hitting.
+- **Principles, Graded** — all four, and it echoes Part III's *Patterns, Graded* for a real reason: 12 to 15 grade patterns against the kinds, 16 to 19 grade specific Principles and find them narrower than they travel.
+
+**The author's proposed chapter retitle did not survive.** *Principles - Domains - Force Profiles* is a three-term list, and no chapter in the book is titled that way — the set runs as a phrase or as a colon and a subtitle. *Six Profiles, Six Inversions* is kept: *inversion* is already [chapter 02](../02_the-five-kinds_cjx4.md)'s Principle vocabulary, and with the claim and the part both saying Principle the title does not need to say it a third time.
+
+### A conflict the draft invented, recorded so it is not re-litigated
+
+The draft flagged the embedded profile's *prefer exceptions to error codes* as contradicting [chapter 02](../02_the-five-kinds_cjx4.md), which grades *exceptions are for exceptional cases* an Idiom and says a Force changes nothing about an Idiom.
+**There is no conflict: those are different sentences.** One is about when to raise and Go and Python disagree at the root; the other is about which mechanism to use for failure at all, and by 02's own five-question test it stops at question three — it can become wrong advice — which makes it a Principle. Nothing else in the book grades it.
+A ledger row now records that grading, under `dnkz`, so the resemblance does not start the argument again.
+
+**Three times in one review the draft built a relation from a resemblance rather than reading both texts** — twice on placement, once here. The pattern is comparing a remembered phrase against a remembered phrase.
