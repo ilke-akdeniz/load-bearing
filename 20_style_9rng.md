@@ -82,7 +82,7 @@ Same output. And `gofmt` reports nothing, because a formatter has no opinion abo
 
 Two decisions in this book's own history show what that costs. FlowCore deviates from Go's short-name convention, on the grounds that abbreviations like `def` and `mgr` must be decoded rather than read, and that the decoding **does not get cheaper with familiarity** the way the convention assumes. This book deviates from the same convention for a different reason: its reader meets a sample once and never returns to it, so a truncated domain noun is one more thing to decode in a language most of them do not write.
 
-Neither could be automated, so both were written down instead. Which is this chapter's oddity in one line: **you can't be right or wrong about a style choice but it's still possible to have reasons for that choice**. And only the written reason survives contact with the next person. A long name with a recorded reason and the same name without one look identical on the screen. The second gets shortened by whoever notices it does not match the convention, and nothing in the code tells them there was a reason.
+Neither could be automated, so both were written down instead. Which is this chapter's oddity in one line: **You cannot be right or wrong about a Style choice, and you can still have reasons for it.** Only the written reason survives contact with the next person. A long name with a recorded reason and the same name without one look identical on the screen. The second gets shortened by whoever notices it does not match the convention, and nothing in the code tells them there was a reason.
 
 ---
 
@@ -137,7 +137,7 @@ without          -> ProgrammingError: parameters are of unsupported type
 
 ### A name that does not name
 
-The same trap with no machine to catch it. Here is the invoice total again, written by a person to argue that naming is not just a style choice:
+The same trap with no machine to catch it. Here is the invoice total again, written by a person to argue that naming is not just a Style choice:
 
 ```go
 func G(p []int) int {
@@ -151,7 +151,7 @@ func G(p []int) int {
 
 It compiles, `go vet` is silent, `gofmt` approves it, and it prints `1745`. Every machine test in this chapter says it is the same program, and it is — so this looks like a Style choice by the definition.
 
-But the example is not a style choice, and still it doesn't prove that naming is not a style choice. The resolution is similar to the tuple's. `Total` and `Sum` are different names for the same function and nothing separates them; that is the Style question and it has no answer. `G` *is not a third name* for the same function. It names nothing, so it is not an alternative to the others — it is the choice not to name the thing.
+The resolution is similar to the tuple's. `Total` and `Sum` are different names for the same function and nothing separates them; that is the Style question and it has no answer. `G` *is not a third name* for the same function. It names nothing, so it is not an alternative to the others — it is the choice not to name the thing. So the example settles what `G` is and not what naming is: the first question has an answer and the second still does not.
 
 And that question has evidence behind it, which is what settles it. Show a colleague `func Total(amounts []int) int` and ask what it returns; they answer. Show them `func G(p []int) int`; they cannot. The experiment has an outcome, so the question can be settled, so by this chapter's own account it was never Style.
 

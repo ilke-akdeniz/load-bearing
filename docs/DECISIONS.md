@@ -7913,3 +7913,21 @@ The bolded clause had grown to *"where being right about the choice is unavailab
 And *another dev*: checked across the book, and the only other matches for the bare word are `go.dev` URLs. The register is *developer* or *engineer* everywhere else, and the sentence reads better without an actor — *whoever notices it does not match the convention*.
 
 **One edit reversed, with a reason.** *"Rewritten by somebody making a point"* became *"making a point about the importance of naming"*. The original was too vague — the author was right that something was wrong — but the expansion states the section's conclusion in its first line, and the section then spends four paragraphs earning it: that `G` names nothing, so it is not a third name for the same function but the choice not to name the thing. That is this file's *lead with the situation, name the thing last*. Replaced with a factual lead that gives nothing away: **with every name stripped out**.
+
+---
+
+## 204. Chapter 20, full read 02
+
+**Date.** 2026-09-17
+
+**Context.** Four direct edits, no tags, on [chapter 20](../20_style_9rng.md).
+
+**The author reinstated a framing the draft had removed, and it is theirs.** Decision 203 had replaced *"rewritten by somebody making a point"* with a factual lead on the grounds that naming the conclusion pre-empts the argument. They put a framing back, sharper: *written by a person to argue that naming is not just a Style choice*. Kept — a repeated editorial move settles it, and their version has a purpose the draft's did not, because their other edits set up an argument that needs someone to be answering.
+
+**Their rewrite of the bolded oddity is clearer than the draft's and was kept in substance.** The draft had compressed three beats into one sentence turning on an ellipsis — *"where being right is unavailable, having a reason is not"* — which is clever and makes the reader supply the missing word. Theirs states it plainly. Normalised to the chapter's register: contractions out of a bolded assertion, and the sentence split so the second beat stands on its own.
+
+**A capitalization rule the edits crossed three times.** This chapter uses lowercase *style* for the ordinary English sense — *a style guide*, *a different style*, *"it's only style"* in reported speech — and capital **Style** for the kind, 21 times. All three new uses meant the kind and were lowercase. Corrected.
+
+**The substantive edit, and the ordering fault in it.** The author added a guard against the example proving too much: *"the example is not a style choice, and still it doesn't prove that naming is not a style choice."* The concern is right — `G` is deliberately extreme, and an extreme case does not settle the ordinary one.
+But they placed it **before** the paragraph that establishes `G` is not a Style choice, so it presupposed its own premise. And they had removed *"but it is not"* from the paragraph before, which was what carried that verdict, so nothing established it until afterwards.
+Moved to the end of the resolution, where it reads as a consequence: *the example settles what `G` is and not what naming is: the first question has an answer and the second still does not.* That also puts it directly after the sentence conceding `Total` versus `Sum` has no answer, which is the concession it depends on.
