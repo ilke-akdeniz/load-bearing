@@ -7956,3 +7956,23 @@ Moved to the end of the resolution, where it reads as a consequence: *the exampl
 **And two small ones fixed:** *occured*, and backticks put around *grilling*, which appears eight times in the chapter and is a named technique rather than an identifier.
 
 **The handoff needed no change, which is the rule working.** [Chapter 20](../20_style_9rng.md) points into this chapter by naming its subject — *the case where nobody ever stated a claim* — rather than paraphrasing its claim, because decision 195's audit rewrote it that way. `CLAUDE.md` predicts exactly this: *a sentence that names a subject cannot be falsified by a later change to the next chapter's claim, and a sentence that paraphrases the claim can.* First time in this session that a claim changed and nothing pointing at it had to move.
+
+---
+
+## 206. Chapter 21, full read 02
+
+**Date.** 2026-09-18
+
+**Context.** Five direct edits, no tags, on [chapter 21](../21_never-written-down_at4r.md).
+
+**Three kept, two of them improvements the draft would not have made.**
+*What happens when it is not one* became *not just one*, removing a real ambiguity.
+And the defensive-code bullet went from *"removing it once caused something and nobody found out what"* to *"caused the billing module to fail, and nobody remembers why"* — which is more realistic and relocates the gap correctly. People do remember **what** broke; what is missing is **why**. Only a missing article was added.
+
+**A heading reverted on the book's own vocabulary.** *One decision, then all of them* had been replaced with **Unrecorded decisions destroy maintainability**. The instinct is right — the old heading was coy about what the section shows — but *maintainability* is a word this book has deliberately put outside its own definitions. [Chapter 02](../02_the-five-kinds_cjx4.md), defining visible behaviour: *"That is a narrow definition on purpose, and it leaves out a great deal: failure modes, developer experience, maintainability."* A heading cannot cash a verdict in a currency the model declines to hold.
+Now **Each one constrains the next change**, taken from the section's own first sentence. It names the mechanism, is concrete, and does not spend the section's closing line — *a system that works and cannot be changed* — which the heading would otherwise have pre-empted.
+
+**One paragraph kept in substance and repaired.** The author cut *"it keeps nothing between sessions"* from the agent paragraph, which is correct and follows from decision 205: the claim no longer locates the impossibility at a session boundary, so neither should the body. They also cut a self-referential flourish about the claim naming a half out loud, which is no loss.
+What they left was a comma splice — *"An agent will not do that for you, the structural reason was explained in this chapter"* — and a trailing space. Rewritten as one sentence.
+
+**One edit reverted for what it gave up.** The test-suite bullet ended *"they say a change is safe without being able to say a change is correct"*, and became *"any change that modifies the behaviour can't be cross-checked with the reasons"* — wordier, contracted, and losing the safe-versus-correct distinction, which is the sharp part and the only thing in the bullet a reader will carry. The author's one real refinement in that edit, *known* behaviour, is kept and made explicit: **the behaviour that was known when they were written**.
