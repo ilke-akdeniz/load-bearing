@@ -4,11 +4,12 @@
 
 ## The claim
 
-**An Idiom rests on a condition about your surroundings rather than about your problem, and naming that condition is what separates deviating from an Idiom from merely ignoring one.**
+**A Principle's condition is a fact about your system, an Idiom's condition is a fact about your surroundings.**
+[-- why the claim change? The previous claim was very close to the ones of ch 03 and 18 and the same theme was repeated on many other places: "X depends on Y, if you dont discover Y you are doomed." An idiom is not something like that. You are not doomed if you get it wrong. That wrongly shaped claim drags the chapter to wrong places. Current claim is an attempt to remedy that, an idiom is different then a principle, you can still check if it applies but the stakes are lower.]
 
-[Chapter 02](02_the-five-kinds_cjx4.md) defines an Idiom as an ecosystem convention: locally correct, non-transferable, and usually traceable to a language feature that is present or absent. It also gives the mechanical test that separates one from a Style — the compiler or the runtime acts on an Idiom, and neither can see a Style.
+[Chapter 02](02_the-five-kinds_cjx4.md) defines an Idiom as an ecosystem convention: locally correct, non-transferable, and usually traceable to a language feature that is present or absent. 
 
-What this chapter adds is the *condition*, and the word is used here in a sense that is this book's own rather than standard vocabulary. A Principle's condition is a fact about your system: how much concurrency, how long the data lives, what a mistake costs ([Ch. 03](03_forces_f4m5.md)). An Idiom's condition is a fact about your surroundings — the language you are writing in, the tools you have, and the people who will read what you write. Both kinds of advice are conditional. They differ in where you go to look the condition up.
+What this chapter adds is the *condition*, A Principle's condition is a fact about your system: how much concurrency, how long the data lives, what a mistake costs ([Ch. 03](03_forces_f4m5.md)). An Idiom's condition is a fact about your surroundings — the language you are writing in, the tools you have, and the people who will read what you write. Both kinds of advice are conditional. They differ in where you go to look the condition up.
 
 That is why ecosystems diverge on the same question, and it is why an Idiom does not travel. The condition stays behind.
 
@@ -54,7 +55,7 @@ type Order struct{ ... }
     func ScanOrder(orderID int, status string) Order
 ```
 
-**The helper was private until it was put behind a wall.** Splitting the code to hide persistence is what published its internals, and an exported identifier is a commitment ([Ch. 05](05_dependency-and-hiding_agjy.md)). The instruction bought a boundary and paid for it with an API.
+**The helper was private until it was put behind a wall.** Splitting the code to hide persistence is what published its internals, and an exported identifier is a commitment ([Ch. 05](05_dependency-and-hiding_agjy.md)). The instruction bought a boundary and paid for it with an API. [-- I don't get the logic of this example, which one is helper that is supposed to be hidden Get or ScanOrder? You say the helper was scanOrder if so why the store us trying to call it? I thought the helper was meant to be private. If both methods need to be called from outside then what's the issue here?]
 
 Now the same split in Python. A leading underscore is the convention for "internal", and it is a message to human readers:
 
@@ -99,7 +100,7 @@ C# lands in a third place, and the reason is worth stating because it looks like
 
 *Put each layer in its own folder* is one instruction whose price runs from nothing to a published API, decided by a language the instruction never names.
 
-The usual reply is that Go has a mechanism for this, and it does — the `internal/` directory, whose rule [chapter 03](03_forces_f4m5.md) gives while putting the same FlowCore decision to a different use. FlowCore considered exactly that placement and rejected it, and the reasoning is the useful part — in Go, privacy comes from identifier case rather than from a directory, so a lower-case type in the root package is already exactly as unreachable to a client as one under `internal/`. What `internal/` solves is narrower: hiding a package when several packages must call each other by exported name. **It is not the tool you use to get privacy. It is the tool you use to get some of it back after a split has taken it away.** Reaching for it is a signal that the wall was drawn where the language charges.
+The usual reply is that Go has a mechanism for this, and it does — the `internal/` directory, whose rule [chapter 03](03_forces_f4m5.md) gives while putting the same FlowCore decision to a different use. [-- did we switch to another example now? That was so abrupt. And this paragraph and following looks like a repetition of previous chapters content] FlowCore considered exactly that placement and rejected it, and the reasoning is the useful part — in Go, privacy comes from identifier case rather than from a directory, so a lower-case type in the root package is already exactly as unreachable to a client as one under `internal/`. What `internal/` solves is narrower: hiding a package when several packages must call each other by exported name. **It is not the tool you use to get privacy. It is the tool you use to get some of it back after a split has taken it away.** Reaching for it is a signal that the wall was drawn where the language charges.
 
 The export is the visible cost and the smaller one. [Chapter 05](05_dependency-and-hiding_agjy.md) prices enforced boundaries in a sentence — walls force exports and mapping code, worth paying at some team sizes and not others — and this is the second half of that bill, itemised. Once `store` and the service are separate packages, an entity type has to live somewhere. If it lives in `store`, the service's public API returns types owned by persistence, which is the coupling the split was meant to remove. If each side owns its own, there are two of them and something converts between them. FlowCore's decision names this as its reason for keeping one package: splitting would force two representations of each entity and a mapping layer between them, which is the duplication the split was supposed to prevent. The charge is per field, per entity, per boundary, and it is invisible in review because every individual mapping function is trivial. It is also where drift lives — add a column, and nothing fails to compile until you reach the second definition.
 
@@ -122,7 +123,7 @@ IndentationError: expected an indented block after function definition on line 1
 
 In Go or C# that is a formatting preference, settled by running the formatter. In Python it is a compile error.
 
-Pike, listing the things about Go that people have argued over for years, puts "using upper case for export" in the same breath as "where the newlines go". They belong in different categories, and the reason they get argued about in the same tone is [chapter 02](02_the-five-kinds_cjx4.md)'s: tone does not vary with authority.
+Pike, listing the things about Go that people have argued over for years, puts "using upper case for export" in the same breath as "where the newlines go". They belong in different categories, and the reason they get argued about in the same tone is [chapter 02](02_the-five-kinds_cjx4.md)'s: tone does not vary with authority. [-- this section is mostly captain obvious and a candidate for deletion]
 
 ## One decision, three ecosystems
 
@@ -134,7 +135,7 @@ Pike, listing the things about Go that people have argued over for years, puts "
 
 **Python has both conditions in different projects**, which is why it never settled. A module-level object is a process-wide singleton for free, because imports are cached, and that covers most of what a container is reached for. Where Python does adopt injection is where a second condition appears — a per-request lifetime, such as a database session that must be opened and closed around one request — and the frameworks that grew that feature are the ones serving requests.
 
-Three answers, three conditions, no disagreement about the underlying advice. [Chapter 02](02_the-five-kinds_cjx4.md) separates *use dependency injection*, which is a Principle, from *use a DI container*, which is an Idiom. The conditions above are what the Idiom is conditioned on.
+Three answers, three conditions, no disagreement about the underlying advice. [Chapter 02](02_the-five-kinds_cjx4.md) separates *use dependency injection*, which is a Principle, from *use a DI container*, which is an Idiom. The conditions above are what the Idiom is conditioned on. [-- another captain obvious and previous chapters repetion section]
 
 ---
 
@@ -152,6 +153,8 @@ And it gives the reason obedience is the default, which is stronger than deferen
 
 So an argument you can win is not a licence. What licences deviation is showing that a condition has failed.
 
+[-- if my claim change holds, the section above should be changed becaue it's a repetition of the claim]
+
 ### A deviation with its condition named
 
 The early Go compiler was written in C. Pike is direct about how that landed: the programming language community thought the proper approach was LLVM or a similar toolkit, or self-hosting — writing the compiler in the language it compiles.
@@ -162,7 +165,7 @@ Then the part that makes it usable rather than merely defensible. It was narrow 
 
 And the condition expired. By Go 1.5 the language was finished, so the worry about a compiler-shaped language no longer applied, and Russ Cox wrote a tool that translated the compiler from C to Go semi-automatically. The deviation ended when the reason for it did.
 
-That is the whole procedure. Name the condition, say so out loud, keep it to one place, and write down what would end it — because a deviation whose condition has quietly expired is indistinguishable from one that never had a reason.
+That is the whole procedure. Name the condition, say so out loud, keep it to one place, and write down what would end it — because a deviation whose condition has quietly expired is indistinguishable from one that never had a reason. [-- interesting anecdote but I'm curious to know how this section is related to idioms...]
 
 ---
 
@@ -176,7 +179,7 @@ Pike, on why generics took Go more than a decade: "Although I wouldn't change a 
 
 The detail that makes this a boundary rather than an anecdote is that the alternative was named early, from inside. Pike says Ian Taylor pushed them to face the problem "from early on", and links the difficulty directly to the convention's standing: it was hard "given the presence of interfaces as the bedrock of Go programming". So this is not a case of nobody noticing. Someone did notice, said so, and was right, and the convention held for a decade anyway.
 
-An Idiom's cost is not that people follow it without thinking. It is that it shapes which alternatives get generated at all, including by the people who wrote it. Against that, naming the condition is necessary and it is not sufficient, and no amount of being correct compresses the decade.
+An Idiom's cost is not that people follow it without thinking. It is that it shapes which alternatives get generated at all, including by the people who wrote it. Against that, naming the condition is necessary and it is not sufficient, and no amount of being correct compresses the decade. [-- doesnt' work with the new claim, I'm stopping my read here, the rest of the chapter probably doesn't match the new claim.]
 
 ### An Idiom can be a bad inference from a true condition
 
