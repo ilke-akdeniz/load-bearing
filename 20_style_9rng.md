@@ -79,9 +79,10 @@ func Total(a []int) int {
 Same output. And `gofmt` reports nothing, because a formatter has no opinion about whether the parameter is called `amounts` or `a`.
 
 **That silence is the reason naming arguments outlive formatting arguments.** Which word you choose is arbitrary in the way any word is arbitrary — Italian and Mongolian give the same table entirely different names and both work — so there is nothing for a tool to compute. The enforcement has to come from a person, repeatedly, for as long as people are still writing code. There is a floor under this, and the boundary section works out where it is.
+
 Two decisions in this book's own history show what that costs. FlowCore deviates from Go's short-name convention, on the grounds that abbreviations like `def` and `mgr` must be decoded rather than read, and that the decoding **does not get cheaper with familiarity** the way the convention assumes. This book deviates from the same convention for a different reason: its reader meets a sample once and never returns to it, so a truncated domain noun is one more thing to decode in a language most of them do not write.
 
-Neither could be automated, so both were written down instead. Which is this chapter's oddity in one line: **where being right about the choice is unavailable, but recording the reasons for it still matters.** A short name with a recorded reason behind it and a short name with nothing behind it are identical on the screen, and the second is indistinguishable from not having noticed.
+Neither could be automated, so both were written down instead. Which is this chapter's oddity in one line: **where being right about the choice is unavailable, but having specific reasons for the choice is possible and recording those coices still matters.** A long variable name with a recorded reason and the same name without the reason look identical on the screen, but the second can easily be reverted to a shorter name by another dev because it doesn't conform to the standard style.
 
 ---
 
@@ -136,7 +137,7 @@ without          -> ProgrammingError: parameters are of unsupported type
 
 ### A name that does not name
 
-The same trap with no machine to catch it. Here is the invoice total again, rewritten by somebody making a point:
+The same trap with no machine to catch it. Here is the invoice total again, rewritten by somebody making a point about the importance of naming:
 
 ```go
 func G(p []int) int {
