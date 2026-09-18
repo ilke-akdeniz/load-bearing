@@ -7840,3 +7840,27 @@ Nothing is needed beyond reading a four-line class, and the failure is a broken 
 **And the author's question supplied the evidence.** A Java record and a C# `init`-only property both give tooling a findable, readable property that no caller can write afterwards — the shape the condition actually called for, built two decades after the convention that overshot it. The entry states what those features *do* rather than why they were introduced, since the draft has not read the proposals behind either.
 
 **A pattern worth naming across 198 to 200.** Three consecutive passes on one chapter, each fixing a different layer: the claim was the wrong shape, then the demonstration was harder than the claim, then the demonstration worked and the argument attached to it was the wrong argument. Only the third was invisible until the second was fixed — a reader who cannot follow the example cannot tell you the point is wrong.
+
+---
+
+## 201. What `init` solved, and a sentence that dropped the mechanism
+
+**Date.** 2026-09-17
+
+**Context.** The author, on the accessor section rewritten in decision 200: *"I don't totally get it the init example… So tooling needed getters but people started putting setters as well and that was wrong, then what happened what init solved?"*
+
+**The question found a real gap.** The draft's sentence said records and `init`-only properties give tooling *"a property it can find and read"* — which drops the point. They give tooling a property it can **write, once**. Without that, the reader is left thinking `init` removed a need the section had just said was real, and there is no way to make sense of it.
+
+**The sequence the section now states.**
+
+- Reading a property needs a getter.
+- Writing one needed a setter, **because of how the tooling wrote**: a deserializer had one mechanism, which was to call a no-argument constructor and then assign fields one at a time. Hibernate still requires that constructor.
+- So the setter had a reason, and the reason was about *how an object gets built* — covering only the fields something actually deserializes.
+- The convention generalised it to every field, and made the writability permanent rather than construction-time.
+- A Java record's canonical constructor takes every value at once; a C# `init` accessor is settable while the object is being created and not after. **The deserializer still gets its write; nobody gets one afterwards.**
+
+**The correction sharpened the claim rather than weakening it.** The bad inference is not that setters were never needed. It is that a construction-time need was answered with permanent, universal writability — which is why *the tooling has to find the field* does not imply *every field stays writable by everyone*, and why the invariant is the thing that gets paid.
+
+**One sentence went inconsistent in the same edit and was caught before committing.** Having granted the setter a real reason, the text still read *"the setter buys nothing the condition asked for."* It now separates the two cases: on a field nothing deserializes the setter answers no condition at all, and on one that is deserialized it buys at every moment of the object's life what was needed only for the first.
+
+**Fourth consecutive pass on this chapter, and the fourth distinct layer.** Claim shape, then an unreadable demonstration, then the wrong argument attached to a working demonstration, then a sentence inside the right argument that omitted its mechanism. Each was invisible until the one before it was fixed.

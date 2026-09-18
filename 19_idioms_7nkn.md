@@ -199,7 +199,7 @@ public class Account {
 
 The condition behind that is real, and it is a fact about the surroundings rather than about your system: the tooling finds fields by looking for `getX` and `setX` pairs. That is the JavaBeans convention, and serializers, object-relational mappers, template engines and IDE property editors have looked for it ever since. A plain public field is invisible to all of them.
 
-The condition asks for less than the convention delivers. Tooling that *reads* a property needs a getter. Tooling that *writes* one needs a setter — and for most fields nothing ever writes them that way. Nothing in the condition says the two arrive as a pair. The convention says they do, and that half is the inference nobody checked.
+The condition asks for less than the convention delivers. Tooling that *reads* a property needs a getter. Tooling that *writes* one — a deserializer turning stored JSON back into an object — needed a setter, because the only mechanism it had was to call a no-argument constructor and then assign the fields one at a time. Hibernate still requires that constructor. So the setter had a reason, and the reason was narrower than what the convention made of it: it was about how an object gets built, and it covered only the fields something actually deserializes.
 
 What the extra half costs is every invariant the type might have held:
 
@@ -207,11 +207,11 @@ What the extra half costs is every invariant the type might have held:
 account.setBalance(-500);
 ```
 
-A balance any caller can set to any value is a public field with four lines of ceremony around it. The getter still earns its place — it is the half that lets the stored representation change later without touching callers. The setter buys nothing the condition asked for and gives that back.
+A balance any caller can set to any value is a public field with four lines of ceremony around it. The getter still earns its place — it is the half that lets the stored representation change later without touching callers. On a field nothing deserializes, the setter answers no condition at all; on one that is deserialized, it buys at every moment of the object's life what was needed for the first.
 
 The reason this went unexamined for so long is a second belief travelling with the first: that the pair *is* encapsulation, so writing both is the careful thing to do. **A getter written because the serializer needs one is the condition being answered. A setter written because getters come with setters is the inference, and it is the part that fails.**
 
-The ecosystem has since built the shape the condition actually called for. A Java record and a C# `init`-only property both give tooling a property it can find and read, and no way for a caller to write it afterwards — arriving two decades after the convention that overshot.
+The ecosystem has since built what the condition actually asked for. A Java record's canonical constructor takes every value at once, and a C# `init` accessor can be set while the object is being created and not after. The deserializer still gets its write; nobody gets one afterwards. Both arrived two decades after a convention that had been charging permanent writability for a need that only ever existed at construction.
 
 So the test has a second step. Name the condition, and then check that the convention actually follows from it — because *the tooling has to find the field* does not imply *every field stays writable by everyone*, and the second rode in with the first. **An Idiom you merely dislike survives that check. An Idiom encoding a mistake fails it, and fails it in a way you can show someone**, which is the difference between a defect report and a preference.
 
