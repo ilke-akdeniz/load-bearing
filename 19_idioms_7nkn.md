@@ -182,9 +182,9 @@ The detail that makes this a boundary rather than an anecdote is that the altern
 
 An Idiom's cost is not that people follow it without thinking. It is that it shapes which alternatives get generated at all, including by the people who wrote it. So the claim buys less than it looks like it buys: it tells you where the condition lives and therefore which arguments are unwinnable, and it does not tell you how to move a convention once you have read the condition correctly.
 
-### An Idiom can be a bad inference from a true condition
+### An Idiom is uniform where its condition is not
 
-The claim says no measurement of your system settles an Idiom. It does not promise that checking the surroundings will. Sometimes the condition about the surroundings is true, and the convention still does not follow from it.
+The claim says no measurement of your system settles an Idiom. Reading the surroundings does not settle it either, and not because the reading is hard. A convention applies to every case. The condition it answers applies to some. Between the two there is a gap nobody inspects, because not having to inspect it is what the convention is for.
 
 In Java and C#, a field is not exposed directly. It gets a getter and a setter:
 
@@ -199,7 +199,9 @@ public class Account {
 
 The condition behind that is real, and it is a fact about the surroundings rather than about your system: the tooling finds fields by looking for `getX` and `setX` pairs. That is the JavaBeans convention, and serializers, object-relational mappers, template engines and IDE property editors have looked for it ever since. A plain public field is invisible to all of them.
 
-The condition asks for less than the convention delivers. Tooling that *reads* a property needs a getter. Tooling that *writes* one — a deserializer turning stored JSON back into an object — needed a setter, because the only mechanism it had was to call a no-argument constructor and then assign the fields one at a time. Hibernate still requires that constructor. So the setter had a reason, and the reason was narrower than what the convention made of it: it was about how an object gets built, and it covered only the fields something actually deserializes.
+The condition covers less than the convention does. Tooling that *reads* a property needs a getter. Tooling that *writes* one — a deserializer turning stored JSON back into an object — needed a setter, because the only mechanism it had was to call a no-argument constructor and then assign the fields one at a time. Hibernate still requires that constructor. So the setter had a reason, and the reason was narrower than what the convention made of it: it was about how an object gets built, and it covered only the fields something actually deserializes.
+
+**Spreading it uniformly was the right call, which is the part worth being honest about.** You cannot know in advance which types will cross a wire, and retrofitting accessors onto a type whose fields are public breaks every caller that touched them. Against an unpredictable need and an expensive retrofit, applying the shape everywhere is cheap, and deciding per field would cost more than it saved. A second belief helped — that the pair *is* encapsulation, so writing both is the careful thing — but the convention would have spread without it.
 
 What the extra half costs is every invariant the type might have held:
 
@@ -207,13 +209,13 @@ What the extra half costs is every invariant the type might have held:
 account.setBalance(-500);
 ```
 
-A balance any caller can set to any value is a public field with four lines of ceremony around it. The getter still earns its place — it is the half that lets the stored representation change later without touching callers. On a field nothing deserializes, the setter answers no condition at all; on one that is deserialized, it buys at every moment of the object's life what was needed for the first.
+A balance any caller can set to any value is a public field with four lines of ceremony around it. The getter still earns its place — it is the half that lets the stored representation change later without touching callers. On a field nothing deserializes, the setter answers no condition at all; on one that is deserialized, it grants at every moment of the object's life what was needed only for the first.
 
-The reason this went unexamined for so long is a second belief travelling with the first: that the pair *is* encapsulation, so writing both is the careful thing to do. **A getter written because the serializer needs one is the condition being answered. A setter written because getters come with setters is the inference, and it is the part that fails.**
+**What uniformity costs is that no individual case is ever looked at.** Not the fields the condition never covered, and not the fields where it stopped applying. The convention is not tracking the condition; it replaced the need to.
 
 The ecosystem has since built what the condition actually asked for. A Java record's canonical constructor takes every value at once, and a C# `init` accessor can be set while the object is being created and not after. The deserializer still gets its write; nobody gets one afterwards. Both arrived two decades after a convention that had been charging permanent writability for a need that only ever existed at construction.
 
-So the test has a second step. Name the condition, and then check that the convention actually follows from it — because *the tooling has to find the field* does not imply *every field stays writable by everyone*, and the second rode in with the first. **An Idiom you merely dislike survives that check. An Idiom encoding a mistake fails it, and fails it in a way you can show someone**, which is the difference between a defect report and a preference.
+So naming the condition correctly leaves something over. It tells you why the convention exists and why following it is usually right; it does not tell you whether this case is one the condition reaches, and the convention is built so that the question never arises. What is left to check is narrower and still worth having: **not whether the convention is justified, but what it costs you here.** A getter on a field nothing serializes costs a line. A setter on a field with an invariant costs the invariant — and that is a bill you can show someone, which a preference is not.
 
 ---
 

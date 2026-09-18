@@ -7864,3 +7864,31 @@ Nothing is needed beyond reading a four-line class, and the failure is a broken 
 **One sentence went inconsistent in the same edit and was caught before committing.** Having granted the setter a real reason, the text still read *"the setter buys nothing the condition asked for."* It now separates the two cases: on a field nothing deserializes the setter answers no condition at all, and on one that is deserialized it buys at every moment of the object's life what was needed only for the first.
 
 **Fourth consecutive pass on this chapter, and the fourth distinct layer.** Claim shape, then an unreadable demonstration, then the wrong argument attached to a working demonstration, then a sentence inside the right argument that omitted its mechanism. Each was invisible until the one before it was fixed.
+
+---
+
+## 202. The objection was a better finding than the section's claim
+
+**Date.** 2026-09-17
+
+**Context.** The author, on the accessor section after two rounds of repair: *"I'm not sure if your example holds for the point it's trying to make… people used the serializable alternative. Which was the correct move in my opinion."*
+
+**The objection is right and the draft conceded it.** Serialization is pervasive, you cannot predict which types will cross a wire, and retrofitting accessors onto a type whose fields are public breaks every caller. Against an unpredictable need and an expensive retrofit, applying the shape everywhere is cheap. **That is a defensible engineering trade, not a bad inference** — and an example a reader can reasonably disagree with does not demonstrate that a convention fails to follow from its condition. It demonstrates a judgment call.
+
+**Three options were put to the author.** Replace the example with interface-per-class, which survives the same objection because extracting an interface later is a mechanical refactor where adding accessors is a breaking change — and which would have filled a coverage gap `docs/pending-tasks/index.md` records as owned by no chapter. Cut the section, since the generics case already satisfies the counter-example rule. Or **keep the example and change what the section claims.** The author took the third.
+
+**The finding is now the author's objection, generalised:**
+
+> A convention applies uniformly where its condition applies selectively, because uniformity is cheaper than judging every case — and the cost is that nobody ever re-checks any case.
+
+**This absorbs the objection instead of fighting it, and it makes the example stronger.** The uniform getter is the right hedge. The uniform setter grants at every moment of an object's life what was needed only at construction. And the reason nobody separates the two is exactly the reason the convention spread: it exists so that no field's case has to be examined. *The convention is not tracking the condition; it replaced the need to.*
+
+It also explains something the section previously asserted without accounting for it — that records and `init` accessors arrived two decades late. Under *bad inference*, that delay is a puzzle. Under *uniformity*, it is the prediction: a convention that replaced per-case judgment has no mechanism for noticing that a case changed.
+
+**Renamed** from *An Idiom can be a bad inference from a true condition* to **An Idiom is uniform where its condition is not**, with both ledger rows rewritten.
+
+**The closing test changed with it**, because the old one no longer follows. It used to be *check that the convention follows from the condition*. It is now narrower and honest: naming the condition tells you why the convention exists and why obeying it is usually right, and does not tell you whether this case is one the condition reaches. What is left to check is **not whether the convention is justified, but what it costs you here** — a getter on a field nothing serializes costs a line; a setter on a field with an invariant costs the invariant.
+
+**One ordering fault caught before committing.** The concession arrived after the damage, so the section read as an accusation, a retraction, and then the accusation again. The concession now sits directly after the condition is stated, before any cost is named.
+
+**Five passes on this chapter, and this is the only one where the author's objection replaced the finding rather than repairing it.** The previous four fixed the claim's shape, an unreadable demonstration, the wrong argument attached to a working one, and a sentence that dropped its mechanism. This one established that the argument itself was too strong for what the evidence supports.
