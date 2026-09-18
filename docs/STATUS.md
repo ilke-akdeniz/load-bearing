@@ -31,7 +31,7 @@ Only the author moves a chapter to **draft** or **ready**.
 | 17 | `17_abstraction-as-insurance_4jk6.md` | **draft** | 2026-09-14 |
 | 18 | `18_six-profiles_dnkz.md` | **draft** | 2026-09-17 |
 | 19 | `19_idioms_7nkn.md` | **draft** | 2026-09-17 |
-| 20 | `20_style_9rng.md` | **draft** | — |
+| 20 | `20_style_9rng.md` | **draft** | 2026-09-17 |
 | 21 | `21_never-written-down_at4r.md` | **draft** | — |
 | 22 | `22_assigned-to-the-team_3fjx.md` | **draft** | — |
 
