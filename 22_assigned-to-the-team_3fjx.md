@@ -96,9 +96,9 @@ This one is missing from the rest of the book. A reading of the Forces is **not 
 
 So there is a gap between the force reading and the code, and it is where most of the actual thinking happens. The rules say what must be true. The reading says what presses on it. Neither of them says *what we are going to build* — a grid on this screen, a reminder sent by text the day before, a nightly job that reconciles and a queue for the failures.
 
-**Form.** A description of the thing, short enough to read in one sitting, in whatever register the reader needs — a paragraph, a sketch, a screen, a sequence. It is the first artifact a non-engineer can check, and that is most of its value.
+**Form.** A description of the thing [-- need more specific word here. my candidates: design, system, application], short enough to read in one sitting, in whatever register the reader needs — a paragraph, a sketch, a screen, a sequence. It is the first artifact a non-engineer can check, and that is most of its value.
 
-This is what the word *architecture* is usually reaching for, and it is worth saying what it is not. It is not the diagram, and it is not the choice of stack; both of those are consequences, and either can be produced without anybody having decided anything. What makes it architecture is that the trade-offs were named, the Forces they answer were read, and one person is answerable for the choice.
+This is what the word *architecture* is usually reaching for, and it is worth saying what it is not. It is not the diagram, and it is not the choice of stack; both of those are consequences, and either can be produced without anybody having decided anything. What makes it architecture is that the trade-offs were named, the Forces they answer were read, and one person is answerable for the choice. [-- this paragraph reads as our "description of the thing" includes trade-offs, force readings and so on and then becomes a proper architecture and could need a small clarification - modification. My understanding is that each is separate artifacts or each should be considered separate: 1. rules, 2 force reading, 3 solution. So our "proper architecture" is the sum of 3 artifacts this chapter explained.]
 
 **Ideal owner.** Whoever holds the most context on both sides — enough of the business to know what would satisfy it, enough of the system to know what it will cost. This is the artifact with the smallest pool of possible owners, and it is the one most often assigned to a room.
 
@@ -108,11 +108,31 @@ This is what the word *architecture* is usually reaching for, and it is worth sa
 
 ## 4. The code
 
-The artifact everybody already owns properly, and it is worth asking why.
+This is the artifact owned individually in most places: evey ticket has a developer; every commit is signed by an author.
 
-Code has an owner because it cannot exist without one. Somebody's hands are on the keyboard; the ticket has a name on it; the commit is signed. Nothing about code is more deserving of an owner than the three artifacts above it — it is simply the one where a shared assignment is *visibly* impossible, so nobody tries.
+Pair programming exists, but mostly as a temporary tool for letting the less experienced developers learn by example. Nobody builds any serious project staring at the same monitor together.
 
-The other three can be nominally assigned to a group, because the absence of the artifact is not visible until much later. That is the whole asymmetry, and it is why the failure this chapter is about happens upstream of the code and shows up in it.
+This asymmetry between the other artifacts and the code stems from two facts:
+- It is the last artifact in the chain 
+- It gives the fastest feedback
+
+Being the last one means that you can omit all the previous ones and still produce something that looks good on surface. A many great deal of software is built without reading the forces, without creating a solution, by just jumping straight into coding. Somebody writes the code and you have a software that does something, you can show it to clients, you can make money from it. The artifact chain is binding for a software that follows the advice of this book, so it doesn't prevent anybody from starting from the last one. 
+
+This first mechanism explains the missing ownership by the perceived importance and awareness of the artifacts. If you don't know that an artifact has to exist or you don't think it's important, you will not assign it to an individual.
+
+Feedback speed is the axis that prevents a correction to the first mechanism. If you omit parts of the code or if you make obvious mistakes in it, you see the effects tomorrow. A page breaks, you oversell items, the application crawls and you get a midnight call. The artifact demonstrates it's importance quickly and loudly. On the other hand, if you get an invariant wrong or read a force incorrectly you see the failure months and sometimes years later. And most of the time, nobody traces the failure to the reading of the force or to the discovery of the invariant.
+
+It's worthy to see how sneaky can be the damage of late feedback with an example. 
+
+The rules about a new sales module is recorded by the team in a meeting: "every proposal belongs to a sales person and that  person gets a comission of the reveneue generated by the proposal." Very straightforward implementation: a `comission percentage` on the `user` and a `userId` on the `proposal`. 
+
+Sales module goes live on January. Clients use it for 1 year without any major complaints. Then tickets start piling up: "Urgent! All comissions are wrong." It turns out that comission percentages, similar to salaries are per year. Sales directors updated the percentages of their personnel on January 1, thinking that the system would handle the switch automatically. That update corrupted the already paid comission amounts of previous years. A significant effort is needed: new tables, new classes, manual datafixes to past amounts by digging the previous year's percentages from the db backups.     
+
+On the retro meeting two action items are recorded:
+- "We should be careful about implementing sales calculations."
+- "QA will add automated comission testing."
+
+Nobody remembers the meeting that happened 1 year ago and who actually gathered business rules. This could be prevented with four words: "percentages are set yearly".
 
 ---
 
