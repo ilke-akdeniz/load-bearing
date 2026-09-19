@@ -2,7 +2,7 @@
 
 ## The claim
 
-**Programming with the five kinds depends on individual ownership: every artifact has one name against it, and that name belongs to whoever holds the most context on the subject the artifact is about.**
+**Programming with the five kinds depends on individual ownership of four artifacts by the persons that hold the most context about the subject.**
 
 ---
 
@@ -14,11 +14,9 @@
 
 **Ownership is where people enter.** Standups, retrospectives, planning sessions, review policies — every one of them carries a tension looking for a resolution, and the tension is always the same question: *which artifacts do we need, and who makes each one?* For many teams, that question is never asked and answered clearly, and the meetings turn into a ceremony.
 
-## What comes before code
+## What comes before the software exists
 
-Code is the obvious artifact and the easiest to own correctly. The trouble starts with everything upstream of it. There the same question produces *we don't need a list of the business rules, we're agile*, and *the team will decide on the design of feature X*.
-
-Four artifacts sit between a request and the code. The claim here is not that these are the only ones or the most important ones — they are what following this book's advice lands you on.
+Four artifacts sit between a request and the software. The claim here is not that these are the only ones or the most important ones — they are what following this book's advice lands you on.
 
 ```text
 1  the rules          what must always be true
@@ -31,7 +29,7 @@ Each is described below by what it looks like, who should own it, and what that 
 
 ## 1. The rules and invariants
 
-The root of the chain, because everything after it is conditioned on it. What must always be true of this system — an invoice reconciles, a booking cannot double-sell a seat, a payment is applied once.
+First artifact, because everything after it is conditioned on it. What must always be true of this system — an invoice reconciles, a booking cannot double-sell a seat, a payment is applied once.
 
 **Form.** A statement of the invariants, at whatever length they take: a hundred pages, or one paragraph. **The length should reflect the rules that actually apply, not the prose style of whoever wrote it or the current mood of the team.** *We are an agile team* is not a reason to begin a medical scanner with a vague idea of what it does.
 
@@ -76,7 +74,7 @@ This one is missing from the rest of the book. A reading of the Forces is **not 
 
 So there is a gap between the force reading and the code, and it is where most of the actual thinking happens. The rules say what must be true. The reading says what presses on it. Neither of them says *what we are going to build* — a grid on this screen, a reminder sent by text the day before, a nightly job that reconciles and a queue for the failures.
 
-**Form.** A description of what gets built, short enough to read in one sitting, in whatever register the reader needs — a paragraph, a sketch, a screen, a sequence. It is the first artifact a non-engineer can check, and that is most of its value.
+**Form.** A description of what gets built, short enough to read in one sitting, in whatever register the reader needs — a paragraph, a sketch, a screen. It is the first artifact a non-engineer can check, and that is most of its value.
 
 This is where the word *architecture* is usually pointing, and it is worth being exact about what it covers. It is not the diagram and it is not the choice of stack; both are consequences, and either can be produced without anybody having decided anything. What people mean by architecture is the first three artifacts together — the rules it has to hold to, the Forces bearing on it, and the thing you are going to build. This is the third of them, and what makes it architecture rather than a sketch is that the other two exist and one person is answerable for what was chosen from them.
 
@@ -92,10 +90,10 @@ This is the artifact owned individually almost everywhere: every ticket has a de
 
 Code is also the one artifact that cannot exist without an owner — somebody's hands are on the keyboard — so nobody has to argue for assigning it. The three above it can all be handed to a group instead, and the asymmetry rests on two facts about code:
 
-- it is the last artifact in the chain
+- it is the last artifact in the sequence
 - it gives the fastest feedback
 
-**Being last means the others can be skipped.** A great deal of software is built without reading the Forces and without deciding on a solution, by going straight to the code, and it produces something. It runs, it can be shown to a client, it can be sold. The chain binds anyone following this book's advice; it does not stop anyone starting at the end of it.
+**Being last means the others can be skipped.** A great deal of software is built without reading the Forces and without deciding on a solution, by going straight to the code, and it produces something. It runs, it can be shown to a client, it can be sold. The sequence binds anyone following this book's advice; it does not stop anyone starting at the end of it.
 
 That is the first mechanism, and it explains the missing owners directly: an artifact nobody knows has to exist, or nobody believes is important, is not one anybody assigns.
 
@@ -111,7 +109,7 @@ The retrospective produces two actions — *be careful with sales calculations*,
 
 ## Why the claim holds
 
-The chain says what has to exist. It does not say who makes it exist, and that is where it fails, because every artifact above is work somebody has to decide to do instead of something else.
+The artifacts only describe what has to exist. It does not say who makes it exist, and that is where it fails, because every artifact above is work somebody has to decide to do instead of something else.
 
 ### An artifact with no name against it is made by nobody
 
@@ -134,31 +132,6 @@ Nothing in that is unreasonable, and none of it is fixed by asking harder or by 
 **It does not say whose judgement settles it.** An owner is expected to hold the most context on the subject; an interchangeable team member is not. So the owner's answer stands unless somebody produces a better reason.
 
 That second mechanism is the key to why ownership works: *because* it tracks context. Give the artifact to somebody without the context and you have the name without the authority, which is a signature rather than an owner.
-
-### What follows about meetings
-
-The claim sorts meetings into two objects that look identical on a calendar.
-
-**A meeting called to decide something nobody owns is a decision assigned to a room.** Rooms do not decide. They produce the impression of having decided, which is why the subject comes back three weeks later and nobody can say what changed:
-
-```text
-Six people meet to agree the export format. Everyone has
-an opinion, three of them are informed, and it ends with
-an action to circulate a document. The document is owned
-by the meeting.
-```
-
-**A meeting called to unblock somebody who already owns the decision does work**, and it stops when they are unblocked:
-
-```text
-One person owns the export format and is stuck on whether
-finance needs the tax column split out. Fifteen minutes is
-booked with the person who knows. It runs nine.
-```
-
-Same people, same slot in the calendar, different object — and what separates them is whether a name was against the thing before anybody sat down.
-
-A meeting with no decision in it at all is a third object and can be perfectly sound. A team meets for fifteen minutes on Friday to stay in contact with each other, and that answers something this chapter does not model. What makes it defensible is that the reason given for the meeting is honest. The same meeting held daily, called a standup and defended as coordination, is the failure.
 
 ---
 
