@@ -8080,3 +8080,39 @@ That is a difference in **shape**, not a derivation, and it is why the log canno
 **Added as two paragraphs after the list**, framed on the chapter's own opening: the four exist so the software is right; the log exists so any of them can be revisited when the Forces move, which is the end goal the chapter set itself.
 
 **And a stranded handoff, found while doing this and missed when it was created.** Decision 209 accepted the deletion of the meetings section. [Chapter 21](../21_never-written-down_at4r.md)'s handoff still promised it — *"and what a meeting can and cannot settle."* That is exactly the failure this repo's review rule names: *a removed paragraph can leave a next section pointing at the wrong place, and none of those fail a check.* The draft checked what the cut stranded **inside** chapter 22 and not what pointed **into** it. Rewritten, and it now names the seam this entry closes: *where this chapter's own record sits among them.*
+
+---
+
+## 211. The final sweep had already run; what this pass covers is the session's own additions
+
+**Date.** 2026-09-18
+
+**A correction first, because the author acted on it.** The draft told them the final sweep was outstanding and the precondition met, and they said to run it. **It ran on 2026-08-26** — decision 110 for slice 1, 112 for `docs/ABOUT.md`, 113 for slice 2, 116 for slice 3, 117 for slice 4, and decision 126 re-ran all four over the chapter written afterwards. `CLAUDE.md` says it runs **once**. Re-running it wholesale would have been three weeks of ground already covered.
+
+**What is genuinely outstanding is narrower**, and `CLAUDE.md` states the principle for it: *content added during a slice has not been through the slices already finished.* Everything decisions 187 to 210 added or rewrote postdates the sweep. So the four slices were applied to that material rather than to the book.
+
+### Slice 1 — pending material
+
+`docs/pending-tasks/index.md` carries no pending revisits; slice 1 discharged them. Its two recorded coverage gaps were checked against the current book and both still hold, with their chapter links resolving correctly after the renumbering: [chapter 16](../16_tdd-and-mocks_u8eu.md) still does not reach the wider test-first literature, and interface-per-class is still owned by no chapter — the draft considered it for [chapter 19](../19_idioms_7nkn.md)'s accessor section in decision 202 and did not use it.
+
+### Slice 2 — rules
+
+Mechanically clean. No untagged fences, no doubled blank lines outside code, no file without a closing newline, no trailing whitespace, no bare cross-references. Three apparent one-paragraph-per-line violations were numbered list items and one apparent doubled blank was PEP 8 spacing inside a Python fence.
+
+### Slice 3 — Sources, and a case slice 3's test did not anticipate
+
+Four chapters carry no `## Sources`, and slice 3 decided that deliberately for three of them: they name external results as labels rather than citing works. Checked again after this session's additions — [chapter 18](../18_six-profiles_dnkz.md) names no external work at all, and [chapter 12](../12_patterns-that-survive-translation_us2k.md) names Conway only as a label pointing at the chapter that owns him.
+
+**[Chapter 22](../22_assigned-to-the-team_3fjx.md) is the interesting one.** It **quotes** Conway — *negotiated and agreed upon* — and slice 3's stated test is that a chapter which *quotes* a work is citing it. On that test it needs a Sources entry.
+
+**It does not get one, and the reason is worth recording because the case will recur.** The quotation is explicitly relayed: *"[chapter 10](../10_organization_rjf9.md) has Conway's mechanism in his own vocabulary."* The provenance is in the prose, as the rule requires, and it points one link away to the chapter that retrieved and verified the source. Requiring an entry here would make every chapter that quotes anything owned elsewhere duplicate its neighbour's Sources, which is the further-reading bloat the rule forbids.
+**So slice 3's test gains a third case:** originating use cites, a bare label does not, and a quotation relayed with an explicit pointer to the owning chapter does not either.
+
+### Slice 4 — reconciliation
+
+`tools/check-drift.py` clean over 22 chapters, 18 checks. Two ledger rows were stale, both from this session's own edits and neither visible to the checker, which validates the owner column and not the prose beside it.
+
+- **`Grilling leaves two artifacts`** still said an agent *keeps nothing between sessions* — a clause the author cut from [chapter 21](../21_never-written-down_at4r.md) in decision 206, because decision 205 had moved the claim off session boundaries.
+- **`Why the upstream artifacts lose their owners`** still said *last in the chain*, written by the draft one pass before the author swept *chain* out of [chapter 22](../22_assigned-to-the-team_3fjx.md) in decision 209.
+
+Both are the same failure in miniature: a row written to match a chapter, and the chapter moved afterwards.
