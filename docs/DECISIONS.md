@@ -8029,3 +8029,34 @@ Now: architecture is the first three together — the rules it has to hold to, t
 - The heading carried a trailing space.
 
 **One tightening of the author's that is kept.** *"Nobody argues that code is unnecessary, and nobody says the team will write this at next week's coding meeting. Assigning a ticket to one person is second nature"* was cut down to a clause. That material is now section 4's, after decision 207 rewrote it — so the cut removes a duplication the previous pass created.
+
+---
+
+## 209. Chapter 22, full read 03: the claim tightened and the meetings section cut
+
+**Date.** 2026-09-18
+
+**Context.** The author's third pass on [chapter 22](../22_assigned-to-the-team_3fjx.md). No tags. A tightened claim, a completed terminology sweep, and one section deleted.
+
+**The claim is compressed and the compression is right.** It had been *"every artifact has one name against it, and that name belongs to whoever holds the most context on the subject the artifact is about"* — two clauses restating each other. The author's version names **four artifacts**, which ties the claim to the enumeration that follows and is what the chapter actually argues.
+Three things in it were fixed: *by the persons that hold* — *persons* is stilted and *that* should be *who* for people; and *the most context about the subject* had lost the antecedent the old version carried, leaving *the subject* dangling. It now reads **each belonging to the person who holds the most context on its subject**.
+
+**The terminology sweep from decision 208 is finished**, and by the author rather than the draft. *Chain* is gone from the chapter: *the last artifact in the sequence*, *the sequence binds anyone following this book's advice*, *the first artifact* where it had been *the root of the chain*. They also dropped *a sequence* from the list of forms artifact 3 can take — *a paragraph, a sketch, a screen* — which would have collided with the word doing new work. That is the survey rule applied without being asked for.
+
+**A circularity fixed in passing, which their edit exposed rather than caused.** *"Four artifacts sit between a request and the code"* was wrong while code was the fourth of them; changing *the code* to *the software* moved the problem rather than removing it, since code is the software. Now **four artifacts lie between a request and software that runs** — the fourth is the code, and running software is what the code produces.
+The heading went with it. *What comes before code* described a framing paragraph deleted in the previous pass; *what comes before the software exists* described a section that enumerates all four including the code. Now **The four artifacts**.
+
+**And the mechanism section's opening lost its subject in the sweep**: *"The artifacts only describe what has to exist. It does not say who makes it exist."* Number agreement, and *that is where it fails* had referred to the chain. Now: *the four artifacts say what has to exist; they do not say who makes any of it exist, and that is the gap.*
+
+### The meetings section, cut
+
+Roughly 240 words went — the two-object sorting of meetings, with the export-format vignettes.
+
+**The draft had defended this section earlier in the same review.** When the author first flagged the chapter's meeting material as loose, decision 189 argued that the *bullets* were passenger weight but the section was not, because *a meeting called to decide something nobody owns is a decision assigned to a room* is the claim applied rather than a digression.
+
+**It is accepted now, on a check rather than a reversal.** What the section demonstrated is demonstrated twice already: by the dialogue in `Why the claim holds`, which is the same mechanism worked at closer range, and in the recognition section — *a retrospective producing actions nobody owns*, and *the third artifact was assigned to a room*. The vignettes were an elaboration of an argument the chapter makes without them.
+**Checked for what the cut strands.** *Room* survives at two later points and reads as ordinary English at both, so nothing was left pointing at a definition that had gone. Two ledger rows did point at it and were removed: the meetings concept row, and the export-format example row.
+
+**What is genuinely lost, recorded rather than argued:** two identically-shaped meetings distinguished only by whether a name was against the thing beforehand was the chapter's most concrete application outside the dialogue. If it is wanted back, it belongs directly after the dialogue rather than as its own section.
+
+The chapter ends at 3,356 words, down from 3,854 when this read began.

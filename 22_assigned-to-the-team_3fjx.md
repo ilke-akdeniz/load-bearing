@@ -2,7 +2,7 @@
 
 ## The claim
 
-**Programming with the five kinds depends on individual ownership of four artifacts by the persons that hold the most context about the subject.**
+**Programming with the five kinds depends on individual ownership of four artifacts, each belonging to the person who holds the most context on its subject.**
 
 ---
 
@@ -14,9 +14,9 @@
 
 **Ownership is where people enter.** Standups, retrospectives, planning sessions, review policies — every one of them carries a tension looking for a resolution, and the tension is always the same question: *which artifacts do we need, and who makes each one?* For many teams, that question is never asked and answered clearly, and the meetings turn into a ceremony.
 
-## What comes before the software exists
+## The four artifacts
 
-Four artifacts sit between a request and the software. The claim here is not that these are the only ones or the most important ones — they are what following this book's advice lands you on.
+Four artifacts lie between a request and software that runs. The claim here is not that these are the only ones or the most important ones — they are what following this book's advice lands you on.
 
 ```text
 1  the rules          what must always be true
@@ -29,7 +29,7 @@ Each is described below by what it looks like, who should own it, and what that 
 
 ## 1. The rules and invariants
 
-First artifact, because everything after it is conditioned on it. What must always be true of this system — an invoice reconciles, a booking cannot double-sell a seat, a payment is applied once.
+The first artifact, because everything after it is conditioned on it. What must always be true of this system — an invoice reconciles, a booking cannot double-sell a seat, a payment is applied once.
 
 **Form.** A statement of the invariants, at whatever length they take: a hundred pages, or one paragraph. **The length should reflect the rules that actually apply, not the prose style of whoever wrote it or the current mood of the team.** *We are an agile team* is not a reason to begin a medical scanner with a vague idea of what it does.
 
@@ -109,7 +109,7 @@ The retrospective produces two actions — *be careful with sales calculations*,
 
 ## Why the claim holds
 
-The artifacts only describe what has to exist. It does not say who makes it exist, and that is where it fails, because every artifact above is work somebody has to decide to do instead of something else.
+The four artifacts say what has to exist. They do not say who makes any of it exist, and that is the gap, because every one of them is work somebody has to decide to do instead of something else.
 
 ### An artifact with no name against it is made by nobody
 
