@@ -8060,3 +8060,23 @@ Roughly 240 words went — the two-object sorting of meetings, with the export-f
 **What is genuinely lost, recorded rather than argued:** two identically-shaped meetings distinguished only by whether a name was against the thing beforehand was the chapter's most concrete application outside the dialogue. If it is wanted back, it belongs directly after the dialogue rather than as its own section.
 
 The chapter ends at 3,356 words, down from 3,854 when this read began.
+
+---
+
+## 210. Chapter 21's artifact was missing from chapter 22's list
+
+**Date.** 2026-09-18
+
+**Context.** The author, after the full read of both: *"We have four artifacts in ch 22… Yet in ch 21 we spent an entire chapter about another artifact: decision log. Is this a thing to resolve?"*
+
+**It was, and [chapter 22](../22_assigned-to-the-team_3fjx.md) already contradicted itself about it.** Its opening section says *"the records of the rules and the decisions are separate artifacts, separately created and separately maintained"* — naming two records as artifacts — and then enumerates four, of which the decisions record is not one. Its artifact-2 section also defers to [chapter 21](../21_never-written-down_at4r.md) for *"what a written entry has to hold"* without ever saying where that entry sits.
+
+**Not a fifth item in the list**, for two reasons. The four are a sequence from a request to running software, and a log of decisions is not a step in it — [chapter 21](../21_never-written-down_at4r.md) defines a decision as what the five kinds produce when they meet a situation, and situations arise at all four. And numbering it five would break a claim that currently says *four artifacts* and works.
+
+**The author supplied the reason that settles it, and it is better than the draft's.** The draft had proposed that the log's ownership is *inherited* — each entry belonging to whoever owned the artifact the decision was taken in. Their correction: *"4 artifacts are mostly owned entirely. 1 one user story, the rules are gathered by one person and so on. The decision log is like a database table, each entry is owned by whoever wrote it."*
+
+That is a difference in **shape**, not a derivation, and it is why the log cannot be a fifth row. Each of the four is owned whole; a log has no owner at all, and every entry belongs to its writer. The claim still holds one level down — the person with the most context on a decision is the person who took it — which is what makes the log consistent with this chapter rather than an exception to it.
+
+**Added as two paragraphs after the list**, framed on the chapter's own opening: the four exist so the software is right; the log exists so any of them can be revisited when the Forces move, which is the end goal the chapter set itself.
+
+**And a stranded handoff, found while doing this and missed when it was created.** Decision 209 accepted the deletion of the meetings section. [Chapter 21](../21_never-written-down_at4r.md)'s handoff still promised it — *"and what a meeting can and cannot settle."* That is exactly the failure this repo's review rule names: *a removed paragraph can leave a next section pointing at the wrong place, and none of those fail a check.* The draft checked what the cut stranded **inside** chapter 22 and not what pointed **into** it. Rewritten, and it now names the seam this entry closes: *where this chapter's own record sits among them.*

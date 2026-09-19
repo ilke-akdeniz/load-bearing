@@ -27,6 +27,10 @@ Four artifacts lie between a request and software that runs. The claim here is n
 
 Each is described below by what it looks like, who should own it, and what that owner has to be able to do. **Owners are given by capability and never by title.** A title says what somebody is called in one company; the capability says whether the artifact will exist, and it is the same question in a startup of four and a bank of forty thousand.
 
+**A fifth record runs alongside all four, and it is not on the list because it is not the same shape.** [Chapter 21](21_never-written-down_at4r.md) works it in full: a log of the decisions taken while the four are being produced, each entry saying what was forced, what was chosen, and what would reopen it. The four exist so that the software is right. The log exists so that any of them can be revisited when the Forces move, which is the end goal this chapter opened on.
+
+**Ownership is where the difference shows.** Each of the four is owned whole — one person gathers the rules for a story, one reads the Forces, one decides what gets built. A log is closer to a table than to a document: nobody owns the whole of it, and every entry belongs to whoever wrote it. The claim holds there too, one level down, because the person with the most context on a decision is the person who took it.
+
 ## 1. The rules and invariants
 
 The first artifact, because everything after it is conditioned on it. What must always be true of this system — an invoice reconciles, a booking cannot double-sell a seat, a payment is applied once.
