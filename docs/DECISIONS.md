@@ -7976,3 +7976,32 @@ Now **Each one constrains the next change**, taken from the section's own first 
 What they left was a comma splice — *"An agent will not do that for you, the structural reason was explained in this chapter"* — and a trailing space. Rewritten as one sentence.
 
 **One edit reverted for what it gave up.** The test-suite bullet ended *"they say a change is safe without being able to say a change is correct"*, and became *"any change that modifies the behaviour can't be cross-checked with the reasons"* — wordier, contracted, and losing the safe-versus-correct distinction, which is the sharp part and the only thing in the bullet a reader will carry. The author's one real refinement in that edit, *known* behaviour, is kept and made explicit: **the behaviour that was known when they were written**.
+
+---
+
+## 207. Chapter 22, full read 01
+
+**Date.** 2026-09-18
+
+**Context.** The author's read of [chapter 22](../22_assigned-to-the-team_3fjx.md), the book's last. Two tags and a substantial rewrite of section 4.
+
+### The rewrite is better than what it replaced and is kept
+
+The old section 4 had one mechanism: a shared assignment for code is *visibly* impossible, so nobody tries, while the absence of the other three is not visible until later. True, and one line deep.
+
+**The author replaced it with two facts about code and an example.** Code is last in the chain, so the others can be skipped and something still ships. And its feedback is fast, so the skipping is never corrected — leave something out of the code and a page breaks tomorrow; read a Force wrong and the failure arrives years later with nobody tracing it back. The first explains why the upstream artifacts lose their owners; the second explains why that is never noticed.
+
+**The commission example earns its place**, and it is the kind of worked case this book asks for. Rules gathered in a meeting — every proposal belongs to a salesperson, who earns a commission on its revenue — become a rate on the user and a user id on the proposal. A year later the directors update the rates and every historical commission is wrong, because no rate was ever stored against a period. The retrospective blames the calculations and the tests, a year after a meeting nobody can name. **Four words in the first artifact would have prevented it: rates are set yearly.**
+
+**One thing was folded back in.** The original's sharpest observation — code is the artifact that *cannot exist* without an owner, because somebody's hands are on the keyboard — had been weakened to tickets and commits carrying names. It is restored as the reason nobody has to argue for assigning code, which is what makes the asymmetry with the other three worth explaining.
+
+**What was corrected.** The draft arrived fast, as review edits do: *evey*, *comission* throughout, *reveneue*, *it's importance*, *datafixes*, *A many great deal*, five lines with trailing whitespace, a doubled space, *The rules … is recorded*, and a narrative that changed tense four times. Two register faults went with them — *you get a midnight call*, which is the atmosphere `CLAUDE.md` names explicitly, and *sneaky*, an evaluative adjective standing in for the argument. And one sentence was unparseable as written: *"The artifact chain is binding for a software that follows the advice of this book, so it doesn't prevent anybody from starting from the last one"*, now *the chain binds anyone following this book's advice; it does not stop anyone starting at the end of it.*
+
+### The two tags
+
+**A vague noun, fixed from the section's own vocabulary.** *A description of the thing* drew the tag *"need more specific word here. my candidates: design, system, application."* None of those: *design* is overloaded, and *system* and *application* both presume a scale this artifact does not have. Two paragraphs above, the section already says what the artifact is for — *neither of them says what we are going to build*. So: **a description of what gets built**.
+
+**The architecture paragraph was conflating three artifacts into one, and the author caught it.** It read *"what makes it architecture is that the trade-offs were named, the Forces they answer were read, and one person is answerable"* — which folds artifacts 1 and 2 into artifact 3. Their reading is right: *"proper architecture is the sum of 3 artifacts this chapter explained."*
+Now: architecture is the first three together — the rules it has to hold to, the Forces bearing on it, and the thing being built — and this section is the third of them, made architecture rather than a sketch by the other two existing and one person being answerable for what was chosen from them.
+
+**Three ledger rows changed**: the code row now carries the two mechanisms rather than the visibility argument, the architecture row says *the three together*, and the commission example is added.
