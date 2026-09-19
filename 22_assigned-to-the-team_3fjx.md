@@ -6,17 +6,15 @@
 
 ---
 
-[-- I deleted this "## The chain, from the end" section entirely. I always felt something was off with it. After completing the last previous full read the issue was obvious: I used the chain to mean: 1 rules, 2 force reading, 3 solution, 4 code. But at the beginning of the chapter the chain was "right software -> code matching the rules, records... -> individual ownership" This chapter doesn't need that and that was basically the conclusion of chapter presented as an evidence.]
+## What the artifacts are for
 
-## Artifact chain 
-
-The end goal of programming with the right kind is not "working software."** It is software that is still right after the Forces move, and [chapter 03](03_forces_f4m5.md) is explicit that they move without warning: a team doubles, a service acquires a client outside the company, a table crosses a hundred million rows.
+**The end goal of programming with the five kinds is not "working software."** It is software that is still right after the Forces move, and [chapter 03](03_forces_f4m5.md) is explicit that they move without warning: a team doubles, a service acquires a client outside the company, a table crosses a hundred million rows.
 
 **The artifacts are not meeting notes, slide decks, or chaos labelled documentation.** The code is one of them: it *applies* the decisions that answer the Forces and it *enforces* the business rules. Those two verbs are the limit of what it does. Code that reflects a decision perfectly still says nothing about which Forces were present, what the alternatives were, or why this one was chosen — so the records of the rules and the decisions are separate artifacts, separately created and separately maintained. [Chapter 21](21_never-written-down_at4r.md) owns what happens when they do not exist.
 
 **Ownership is where people enter.** Standups, retrospectives, planning sessions, review policies — every one of them carries a tension looking for a resolution, and the tension is always the same question: *which artifacts do we need, and who makes each one?* For many teams, that question is never asked and answered clearly, and the meetings turn into a ceremony.
 
-## What come before code
+## What comes before code
 
 Code is the obvious artifact and the easiest to own correctly. The trouble starts with everything upstream of it. There the same question produces *we don't need a list of the business rules, we're agile*, and *the team will decide on the design of feature X*.
 

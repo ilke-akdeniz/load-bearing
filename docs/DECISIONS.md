@@ -8005,3 +8005,27 @@ The old section 4 had one mechanism: a shared assignment for code is *visibly* i
 Now: architecture is the first three together — the rules it has to hold to, the Forces bearing on it, and the thing being built — and this section is the third of them, made architecture rather than a sketch by the other two existing and one person being answerable for what was chosen from them.
 
 **Three ledger rows changed**: the code row now carries the two mechanisms rather than the visibility argument, the architecture row says *the three together*, and the commission example is added.
+
+---
+
+## 208. The chain meant two things, and the section that carried one of them was the claim restated
+
+**Date.** 2026-09-18
+
+**Context.** The author's second pass on [chapter 22](../22_assigned-to-the-team_3fjx.md). They deleted the opening section, *The chain, from the end*, including its diagram, and explained why: *"I used the chain to mean: 1 rules, 2 force reading, 3 solution, 4 code. But at the beginning of the chapter the chain was 'right software -> code matching the rules, records... -> individual ownership'… that was basically the conclusion of chapter presented as an evidence."*
+
+**Both halves of that are right, and the second corrects this log.**
+
+**The collision was real.** After the deletion, *chain* means the four artifacts consistently — *the root of the chain*, *the last artifact in the chain*, *the chain says what has to exist*. Before it, one section used the same word for a three-level dependency stack. Two structures, one word, which is the global drift `tools/check-drift.py` cannot see.
+
+**And decision 189 was right for the wrong reason.** That entry recorded the draft conceding, correctly, that [chapter 22](../22_assigned-to-the-team_3fjx.md)'s claim is argued rather than asserted — and it named the deleted section as the argument: *"the chain section is the argument, not a preamble."* The author has now shown it was not. A diagram stating *ownership is load-bearing for the artifacts, which are load-bearing for the goal* is the claim drawn rather than demonstrated.
+**The concession stands and its grounds move.** What argues the claim is the enumeration of the four artifacts and the dialogue in `Why the claim holds` — a shared assignment supplying neither a defence of the time nor a settling judgement — together with section 4's account of why the upstream artifacts lose their owners. None of that was in the deleted section.
+
+**What the deletion left behind, and was fixed.**
+
+- The replacement heading was **Artifact chain**, which names the four-artifact structure and sat on the section about the three-level one. The collision would have survived the cut under a new label. Renamed to **What the artifacts are for**, which covers the three paragraphs that remain — the goal, what counts as an artifact, and where people enter.
+- The first paragraph had lost its opening `**` and read *the end goal of programming with the right kind*. Restored to the claim's own phrase, **the five kinds**.
+- *What come before code* → *comes*.
+- The heading carried a trailing space.
+
+**One tightening of the author's that is kept.** *"Nobody argues that code is unnecessary, and nobody says the team will write this at next week's coding meeting. Assigning a ticket to one person is second nature"* was cut down to a clause. That material is now section 4's, after decision 207 rewrote it — so the cut removes a duplication the previous pass created.
